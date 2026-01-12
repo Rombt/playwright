@@ -1,0 +1,23 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rombt/playwright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rombt/playwright/issues"
+  },
+  "homepage": "https://github.com/Rombt/playwright#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
+  }
+}
