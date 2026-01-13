@@ -1,0 +1,21 @@
+            {
+                "brands": [
+                    {
+                        "brand_id": "123",
+                        "brand_name": "Brand A",
+                        "metadata": {
+                                "target_website": "https://brand-a.example.com"
+                            },
+                        "products": [
+                                {
+                                    "id_product": "1001",
+                                    "sku": "BA-001-X",
+                                    "attributes": {
+                                        "color": "black",
+                                        "size": "L"
+                                    },
+                                }
+                            ]
+                    }
+                ]
+            }

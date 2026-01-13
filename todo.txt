@@ -1,0 +1,33 @@
+Скрапинг картинок:
+
+    Получение данных
+        добавление в test вручную
+        формирование специальным скриптом на сервере
+        структура:
+            {
+                "brands": [
+                    {
+                        "brand_id": "123",
+                        "brand_name": "Brand A",
+                        "metadata": {
+                                "target_website": "https://brand-a.example.com"
+                            },
+                        "products": [
+                                {
+                                    "id_product": "1001",
+                                    "sku": "BA-001-X",
+                                    "attributes": {
+                                        "color": "black",
+                                        "size": "L"
+                                    },
+                                }
+                            ]
+                    }
+                ]
+            }
+
+    Возврат результатов
+        слаживать картинки в паки с brand__YYYY-MM-DD_HH-mm
+        именование картинок brand_prod_id_squ.jpeg
+
+
