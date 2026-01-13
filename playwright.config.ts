@@ -29,7 +29,7 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'columbia.com',
+      name: 'columbia',
       testDir: 'tests/columbia',
       use: { baseURL: 'https://www.columbia.com/' },
        outputDir: 'test-results/columbia',
