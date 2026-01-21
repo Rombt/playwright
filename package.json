@@ -18,7 +18,8 @@
   "homepage": "https://github.com/Rombt/playwright#readme",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.57.0"
+    "@playwright/test": "^1.57.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "node-fetch": "^3.3.2"
