@@ -69,55 +69,6 @@ test('download all images from gallery', async ({ browser }) => {
 
 
 
-
-//   const CONCURRENCY = 3;
-
-//   const queue = [...imageUrls];
-//   const pages = await Promise.all(
-//     Array.from({ length: CONCURRENCY }, () => context.newPage())
-//   );
-
-//   async function worker(page) {
-//     while (queue.length) {
-//       const url = queue.shift();
-//       if (!url) return;
-
-//       const [ download ] = await Promise.all([
-//         page.waitForEvent('download'),
-//         page.evaluate((url) => {
-//           const a = document.createElement('a');
-//           a.href = url;
-//           a.download = '';
-//           document.body.appendChild(a);
-//           a.click();
-//           a.remove();
-//         }, url)
-//       ]);
-
-//     await download.saveAs(`downloads/${await download.suggestedFilename()}`);
-//     await page.waitForTimeout(300);
-//   }
-// }
-
-// await Promise.all(pages.map(worker));
-
-
-
-
-  // const CONCURRENCY = 3;
-  // let index = 0;
-
-  // const workers = Array.from({ length: CONCURRENCY }, async () => {
-  //   while (index < imageUrls.length) {
-  //     const current = index++;
-  //     await downloadImage(page, imageUrls[current], current);
-  //   }
-  // });
-
-  // await Promise.all(workers);
-
-
-
   await context.close();
 });
 

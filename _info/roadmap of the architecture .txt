@@ -1,0 +1,129 @@
+🗺 Дорожная карта эволюции Playwright-проекта
+
+📌 Философия
+    Сначала — работающие тесты.
+    Потом — аккуратная архитектура.
+    Архитектура растёт только когда появляется боль.
+
+🧱 ЭТАП 0 — “В лоб, но аккуратно”
+    🎯 Цель:
+        Начать писать тесты сразу
+        Ничего не усложнять
+        Но не писать всё в одном файле
+    ✅ Что используем:
+        ❗ НИКАКИХ паттернов только:
+            tests/
+            playwright.config.ts
+        📁 Структура:
+                tests/
+                login.test.ts
+                product.test.ts
+        🧠 Правила:
+            Селекторы прямо в тестах — можно
+            Копипаста — можно
+            Главное: понять Playwright и начать
+
+🧱 ЭТАП 1 — Первый и обязательный паттерн: Page Object
+    ⏰ Когда:
+        Начал копировать одни и те же селекторы
+        Изменения в вёрстке ломают 20 тестов
+    🎯 Цель:
+        Вынести селекторы и низкоуровневые действия
+    ✅ Добавляем:
+        ✔ Page Object (в САМОМ ПРОСТОМ виде)
+    📁 Структура:
+        pages/
+            LoginPage.ts
+            AdminProductsPage.ts
+        tests/
+    🧠 Правила:
+        Страница:
+            знает СЕЛЕКТОРЫ
+            знает КАК кликать
+            ❌ не знает “зачем”
+        Тест:
+            вызывает loginPage.login()
+            ❌ не пишет page.locator(...)
+
+🧱 ЭТАП 2 — Убираем “простыни” из тестов (Steps / Facade)
+    ⏰ Когда:
+        Тесты стали по 200 строк
+        В каждом: логин → открыть → создать → сохранить
+    🎯 Цель:
+        Сделать тесты короткими и читаемыми
+        ✅ Добавляем:
+    ✔ Facade / Steps слой (неважно как назвать)
+        📁 Структура:
+        steps/
+        AdminSteps.ts
+        pages/
+        tests/
+    🧠 Принцип:
+        Вместо:
+            await loginPage.open()
+            await loginPage.fillLogin()
+            await loginPage.fillPassword()
+            await loginPage.submit()
+            // ...
+        Пишем:
+            await adminSteps.loginAsAdmin()
+            await adminSteps.createProduct()
+
+🧱 ЭТАП 3 — Нормальная инициализация (Fixtures как DI)
+    ⏰ Когда:
+        В каждом тесте одно и то же:
+            const page = await browser.newPage()
+            const loginPage = new LoginPage(page)
+            const adminSteps = new AdminSteps(...)
+    🎯 Цель:
+        Централизовать создание объектов
+        ✅ Добавляем:
+            ✔ Playwright fixtures
+        📁 Структура:
+            fixtures/
+            test.ts
+            pages/
+            steps/
+            tests/
+        🧠 Тест становится:
+            test('...', async ({ admin }) => {
+            await admin.createProduct()
+            });
+
+🧱 ЭТАП 4 — Удобная подготовка данных (Builder)
+    ⏰ Когда:
+        Начинаешь создавать сложные сущности:
+            товар
+            пользователь
+            заказ
+        🎯 Цель:
+            Убрать JSON-помойки
+            Сделать данные читаемыми
+        ✅ Добавляем:
+            ✔ Test Data Builder
+                product()
+                .published()
+                .withPrice(100)
+                .build()
+
+🧱 ЭТАП 5 — Когда проект стал большим
+    Тут:
+        Screenplay
+        Domain layer
+        Strategy
+        API + UI orchestration
+
+
+🧠 Главная мысль всего изложенного выше
+    ❗ Нужно начинать с:
+        Page Object
+        Steps
+        Fixtures
+
+
+✅ Минимальный набор “навсегда”
+    Что	и Зачем
+        Page Object	изоляция селекторов
+        Steps / Facade	читаемые тесты
+        Fixtures	контроль архитектуры
+        Builder	удобные данные

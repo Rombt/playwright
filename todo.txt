@@ -1,58 +1,25 @@
-Скрапинг картинок:
-
-    Получение данных
-        добавление в test вручную
-        формирование специальным скриптом на сервере
-        структура:
-            {
-                "brands": [
-                    {
-                        "brand_id": "123",
-                        "brand_name": "Brand A",
-                        "metadata": {
-                                "target_website": "https://brand-a.example.com"
-                            },
-                        "products": [
-                                {
-                                    "id_product": "1001",
-                                    "name_product": "",
-                                    "sku": "",
-                                    "attributes": {
-                                        "color": "black",
-                                        "size": "L"
-                                    },
-                                }
-                            ]
-                    }
-                ]
-            }
-
-    Возврат результатов
-        слаживать картинки в паки с brand__YYYY-MM-DD_HH-mm
-        именование картинок brand_prod_id_squ.jpeg
 
     Очерёдность обработки брендов:
         $brands = Array
             (
-                [0] => Puma
-                [1] => M-TAC
-                [2] => Columbia
-                [3] => New Balance
-                [4] => Outventure
-                [5] => Adidas
-                [6] => Fila
-                [7] => 4F
-                [8] => KAPPA
-                [9] => Jack Wolfskin
-                [10] => DEMIX
-                [11] => Merrell
-                [12] => Nike
-                [13] => Under Armour
+                [0] => Puma             +
+                [1] => M-TAC            +
+                [2] => Columbia         +
+                [3] => New Balance      +
+                [4] => Outventure       -
+                [5] => Adidas           -
+                [6] => Fila             -
+                [7] => 4F               -
+                [8] => KAPPA            -
+                [9] => Jack Wolfskin    -
+                [11] => Merrell         -
+                [12] => Nike            +
+                [13] => Under Armour    -
                 [14] => FLY
-                [15] => Glissade
-                [16] => Hi-Tec
-                [17] => Saucony
-                [18] => Skechers
-                [19] => Joma
+                [15] => Glissade        -
+                [16] => Hi-Tec          -
+                [17] => Saucony         +
+                [18] => Skechers        -
+                [19] => Joma            +
             )
 
