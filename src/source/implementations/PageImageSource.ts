@@ -1,5 +1,5 @@
 import { Source } from "../Source";
-import { Browser } from "../../browser/Browser";
+import { Browser } from "../../browser/IBrowser";
 import { Task } from "../../contracts/Task";
 import { ImageResult } from "../../contracts/ImageResult";
 

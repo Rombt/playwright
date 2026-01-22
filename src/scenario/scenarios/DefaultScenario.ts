@@ -1,7 +1,7 @@
 import { Scenario } from "../Scenario";
 import { Source } from "../../source/Source";
 import { Storage } from "../../storage/Storage";
-import { Browser } from "../../browser/Browser";
+import { Browser } from "../../browser/IBrowser";
 import { Task } from "../../contracts/Task";
 
 export class DefaultScenario implements Scenario {

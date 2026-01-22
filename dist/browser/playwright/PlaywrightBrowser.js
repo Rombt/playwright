@@ -1,49 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaywrightBrowser = void 0;
+// import { chromium, Browser as PWBrowser, Page } from "playwright";
 const playwright_1 = require("playwright");
 class PlaywrightBrowser {
-    async open(url) {
-        if (!this.browser)
-            this.browser = await playwright_1.chromium.launch({ headless: true });
-        this.page = await this.browser.newPage();
-        await this.page.goto(url, { waitUntil: "domcontentloaded" });
+    constructor() {
+        this.instance = null;
     }
-    async getHtml() {
-        if (!this.page)
-            throw new Error("Page not initialized");
-        return await this.page.content();
+    get isInitialized() {
+        return this.instance !== null;
     }
-    async find(selector) {
-        if (!this.page)
-            throw new Error("Page not initialized");
-        const el = await this.page.$(selector);
-        return el !== null;
-    }
-    async getAttribute(selector, name) {
-        if (!this.page)
-            throw new Error("Page not initialized");
-        const el = await this.page.$(selector);
-        if (!el)
-            return null;
-        return await el.getAttribute(name);
-    }
-    async download(url, saveAs) {
-        if (!this.page)
-            throw new Error("Page not initialized");
-        const [download] = await Promise.all([
-            this.page.waitForEvent("download"),
-            this.page.evaluate((u) => window.open(u), url)
-        ]);
-        await download.saveAs(saveAs);
+    async init() {
+        if (this.isInitialized)
+            return this.instance;
+        this.instance = await playwright_1.chromium.launch();
+        return this.instance;
     }
     async close() {
-        if (this.page)
-            await this.page.close();
-        if (this.browser)
-            await this.browser.close();
-        this.page = undefined;
-        this.browser = undefined;
+        if (!this.isInitialized)
+            return; // Защита от лишних вызовов
+        await this.instance?.close();
+        this.instance = null;
     }
 }
 exports.PlaywrightBrowser = PlaywrightBrowser;

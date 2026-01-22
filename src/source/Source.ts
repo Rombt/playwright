@@ -1,4 +1,4 @@
-import { Browser } from "../browser/Browser";
+import { Browser } from "../browser/IBrowser";
 import { ImageResult } from "../contracts/ImageResult";
 import { Task } from "../contracts/Task";
 
