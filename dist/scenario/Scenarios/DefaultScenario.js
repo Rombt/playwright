@@ -8,7 +8,7 @@ class DefaultScenario {
         this.storage = storage;
     }
     async run(task) {
-        await this.browser.open("https://example.com");
+        // await this.browser.open("https://example.com");
         const results = await this.source.collect(task, this.browser);
         await this.storage.save(results);
         await this.browser.close();
