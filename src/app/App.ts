@@ -10,6 +10,11 @@ export class App {
     const storage = new FileStorage();
     const source = new DummySource();
 
+    console.log("browser = ", browser);
+    console.log("storage = ", storage);
+    console.log("source = ", source);
+
+
     const scenario = new DefaultScenario(source, browser, storage);
 
     const task: Task = { sku: "TEST-123" };

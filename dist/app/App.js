@@ -10,6 +10,9 @@ class App {
         const browser = new PlaywrightBrowser_1.PlaywrightBrowser();
         const storage = new FileStorage_1.FileStorage();
         const source = new DummySource_1.DummySource();
+        console.log("browser = ", browser);
+        console.log("storage = ", storage);
+        console.log("source = ", source);
         const scenario = new DefaultScenario_1.DefaultScenario(source, browser, storage);
         const task = { sku: "TEST-123" };
         await scenario.run(task);

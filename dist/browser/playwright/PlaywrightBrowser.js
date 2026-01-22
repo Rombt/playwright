@@ -1,26 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaywrightBrowser = void 0;
-// тут потом будет import { chromium, Page } from "playwright";
+const playwright_1 = require("playwright");
 class PlaywrightBrowser {
     async open(url) {
-        console.log("open", url);
+        if (!this.browser)
+            this.browser = await playwright_1.chromium.launch({ headless: true });
+        this.page = await this.browser.newPage();
+        await this.page.goto(url, { waitUntil: "domcontentloaded" });
     }
     async getHtml() {
-        console.log("getHtml()");
-        return "";
+        if (!this.page)
+            throw new Error("Page not initialized");
+        return await this.page.content();
     }
     async find(selector) {
-        console.log("find(selector: string)");
-        return false;
+        if (!this.page)
+            throw new Error("Page not initialized");
+        const el = await this.page.$(selector);
+        return el !== null;
     }
     async getAttribute(selector, name) {
-        console.log("getAttribute(selector: string, name: string)");
-        return null;
+        if (!this.page)
+            throw new Error("Page not initialized");
+        const el = await this.page.$(selector);
+        if (!el)
+            return null;
+        return await el.getAttribute(name);
     }
     async download(url, saveAs) {
-        console.log("download", url, saveAs);
+        if (!this.page)
+            throw new Error("Page not initialized");
+        const [download] = await Promise.all([
+            this.page.waitForEvent("download"),
+            this.page.evaluate((u) => window.open(u), url)
+        ]);
+        await download.saveAs(saveAs);
     }
-    async close() { }
+    async close() {
+        if (this.page)
+            await this.page.close();
+        if (this.browser)
+            await this.browser.close();
+        this.page = undefined;
+        this.browser = undefined;
+    }
 }
 exports.PlaywrightBrowser = PlaywrightBrowser;

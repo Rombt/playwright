@@ -1,4 +1,7 @@
 export interface Browser {
+
+
+
   open(url: string): Promise<void>;
 
   getHtml(): Promise<string>;
