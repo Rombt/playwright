@@ -1,9 +1,10 @@
 import { IBrowser as IBrowser } from "../IBrowser";
 // import { chromium, Browser as PWBrowser, Page } from "playwright";
-import { chromium, Browser as PWBrowser } from 'playwright';
+import { chromium, Browser as PWBrowser, BrowserContext as Context} from 'playwright';
 
 
-export class PlaywrightBrowser implements IBrowser<PWBrowser> {
+export class PlaywrightBrowser implements IBrowser<PWBrowser, Context> {
+
 
   private instance: PWBrowser | null = null;
 
@@ -25,10 +26,20 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser> {
     this.instance = null;
   }
 
+  async runInContext<Result>(fn: (context:Context) => Promise<Result>): Promise<Result> {
 
 
+    const browser = await this.init();
+    const context = await browser.newContext();
+
+    try {
+      return await fn(context);
+    } finally {
+      await context.close();
+    }
 
 
+  }
 
 
 

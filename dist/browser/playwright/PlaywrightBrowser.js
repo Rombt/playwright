@@ -22,5 +22,15 @@ class PlaywrightBrowser {
         await this.instance?.close();
         this.instance = null;
     }
+    async runInContext(fn) {
+        const browser = await this.init();
+        const context = await browser.newContext();
+        try {
+            return await fn(context);
+        }
+        finally {
+            await context.close();
+        }
+    }
 }
 exports.PlaywrightBrowser = PlaywrightBrowser;
