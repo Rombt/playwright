@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaywrightBrowser = void 0;
-// import { chromium, Browser as PWBrowser, Page } from "playwright";
 const playwright_1 = require("playwright");
 class PlaywrightBrowser {
-    constructor() {
+    constructor(launchOptions) {
+        this.launchOptions = launchOptions;
         this.instance = null;
     }
     get isInitialized() {
@@ -13,7 +13,7 @@ class PlaywrightBrowser {
     async init() {
         if (this.isInitialized)
             return this.instance;
-        this.instance = await playwright_1.chromium.launch();
+        this.instance = await playwright_1.chromium.launch(this.launchOptions);
         return this.instance;
     }
     async close() {
@@ -22,9 +22,9 @@ class PlaywrightBrowser {
         await this.instance?.close();
         this.instance = null;
     }
-    async runInContext(fn) {
+    async runInContext(fn, options) {
         const browser = await this.init();
-        const context = await browser.newContext();
+        const context = await browser.newContext(options);
         try {
             return await fn(context);
         }

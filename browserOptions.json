@@ -1,0 +1,7 @@
+{
+  "launchOptions": {
+    "headless": false,
+    "timeout": 30000,
+    "slowMo": 100
+  }
+}

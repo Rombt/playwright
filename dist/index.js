@@ -2,6 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const App_1 = require("./app/App");
 (async () => {
-    const app = new App_1.App();
+    const app = new App_1.App('browserOptions.json');
     await app.run();
 })();

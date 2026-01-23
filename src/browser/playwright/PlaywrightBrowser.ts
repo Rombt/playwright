@@ -1,12 +1,23 @@
 import { IBrowser as IBrowser } from "../IBrowser";
-// import { chromium, Browser as PWBrowser, Page } from "playwright";
-import { chromium, Browser as PWBrowser, BrowserContext as Context} from 'playwright';
+import {
+  chromium,
+  Browser as PWBrowser,
+  BrowserContext as Context,
+  LaunchOptions,
+  BrowserContextOptions
+} from 'playwright';
 
 
-export class PlaywrightBrowser implements IBrowser<PWBrowser, Context> {
-
+export class PlaywrightBrowser implements IBrowser<PWBrowser, Context, LaunchOptions, BrowserContextOptions> {
 
   private instance: PWBrowser | null = null;
+
+
+  constructor(private readonly launchOptions: LaunchOptions) {
+
+
+  }
+
 
   public get isInitialized(): boolean {
     return this.instance !== null;
@@ -15,7 +26,7 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, Context> {
   async init(): Promise<PWBrowser> {
     if (this.isInitialized) return this.instance!;
 
-    this.instance = await chromium.launch();
+    this.instance = await chromium.launch(this.launchOptions);
     return this.instance;
   }
 
@@ -26,11 +37,14 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, Context> {
     this.instance = null;
   }
 
-  async runInContext<Result>(fn: (context:Context) => Promise<Result>): Promise<Result> {
+  async runInContext<Result>(
+    fn: (context: Context) => Promise<Result>,
+    options?: BrowserContextOptions
+  ): Promise<Result> {
 
 
     const browser = await this.init();
-    const context = await browser.newContext();
+    const context = await browser.newContext(options);
 
     try {
       return await fn(context);
