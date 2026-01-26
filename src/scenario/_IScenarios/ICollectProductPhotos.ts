@@ -1,0 +1,1 @@
+import { ICollectProductPhotosTask } from "../../Task/ITasks/ICollectProductPhotosTask";

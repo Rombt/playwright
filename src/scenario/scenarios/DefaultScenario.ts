@@ -1,22 +1,35 @@
-import { Scenario } from "../Scenario";
+import { IScenario } from "../IScenario";
 import { Source } from "../../source/Source";
 import { Storage } from "../../storage/Storage";
 import { IBrowser } from "../../browser/IBrowser";
-import { Task } from "../../contracts/Task";
+import { ITask } from "../../Task/ITask";
 
-export class DefaultScenario<Browser,Context,Options=void,BrowserContextOptions=void> implements Scenario {
+export class DefaultScenario<T extends ITask, Browser,Context> implements IScenario<T, Browser, Context> {
   constructor(
-    private source: Source,
-    private browser: IBrowser<Browser,Context,Options,BrowserContextOptions>,
+    private source: Source<T>,
+    private browser: IBrowser<Browser,Context>,
     private storage: Storage
   ) {}
-
-  async run(task: Task): Promise<void> {
-    // await this.browser.open("https://example.com");
-
-    // const results = await this.source.collect(task, this.browser);
-
-    // await this.storage.save(results);
-
+  run(): Promise<void> {
+    throw new Error("Method not implemented.");
   }
+  load(): Promise<T[]> {
+    throw new Error("Method not implemented.");
+  }
+  prepare(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+  process(tasks: T[]): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+  handleError(error: unknown): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+  finalize(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+
+
+
+
 }

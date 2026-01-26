@@ -1,7 +1,7 @@
 import { IBrowser } from "../browser/IBrowser";
 import { ImageResult } from "../contracts/ImageResult";
-import { Task } from "../contracts/Task";
+import { ITask } from "../Task/ITask";
 
-export interface Source {
-  collect(task: Task, browser: IBrowser<unknown, unknown>): Promise<ImageResult[]>;
+export interface Source<T extends ITask> {
+  collect(task: ITask, browser: IBrowser<unknown, unknown>): Promise<ImageResult[]>;
 }

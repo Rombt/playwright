@@ -2,7 +2,7 @@ import { PlaywrightBrowser } from "../browser/playwright/PlaywrightBrowser";
 import { FileStorage } from "../storage/fs/FileStorage";
 import { DummySource } from "../source/implementations/DummySource";
 import { DefaultScenario } from "../scenario/scenarios/DefaultScenario";
-import { Task } from "../contracts/Task";
+import { ITask } from "../Task/ITask";
 import { LaunchOptions } from 'playwright';
 
 import { accessSync, readFileSync, constants } from 'node:fs';
