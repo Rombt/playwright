@@ -4,15 +4,33 @@ import { Storage } from "../../storage/Storage";
 import { IBrowser } from "../../browser/IBrowser";
 import { ITask } from "../../Task/ITask";
 
+import { PlaywrightBrowser } from "../../browser/playwright/PlaywrightBrowser";
+
 export class DefaultScenario<T extends ITask, Browser,Context> implements IScenario<T, Browser, Context> {
+
+
+
   constructor(
     private source: Source<T>,
     private browser: IBrowser<Browser,Context>,
     private storage: Storage
-  ) {}
-  run(): Promise<void> {
-    throw new Error("Method not implemented.");
+  ) { }
+
+
+  async run(): Promise<void> {
+
+    console.log("this.browser.runInContext = ", this.browser.runInContext);
+
+    this.browser.runInContext(async ( context ) => {
+
+
+
+     })
+
+
+
   }
+
   load(): Promise<T[]> {
     throw new Error("Method not implemented.");
   }

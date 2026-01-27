@@ -10,29 +10,33 @@ const node_fs_1 = require("node:fs");
 // todo где то здесь должен создаваться браузер, один на всё приложение!
 // todo где закрывать браузер?
 class App {
-    constructor(pathBrowserOptions) {
+    constructor(pathBrowserOptions, pathContextOptions) {
         this.pathBrowserOptions = pathBrowserOptions;
+        this.pathContextOptions = pathContextOptions;
         this.browserOptions = {};
+        this.contextOptions = {};
         try {
-            (0, node_fs_1.accessSync)(pathBrowserOptions, node_fs_1.constants.R_OK);
-            const content = (0, node_fs_1.readFileSync)(pathBrowserOptions, 'utf-8');
-            this.browserOptions = JSON.parse(content);
+            //todo убрать повторяющийся код
+            (0, node_fs_1.accessSync)(this.pathBrowserOptions, node_fs_1.constants.R_OK);
+            const contentBrowserOptions = (0, node_fs_1.readFileSync)(this.pathBrowserOptions, 'utf-8');
+            this.browserOptions = JSON.parse(contentBrowserOptions);
+            (0, node_fs_1.accessSync)(pathContextOptions, node_fs_1.constants.R_OK);
+            const contentContextOptions = (0, node_fs_1.readFileSync)(this.pathContextOptions, 'utf-8');
+            this.contextOptions = JSON.parse(contentContextOptions);
         }
         catch (error) {
             if (error.code === 'ENOENT') {
-                throw new Error(`Файл не найден по пути: ${pathBrowserOptions}`);
+                throw new Error(`Проблемы с одним из файлов настроек по пути: ${this.pathBrowserOptions} или ${this.pathContextOptions}`);
             }
             throw new Error(`Ошибка при обработке JSON: ${error.message}`);
         }
     }
     async run() {
-        const browser = new PlaywrightBrowser_1.PlaywrightBrowser(this.browserOptions);
+        const browser = new PlaywrightBrowser_1.PlaywrightBrowser(this.browserOptions, this.contextOptions);
         const storage = new FileStorage_1.FileStorage();
         const source = new DummySource_1.DummySource();
         const scenario = new DefaultScenario_1.DefaultScenario(source, browser, storage);
-        // const task: Task = { sku: "TEST-123" };
-        // await scenario.run(task);
-        console.log("browser = ", browser);
+        await scenario.run();
     }
     async getBrowserOptions() {
     }

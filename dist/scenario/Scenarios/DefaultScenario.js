@@ -7,10 +7,25 @@ class DefaultScenario {
         this.browser = browser;
         this.storage = storage;
     }
-    async run(task) {
-        // await this.browser.open("https://example.com");
-        // const results = await this.source.collect(task, this.browser);
-        // await this.storage.save(results);
+    async run() {
+        console.log("this.browser.runInContext = ", this.browser.runInContext);
+        this.browser.runInContext(async (context) => {
+        });
+    }
+    load() {
+        throw new Error("Method not implemented.");
+    }
+    prepare() {
+        throw new Error("Method not implemented.");
+    }
+    process(tasks) {
+        throw new Error("Method not implemented.");
+    }
+    handleError(error) {
+        throw new Error("Method not implemented.");
+    }
+    finalize() {
+        throw new Error("Method not implemented.");
     }
 }
 exports.DefaultScenario = DefaultScenario;

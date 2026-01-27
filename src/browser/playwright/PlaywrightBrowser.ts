@@ -2,21 +2,21 @@ import { IBrowser as IBrowser } from "../IBrowser";
 import {
   chromium,
   Browser as PWBrowser,
-  BrowserContext as Context,
+  BrowserContext,
   LaunchOptions,
   BrowserContextOptions
 } from 'playwright';
 
 
-export class PlaywrightBrowser implements IBrowser<PWBrowser, Context, LaunchOptions, BrowserContextOptions> {
+export class PlaywrightBrowser implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions> {
 
   private instance: PWBrowser | null = null;
 
 
-  constructor(private readonly launchOptions: LaunchOptions) {
-
-
-  }
+  constructor(
+    private readonly launchOptions: LaunchOptions,
+    private readonly browserContextOptions: BrowserContextOptions,
+  ) {  }
 
 
   public get isInitialized(): boolean {
@@ -27,6 +27,8 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, Context, LaunchOpt
     if (this.isInitialized) return this.instance!;
 
     this.instance = await chromium.launch(this.launchOptions);
+
+    console.log("this.instance = ", this.instance);
     return this.instance;
   }
 
@@ -37,14 +39,21 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, Context, LaunchOpt
     this.instance = null;
   }
 
+  //!!!!!!!!!!!!!!!! где вызывать?????
+  async createContext(): Promise<BrowserContext> {
+    const browser = await this.init();
+
+    return await browser.newContext(this.browserContextOptions);
+  }
+
+
   async runInContext<Result>(
-    fn: (context: Context) => Promise<Result>,
-    options?: BrowserContextOptions
+    fn: (context: BrowserContext) => Promise<Result>
   ): Promise<Result> {
 
-
-    const browser = await this.init();
-    const context = await browser.newContext(options);
+    const context = await this.createContext();
+    const page = await context.newPage();
+    await page.goto('https://google.com');
 
     try {
       return await fn(context);

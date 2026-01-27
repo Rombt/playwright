@@ -3,7 +3,7 @@ import { FileStorage } from "../storage/fs/FileStorage";
 import { DummySource } from "../source/implementations/DummySource";
 import { DefaultScenario } from "../scenario/scenarios/DefaultScenario";
 import { ITask } from "../Task/ITask";
-import { LaunchOptions } from 'playwright';
+import { LaunchOptions, BrowserContextOptions } from 'playwright';
 
 import { accessSync, readFileSync, constants } from 'node:fs';
 
@@ -18,17 +18,26 @@ import { accessSync, readFileSync, constants } from 'node:fs';
 export class App<BrowserOptions> {
 
   public readonly browserOptions: LaunchOptions = {};
+  public readonly contextOptions: BrowserContextOptions = {};
 
-  constructor(private readonly pathBrowserOptions: string) {
+  constructor(
+    private readonly pathBrowserOptions: string,
+    private readonly pathContextOptions: string,
+  ) {
 
     try {
-      accessSync(pathBrowserOptions, constants.R_OK);
-      const content = readFileSync(pathBrowserOptions, 'utf-8');
+      //todo убрать повторяющийся код
+      accessSync(this.pathBrowserOptions, constants.R_OK);
+      const contentBrowserOptions = readFileSync(this.pathBrowserOptions, 'utf-8');
+      this.browserOptions = JSON.parse(contentBrowserOptions);
 
-      this.browserOptions = JSON.parse(content);
+      accessSync(pathContextOptions, constants.R_OK);
+      const contentContextOptions = readFileSync(this.pathContextOptions, 'utf-8');
+      this.contextOptions = JSON.parse(contentContextOptions);
+
     } catch (error: any) {
       if (error.code === 'ENOENT') {
-        throw new Error(`Файл не найден по пути: ${pathBrowserOptions}`);
+        throw new Error(`Проблемы с одним из файлов настроек по пути: ${this.pathBrowserOptions} или ${this.pathContextOptions}`);
       }
       throw new Error(`Ошибка при обработке JSON: ${error.message}`);
     }
@@ -38,16 +47,15 @@ export class App<BrowserOptions> {
 
 
   async run() {
-    const browser = new PlaywrightBrowser(this.browserOptions);
+    const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
     const storage = new FileStorage();
     const source = new DummySource();
     const scenario = new DefaultScenario(source, browser, storage);
 
 
-    // const task: Task = { sku: "TEST-123" };
 
-    // await scenario.run(task);
-console.log("browser = ", browser);
+
+    await scenario.run();
 
 
   }
