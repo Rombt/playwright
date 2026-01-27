@@ -1,18 +1,22 @@
-export interface IBrowser<Browser,Context,LaunchOptions=void,BrowserContextOptions=void> {
-
+export interface IBrowser<
+  BrowserT,
+  ContextT,
+  LaunchOptionsT = void,
+  ContextOptionsT = void
+> {
   readonly isInitialized: boolean;
 
-  init(options?: LaunchOptions): Promise<Browser>;
+  init(options?: LaunchOptionsT): Promise<BrowserT>;
 
   close(): Promise<void>;
 
-  createContext(BrowserContextOptions?: BrowserContextOptions): Promise<Context>;
+  createContext(options?: ContextOptionsT): Promise<ContextT>;
 
   runInContext<Result>(
-    fn: (context: Context) => Promise<Result>
+    fn: (context: ContextT) => Promise<Result>
   ): Promise<Result>;
-
 }
+
 
 
 //!!!!  методы для работы с содержимым страницы !!!!!

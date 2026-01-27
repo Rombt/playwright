@@ -25,21 +25,16 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, BrowserContext, La
 
   async init(): Promise<PWBrowser> {
     if (this.isInitialized) return this.instance!;
-
     this.instance = await chromium.launch(this.launchOptions);
-
-    console.log("this.instance = ", this.instance);
     return this.instance;
   }
 
   async close(): Promise<void> {
-    if (!this.isInitialized) return; // Защита от лишних вызовов
-
+    if (!this.isInitialized) return; // т.к. браузер должен быть один
     await this.instance?.close();
     this.instance = null;
   }
 
-  //!!!!!!!!!!!!!!!! где вызывать?????
   async createContext(): Promise<BrowserContext> {
     const browser = await this.init();
 
@@ -55,15 +50,13 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, BrowserContext, La
     const page = await context.newPage();
     await page.goto('https://google.com');
 
+
+
     try {
       return await fn(context);
     } finally {
       await context.close();
+      this.close();
     }
-
-
   }
-
-
-
 }

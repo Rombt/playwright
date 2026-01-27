@@ -15,16 +15,14 @@ class PlaywrightBrowser {
         if (this.isInitialized)
             return this.instance;
         this.instance = await playwright_1.chromium.launch(this.launchOptions);
-        console.log("this.instance = ", this.instance);
         return this.instance;
     }
     async close() {
         if (!this.isInitialized)
-            return; // Защита от лишних вызовов
+            return; // т.к. браузер должен быть один
         await this.instance?.close();
         this.instance = null;
     }
-    //!!!!!!!!!!!!!!!! где вызывать?????
     async createContext() {
         const browser = await this.init();
         return await browser.newContext(this.browserContextOptions);
@@ -38,6 +36,7 @@ class PlaywrightBrowser {
         }
         finally {
             await context.close();
+            this.close();
         }
     }
 }
