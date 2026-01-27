@@ -29,8 +29,6 @@ class PlaywrightBrowser {
     }
     async runInContext(fn) {
         const context = await this.createContext();
-        const page = await context.newPage();
-        await page.goto('https://google.com');
         try {
             return await fn(context);
         }

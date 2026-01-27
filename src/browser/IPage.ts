@@ -1,4 +1,5 @@
 export interface IPage {
+
   // Навигация
   goto(url: string): Promise<void>;
 

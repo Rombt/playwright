@@ -1,19 +1,32 @@
-import { Page, Frame } from "playwright";
-
+import { Page, BrowserContext, Frame } from "playwright";
 import { IPage } from "../IPage";
 
-export class PlaywrightPageAdapter implements IPage {
-  protected page: Page | Frame;
 
-  constructor(page: Page | Frame) {
-    this.page = page;
-  }
+
+
+export class PlaywrightPageAdapter implements IPage {
+  private page!: Page | Frame;
+
+    constructor(private readonly context: BrowserContext) {
+    }
+
+    static async create(context: BrowserContext): Promise<IPage> {
+        const adapter = new PlaywrightPageAdapter(context);
+        adapter.page = await context.newPage();
+        return adapter;
+    }
+
+    frame(selector: string): Promise<IPage> {
+        throw new Error("Method not implemented.");
+    }
+
 
   // =====================
   // Навигация
   // =====================
 
-  async goto(url: string): Promise<void> {
+    async goto(url: string): Promise<void> {
+
     if (!("goto" in this.page)) {
       throw new Error("goto() is not supported in Frame context");
     }
@@ -160,19 +173,19 @@ export class PlaywrightPageAdapter implements IPage {
   // Iframe
   // =====================
 
-  async frame(selector: string): Promise<IPage> {
-    const handle = await this.page.waitForSelector(selector);
-    if (!handle) {
-      throw new Error(`Frame not found: ${selector}`);
-    }
+//   async frame(selector: string): Promise<IPage> {
+//     const handle = await this.page.waitForSelector(selector);
+//     if (!handle) {
+//       throw new Error(`Frame not found: ${selector}`);
+//     }
 
-    const frame = await handle.contentFrame();
-    if (!frame) {
-      throw new Error(`Element is not a frame: ${selector}`);
-    }
+//     const frame = await handle.contentFrame();
+//     if (!frame) {
+//       throw new Error(`Element is not a frame: ${selector}`);
+//     }
 
-    return new PlaywrightPageAdapter(frame);
-  }
+//     return new PlaywrightPageAdapter(frame);
+//   }
 
   // =====================
   // Жизненный цикл

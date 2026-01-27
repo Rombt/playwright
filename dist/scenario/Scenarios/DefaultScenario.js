@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultScenario = void 0;
+const PlaywrightPageAdapter_1 = require("../../browser/playwright/PlaywrightPageAdapter");
 class DefaultScenario {
     constructor(source, browser, storage) {
         this.source = source;
@@ -11,14 +12,13 @@ class DefaultScenario {
         this.maxDelay = 5000;
     }
     async run() {
-        console.log("this.browser.runInContext = ", this.browser.runInContext);
         this.browser.runInContext(async (context) => {
+            const page = await PlaywrightPageAdapter_1.PlaywrightPageAdapter.create(context);
             try {
-                // await page.goto(url);
-                // await page.click(".submit");
+                await page.goto('https://google.com');
             }
             catch (err) {
-                await this.handleError(err); // все retries внутри handleError
+                await this.handleError(err);
             }
         });
     }
@@ -32,14 +32,11 @@ class DefaultScenario {
         throw new Error("Method not implemented.");
     }
     async handleError(error, attempt = 1) {
-        // 1. Логирование
         console.error(`Error on attempt ${attempt}:`, error);
-        // 2. Проверка, можно ли повторить
         if (attempt < this.maxRetries && this.isRetryable(error)) {
-            await this.waitBeforeRetry(attempt); // опциональная пауза
-            return this.handleError(error, attempt + 1); // повторяем
+            await this.waitBeforeRetry(attempt);
+            return this.handleError(error, attempt + 1);
         }
-        // 3. Если retries закончились — выбросить или сохранить состояние
         throw error;
     }
     finalize() {
@@ -48,20 +45,18 @@ class DefaultScenario {
     isRetryable(error) {
         if (!error)
             return false;
-        // 1️⃣ Если это ошибка Playwright с кодом timeout
+        // Если это ошибка Playwright с кодом timeout
         if (error instanceof Error) {
             const msg = error.message.toLowerCase();
-            // таймауты и network glitches считаются retryable
+            // таймауты и network glitches
             if (msg.includes("timeout") || msg.includes("net::"))
                 return true;
-            // иногда полезно повторять ошибки типа "element not found", если страница динамическая
+            // если страница динамическая
             if (msg.includes("element not found") || msg.includes("not visible"))
                 return true;
         }
-        // 2️⃣ Можно добавить свои кастомные классы ошибок
         if (error?.retryable === true)
             return true;
-        // 3️⃣ Всё остальное — критические ошибки, retry не делаем
         return false;
     }
     async waitBeforeRetry(attempt) {

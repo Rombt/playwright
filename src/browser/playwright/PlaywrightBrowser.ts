@@ -42,15 +42,16 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, BrowserContext, La
   }
 
 
+
+
+
+
+
   async runInContext<Result>(
     fn: (context: BrowserContext) => Promise<Result>
   ): Promise<Result> {
 
     const context = await this.createContext();
-    const page = await context.newPage();
-    await page.goto('https://google.com');
-
-
 
     try {
       return await fn(context);

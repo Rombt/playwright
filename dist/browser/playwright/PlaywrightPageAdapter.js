@@ -2,8 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaywrightPageAdapter = void 0;
 class PlaywrightPageAdapter {
-    constructor(page) {
-        this.page = page;
+    constructor(context) {
+        this.context = context;
+    }
+    static async create(context) {
+        const adapter = new PlaywrightPageAdapter(context);
+        adapter.page = await context.newPage();
+        return adapter;
+    }
+    frame(selector) {
+        throw new Error("Method not implemented.");
     }
     // =====================
     // Навигация
@@ -126,17 +134,17 @@ class PlaywrightPageAdapter {
     // =====================
     // Iframe
     // =====================
-    async frame(selector) {
-        const handle = await this.page.waitForSelector(selector);
-        if (!handle) {
-            throw new Error(`Frame not found: ${selector}`);
-        }
-        const frame = await handle.contentFrame();
-        if (!frame) {
-            throw new Error(`Element is not a frame: ${selector}`);
-        }
-        return new PlaywrightPageAdapter(frame);
-    }
+    //   async frame(selector: string): Promise<IPage> {
+    //     const handle = await this.page.waitForSelector(selector);
+    //     if (!handle) {
+    //       throw new Error(`Frame not found: ${selector}`);
+    //     }
+    //     const frame = await handle.contentFrame();
+    //     if (!frame) {
+    //       throw new Error(`Element is not a frame: ${selector}`);
+    //     }
+    //     return new PlaywrightPageAdapter(frame);
+    //   }
     // =====================
     // Жизненный цикл
     // =====================
