@@ -1,6 +1,6 @@
 import { PlaywrightBrowser } from "../browser/playwright/PlaywrightBrowser";
 import { FileStorage } from "../storage/fs/FileStorage";
-import { ITask } from "../Task/ITask";
+import { ITask } from "../data/entities/ITask";
 import { DefaultScenario } from "../scenario/scenarios/DefaultScenario";
 
 import { LaunchOptions, BrowserContextOptions } from 'playwright';

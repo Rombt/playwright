@@ -1,6 +1,6 @@
 import { ISource } from "../ISource";
 import { IBrowser } from "../../browser/IBrowser";
-import { ITask } from "../../Task/ITask";
+import { ITask } from "../../data/entities/ITask";
 import { BrowserContext } from "playwright-core";
 // import { ImageResult } from "../../contracts/ImageResult";
 

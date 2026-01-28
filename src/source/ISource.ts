@@ -1,6 +1,6 @@
 import { IBrowser } from "../browser/IBrowser";
 // import { ImageResult } from "../contracts/ImageResult";
-import { ITask } from "../Task/ITask";
+import { ITask } from "../data/entities/ITask";
 import { BrowserContext } from "playwright";
 
 export interface ISource<T extends ITask, R = unknown> {

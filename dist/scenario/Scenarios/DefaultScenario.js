@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
-const PlaywrightPageAdapter_1 = require("../../browser/playwright/PlaywrightPageAdapter");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -12,6 +11,7 @@ class DefaultScenario {
         this.baseDelay = 500;
         this.maxDelay = 5000;
         this.sourcesFolder = './dist/source/sources';
+        this.taskPath = 'src/data/tasks/2026-01-20_14-44.json';
         this.sources = [];
     }
     finalize() {
@@ -33,7 +33,7 @@ class DefaultScenario {
     async load() {
         //todo получаем массив путей к файлам перебираем формируем массив задач
         const arrTasks = [];
-        const filePath = path.resolve(process.cwd(), 'src/Task/tasks/2026-01-20_14-44.json');
+        const filePath = path.resolve(process.cwd(), this.taskPath);
         const raw = await fs_1.promises.readFile(filePath, 'utf-8');
         const data = JSON.parse(raw);
         arrTasks.push(data);
@@ -51,10 +51,16 @@ class DefaultScenario {
             if (!source)
                 throw new Error();
             const result = await this.browser.runInContext(async (context) => {
-                // return source.execute(task, context);
-                const page = await PlaywrightPageAdapter_1.PlaywrightPageAdapter.create(context);
+                // const page = await PageAdapter.create(context);
+                // console.dir(task, { depth: null, colors: true });
+                const brand = this.getBrands(task)[0];
+                const target_website = brand.metadata.target_website;
+                const products = brand.products;
+                products.forEach(product => {
+                    const sku = product.sku.slice(0, product.sku.indexOf('*'));
+                });
                 try {
-                    await page.goto('https://google.com');
+                    // await page.goto('https://google.com');
                 }
                 catch (err) {
                     await this.handleError(err);
@@ -76,14 +82,6 @@ class DefaultScenario {
         }
         return sources;
     }
-    async handleError(error, attempt = 1) {
-        console.error(`Error on attempt ${attempt}:`, error);
-        if (attempt < this.maxRetries && this.isRetryable(error)) {
-            await this.waitBeforeRetry(attempt);
-            return this.handleError(error, attempt + 1);
-        }
-        throw error;
-    }
     // async finalize(): Promise<void> {
     //       if (this.pageAdapter) {
     //       await this.pageAdapter.close();
@@ -93,6 +91,18 @@ class DefaultScenario {
     //   }
     //   this.isInitialized = false;
     // }
+    async handleError(error, attempt = 1) {
+        console.error(`Error on attempt ${attempt}:`, error);
+        if (attempt < this.maxRetries && this.isRetryable(error)) {
+            await this.waitBeforeRetry(attempt);
+            return this.handleError(error, attempt + 1);
+        }
+        throw error;
+    }
+    // =================  helpers ============================
+    getBrands(task) {
+        return Object.values(task.task);
+    }
     isRetryable(error) {
         if (!error)
             return false;
@@ -111,7 +121,6 @@ class DefaultScenario {
         return false;
     }
     async waitBeforeRetry(attempt) {
-        // экспоненциальный рост: baseDelay * 2^(attempt-1)
         const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
         return new Promise((resolve) => setTimeout(resolve, delay));
     }

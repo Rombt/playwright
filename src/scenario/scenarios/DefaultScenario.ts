@@ -2,7 +2,7 @@ import { IScenario } from "../IScenario";
 import { ISource } from "../../source/ISource";
 import { Storage } from "../../storage/Storage";
 import { IBrowser } from "../../browser/IBrowser";
-import { ITask } from "../../Task/ITask";
+import { ICollectProductPhotosTask } from "../../data/entities/ITasks/ICollectProductPhotosTask";
 
 import { promises as fs } from 'fs';
 import * as path from 'path';
@@ -13,18 +13,19 @@ import { BrowserContext } from "playwright";
 import { PlaywrightPageAdapter as PageAdapter } from "../../browser/playwright/PlaywrightPageAdapter";
 
 export class DefaultScenario<
-  T extends ITask,
+  IPhotosTask extends ICollectProductPhotosTask,
   Browser,
   Context extends BrowserContext
-> implements IScenario<T, Browser, Context> {
+> implements IScenario<IPhotosTask, Browser, Context> {
 
   private readonly maxRetries = 10;
   private readonly baseDelay = 500;
   private readonly maxDelay = 5000;
 
   private readonly sourcesFolder:string = './dist/source/sources';
+  private readonly taskPath:string = 'src/data/tasks/2026-01-20_14-44.json';
 
-  private sources: ISource<ITask>[] = [];
+  private sources: ISource<ICollectProductPhotosTask>[] = [];
 
 
   constructor(
@@ -47,14 +48,14 @@ export class DefaultScenario<
     }
   }
 
-  async load(): Promise<T[]> {
+  async load(): Promise<IPhotosTask[]> {
 
     //todo получаем массив путей к файлам перебираем формируем массив задач
     const arrTasks = [];
 
     const filePath = path.resolve(
       process.cwd(),
-      'src/Task/tasks/2026-01-20_14-44.json'
+      this.taskPath
     );
 
     const raw = await fs.readFile(filePath, 'utf-8');
@@ -66,8 +67,7 @@ export class DefaultScenario<
       throw new Error('Task file must contain an array');
     }
 
-
-    return arrTasks as T[];
+    return arrTasks as IPhotosTask[];
   }
 
   async prepare(): Promise<void> {
@@ -75,29 +75,33 @@ export class DefaultScenario<
 
   }
 
-  async process(arrTasks: T[]): Promise<void> {
+  async process(arrTasks: IPhotosTask[]): Promise<void> {
 
     for (const task of arrTasks) {
-
       const source = this.sources.find(s => s.supports(task));
-
       if (!source) throw new Error();
 
       const result = await this.browser.runInContext(async (context) => {
-        // return source.execute(task, context);
+        // const page = await PageAdapter.create(context);
+
+        // console.dir(task, { depth: null, colors: true });
+
+        const brand = this.getBrands(task)[0];
+        const target_website = brand.metadata.target_website;
+        const products = brand.products;
+
+        products.forEach(product => {
+          const sku = product.sku.slice(0, product.sku.indexOf('*'))
+        });
 
 
-      const page = await PageAdapter.create(context);
+        try {
 
-      try {
+          // await page.goto('https://google.com');
 
-        await page.goto('https://google.com');
-
-      } catch (err) {
-        await this.handleError(err);
-      }
-
-
+        } catch (err) {
+          await this.handleError(err);
+        }
 
 
 
@@ -111,10 +115,10 @@ export class DefaultScenario<
   }
 
 
-  async loadSources(): Promise<ISource<T, unknown>[]> {
+  async loadSources(): Promise<ISource<IPhotosTask, unknown>[]> {
 
     const files = await fs.readdir(this.sourcesFolder);
-    const sources: ISource<T>[] = [];
+    const sources: ISource<IPhotosTask>[] = [];
 
     for (const file of files) {
       if (!file.endsWith('.js')) continue;
@@ -131,6 +135,20 @@ export class DefaultScenario<
     return sources;
   }
 
+
+
+
+
+  // async finalize(): Promise<void> {
+  //       if (this.pageAdapter) {
+  //       await this.pageAdapter.close();
+  //   }
+  //   if (this.browserContext) {
+  //       await this.browserContext.close();
+  //   }
+  //   this.isInitialized = false;
+  // }
+
   async handleError(error: unknown, attempt: number = 1): Promise<void> {
 
     console.error(`Error on attempt ${attempt}:`, error);
@@ -143,15 +161,12 @@ export class DefaultScenario<
     throw error;
   }
 
-  // async finalize(): Promise<void> {
-  //       if (this.pageAdapter) {
-  //       await this.pageAdapter.close();
-  //   }
-  //   if (this.browserContext) {
-  //       await this.browserContext.close();
-  //   }
-  //   this.isInitialized = false;
-  // }
+
+  // =================  helpers ============================
+  protected getBrands(task: IPhotosTask) {
+    return Object.values(task.task);
+  }
+
 
   protected isRetryable(error: unknown): boolean {
     if (!error) return false;
@@ -173,10 +188,7 @@ export class DefaultScenario<
   }
 
   protected async waitBeforeRetry(attempt: number): Promise<void> {
-
-  // экспоненциальный рост: baseDelay * 2^(attempt-1)
-  const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
-
+    const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
   return new Promise((resolve) => setTimeout(resolve, delay));
 }
 

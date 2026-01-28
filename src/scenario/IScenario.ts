@@ -1,4 +1,4 @@
-import { ITask } from "../Task/ITask";
+import { ITask } from "../data/entities/ITask";
 import { ISource } from "../source/ISource";
 
 export interface IScenario<
