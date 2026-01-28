@@ -1,10 +1,9 @@
 import { PlaywrightBrowser } from "../browser/playwright/PlaywrightBrowser";
 import { FileStorage } from "../storage/fs/FileStorage";
-import { DummySource } from "../source/implementations/DummySource";
-import { DefaultScenario } from "../scenario/scenarios/DefaultScenario";
 import { ITask } from "../Task/ITask";
-import { LaunchOptions, BrowserContextOptions } from 'playwright';
+import { DefaultScenario } from "../scenario/scenarios/DefaultScenario";
 
+import { LaunchOptions, BrowserContextOptions } from 'playwright';
 import { accessSync, readFileSync, constants } from 'node:fs';
 
 
@@ -49,8 +48,7 @@ export class App<BrowserOptions> {
   async run() {
     const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
     const storage = new FileStorage();
-    const source = new DummySource();
-    const scenario = new DefaultScenario(source, browser, storage);
+    const scenario = new DefaultScenario( browser, storage);
 
 
 

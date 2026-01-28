@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const PlaywrightBrowser_1 = require("../browser/playwright/PlaywrightBrowser");
 const FileStorage_1 = require("../storage/fs/FileStorage");
-const DummySource_1 = require("../source/implementations/DummySource");
 const DefaultScenario_1 = require("../scenario/scenarios/DefaultScenario");
 const node_fs_1 = require("node:fs");
 //todo прочитать опции и предать в браузер
@@ -34,8 +33,7 @@ class App {
     async run() {
         const browser = new PlaywrightBrowser_1.PlaywrightBrowser(this.browserOptions, this.contextOptions);
         const storage = new FileStorage_1.FileStorage();
-        const source = new DummySource_1.DummySource();
-        const scenario = new DefaultScenario_1.DefaultScenario(source, browser, storage);
+        const scenario = new DefaultScenario_1.DefaultScenario(browser, storage);
         await scenario.run();
     }
     async getBrowserOptions() {

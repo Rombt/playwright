@@ -1,9 +1,17 @@
-import { Source } from "../Source";
+import { ISource } from "../ISource";
 import { IBrowser } from "../../browser/IBrowser";
 import { ITask } from "../../Task/ITask";
+import { BrowserContext } from "playwright-core";
 // import { ImageResult } from "../../contracts/ImageResult";
 
-export class PageImageSource implements Source<ITask> {
+export default class PageImageSource implements ISource<ITask> {
+  supports(task: ITask): boolean {
+    return task.type === 'collect_product_photos';
+  }
+
+  execute(task: ITask, context: BrowserContext): Promise<unknown> {
+    throw new Error("Method not implemented.");
+  }
   // async collect(task: ITask, browser: IBrowser<unknown, unknown>): Promise<unknown> {
   //   // if (!task.sku) return [];
 

@@ -1,4 +1,5 @@
 import { ITask } from "../Task/ITask";
+import { ISource } from "../source/ISource";
 
 export interface IScenario<
     T extends ITask = ITask,
@@ -41,4 +42,10 @@ export interface IScenario<
    * Cleanup, финальное логирование, завершение.
    */
   finalize(): Promise<void>;
+
+  /**
+   * Загружает все доступные Source.
+   * Возвращает массив объектов, реализующих ISource.
+   */
+  loadSources(): Promise<ISource<T>[]>;
 }

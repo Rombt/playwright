@@ -1,35 +1,80 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultScenario = void 0;
+const fs_1 = require("fs");
+const path = require("path");
 const PlaywrightPageAdapter_1 = require("../../browser/playwright/PlaywrightPageAdapter");
 class DefaultScenario {
-    constructor(source, browser, storage) {
-        this.source = source;
+    constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
         this.maxRetries = 10;
         this.baseDelay = 500;
         this.maxDelay = 5000;
+        this.sourcesFolder = './dist/source/sources';
+        this.sources = [];
+    }
+    finalize() {
+        throw new Error("Method not implemented.");
     }
     async run() {
-        this.browser.runInContext(async (context) => {
-            const page = await PlaywrightPageAdapter_1.PlaywrightPageAdapter.create(context);
-            try {
-                await page.goto('https://google.com');
-            }
-            catch (err) {
-                await this.handleError(err);
-            }
-        });
+        try {
+            const arrTasks = await this.load();
+            await this.prepare();
+            await this.process(arrTasks);
+        }
+        catch (error) {
+            await this.handleError(error);
+        }
+        finally {
+            // await this.finalize();
+        }
     }
-    load() {
-        throw new Error("Method not implemented.");
+    async load() {
+        //todo получаем массив путей к файлам перебираем формируем массив задач
+        const arrTasks = [];
+        const filePath = path.resolve(process.cwd(), 'src/Task/tasks/2026-01-20_14-44.json');
+        const raw = await fs_1.promises.readFile(filePath, 'utf-8');
+        const data = JSON.parse(raw);
+        arrTasks.push(data);
+        if (!Array.isArray(arrTasks)) {
+            throw new Error('Task file must contain an array');
+        }
+        return arrTasks;
     }
-    prepare() {
-        throw new Error("Method not implemented.");
+    async prepare() {
+        this.sources = await this.loadSources();
     }
-    process(tasks) {
-        throw new Error("Method not implemented.");
+    async process(arrTasks) {
+        for (const task of arrTasks) {
+            const source = this.sources.find(s => s.supports(task));
+            if (!source)
+                throw new Error();
+            const result = await this.browser.runInContext(async (context) => {
+                // return source.execute(task, context);
+                const page = await PlaywrightPageAdapter_1.PlaywrightPageAdapter.create(context);
+                try {
+                    await page.goto('https://google.com');
+                }
+                catch (err) {
+                    await this.handleError(err);
+                }
+            });
+            // await this.storage.save(result);
+        }
+    }
+    async loadSources() {
+        const files = await fs_1.promises.readdir(this.sourcesFolder);
+        const sources = [];
+        for (const file of files) {
+            if (!file.endsWith('.js'))
+                continue;
+            const fullPath = path.resolve(this.sourcesFolder, file);
+            const sourceModule = require(fullPath);
+            const SourceClass = sourceModule.default ?? sourceModule;
+            sources.push(new SourceClass());
+        }
+        return sources;
     }
     async handleError(error, attempt = 1) {
         console.error(`Error on attempt ${attempt}:`, error);
@@ -39,9 +84,15 @@ class DefaultScenario {
         }
         throw error;
     }
-    finalize() {
-        throw new Error("Method not implemented.");
-    }
+    // async finalize(): Promise<void> {
+    //       if (this.pageAdapter) {
+    //       await this.pageAdapter.close();
+    //   }
+    //   if (this.browserContext) {
+    //       await this.browserContext.close();
+    //   }
+    //   this.isInitialized = false;
+    // }
     isRetryable(error) {
         if (!error)
             return false;

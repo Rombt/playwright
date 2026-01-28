@@ -1,9 +1,12 @@
 import { IScenario } from "../IScenario";
-import { Source } from "../../source/Source";
+import { ISource } from "../../source/ISource";
 import { Storage } from "../../storage/Storage";
 import { IBrowser } from "../../browser/IBrowser";
 import { ITask } from "../../Task/ITask";
 
+import { promises as fs } from 'fs';
+import * as path from 'path';
+import { pathToFileURL } from 'url';
 
 import { BrowserContext } from "playwright";
 
@@ -19,17 +22,70 @@ export class DefaultScenario<
   private readonly baseDelay = 500;
   private readonly maxDelay = 5000;
 
+  private readonly sourcesFolder:string = './dist/source/sources';
+
+  private sources: ISource<ITask>[] = [];
+
 
   constructor(
-    private source: Source<T>,
     private browser: IBrowser<Browser,Context>,
     private storage: Storage
   ) { }
-
+  finalize(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 
   async run(): Promise<void> {
+    try {
+      const arrTasks = await this.load();
+      await this.prepare();
+      await this.process(arrTasks);
+    } catch (error) {
+      await this.handleError(error);
+    } finally {
+      // await this.finalize();
+    }
+  }
 
-    this.browser.runInContext(async (context) => {
+  async load(): Promise<T[]> {
+
+    //todo получаем массив путей к файлам перебираем формируем массив задач
+    const arrTasks = [];
+
+    const filePath = path.resolve(
+      process.cwd(),
+      'src/Task/tasks/2026-01-20_14-44.json'
+    );
+
+    const raw = await fs.readFile(filePath, 'utf-8');
+    const data = JSON.parse(raw);
+
+    arrTasks.push(data);
+
+    if (!Array.isArray(arrTasks)) {
+      throw new Error('Task file must contain an array');
+    }
+
+
+    return arrTasks as T[];
+  }
+
+  async prepare(): Promise<void> {
+    this.sources = await this.loadSources();
+
+  }
+
+  async process(arrTasks: T[]): Promise<void> {
+
+    for (const task of arrTasks) {
+
+      const source = this.sources.find(s => s.supports(task));
+
+      if (!source) throw new Error();
+
+      const result = await this.browser.runInContext(async (context) => {
+        // return source.execute(task, context);
+
 
       const page = await PageAdapter.create(context);
 
@@ -43,20 +99,36 @@ export class DefaultScenario<
 
 
 
-    })
 
+
+      });
+
+      // await this.storage.save(result);
+
+    }
 
 
   }
 
-  load(): Promise<T[]> {
-    throw new Error("Method not implemented.");
-  }
-  prepare(): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-  process(tasks: T[]): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async loadSources(): Promise<ISource<T, unknown>[]> {
+
+    const files = await fs.readdir(this.sourcesFolder);
+    const sources: ISource<T>[] = [];
+
+    for (const file of files) {
+      if (!file.endsWith('.js')) continue;
+
+      const fullPath = path.resolve(this.sourcesFolder, file);
+
+
+      const sourceModule = require(fullPath);
+
+      const SourceClass = sourceModule.default ?? sourceModule;
+      sources.push(new SourceClass());
+    }
+
+    return sources;
   }
 
   async handleError(error: unknown, attempt: number = 1): Promise<void> {
@@ -71,9 +143,15 @@ export class DefaultScenario<
     throw error;
   }
 
-  finalize(): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
+  // async finalize(): Promise<void> {
+  //       if (this.pageAdapter) {
+  //       await this.pageAdapter.close();
+  //   }
+  //   if (this.browserContext) {
+  //       await this.browserContext.close();
+  //   }
+  //   this.isInitialized = false;
+  // }
 
   protected isRetryable(error: unknown): boolean {
     if (!error) return false;
