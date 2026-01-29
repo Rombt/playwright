@@ -10,4 +10,7 @@ export interface ISource<T extends ITask, R = unknown> {
     task: T,
     context: BrowserContext
   ): Promise<R>;
+
+
+
 }

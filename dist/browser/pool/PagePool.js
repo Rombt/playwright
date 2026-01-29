@@ -2,19 +2,33 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PagePool = void 0;
 class PagePool {
-    constructor(context, size) {
+    constructor(context, max) {
         this.context = context;
-        this.size = size;
-        this.pages = [];
+        this.max = max;
+        this.free = [];
+        this.created = 0;
+        this.waiters = [];
     }
-    async init() {
-        for (let i = 0; i < this.size; i++) {
-            this.pages.push(await this.context.newPage());
+    async acquire() {
+        if (this.free.length) {
+            return this.free.pop();
         }
-        return this.pages;
+        if (this.created < this.max) {
+            this.created++;
+            return await this.context.newPage();
+        }
+        return new Promise(resolve => {
+            this.waiters.push(resolve);
+        });
     }
-    async destroy() {
-        await Promise.all(this.pages.map(p => p.close()));
+    release(page) {
+        const waiter = this.waiters.shift();
+        if (waiter) {
+            waiter(page);
+        }
+        else {
+            this.free.push(page);
+        }
     }
 }
 exports.PagePool = PagePool;

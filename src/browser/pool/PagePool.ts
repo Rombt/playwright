@@ -1,21 +1,39 @@
 import { BrowserContext, Page } from 'playwright';
+import { IPagePool } from './IPagePool';
 
-export class PagePool {
-  private readonly pages: Page[] = [];
+export class PagePool implements IPagePool{
+
+  private free: Page[] = [];
+  private created = 0;
+  private waiters: ((p: Page) => void)[] = [];
 
   constructor(
     private readonly context: BrowserContext,
-    private readonly size: number
+    private readonly max: number
   ) {}
 
-  async init(): Promise<Page[]> {
-    for (let i = 0; i < this.size; i++) {
-      this.pages.push(await this.context.newPage());
+  async acquire(): Promise<Page> {
+
+    if (this.free.length) {
+      return this.free.pop()!;
     }
-    return this.pages;
+
+    if (this.created < this.max) {
+      this.created++;
+      return await this.context.newPage();
+    }
+
+    return new Promise<Page>(resolve => {
+      this.waiters.push(resolve);
+    });
   }
 
-  async destroy(): Promise<void> {
-    await Promise.all(this.pages.map(p => p.close()));
+  release(page: Page) {
+    const waiter = this.waiters.shift();
+    if (waiter) {
+      waiter(page);
+    } else {
+      this.free.push(page);
+    }
   }
 }

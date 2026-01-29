@@ -1,0 +1,9 @@
+export interface Product {
+  id_product: string;
+  name_product: string;
+  sku: string;
+  attributes: {
+    color: string;
+    size: string;
+  };
+}

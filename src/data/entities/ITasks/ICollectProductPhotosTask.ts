@@ -1,5 +1,5 @@
 import { ITask } from "../ITask";
-
+import { Product } from '../Product';
 /**
  * Сбор фотографий товаров по SKU
  */
@@ -22,20 +22,7 @@ export interface ICollectProductPhotosTask extends ITask {
         target_website: string | null;
       };
 
-      products: Array<{
-        /** Идентификатор товара из базы данных сайта*/
-        id_product: string;
-
-        name_product: string;
-
-        /** SKU товара из базы данных производителя*/
-        sku: string;
-
-        attributes: {
-          color: string;
-          size: string;
-        };
-      }>;
+      products: Product[];
     }
   >;
 }

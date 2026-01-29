@@ -11,6 +11,13 @@ import { pathToFileURL } from 'url';
 import { BrowserContext } from "playwright";
 
 import { PlaywrightPageAdapter as PageAdapter } from "../../browser/playwright/PlaywrightPageAdapter";
+import  PageImageSource  from "../../source/sources/PageImageSource";
+import { RateLimiter } from "../../browser/limiter/RateLimiter";
+import { PagePool } from "../../browser/pool/PagePool";
+
+
+
+
 
 export class DefaultScenario<
   IPhotosTask extends ICollectProductPhotosTask,
@@ -82,7 +89,7 @@ export class DefaultScenario<
       if (!source) throw new Error();
 
       const result = await this.browser.runInContext(async (context) => {
-        // const page = await PageAdapter.create(context);
+        const page = await PageAdapter.create(context);
 
         // console.dir(task, { depth: null, colors: true });
 
@@ -90,18 +97,39 @@ export class DefaultScenario<
         const target_website = brand.metadata.target_website;
         const products = brand.products;
 
-        products.forEach(product => {
-          const sku = product.sku.slice(0, product.sku.indexOf('*'))
-        });
+        const source = new PageImageSource();
+        const limiter = new RateLimiter(1000);
+        const pool = new PagePool(context, 5);
+
+        const queue = [...products];
+        let index = 0;
+        const getNext = () => {
+          if (index >= queue.length) return undefined;
+          return queue[index++];
+        };
 
 
-        try {
+        async function runWorker() {
+          const page = await pool.acquire();
 
-          // await page.goto('https://google.com');
-
-        } catch (err) {
-          await this.handleError(err);
+          try {
+            await source.worker(page, limiter, getNext);
+          } finally {
+            pool.release(page);
+          }
         }
+        const workers = Array.from({ length: 5 }, () => runWorker());
+        await Promise.allSettled(workers);
+
+
+        //!!!!!!
+        // try {
+
+        //   // await page.goto('https://google.com');
+
+        // } catch (err) {
+        //   await this.handleError(err);
+        // }
 
 
 

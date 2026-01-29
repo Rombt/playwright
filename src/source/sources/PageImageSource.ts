@@ -1,15 +1,14 @@
 import { ISource } from "../ISource";
 import { IBrowser } from "../../browser/IBrowser";
 import { ITask } from "../../data/entities/ITask";
-import { BrowserContext } from "playwright-core";
+import { BrowserContext, Page  } from "playwright-core";
 // import { ImageResult } from "../../contracts/ImageResult";
 
 import { RateLimiter } from "../../browser/limiter/RateLimiter";
 import { PagePool } from "../../browser/pool/PagePool";
+import { Product } from '../../data/entities/Product';
 
-import { PlaywrightPageAdapter as PageAdapter } from "../../browser/playwright/PlaywrightPageAdapter";
-
-export default class PageImageSource implements ISource<ITask> {
+export  default  class PageImageSource implements ISource<ITask> {
   supports(task: ITask): boolean {
     return task.type === 'collect_product_photos';
   }
@@ -20,27 +19,28 @@ export default class PageImageSource implements ISource<ITask> {
 
 
 
-  // async  worker(
-  //   page: PageAdapter,
-  //   products: Product[],
-  //   limiter: RateLimiter,
-  //   getNext: () => Product | undefined
-  // ) {
-  //   while (true) {
-  //     const product = getNext();
-  //     if (!product) break;
+  async  worker(
+    page: Page,
+    limiter: RateLimiter,
+    getNext: () => Product | undefined
+  ) {
+  while (true) {
+    const product = getNext();
+    if (!product) break;
 
-  //     await limiter.wait();
+    await limiter.wait();
 
-  //     const url = buildProductUrl(product.sku);
-  //     await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-  //     await runScenario(page, product);
+    console.log("*****  worker *****");
+    // const url = buildProductUrl(product.sku);
+    // await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-  //     // Небольшая "человеческая" пауза
-  //     await delay(300 + Math.random() * 400);
-  //   }
-  // }
+    // await runScenario(page, product);
+
+    // Небольшая "человеческая" пауза
+    // await delay(300 + Math.random() * 400);
+  }
+  }
 
 
 

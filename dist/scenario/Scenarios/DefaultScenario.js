@@ -3,6 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
+const PlaywrightPageAdapter_1 = require("../../browser/playwright/PlaywrightPageAdapter");
+const PageImageSource_1 = require("../../source/sources/PageImageSource");
+const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
+const PagePool_1 = require("../../browser/pool/PagePool");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -51,20 +55,38 @@ class DefaultScenario {
             if (!source)
                 throw new Error();
             const result = await this.browser.runInContext(async (context) => {
-                // const page = await PageAdapter.create(context);
+                const page = await PlaywrightPageAdapter_1.PlaywrightPageAdapter.create(context);
                 // console.dir(task, { depth: null, colors: true });
                 const brand = this.getBrands(task)[0];
                 const target_website = brand.metadata.target_website;
                 const products = brand.products;
-                products.forEach(product => {
-                    const sku = product.sku.slice(0, product.sku.indexOf('*'));
-                });
-                try {
-                    // await page.goto('https://google.com');
+                const source = new PageImageSource_1.default();
+                const limiter = new RateLimiter_1.RateLimiter(1000);
+                const pool = new PagePool_1.PagePool(context, 5);
+                const queue = [...products];
+                let index = 0;
+                const getNext = () => {
+                    if (index >= queue.length)
+                        return undefined;
+                    return queue[index++];
+                };
+                async function runWorker() {
+                    const page = await pool.acquire();
+                    try {
+                        await source.worker(page, limiter, getNext);
+                    }
+                    finally {
+                        pool.release(page);
+                    }
                 }
-                catch (err) {
-                    await this.handleError(err);
-                }
+                const workers = Array.from({ length: 5 }, () => runWorker());
+                await Promise.allSettled(workers);
+                //!!!!!!
+                // try {
+                //   // await page.goto('https://google.com');
+                // } catch (err) {
+                //   await this.handleError(err);
+                // }
             });
             // await this.storage.save(result);
         }
