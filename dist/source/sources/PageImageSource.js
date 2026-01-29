@@ -3,6 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSource {
     constructor() {
         this.i = 0; //! для тестов
+        // buildProductUrl(targetUrl: string, sku: string) {
+        //   sku = sku.slice(0, sku.indexOf('*'));
+        //   return targetUrl.replace('{{sku_prod}}', sku);
+        // }
     }
     supports(task) {
         return task.type === 'collect_product_photos';
@@ -24,11 +28,17 @@ class PageImageSource {
         try {
             this.i++;
             console.log('*****  execute ***** i = ', this.i);
-            console.log('targetUrl = ', targetUrl);
-            console.log('product = ', product);
+            // console.log('targetUrl = ', targetUrl);
+            // console.log('product = ', product);
             //* Здесь все операции со страницей
-            // const url = buildProductUrl(product.sku);
+            const rawSku = product.sku;
+            const starIndex = rawSku.indexOf('*');
+            const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
+            const url = targetUrl.replace('{{sku_prod}}', sku);
+            console.log('url = ', url);
+            await page.goto(url);
             // await page.goto(url, { waitUntil: 'domcontentloaded' });
+            // await page.close();
         }
         catch (err) {
             errors.push(err);

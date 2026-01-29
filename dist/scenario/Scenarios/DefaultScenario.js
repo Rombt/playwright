@@ -62,10 +62,11 @@ class DefaultScenario {
                 const brand = this.getBrands(task)[0];
                 const targetUrl = brand.metadata.target_website;
                 const products = brand.products;
+                const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
+                const queue = [...uniqueProducts];
                 const source = new PageImageSource_1.default();
                 const limiter = new RateLimiter_1.RateLimiter(1000);
                 const pool = new PagePool_1.PagePool(context, 5);
-                const queue = [...products];
                 let index = 0;
                 const getNext = () => {
                     if (index >= queue.length)
