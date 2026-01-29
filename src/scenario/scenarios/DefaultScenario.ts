@@ -1,46 +1,41 @@
-import { IScenario } from "../IScenario";
-import { ISource } from "../../source/ISource";
-import { Storage } from "../../storage/Storage";
-import { IBrowser } from "../../browser/IBrowser";
-import { ICollectProductPhotosTask } from "../../data/entities/ITasks/ICollectProductPhotosTask";
+import { IScenario } from '../IScenario';
+import { ISource } from '../../source/ISource';
+import { Storage } from '../../storage/Storage';
+import { IBrowser } from '../../browser/IBrowser';
+import { ICollectProductPhotosTask } from '../../data/entities/ITasks/ICollectProductPhotosTask';
+import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
+import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { pathToFileURL } from 'url';
 
-import { BrowserContext } from "playwright";
+import { BrowserContext } from 'playwright';
 
-import { PlaywrightPageAdapter as PageAdapter } from "../../browser/playwright/PlaywrightPageAdapter";
-import  PageImageSource  from "../../source/sources/PageImageSource";
-import { RateLimiter } from "../../browser/limiter/RateLimiter";
-import { PagePool } from "../../browser/pool/PagePool";
+import { PlaywrightPageAdapter as PageAdapter } from '../../browser/playwright/PlaywrightPageAdapter';
+import PageImageSource from '../../source/sources/PageImageSource';
+import { RateLimiter } from '../../browser/limiter/RateLimiter';
+import { PagePool } from '../../browser/pool/PagePool';
 
-
-
-
+// import { ImageResult } from "../../contracts/ImageResult";
 
 export class DefaultScenario<
   IPhotosTask extends ICollectProductPhotosTask,
   Browser,
-  Context extends BrowserContext
-> implements IScenario<IPhotosTask, Browser, Context> {
-
+  Context extends BrowserContext,
+> implements IScenario<IPhotosTask, Browser, Context>
+{
   private readonly maxRetries = 10;
   private readonly baseDelay = 500;
   private readonly maxDelay = 5000;
 
-  private readonly sourcesFolder:string = './dist/source/sources';
-  private readonly taskPath:string = 'src/data/tasks/2026-01-20_14-44.json';
+  private readonly sourcesFolder: string = './dist/source/sources';
+  private readonly taskPath: string = 'src/data/tasks/2026-01-20_14-44.json';
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
 
-
-  constructor(
-    private browser: IBrowser<Browser,Context>,
-    private storage: Storage
-  ) { }
+  constructor(private browser: IBrowser<Browser, Context>, private storage: Storage) {}
   finalize(): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   async run(): Promise<void> {
@@ -49,21 +44,17 @@ export class DefaultScenario<
       await this.prepare();
       await this.process(arrTasks);
     } catch (error) {
-      await this.handleError(error);
+      // await this.handleError(error);   //todo какие ошибки здесь ловить
     } finally {
-      // await this.finalize();
+      // await this.finalize();     //todo
     }
   }
 
   async load(): Promise<IPhotosTask[]> {
-
     //todo получаем массив путей к файлам перебираем формируем массив задач
     const arrTasks = [];
 
-    const filePath = path.resolve(
-      process.cwd(),
-      this.taskPath
-    );
+    const filePath = path.resolve(process.cwd(), this.taskPath);
 
     const raw = await fs.readFile(filePath, 'utf-8');
     const data = JSON.parse(raw);
@@ -79,22 +70,21 @@ export class DefaultScenario<
 
   async prepare(): Promise<void> {
     this.sources = await this.loadSources();
-
   }
 
   async process(arrTasks: IPhotosTask[]): Promise<void> {
-
     for (const task of arrTasks) {
       const source = this.sources.find(s => s.supports(task));
       if (!source) throw new Error();
 
-      const result = await this.browser.runInContext(async (context) => {
+      await this.browser.runInContext(async context => {
         const page = await PageAdapter.create(context);
 
-        // console.dir(task, { depth: null, colors: true });
+        const allErrors: IWorkerError[] = [];
+        const allData: unknown[] = [];
 
         const brand = this.getBrands(task)[0];
-        const target_website = brand.metadata.target_website;
+        const targetUrl = brand.metadata.target_website;
         const products = brand.products;
 
         const source = new PageImageSource();
@@ -108,43 +98,43 @@ export class DefaultScenario<
           return queue[index++];
         };
 
-
-        async function runWorker() {
+        async function runWorker(): Promise<unknown[]> {
           const page = await pool.acquire();
 
           try {
-            await source.worker(page, limiter, getNext);
+            if (!targetUrl) {
+              allErrors.push({ error: 'URL is missing in metadata' });
+              return [];
+            }
+            return await source.worker(targetUrl, page, limiter, getNext);
           } finally {
             pool.release(page);
           }
         }
+
         const workers = Array.from({ length: 5 }, () => runWorker());
-        await Promise.allSettled(workers);
+        const results = await Promise.allSettled(workers);
 
+        for (const r of results) {
+          if (r.status === 'fulfilled') {
+            // allErrors.push(...r.value.errors); //todo
+            // allData.push(...r.value.data);
+          } else {
+            // воркер упал фатально, сохраняем как WorkerError
+            allErrors.push({ error: r.reason });
+          }
+        }
 
-        //!!!!!!
-        // try {
-
-        //   // await page.goto('https://google.com');
-
-        // } catch (err) {
-        //   await this.handleError(err);
-        // }
-
-
-
+        for (const err of allErrors) {
+          await this.handleError(err);
+        }
       });
 
       // await this.storage.save(result);
-
     }
-
-
   }
 
-
   async loadSources(): Promise<ISource<IPhotosTask, unknown>[]> {
-
     const files = await fs.readdir(this.sourcesFolder);
     const sources: ISource<IPhotosTask>[] = [];
 
@@ -152,7 +142,6 @@ export class DefaultScenario<
       if (!file.endsWith('.js')) continue;
 
       const fullPath = path.resolve(this.sourcesFolder, file);
-
 
       const sourceModule = require(fullPath);
 
@@ -162,10 +151,6 @@ export class DefaultScenario<
 
     return sources;
   }
-
-
-
-
 
   // async finalize(): Promise<void> {
   //       if (this.pageAdapter) {
@@ -177,8 +162,7 @@ export class DefaultScenario<
   //   this.isInitialized = false;
   // }
 
-  async handleError(error: unknown, attempt: number = 1): Promise<void> {
-
+  async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
     console.error(`Error on attempt ${attempt}:`, error);
 
     if (attempt < this.maxRetries && this.isRetryable(error)) {
@@ -189,14 +173,12 @@ export class DefaultScenario<
     throw error;
   }
 
-
   // =================  helpers ============================
   protected getBrands(task: IPhotosTask) {
     return Object.values(task.task);
   }
 
-
-  protected isRetryable(error: unknown): boolean {
+  protected isRetryable(error: IWorkerError): boolean {
     if (!error) return false;
 
     // Если это ошибка Playwright с кодом timeout
@@ -204,10 +186,10 @@ export class DefaultScenario<
       const msg = error.message.toLowerCase();
 
       // таймауты и network glitches
-      if (msg.includes("timeout") || msg.includes("net::")) return true;
+      if (msg.includes('timeout') || msg.includes('net::')) return true;
 
       // если страница динамическая
-      if (msg.includes("element not found") || msg.includes("not visible")) return true;
+      if (msg.includes('element not found') || msg.includes('not visible')) return true;
     }
 
     if ((error as any)?.retryable === true) return true;
@@ -217,7 +199,6 @@ export class DefaultScenario<
 
   protected async waitBeforeRetry(attempt: number): Promise<void> {
     const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
-  return new Promise((resolve) => setTimeout(resolve, delay));
-}
-
+    return new Promise(resolve => setTimeout(resolve, delay));
+  }
 }

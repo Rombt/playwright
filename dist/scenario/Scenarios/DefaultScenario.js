@@ -7,6 +7,7 @@ const PlaywrightPageAdapter_1 = require("../../browser/playwright/PlaywrightPage
 const PageImageSource_1 = require("../../source/sources/PageImageSource");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const PagePool_1 = require("../../browser/pool/PagePool");
+// import { ImageResult } from "../../contracts/ImageResult";
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -19,7 +20,7 @@ class DefaultScenario {
         this.sources = [];
     }
     finalize() {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
     async run() {
         try {
@@ -28,10 +29,10 @@ class DefaultScenario {
             await this.process(arrTasks);
         }
         catch (error) {
-            await this.handleError(error);
+            // await this.handleError(error);   //todo какие ошибки здесь ловить
         }
         finally {
-            // await this.finalize();
+            // await this.finalize();     //todo
         }
     }
     async load() {
@@ -54,11 +55,12 @@ class DefaultScenario {
             const source = this.sources.find(s => s.supports(task));
             if (!source)
                 throw new Error();
-            const result = await this.browser.runInContext(async (context) => {
+            await this.browser.runInContext(async (context) => {
                 const page = await PlaywrightPageAdapter_1.PlaywrightPageAdapter.create(context);
-                // console.dir(task, { depth: null, colors: true });
+                const allErrors = [];
+                const allData = [];
                 const brand = this.getBrands(task)[0];
-                const target_website = brand.metadata.target_website;
+                const targetUrl = brand.metadata.target_website;
                 const products = brand.products;
                 const source = new PageImageSource_1.default();
                 const limiter = new RateLimiter_1.RateLimiter(1000);
@@ -73,20 +75,31 @@ class DefaultScenario {
                 async function runWorker() {
                     const page = await pool.acquire();
                     try {
-                        await source.worker(page, limiter, getNext);
+                        if (!targetUrl) {
+                            allErrors.push({ error: 'URL is missing in metadata' });
+                            return [];
+                        }
+                        return await source.worker(targetUrl, page, limiter, getNext);
                     }
                     finally {
                         pool.release(page);
                     }
                 }
                 const workers = Array.from({ length: 5 }, () => runWorker());
-                await Promise.allSettled(workers);
-                //!!!!!!
-                // try {
-                //   // await page.goto('https://google.com');
-                // } catch (err) {
-                //   await this.handleError(err);
-                // }
+                const results = await Promise.allSettled(workers);
+                for (const r of results) {
+                    if (r.status === 'fulfilled') {
+                        // allErrors.push(...r.value.errors); //todo
+                        // allData.push(...r.value.data);
+                    }
+                    else {
+                        // воркер упал фатально, сохраняем как WorkerError
+                        allErrors.push({ error: r.reason });
+                    }
+                }
+                for (const err of allErrors) {
+                    await this.handleError(err);
+                }
             });
             // await this.storage.save(result);
         }
@@ -132,10 +145,10 @@ class DefaultScenario {
         if (error instanceof Error) {
             const msg = error.message.toLowerCase();
             // таймауты и network glitches
-            if (msg.includes("timeout") || msg.includes("net::"))
+            if (msg.includes('timeout') || msg.includes('net::'))
                 return true;
             // если страница динамическая
-            if (msg.includes("element not found") || msg.includes("not visible"))
+            if (msg.includes('element not found') || msg.includes('not visible'))
                 return true;
         }
         if (error?.retryable === true)
@@ -144,7 +157,7 @@ class DefaultScenario {
     }
     async waitBeforeRetry(attempt) {
         const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
-        return new Promise((resolve) => setTimeout(resolve, delay));
+        return new Promise(resolve => setTimeout(resolve, delay));
     }
 }
 exports.DefaultScenario = DefaultScenario;

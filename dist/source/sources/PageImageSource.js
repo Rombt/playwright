@@ -1,25 +1,39 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSource {
+    constructor() {
+        this.i = 0; //! для тестов
+    }
     supports(task) {
         return task.type === 'collect_product_photos';
     }
-    execute(task, context) {
-        throw new Error("Method not implemented.");
-    }
-    async worker(page, limiter, getNext) {
+    async worker(targetUrl, page, limiter, getNext) {
+        const results = [];
         while (true) {
             const product = getNext();
             if (!product)
                 break;
             await limiter.wait();
-            console.log("*****  worker *****");
+            results.push(await this.execute(targetUrl, page, product));
+        }
+        return results;
+    }
+    async execute(targetUrl, page, product) {
+        const errors = [];
+        const data = [];
+        try {
+            this.i++;
+            console.log('*****  execute ***** i = ', this.i);
+            console.log('targetUrl = ', targetUrl);
+            console.log('product = ', product);
+            //* Здесь все операции со страницей
             // const url = buildProductUrl(product.sku);
             // await page.goto(url, { waitUntil: 'domcontentloaded' });
-            // await runScenario(page, product);
-            // Небольшая "человеческая" пауза
-            // await delay(300 + Math.random() * 400);
         }
+        catch (err) {
+            errors.push(err);
+        }
+        return { data, errors };
     }
 }
 exports.default = PageImageSource;
