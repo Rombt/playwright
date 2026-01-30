@@ -23,7 +23,7 @@ export class DefaultScenario<
   Context extends BrowserContext,
 > implements IScenario<IPhotosTask, Browser, Context>
 {
-  private readonly maxRetries: number = 10;
+  private readonly maxRetries: number = 3;
   private readonly baseDelay: number = 500;
   private readonly maxDelay: number = 5000;
   private readonly maxPage: number = 10;
@@ -34,6 +34,7 @@ export class DefaultScenario<
   private sources: ISource<ICollectProductPhotosTask>[] = [];
 
   constructor(private browser: IBrowser<Browser, Context>, private storage: Storage) {}
+
   finalize(): Promise<void> {
     throw new Error('Method not implemented.');
   }
@@ -99,53 +100,73 @@ export class DefaultScenario<
           return queue[index++];
         };
 
-        async function runWorker(): Promise<unknown[]> {
+        // runWorker обрабатывает retry внутри себя
+        const runWorker = async (): Promise<unknown[]> => {
           const page = await pool.acquire();
 
           try {
             if (!targetUrl) {
-              allErrors.push({ error: 'URL is missing in metadata' });
+              const err: IWorkerError = { error: 'URL is missing in metadata' };
+              // Если это ретрайable ошибка, handleError сам её повторит
+              try {
+                await this.handleError(err);
+              } catch (finalErr) {
+                allErrors.push(finalErr as IWorkerError);
+              }
               return [];
             }
-            return await source.worker(targetUrl, page, limiter, getNext);
+
+            while (true) {
+              try {
+                // вызываем worker
+                const result = await source.worker(targetUrl, page, limiter, getNext);
+
+                // можно собрать данные, если нужно
+                if (Array.isArray(result)) {
+                  const typedResult = result as IWorkerResult[];
+                  allData.push(...typedResult.map(r => r.data).flat());
+                }
+
+                // если в результате есть ошибки, обрабатываем их через handleError
+                if (Array.isArray(result)) {
+                  for (const item of result as IWorkerResult[]) {
+                    if (item && Array.isArray(item.errors)) {
+                      for (const err of item.errors) {
+                        try {
+                          // err уже имеет тип IWorkerError, можно передавать напрямую
+                          await this.handleError(err);
+                        } catch (finalErr) {
+                          allErrors.push(finalErr as IWorkerError);
+                        }
+                      }
+                    }
+                  }
+                }
+
+                // Всё прошло успешно
+                return result;
+              } catch (err) {
+                // Любая ошибка worker
+                try {
+                  await this.handleError({ error: err });
+                } catch (finalErr) {
+                  allErrors.push(finalErr as IWorkerError);
+                  return [];
+                }
+              }
+            }
           } finally {
             pool.release(page);
           }
-        }
+        };
 
         const workers = Array.from({ length: quantityPage }, () => runWorker());
         const results = await Promise.allSettled(workers);
 
-        console.dir(results, { depth: null, colors: true });
-
-        for (const result of results) {
-          if (result.status === 'rejected') {
-            allErrors.push(result.reason);
-          } else {
-            if (Array.isArray(result.value)) {
-              for (const item of result.value) {
-                if (
-                  item &&
-                  typeof item === 'object' &&
-                  'errors' in item &&
-                  Array.isArray((item as any).errors)
-                ) {
-                  for (const err of (item as any).errors) {
-                    // Оборачиваем в IWorkerError
-                    allErrors.push({ error: err });
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        console.log('allErrors = ');
+        console.log('All workers finished.');
+        console.dir(allData, { depth: null, colors: true });
+        console.log('All final errors:');
         console.dir(allErrors, { depth: null, colors: true });
-
-        for (const err of allErrors) {
-          await this.handleError(err);
-        }
       });
 
       // await this.storage.save(result);
@@ -181,7 +202,7 @@ export class DefaultScenario<
   // }
 
   async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
-    console.error(`++++++ Error on attempt ${attempt}:`, error);
+    console.error(`Error on attempt ${attempt}:`, error);
 
     if (attempt < this.maxRetries && this.isRetryable(error)) {
       await this.waitBeforeRetry(attempt);

@@ -11,7 +11,7 @@ class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
-        this.maxRetries = 10;
+        this.maxRetries = 3;
         this.baseDelay = 500;
         this.maxDelay = 5000;
         this.maxPage = 10;
@@ -74,47 +74,71 @@ class DefaultScenario {
                         return undefined;
                     return queue[index++];
                 };
-                async function runWorker() {
+                // runWorker обрабатывает retry внутри себя
+                const runWorker = async () => {
                     const page = await pool.acquire();
                     try {
                         if (!targetUrl) {
-                            allErrors.push({ error: 'URL is missing in metadata' });
+                            const err = { error: 'URL is missing in metadata' };
+                            // Если это ретрайable ошибка, handleError сам её повторит
+                            try {
+                                await this.handleError(err);
+                            }
+                            catch (finalErr) {
+                                allErrors.push(finalErr);
+                            }
                             return [];
                         }
-                        return await source.worker(targetUrl, page, limiter, getNext);
-                    }
-                    finally {
-                        pool.release(page);
-                    }
-                }
-                const workers = Array.from({ length: quantityPage }, () => runWorker());
-                const results = await Promise.allSettled(workers);
-                console.dir(results, { depth: null, colors: true });
-                for (const result of results) {
-                    if (result.status === 'rejected') {
-                        allErrors.push(result.reason);
-                    }
-                    else {
-                        if (Array.isArray(result.value)) {
-                            for (const item of result.value) {
-                                if (item &&
-                                    typeof item === 'object' &&
-                                    'errors' in item &&
-                                    Array.isArray(item.errors)) {
-                                    for (const err of item.errors) {
-                                        // Оборачиваем в IWorkerError
-                                        allErrors.push({ error: err });
+                        while (true) {
+                            try {
+                                // вызываем worker
+                                const result = await source.worker(targetUrl, page, limiter, getNext);
+                                // можно собрать данные, если нужно
+                                if (Array.isArray(result)) {
+                                    const typedResult = result;
+                                    allData.push(...typedResult.map(r => r.data).flat());
+                                }
+                                // если в результате есть ошибки, обрабатываем их через handleError
+                                if (Array.isArray(result)) {
+                                    for (const item of result) {
+                                        if (item && Array.isArray(item.errors)) {
+                                            for (const err of item.errors) {
+                                                try {
+                                                    // err уже имеет тип IWorkerError, можно передавать напрямую
+                                                    await this.handleError(err);
+                                                }
+                                                catch (finalErr) {
+                                                    allErrors.push(finalErr);
+                                                }
+                                            }
+                                        }
                                     }
+                                }
+                                // Всё прошло успешно
+                                return result;
+                            }
+                            catch (err) {
+                                // Любая ошибка worker
+                                try {
+                                    await this.handleError({ error: err });
+                                }
+                                catch (finalErr) {
+                                    allErrors.push(finalErr);
+                                    return [];
                                 }
                             }
                         }
                     }
-                }
-                console.log('allErrors = ');
+                    finally {
+                        pool.release(page);
+                    }
+                };
+                const workers = Array.from({ length: quantityPage }, () => runWorker());
+                const results = await Promise.allSettled(workers);
+                console.log('All workers finished.');
+                console.dir(allData, { depth: null, colors: true });
+                console.log('All final errors:');
                 console.dir(allErrors, { depth: null, colors: true });
-                for (const err of allErrors) {
-                    await this.handleError(err);
-                }
             });
             // await this.storage.save(result);
         }
@@ -142,7 +166,7 @@ class DefaultScenario {
     //   this.isInitialized = false;
     // }
     async handleError(error, attempt = 1) {
-        console.error(`++++++ Error on attempt ${attempt}:`, error);
+        console.error(`Error on attempt ${attempt}:`, error);
         if (attempt < this.maxRetries && this.isRetryable(error)) {
             await this.waitBeforeRetry(attempt);
             return this.handleError(error, attempt + 1);
