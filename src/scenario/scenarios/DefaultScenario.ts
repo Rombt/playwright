@@ -11,7 +11,7 @@ import * as path from 'path';
 
 import { BrowserContext } from 'playwright';
 
-import { PlaywrightPageAdapter as PageAdapter } from '../../browser/playwright/PlaywrightPageAdapter';
+// import { PlaywrightPageAdapter as PageAdapter } from '../../browser/playwright/PlaywrightPageAdapter';
 import PageImageSource from '../../source/sources/PageImageSource';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { PagePool } from '../../browser/pool/PagePool';
@@ -78,7 +78,7 @@ export class DefaultScenario<
       if (!source) throw new Error();
 
       await this.browser.runInContext(async context => {
-        const page = await PageAdapter.create(context);
+        // const page = await PageAdapter.create(context);
 
         const allErrors: IWorkerError[] = [];
         const allData: unknown[] = [];

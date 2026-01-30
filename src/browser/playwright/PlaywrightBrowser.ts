@@ -1,23 +1,21 @@
-import { IBrowser as IBrowser } from "../IBrowser";
+import { IBrowser as IBrowser } from '../IBrowser';
 import {
   chromium,
   Browser as PWBrowser,
   BrowserContext,
   LaunchOptions,
-  BrowserContextOptions
+  BrowserContextOptions,
 } from 'playwright';
 
-
-export class PlaywrightBrowser implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions> {
-
+export class PlaywrightBrowser
+  implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions>
+{
   private instance: PWBrowser | null = null;
-
 
   constructor(
     private readonly launchOptions: LaunchOptions,
     private readonly browserContextOptions: BrowserContextOptions,
-  ) {  }
-
+  ) {}
 
   public get isInitialized(): boolean {
     return this.instance !== null;
@@ -41,16 +39,7 @@ export class PlaywrightBrowser implements IBrowser<PWBrowser, BrowserContext, La
     return await browser.newContext(this.browserContextOptions);
   }
 
-
-
-
-
-
-
-  async runInContext<Result>(
-    fn: (context: BrowserContext) => Promise<Result>
-  ): Promise<Result> {
-
+  async runInContext<Result>(fn: (context: BrowserContext) => Promise<Result>): Promise<Result> {
     const context = await this.createContext();
 
     try {

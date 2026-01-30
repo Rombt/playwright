@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
-const PlaywrightPageAdapter_1 = require("../../browser/playwright/PlaywrightPageAdapter");
+// import { PlaywrightPageAdapter as PageAdapter } from '../../browser/playwright/PlaywrightPageAdapter';
 const PageImageSource_1 = require("../../source/sources/PageImageSource");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const PagePool_1 = require("../../browser/pool/PagePool");
@@ -56,7 +56,7 @@ class DefaultScenario {
             if (!source)
                 throw new Error();
             await this.browser.runInContext(async (context) => {
-                const page = await PlaywrightPageAdapter_1.PlaywrightPageAdapter.create(context);
+                // const page = await PageAdapter.create(context);
                 const allErrors = [];
                 const allData = [];
                 const brand = this.getBrands(task)[0];

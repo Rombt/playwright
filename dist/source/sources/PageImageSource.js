@@ -28,8 +28,6 @@ class PageImageSource {
         try {
             this.i++;
             console.log('*****  execute ***** i = ', this.i);
-            // console.log('targetUrl = ', targetUrl);
-            // console.log('product = ', product);
             //* Здесь все операции со страницей
             const rawSku = product.sku;
             const starIndex = rawSku.indexOf('*');
