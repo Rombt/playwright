@@ -26,16 +26,18 @@ class PageImageSource {
         const errors = [];
         const data = [];
         try {
-            this.i++;
-            console.log('*****  execute ***** i = ', this.i);
-            //* Здесь все операции со страницей
+            // this.i++;
+            // console.log('*****  execute ***** i = ', this.i);
             const rawSku = product.sku;
             const starIndex = rawSku.indexOf('*');
             const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
             const url = targetUrl.replace('{{sku_prod}}', sku);
-            console.log('url = ', url);
             await page.goto(url);
-            // await page.goto(url, { waitUntil: 'domcontentloaded' });
+            // находим первую картинку для перехода
+            await page.goto(url, { waitUntil: 'domcontentloaded' });
+            const image = page.locator('#app-main img').first();
+            await image.waitFor({ state: 'visible', timeout: 5000 });
+            await image.click();
             // await page.close();
         }
         catch (err) {

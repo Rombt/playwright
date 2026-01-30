@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PagePool = void 0;
 class PagePool {
-    constructor(context, max) {
+    constructor(context, quantityPage) {
         this.context = context;
-        this.max = max;
+        this.quantityPage = quantityPage;
         this.free = [];
         this.created = 0;
         this.waiters = [];
@@ -13,9 +13,10 @@ class PagePool {
         if (this.free.length) {
             return this.free.pop();
         }
-        if (this.created < this.max) {
+        if (this.created < this.quantityPage) {
+            const page = await this.context.newPage();
             this.created++;
-            return await this.context.newPage();
+            return page;
         }
         return new Promise(resolve => {
             this.waiters.push(resolve);

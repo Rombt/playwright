@@ -1,7 +1,4 @@
 {
-    "cSpell.words": [
-        "Retryable",
-        "Скрапинг"
-    ],
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+  "cSpell.words": ["domcontentloaded", "Retryable", "Скрапинг"],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
-// import { PlaywrightPageAdapter as PageAdapter } from '../../browser/playwright/PlaywrightPageAdapter';
 const PageImageSource_1 = require("../../source/sources/PageImageSource");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const PagePool_1 = require("../../browser/pool/PagePool");
@@ -15,6 +14,7 @@ class DefaultScenario {
         this.maxRetries = 10;
         this.baseDelay = 500;
         this.maxDelay = 5000;
+        this.maxPage = 10;
         this.sourcesFolder = './dist/source/sources';
         this.taskPath = 'src/data/tasks/2026-01-20_14-44.json';
         this.sources = [];
@@ -29,6 +29,7 @@ class DefaultScenario {
             await this.process(arrTasks);
         }
         catch (error) {
+            console.log('***** error = ', error);
             // await this.handleError(error);   //todo какие ошибки здесь ловить
         }
         finally {
@@ -56,7 +57,6 @@ class DefaultScenario {
             if (!source)
                 throw new Error();
             await this.browser.runInContext(async (context) => {
-                // const page = await PageAdapter.create(context);
                 const allErrors = [];
                 const allData = [];
                 const brand = this.getBrands(task)[0];
@@ -65,8 +65,9 @@ class DefaultScenario {
                 const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
                 const queue = [...uniqueProducts];
                 const source = new PageImageSource_1.default();
-                const limiter = new RateLimiter_1.RateLimiter(1000);
-                const pool = new PagePool_1.PagePool(context, 5);
+                const limiter = new RateLimiter_1.RateLimiter(2000);
+                const quantityPage = Math.min(queue.length, this.maxPage);
+                const pool = new PagePool_1.PagePool(context, quantityPage);
                 let index = 0;
                 const getNext = () => {
                     if (index >= queue.length)
@@ -86,18 +87,31 @@ class DefaultScenario {
                         pool.release(page);
                     }
                 }
-                const workers = Array.from({ length: 5 }, () => runWorker());
+                const workers = Array.from({ length: quantityPage }, () => runWorker());
                 const results = await Promise.allSettled(workers);
-                for (const r of results) {
-                    if (r.status === 'fulfilled') {
-                        // allErrors.push(...r.value.errors); //todo
-                        // allData.push(...r.value.data);
+                console.dir(results, { depth: null, colors: true });
+                for (const result of results) {
+                    if (result.status === 'rejected') {
+                        allErrors.push(result.reason);
                     }
                     else {
-                        // воркер упал фатально, сохраняем как WorkerError
-                        allErrors.push({ error: r.reason });
+                        if (Array.isArray(result.value)) {
+                            for (const item of result.value) {
+                                if (item &&
+                                    typeof item === 'object' &&
+                                    'errors' in item &&
+                                    Array.isArray(item.errors)) {
+                                    for (const err of item.errors) {
+                                        // Оборачиваем в IWorkerError
+                                        allErrors.push({ error: err });
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+                console.log('allErrors = ');
+                console.dir(allErrors, { depth: null, colors: true });
                 for (const err of allErrors) {
                     await this.handleError(err);
                 }
@@ -128,7 +142,7 @@ class DefaultScenario {
     //   this.isInitialized = false;
     // }
     async handleError(error, attempt = 1) {
-        console.error(`Error on attempt ${attempt}:`, error);
+        console.error(`++++++ Error on attempt ${attempt}:`, error);
         if (attempt < this.maxRetries && this.isRetryable(error)) {
             await this.waitBeforeRetry(attempt);
             return this.handleError(error, attempt + 1);

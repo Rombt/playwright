@@ -9,9 +9,8 @@ import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
-import { BrowserContext } from 'playwright';
+import { BrowserContext } from 'playwright-core';
 
-// import { PlaywrightPageAdapter as PageAdapter } from '../../browser/playwright/PlaywrightPageAdapter';
 import PageImageSource from '../../source/sources/PageImageSource';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { PagePool } from '../../browser/pool/PagePool';
@@ -24,9 +23,10 @@ export class DefaultScenario<
   Context extends BrowserContext,
 > implements IScenario<IPhotosTask, Browser, Context>
 {
-  private readonly maxRetries = 10;
-  private readonly baseDelay = 500;
-  private readonly maxDelay = 5000;
+  private readonly maxRetries: number = 10;
+  private readonly baseDelay: number = 500;
+  private readonly maxDelay: number = 5000;
+  private readonly maxPage: number = 10;
 
   private readonly sourcesFolder: string = './dist/source/sources';
   private readonly taskPath: string = 'src/data/tasks/2026-01-20_14-44.json';
@@ -44,6 +44,7 @@ export class DefaultScenario<
       await this.prepare();
       await this.process(arrTasks);
     } catch (error) {
+      console.log('***** error = ', error);
       // await this.handleError(error);   //todo какие ошибки здесь ловить
     } finally {
       // await this.finalize();     //todo
@@ -78,8 +79,6 @@ export class DefaultScenario<
       if (!source) throw new Error();
 
       await this.browser.runInContext(async context => {
-        // const page = await PageAdapter.create(context);
-
         const allErrors: IWorkerError[] = [];
         const allData: unknown[] = [];
 
@@ -90,8 +89,9 @@ export class DefaultScenario<
         const queue = [...uniqueProducts];
 
         const source = new PageImageSource();
-        const limiter = new RateLimiter(1000);
-        const pool = new PagePool(context, 5);
+        const limiter = new RateLimiter(2000);
+        const quantityPage = Math.min(queue.length, this.maxPage);
+        const pool = new PagePool(context, quantityPage);
 
         let index = 0;
         const getNext = () => {
@@ -113,18 +113,35 @@ export class DefaultScenario<
           }
         }
 
-        const workers = Array.from({ length: 5 }, () => runWorker());
+        const workers = Array.from({ length: quantityPage }, () => runWorker());
         const results = await Promise.allSettled(workers);
 
-        for (const r of results) {
-          if (r.status === 'fulfilled') {
-            // allErrors.push(...r.value.errors); //todo
-            // allData.push(...r.value.data);
+        console.dir(results, { depth: null, colors: true });
+
+        for (const result of results) {
+          if (result.status === 'rejected') {
+            allErrors.push(result.reason);
           } else {
-            // воркер упал фатально, сохраняем как WorkerError
-            allErrors.push({ error: r.reason });
+            if (Array.isArray(result.value)) {
+              for (const item of result.value) {
+                if (
+                  item &&
+                  typeof item === 'object' &&
+                  'errors' in item &&
+                  Array.isArray((item as any).errors)
+                ) {
+                  for (const err of (item as any).errors) {
+                    // Оборачиваем в IWorkerError
+                    allErrors.push({ error: err });
+                  }
+                }
+              }
+            }
           }
         }
+
+        console.log('allErrors = ');
+        console.dir(allErrors, { depth: null, colors: true });
 
         for (const err of allErrors) {
           await this.handleError(err);
@@ -164,7 +181,7 @@ export class DefaultScenario<
   // }
 
   async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
-    console.error(`Error on attempt ${attempt}:`, error);
+    console.error(`++++++ Error on attempt ${attempt}:`, error);
 
     if (attempt < this.maxRetries && this.isRetryable(error)) {
       await this.waitBeforeRetry(attempt);
