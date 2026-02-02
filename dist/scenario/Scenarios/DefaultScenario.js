@@ -137,19 +137,35 @@ class DefaultScenario {
                 const workers = Array.from({ length: quantityPage }, () => runWorker());
                 const results = await Promise.allSettled(workers);
                 console.log('All workers finished.');
-                console.log('allData: ');
-                console.dir(allData, { depth: null, colors: true });
-                console.log('All final errors:');
-                console.dir(allErrors, { depth: null, colors: true });
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                /**
-                  В data урлы должны быть сохранены для каждого sku, или лучше id товара(?), отдельно!
-        
-                 */
-                // for (const url of allData) {
-                //   const file = await this.browser.download(context, url);
-                //   await this.storage.save({ ...file, targetDir: path.join(brand, sku) });
-                // }
+                const imageQueue = [];
+                for (const [sku, urls] of Object.entries(allData)) {
+                    for (const url of urls) {
+                        imageQueue.push({ sku, url });
+                    }
+                }
+                const runImageWorker = async () => {
+                    const page = await pool.acquire();
+                    try {
+                        while (true) {
+                            const task = imageQueue.shift();
+                            if (!task)
+                                return;
+                            const { sku, url } = task;
+                            const { filename, buffer } = await limiter.schedule(() => this.browser.download(page, url));
+                            await this.storage.save({
+                                filename,
+                                buffer,
+                                targetDir: path.join(brand.brand_name, sku),
+                            });
+                        }
+                    }
+                    finally {
+                        pool.release(page);
+                    }
+                };
+                const workersDownload = Array.from({ length: quantityPage }, () => runImageWorker());
+                await Promise.allSettled(workersDownload);
+                //todo перебрать ошибки и сформировать файл с товарами которые не были обработаны
             });
         }
     }

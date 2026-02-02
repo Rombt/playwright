@@ -1,13 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSource {
-    constructor() {
-        this.i = 0; //! для тестов
-        // buildProductUrl(targetUrl: string, sku: string) {
-        //   sku = sku.slice(0, sku.indexOf('*'));
-        //   return targetUrl.replace('{{sku_prod}}', sku);
-        // }
-    }
     supports(task) {
         return task.type === 'collect_product_photos';
     }
@@ -25,15 +18,12 @@ class PageImageSource {
     async execute(targetUrl, page, product) {
         const errors = [];
         const data = {};
-        this.i++;
-        console.log('***** i = ', this.i);
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url);
-            // находим первую картинку для перехода
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             const image = page.locator('#app-main img').first();
             await image.waitFor({ state: 'visible', timeout: 5000 });

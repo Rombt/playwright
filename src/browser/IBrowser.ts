@@ -1,10 +1,6 @@
-export interface IBrowser<
-  BrowserContext,
-  ContextT,
-  DownloadedFile,
-  LaunchOptionsT = void,
-  ContextOptionsT = void,
-> {
+import { Page } from 'playwright';
+
+export interface IBrowser<BrowserContext, ContextT, LaunchOptionsT = void, ContextOptionsT = void> {
   readonly isInitialized: boolean;
 
   init(options?: LaunchOptionsT): Promise<BrowserContext>;
@@ -15,5 +11,5 @@ export interface IBrowser<
 
   runInContext<Result>(fn: (context: ContextT) => Promise<Result>): Promise<Result>;
 
-  download(context: ContextT, url: string): Promise<DownloadedFile>;
+  download(page: Page, url: string): Promise<{ filename: string; buffer: Buffer }>;
 }

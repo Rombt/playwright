@@ -9,8 +9,6 @@ import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
 
 export default class PageImageSource implements ISource<ITask> {
-  private i = 0; //! для тестов
-
   supports(task: ITask): boolean {
     return task.type === 'collect_product_photos';
   }
@@ -38,9 +36,6 @@ export default class PageImageSource implements ISource<ITask> {
     const errors: IWorkerError[] = [];
     const data: IDataImag = {};
 
-    this.i++;
-    console.log('***** i = ', this.i);
-
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');
     const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
@@ -49,7 +44,6 @@ export default class PageImageSource implements ISource<ITask> {
     try {
       await page.goto(url);
 
-      // находим первую картинку для перехода
       await page.goto(url, { waitUntil: 'domcontentloaded' });
       const image = page.locator('#app-main img').first();
       await image.waitFor({ state: 'visible', timeout: 5000 });
@@ -80,11 +74,4 @@ export default class PageImageSource implements ISource<ITask> {
 
     return { data, errors };
   }
-
-  // buildProductUrl(targetUrl: string, sku: string) {
-
-  //   sku = sku.slice(0, sku.indexOf('*'));
-
-  //   return targetUrl.replace('{{sku_prod}}', sku);
-  // }
 }

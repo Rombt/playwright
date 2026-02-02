@@ -5,15 +5,15 @@ import {
   BrowserContext,
   LaunchOptions,
   BrowserContextOptions,
+  Download,
+  Page,
 } from 'playwright';
 
-import { IDownloadedFile } from '../IDownloadedFile';
 import * as path from 'path';
 import * as os from 'os';
 
 export class PlaywrightBrowser
-  implements
-    IBrowser<PWBrowser, BrowserContext, IDownloadedFile, LaunchOptions, BrowserContextOptions>
+  implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions>
 {
   private instance: PWBrowser | null = null;
 
@@ -55,33 +55,57 @@ export class PlaywrightBrowser
     }
   }
 
-  async download(context: BrowserContext, url: string): Promise<IDownloadedFile> {
-    const page = await context.newPage();
+  async download(page: Page, url: string): Promise<{ filename: string; buffer: Buffer }> {
+    let downloadEvent: Download | undefined;
 
-    try {
-      const [download] = await Promise.all([
-        page.waitForEvent('download'),
-        page.evaluate(url => {
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = '';
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-        }, url),
-      ]);
+    const downloadPromise = page
+      .waitForEvent('download')
+      .then((d: Download) => {
+        downloadEvent = d;
+      })
+      .catch(() => {});
 
-      const filename = await download.suggestedFilename();
-      const tempPath = path.join(os.tmpdir(), filename);
+    const response = await page.goto(url);
+    await downloadPromise;
 
-      await download.saveAs(tempPath);
+    //  Если сработал download
+    if (downloadEvent) {
+      const filename = downloadEvent.suggestedFilename();
+
+      const stream = await downloadEvent.createReadStream();
+      if (!stream) {
+        throw new Error('Download stream is null');
+      }
+
+      const chunks: Buffer[] = [];
+      for await (const chunk of stream) {
+        chunks.push(chunk as Buffer);
+      }
 
       return {
-        path: tempPath,
         filename,
+        buffer: Buffer.concat(chunks),
       };
-    } finally {
-      await page.close();
     }
+
+    if (!response) {
+      throw new Error('No response received');
+    }
+
+    const buffer = await response.body();
+    const contentType = response.headers()['content-type'] || '';
+    let ext = '';
+
+    if (contentType.includes('image/jpeg')) ext = '.jpg';
+    else if (contentType.includes('image/png')) ext = '.png';
+    else if (contentType.includes('image/webp')) ext = '.webp';
+    else if (contentType.includes('image/avif')) ext = '.avif';
+    else if (contentType.includes('application/pdf')) ext = '.pdf';
+
+    const baseName = path.basename(new URL(url).pathname) || 'file';
+
+    const filename = baseName + ext;
+
+    return { filename, buffer };
   }
 }

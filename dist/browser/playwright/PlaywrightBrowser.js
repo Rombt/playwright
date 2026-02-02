@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaywrightBrowser = void 0;
 const playwright_1 = require("playwright");
 const path = require("path");
-const os = require("os");
 class PlaywrightBrowser {
     constructor(launchOptions, browserContextOptions) {
         this.launchOptions = launchOptions;
@@ -39,31 +38,51 @@ class PlaywrightBrowser {
             this.close();
         }
     }
-    async download(context, url) {
-        const page = await context.newPage();
-        try {
-            const [download] = await Promise.all([
-                page.waitForEvent('download'),
-                page.evaluate(url => {
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = '';
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                }, url),
-            ]);
-            const filename = await download.suggestedFilename();
-            const tempPath = path.join(os.tmpdir(), filename);
-            await download.saveAs(tempPath);
+    async download(page, url) {
+        let downloadEvent;
+        const downloadPromise = page
+            .waitForEvent('download')
+            .then((d) => {
+            downloadEvent = d;
+        })
+            .catch(() => { });
+        const response = await page.goto(url);
+        await downloadPromise;
+        //  Если сработал download
+        if (downloadEvent) {
+            const filename = downloadEvent.suggestedFilename();
+            const stream = await downloadEvent.createReadStream();
+            if (!stream) {
+                throw new Error('Download stream is null');
+            }
+            const chunks = [];
+            for await (const chunk of stream) {
+                chunks.push(chunk);
+            }
             return {
-                path: tempPath,
                 filename,
+                buffer: Buffer.concat(chunks),
             };
         }
-        finally {
-            await page.close();
+        if (!response) {
+            throw new Error('No response received');
         }
+        const buffer = await response.body();
+        const contentType = response.headers()['content-type'] || '';
+        let ext = '';
+        if (contentType.includes('image/jpeg'))
+            ext = '.jpg';
+        else if (contentType.includes('image/png'))
+            ext = '.png';
+        else if (contentType.includes('image/webp'))
+            ext = '.webp';
+        else if (contentType.includes('image/avif'))
+            ext = '.avif';
+        else if (contentType.includes('application/pdf'))
+            ext = '.pdf';
+        const baseName = path.basename(new URL(url).pathname) || 'file';
+        const filename = baseName + ext;
+        return { filename, buffer };
     }
 }
 exports.PlaywrightBrowser = PlaywrightBrowser;

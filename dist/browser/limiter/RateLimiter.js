@@ -14,5 +14,10 @@ class RateLimiter {
         }
         this.lastRun = Date.now();
     }
+    async schedule(callback) {
+        await this.wait();
+        const result = await callback();
+        return result;
+    }
 }
 exports.RateLimiter = RateLimiter;

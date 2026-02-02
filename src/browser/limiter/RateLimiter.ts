@@ -1,5 +1,3 @@
-
-
 export class RateLimiter {
   private lastRun = 0;
 
@@ -14,5 +12,11 @@ export class RateLimiter {
     }
 
     this.lastRun = Date.now();
+  }
+
+  async schedule<T>(callback: () => Promise<T>): Promise<T> {
+    await this.wait();
+    const result = await callback();
+    return result;
   }
 }
