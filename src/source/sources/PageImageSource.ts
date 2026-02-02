@@ -5,7 +5,8 @@ import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
-import { Product } from '../../data/entities/Product';
+import { IProduct } from '../../data/entities/IProduct';
+import { IDataImag } from '../../data/entities/IDataImag';
 
 export default class PageImageSource implements ISource<ITask> {
   private i = 0; //! для тестов
@@ -18,7 +19,7 @@ export default class PageImageSource implements ISource<ITask> {
     targetUrl: string,
     page: Page,
     limiter: RateLimiter,
-    getNext: () => Product | undefined,
+    getNext: () => IProduct | undefined,
   ): Promise<unknown[]> {
     const results = [];
 
@@ -33,19 +34,19 @@ export default class PageImageSource implements ISource<ITask> {
     return results;
   }
 
-  async execute(targetUrl: string, page: Page, product: Product): Promise<IWorkerResult> {
+  async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
-    const data: unknown[] = [];
+    const data: IDataImag = {};
+
+    this.i++;
+    console.log('***** i = ', this.i);
+
+    const rawSku = product.sku;
+    const starIndex = rawSku.indexOf('*');
+    const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
+    const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {
-      // this.i++;
-      // console.log('*****  execute ***** i = ', this.i);
-
-      const rawSku = product.sku;
-      const starIndex = rawSku.indexOf('*');
-      const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
-      const url = targetUrl.replace('{{sku_prod}}', sku);
-
       await page.goto(url);
 
       // находим первую картинку для перехода
@@ -54,9 +55,27 @@ export default class PageImageSource implements ISource<ITask> {
       await image.waitFor({ state: 'visible', timeout: 5000 });
       await image.click();
 
-      // await page.close();
+      const gallery = page.locator('[data-component-id="image-gallery"]');
+      await gallery.waitFor({ state: 'attached', timeout: 15000 });
+
+      const firstImg = gallery.locator('img').first();
+      await firstImg.waitFor({ state: 'visible', timeout: 15000 });
+
+      const imageUrls = await gallery
+        .locator('img')
+        .evaluateAll(imgs =>
+          imgs
+            .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
+            .map(img => img.src),
+        );
+
+      data[sku] = imageUrls;
     } catch (err) {
-      errors.push(err as IWorkerError);
+      errors.push({
+        error: err,
+        product: product,
+        url: url,
+      } as IWorkerError);
     }
 
     return { data, errors };

@@ -1,3 +1,7 @@
-import { IWorkerError } from "../IErrors/IWorkerError";
+import { IWorkerError } from '../IErrors/IWorkerError';
+import { IDataImag } from '../IDataImag';
 
-export interface IWorkerResult { data: unknown[];  errors: IWorkerError[]; }
+export interface IWorkerResult {
+  data: IDataImag;
+  errors: IWorkerError[];
+}

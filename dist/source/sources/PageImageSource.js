@@ -24,24 +24,37 @@ class PageImageSource {
     }
     async execute(targetUrl, page, product) {
         const errors = [];
-        const data = [];
+        const data = {};
+        this.i++;
+        console.log('***** i = ', this.i);
+        const rawSku = product.sku;
+        const starIndex = rawSku.indexOf('*');
+        const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
+        const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
-            // this.i++;
-            // console.log('*****  execute ***** i = ', this.i);
-            const rawSku = product.sku;
-            const starIndex = rawSku.indexOf('*');
-            const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
-            const url = targetUrl.replace('{{sku_prod}}', sku);
             await page.goto(url);
             // находим первую картинку для перехода
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             const image = page.locator('#app-main img').first();
             await image.waitFor({ state: 'visible', timeout: 5000 });
             await image.click();
-            // await page.close();
+            const gallery = page.locator('[data-component-id="image-gallery"]');
+            await gallery.waitFor({ state: 'attached', timeout: 15000 });
+            const firstImg = gallery.locator('img').first();
+            await firstImg.waitFor({ state: 'visible', timeout: 15000 });
+            const imageUrls = await gallery
+                .locator('img')
+                .evaluateAll(imgs => imgs
+                .filter((img) => img instanceof HTMLImageElement)
+                .map(img => img.src));
+            data[sku] = imageUrls;
         }
         catch (err) {
-            errors.push(err);
+            errors.push({
+                error: err,
+                product: product,
+                url: url,
+            });
         }
         return { data, errors };
     }

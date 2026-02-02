@@ -1,6 +1,7 @@
-import { Product } from '../Product';
+import { IProduct } from '../IProduct';
 
 export interface IWorkerError {
-  error: unknown;     // ОРИГИНАЛЬНАЯ ошибка Playwright
-  product?: Product; // Контекст
+  error: unknown; // ОРИГИНАЛЬНАЯ ошибка Playwright
+  product?: IProduct; // Контекст
+  targetUrl?: string;
 }

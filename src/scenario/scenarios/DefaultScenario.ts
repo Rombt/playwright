@@ -5,6 +5,9 @@ import { IBrowser } from '../../browser/IBrowser';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/ICollectProductPhotosTask';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
+import { IDownloadedFile } from '../../browser/IDownloadedFile';
+import { IDataImag } from '../../data/entities/IDataImag';
+import { IBrand } from '../../data/entities/IBrand';
 
 import { promises as fs } from 'fs';
 import * as path from 'path';
@@ -33,7 +36,10 @@ export class DefaultScenario<
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
 
-  constructor(private browser: IBrowser<Browser, Context>, private storage: Storage) {}
+  constructor(
+    private browser: IBrowser<Browser, Context, IDownloadedFile>,
+    private storage: Storage,
+  ) {}
 
   finalize(): Promise<void> {
     throw new Error('Method not implemented.');
@@ -81,9 +87,10 @@ export class DefaultScenario<
 
       await this.browser.runInContext(async context => {
         const allErrors: IWorkerError[] = [];
-        const allData: unknown[] = [];
+        const allData: IDataImag = {};
 
-        const brand = this.getBrands(task)[0];
+        const brand: IBrand = this.getBrands(task)[0];
+
         const targetUrl = brand.metadata.target_website;
         const products = brand.products;
         const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
@@ -121,10 +128,11 @@ export class DefaultScenario<
                 // вызываем worker
                 const result = await source.worker(targetUrl, page, limiter, getNext);
 
-                // можно собрать данные, если нужно
-                if (Array.isArray(result)) {
-                  const typedResult = result as IWorkerResult[];
-                  allData.push(...typedResult.map(r => r.data).flat());
+                for (const r of result as IWorkerResult[]) {
+                  for (const [sku, images] of Object.entries(r.data) as [string, string[]][]) {
+                    allData[sku] ??= [];
+                    allData[sku].push(...images);
+                  }
                 }
 
                 // если в результате есть ошибки, обрабатываем их через handleError
@@ -164,12 +172,22 @@ export class DefaultScenario<
         const results = await Promise.allSettled(workers);
 
         console.log('All workers finished.');
+        console.log('allData: ');
         console.dir(allData, { depth: null, colors: true });
         console.log('All final errors:');
         console.dir(allErrors, { depth: null, colors: true });
-      });
 
-      // await this.storage.save(result);
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        /**
+          В data урлы должны быть сохранены для каждого sku, или лучше id товара(?), отдельно!
+
+         */
+
+        // for (const url of allData) {
+        //   const file = await this.browser.download(context, url);
+        //   await this.storage.save({ ...file, targetDir: path.join(brand, sku) });
+        // }
+      });
     }
   }
 

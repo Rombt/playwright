@@ -1,10 +1,10 @@
-import { ITask } from "../ITask";
-import { Product } from '../Product';
+import { ITask } from '../ITask';
+import { IProduct } from '../IProduct';
 /**
  * Сбор фотографий товаров по SKU
  */
 export interface ICollectProductPhotosTask extends ITask {
-  type: "collect_product_photos";
+  type: 'collect_product_photos';
 
   /** Время генерации задачи */
   generated_at: string;
@@ -22,7 +22,7 @@ export interface ICollectProductPhotosTask extends ITask {
         target_website: string | null;
       };
 
-      products: Product[];
+      products: IProduct[];
     }
   >;
 }

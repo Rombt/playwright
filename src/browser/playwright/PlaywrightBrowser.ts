@@ -7,8 +7,13 @@ import {
   BrowserContextOptions,
 } from 'playwright';
 
+import { IDownloadedFile } from '../IDownloadedFile';
+import * as path from 'path';
+import * as os from 'os';
+
 export class PlaywrightBrowser
-  implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions>
+  implements
+    IBrowser<PWBrowser, BrowserContext, IDownloadedFile, LaunchOptions, BrowserContextOptions>
 {
   private instance: PWBrowser | null = null;
 
@@ -47,6 +52,36 @@ export class PlaywrightBrowser
     } finally {
       await context.close();
       this.close();
+    }
+  }
+
+  async download(context: BrowserContext, url: string): Promise<IDownloadedFile> {
+    const page = await context.newPage();
+
+    try {
+      const [download] = await Promise.all([
+        page.waitForEvent('download'),
+        page.evaluate(url => {
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = '';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }, url),
+      ]);
+
+      const filename = await download.suggestedFilename();
+      const tempPath = path.join(os.tmpdir(), filename);
+
+      await download.saveAs(tempPath);
+
+      return {
+        path: tempPath,
+        filename,
+      };
+    } finally {
+      await page.close();
     }
   }
 }

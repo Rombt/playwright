@@ -1,5 +1,5 @@
-// import { ImageResult } from "../contracts/ImageResult";
+import { IDownloadedFile } from '../browser/IDownloadedFile';
 
 export interface Storage {
-  // save(results: ImageResult[]): Promise<void>;
+  save(file: IDownloadedFile): Promise<void>;
 }

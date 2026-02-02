@@ -58,7 +58,7 @@ class DefaultScenario {
                 throw new Error();
             await this.browser.runInContext(async (context) => {
                 const allErrors = [];
-                const allData = [];
+                const allData = {};
                 const brand = this.getBrands(task)[0];
                 const targetUrl = brand.metadata.target_website;
                 const products = brand.products;
@@ -93,10 +93,11 @@ class DefaultScenario {
                             try {
                                 // вызываем worker
                                 const result = await source.worker(targetUrl, page, limiter, getNext);
-                                // можно собрать данные, если нужно
-                                if (Array.isArray(result)) {
-                                    const typedResult = result;
-                                    allData.push(...typedResult.map(r => r.data).flat());
+                                for (const r of result) {
+                                    for (const [sku, images] of Object.entries(r.data)) {
+                                        allData[sku] ?? (allData[sku] = []);
+                                        allData[sku].push(...images);
+                                    }
                                 }
                                 // если в результате есть ошибки, обрабатываем их через handleError
                                 if (Array.isArray(result)) {
@@ -136,11 +137,20 @@ class DefaultScenario {
                 const workers = Array.from({ length: quantityPage }, () => runWorker());
                 const results = await Promise.allSettled(workers);
                 console.log('All workers finished.');
+                console.log('allData: ');
                 console.dir(allData, { depth: null, colors: true });
                 console.log('All final errors:');
                 console.dir(allErrors, { depth: null, colors: true });
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                /**
+                  В data урлы должны быть сохранены для каждого sku, или лучше id товара(?), отдельно!
+        
+                 */
+                // for (const url of allData) {
+                //   const file = await this.browser.download(context, url);
+                //   await this.storage.save({ ...file, targetDir: path.join(brand, sku) });
+                // }
             });
-            // await this.storage.save(result);
         }
     }
     async loadSources() {

@@ -32,11 +32,10 @@ class App {
     }
     async run() {
         const browser = new PlaywrightBrowser_1.PlaywrightBrowser(this.browserOptions, this.contextOptions);
-        const storage = new FileStorage_1.FileStorage();
+        const storage = new FileStorage_1.FileStorage('F:/testing/playwright/results'); //todo перевести относительно папки проекта
         const scenario = new DefaultScenario_1.DefaultScenario(browser, storage);
         await scenario.run();
     }
-    async getBrowserOptions() {
-    }
+    async getBrowserOptions() { }
 }
 exports.App = App;
