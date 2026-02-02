@@ -12,5 +12,10 @@ class FileStorage {
         await fs.mkdir(path.dirname(targetPath), { recursive: true });
         await fs.writeFile(targetPath, file.buffer);
     }
+    async saveJson(data, options) {
+        const targetPath = path.join(this.baseDir, options.targetDir, options.filename);
+        await fs.mkdir(path.dirname(targetPath), { recursive: true });
+        await fs.writeFile(targetPath, JSON.stringify(data, null, 2), 'utf-8');
+    }
 }
 exports.FileStorage = FileStorage;

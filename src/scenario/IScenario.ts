@@ -1,6 +1,8 @@
 import { ITask } from '../data/entities/ITask';
 import { ISource } from '../source/ISource';
 import { IResource } from '../browser/IResource';
+import { IProduct } from '../data/entities/IProduct';
+import { IWorkerError } from '../data/entities/IErrors/IWorkerError';
 
 export interface IScenario<T extends ITask = ITask, Browser = unknown, BrowserContext = unknown> {
   registerResource(res: IResource): void;
@@ -46,4 +48,6 @@ export interface IScenario<T extends ITask = ITask, Browser = unknown, BrowserCo
    * Возвращает массив объектов, реализующих ISource.
    */
   loadSources(): Promise<ISource<T>[]>;
+
+  getUnprocessedProducts(errors: IWorkerError[]): IProduct[];
 }

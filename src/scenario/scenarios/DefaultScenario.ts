@@ -18,6 +18,7 @@ import { BrowserContext } from 'playwright-core';
 import PageImageSource from '../../source/sources/PageImageSource';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { PagePool } from '../../browser/pool/PagePool';
+import { IProduct } from '../../data/entities/IProduct';
 
 export class DefaultScenario<
   IPhotosTask extends ICollectProductPhotosTask,
@@ -36,24 +37,20 @@ export class DefaultScenario<
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
 
-  registerResource(res: IResource): void {
-    this.resources.push(res);
-  }
-
-  async finalize(): Promise<void> {
-    for (const res of this.resources) {
-      try {
-        await res.close();
-      } catch (err) {
-        console.warn('Error closing resource:', err);
-      }
-    }
-  }
-
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
     private storage: Storage,
   ) {}
+
+  getUnprocessedProducts(errors: IWorkerError[]): IProduct[] {
+    const unprocessedProducts = Array.from(
+      new Map(errors.filter(e => e.product).map(e => [e.product!.id_product, e.product!])).values(),
+    );
+
+    console.log('unprocessedProducts = ', unprocessedProducts);
+
+    return unprocessedProducts;
+  }
 
   async run(): Promise<void> {
     try {
@@ -217,6 +214,13 @@ export class DefaultScenario<
         const workersDownload = Array.from({ length: quantityPage }, () => runImageWorker());
         await Promise.allSettled(workersDownload);
 
+        const unprocessedProducts = this.getUnprocessedProducts(allErrors);
+
+        await this.storage.saveJson(unprocessedProducts, {
+          filename: 'unprocessed-products.json',
+          targetDir: brand.brand_name,
+        });
+
         //todo перебрать ошибки и сформировать файл с товарами которые не были обработаны
       });
     }
@@ -249,6 +253,20 @@ export class DefaultScenario<
     }
 
     throw error;
+  }
+
+  registerResource(res: IResource): void {
+    this.resources.push(res);
+  }
+
+  async finalize(): Promise<void> {
+    for (const res of this.resources) {
+      try {
+        await res.close();
+      } catch (err) {
+        console.warn('Error closing resource:', err);
+      }
+    }
   }
 
   // =================  helpers ============================

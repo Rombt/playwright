@@ -7,19 +7,6 @@ const PageImageSource_1 = require("../../source/sources/PageImageSource");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const PagePool_1 = require("../../browser/pool/PagePool");
 class DefaultScenario {
-    registerResource(res) {
-        this.resources.push(res);
-    }
-    async finalize() {
-        for (const res of this.resources) {
-            try {
-                await res.close();
-            }
-            catch (err) {
-                console.warn('Error closing resource:', err);
-            }
-        }
-    }
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
@@ -31,6 +18,11 @@ class DefaultScenario {
         this.taskPath = 'src/data/tasks/2026-01-20_14-44.json';
         this.sources = [];
         this.resources = [];
+    }
+    getUnprocessedProducts(errors) {
+        const unprocessedProducts = Array.from(new Map(errors.filter(e => e.product).map(e => [e.product.id_product, e.product])).values());
+        console.log('unprocessedProducts = ', unprocessedProducts);
+        return unprocessedProducts;
     }
     async run() {
         try {
@@ -176,6 +168,11 @@ class DefaultScenario {
                 };
                 const workersDownload = Array.from({ length: quantityPage }, () => runImageWorker());
                 await Promise.allSettled(workersDownload);
+                const unprocessedProducts = this.getUnprocessedProducts(allErrors);
+                await this.storage.saveJson(unprocessedProducts, {
+                    filename: 'unprocessed-products.json',
+                    targetDir: brand.brand_name,
+                });
                 //todo перебрать ошибки и сформировать файл с товарами которые не были обработаны
             });
         }
@@ -200,6 +197,19 @@ class DefaultScenario {
             return this.handleError(error, attempt + 1);
         }
         throw error;
+    }
+    registerResource(res) {
+        this.resources.push(res);
+    }
+    async finalize() {
+        for (const res of this.resources) {
+            try {
+                await res.close();
+            }
+            catch (err) {
+                console.warn('Error closing resource:', err);
+            }
+        }
     }
     // =================  helpers ============================
     getBrands(task) {
