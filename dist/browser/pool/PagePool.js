@@ -31,5 +31,26 @@ class PagePool {
             this.free.push(page);
         }
     }
+    async close() {
+        // Прекращаем ожидание всех waiters
+        for (const waiter of this.waiters) {
+            try {
+                waiter(Promise.reject(new Error('PagePool is closing')));
+            }
+            catch { }
+        }
+        this.waiters = [];
+        // Закрываем все свободные страницы
+        for (const page of this.free) {
+            try {
+                await page.close();
+            }
+            catch (err) {
+                console.warn('Error closing page:', err);
+            }
+        }
+        this.free = [];
+        this.created = 0;
+    }
 }
 exports.PagePool = PagePool;

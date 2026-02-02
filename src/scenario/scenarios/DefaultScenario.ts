@@ -8,6 +8,7 @@ import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IDownloadedFile } from '../../browser/IDownloadedFile';
 import { IDataImag } from '../../data/entities/IDataImag';
 import { IBrand } from '../../data/entities/IBrand';
+import { IResource } from '../../browser/IResource';
 
 import { promises as fs } from 'fs';
 import * as path from 'path';
@@ -17,8 +18,6 @@ import { BrowserContext } from 'playwright-core';
 import PageImageSource from '../../source/sources/PageImageSource';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { PagePool } from '../../browser/pool/PagePool';
-
-// import { ImageResult } from "../../contracts/ImageResult";
 
 export class DefaultScenario<
   IPhotosTask extends ICollectProductPhotosTask,
@@ -35,15 +34,26 @@ export class DefaultScenario<
   private readonly taskPath: string = 'src/data/tasks/2026-01-20_14-44.json';
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
+  private resources: IResource[] = [];
+
+  registerResource(res: IResource): void {
+    this.resources.push(res);
+  }
+
+  async finalize(): Promise<void> {
+    for (const res of this.resources) {
+      try {
+        await res.close();
+      } catch (err) {
+        console.warn('Error closing resource:', err);
+      }
+    }
+  }
 
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
     private storage: Storage,
   ) {}
-
-  finalize(): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
 
   async run(): Promise<void> {
     try {
@@ -54,7 +64,7 @@ export class DefaultScenario<
       console.log('***** error = ', error);
       // await this.handleError(error);   //todo какие ошибки здесь ловить
     } finally {
-      // await this.finalize();     //todo
+      await this.finalize();
     }
   }
 
@@ -100,6 +110,7 @@ export class DefaultScenario<
         const limiter = new RateLimiter(2000);
         const quantityPage = Math.min(queue.length, this.maxPage);
         const pool = new PagePool(context, quantityPage);
+        this.registerResource(pool);
 
         let index = 0;
         const getNext = () => {
@@ -228,16 +239,6 @@ export class DefaultScenario<
 
     return sources;
   }
-
-  // async finalize(): Promise<void> {
-  //       if (this.pageAdapter) {
-  //       await this.pageAdapter.close();
-  //   }
-  //   if (this.browserContext) {
-  //       await this.browserContext.close();
-  //   }
-  //   this.isInitialized = false;
-  // }
 
   async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
     console.error(`Error on attempt ${attempt}:`, error);

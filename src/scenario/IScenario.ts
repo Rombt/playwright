@@ -1,11 +1,9 @@
-import { ITask } from "../data/entities/ITask";
-import { ISource } from "../source/ISource";
+import { ITask } from '../data/entities/ITask';
+import { ISource } from '../source/ISource';
+import { IResource } from '../browser/IResource';
 
-export interface IScenario<
-    T extends ITask = ITask,
-    Browser = unknown,
-    BrowserContext = unknown,
-  > {
+export interface IScenario<T extends ITask = ITask, Browser = unknown, BrowserContext = unknown> {
+  registerResource(res: IResource): void;
 
   /**
    * Точка входа в сценарий.

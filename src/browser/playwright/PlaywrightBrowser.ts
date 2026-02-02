@@ -10,7 +10,6 @@ import {
 } from 'playwright';
 
 import * as path from 'path';
-import * as os from 'os';
 
 export class PlaywrightBrowser
   implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions>
@@ -33,9 +32,25 @@ export class PlaywrightBrowser
   }
 
   async close(): Promise<void> {
-    if (!this.isInitialized) return; // т.к. браузер должен быть один
-    await this.instance?.close();
-    this.instance = null;
+    if (!this.instance) return;
+
+    try {
+      for (const context of this.instance.contexts()) {
+        try {
+          await context.close();
+        } catch (err) {
+          console.warn('Error closing context:', err);
+        }
+      }
+
+      await this.instance.close();
+    } catch (err) {
+      console.warn('Error closing browser:', err);
+    } finally {
+      this.instance = null;
+    }
+
+    console.log('Browser closed.');
   }
 
   async createContext(): Promise<BrowserContext> {
@@ -51,7 +66,6 @@ export class PlaywrightBrowser
       return await fn(context);
     } finally {
       await context.close();
-      this.close();
     }
   }
 

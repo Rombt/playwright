@@ -6,8 +6,20 @@ const path = require("path");
 const PageImageSource_1 = require("../../source/sources/PageImageSource");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const PagePool_1 = require("../../browser/pool/PagePool");
-// import { ImageResult } from "../../contracts/ImageResult";
 class DefaultScenario {
+    registerResource(res) {
+        this.resources.push(res);
+    }
+    async finalize() {
+        for (const res of this.resources) {
+            try {
+                await res.close();
+            }
+            catch (err) {
+                console.warn('Error closing resource:', err);
+            }
+        }
+    }
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
@@ -18,9 +30,7 @@ class DefaultScenario {
         this.sourcesFolder = './dist/source/sources';
         this.taskPath = 'src/data/tasks/2026-01-20_14-44.json';
         this.sources = [];
-    }
-    finalize() {
-        throw new Error('Method not implemented.');
+        this.resources = [];
     }
     async run() {
         try {
@@ -33,7 +43,7 @@ class DefaultScenario {
             // await this.handleError(error);   //todo какие ошибки здесь ловить
         }
         finally {
-            // await this.finalize();     //todo
+            await this.finalize();
         }
     }
     async load() {
@@ -68,6 +78,7 @@ class DefaultScenario {
                 const limiter = new RateLimiter_1.RateLimiter(2000);
                 const quantityPage = Math.min(queue.length, this.maxPage);
                 const pool = new PagePool_1.PagePool(context, quantityPage);
+                this.registerResource(pool);
                 let index = 0;
                 const getNext = () => {
                     if (index >= queue.length)
@@ -182,15 +193,6 @@ class DefaultScenario {
         }
         return sources;
     }
-    // async finalize(): Promise<void> {
-    //       if (this.pageAdapter) {
-    //       await this.pageAdapter.close();
-    //   }
-    //   if (this.browserContext) {
-    //       await this.browserContext.close();
-    //   }
-    //   this.isInitialized = false;
-    // }
     async handleError(error, attempt = 1) {
         console.error(`Error on attempt ${attempt}:`, error);
         if (attempt < this.maxRetries && this.isRetryable(error)) {

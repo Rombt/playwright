@@ -19,10 +19,26 @@ class PlaywrightBrowser {
         return this.instance;
     }
     async close() {
-        if (!this.isInitialized)
-            return; // т.к. браузер должен быть один
-        await this.instance?.close();
-        this.instance = null;
+        if (!this.instance)
+            return;
+        try {
+            for (const context of this.instance.contexts()) {
+                try {
+                    await context.close();
+                }
+                catch (err) {
+                    console.warn('Error closing context:', err);
+                }
+            }
+            await this.instance.close();
+        }
+        catch (err) {
+            console.warn('Error closing browser:', err);
+        }
+        finally {
+            this.instance = null;
+        }
+        console.log('Browser closed.');
     }
     async createContext() {
         const browser = await this.init();
@@ -35,7 +51,6 @@ class PlaywrightBrowser {
         }
         finally {
             await context.close();
-            this.close();
         }
     }
     async download(page, url) {
