@@ -45,15 +45,22 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      const gallery = page.locator('#productGallery');
-      await gallery.waitFor({ state: 'attached', timeout: 15000 });
+      const imageUrls: string[] = await page
+        .locator('figure.zoom-image-gallery__figure')
+        .evaluateAll(figures =>
+          figures
+            .map(fig => {
+              const img = fig.querySelector('img');
 
-      const imageUrls = await gallery
-        .locator('img')
-        .evaluateAll(imgs =>
-          imgs
-            .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
-            .map(img => img.src),
+              if (img?.currentSrc && !img.currentSrc.startsWith('data:')) return img.currentSrc;
+              const src = img?.getAttribute('src');
+              if (src && !src.startsWith('data:')) return src;
+              const lazy = img?.getAttribute('data-lazy');
+              if (lazy) return lazy;
+              return fig.getAttribute('data-large-img');
+            })
+            // вот type guard для TS
+            .filter((url): url is string => url !== null && url !== undefined),
         );
 
       data[sku] = imageUrls;

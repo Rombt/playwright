@@ -171,6 +171,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         }
       }
 
+      console.log('imageQueue = ', imageQueue);
+
       const runImageWorker = async (): Promise<void> => {
         const page = await pool.acquire();
 
@@ -203,8 +205,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         filename: 'unprocessed-products.json',
         targetDir: task.brand_name,
       });
-
-      //todo перебрать ошибки и сформировать файл с товарами которые не были обработаны
     });
   }
 

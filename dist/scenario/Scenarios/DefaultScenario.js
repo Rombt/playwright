@@ -139,6 +139,7 @@ class DefaultScenario {
                     imageQueue.push({ sku, url });
                 }
             }
+            console.log('imageQueue = ', imageQueue);
             const runImageWorker = async () => {
                 const page = await pool.acquire();
                 try {
@@ -166,7 +167,6 @@ class DefaultScenario {
                 filename: 'unprocessed-products.json',
                 targetDir: task.brand_name,
             });
-            //todo перебрать ошибки и сформировать файл с товарами которые не были обработаны
         });
     }
     async loadSources() {
