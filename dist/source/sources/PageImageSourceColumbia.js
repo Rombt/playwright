@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class PageImageSource {
+class PageImageSourceColumbia {
     supports(task) {
-        return task.type === 'collect_product_photos';
+        return (task.metadata.target_website ===
+            'https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch');
     }
     async worker(targetUrl, page, limiter, getNext) {
         const results = [];
@@ -23,7 +24,6 @@ class PageImageSource {
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
-            await page.goto(url);
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             const image = page.locator('#app-main img').first();
             await image.waitFor({ state: 'visible', timeout: 5000 });
@@ -49,4 +49,4 @@ class PageImageSource {
         return { data, errors };
     }
 }
-exports.default = PageImageSource;
+exports.default = PageImageSourceColumbia;

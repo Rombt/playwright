@@ -4,7 +4,7 @@ import { IResource } from '../browser/IResource';
 import { IProduct } from '../data/entities/IProduct';
 import { IWorkerError } from '../data/entities/IErrors/IWorkerError';
 
-export interface IScenario<T extends ITask = ITask, Browser = unknown, BrowserContext = unknown> {
+export interface IScenario<Browser = unknown, BrowserContext = unknown> {
   registerResource(res: IResource): void;
 
   /**
@@ -15,10 +15,10 @@ export interface IScenario<T extends ITask = ITask, Browser = unknown, BrowserCo
   run(): Promise<void>;
 
   /**
-   * Загрузка входных данных (Job, Task и пр.).
+   * Загрузка входных данных ().
    * Работает только с Data Layer.
    */
-  load(): Promise<T[]>;
+  load(): Promise<ITask[]>;
 
   /**
    * Подготовка окружения выполнения.
@@ -30,7 +30,7 @@ export interface IScenario<T extends ITask = ITask, Browser = unknown, BrowserCo
    * Основной алгоритм выполнения.
    * Перебор задач, выбор Source, управление потоком.
    */
-  process(tasks: T[]): Promise<void>;
+  process(task: ITask): Promise<void>;
 
   /**
    * Централизованная обработка ошибок сценария.
@@ -47,7 +47,7 @@ export interface IScenario<T extends ITask = ITask, Browser = unknown, BrowserCo
    * Загружает все доступные Source.
    * Возвращает массив объектов, реализующих ISource.
    */
-  loadSources(): Promise<ISource<T>[]>;
+  loadSources(): Promise<ISource<ITask>[]>;
 
   getUnprocessedProducts(errors: IWorkerError[]): IProduct[];
 }

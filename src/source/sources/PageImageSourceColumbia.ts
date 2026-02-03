@@ -1,16 +1,18 @@
 import { Page } from 'playwright-core';
 import { ISource } from '../ISource';
-import { ITask } from '../../data/entities/ITask';
+import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
-
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
 
-export default class PageImageSource implements ISource<ITask> {
-  supports(task: ITask): boolean {
-    return task.type === 'collect_product_photos';
+export default class PageImageSourceColumbia implements ISource<ICollectProductPhotosTask> {
+  supports(task: ICollectProductPhotosTask): boolean {
+    return (
+      task.metadata.target_website ===
+      'https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch'
+    );
   }
 
   async worker(
@@ -42,8 +44,6 @@ export default class PageImageSource implements ISource<ITask> {
     const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {
-      await page.goto(url);
-
       await page.goto(url, { waitUntil: 'domcontentloaded' });
       const image = page.locator('#app-main img').first();
       await image.waitFor({ state: 'visible', timeout: 5000 });

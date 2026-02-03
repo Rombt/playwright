@@ -1,1 +1,0 @@
-import { ICollectProductPhotosTask } from "../../data/entities/ITasks/ICollectProductPhotosTask";

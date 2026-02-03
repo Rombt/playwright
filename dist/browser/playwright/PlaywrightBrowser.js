@@ -63,7 +63,6 @@ class PlaywrightBrowser {
             .catch(() => { });
         const response = await page.goto(url);
         await downloadPromise;
-        //  Если сработал download
         if (downloadEvent) {
             const filename = downloadEvent.suggestedFilename();
             const stream = await downloadEvent.createReadStream();
