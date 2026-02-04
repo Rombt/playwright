@@ -15,7 +15,8 @@ class DefaultScenario {
         this.maxPage = 10; // максимальное количество страниц в пуле
         this.maxTask = 5; // количество одновременно выполняемых задач
         this.sourcesFolder = './dist/source/sources';
-        this.taskPath = 'src/data/tasks/2026-02-03_10-52.json';
+        // private readonly taskPath: string = 'src/data/tasks/2026-02-03_10-52.json';
+        this.taskPath = 'src/data/tasks/puma_for_tests.json';
         this.sources = [];
         this.resources = [];
     }
@@ -76,19 +77,14 @@ class DefaultScenario {
                 const page = await pool.acquire();
                 try {
                     if (!targetUrl) {
-                        const err = { error: 'URL is missing in metadata' };
-                        // Если это ретрайable ошибка, handleError сам её повторит
-                        try {
-                            await this.handleError(err);
-                        }
-                        catch (finalErr) {
-                            allErrors.push(finalErr);
-                        }
+                        const err = {
+                            error: 'task.metadata.target_website is missing',
+                        };
+                        allErrors.push(err);
                         return [];
                     }
                     while (true) {
                         try {
-                            // вызываем worker
                             const result = await source.worker(targetUrl, page, limiter, getNext);
                             for (const r of result) {
                                 for (const [sku, images] of Object.entries(r.data)) {
@@ -115,7 +111,7 @@ class DefaultScenario {
                             return result;
                         }
                         catch (err) {
-                            // Любая ошибка worker
+                            // Здесь любая ошибка worker которая не была ним обработана и положена в result.errors
                             try {
                                 await this.handleError({ error: err });
                             }
@@ -133,38 +129,78 @@ class DefaultScenario {
             const workers = Array.from({ length: quantityPage }, () => runWorker());
             const results = await Promise.allSettled(workers);
             console.log('All workers finished.');
-            const imageQueue = [];
+            console.log('allData = ', allData);
+            console.log('allErrors = ', allErrors);
+            /* Скачиваю полученные urls  */
+            let imageQueue = [];
             for (const [sku, urls] of Object.entries(allData)) {
                 urls.forEach((url, i) => {
                     imageQueue.push({ sku, url, index: i + 1 });
                 });
             }
-            const runImageWorker = async () => {
-                const page = await pool.acquire();
-                try {
-                    while (true) {
-                        const currentTask = imageQueue.shift();
-                        if (!currentTask)
-                            return;
-                        const { sku, url, index } = currentTask;
-                        let { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
-                        const filename = `${task.brand_name}_${sku}_${index}${ext}`;
-                        console.log('===> sku = ', sku);
-                        console.log('index = ', index);
-                        console.log('filename = ', filename);
-                        await this.storage.save({
-                            filename,
-                            buffer,
-                            targetDir: path.join(task.brand_name, sku),
-                        });
-                    }
-                }
-                finally {
-                    pool.release(page);
-                }
+            const processImage = async (page, item) => {
+                const { sku, url, index } = item;
+                const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
+                const filename = `${task.brand_name}_${sku}_${index}${ext}`;
+                await this.storage.save({
+                    filename,
+                    buffer,
+                    targetDir: path.join(task.brand_name, sku),
+                });
             };
-            const workersDownload = Array.from({ length: quantityPage }, () => runImageWorker());
-            await Promise.allSettled(workersDownload);
+            const runBatch = async (items) => {
+                const errors = [];
+                const queue = [...items];
+                const workers = Array.from({ length: quantityPage }, async () => {
+                    const page = await pool.acquire();
+                    try {
+                        while (true) {
+                            const item = queue.shift();
+                            if (!item)
+                                return;
+                            try {
+                                await processImage(page, item);
+                            }
+                            catch (error) {
+                                errors.push({ item, error: error });
+                            }
+                        }
+                    }
+                    finally {
+                        pool.release(page);
+                    }
+                });
+                await Promise.allSettled(workers);
+                return errors;
+            };
+            const handleError = (errors, attempt) => {
+                return errors.filter(e => attempt < this.maxRetries && this.isRetryable(e.error));
+            };
+            let attempt = 1;
+            let currentBatch = imageQueue;
+            //**************
+            while (currentBatch.length && attempt <= this.maxRetries) {
+                console.log('---> attempt № ', attempt);
+                const errors = await runBatch(currentBatch);
+                console.log('errors = ', errors);
+                // Отбираем retryable
+                const retryable = handleError(errors, attempt);
+                currentBatch = retryable.map(e => e.item);
+                // Сохраняем окончательные ошибки
+                const finalErrors = errors.filter(e => !retryable.includes(e));
+                finalErrors.forEach(e => {
+                    allErrors.push({
+                        error: e.error,
+                        targetUrl: e.item.url,
+                    });
+                });
+                if (currentBatch.length) {
+                    await this.waitBeforeRetry(attempt);
+                }
+                attempt++;
+            }
+            //******************
+            console.log('allErrors = ', allErrors);
             const unprocessedProducts = this.getUnprocessedProducts(allErrors);
             await this.storage.saveJson(unprocessedProducts, {
                 filename: 'unprocessed-products.json',
@@ -185,14 +221,6 @@ class DefaultScenario {
         }
         return sources;
     }
-    async handleError(error, attempt = 1) {
-        console.error(`Error on attempt ${attempt}:`, error);
-        if (attempt < this.maxRetries && this.isRetryable(error)) {
-            await this.waitBeforeRetry(attempt);
-            return this.handleError(error, attempt + 1);
-        }
-        throw error;
-    }
     registerResource(res) {
         this.resources.push(res);
     }
@@ -212,6 +240,14 @@ class DefaultScenario {
                 this.browser.close(); //todo не уверен по поводу этого места закрытия браузера
             }
         }
+    }
+    async handleError(error, attempt = 1) {
+        console.error(`Error on attempt ${attempt}:`, error);
+        if (attempt < this.maxRetries && this.isRetryable(error)) {
+            await this.waitBeforeRetry(attempt);
+            return this.handleError(error, attempt + 1);
+        }
+        throw error;
     }
     // =================  helpers ============================
     isRetryable(error) {

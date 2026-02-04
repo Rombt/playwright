@@ -1,4 +1,4 @@
-import { BrowserContext } from 'playwright-core';
+import { BrowserContext, Page } from 'playwright-core';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { IScenario } from '../IScenario';
@@ -16,6 +16,9 @@ import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { PagePool } from '../../browser/pool/PagePool';
 import { IProduct } from '../../data/entities/IProduct';
 
+import { IImageItem } from '../../data/entities/IImageItem';
+import { IImageError } from '../../data/entities/IErrors/IImageError';
+
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
@@ -26,7 +29,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   private readonly maxTask: number = 5; // количество одновременно выполняемых задач
 
   private readonly sourcesFolder: string = './dist/source/sources';
-  private readonly taskPath: string = 'src/data/tasks/2026-02-03_10-52.json';
+  // private readonly taskPath: string = 'src/data/tasks/2026-02-03_10-52.json';
+  private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
@@ -105,19 +109,15 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
         try {
           if (!targetUrl) {
-            const err: IWorkerError = { error: 'URL is missing in metadata' };
-            // Если это ретрайable ошибка, handleError сам её повторит
-            try {
-              await this.handleError(err);
-            } catch (finalErr) {
-              allErrors.push(finalErr as IWorkerError);
-            }
+            const err: IWorkerError = {
+              error: 'task.metadata.target_website is missing',
+            };
+            allErrors.push(err as IWorkerError);
             return [];
           }
 
           while (true) {
             try {
-              // вызываем worker
               const result = await source.worker(targetUrl, page, limiter, getNext);
 
               for (const r of result as IWorkerResult[]) {
@@ -145,7 +145,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
               return result;
             } catch (err) {
-              // Любая ошибка worker
+              // Здесь любая ошибка worker которая не была ним обработана и положена в result.errors
               try {
                 await this.handleError({ error: err });
               } catch (finalErr) {
@@ -164,43 +164,95 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       console.log('All workers finished.');
 
-      const imageQueue: { sku: string; url: string; index: number }[] = [];
+      console.log('allData = ', allData);
+      console.log('allErrors = ', allErrors);
+
+      /* Скачиваю полученные urls  */
+
+      let imageQueue: IImageItem[] = [];
       for (const [sku, urls] of Object.entries(allData)) {
         urls.forEach((url, i) => {
           imageQueue.push({ sku, url, index: i + 1 });
         });
       }
 
-      const runImageWorker = async (): Promise<void> => {
-        const page = await pool.acquire();
+      const processImage = async (page: Page, item: IImageItem): Promise<void> => {
+        const { sku, url, index } = item;
+        const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
+        const filename = `${task.brand_name}_${sku}_${index}${ext}`;
 
-        try {
-          while (true) {
-            const currentTask = imageQueue.shift();
-
-            if (!currentTask) return;
-
-            const { sku, url, index } = currentTask;
-            let { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
-            const filename = `${task.brand_name}_${sku}_${index}${ext}`;
-
-            console.log('===> sku = ', sku);
-            console.log('index = ', index);
-            console.log('filename = ', filename);
-
-            await this.storage.save({
-              filename,
-              buffer,
-              targetDir: path.join(task.brand_name, sku),
-            });
-          }
-        } finally {
-          pool.release(page);
-        }
+        await this.storage.save({
+          filename,
+          buffer,
+          targetDir: path.join(task.brand_name, sku),
+        });
       };
 
-      const workersDownload = Array.from({ length: quantityPage }, () => runImageWorker());
-      await Promise.allSettled(workersDownload);
+      const runBatch = async (items: IImageItem[]): Promise<IImageError[]> => {
+        const errors: IImageError[] = [];
+        const queue = [...items];
+
+        const workers = Array.from({ length: quantityPage }, async () => {
+          const page = await pool.acquire();
+
+          try {
+            while (true) {
+              const item = queue.shift();
+              if (!item) return;
+
+              try {
+                await processImage(page, item);
+              } catch (error) {
+                errors.push({ item, error: error as IWorkerError });
+              }
+            }
+          } finally {
+            pool.release(page);
+          }
+        });
+
+        await Promise.allSettled(workers);
+        return errors;
+      };
+
+      const handleError = (errors: IImageError[], attempt: number): IImageError[] => {
+        return errors.filter(e => attempt < this.maxRetries && this.isRetryable(e.error));
+      };
+
+      let attempt = 1;
+      let currentBatch = imageQueue;
+
+      //**************
+      while (currentBatch.length && attempt <= this.maxRetries) {
+        console.log('---> attempt № ', attempt);
+
+        const errors = await runBatch(currentBatch);
+
+        console.log('errors = ', errors);
+
+        // Отбираем retryable
+        const retryable = handleError(errors, attempt);
+        currentBatch = retryable.map(e => e.item);
+
+        // Сохраняем окончательные ошибки
+        const finalErrors = errors.filter(e => !retryable.includes(e));
+        finalErrors.forEach(e => {
+          allErrors.push({
+            error: e.error,
+            targetUrl: e.item.url,
+          });
+        });
+
+        if (currentBatch.length) {
+          await this.waitBeforeRetry(attempt);
+        }
+
+        attempt++;
+      }
+
+      //******************
+
+      console.log('allErrors = ', allErrors);
 
       const unprocessedProducts = this.getUnprocessedProducts(allErrors);
 
@@ -229,17 +281,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     return sources;
   }
 
-  async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
-    console.error(`Error on attempt ${attempt}:`, error);
-
-    if (attempt < this.maxRetries && this.isRetryable(error)) {
-      await this.waitBeforeRetry(attempt);
-      return this.handleError(error, attempt + 1);
-    }
-
-    throw error;
-  }
-
   registerResource(res: IResource): void {
     this.resources.push(res);
   }
@@ -261,6 +302,17 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         this.browser.close(); //todo не уверен по поводу этого места закрытия браузера
       }
     }
+  }
+
+  async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
+    console.error(`Error on attempt ${attempt}:`, error);
+
+    if (attempt < this.maxRetries && this.isRetryable(error)) {
+      await this.waitBeforeRetry(attempt);
+      return this.handleError(error, attempt + 1);
+    }
+
+    throw error;
   }
 
   // =================  helpers ============================

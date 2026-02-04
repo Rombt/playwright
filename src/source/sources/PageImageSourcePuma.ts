@@ -45,23 +45,31 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      const imageUrls: string[] = await page
-        .locator('figure.zoom-image-gallery__figure')
-        .evaluateAll(figures =>
-          figures
-            .map(fig => {
-              const img = fig.querySelector('img');
+      const galleries = page.locator('figure.zoom-image-gallery__figure');
 
-              if (img?.currentSrc && !img.currentSrc.startsWith('data:')) return img.currentSrc;
-              const src = img?.getAttribute('src');
-              if (src && !src.startsWith('data:')) return src;
-              const lazy = img?.getAttribute('data-lazy');
-              if (lazy) return lazy;
-              return fig.getAttribute('data-large-img');
-            })
-            // вот type guard для TS
-            .filter((url): url is string => url !== null && url !== undefined),
-        );
+      try {
+        await galleries.first().waitFor({ state: 'attached', timeout: 15000 });
+      } catch (error) {
+        throw new Error(`No gallery found on page: ${error}`);
+      }
+
+      const imageUrls: string[] = await galleries.evaluateAll(figures =>
+        figures
+          .map(fig => {
+            const img = fig.querySelector('img');
+
+            if (img?.currentSrc && !img.currentSrc.startsWith('data:')) return img.currentSrc;
+            const src = img?.getAttribute('src');
+            if (src && !src.startsWith('data:')) return src;
+            const lazy = img?.getAttribute('data-lazy');
+            if (lazy) return lazy;
+            return fig.getAttribute('data-large-img');
+          })
+          // вот type guard для TS
+          .filter((url): url is string => url !== null && url !== undefined),
+      );
+
+      if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
       data[sku] = imageUrls;
     } catch (err) {

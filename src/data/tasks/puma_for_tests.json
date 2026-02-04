@@ -1,0 +1,167 @@
+{
+  "generated_at": "2026-02-03_10-52",
+  "task": {
+    "45": {
+      "brand_id": "45",
+      "brand_name": "Puma",
+      "metadata": {
+        "target_website": "https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54478",
+          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
+          "sku": "63152907*SS26",
+          "attributes": {
+            "color": "т.сiр/чорн",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54478",
+          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
+          "sku": "63152907*SS26",
+          "attributes": {
+            "color": "т.сiр/чорн",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54478",
+          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
+          "sku": "63152907*SS26",
+          "attributes": {
+            "color": "т.сiр/чорн",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54478",
+          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
+          "sku": "63152907*SS26",
+          "attributes": {
+            "color": "т.сiр/чорн",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54478",
+          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
+          "sku": "63152907*SS26",
+          "attributes": {
+            "color": "т.сiр/чорн",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "54481",
+          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
+          "sku": "37947809*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "54482",
+          "name_product": "Пляшка 05351801*SS26 PUMA",
+          "sku": "05351801*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54483",
+          "name_product": "Пляшка 05351837*SS26 PUMA",
+          "sku": "05351837*SS26",
+          "attributes": {
+            "color": "блак.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54484",
+          "name_product": "Рукавиці 04146501*SS26 PUMA",
+          "sku": "04146501*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54484",
+          "name_product": "Рукавиці 04146501*SS26 PUMA",
+          "sku": "04146501*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        }
+      ]
+    }
+  }
+}

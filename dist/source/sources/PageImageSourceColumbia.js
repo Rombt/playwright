@@ -29,7 +29,15 @@ class PageImageSourceColumbia {
             await image.waitFor({ state: 'visible', timeout: 5000 });
             await image.click();
             const gallery = page.locator('[data-component-id="image-gallery"]');
-            await gallery.waitFor({ state: 'attached', timeout: 15000 });
+            try {
+                await gallery.waitFor({ state: 'attached', timeout: 15000 });
+            }
+            catch (error) {
+                throw new Error('No gallery found on page');
+            }
+            const count = await gallery.count();
+            if (count === 0)
+                throw new Error('No images found on page');
             const firstImg = gallery.locator('img').first();
             await firstImg.waitFor({ state: 'visible', timeout: 15000 });
             const imageUrls = await gallery
@@ -37,6 +45,8 @@ class PageImageSourceColumbia {
                 .evaluateAll(imgs => imgs
                 .filter((img) => img instanceof HTMLImageElement)
                 .map(img => img.src));
+            if (imageUrls.length === 0)
+                throw new Error('No valid image URLs found');
             data[sku] = imageUrls;
         }
         catch (err) {

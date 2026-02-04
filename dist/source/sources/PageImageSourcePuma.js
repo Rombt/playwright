@@ -24,9 +24,14 @@ class PageImageSourcePuma {
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
-            const imageUrls = await page
-                .locator('figure.zoom-image-gallery__figure')
-                .evaluateAll(figures => figures
+            const galleries = page.locator('figure.zoom-image-gallery__figure');
+            try {
+                await galleries.first().waitFor({ state: 'attached', timeout: 15000 });
+            }
+            catch (error) {
+                throw new Error(`No gallery found on page: ${error}`);
+            }
+            const imageUrls = await galleries.evaluateAll(figures => figures
                 .map(fig => {
                 const img = fig.querySelector('img');
                 if (img?.currentSrc && !img.currentSrc.startsWith('data:'))
@@ -41,6 +46,8 @@ class PageImageSourcePuma {
             })
                 // вот type guard для TS
                 .filter((url) => url !== null && url !== undefined));
+            if (imageUrls.length === 0)
+                throw new Error('No valid image URLs found');
             data[sku] = imageUrls;
         }
         catch (err) {
