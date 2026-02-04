@@ -30,12 +30,12 @@ class PlaywrightBrowser {
                     console.warn('Error closing context:', err);
                 }
             }
-            await this.instance.close();
         }
         catch (err) {
             console.warn('Error closing browser:', err);
         }
         finally {
+            await this.instance.close();
             this.instance = null;
         }
         console.log('Browser closed.');
