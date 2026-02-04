@@ -11,5 +11,5 @@ export interface IBrowser<BrowserContext, ContextT, LaunchOptionsT = void, Conte
 
   runInContext<Result>(fn: (context: ContextT) => Promise<Result>): Promise<Result>;
 
-  download(page: Page, url: string): Promise<{ filename: string; buffer: Buffer }>;
+  download(page: Page, url: string): Promise<{ buffer: Buffer; ext: string }>;
 }

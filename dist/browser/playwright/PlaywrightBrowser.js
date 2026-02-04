@@ -64,7 +64,8 @@ class PlaywrightBrowser {
         const response = await page.goto(url);
         await downloadPromise;
         if (downloadEvent) {
-            const filename = downloadEvent.suggestedFilename();
+            const suggestedFilename = downloadEvent.suggestedFilename();
+            const ext = path.extname(suggestedFilename) || '.jpg';
             const stream = await downloadEvent.createReadStream();
             if (!stream) {
                 throw new Error('Download stream is null');
@@ -74,8 +75,8 @@ class PlaywrightBrowser {
                 chunks.push(chunk);
             }
             return {
-                filename,
                 buffer: Buffer.concat(chunks),
+                ext: ext,
             };
         }
         if (!response) {
@@ -94,9 +95,7 @@ class PlaywrightBrowser {
             ext = '.avif';
         else if (contentType.includes('application/pdf'))
             ext = '.pdf';
-        const baseName = path.basename(new URL(url).pathname) || 'file';
-        const filename = baseName + ext;
-        return { filename, buffer };
+        return { buffer, ext };
     }
 }
 exports.PlaywrightBrowser = PlaywrightBrowser;

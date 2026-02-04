@@ -17,5 +17,6 @@ class FileStorage {
         await fs.mkdir(path.dirname(targetPath), { recursive: true });
         await fs.writeFile(targetPath, JSON.stringify(data, null, 2), 'utf-8');
     }
+    composeFileName() { }
 }
 exports.FileStorage = FileStorage;

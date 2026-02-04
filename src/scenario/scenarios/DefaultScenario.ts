@@ -164,14 +164,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       console.log('All workers finished.');
 
-      const imageQueue: { sku: string; url: string }[] = [];
+      const imageQueue: { sku: string; url: string; index: number }[] = [];
       for (const [sku, urls] of Object.entries(allData)) {
-        for (const url of urls) {
-          imageQueue.push({ sku, url });
-        }
+        urls.forEach((url, i) => {
+          imageQueue.push({ sku, url, index: i + 1 });
+        });
       }
-
-      console.log('imageQueue = ', imageQueue);
 
       const runImageWorker = async (): Promise<void> => {
         const page = await pool.acquire();
@@ -179,11 +177,16 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         try {
           while (true) {
             const currentTask = imageQueue.shift();
+
             if (!currentTask) return;
-            const { sku, url } = currentTask;
-            const { filename, buffer } = await limiter.schedule(() =>
-              this.browser.download(page, url),
-            );
+
+            const { sku, url, index } = currentTask;
+            let { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
+            const filename = `${task.brand_name}_${sku}_${index}${ext}`;
+
+            console.log('===> sku = ', sku);
+            console.log('index = ', index);
+            console.log('filename = ', filename);
 
             await this.storage.save({
               filename,

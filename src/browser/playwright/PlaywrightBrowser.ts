@@ -69,7 +69,7 @@ export class PlaywrightBrowser
     }
   }
 
-  async download(page: Page, url: string): Promise<{ filename: string; buffer: Buffer }> {
+  async download(page: Page, url: string): Promise<{ buffer: Buffer; ext: string }> {
     let downloadEvent: Download | undefined;
 
     const downloadPromise = page
@@ -83,7 +83,8 @@ export class PlaywrightBrowser
     await downloadPromise;
 
     if (downloadEvent) {
-      const filename = downloadEvent.suggestedFilename();
+      const suggestedFilename = downloadEvent.suggestedFilename();
+      const ext = path.extname(suggestedFilename) || '.jpg';
 
       const stream = await downloadEvent.createReadStream();
       if (!stream) {
@@ -96,8 +97,8 @@ export class PlaywrightBrowser
       }
 
       return {
-        filename,
         buffer: Buffer.concat(chunks),
+        ext: ext,
       };
     }
 
@@ -115,10 +116,6 @@ export class PlaywrightBrowser
     else if (contentType.includes('image/avif')) ext = '.avif';
     else if (contentType.includes('application/pdf')) ext = '.pdf';
 
-    const baseName = path.basename(new URL(url).pathname) || 'file';
-
-    const filename = baseName + ext;
-
-    return { filename, buffer };
+    return { buffer, ext };
   }
 }
