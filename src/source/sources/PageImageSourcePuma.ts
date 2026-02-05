@@ -19,7 +19,7 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
     page: Page,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
-  ): Promise<unknown[]> {
+  ): Promise<IWorkerResult[]> {
     const results = [];
 
     while (true) {

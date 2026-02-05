@@ -12,8 +12,8 @@ export class FileStorage implements Storage {
     await fs.writeFile(targetPath, file.buffer);
   }
 
-  async saveJson<T>(data: T, options: { filename: string; targetDir: string }): Promise<void> {
-    const targetPath = path.join(this.baseDir, options.targetDir, options.filename);
+  async saveJson<T>(data: T, options: { filename: string; targetDir?: string }): Promise<void> {
+    const targetPath = path.join(this.baseDir, options.targetDir ?? '', options.filename);
 
     await fs.mkdir(path.dirname(targetPath), { recursive: true });
     await fs.writeFile(targetPath, JSON.stringify(data, null, 2), 'utf-8');

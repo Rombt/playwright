@@ -9,14 +9,14 @@ class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
-        this.maxRetries = 3;
+        this.maxRetries = 5;
         this.baseDelay = 500;
         this.maxDelay = 5000;
         this.maxPage = 10; // максимальное количество страниц в пуле
         this.maxTask = 5; // количество одновременно выполняемых задач
         this.sourcesFolder = './dist/source/sources';
-        // private readonly taskPath: string = 'src/data/tasks/2026-02-03_10-52.json';
-        this.taskPath = 'src/data/tasks/puma_for_tests.json';
+        this.taskPath = 'src/data/tasks/columbia_puma_for_tests.json';
+        // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
         this.sources = [];
         this.resources = [];
     }
@@ -30,7 +30,8 @@ class DefaultScenario {
             }
         }
         catch (error) {
-            console.log('error = ', error);
+            console.log('error in run() = ');
+            console.dir(error, { depth: null, colors: true });
             // await this.handleError(error);   //todo какие ошибки здесь ловить??
         }
         finally {
@@ -55,8 +56,8 @@ class DefaultScenario {
         const source = this.sources.find(s => s.supports(task));
         if (!source)
             throw new Error();
+        const allErrors = [];
         await this.browser.runInContext(async (context) => {
-            const allErrors = [];
             const allData = {};
             const targetUrl = task.metadata.target_website;
             const products = task.products;
@@ -66,74 +67,82 @@ class DefaultScenario {
             const quantityPage = Math.min(queue.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
-            let index = 0;
-            const getNext = () => {
-                if (index >= queue.length)
-                    return undefined;
-                return queue[index++];
-            };
-            // runWorker обрабатывает retry внутри себя
-            const runWorker = async () => {
-                const page = await pool.acquire();
-                try {
-                    if (!targetUrl) {
-                        const err = {
-                            error: 'task.metadata.target_website is missing',
-                        };
-                        allErrors.push(err);
-                        return [];
-                    }
-                    while (true) {
-                        try {
-                            const result = await source.worker(targetUrl, page, limiter, getNext);
-                            for (const r of result) {
-                                for (const [sku, images] of Object.entries(r.data)) {
-                                    allData[sku] ?? (allData[sku] = []);
-                                    allData[sku].push(...images);
-                                }
+            let taskQueue = [...queue];
+            const runBatch = async (items) => {
+                const errors = [];
+                let index = 0;
+                const getNext = () => {
+                    if (index >= items.length)
+                        return undefined;
+                    return items[index++];
+                };
+                const workers = Array.from({ length: quantityPage }, async () => {
+                    const page = await pool.acquire();
+                    try {
+                        const result = await source.worker(targetUrl, page, limiter, getNext);
+                        for (const r of result) {
+                            for (const [sku, images] of Object.entries(r.data)) {
+                                allData[sku] ?? (allData[sku] = []);
+                                allData[sku].push(...images);
                             }
-                            // если в результате есть ошибки, обрабатываем их через handleError
-                            if (Array.isArray(result)) {
-                                for (const item of result) {
-                                    if (item && Array.isArray(item.errors)) {
-                                        for (const err of item.errors) {
-                                            try {
-                                                // err уже имеет тип IWorkerError, можно передавать напрямую
-                                                await this.handleError(err);
-                                            }
-                                            catch (finalErr) {
-                                                allErrors.push(finalErr);
-                                            }
-                                        }
+                            if (Array.isArray(r.errors)) {
+                                for (const err of r.errors) {
+                                    try {
+                                        await this.handleError(err);
+                                    }
+                                    catch (finalErr) {
+                                        errors.push({
+                                            item: err.product,
+                                            error: finalErr,
+                                        });
                                     }
                                 }
                             }
-                            return result;
-                        }
-                        catch (err) {
-                            // Здесь любая ошибка worker которая не была ним обработана и положена в result.errors
-                            try {
-                                await this.handleError({ error: err });
-                            }
-                            catch (finalErr) {
-                                allErrors.push(finalErr);
-                                return [];
-                            }
                         }
                     }
-                }
-                finally {
-                    pool.release(page);
-                }
+                    catch (err) {
+                        errors.push({
+                            item: undefined,
+                            error: err,
+                        });
+                    }
+                    finally {
+                        pool.release(page);
+                    }
+                });
+                await Promise.allSettled(workers);
+                return errors;
             };
-            const workers = Array.from({ length: quantityPage }, () => runWorker());
-            const results = await Promise.allSettled(workers);
-            console.log('All workers finished.');
-            console.log('allData = ', allData);
-            console.log('allErrors = ', allErrors);
+            let attempt = 1;
+            let currentBatch = taskQueue;
+            while (currentBatch.length && attempt <= this.maxRetries) {
+                console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+                const errors = await runBatch(currentBatch);
+                console.log(`errors of SearchURL  for ${task.brand_name}  = `);
+                console.dir(errors, { depth: null, colors: true });
+                const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && this.isRetryable(e.error));
+                currentBatch = retryable.map(e => e.item);
+                if (currentBatch.length) {
+                    await this.waitBeforeRetry(attempt);
+                }
+                else {
+                    // оставшиеся ошибки записываем в глобальный пул ошибок
+                    errors.forEach(e => {
+                        allErrors.push({
+                            error: e.error,
+                            targetUrl: targetUrl ?? undefined,
+                        });
+                    });
+                }
+                attempt++;
+            }
+            console.log(`All workers finished  for ${task.brand_name}`);
+            const allDataNormalize = this.normalizeAllData(allData);
+            console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
+            console.dir(allErrors, { depth: null, colors: true });
             /* Скачиваю полученные urls  */
             let imageQueue = [];
-            for (const [sku, urls] of Object.entries(allData)) {
+            for (const [sku, urls] of Object.entries(allDataNormalize)) {
                 urls.forEach((url, i) => {
                     imageQueue.push({ sku, url, index: i + 1 });
                 });
@@ -148,7 +157,7 @@ class DefaultScenario {
                     targetDir: path.join(task.brand_name, sku),
                 });
             };
-            const runBatch = async (items) => {
+            const runBatchImage = async (items) => {
                 const errors = [];
                 const queue = [...items];
                 const workers = Array.from({ length: quantityPage }, async () => {
@@ -173,39 +182,40 @@ class DefaultScenario {
                 await Promise.allSettled(workers);
                 return errors;
             };
-            const handleError = (errors, attempt) => {
+            // todo должна быть централизованная обработка ошибок в методе handleError
+            const procError = (errors, attempt) => {
                 return errors.filter(e => attempt < this.maxRetries && this.isRetryable(e.error));
             };
-            let attempt = 1;
-            let currentBatch = imageQueue;
-            //**************
-            while (currentBatch.length && attempt <= this.maxRetries) {
-                console.log('---> attempt № ', attempt);
-                const errors = await runBatch(currentBatch);
-                console.log('errors = ', errors);
+            let attemptImage = 1;
+            let currentBatchImage = imageQueue;
+            while (currentBatchImage.length && attemptImage <= this.maxRetries) {
+                console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
+                const errors = await runBatchImage(currentBatchImage);
+                console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
+                console.dir(errors, { depth: null, colors: true });
                 // Отбираем retryable
-                const retryable = handleError(errors, attempt);
-                currentBatch = retryable.map(e => e.item);
-                // Сохраняем окончательные ошибки
-                const finalErrors = errors.filter(e => !retryable.includes(e));
-                finalErrors.forEach(e => {
-                    allErrors.push({
-                        error: e.error,
-                        targetUrl: e.item.url,
-                    });
-                });
-                if (currentBatch.length) {
-                    await this.waitBeforeRetry(attempt);
+                const retryable = procError(errors, attemptImage);
+                currentBatchImage = retryable.map(e => e.item);
+                if (currentBatchImage.length) {
+                    await this.waitBeforeRetry(attemptImage);
                 }
-                attempt++;
+                else {
+                    // Сохраняем окончательные ошибки
+                    errors.forEach(e => {
+                        allErrors.push({
+                            error: e.error,
+                            targetUrl: e.item.url,
+                        });
+                    });
+                }
+                attemptImage++;
             }
-            //******************
-            console.log('allErrors = ', allErrors);
-            const unprocessedProducts = this.getUnprocessedProducts(allErrors);
-            await this.storage.saveJson(unprocessedProducts, {
-                filename: 'unprocessed-products.json',
-                targetDir: task.brand_name,
-            });
+        });
+        console.log('END allErrors = ');
+        console.dir(allErrors, { depth: null, colors: true });
+        await this.storage.saveJson(allErrors, {
+            filename: `${task.brand_name}_unprocessed-products.json`,
+            targetDir: task.brand_name,
         });
     }
     async loadSources() {
@@ -225,6 +235,7 @@ class DefaultScenario {
         this.resources.push(res);
     }
     getUnprocessedProducts(errors) {
+        console.log('getUnprocessedProducts    errors = ', errors);
         const unprocessedProducts = Array.from(new Map(errors.filter(e => e.product).map(e => [e.product.id_product, e.product])).values());
         return unprocessedProducts;
     }
@@ -250,12 +261,26 @@ class DefaultScenario {
         throw error;
     }
     // =================  helpers ============================
+    normalizeAllData(source) {
+        const map = new Map();
+        for (const [key, urls] of Object.entries(source)) {
+            if (!map.has(key)) {
+                map.set(key, new Set());
+            }
+            const set = map.get(key);
+            for (const url of urls) {
+                set.add(url);
+            }
+        }
+        return Object.fromEntries([...map.entries()].map(([key, set]) => [key, [...set]]));
+    }
     isRetryable(error) {
         if (!error)
             return false;
         // Если это ошибка Playwright с кодом timeout
         if (error instanceof Error) {
             const msg = error.message.toLowerCase();
+            error.retryable = true;
             // таймауты и network glitches
             if (msg.includes('timeout') || msg.includes('net::'))
                 return true;
@@ -263,8 +288,11 @@ class DefaultScenario {
             if (msg.includes('element not found') || msg.includes('not visible'))
                 return true;
         }
-        if (error?.retryable === true)
+        if (error?.retryable === true) {
+            error.retryable = true;
             return true;
+        }
+        error.retryable = false;
         return false;
     }
     async waitBeforeRetry(attempt) {
