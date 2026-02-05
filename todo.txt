@@ -8,9 +8,9 @@
     Очерёдность обработки брендов:
         $brands = Array
             (
-                [0] => Puma             +
-                [1] => M-TAC            +
-                [2] => Columbia         +
+                [0] => Puma             + +
+                [1] => M-TAC            + -
+                [2] => Columbia         + +
                 [3] => New Balance      +
                 [4] => Outventure       -
                 [5] => Adidas           -
