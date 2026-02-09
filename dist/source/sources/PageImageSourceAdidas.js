@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class PageImageSourceColumbia {
+class PageImageSourceAdidas {
     supports(task) {
-        return (task.metadata.target_website ===
-            'https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch');
+        return task.metadata.target_website === 'https://www.adidas.ua/search?s={{sku_prod}}';
     }
     async worker(targetUrl, page, limiter, getNext) {
         const results = [];
@@ -25,10 +24,17 @@ class PageImageSourceColumbia {
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
-            const image = page.locator('#app-main img').first();
-            await image.waitFor({ state: 'attached', timeout: 5000 });
-            await image.click();
-            const gallery = page.locator('[data-component-id="image-gallery"]');
+            const link = page
+                .locator('div.list.store__list > div > div > div.product__image > a')
+                .first();
+            await link.waitFor({ state: 'attached', timeout: 30000 });
+            const relativeHref = await link.getAttribute('href');
+            if (!relativeHref)
+                throw new Error('Product link not found');
+            const absoluteHref = new URL(relativeHref, page.url()).toString();
+            console.log('===>>  absoluteHref = ', absoluteHref);
+            await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+            const gallery = page.locator('#gallery > div > div.slider__carousel.slick-slider.slick-initialized > div > div');
             try {
                 await gallery.waitFor({ state: 'attached', timeout: 15000 });
             }
@@ -38,13 +44,12 @@ class PageImageSourceColumbia {
             const count = await gallery.count();
             if (count === 0)
                 throw new Error('No images found on page');
-            const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'attached', timeout: 15000 });
-            const imageUrls = await gallery
-                .locator('img')
-                .evaluateAll(imgs => imgs
+            const images = gallery.locator('img');
+            await images.first().waitFor({ state: 'attached', timeout: 15000 });
+            const imageUrls = await images.evaluateAll(imgs => imgs
                 .filter((img) => img instanceof HTMLImageElement)
-                .map(img => img.src));
+                .map(img => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
+                .filter((src) => Boolean(src)));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
             data[sku] = imageUrls;
@@ -56,7 +61,8 @@ class PageImageSourceColumbia {
                 url: url,
             });
         }
+        console.log('==>> data: ', data);
         return { data, errors };
     }
 }
-exports.default = PageImageSourceColumbia;
+exports.default = PageImageSourceAdidas;

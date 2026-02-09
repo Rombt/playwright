@@ -21,7 +21,8 @@ class DefaultScenario {
         // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
-        this.taskPath = 'src/data/tasks/joma_tests.json';
+        // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
+        this.taskPath = 'src/data/tasks/adidas_tests.json';
         this.sources = [];
         this.resources = [];
     }

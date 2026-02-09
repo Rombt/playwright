@@ -45,7 +45,7 @@ class PageImageSourceJoma {
             if (count === 0)
                 throw new Error('No images found on page');
             const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'visible', timeout: 15000 });
+            await firstImg.waitFor({ state: 'attached', timeout: 15000 });
             const imageUrls = await gallery
                 .locator('img')
                 .evaluateAll(imgs => imgs

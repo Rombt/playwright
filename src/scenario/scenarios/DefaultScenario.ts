@@ -36,7 +36,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
-  private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
+  // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
+  private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
 
   private sources: ISource<ICollectProductPhotosTask, IWorkerResult>[] = [];
   private resources: IResource[] = [];

@@ -25,7 +25,7 @@ class PageImageSourceMTac {
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
-            await image.waitFor({ state: 'visible', timeout: 5000 });
+            await image.waitFor({ state: 'attached', timeout: 5000 });
             await image.click();
             const gallery = page.locator('div.catalog-item-gallery > div > div.big-img.slider-for.slick-initialized.slick-slider > div > div');
             try {
@@ -38,7 +38,7 @@ class PageImageSourceMTac {
             if (count === 0)
                 throw new Error('No images found on page');
             const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'visible', timeout: 15000 });
+            await firstImg.waitFor({ state: 'attached', timeout: 15000 });
             const imageUrls = await gallery
                 .locator('img')
                 .evaluateAll(imgs => imgs

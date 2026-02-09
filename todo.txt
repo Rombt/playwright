@@ -13,7 +13,7 @@
                 [2] => Columbia         + +
                 [3] => New Balance      + +
                 [4] => Outventure       -
-                [5] => Adidas           -
+                [5] => Adidas           + +
                 [6] => Fila             -
                 [7] => 4F               -
                 [8] => KAPPA            -

@@ -46,7 +46,7 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
       const image = page.locator('#app-main img').first();
-      await image.waitFor({ state: 'visible', timeout: 5000 });
+      await image.waitFor({ state: 'attached', timeout: 5000 });
       await image.click();
 
       const gallery = page.locator('[data-component-id="image-gallery"]');
@@ -60,7 +60,7 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
       if (count === 0) throw new Error('No images found on page');
 
       const firstImg = gallery.locator('img').first();
-      await firstImg.waitFor({ state: 'visible', timeout: 15000 });
+      await firstImg.waitFor({ state: 'attached', timeout: 15000 });
 
       const imageUrls = await gallery
         .locator('img')

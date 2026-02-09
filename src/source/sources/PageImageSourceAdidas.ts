@@ -7,9 +7,9 @@ import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
 
-export default class PageImageSourceMTac implements ISource<ICollectProductPhotosTask> {
+export default class PageImageSourceAdidas implements ISource<ICollectProductPhotosTask> {
   supports(task: ICollectProductPhotosTask): boolean {
-    return task.metadata.target_website === 'https://militarist.ua/ua/search/?q={{sku_prod}}';
+    return task.metadata.target_website === 'https://www.adidas.ua/search?s={{sku_prod}}';
   }
 
   async worker(
@@ -43,11 +43,21 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
-      await image.waitFor({ state: 'attached', timeout: 5000 });
-      await image.click();
+      const link = page
+        .locator('div.list.store__list > div > div > div.product__image > a')
+        .first();
+
+      await link.waitFor({ state: 'attached', timeout: 30000 });
+
+      const relativeHref = await link.getAttribute('href');
+      if (!relativeHref) throw new Error('Product link not found');
+      const absoluteHref = new URL(relativeHref, page.url()).toString();
+
+      console.log('===>>  absoluteHref = ', absoluteHref);
+      await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+
       const gallery = page.locator(
-        'div.catalog-item-gallery > div > div.big-img.slider-for.slick-initialized.slick-slider > div > div',
+        '#gallery > div > div.slider__carousel.slick-slider.slick-initialized > div > div',
       );
       try {
         await gallery.waitFor({ state: 'attached', timeout: 15000 });
@@ -58,16 +68,15 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       const count = await gallery.count();
       if (count === 0) throw new Error('No images found on page');
 
-      const firstImg = gallery.locator('img').first();
-      await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+      const images = gallery.locator('img');
+      await images.first().waitFor({ state: 'attached', timeout: 15000 });
 
-      const imageUrls = await gallery
-        .locator('img')
-        .evaluateAll(imgs =>
-          imgs
-            .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
-            .map(img => img.src),
-        );
+      const imageUrls = await images.evaluateAll(imgs =>
+        imgs
+          .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
+          .map(img => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
+          .filter((src): src is string => Boolean(src)),
+      );
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
@@ -80,7 +89,7 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       } as IWorkerError);
     }
 
-    console.log('==========>>  data = ', data);
+    console.log('==>> data: ', data);
 
     return { data, errors };
   }
