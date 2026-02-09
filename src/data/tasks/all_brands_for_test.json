@@ -801,6 +801,798 @@
           }
         }
       ]
+    },
+    "15": {
+      "brand_id": "15",
+      "brand_name": "Nike",
+      "metadata": {
+        "target_website": "https://www.nike.com/fi/w?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        }
+      ]
+    },
+    "53": {
+      "brand_id": "53",
+      "brand_name": "Saucony",
+      "metadata": {
+        "target_website": "https://saucony.kiev.ua/index.php?route=product/search&search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "46.5"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "46"
+          }
+        }
+      ]
+    },
+    "25": {
+      "brand_id": "25",
+      "brand_name": "Joma",
+      "metadata": {
+        "target_website": "https://joma.ua/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53740",
+          "name_product": "Футболка Joma FLAG II 101465.102",
+          "sku": "101465.102-AW26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "2XS"
+          }
+        },
+        {
+          "id_product": "54521",
+          "name_product": "Гетри 400054.060*SS26 JOMA",
+          "sku": "400054.060*SS26",
+          "attributes": {
+            "color": "лимон.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54521",
+          "name_product": "Гетри 400054.060*SS26 JOMA",
+          "sku": "400054.060*SS26",
+          "attributes": {
+            "color": "лимон.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54521",
+          "name_product": "Гетри 400054.060*SS26 JOMA",
+          "sku": "400054.060*SS26",
+          "attributes": {
+            "color": "лимон.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54535",
+          "name_product": "Шкарпетки 400027.P01*SS26 JOMA",
+          "sku": "400027.P01*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "39/42"
+          }
+        },
+        {
+          "id_product": "54535",
+          "name_product": "Шкарпетки 400027.P01*SS26 JOMA",
+          "sku": "400027.P01*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43/46"
+          }
+        },
+        {
+          "id_product": "54537",
+          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
+          "sku": "400032.P01*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "35/38"
+          }
+        },
+        {
+          "id_product": "54537",
+          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
+          "sku": "400032.P01*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "39/42"
+          }
+        },
+        {
+          "id_product": "54537",
+          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
+          "sku": "400032.P01*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43/46"
+          }
+        },
+        {
+          "id_product": "54543",
+          "name_product": "Щитки 401488.269*SS26 JOMA",
+          "sku": "401488.269*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        }
+      ]
     }
   }
 }

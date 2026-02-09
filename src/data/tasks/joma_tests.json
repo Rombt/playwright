@@ -1,0 +1,104 @@
+{
+  "generated_at": "2026-02-09_14-39",
+  "task": {
+    "25": {
+      "brand_id": "25",
+      "brand_name": "Joma",
+      "metadata": {
+        "target_website": "https://joma.ua/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53740",
+          "name_product": "Футболка Joma FLAG II 101465.102",
+          "sku": "101465.102-AW26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "2XS"
+          }
+        },
+        {
+          "id_product": "54521",
+          "name_product": "Гетри 400054.060*SS26 JOMA",
+          "sku": "400054.060*SS26",
+          "attributes": {
+            "color": "лимон.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54521",
+          "name_product": "Гетри 400054.060*SS26 JOMA",
+          "sku": "400054.060*SS26",
+          "attributes": {
+            "color": "лимон.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54521",
+          "name_product": "Гетри 400054.060*SS26 JOMA",
+          "sku": "400054.060*SS26",
+          "attributes": {
+            "color": "лимон.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54535",
+          "name_product": "Шкарпетки 400027.P01*SS26 JOMA",
+          "sku": "400027.P01*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "39/42"
+          }
+        },
+        {
+          "id_product": "54535",
+          "name_product": "Шкарпетки 400027.P01*SS26 JOMA",
+          "sku": "400027.P01*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43/46"
+          }
+        },
+        {
+          "id_product": "54537",
+          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
+          "sku": "400032.P01*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "35/38"
+          }
+        },
+        {
+          "id_product": "54537",
+          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
+          "sku": "400032.P01*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "39/42"
+          }
+        },
+        {
+          "id_product": "54537",
+          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
+          "sku": "400032.P01*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43/46"
+          }
+        },
+        {
+          "id_product": "54543",
+          "name_product": "Щитки 401488.269*SS26 JOMA",
+          "sku": "401488.269*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        }
+      ]
+    }
+  }
+}

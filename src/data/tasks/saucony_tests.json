@@ -1,0 +1,401 @@
+{
+  "generated_at": "2026-02-09_14-00",
+  "task": {
+    "53": {
+      "brand_id": "53",
+      "brand_name": "Saucony",
+      "metadata": {
+        "target_website": "https://saucony.kiev.ua/index.php?route=product/search&search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "46316",
+          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
+          "sku": "S2044-449*SS24",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "46.5"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52595",
+          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
+          "sku": "21052-206*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52596",
+          "name_product": "Кросівки чоловічі Saucony 70665-56",
+          "sku": "70665-56*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52964",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
+          "sku": "2044-725*AW26",
+          "attributes": {
+            "color": "хакі",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52965",
+          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
+          "sku": "2044-727*AW26",
+          "attributes": {
+            "color": "т.сір./чорн",
+            "size": "46"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -24,9 +24,9 @@
                 [14] => FLY
                 [15] => Glissade        -
                 [16] => Hi-Tec          -
-                [17] => Saucony         +
+                [17] => Saucony         + +
                 [18] => Skechers        -
-                [19] => Joma            +
+                [19] => Joma            + +
             )
 
 Потенциальные источники:
