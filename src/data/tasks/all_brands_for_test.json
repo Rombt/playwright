@@ -621,6 +621,186 @@
           }
         }
       ]
+    },
+    "16": {
+      "brand_id": "16",
+      "brand_name": "New Balance",
+      "metadata": {
+        "target_website": "https://newbalance.ua/store?page=1&s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54309",
+          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
+          "sku": "MS41520AG*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54309",
+          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
+          "sku": "MS41520AG*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54309",
+          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
+          "sku": "MS41520AG*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54309",
+          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
+          "sku": "MS41520AG*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54309",
+          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
+          "sku": "MS41520AG*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54436",
+          "name_product": "Кросівки ML574EVE*SS26 NB (ч)",
+          "sku": "ML574EVE*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54436",
+          "name_product": "Кросівки ML574EVE*SS26 NB (ч)",
+          "sku": "ML574EVE*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "41.5"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "54437",
+          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
+          "sku": "U5749X3*SS26",
+          "attributes": {
+            "color": "сір/блак",
+            "size": "46.5"
+          }
+        },
+        {
+          "id_product": "54443",
+          "name_product": "Сумка LAB51531BK*SS26 NB",
+          "sku": "LAB51531BK*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54444",
+          "name_product": "Футболка WT41502ABP*SS26 NB (ж)",
+          "sku": "WT41502ABP*SS26 ",
+          "attributes": {
+            "color": "кор.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54444",
+          "name_product": "Футболка WT41502ABP*SS26 NB (ж)",
+          "sku": "WT41502ABP*SS26 ",
+          "attributes": {
+            "color": "кор.",
+            "size": "XL"
+          }
+        }
+      ]
     }
   }
 }

@@ -1,0 +1,302 @@
+{
+  "generated_at": "2026-02-09_13-10",
+  "task": [
+    {
+      "brand_id": "15",
+      "brand_name": "Nike",
+      "metadata": {
+        "target_website": "https://www.nike.com/fi/w?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53906",
+          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
+          "sku": "FN3868-010*AW26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "54140",
+          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
+          "sku": "FN4322-005*AW26",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "54141",
+          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
+          "sku": "HF0263-001*AW26",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54142",
+          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
+          "sku": "HV3698-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  ]
+}

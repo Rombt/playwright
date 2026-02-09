@@ -11,7 +11,7 @@
                 [0] => Puma             + +
                 [1] => M-TAC            + +
                 [2] => Columbia         + +
-                [3] => New Balance      +
+                [3] => New Balance      + +
                 [4] => Outventure       -
                 [5] => Adidas           -
                 [6] => Fila             -
@@ -19,7 +19,7 @@
                 [8] => KAPPA            -
                 [9] => Jack Wolfskin    -
                 [11] => Merrell         -
-                [12] => Nike            +
+                [12] => Nike            + +
                 [13] => Under Armour    -
                 [14] => FLY
                 [15] => Glissade        -
