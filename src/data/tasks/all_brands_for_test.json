@@ -432,6 +432,195 @@
           }
         }
       ]
+    },
+    "214": {
+      "brand_id": "214",
+      "brand_name": "M-TAC",
+      "metadata": {
+        "target_website": "https://militarist.ua/ua/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53704",
+          "name_product": "Паракорд M-TAC 550 type III 10250190",
+          "sku": "10250190",
+          "attributes": {
+            "color": "зел.",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "53707",
+          "name_product": "Термосорочка M-TAC Delta Level 2 70002003",
+          "sku": "70002003",
+          "attributes": {
+            "color": "Tan",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53707",
+          "name_product": "Термосорочка M-TAC Delta Level 2 70002003",
+          "sku": "70002003",
+          "attributes": {
+            "color": "Tan",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53707",
+          "name_product": "Термосорочка M-TAC Delta Level 2 70002003",
+          "sku": "70002003",
+          "attributes": {
+            "color": "Tan",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53707",
+          "name_product": "Термосорочка M-TAC Delta Level 2 70002003",
+          "sku": "70002003",
+          "attributes": {
+            "color": "Tan",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53707",
+          "name_product": "Термосорочка M-TAC Delta Level 2 70002003",
+          "sku": "70002003",
+          "attributes": {
+            "color": "Tan",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "53708",
+          "name_product": "Черевики такт. M-TAC Caiman 30805001",
+          "sku": "30805001",
+          "attributes": {
+            "color": "олива",
+            "size": "47"
+          }
+        },
+        {
+          "id_product": "54474",
+          "name_product": "Худі Один в полі воїн 20116002 M-TAC",
+          "sku": "20116002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "54474",
+          "name_product": "Худі Один в полі воїн 20116002 M-TAC",
+          "sku": "20116002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54474",
+          "name_product": "Худі Один в полі воїн 20116002 M-TAC",
+          "sku": "20116002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54474",
+          "name_product": "Худі Один в полі воїн 20116002 M-TAC",
+          "sku": "20116002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54474",
+          "name_product": "Худі Один в полі воїн 20116002 M-TAC",
+          "sku": "20116002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        }
+      ]
     }
   }
 }

@@ -9,7 +9,7 @@
         $brands = Array
             (
                 [0] => Puma             + +
-                [1] => M-TAC            + -
+                [1] => M-TAC            + +
                 [2] => Columbia         + +
                 [3] => New Balance      +
                 [4] => Outventure       -
@@ -29,3 +29,10 @@
                 [19] => Joma            +
             )
 
+Потенциальные источники:
+    https://sportcity.ua/
+    https://modivo.ua/
+    https://md-fashion.ua/
+    https://sportano.ua/
+    https://megasport.ua/
+    https://intertop.ua/

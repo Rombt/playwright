@@ -16,9 +16,10 @@ class DefaultScenario {
         this.maxTask = 5; // количество одновременно выполняемых задач
         this.sourcesFolder = './dist/source/sources';
         //todo отдельная папка для задач, но сначала интерфейс
-        // private readonly taskPath: string = 'src/data/tasks/columbia_puma_for_tests.json';
+        // private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
         // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
-        this.taskPath = 'src/data/tasks/m-tac_for_tests.json';
+        // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
+        this.taskPath = 'src/data/tasks/new_balance_tests.json';
         this.sources = [];
         this.resources = [];
     }
