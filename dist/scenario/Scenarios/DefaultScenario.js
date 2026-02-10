@@ -5,6 +5,7 @@ const fs_1 = require("fs");
 const path = require("path");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const PagePool_1 = require("../../browser/pool/PagePool");
+const helpers_1 = require("../../common/helpers");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -127,10 +128,10 @@ class DefaultScenario {
                 const errors = await runBatch(currentBatch);
                 console.log(`errors of SearchURL  for ${task.brand_name}  = `);
                 console.dir(errors, { depth: null, colors: true });
-                const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && this.isRetryable(e.error));
+                const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
                 currentBatch = retryable.map(e => e.item);
                 if (currentBatch.length) {
-                    await this.waitBeforeRetry(attempt);
+                    await (0, helpers_1.waitBeforeRetry)(attempt);
                 }
                 else {
                     // оставшиеся ошибки записываем в глобальный пул ошибок
@@ -144,7 +145,7 @@ class DefaultScenario {
                 attempt++;
             }
             console.log(`All workers finished  for ${task.brand_name}`);
-            const allDataNormalize = this.normalizeAllData(allData);
+            const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
             console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
             console.dir(allErrors, { depth: null, colors: true });
             /* Скачиваю полученные urls  */
@@ -191,7 +192,7 @@ class DefaultScenario {
             };
             // todo должна быть централизованная обработка ошибок в методе handleError
             const procError = (errors, attempt) => {
-                return errors.filter(e => attempt < this.maxRetries && this.isRetryable(e.error));
+                return errors.filter(e => attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
             };
             let attemptImage = 1;
             let currentBatchImage = imageQueue;
@@ -204,7 +205,7 @@ class DefaultScenario {
                 const retryable = procError(errors, attemptImage);
                 currentBatchImage = retryable.map(e => e.item);
                 if (currentBatchImage.length) {
-                    await this.waitBeforeRetry(attemptImage);
+                    await (0, helpers_1.waitBeforeRetry)(attemptImage);
                 }
                 else {
                     // Сохраняем окончательные ошибки
@@ -261,50 +262,11 @@ class DefaultScenario {
     }
     async handleError(error, attempt = 1) {
         console.error(`Error on attempt ${attempt}:`, error);
-        if (attempt < this.maxRetries && this.isRetryable(error)) {
-            await this.waitBeforeRetry(attempt);
+        if (attempt < this.maxRetries && (0, helpers_1.isRetryable)(error)) {
+            await (0, helpers_1.waitBeforeRetry)(attempt);
             return this.handleError(error, attempt + 1);
         }
         throw error;
-    }
-    // =================  helpers ============================
-    normalizeAllData(source) {
-        const map = new Map();
-        for (const [key, urls] of Object.entries(source)) {
-            if (!map.has(key)) {
-                map.set(key, new Set());
-            }
-            const set = map.get(key);
-            for (const url of urls) {
-                set.add(url);
-            }
-        }
-        return Object.fromEntries([...map.entries()].map(([key, set]) => [key, [...set]]));
-    }
-    isRetryable(error) {
-        if (!error)
-            return false;
-        // Если это ошибка Playwright с кодом timeout
-        if (error instanceof Error) {
-            const msg = error.message.toLowerCase();
-            error.retryable = true;
-            // таймауты и network glitches
-            if (msg.includes('timeout') || msg.includes('net::'))
-                return true;
-            // если страница динамическая
-            if (msg.includes('element not found') || msg.includes('not visible'))
-                return true;
-        }
-        if (error?.retryable === true) {
-            error.retryable = true;
-            return true;
-        }
-        error.retryable = false;
-        return false;
-    }
-    async waitBeforeRetry(attempt) {
-        const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
-        return new Promise(resolve => setTimeout(resolve, delay));
     }
 }
 exports.DefaultScenario = DefaultScenario;

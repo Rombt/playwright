@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RozetkaScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
+const helpers_1 = require("../../common/helpers");
 class RozetkaScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -96,50 +97,11 @@ class RozetkaScenario {
     }
     async handleError(error, attempt = 1) {
         console.error(`Error on attempt ${attempt}:`, error);
-        if (attempt < this.maxRetries && this.isRetryable(error)) {
-            await this.waitBeforeRetry(attempt);
+        if (attempt < this.maxRetries && (0, helpers_1.isRetryable)(error)) {
+            await (0, helpers_1.waitBeforeRetry)(attempt);
             return this.handleError(error, attempt + 1);
         }
         throw error;
-    }
-    // =================  helpers ============================
-    normalizeAllData(source) {
-        const map = new Map();
-        for (const [key, urls] of Object.entries(source)) {
-            if (!map.has(key)) {
-                map.set(key, new Set());
-            }
-            const set = map.get(key);
-            for (const url of urls) {
-                set.add(url);
-            }
-        }
-        return Object.fromEntries([...map.entries()].map(([key, set]) => [key, [...set]]));
-    }
-    isRetryable(error) {
-        if (!error)
-            return false;
-        // Если это ошибка Playwright с кодом timeout
-        if (error instanceof Error) {
-            const msg = error.message.toLowerCase();
-            error.retryable = true;
-            // таймауты и network glitches
-            if (msg.includes('timeout') || msg.includes('net::'))
-                return true;
-            // если страница динамическая
-            if (msg.includes('element not found') || msg.includes('not visible'))
-                return true;
-        }
-        if (error?.retryable === true) {
-            error.retryable = true;
-            return true;
-        }
-        error.retryable = false;
-        return false;
-    }
-    async waitBeforeRetry(attempt) {
-        const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
-        return new Promise(resolve => setTimeout(resolve, delay));
     }
 }
 exports.RozetkaScenario = RozetkaScenario;

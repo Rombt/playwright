@@ -19,6 +19,8 @@ import { IProduct } from '../../data/entities/IProduct';
 import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
 
+import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
+
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
@@ -175,13 +177,13 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
         const retryable = errors.filter(
           (e): e is { item: IProduct; error: IWorkerError } =>
-            !!e.item && attempt < this.maxRetries && this.isRetryable(e.error),
+            !!e.item && attempt < this.maxRetries && isRetryable(e.error),
         );
 
         currentBatch = retryable.map(e => e.item);
 
         if (currentBatch.length) {
-          await this.waitBeforeRetry(attempt);
+          await waitBeforeRetry(attempt);
         } else {
           // оставшиеся ошибки записываем в глобальный пул ошибок
           errors.forEach(e => {
@@ -197,7 +199,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       console.log(`All workers finished  for ${task.brand_name}`);
 
-      const allDataNormalize = this.normalizeAllData(allData);
+      const allDataNormalize = normalizeAllData(allData);
 
       console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
       console.dir(allErrors, { depth: null, colors: true });
@@ -252,7 +254,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       // todo должна быть централизованная обработка ошибок в методе handleError
       const procError = (errors: IImageError[], attempt: number): IImageError[] => {
-        return errors.filter(e => attempt < this.maxRetries && this.isRetryable(e.error));
+        return errors.filter(e => attempt < this.maxRetries && isRetryable(e.error));
       };
 
       let attemptImage = 1;
@@ -271,7 +273,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         currentBatchImage = retryable.map(e => e.item);
 
         if (currentBatchImage.length) {
-          await this.waitBeforeRetry(attemptImage);
+          await waitBeforeRetry(attemptImage);
         } else {
           // Сохраняем окончательные ошибки
           errors.forEach(e => {
@@ -341,60 +343,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
     console.error(`Error on attempt ${attempt}:`, error);
 
-    if (attempt < this.maxRetries && this.isRetryable(error)) {
-      await this.waitBeforeRetry(attempt);
+    if (attempt < this.maxRetries && isRetryable(error)) {
+      await waitBeforeRetry(attempt);
       return this.handleError(error, attempt + 1);
     }
 
     throw error;
-  }
-
-  // =================  helpers ============================
-
-  normalizeAllData(source: IDataImag): IDataImag {
-    const map = new Map<string, Set<string>>();
-
-    for (const [key, urls] of Object.entries(source)) {
-      if (!map.has(key)) {
-        map.set(key, new Set());
-      }
-
-      const set = map.get(key)!;
-      for (const url of urls) {
-        set.add(url);
-      }
-    }
-
-    return Object.fromEntries([...map.entries()].map(([key, set]) => [key, [...set]]));
-  }
-
-  protected isRetryable(error: IWorkerError): boolean {
-    if (!error) return false;
-
-    // Если это ошибка Playwright с кодом timeout
-    if (error instanceof Error) {
-      const msg = error.message.toLowerCase();
-
-      error.retryable = true;
-
-      // таймауты и network glitches
-      if (msg.includes('timeout') || msg.includes('net::')) return true;
-
-      // если страница динамическая
-      if (msg.includes('element not found') || msg.includes('not visible')) return true;
-    }
-
-    if ((error as any)?.retryable === true) {
-      error.retryable = true;
-      return true;
-    }
-
-    error.retryable = false;
-    return false;
-  }
-
-  protected async waitBeforeRetry(attempt: number): Promise<void> {
-    const delay = Math.min(this.baseDelay * 2 ** (attempt - 1), this.maxDelay);
-    return new Promise(resolve => setTimeout(resolve, delay));
   }
 }
