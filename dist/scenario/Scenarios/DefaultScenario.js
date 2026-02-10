@@ -11,7 +11,7 @@ class DefaultScenario {
         this.storage = storage;
         this.maxRetries = 5;
         this.baseDelay = 500;
-        this.maxDelay = 5000;
+        this.maxDelay = 10000;
         this.maxPage = 10; // максимальное количество страниц в пуле
         this.maxTask = 5; // количество одновременно выполняемых задач
         this.sourcesFolder = './dist/source/sources';
@@ -22,7 +22,8 @@ class DefaultScenario {
         // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
-        this.taskPath = 'src/data/tasks/adidas_tests.json';
+        // private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
+        this.taskPath = 'src/data/tasks/ganzo_tests.json';
         this.sources = [];
         this.resources = [];
     }

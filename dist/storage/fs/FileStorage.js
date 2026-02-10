@@ -8,7 +8,7 @@ class FileStorage {
         this.baseDir = baseDir;
     }
     async save(file) {
-        const targetPath = path.join(this.baseDir, file.targetDir, file.filename);
+        const targetPath = path.join(this.trimNonPrintable(this.baseDir), this.trimNonPrintable(file.targetDir), this.trimNonPrintable(file.filename));
         await fs.mkdir(path.dirname(targetPath), { recursive: true });
         await fs.writeFile(targetPath, file.buffer);
     }
@@ -16,6 +16,9 @@ class FileStorage {
         const targetPath = path.join(this.baseDir, options.targetDir ?? '', options.filename);
         await fs.mkdir(path.dirname(targetPath), { recursive: true });
         await fs.writeFile(targetPath, JSON.stringify(data, null, 2), 'utf-8');
+    }
+    trimNonPrintable(value) {
+        return value.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '');
     }
     composeFileName() { }
 }
