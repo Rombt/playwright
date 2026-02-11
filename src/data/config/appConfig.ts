@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { IAppConfig } from './IAppConfig';
+import { IAppConfig, RetryConfig } from './IAppConfig';
 
 export class AppConfig {
   private static instance: AppConfig;
@@ -69,10 +69,9 @@ export class AppConfig {
     return this.processResultsFolder(this.rawConfig).data?.resultsFolder ?? '';
   }
 
-  public get asyncRetry(): IAppConfig['async'] {
-    return (
-      this.processAsyncRetry(this.rawConfig).async ?? { retry: { baseDelay: 100, maxDelay: 5000 } }
-    );
+  public get asyncRetry(): RetryConfig {
+    const asyncPart = this.processAsyncRetry(this.rawConfig).async;
+    return asyncPart?.retry ?? { baseDelay: 100, maxDelay: 5000 };
   }
 
   // ==========  методы для обработки полей  ===============

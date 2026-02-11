@@ -3,14 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnprocessedCollector = void 0;
 const fs = require("fs");
 const path = require("path");
+const appConfig_1 = require("../../data/config/appConfig");
 class UnprocessedCollector {
-    constructor(resultsDir) {
-        this.resultsDir = resultsDir;
+    constructor() {
+        this.config = appConfig_1.AppConfig.getInstance();
+        this.resultsFolder = this.config.resultsFolder;
     }
     getProducts(brand) {
         const brands = this.normalizeBrands(brand);
         const files = this.getBrandFiles(brands);
-        console.log('files = ', files);
         const products = [];
         for (const file of files) {
             const items = this.readFile(file);
@@ -76,13 +77,24 @@ class UnprocessedCollector {
      * Returns all valid brand filenames.
      */
     getAllBrandFiles() {
-        if (!fs.existsSync(this.resultsDir)) {
+        if (!fs.existsSync(this.resultsFolder)) {
             return [];
         }
-        return fs
-            .readdirSync(this.resultsDir)
-            .filter(name => name.endsWith('_unprocessed-products.json'))
-            .map(name => path.join(this.resultsDir, name));
+        const result = [];
+        const walk = (dir) => {
+            const entries = fs.readdirSync(dir, { withFileTypes: true });
+            for (const entry of entries) {
+                const fullPath = path.join(dir, entry.name);
+                if (entry.isDirectory()) {
+                    walk(fullPath);
+                }
+                if (entry.isFile() && entry.name.endsWith('_unprocessed-products.json')) {
+                    result.push(fullPath);
+                }
+            }
+        };
+        walk(this.resultsFolder);
+        return result;
     }
     /**
      * Extract brand name from filename.

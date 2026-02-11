@@ -1,11 +1,13 @@
 export interface IAppConfig {
   async?: {
-    retry?: {
-      baseDelay: number;
-      maxDelay: number;
-    };
+    retry?: RetryConfig;
   };
   data: {
     resultsFolder: string;
   };
+}
+
+export interface RetryConfig {
+  baseDelay: number;
+  maxDelay: number;
 }

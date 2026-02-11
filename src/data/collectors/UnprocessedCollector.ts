@@ -1,17 +1,23 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { AppConfig } from '../../data/config/appConfig';
 
 import { IProduct } from '../../data/entities/IProduct';
 import { IUnprocessedCollector } from './IUnprocessedCollector';
 
 export class UnprocessedCollector implements IUnprocessedCollector {
-  constructor(private readonly resultsDir: string) {}
+  private readonly config: AppConfig;
+  private readonly resultsFolder: string;
+
+  constructor() {
+    this.config = AppConfig.getInstance();
+    this.resultsFolder = this.config.resultsFolder;
+  }
 
   getProducts(brand?: string | string[]): IProduct[] {
     const brands = this.normalizeBrands(brand);
-    const files = this.getBrandFiles(brands);
 
-    console.log('files = ', files);
+    const files = this.getBrandFiles(brands);
 
     const products: IProduct[] = [];
 
@@ -97,14 +103,31 @@ export class UnprocessedCollector implements IUnprocessedCollector {
    * Returns all valid brand filenames.
    */
   private getAllBrandFiles(): string[] {
-    if (!fs.existsSync(this.resultsDir)) {
+    if (!fs.existsSync(this.resultsFolder)) {
       return [];
     }
 
-    return fs
-      .readdirSync(this.resultsDir)
-      .filter(name => name.endsWith('_unprocessed-products.json'))
-      .map(name => path.join(this.resultsDir, name));
+    const result: string[] = [];
+
+    const walk = (dir: string): void => {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+
+        if (entry.isDirectory()) {
+          walk(fullPath);
+        }
+
+        if (entry.isFile() && entry.name.endsWith('_unprocessed-products.json')) {
+          result.push(fullPath);
+        }
+      }
+    };
+
+    walk(this.resultsFolder);
+
+    return result;
   }
 
   /**

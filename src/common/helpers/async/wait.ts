@@ -7,7 +7,7 @@ export async function waitBeforeRetry(
 ): Promise<void> {
   const cfg = AppConfig.getInstance();
 
-  const retryCfg = cfg.asyncRetry?.retry;
+  const retryCfg = cfg.asyncRetry;
   const defaultBase = 100;
   const defaultMax = 5000;
 

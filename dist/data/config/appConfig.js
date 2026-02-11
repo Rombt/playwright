@@ -56,7 +56,8 @@ class AppConfig {
         return this.processResultsFolder(this.rawConfig).data?.resultsFolder ?? '';
     }
     get asyncRetry() {
-        return (this.processAsyncRetry(this.rawConfig).async ?? { retry: { baseDelay: 100, maxDelay: 5000 } });
+        const asyncPart = this.processAsyncRetry(this.rawConfig).async;
+        return asyncPart?.retry ?? { baseDelay: 100, maxDelay: 5000 };
     }
     // ==========  методы для обработки полей  ===============
     processResultsFolder(rawConfig) {

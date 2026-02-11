@@ -7,7 +7,6 @@ import { RozetkaScenario } from '../scenario/scenarios/RozetkaScenario';
 import { LaunchOptions, BrowserContextOptions } from 'playwright';
 import { accessSync, readFileSync, constants } from 'node:fs';
 import { AppConfig } from '../data/config/appConfig';
-import { IAppConfig } from '../data/config/IAppConfig';
 import { UnprocessedCollector } from '../data/collectors/UnprocessedCollector';
 
 //todo прочитать опции и предать в браузер
@@ -24,9 +23,6 @@ export class App<BrowserOptions> {
     private readonly pathContextOptions: string,
   ) {
     this.config = AppConfig.getInstance();
-
-    console.log('cfg.asyncRetry = ', this.config.asyncRetry);
-    console.log('cfg.resultsFolder = ', this.config.resultsFolder);
 
     try {
       //todo убрать повторяющийся код
@@ -54,13 +50,16 @@ export class App<BrowserOptions> {
 
     const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
 
-    console.dir(this.config, { depth: null, colors: true });
-    const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
-    const scenario = new DefaultScenario(browser, storage);
-    await scenario.run(); //! на время тестов
+    // console.dir(this.config, { depth: null, colors: true });
+    //! на время тестов
+    // const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
+    // const scenario = new DefaultScenario(browser, storage);
+    // await scenario.run();
 
-    const unprocessedCollector = new UnprocessedCollector(this.config.resultsFolder);
+    const unprocessedCollector = new UnprocessedCollector();
     const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
+
+    console.log('unprocessedProducts = ', unprocessedProducts);
   }
 
   async getBrowserOptions() {}
