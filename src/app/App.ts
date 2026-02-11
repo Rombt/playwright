@@ -17,12 +17,16 @@ export class App<BrowserOptions> {
   public readonly browserOptions: LaunchOptions = {};
   public readonly contextOptions: BrowserContextOptions = {};
   private readonly config: AppConfig;
+  private readonly mode: string;
 
   constructor(
     private readonly pathBrowserOptions: string,
     private readonly pathContextOptions: string,
   ) {
     this.config = AppConfig.getInstance();
+
+    const modeArg = process.argv.find(arg => arg.startsWith('--mode='));
+    this.mode = modeArg?.split('=')[1] ?? 'dev';
 
     try {
       //todo убрать повторяющийся код
@@ -49,17 +53,16 @@ export class App<BrowserOptions> {
     }
 
     const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
+    if (this.mode === 'full') {
+      const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
+      const scenario = new DefaultScenario(browser, storage);
+      await scenario.run();
+    } else if (this.mode === 'retry') {
+      const unprocessedCollector = new UnprocessedCollector();
+      const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
 
-    // console.dir(this.config, { depth: null, colors: true });
-    //! на время тестов
-    // const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
-    // const scenario = new DefaultScenario(browser, storage);
-    // await scenario.run();
-
-    const unprocessedCollector = new UnprocessedCollector();
-    const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
-
-    console.log('unprocessedProducts = ', unprocessedProducts);
+      console.log('unprocessedProducts = ', unprocessedProducts);
+    }
   }
 
   async getBrowserOptions() {}
