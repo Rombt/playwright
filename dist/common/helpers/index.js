@@ -17,3 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./data/normalize"), exports);
 __exportStar(require("./playwright/retry"), exports);
 __exportStar(require("./async/wait"), exports);
+__exportStar(require("./data/readProducts"), exports);
+__exportStar(require("./data/writeProducts"), exports);
+__exportStar(require("./data/getUnprocessedFilePath"), exports);
+__exportStar(require("./data/extractBrandFromFileName"), exports);

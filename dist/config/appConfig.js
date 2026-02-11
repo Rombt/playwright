@@ -8,4 +8,7 @@ exports.appConfig = {
             maxDelay: 5000,
         },
     },
+    data: {
+        resultsFolder: 'results',
+    },
 };

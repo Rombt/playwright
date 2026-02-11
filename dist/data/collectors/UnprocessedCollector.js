@@ -1,1 +1,118 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UnprocessedCollector = void 0;
+const fs = require("fs");
+const path = require("path");
+class UnprocessedCollector {
+    constructor(resultsDir) {
+        this.resultsDir = resultsDir;
+    }
+    getProducts(brand) {
+        const brands = this.normalizeBrands(brand);
+        const files = this.getBrandFiles(brands);
+        console.log('files = ', files);
+        const products = [];
+        for (const file of files) {
+            const items = this.readFile(file);
+            for (const item of items) {
+                if (item?.error?.product) {
+                    products.push(item.error.product);
+                }
+            }
+        }
+        return products;
+    }
+    getBrands() {
+        return this.getAllBrandNames();
+    }
+    countTotal() {
+        return this.getProducts().length;
+    }
+    countByBrand() {
+        const result = {};
+        for (const brand of this.getAllBrandNames()) {
+            result[brand] = this.count(brand);
+        }
+        return result;
+    }
+    count(brand) {
+        return this.getProducts(brand).length;
+    }
+    getSummary() {
+        return this.countByBrand();
+    }
+    logSummary() {
+        const summary = this.getSummary();
+        for (const [brand, count] of Object.entries(summary)) {
+            console.log(`${brand}: ${count}`);
+        }
+    }
+    // ============  helpers  ====================================
+    /**
+     * Normalize brand input to lowercase array.
+     * undefined → null (means all brands)
+     */
+    normalizeBrands(brand) {
+        if (!brand)
+            return null;
+        const brands = Array.isArray(brand) ? brand : [brand];
+        const normalized = brands.map(b => b.trim().toLowerCase()).filter(Boolean);
+        return normalized.length ? normalized : null;
+    }
+    /**
+     * Returns absolute paths to brand files.
+     */
+    getBrandFiles(brands) {
+        const allFiles = this.getAllBrandFiles();
+        if (!brands) {
+            return allFiles;
+        }
+        return allFiles.filter(file => {
+            const brand = this.extractBrandFromFilename(file);
+            return brand !== null && brands.includes(brand);
+        });
+    }
+    /**
+     * Returns all valid brand filenames.
+     */
+    getAllBrandFiles() {
+        if (!fs.existsSync(this.resultsDir)) {
+            return [];
+        }
+        return fs
+            .readdirSync(this.resultsDir)
+            .filter(name => name.endsWith('_unprocessed-products.json'))
+            .map(name => path.join(this.resultsDir, name));
+    }
+    /**
+     * Extract brand name from filename.
+     */
+    extractBrandFromFilename(filePath) {
+        const filename = path.basename(filePath);
+        const match = filename.match(/^(.+?)_unprocessed-products\.json$/);
+        return match ? match[1].toLowerCase() : null;
+    }
+    /**
+     * Returns all available brand names.
+     */
+    getAllBrandNames() {
+        return this.getAllBrandFiles()
+            .map(file => this.extractBrandFromFilename(file))
+            .filter((b) => Boolean(b));
+    }
+    /**
+     * Read and parse JSON file.
+     * Returns empty array on any error.
+     */
+    readFile(filePath) {
+        try {
+            const raw = fs.readFileSync(filePath, 'utf-8');
+            const data = JSON.parse(raw);
+            return Array.isArray(data) ? data : [];
+        }
+        catch {
+            return [];
+        }
+    }
+}
+exports.UnprocessedCollector = UnprocessedCollector;

@@ -1,0 +1,11 @@
+{
+  "async": {
+    "retry": {
+      "baseDelay": 100,
+      "maxDelay": 5000
+    }
+  },
+  "data": {
+    "resultsFolder": "results"
+  }
+}

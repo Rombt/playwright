@@ -6,6 +6,9 @@ import { RozetkaScenario } from '../scenario/scenarios/RozetkaScenario';
 
 import { LaunchOptions, BrowserContextOptions } from 'playwright';
 import { accessSync, readFileSync, constants } from 'node:fs';
+import { AppConfig } from '../data/config/appConfig';
+import { IAppConfig } from '../data/config/IAppConfig';
+import { UnprocessedCollector } from '../data/collectors/UnprocessedCollector';
 
 //todo прочитать опции и предать в браузер
 // todo где то здесь должен создаваться браузер, один на всё приложение!
@@ -14,11 +17,17 @@ import { accessSync, readFileSync, constants } from 'node:fs';
 export class App<BrowserOptions> {
   public readonly browserOptions: LaunchOptions = {};
   public readonly contextOptions: BrowserContextOptions = {};
+  private readonly config: AppConfig;
 
   constructor(
     private readonly pathBrowserOptions: string,
     private readonly pathContextOptions: string,
   ) {
+    this.config = AppConfig.getInstance();
+
+    console.log('cfg.asyncRetry = ', this.config.asyncRetry);
+    console.log('cfg.resultsFolder = ', this.config.resultsFolder);
+
     try {
       //todo убрать повторяющийся код
       accessSync(this.pathBrowserOptions, constants.R_OK);
@@ -39,11 +48,19 @@ export class App<BrowserOptions> {
   }
 
   async run() {
-    const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
-    const storage = new FileStorage('F:/testing/playwright/results'); //todo перевести относительно папки проекта
-    const scenario = new DefaultScenario(browser, storage);
+    if (!this.config.resultsFolder) {
+      throw new Error('resultsFolder is not defined in config');
+    }
 
-    await scenario.run();
+    const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
+
+    console.dir(this.config, { depth: null, colors: true });
+    const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
+    const scenario = new DefaultScenario(browser, storage);
+    await scenario.run(); //! на время тестов
+
+    const unprocessedCollector = new UnprocessedCollector(this.config.resultsFolder);
+    const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
   }
 
   async getBrowserOptions() {}

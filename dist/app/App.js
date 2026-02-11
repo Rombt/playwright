@@ -5,6 +5,8 @@ const PlaywrightBrowser_1 = require("../browser/playwright/PlaywrightBrowser");
 const FileStorage_1 = require("../storage/fs/FileStorage");
 const DefaultScenario_1 = require("../scenario/scenarios/DefaultScenario");
 const node_fs_1 = require("node:fs");
+const appConfig_1 = require("../data/config/appConfig");
+const UnprocessedCollector_1 = require("../data/collectors/UnprocessedCollector");
 //todo прочитать опции и предать в браузер
 // todo где то здесь должен создаваться браузер, один на всё приложение!
 // todo где закрывать браузер?
@@ -14,6 +16,9 @@ class App {
         this.pathContextOptions = pathContextOptions;
         this.browserOptions = {};
         this.contextOptions = {};
+        this.config = appConfig_1.AppConfig.getInstance();
+        console.log('cfg.asyncRetry = ', this.config.asyncRetry);
+        console.log('cfg.resultsFolder = ', this.config.resultsFolder);
         try {
             //todo убрать повторяющийся код
             (0, node_fs_1.accessSync)(this.pathBrowserOptions, node_fs_1.constants.R_OK);
@@ -31,10 +36,16 @@ class App {
         }
     }
     async run() {
+        if (!this.config.resultsFolder) {
+            throw new Error('resultsFolder is not defined in config');
+        }
         const browser = new PlaywrightBrowser_1.PlaywrightBrowser(this.browserOptions, this.contextOptions);
-        const storage = new FileStorage_1.FileStorage('F:/testing/playwright/results'); //todo перевести относительно папки проекта
+        console.dir(this.config, { depth: null, colors: true });
+        const storage = new FileStorage_1.FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
         const scenario = new DefaultScenario_1.DefaultScenario(browser, storage);
-        await scenario.run();
+        await scenario.run(); //! на время тестов
+        const unprocessedCollector = new UnprocessedCollector_1.UnprocessedCollector(this.config.resultsFolder);
+        const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
     }
     async getBrowserOptions() { }
 }
