@@ -56,8 +56,7 @@ class AppConfig {
         return this.processResultsFolder(this.rawConfig).data?.resultsFolder ?? '';
     }
     get asyncRetry() {
-        const asyncPart = this.processAsyncRetry(this.rawConfig).async;
-        return asyncPart?.retry ?? { baseDelay: 100, maxDelay: 5000 };
+        return this.processAsyncRetry(this.rawConfig).async.retry;
     }
     // ==========  методы для обработки полей  ===============
     processResultsFolder(rawConfig) {
@@ -72,13 +71,18 @@ class AppConfig {
     processAsyncRetry(rawConfig) {
         const asyncConfig = rawConfig?.async ?? {};
         const retry = asyncConfig.retry ?? {};
-        const baseDelay = typeof retry.baseDelay === 'number' ? retry.baseDelay : 100;
-        const maxDelay = typeof retry.maxDelay === 'number' ? retry.maxDelay : 5000;
         return {
             async: {
                 retry: {
-                    baseDelay,
-                    maxDelay,
+                    baseDelay: typeof retry.baseDelay === 'number' ? retry.baseDelay : 100,
+                    maxDelay: typeof retry.maxDelay === 'number' ? retry.maxDelay : 5000,
+                    maxRetries: typeof retry.maxRetries === 'number' ? retry.maxRetries : 3,
+                },
+                tasks: {
+                    maxTask: typeof asyncConfig.tasks?.maxTask === 'number' ? asyncConfig.tasks.maxTask : 5,
+                },
+                pages: {
+                    maxPage: typeof asyncConfig.pages?.maxPage === 'number' ? asyncConfig.pages.maxPage : 10,
                 },
             },
         };

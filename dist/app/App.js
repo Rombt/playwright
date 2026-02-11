@@ -49,6 +49,7 @@ class App {
             const unprocessedCollector = new UnprocessedCollector_1.UnprocessedCollector();
             const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
             console.log('unprocessedProducts = ', unprocessedProducts);
+            //todo добавить перебор сценариев для дополнительного поиска
         }
     }
     async getBrowserOptions() { }

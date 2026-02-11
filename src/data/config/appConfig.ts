@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { IAppConfig, RetryConfig } from './IAppConfig';
+import { IAppConfig, RetryConfig, AsyncConfig } from './IAppConfig';
 
 export class AppConfig {
   private static instance: AppConfig;
@@ -70,8 +70,7 @@ export class AppConfig {
   }
 
   public get asyncRetry(): RetryConfig {
-    const asyncPart = this.processAsyncRetry(this.rawConfig).async;
-    return asyncPart?.retry ?? { baseDelay: 100, maxDelay: 5000 };
+    return this.processAsyncRetry(this.rawConfig).async.retry;
   }
 
   // ==========  методы для обработки полей  ===============
@@ -88,18 +87,23 @@ export class AppConfig {
     return { data: { resultsFolder: resolved } };
   }
 
-  processAsyncRetry(rawConfig: any): { async?: IAppConfig['async'] } {
+  processAsyncRetry(rawConfig: any): { async: AsyncConfig } {
     const asyncConfig = rawConfig?.async ?? {};
 
     const retry = asyncConfig.retry ?? {};
-    const baseDelay = typeof retry.baseDelay === 'number' ? retry.baseDelay : 100;
-    const maxDelay = typeof retry.maxDelay === 'number' ? retry.maxDelay : 5000;
 
     return {
       async: {
         retry: {
-          baseDelay,
-          maxDelay,
+          baseDelay: typeof retry.baseDelay === 'number' ? retry.baseDelay : 100,
+          maxDelay: typeof retry.maxDelay === 'number' ? retry.maxDelay : 5000,
+          maxRetries: typeof retry.maxRetries === 'number' ? retry.maxRetries : 3,
+        },
+        tasks: {
+          maxTask: typeof asyncConfig.tasks?.maxTask === 'number' ? asyncConfig.tasks.maxTask : 5,
+        },
+        pages: {
+          maxPage: typeof asyncConfig.pages?.maxPage === 'number' ? asyncConfig.pages.maxPage : 10,
         },
       },
     };

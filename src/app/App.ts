@@ -62,6 +62,8 @@ export class App<BrowserOptions> {
       const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
 
       console.log('unprocessedProducts = ', unprocessedProducts);
+
+      //todo добавить перебор сценариев для дополнительного поиска
     }
   }
 
