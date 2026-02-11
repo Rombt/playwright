@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { IAppConfig, RetryConfig, AsyncConfig } from './IAppConfig';
+import { IAppConfig, RetryConfig, AsyncConfig, DataConfig } from './IAppConfig';
 
 export class AppConfig {
   private static instance: AppConfig;
@@ -36,8 +36,8 @@ export class AppConfig {
     let result: IAppConfig = {} as IAppConfig;
 
     const processors = [
-      this.processResultsFolder.bind(this),
-      this.processAsyncRetry.bind(this),
+      this.processData.bind(this),
+      this.processAsync.bind(this),
       // сюда добавлять методы для обработки новых полей
     ];
 
@@ -66,28 +66,46 @@ export class AppConfig {
   }
 
   public get resultsFolder(): string {
-    return this.processResultsFolder(this.rawConfig).data?.resultsFolder ?? '';
+    return this.processData(this.rawConfig).data.resultsFolder;
+  }
+
+  public get sourcesFolder(): string {
+    return this.processData(this.rawConfig).data.sourcesFolder;
   }
 
   public get asyncRetry(): RetryConfig {
-    return this.processAsyncRetry(this.rawConfig).async.retry;
+    return this.processAsync(this.rawConfig).async.retry;
+  }
+
+  public get asyncTasks(): AsyncConfig['tasks'] {
+    return this.processAsync(this.rawConfig).async.tasks;
+  }
+
+  public get asyncPages(): AsyncConfig['pages'] {
+    return this.processAsync(this.rawConfig).async.pages;
   }
 
   // ==========  методы для обработки полей  ===============
 
-  processResultsFolder(rawConfig: any): { data: { resultsFolder: string } } {
-    const rawPath = rawConfig?.data?.resultsFolder;
-    const resolved =
-      rawPath && typeof rawPath === 'string'
-        ? path.isAbsolute(rawPath)
-          ? rawPath
-          : path.resolve(this.baseDir, rawPath)
+  private processData(rawConfig: any): { data: DataConfig } {
+    const dataConfig = rawConfig?.data ?? {};
+
+    const resolvePath = (value: unknown): string =>
+      typeof value === 'string'
+        ? path.isAbsolute(value)
+          ? value
+          : path.resolve(this.baseDir, value)
         : '';
 
-    return { data: { resultsFolder: resolved } };
+    return {
+      data: {
+        resultsFolder: resolvePath(dataConfig.resultsFolder),
+        sourcesFolder: resolvePath(dataConfig.sourcesFolder),
+      },
+    };
   }
 
-  processAsyncRetry(rawConfig: any): { async: AsyncConfig } {
+  processAsync(rawConfig: any): { async: AsyncConfig } {
     const asyncConfig = rawConfig?.async ?? {};
 
     const retry = asyncConfig.retry ?? {};

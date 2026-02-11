@@ -18,19 +18,19 @@ import { IProduct } from '../../data/entities/IProduct';
 
 import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
+import { AppConfig } from '../../data/config/appConfig';
 
 import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
 
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
-  private readonly maxRetries: number = 5;
-  private readonly baseDelay: number = 500;
-  private readonly maxDelay: number = 10000;
-  private readonly maxPage: number = 10; // максимальное количество страниц в пуле
-  private readonly maxTask: number = 5; // количество одновременно выполняемых задач
+  private readonly maxRetries: number;
+  private readonly maxPage: number;
+  private readonly maxTask: number;
 
-  private readonly sourcesFolder: string = './dist/source/sources';
+  private readonly config: AppConfig;
+  private readonly sourcesFolder: string;
 
   //todo отдельная папка для задач, но сначала интерфейс
   // private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
@@ -48,7 +48,14 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
     private storage: Storage,
-  ) {}
+  ) {
+    this.config = AppConfig.getInstance();
+
+    this.maxRetries = this.config.asyncRetry.maxRetries;
+    this.maxPage = this.config.asyncPages.maxPage;
+    this.maxTask = this.config.asyncTasks.maxTask;
+    this.sourcesFolder = this.config.sourcesFolder;
+  }
 
   async run(): Promise<void> {
     try {

@@ -5,17 +5,12 @@ const fs_1 = require("fs");
 const path = require("path");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const PagePool_1 = require("../../browser/pool/PagePool");
+const appConfig_1 = require("../../data/config/appConfig");
 const helpers_1 = require("../../common/helpers");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
-        this.maxRetries = 5;
-        this.baseDelay = 500;
-        this.maxDelay = 10000;
-        this.maxPage = 10; // максимальное количество страниц в пуле
-        this.maxTask = 5; // количество одновременно выполняемых задач
-        this.sourcesFolder = './dist/source/sources';
         //todo отдельная папка для задач, но сначала интерфейс
         // private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
         // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
@@ -27,6 +22,11 @@ class DefaultScenario {
         this.taskPath = 'src/data/tasks/ganzo_tests.json';
         this.sources = [];
         this.resources = [];
+        this.config = appConfig_1.AppConfig.getInstance();
+        this.maxRetries = this.config.asyncRetry.maxRetries;
+        this.maxPage = this.config.asyncPages.maxPage;
+        this.maxTask = this.config.asyncTasks.maxTask;
+        this.sourcesFolder = this.config.sourcesFolder;
     }
     async run() {
         try {

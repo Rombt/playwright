@@ -1,8 +1,6 @@
 export interface IAppConfig {
   async?: AsyncConfig;
-  data: {
-    resultsFolder: string;
-  };
+  data?: DataConfig;
 }
 
 export interface AsyncConfig {
@@ -21,4 +19,9 @@ export interface RetryConfig {
   baseDelay: number;
   maxDelay: number;
   maxRetries: number;
+}
+
+export interface DataConfig {
+  resultsFolder: string;
+  sourcesFolder: string;
 }

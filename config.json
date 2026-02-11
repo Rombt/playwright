@@ -13,6 +13,7 @@
     }
   },
   "data": {
-    "resultsFolder": "results"
+    "resultsFolder": "results",
+    "sourcesFolder": "./dist/source/sources"
   }
 }

@@ -29,8 +29,8 @@ class AppConfig {
     buildConfig() {
         let result = {};
         const processors = [
-            this.processResultsFolder.bind(this),
-            this.processAsyncRetry.bind(this),
+            this.processData.bind(this),
+            this.processAsync.bind(this),
             // сюда добавлять методы для обработки новых полей
         ];
         for (const processor of processors) {
@@ -53,22 +53,36 @@ class AppConfig {
         return this.config;
     }
     get resultsFolder() {
-        return this.processResultsFolder(this.rawConfig).data?.resultsFolder ?? '';
+        return this.processData(this.rawConfig).data.resultsFolder;
+    }
+    get sourcesFolder() {
+        return this.processData(this.rawConfig).data.sourcesFolder;
     }
     get asyncRetry() {
-        return this.processAsyncRetry(this.rawConfig).async.retry;
+        return this.processAsync(this.rawConfig).async.retry;
+    }
+    get asyncTasks() {
+        return this.processAsync(this.rawConfig).async.tasks;
+    }
+    get asyncPages() {
+        return this.processAsync(this.rawConfig).async.pages;
     }
     // ==========  методы для обработки полей  ===============
-    processResultsFolder(rawConfig) {
-        const rawPath = rawConfig?.data?.resultsFolder;
-        const resolved = rawPath && typeof rawPath === 'string'
-            ? path.isAbsolute(rawPath)
-                ? rawPath
-                : path.resolve(this.baseDir, rawPath)
+    processData(rawConfig) {
+        const dataConfig = rawConfig?.data ?? {};
+        const resolvePath = (value) => typeof value === 'string'
+            ? path.isAbsolute(value)
+                ? value
+                : path.resolve(this.baseDir, value)
             : '';
-        return { data: { resultsFolder: resolved } };
+        return {
+            data: {
+                resultsFolder: resolvePath(dataConfig.resultsFolder),
+                sourcesFolder: resolvePath(dataConfig.sourcesFolder),
+            },
+        };
     }
-    processAsyncRetry(rawConfig) {
+    processAsync(rawConfig) {
         const asyncConfig = rawConfig?.async ?? {};
         const retry = asyncConfig.retry ?? {};
         return {

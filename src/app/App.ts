@@ -63,6 +63,10 @@ export class App<BrowserOptions> {
 
       console.log('unprocessedProducts = ', unprocessedProducts);
 
+      console.log('this.config.asyncRetry = ', this.config.asyncRetry);
+      console.log('this.config.asyncTasks = ', this.config.asyncTasks);
+      console.log('this.config.asyncPages = ', this.config.asyncPages);
+
       //todo добавить перебор сценариев для дополнительного поиска
     }
   }
