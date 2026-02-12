@@ -20,4 +20,7 @@ exports.config = {
         sourcesFolder: './dist/source/sources',
         brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'],
     },
+    browser: {
+        fingerprintFile: './fingerprint.config.json',
+    },
 };

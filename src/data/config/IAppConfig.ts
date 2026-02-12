@@ -1,6 +1,7 @@
 export interface IAppConfig {
   async?: AsyncConfig;
   data?: DataConfig;
+  browser?: BrowserConfig;
 }
 
 export interface AsyncConfig {
@@ -25,4 +26,8 @@ export interface DataConfig {
   resultsFolder: string;
   sourcesFolder: string;
   brands: string[];
+}
+
+export interface BrowserConfig {
+  fingerprintFile: string;
 }

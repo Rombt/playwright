@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaywrightBrowser = void 0;
-const playwright_1 = require("playwright");
 const path = require("path");
+const playwright_1 = require("playwright");
+const FingerprintPool_1 = require("../fingerprint/FingerprintPool");
 class PlaywrightBrowser {
     constructor(launchOptions, browserContextOptions) {
         this.launchOptions = launchOptions;
@@ -40,12 +41,23 @@ class PlaywrightBrowser {
         }
         console.log('Browser closed.');
     }
-    async createContext() {
+    async createContext(mode = 'real') {
         const browser = await this.init();
-        return await browser.newContext(this.browserContextOptions);
+        if (mode === 'fake') {
+            const fingerprintPool = new FingerprintPool_1.FingerprintPool();
+            const fingerprint = fingerprintPool.get();
+            if (!fingerprint) {
+                throw new Error('Нет доступного fingerprint профиля');
+            }
+            return browser.newContext({
+                ...this.browserContextOptions,
+                ...fingerprint,
+            });
+        }
+        return browser.newContext(this.browserContextOptions);
     }
-    async runInContext(fn) {
-        const context = await this.createContext();
+    async runInContext(fn, mode) {
+        const context = await this.createContext(mode);
         try {
             return await fn(context);
         }

@@ -7,9 +7,12 @@ export interface IBrowser<BrowserContext, ContextT, LaunchOptionsT = void, Conte
 
   close(): Promise<void>;
 
-  createContext(options?: ContextOptionsT): Promise<ContextT>;
+  createContext(mode?: 'real' | 'fake'): Promise<ContextT>;
 
-  runInContext<Result>(fn: (context: ContextT) => Promise<Result>): Promise<Result>;
+  runInContext<Result>(
+    fn: (context: ContextT) => Promise<Result>,
+    mode?: 'real' | 'fake',
+  ): Promise<Result>;
 
   download(page: Page, url: string): Promise<{ buffer: Buffer; ext: string }>;
 }

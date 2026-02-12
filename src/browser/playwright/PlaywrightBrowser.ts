@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { IBrowser as IBrowser } from '../IBrowser';
 import {
   chromium,
@@ -8,8 +9,7 @@ import {
   Download,
   Page,
 } from 'playwright';
-
-import * as path from 'path';
+import { FingerprintPool } from '../fingerprint/FingerprintPool';
 
 export class PlaywrightBrowser
   implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions>
@@ -52,14 +52,31 @@ export class PlaywrightBrowser
     console.log('Browser closed.');
   }
 
-  async createContext(): Promise<BrowserContext> {
+  async createContext(mode: 'real' | 'fake' = 'real'): Promise<BrowserContext> {
     const browser = await this.init();
 
-    return await browser.newContext(this.browserContextOptions);
+    if (mode === 'fake') {
+      const fingerprintPool = new FingerprintPool();
+      const fingerprint = fingerprintPool.get();
+
+      if (!fingerprint) {
+        throw new Error('Нет доступного fingerprint профиля');
+      }
+
+      return browser.newContext({
+        ...this.browserContextOptions,
+        ...fingerprint,
+      });
+    }
+
+    return browser.newContext(this.browserContextOptions);
   }
 
-  async runInContext<Result>(fn: (context: BrowserContext) => Promise<Result>): Promise<Result> {
-    const context = await this.createContext();
+  async runInContext<Result>(
+    fn: (context: BrowserContext) => Promise<Result>,
+    mode?: 'real' | 'fake',
+  ): Promise<Result> {
+    const context = await this.createContext(mode);
 
     try {
       return await fn(context);

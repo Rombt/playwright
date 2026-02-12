@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { config as appConfig } from '../../config';
-import { IAppConfig, RetryConfig, AsyncConfig, DataConfig } from './IAppConfig';
+import { IAppConfig, RetryConfig, AsyncConfig, DataConfig, BrowserConfig } from './IAppConfig';
 
 export class AppConfig {
   private static instance: AppConfig;
@@ -79,17 +79,14 @@ export class AppConfig {
     return this.processAsync(appConfig).async.pages;
   }
 
+  public get fingerprintFile(): string {
+    return this.processBrowser(appConfig).browser.fingerprintFile;
+  }
+
   // ==========  методы для обработки полей  ===============
 
   private processData(rawConfig: any): { data: DataConfig } {
     const dataConfig = rawConfig?.data ?? {};
-
-    const resolvePath = (value: unknown): string =>
-      typeof value === 'string'
-        ? path.isAbsolute(value)
-          ? value
-          : path.resolve(this.baseDir, value)
-        : '';
 
     const resolveBrands = (value: unknown): string[] =>
       Array.isArray(value)
@@ -101,8 +98,8 @@ export class AppConfig {
 
     return {
       data: {
-        resultsFolder: resolvePath(dataConfig.resultsFolder),
-        sourcesFolder: resolvePath(dataConfig.sourcesFolder),
+        resultsFolder: this.resolvePath(dataConfig.resultsFolder),
+        sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
         brands: resolveBrands(dataConfig.brands),
       },
     };
@@ -128,5 +125,25 @@ export class AppConfig {
         },
       },
     };
+  }
+
+  processBrowser(rawConfig: any): { browser: BrowserConfig } {
+    const browserConfig = rawConfig?.browser ?? {};
+
+    return {
+      browser: {
+        fingerprintFile: this.resolvePath(browserConfig.fingerprintFile),
+      },
+    };
+  }
+
+  //==========  helpers ========
+
+  resolvePath(value: unknown): string {
+    if (typeof value !== 'string') {
+      throw new Error(`Invalid path value: expected string, got ${typeof value}`);
+    }
+
+    return path.isAbsolute(value) ? value : path.resolve(this.baseDir, value);
   }
 }

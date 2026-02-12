@@ -59,14 +59,12 @@ class AppConfig {
     get asyncPages() {
         return this.processAsync(config_1.config).async.pages;
     }
+    get fingerprintFile() {
+        return this.processBrowser(config_1.config).browser.fingerprintFile;
+    }
     // ==========  методы для обработки полей  ===============
     processData(rawConfig) {
         const dataConfig = rawConfig?.data ?? {};
-        const resolvePath = (value) => typeof value === 'string'
-            ? path.isAbsolute(value)
-                ? value
-                : path.resolve(this.baseDir, value)
-            : '';
         const resolveBrands = (value) => Array.isArray(value)
             ? value
                 .filter((v) => typeof v === 'string')
@@ -75,8 +73,8 @@ class AppConfig {
             : [];
         return {
             data: {
-                resultsFolder: resolvePath(dataConfig.resultsFolder),
-                sourcesFolder: resolvePath(dataConfig.sourcesFolder),
+                resultsFolder: this.resolvePath(dataConfig.resultsFolder),
+                sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
                 brands: resolveBrands(dataConfig.brands),
             },
         };
@@ -99,6 +97,21 @@ class AppConfig {
                 },
             },
         };
+    }
+    processBrowser(rawConfig) {
+        const browserConfig = rawConfig?.browser ?? {};
+        return {
+            browser: {
+                fingerprintFile: this.resolvePath(browserConfig.fingerprintFile),
+            },
+        };
+    }
+    //==========  helpers ========
+    resolvePath(value) {
+        if (typeof value !== 'string') {
+            throw new Error(`Invalid path value: expected string, got ${typeof value}`);
+        }
+        return path.isAbsolute(value) ? value : path.resolve(this.baseDir, value);
     }
 }
 exports.AppConfig = AppConfig;
