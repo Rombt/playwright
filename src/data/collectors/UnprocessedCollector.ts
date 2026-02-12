@@ -4,6 +4,12 @@ import { AppConfig } from '../../data/config/appConfig';
 
 import { IProduct } from '../../data/entities/IProduct';
 import { IUnprocessedCollector } from './IUnprocessedCollector';
+import { ICollectProductPhotosTask } from '../entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
+
+type IBrandedProduct = {
+  brand: string;
+  product: IProduct;
+};
 
 export class UnprocessedCollector implements IUnprocessedCollector {
   private readonly config: AppConfig;
@@ -35,6 +41,59 @@ export class UnprocessedCollector implements IUnprocessedCollector {
 
   getBrands(): string[] {
     return this.getAllBrandNames();
+  }
+
+  public getPhotoCollectionTasks(): ICollectProductPhotosTask[] {
+    const brandedProducts = this.getProductsWithBrand();
+
+    const grouped = new Map<string, IProduct[]>();
+
+    for (const { brand, product } of brandedProducts) {
+      if (!grouped.has(brand)) {
+        grouped.set(brand, []);
+      }
+
+      grouped.get(brand)!.push(product);
+    }
+
+    const tasks: ICollectProductPhotosTask[] = [];
+
+    for (const [brand_name, products] of grouped.entries()) {
+      tasks.push({
+        type: 'recollect-product-photos',
+        brand_id: null,
+        brand_name,
+        metadata: {
+          target_website: null,
+        },
+        products,
+      });
+    }
+
+    return tasks;
+  }
+
+  private getProductsWithBrand(): IBrandedProduct[] {
+    const files = this.getBrandFiles(null);
+    const result: IBrandedProduct[] = [];
+
+    for (const file of files) {
+      const brand = this.extractBrandFromFilename(file);
+      if (!brand) continue;
+
+      const items = this.readFile(file);
+
+      for (const item of items) {
+        if (item?.error?.product) {
+          result.push({
+            brand,
+            product: item.error.product,
+          });
+        }
+      }
+    }
+
+    return result;
   }
 
   countTotal(): number {

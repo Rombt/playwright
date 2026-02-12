@@ -3,20 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RozetkaScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
+const appConfig_1 = require("../../data/config/appConfig");
+const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 const helpers_1 = require("../../common/helpers");
 class RozetkaScenario {
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
-        this.maxRetries = 5;
-        this.baseDelay = 500;
-        this.maxDelay = 10000;
-        this.maxPage = 10; // максимальное количество страниц в пуле
-        this.maxTask = 5; // количество одновременно выполняемых задач
-        this.sourcesFolder = './dist/source/sources';
-        this.taskPath = 'src/data/tasks/rozetka_tests.json';
         this.sources = [];
         this.resources = [];
+        this.config = appConfig_1.AppConfig.getInstance();
+        this.maxRetries = this.config.asyncRetry.maxRetries;
+        this.maxPage = this.config.asyncPages.maxPage;
+        this.maxTask = this.config.asyncTasks.maxTask;
+        this.sourcesFolder = this.config.sourcesFolder;
     }
     async run() {
         try {
@@ -36,10 +36,8 @@ class RozetkaScenario {
         }
     }
     async load() {
-        const filePath = path.resolve(process.cwd(), this.taskPath);
-        const raw = await fs_1.promises.readFile(filePath, 'utf-8');
-        const data = JSON.parse(raw);
-        const arrTasks = Object.values(data.task);
+        const unprocessedCollector = new UnprocessedCollector_1.UnprocessedCollector();
+        const arrTasks = unprocessedCollector.getPhotoCollectionTasks();
         if (!Array.isArray(arrTasks)) {
             throw new Error('Task file must contain an array');
         }
@@ -51,7 +49,7 @@ class RozetkaScenario {
     async process(task) {
         const source = this.sources.find(s => s.supports(task));
         if (!source)
-            throw new Error();
+            throw new Error("Don't found of source");
         const allErrors = [];
         await this.browser.runInContext(async (context) => { });
         console.log('END allErrors = ');

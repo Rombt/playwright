@@ -4,6 +4,7 @@ exports.App = void 0;
 const PlaywrightBrowser_1 = require("../browser/playwright/PlaywrightBrowser");
 const FileStorage_1 = require("../storage/fs/FileStorage");
 const DefaultScenario_1 = require("../scenario/scenarios/DefaultScenario");
+const RozetkaScenario_1 = require("../scenario/scenarios/RozetkaScenario");
 const node_fs_1 = require("node:fs");
 const appConfig_1 = require("../data/config/appConfig");
 const UnprocessedCollector_1 = require("../data/collectors/UnprocessedCollector");
@@ -40,19 +41,16 @@ class App {
             throw new Error('resultsFolder is not defined in config');
         }
         const browser = new PlaywrightBrowser_1.PlaywrightBrowser(this.browserOptions, this.contextOptions);
+        const unprocessedCollector = new UnprocessedCollector_1.UnprocessedCollector();
+        const storage = new FileStorage_1.FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
         if (this.mode === 'full') {
-            const storage = new FileStorage_1.FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
             const scenario = new DefaultScenario_1.DefaultScenario(browser, storage);
             await scenario.run();
         }
-        else if (this.mode === 'retry') {
-            const unprocessedCollector = new UnprocessedCollector_1.UnprocessedCollector();
-            const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
-            console.log('unprocessedProducts = ', unprocessedProducts);
-            console.log('this.config.asyncRetry = ', this.config.asyncRetry);
-            console.log('this.config.asyncTasks = ', this.config.asyncTasks);
-            console.log('this.config.asyncPages = ', this.config.asyncPages);
+        else if (this.mode === 'retry' && unprocessedCollector.countTotal() !== 0) {
             //todo добавить перебор сценариев для дополнительного поиска
+            const rozetkaScenario = new RozetkaScenario_1.RozetkaScenario(browser, storage);
+            await rozetkaScenario.run();
         }
     }
     async getBrowserOptions() { }

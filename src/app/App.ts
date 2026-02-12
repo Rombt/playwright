@@ -51,23 +51,17 @@ export class App<BrowserOptions> {
     if (!this.config.resultsFolder) {
       throw new Error('resultsFolder is not defined in config');
     }
-
     const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
+    const unprocessedCollector = new UnprocessedCollector();
+    const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
+
     if (this.mode === 'full') {
-      const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
       const scenario = new DefaultScenario(browser, storage);
       await scenario.run();
-    } else if (this.mode === 'retry') {
-      const unprocessedCollector = new UnprocessedCollector();
-      const unprocessedProducts = unprocessedCollector.getProducts('Columbia');
-
-      console.log('unprocessedProducts = ', unprocessedProducts);
-
-      console.log('this.config.asyncRetry = ', this.config.asyncRetry);
-      console.log('this.config.asyncTasks = ', this.config.asyncTasks);
-      console.log('this.config.asyncPages = ', this.config.asyncPages);
-
+    } else if (this.mode === 'retry' && unprocessedCollector.countTotal() !== 0) {
       //todo добавить перебор сценариев для дополнительного поиска
+      const rozetkaScenario = new RozetkaScenario(browser, storage);
+      await rozetkaScenario.run();
     }
   }
 

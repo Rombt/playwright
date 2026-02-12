@@ -26,6 +26,48 @@ class UnprocessedCollector {
     getBrands() {
         return this.getAllBrandNames();
     }
+    getPhotoCollectionTasks() {
+        const brandedProducts = this.getProductsWithBrand();
+        const grouped = new Map();
+        for (const { brand, product } of brandedProducts) {
+            if (!grouped.has(brand)) {
+                grouped.set(brand, []);
+            }
+            grouped.get(brand).push(product);
+        }
+        const tasks = [];
+        for (const [brand_name, products] of grouped.entries()) {
+            tasks.push({
+                type: 'recollect-product-photos',
+                brand_id: null,
+                brand_name,
+                metadata: {
+                    target_website: null,
+                },
+                products,
+            });
+        }
+        return tasks;
+    }
+    getProductsWithBrand() {
+        const files = this.getBrandFiles(null);
+        const result = [];
+        for (const file of files) {
+            const brand = this.extractBrandFromFilename(file);
+            if (!brand)
+                continue;
+            const items = this.readFile(file);
+            for (const item of items) {
+                if (item?.error?.product) {
+                    result.push({
+                        brand,
+                        product: item.error.product,
+                    });
+                }
+            }
+        }
+        return result;
+    }
     countTotal() {
         return this.getProducts().length;
     }

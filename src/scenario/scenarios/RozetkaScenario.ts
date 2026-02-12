@@ -15,6 +15,8 @@ import { IResource } from '../../browser/IResource';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { PagePool } from '../../browser/pool/PagePool';
 import { IProduct } from '../../data/entities/IProduct';
+import { AppConfig } from '../../data/config/appConfig';
+import { UnprocessedCollector } from '../../data/collectors/UnprocessedCollector';
 
 import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
@@ -24,15 +26,11 @@ import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/hel
 export class RozetkaScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
-  private readonly maxRetries: number = 5;
-  private readonly baseDelay: number = 500;
-  private readonly maxDelay: number = 10000;
-  private readonly maxPage: number = 10; // максимальное количество страниц в пуле
-  private readonly maxTask: number = 5; // количество одновременно выполняемых задач
-
-  private readonly sourcesFolder: string = './dist/source/sources';
-
-  private readonly taskPath: string = 'src/data/tasks/rozetka_tests.json';
+  private readonly config: AppConfig;
+  private readonly maxRetries: number;
+  private readonly maxPage: number;
+  private readonly maxTask: number;
+  private readonly sourcesFolder: string;
 
   private sources: ISource<ICollectProductPhotosTask, IWorkerResult>[] = [];
   private resources: IResource[] = [];
@@ -40,7 +38,14 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
     private storage: Storage,
-  ) {}
+  ) {
+    this.config = AppConfig.getInstance();
+
+    this.maxRetries = this.config.asyncRetry.maxRetries;
+    this.maxPage = this.config.asyncPages.maxPage;
+    this.maxTask = this.config.asyncTasks.maxTask;
+    this.sourcesFolder = this.config.sourcesFolder;
+  }
 
   async run(): Promise<void> {
     try {
@@ -60,12 +65,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   }
 
   async load(): Promise<ICollectProductPhotosTask[]> {
-    const filePath = path.resolve(process.cwd(), this.taskPath);
-
-    const raw = await fs.readFile(filePath, 'utf-8');
-    const data: ICollectProductPhotosBatch = JSON.parse(raw);
-
-    const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
+    const unprocessedCollector = new UnprocessedCollector();
+    const arrTasks = unprocessedCollector.getPhotoCollectionTasks();
 
     if (!Array.isArray(arrTasks)) {
       throw new Error('Task file must contain an array');
@@ -81,7 +82,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   async process(task: ICollectProductPhotosTask): Promise<void> {
     const source = this.sources.find(s => s.supports(task));
 
-    if (!source) throw new Error();
+    if (!source) throw new Error("Don't found of source");
 
     const allErrors: IWorkerError[] = [];
     await this.browser.runInContext(async context => {});

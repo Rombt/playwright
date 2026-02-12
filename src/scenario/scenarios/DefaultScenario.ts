@@ -25,11 +25,10 @@ import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/hel
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
+  private readonly config: AppConfig;
   private readonly maxRetries: number;
   private readonly maxPage: number;
   private readonly maxTask: number;
-
-  private readonly config: AppConfig;
   private readonly sourcesFolder: string;
 
   //todo отдельная папка для задач, но сначала интерфейс
