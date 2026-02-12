@@ -68,6 +68,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     const unprocessedCollector = new UnprocessedCollector();
     const arrTasks = unprocessedCollector.getPhotoCollectionTasks();
 
+    console.dir(arrTasks, { depth: null, colors: true });
+
     if (!Array.isArray(arrTasks)) {
       throw new Error('Task file must contain an array');
     }
@@ -90,10 +92,10 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     console.log('END allErrors = ');
     console.dir(allErrors, { depth: null, colors: true });
 
-    await this.storage.saveJson(allErrors, {
-      filename: `${task.brand_name}_unprocessed-products.json`,
-      targetDir: task.brand_name,
-    });
+    // await this.storage.saveJson(allErrors, {
+    //   filename: `${task.brand_name}_unprocessed-products.json`,
+    //   targetDir: task.brand_name,
+    // });
   }
 
   async loadSources(): Promise<ISource<ICollectProductPhotosTask, IWorkerResult>[]> {

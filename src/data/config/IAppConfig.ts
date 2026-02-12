@@ -24,4 +24,5 @@ export interface RetryConfig {
 export interface DataConfig {
   resultsFolder: string;
   sourcesFolder: string;
+  brands: string[];
 }

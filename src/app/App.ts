@@ -53,13 +53,17 @@ export class App<BrowserOptions> {
     }
     const browser = new PlaywrightBrowser(this.browserOptions, this.contextOptions);
     const unprocessedCollector = new UnprocessedCollector();
+    const unprocessedCount = unprocessedCollector.countTotal();
     const storage = new FileStorage(this.config.resultsFolder); //todo перевести относительно папки проекта
+
+    console.log('==>> unprocessedCount = ', unprocessedCount);
 
     if (this.mode === 'full') {
       const scenario = new DefaultScenario(browser, storage);
-      await scenario.run();
-    } else if (this.mode === 'retry' && unprocessedCollector.countTotal() !== 0) {
+      await scenario.run(this.config.brands);
+    } else if (this.mode === 'retry' && unprocessedCount !== 0) {
       //todo добавить перебор сценариев для дополнительного поиска
+
       const rozetkaScenario = new RozetkaScenario(browser, storage);
       await rozetkaScenario.run();
     }

@@ -12,13 +12,13 @@ export interface IScenario<Browser = unknown, BrowserContext = unknown> {
    * Запускает полный жизненный цикл выполнения.
    * Единственный метод, доступный внешнему коду.
    */
-  run(): Promise<void>;
+  run(brands?: string[]): Promise<void>;
 
   /**
    * Загрузка входных данных ().
    * Работает только с Data Layer.
    */
-  load(): Promise<ITask[]>;
+  load(brands?: string[]): Promise<ITask[]>;
 
   /**
    * Подготовка окружения выполнения.

@@ -12,14 +12,14 @@ class DefaultScenario {
         this.browser = browser;
         this.storage = storage;
         //todo отдельная папка для задач, но сначала интерфейс
-        // private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
+        this.taskPath = 'src/data/tasks/all_brands_for_test.json';
         // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
         // private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
-        this.taskPath = 'src/data/tasks/ganzo_tests.json';
+        // private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
         this.sources = [];
         this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
@@ -28,9 +28,10 @@ class DefaultScenario {
         this.maxTask = this.config.asyncTasks.maxTask;
         this.sourcesFolder = this.config.sourcesFolder;
     }
-    async run() {
+    async run(brands) {
         try {
-            const arrTasks = await this.load();
+            const arrTasks = await this.load(brands);
+            console.log('arrTasks = ', arrTasks);
             await this.prepare();
             for (let i = 0; i < arrTasks.length; i += this.maxTask) {
                 const batch = arrTasks.slice(i, i + this.maxTask);
@@ -46,16 +47,15 @@ class DefaultScenario {
             await this.finalize();
         }
     }
-    async load() {
-        //todo получаем массив путей к файлам перебираем формируем массив задач
+    async load(brands) {
         const filePath = path.resolve(process.cwd(), this.taskPath);
         const raw = await fs_1.promises.readFile(filePath, 'utf-8');
         const data = JSON.parse(raw);
-        const arrTasks = Object.values(data.task);
-        if (!Array.isArray(arrTasks)) {
-            throw new Error('Task file must contain an array');
+        const allTasks = Object.values(data.task);
+        if (!brands?.length) {
+            return allTasks;
         }
-        return arrTasks;
+        return allTasks.filter(task => brands.includes(task.brand_name));
     }
     async prepare() {
         this.sources = await this.loadSources();

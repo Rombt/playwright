@@ -1,13 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppConfig = void 0;
-const fs = require("fs");
 const path = require("path");
+const config_1 = require("../../config");
 class AppConfig {
-    constructor(configPath = 'config.json') {
+    constructor() {
         this.baseDir = process.cwd();
-        const absolutePath = path.resolve(process.cwd(), configPath);
-        this.rawConfig = this.loadConfigFile(absolutePath);
         this.config = this.buildConfig();
     }
     static getInstance() {
@@ -15,15 +13,6 @@ class AppConfig {
             this.instance = new this();
         }
         return this.instance;
-    }
-    loadConfigFile(filePath) {
-        try {
-            const raw = fs.readFileSync(filePath, 'utf-8');
-            return JSON.parse(raw);
-        }
-        catch {
-            return {};
-        }
     }
     /** Применение processors и нормализация */
     buildConfig() {
@@ -34,7 +23,7 @@ class AppConfig {
             // сюда добавлять методы для обработки новых полей
         ];
         for (const processor of processors) {
-            const partial = processor(this.rawConfig);
+            const partial = processor(config_1.config);
             result = this.merge(result, partial);
         }
         return result;
@@ -53,19 +42,22 @@ class AppConfig {
         return this.config;
     }
     get resultsFolder() {
-        return this.processData(this.rawConfig).data.resultsFolder;
+        return this.processData(config_1.config).data.resultsFolder;
     }
     get sourcesFolder() {
-        return this.processData(this.rawConfig).data.sourcesFolder;
+        return this.processData(config_1.config).data.sourcesFolder;
+    }
+    get brands() {
+        return this.processData(config_1.config).data.brands;
     }
     get asyncRetry() {
-        return this.processAsync(this.rawConfig).async.retry;
+        return this.processAsync(config_1.config).async.retry;
     }
     get asyncTasks() {
-        return this.processAsync(this.rawConfig).async.tasks;
+        return this.processAsync(config_1.config).async.tasks;
     }
     get asyncPages() {
-        return this.processAsync(this.rawConfig).async.pages;
+        return this.processAsync(config_1.config).async.pages;
     }
     // ==========  методы для обработки полей  ===============
     processData(rawConfig) {
@@ -75,10 +67,17 @@ class AppConfig {
                 ? value
                 : path.resolve(this.baseDir, value)
             : '';
+        const resolveBrands = (value) => Array.isArray(value)
+            ? value
+                .filter((v) => typeof v === 'string')
+                .map(v => v.trim())
+                .filter(Boolean)
+            : [];
         return {
             data: {
                 resultsFolder: resolvePath(dataConfig.resultsFolder),
                 sourcesFolder: resolvePath(dataConfig.sourcesFolder),
+                brands: resolveBrands(dataConfig.brands),
             },
         };
     }

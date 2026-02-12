@@ -32,14 +32,14 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   private readonly sourcesFolder: string;
 
   //todo отдельная папка для задач, но сначала интерфейс
-  // private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
+  private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
   // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
-  private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
+  // private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
 
   private sources: ISource<ICollectProductPhotosTask, IWorkerResult>[] = [];
   private resources: IResource[] = [];
@@ -56,9 +56,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     this.sourcesFolder = this.config.sourcesFolder;
   }
 
-  async run(): Promise<void> {
+  async run(brands?: string[]): Promise<void> {
     try {
-      const arrTasks = await this.load();
+      const arrTasks = await this.load(brands);
+
+      console.log('arrTasks = ', arrTasks);
       await this.prepare();
 
       for (let i = 0; i < arrTasks.length; i += this.maxTask) {
@@ -74,21 +76,18 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     }
   }
 
-  async load(): Promise<ICollectProductPhotosTask[]> {
-    //todo получаем массив путей к файлам перебираем формируем массив задач
-
+  async load(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
     const filePath = path.resolve(process.cwd(), this.taskPath);
-
     const raw = await fs.readFile(filePath, 'utf-8');
     const data: ICollectProductPhotosBatch = JSON.parse(raw);
 
-    const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
+    const allTasks = Object.values(data.task);
 
-    if (!Array.isArray(arrTasks)) {
-      throw new Error('Task file must contain an array');
+    if (!brands?.length) {
+      return allTasks;
     }
 
-    return arrTasks;
+    return allTasks.filter(task => brands.includes(task.brand_name));
   }
 
   async prepare(): Promise<void> {

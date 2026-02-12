@@ -38,6 +38,7 @@ class RozetkaScenario {
     async load() {
         const unprocessedCollector = new UnprocessedCollector_1.UnprocessedCollector();
         const arrTasks = unprocessedCollector.getPhotoCollectionTasks();
+        console.dir(arrTasks, { depth: null, colors: true });
         if (!Array.isArray(arrTasks)) {
             throw new Error('Task file must contain an array');
         }
@@ -54,10 +55,10 @@ class RozetkaScenario {
         await this.browser.runInContext(async (context) => { });
         console.log('END allErrors = ');
         console.dir(allErrors, { depth: null, colors: true });
-        await this.storage.saveJson(allErrors, {
-            filename: `${task.brand_name}_unprocessed-products.json`,
-            targetDir: task.brand_name,
-        });
+        // await this.storage.saveJson(allErrors, {
+        //   filename: `${task.brand_name}_unprocessed-products.json`,
+        //   targetDir: task.brand_name,
+        // });
     }
     async loadSources() {
         const files = await fs_1.promises.readdir(this.sourcesFolder);
