@@ -1,6 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceAdidas {
+    executeHttpRequest(request, headers, targetUrl, product) {
+        throw new Error('Method not implemented.');
+    }
+    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+        throw new Error('Method not implemented.');
+    }
     supports(task) {
         return task.metadata.target_website === 'https://www.adidas.ua/search?s={{sku_prod}}';
     }

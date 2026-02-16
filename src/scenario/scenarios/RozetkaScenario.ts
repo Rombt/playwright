@@ -68,7 +68,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     const unprocessedCollector = new UnprocessedCollector();
     const arrTasks = unprocessedCollector.getPhotoCollectionTasks();
 
-    console.dir(arrTasks, { depth: null, colors: true });
+    // console.dir(arrTasks, { depth: null, colors: true });
 
     if (!Array.isArray(arrTasks)) {
       throw new Error('Task file must contain an array');
@@ -90,124 +90,120 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     await this.browser.runInContext(async context => {
       const allData: IDataImag = {};
 
-      const page = await context.newPage();
+      const targetUrl =
+        'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text={{sku_prod}}';
 
-      const fingerprint = await page.evaluate(() => ({
-        userAgent: navigator.userAgent,
-        language: navigator.language,
-        platform: navigator.platform,
-        colorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-        viewport: {
-          width: window.innerWidth,
-          height: window.innerHeight,
-        },
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      }));
+      const products = task.products;
 
-      console.log('Context fingerprint:');
-      console.table(fingerprint);
+      const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
+      const queue = [...uniqueProducts];
+      const limiter = new RateLimiter(2000);
 
-      await page.close();
-
-      // const targetUrl =
-      //   'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text={{sku_prod}}';
-      // const products = task.products;
-      // const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
-      // const queue = [...uniqueProducts];
-
-      // const limiter = new RateLimiter(2000);
-      // const quantityPage = Math.min(queue.length, this.maxPage);
-      // const pool = new PagePool(context, quantityPage);
-      // this.registerResource(pool);
+      const quantityPage = Math.min(queue.length, this.maxPage);
+      const pool = new PagePool(context, quantityPage);
+      this.registerResource(pool);
 
       // //todo  Убрать!
-      // type ITaskError = {
-      //   item?: IProduct;
-      //   error: IWorkerError;
-      // };
+      type ITaskError = {
+        item?: IProduct;
+        error: IWorkerError;
+      };
 
-      // let taskQueue: IProduct[] = [...queue];
+      let taskQueue: IProduct[] = [...queue];
 
-      // const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
-      //   const errors: ITaskError[] = [];
-      //   let index = 0;
+      const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
+        const errors: ITaskError[] = [];
+        let index = 0;
 
-      //   const getNext = (): IProduct | undefined => {
-      //     if (index >= items.length) return undefined;
-      //     return items[index++];
-      //   };
+        const getNext = (): IProduct | undefined => {
+          if (index >= items.length) return undefined;
+          return items[index++];
+        };
 
-      //   const workers = Array.from({ length: quantityPage }, async () => {
-      //     const page = await pool.acquire();
+        const workers = Array.from({ length: quantityPage }, async () => {
+          const page = await pool.acquire();
 
-      //     try {
-      //       const result = await source.worker(targetUrl!, page, limiter, getNext);
+          const url_init = 'https://rozetka.com.ua/';
+          const targetUrl: string =
+            'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
+          await page.goto(url_init, { waitUntil: 'domcontentloaded' });
+          const headers = this.buildHeaders(url_init);
+          const request = context.request;
 
-      //       for (const r of result) {
-      //         for (const [sku, images] of Object.entries(r.data)) {
-      //           allData[sku] ??= [];
-      //           allData[sku].push(...images);
-      //         }
+          try {
+            const result = await source.workerHttpRequest(
+              request,
+              headers,
+              targetUrl,
+              limiter,
+              getNext,
+            );
 
-      //         if (Array.isArray(r.errors)) {
-      //           for (const err of r.errors) {
-      //             try {
-      //               await this.handleError(err);
-      //             } catch (finalErr) {
-      //               errors.push({
-      //                 item: err.product,
-      //                 error: finalErr as IWorkerError,
-      //               });
-      //             }
-      //           }
-      //         }
-      //       }
-      //     } catch (err) {
-      //       errors.push({
-      //         item: undefined as any,
-      //         error: err as IWorkerError,
-      //       });
-      //     } finally {
-      //       pool.release(page);
-      //     }
-      //   });
+            //       for (const r of result) {
+            //         for (const [sku, images] of Object.entries(r.data)) {
+            //           allData[sku] ??= [];
+            //           allData[sku].push(...images);
+            //         }
 
-      //   await Promise.allSettled(workers);
-      //   return errors;
-      // };
+            //         if (Array.isArray(r.errors)) {
+            //           for (const err of r.errors) {
+            //             try {
+            //               await this.handleError(err);
+            //             } catch (finalErr) {
+            //               errors.push({
+            //                 item: err.product,
+            //                 error: finalErr as IWorkerError,
+            //               });
+            //             }
+            //           }
+            //         }
+            //       }
+          } catch (err) {
+            errors.push({
+              item: undefined as any,
+              error: err as IWorkerError,
+            });
+          } finally {
+            pool.release(page);
+          }
+        });
 
-      // let attempt = 1;
-      // let currentBatch = taskQueue;
+        await Promise.allSettled(workers);
+        return errors;
+      };
 
-      // while (currentBatch.length && attempt <= this.maxRetries) {
-      //   console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+      let attempt = 1;
+      let currentBatch = taskQueue;
 
-      //   const errors = await runBatch(currentBatch);
+      while (currentBatch.length && attempt <= this.maxRetries) {
+        console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
 
-      //   console.log(`errors of SearchURL  for ${task.brand_name}  = `);
-      //   console.dir(errors, { depth: null, colors: true });
+        const errors = await runBatch(currentBatch);
 
-      //   const retryable = errors.filter(
-      //     (e): e is { item: IProduct; error: IWorkerError } =>
-      //       !!e.item && attempt < this.maxRetries && isRetryable(e.error),
-      //   );
+        console.log(`errors of SearchURL  for ${task.brand_name}  = `);
+        console.dir(errors, { depth: null, colors: true });
 
-      //   currentBatch = retryable.map(e => e.item);
+        const retryable = errors.filter(
+          (e): e is { item: IProduct; error: IWorkerError } =>
+            !!e.item && attempt < this.maxRetries && isRetryable(e.error),
+        );
 
-      //   if (currentBatch.length) {
-      //     await waitBeforeRetry(attempt);
-      //   } else {
-      //     // оставшиеся ошибки записываем в глобальный пул ошибок
-      //     errors.forEach(e => {
-      //       allErrors.push({
-      //         error: e.error,
-      //         targetUrl: targetUrl ?? undefined,
-      //       });
-      //     });
-      //   }
+        currentBatch = retryable.map(e => e.item);
 
-      //   attempt++;
-      // }
+        if (currentBatch.length) {
+          await waitBeforeRetry(attempt);
+        } else {
+          // оставшиеся ошибки записываем в глобальный пул ошибок
+          errors.forEach(e => {
+            allErrors.push({
+              error: e.error,
+              targetUrl: targetUrl ?? undefined,
+            });
+          });
+        }
+
+        attempt++;
+      }
 
       console.log(`All workers finished  for ${task.brand_name}`);
 
@@ -301,8 +297,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       // }
     }, 'fake');
 
-    // console.log('END allErrors = ');
-    // console.dir(allErrors, { depth: null, colors: true });
+    console.log('END allErrors = ');
+    console.dir(allErrors, { depth: null, colors: true });
 
     // await this.storage.saveJson(allErrors, {
     //   filename: `${task.brand_name}_unprocessed-products.json`,
@@ -362,5 +358,17 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     }
 
     throw error;
+  }
+
+  buildHeaders(refer: string = '') {
+    const languages = ['uk-UA,uk;q=0.9', 'uk-UA,uk;q=0.8,en;q=0.5'];
+
+    const index = Math.floor(Math.random() * languages.length);
+
+    return {
+      Accept: 'application/json, text/plain, */*',
+      'Accept-Language': languages[index],
+      Referer: refer,
+    };
   }
 }

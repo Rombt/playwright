@@ -6,10 +6,10 @@ export const config = {
       maxRetries: 5,
     },
     tasks: {
-      maxTask: 5,
+      maxTask: 2,
     },
     pages: {
-      maxPage: 10,
+      maxPage: 2,
     },
   },
   data: {

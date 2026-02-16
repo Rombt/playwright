@@ -1,6 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceSaucony {
+    executeHttpRequest(request, headers, targetUrl, product) {
+        throw new Error('Method not implemented.');
+    }
+    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+        throw new Error('Method not implemented.');
+    }
     supports(task) {
         return (task.metadata.target_website ===
             'https://saucony.kiev.ua/index.php?route=product/search&search={{sku_prod}}');

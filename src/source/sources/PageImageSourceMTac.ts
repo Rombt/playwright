@@ -1,4 +1,4 @@
-import { Page } from 'playwright-core';
+import { APIRequestContext, Page } from 'playwright-core';
 import { ISource } from '../ISource';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
@@ -8,6 +8,23 @@ import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
 
 export default class PageImageSourceMTac implements ISource<ICollectProductPhotosTask> {
+  executeHttpRequest(
+    request: APIRequestContext,
+    headers: Record<string, string>,
+    targetUrl: string,
+    product: IProduct,
+  ): Promise<IWorkerResult> {
+    throw new Error('Method not implemented.');
+  }
+  workerHttpRequest(
+    request: APIRequestContext,
+    headers: Record<string, string>,
+    targetUrl: string,
+    limiter: RateLimiter,
+    getNext: () => IProduct | undefined,
+  ): Promise<unknown[]> {
+    throw new Error('Method not implemented.');
+  }
   supports(task: ICollectProductPhotosTask): boolean {
     return task.metadata.target_website === 'https://militarist.ua/ua/search/?q={{sku_prod}}';
   }

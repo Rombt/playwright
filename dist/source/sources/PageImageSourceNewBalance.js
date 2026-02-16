@@ -1,6 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceNewBalance {
+    executeHttpRequest(request, headers, targetUrl, product) {
+        throw new Error('Method not implemented.');
+    }
+    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+        throw new Error('Method not implemented.');
+    }
     supports(task) {
         return task.metadata.target_website === 'https://newbalance.ua/store?page=1&s={{sku_prod}}';
     }

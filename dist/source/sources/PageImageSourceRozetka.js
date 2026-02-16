@@ -15,55 +15,57 @@ class PageImageSourceRozetka {
         }
         return results;
     }
-    async execute(targetUrl, page, product) {
+    execute(targetUrl, page, product) {
+        throw new Error('Method not implemented.');
+    }
+    async workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+        const results = [];
+        while (true) {
+            const product = getNext();
+            if (!product)
+                break;
+            await limiter.wait();
+            results.push(await this.executeHttpRequest(request, headers, targetUrl, product));
+        }
+        return results;
+    }
+    async executeHttpRequest(request, headers, targetUrl, product) {
         const errors = [];
         const data = {};
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
-        const url = targetUrl.replace('{{sku_prod}}', sku);
-        console.log('url = ', url);
         try {
-            // await page.goto(url, { waitUntil: 'domcontentloaded' });
-            // const link = page
-            //   .locator(
-            //     '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
-            //   )
-            //   .first();
-            // await link.waitFor({ state: 'attached', timeout: 30000 });
-            // const relativeHref = await link.getAttribute('href');
-            // if (!relativeHref) throw new Error('Product link not found');
-            // const absoluteHref = new URL(relativeHref, page.url()).toString();
-            // console.log('===>>  absoluteHref = ', absoluteHref);
-            // await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
-            // const gallery = page.locator(
-            //   '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
-            // );
-            // try {
-            //   await gallery.waitFor({ state: 'attached', timeout: 15000 });
-            // } catch (error) {
-            //   throw new Error('No gallery found on page');
-            // }
-            // const count = await gallery.count();
-            // if (count === 0) throw new Error('No images found on page');
-            // const firstImg = gallery.locator('img').first();
-            // await firstImg.waitFor({ state: 'attached', timeout: 15000 });
-            // const imageUrls = await gallery
-            //   .locator('img')
-            //   .evaluateAll(imgs => imgs.map(img => img.getAttribute('src')).filter(Boolean));
-            // const absoluteImageUrls = imageUrls.map(src => new URL(src!, page.url()).toString());
-            // if (absoluteImageUrls.length === 0) throw new Error('No valid image URLs found');
-            // data[sku] = absoluteImageUrls;
+            const response = await request.get(targetUrl, {
+                params: {
+                    country: 'UA',
+                    lang: 'ua',
+                    text: sku,
+                },
+                headers: headers,
+            });
+            if (response.status() === 429 || response.status() === 403) {
+                await this.delay(10000);
+                return { data, errors };
+            }
+            const res = await response.json();
+            console.log('for sku ', sku);
+            console.log('res: ');
+            console.dir(res, { depth: null, colors: true });
         }
         catch (err) {
             errors.push({
                 error: err,
                 product: product,
-                url: url,
+                url: targetUrl,
             });
         }
         console.log('==>> data: ', data);
         return { data, errors };
+    }
+    //todo использовать const limiter = new RateLimiter(2000);
+    delay(ms) {
+        return new Promise(res => setTimeout(res, ms));
     }
 }
 exports.default = PageImageSourceRozetka;
