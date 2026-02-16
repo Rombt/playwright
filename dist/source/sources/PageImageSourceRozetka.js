@@ -15,53 +15,68 @@ class PageImageSourceRozetka {
         }
         return results;
     }
-    execute(targetUrl, page, product) {
-        throw new Error('Method not implemented.');
-    }
     async workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
         const results = [];
         while (true) {
             const product = getNext();
             if (!product)
                 break;
-            await limiter.wait();
-            results.push(await this.executeHttpRequest(request, headers, targetUrl, product));
-        }
-        return results;
-    }
-    async executeHttpRequest(request, headers, targetUrl, product) {
-        const errors = [];
-        const data = {};
-        const rawSku = product.sku;
-        const starIndex = rawSku.indexOf('*');
-        const sku = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
-        try {
-            const response = await request.get(targetUrl, {
+            const rawSku = product.sku;
+            const starIndex = rawSku.indexOf('*');
+            const sku = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
+            const options = {
+                url: targetUrl,
                 params: {
                     country: 'UA',
                     lang: 'ua',
                     text: sku,
                 },
                 headers: headers,
+            };
+            await limiter.wait();
+            const requestResult = await this.executeHttpRequest(request, options);
+            results.push(requestResult);
+        }
+        return results;
+    }
+    execute(targetUrl, page, product) {
+        throw new Error('Method not implemented.');
+    }
+    async executeHttpRequest(request, options) {
+        try {
+            const response = await request.get(options.url, {
+                params: options.params,
+                headers: options.headers,
             });
-            if (response.status() === 429 || response.status() === 403) {
+            const status = response.status();
+            if (status === 429 || status === 403) {
                 await this.delay(10000);
-                return { data, errors };
             }
-            const res = await response.json();
-            console.log('for sku ', sku);
-            console.log('res: ');
-            console.dir(res, { depth: null, colors: true });
+            let body = null;
+            try {
+                body = await response.json();
+            }
+            catch {
+                // если не JSON
+            }
+            return {
+                ok: status >= 200 && status < 300,
+                status,
+                body,
+                headers: response.headers(),
+                url: options.url,
+            };
         }
-        catch (err) {
-            errors.push({
-                error: err,
-                product: product,
-                url: targetUrl,
-            });
+        catch (error) {
+            return {
+                ok: false,
+                status: 0,
+                body: null,
+                error,
+                headers: {},
+                url: options.url,
+            };
         }
-        console.log('==>> data: ', data);
-        return { data, errors };
     }
     //todo использовать const limiter = new RateLimiter(2000);
     delay(ms) {

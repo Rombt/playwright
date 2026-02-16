@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceJoma {
-    executeHttpRequest(request, headers, targetUrl, product) {
+    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
         throw new Error('Method not implemented.');
     }
-    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+    executeHttpRequest(request, options) {
         throw new Error('Method not implemented.');
     }
     supports(task) {

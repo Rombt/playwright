@@ -41,7 +41,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   // private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
 
-  private sources: ISource<ICollectProductPhotosTask, IWorkerResult>[] = [];
+  private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
 
   constructor(
@@ -174,11 +174,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       while (currentBatch.length && attempt <= this.maxRetries) {
         console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+        // todo выбрать какую то одну
+        // await limiter.sleepNormal(1000, 5000);
+        await limiter.sleep(1000, 5000);
 
         const errors = await runBatch(currentBatch);
-
-        console.log(`errors of SearchURL  for ${task.brand_name}  = `);
-        console.dir(errors, { depth: null, colors: true });
 
         const retryable = errors.filter(
           (e): e is { item: IProduct; error: IWorkerError } =>
@@ -268,10 +268,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       while (currentBatchImage.length && attemptImage <= this.maxRetries) {
         console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
 
-        const errors = await runBatchImage(currentBatchImage);
+        // todo выбрать какую то одну
+        // await limiter.sleepNormal(1000, 5000);
+        await limiter.sleep(1000, 5000);
 
-        console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
-        console.dir(errors, { depth: null, colors: true });
+        const errors = await runBatchImage(currentBatchImage);
 
         // Отбираем retryable
         const retryable = procError(errors, attemptImage);
@@ -302,9 +303,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     });
   }
 
-  async loadSources(): Promise<ISource<ICollectProductPhotosTask, IWorkerResult>[]> {
+  async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
     const files = await fs.readdir(this.sourcesFolder);
-    const sources: ISource<ICollectProductPhotosTask, IWorkerResult>[] = [];
+    const sources: ISource<ICollectProductPhotosTask>[] = [];
 
     for (const file of files) {
       if (!file.endsWith('.js')) continue;

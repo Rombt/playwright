@@ -22,6 +22,7 @@ import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
 
 import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
+import { IHttpResult, IAutocompleteResponse } from '../../data/entities/IResults/IHttpResult';
 
 export class RozetkaScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
@@ -32,7 +33,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   private readonly maxTask: number;
   private readonly sourcesFolder: string;
 
-  private sources: ISource<ICollectProductPhotosTask, IWorkerResult>[] = [];
+  private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
 
   constructor(
@@ -90,14 +91,15 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     await this.browser.runInContext(async context => {
       const allData: IDataImag = {};
 
-      const targetUrl =
-        'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text={{sku_prod}}';
+      const url_init: string = 'https://rozetka.com.ua/';
+      const targetUrl: string =
+        'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
 
       const products = task.products;
 
       const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
       const queue = [...uniqueProducts];
-      const limiter = new RateLimiter(2000);
+      const limiter = new RateLimiter(5000);
 
       const quantityPage = Math.min(queue.length, this.maxPage);
       const pool = new PagePool(context, quantityPage);
@@ -110,6 +112,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       };
 
       let taskQueue: IProduct[] = [...queue];
+      const productsPageLinks: string[] = [];
 
       const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
         const errors: ITaskError[] = [];
@@ -123,41 +126,28 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         const workers = Array.from({ length: quantityPage }, async () => {
           const page = await pool.acquire();
 
-          const url_init = 'https://rozetka.com.ua/';
-          const targetUrl: string =
-            'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
           await page.goto(url_init, { waitUntil: 'domcontentloaded' });
           const headers = this.buildHeaders(url_init);
           const request = context.request;
 
           try {
-            const result = await source.workerHttpRequest(
+            const result = (await source.workerHttpRequest(
               request,
               headers,
               targetUrl,
               limiter,
               getNext,
-            );
+            )) as IHttpResult<IAutocompleteResponse>[];
 
-            //       for (const r of result) {
-            //         for (const [sku, images] of Object.entries(r.data)) {
-            //           allData[sku] ??= [];
-            //           allData[sku].push(...images);
-            //         }
-
-            //         if (Array.isArray(r.errors)) {
-            //           for (const err of r.errors) {
-            //             try {
-            //               await this.handleError(err);
-            //             } catch (finalErr) {
-            //               errors.push({
-            //                 item: err.product,
-            //                 error: finalErr as IWorkerError,
-            //               });
-            //             }
-            //           }
-            //         }
-            //       }
+            for (const r of result) {
+              if (!r.ok || !r.body) return [];
+              r.body.data.content.records.goods.forEach(g => {
+                if (!this.isGood(g) || r.body == null) return;
+                if (g.title.includes(r.body.data.content.text)) {
+                  productsPageLinks.push(g.href);
+                }
+              });
+            }
           } catch (err) {
             errors.push({
               item: undefined as any,
@@ -176,12 +166,13 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       let currentBatch = taskQueue;
 
       while (currentBatch.length && attempt <= this.maxRetries) {
+        // todo выбрать какую то одну
+        // await limiter.sleepNormal(1000, 5000);
+        await limiter.sleep(1000, 5000);
+
         console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
 
         const errors = await runBatch(currentBatch);
-
-        console.log(`errors of SearchURL  for ${task.brand_name}  = `);
-        console.dir(errors, { depth: null, colors: true });
 
         const retryable = errors.filter(
           (e): e is { item: IProduct; error: IWorkerError } =>
@@ -206,9 +197,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       }
 
       console.log(`All workers finished  for ${task.brand_name}`);
-
-      const allDataNormalize = normalizeAllData(allData);
-      console.log('allDataNormalize = ', allDataNormalize);
+      console.log('productsPageLinks = ', productsPageLinks);
 
       console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
       console.dir(allErrors, { depth: null, colors: true });
@@ -306,9 +295,9 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     // });
   }
 
-  async loadSources(): Promise<ISource<ICollectProductPhotosTask, IWorkerResult>[]> {
+  async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
     const files = await fs.readdir(this.sourcesFolder);
-    const sources: ISource<ICollectProductPhotosTask, IWorkerResult>[] = [];
+    const sources: ISource<ICollectProductPhotosTask>[] = [];
 
     for (const file of files) {
       if (!file.endsWith('.js')) continue;
@@ -370,5 +359,13 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       'Accept-Language': languages[index],
       Referer: refer,
     };
+  }
+
+  isGood(value: unknown): value is { title: string; href: string } {
+    if (typeof value !== 'object' || value === null) return false;
+
+    const v = value as Record<string, unknown>;
+
+    return typeof v.title === 'string' && typeof v.href === 'string';
   }
 }

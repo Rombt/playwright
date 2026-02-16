@@ -6,25 +6,25 @@ import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
+import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 
 export default class PageImageSourceNewBalance implements ISource<ICollectProductPhotosTask> {
-  executeHttpRequest(
-    request: APIRequestContext,
-    headers: Record<string, string>,
-    targetUrl: string,
-    product: IProduct,
-  ): Promise<IWorkerResult> {
-    throw new Error('Method not implemented.');
-  }
   workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
     targetUrl: string,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
-  ): Promise<unknown[]> {
+  ): Promise<IHttpResult<unknown>[]> {
     throw new Error('Method not implemented.');
   }
+  executeHttpRequest<T = unknown>(
+    request: APIRequestContext,
+    options: { url: string; params?: Record<string, string>; headers?: Record<string, string> },
+  ): Promise<IHttpResult<T>> {
+    throw new Error('Method not implemented.');
+  }
+
   supports(task: ICollectProductPhotosTask): boolean {
     return task.metadata.target_website === 'https://newbalance.ua/store?page=1&s={{sku_prod}}';
   }
@@ -34,7 +34,7 @@ export default class PageImageSourceNewBalance implements ISource<ICollectProduc
     page: Page,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
-  ): Promise<unknown[]> {
+  ): Promise<IWorkerResult[]> {
     const results = [];
 
     while (true) {

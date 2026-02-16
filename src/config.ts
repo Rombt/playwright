@@ -1,8 +1,8 @@
 export const config = {
   async: {
     retry: {
-      baseDelay: 100,
-      maxDelay: 5000,
+      baseDelay: 1000,
+      maxDelay: 20000,
       maxRetries: 5,
     },
     tasks: {
