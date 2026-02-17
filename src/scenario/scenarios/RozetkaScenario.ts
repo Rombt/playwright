@@ -94,15 +94,17 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
       // const targetUrl = 'https://search.rozetka.com.ua';
 
+      const limiter = new RateLimiter(2000);
       //!! тест !!
       const targetUrl = 'https://bot.sannysoft.com/';
       await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
+      // page.waitForTimeout(120000);
+      await limiter.sleep(60000, 120000);
 
       // const products = task.products;
       // const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
       // const queue = [...uniqueProducts];
 
-      // const limiter = new RateLimiter(2000);
       // const quantityPage = Math.min(queue.length, this.maxPage);
       // const pool = new PagePool(context, quantityPage);
       // this.registerResource(pool);

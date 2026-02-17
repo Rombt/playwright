@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RozetkaScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
+const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const appConfig_1 = require("../../data/config/appConfig");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 const helpers_1 = require("../../common/helpers");
@@ -56,13 +57,15 @@ class RozetkaScenario {
             const allData = {};
             const page = await context.newPage();
             // const targetUrl = 'https://search.rozetka.com.ua';
+            const limiter = new RateLimiter_1.RateLimiter(2000);
             //!! тест !!
             const targetUrl = 'https://bot.sannysoft.com/';
             await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
+            // page.waitForTimeout(120000);
+            await limiter.sleep(60000, 120000);
             // const products = task.products;
             // const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
             // const queue = [...uniqueProducts];
-            // const limiter = new RateLimiter(2000);
             // const quantityPage = Math.min(queue.length, this.maxPage);
             // const pool = new PagePool(context, quantityPage);
             // this.registerResource(pool);
