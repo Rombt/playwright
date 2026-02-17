@@ -36,3 +36,13 @@
     https://sportano.ua/
     https://megasport.ua/
     https://intertop.ua/
+
+
+
+const productsPageLinks = {
+  '1865231': [
+    'https://rozetka.com.ua/ua/columbia_0990037254005_0192660465388/p388246605/'
+  ],
+  '2079181': [ 'https://rozetka.com.ua/ua/columbia-195981582994/p446003411/' ],
+  '2103761': [ 'https://rozetka.com.ua/ua/columbia-195981625394/p446018603/' ]
+};
