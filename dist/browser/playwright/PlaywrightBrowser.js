@@ -58,6 +58,25 @@ class PlaywrightBrowser {
     }
     async runInContext(fn, mode) {
         const context = await this.createContext(mode);
+        await context.addInitScript(() => {
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => false,
+            });
+        });
+        try {
+            return await fn(context);
+        }
+        finally {
+            await context.close();
+        }
+    }
+    async runInContextByChromium(fn, mode) {
+        const userDataDir = path.resolve(mode === 'real' ? './chrome-profile-real' : './chrome-profile-fake');
+        const context = await playwright_1.chromium.launchPersistentContext(userDataDir, {
+            headless: false,
+            channel: 'chrome',
+            args: ['--disable-blink-features=AutomationControlled'],
+        });
         try {
             return await fn(context);
         }

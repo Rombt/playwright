@@ -53,16 +53,26 @@ class RozetkaScenario {
         if (!source)
             throw new Error("Don't found of source");
         const allErrors = [];
-        await this.browser.runInContext(async (context) => {
-            const allData = {};
+        //!! тест !!
+        await this.browser.runInContextByChromium(async (context) => {
             const page = await context.newPage();
-            // const targetUrl = 'https://search.rozetka.com.ua';
             const limiter = new RateLimiter_1.RateLimiter(2000);
-            //!! тест !!
             const targetUrl = 'https://bot.sannysoft.com/';
             await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
             // page.waitForTimeout(120000);
             await limiter.sleep(60000, 120000);
+        });
+        // await this.browser.runInContext(async context => {
+        await this.browser.runInContextByChromium(async (context) => {
+            // const allData: IDataImag = {};
+            // const page = await context.newPage();
+            // const targetUrl = 'https://search.rozetka.com.ua';
+            // const limiter = new RateLimiter(2000);
+            // //!! тест !!
+            // const targetUrl = 'https://bot.sannysoft.com/';
+            // await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
+            // // page.waitForTimeout(120000);
+            // await limiter.sleep(60000, 120000);
             // const products = task.products;
             // const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
             // const queue = [...uniqueProducts];
@@ -181,38 +191,38 @@ class RozetkaScenario {
             //     } finally {
             //       pool.release(page);
             //     }
-            //   });
-            //   await Promise.allSettled(workers);
-            //   return errors;
-            // };
-            // // todo должна быть централизованная обработка ошибок в методе handleError
-            // const procError = (errors: IImageError[], attempt: number): IImageError[] => {
-            //   return errors.filter(e => attempt < this.maxRetries && isRetryable(e.error));
-            // };
-            // let attemptImage = 1;
-            // let currentBatchImage = imageQueue;
-            // while (currentBatchImage.length && attemptImage <= this.maxRetries) {
-            //   console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
-            //   const errors = await runBatchImage(currentBatchImage);
-            //   console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
-            //   console.dir(errors, { depth: null, colors: true });
-            //   // Отбираем retryable
-            //   const retryable = procError(errors, attemptImage);
-            //   currentBatchImage = retryable.map(e => e.item);
-            //   if (currentBatchImage.length) {
-            //     await waitBeforeRetry(attemptImage);
-            //   } else {
-            //     // Сохраняем окончательные ошибки
-            //     errors.forEach(e => {
-            //       allErrors.push({
-            //         error: e.error,
-            //         targetUrl: e.item.url,
-            //       });
-            //     });
-            //   }
-            //   attemptImage++;
-            // }
-        }, 'fake');
+        });
+        //   await Promise.allSettled(workers);
+        //   return errors;
+        // };
+        // // todo должна быть централизованная обработка ошибок в методе handleError
+        // const procError = (errors: IImageError[], attempt: number): IImageError[] => {
+        //   return errors.filter(e => attempt < this.maxRetries && isRetryable(e.error));
+        // };
+        // let attemptImage = 1;
+        // let currentBatchImage = imageQueue;
+        // while (currentBatchImage.length && attemptImage <= this.maxRetries) {
+        //   console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
+        //   const errors = await runBatchImage(currentBatchImage);
+        //   console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
+        //   console.dir(errors, { depth: null, colors: true });
+        //   // Отбираем retryable
+        //   const retryable = procError(errors, attemptImage);
+        //   currentBatchImage = retryable.map(e => e.item);
+        //   if (currentBatchImage.length) {
+        //     await waitBeforeRetry(attemptImage);
+        //   } else {
+        //     // Сохраняем окончательные ошибки
+        //     errors.forEach(e => {
+        //       allErrors.push({
+        //         error: e.error,
+        //         targetUrl: e.item.url,
+        //       });
+        //     });
+        //   }
+        //   attemptImage++;
+        // }
+        // }, 'fake');
         // console.log('END allErrors = ');
         // console.dir(allErrors, { depth: null, colors: true });
         // await this.storage.saveJson(allErrors, {
