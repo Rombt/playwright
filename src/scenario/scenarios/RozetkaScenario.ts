@@ -92,112 +92,117 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
       const page = await context.newPage();
 
-      const targetUrl = 'https://search.rozetka.com.ua';
-      const products = task.products;
-      const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
-      const queue = [...uniqueProducts];
+      // const targetUrl = 'https://search.rozetka.com.ua';
 
-      const limiter = new RateLimiter(2000);
-      const quantityPage = Math.min(queue.length, this.maxPage);
-      const pool = new PagePool(context, quantityPage);
-      this.registerResource(pool);
+      //!! тест !!
+      const targetUrl = 'https://bot.sannysoft.com/';
+      await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
 
-      //todo  Убрать!
-      type ITaskError = {
-        item?: IProduct;
-        error: IWorkerError;
-      };
+      // const products = task.products;
+      // const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
+      // const queue = [...uniqueProducts];
 
-      let taskQueue: IProduct[] = [...queue];
+      // const limiter = new RateLimiter(2000);
+      // const quantityPage = Math.min(queue.length, this.maxPage);
+      // const pool = new PagePool(context, quantityPage);
+      // this.registerResource(pool);
 
-      const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
-        const errors: ITaskError[] = [];
-        let index = 0;
+      // //todo  Убрать!
+      // type ITaskError = {
+      //   item?: IProduct;
+      //   error: IWorkerError;
+      // };
 
-        const getNext = (): IProduct | undefined => {
-          if (index >= items.length) return undefined;
-          return items[index++];
-        };
+      // let taskQueue: IProduct[] = [...queue];
 
-        const workers = Array.from({ length: quantityPage }, async () => {
-          const page = await pool.acquire();
+      // const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
+      //   const errors: ITaskError[] = [];
+      //   let index = 0;
 
-          try {
-            const result = await source.worker(targetUrl!, page, limiter, getNext);
+      //   const getNext = (): IProduct | undefined => {
+      //     if (index >= items.length) return undefined;
+      //     return items[index++];
+      //   };
 
-            for (const r of result) {
-              for (const [sku, images] of Object.entries(r.data)) {
-                allData[sku] ??= [];
-                allData[sku].push(...images);
-              }
+      //   const workers = Array.from({ length: quantityPage }, async () => {
+      //     const page = await pool.acquire();
 
-              if (Array.isArray(r.errors)) {
-                for (const err of r.errors) {
-                  try {
-                    await this.handleError(err);
-                  } catch (finalErr) {
-                    errors.push({
-                      item: err.product,
-                      error: finalErr as IWorkerError,
-                    });
-                  }
-                }
-              }
-            }
-          } catch (err) {
-            errors.push({
-              item: undefined as any,
-              error: err as IWorkerError,
-            });
-          } finally {
-            pool.release(page);
-          }
-        });
+      //     try {
+      //       const result = await source.worker(targetUrl!, page, limiter, getNext);
 
-        await Promise.allSettled(workers);
-        return errors;
-      };
+      //       for (const r of result) {
+      //         for (const [sku, images] of Object.entries(r.data)) {
+      //           allData[sku] ??= [];
+      //           allData[sku].push(...images);
+      //         }
 
-      let attempt = 1;
-      let currentBatch = taskQueue;
+      //         if (Array.isArray(r.errors)) {
+      //           for (const err of r.errors) {
+      //             try {
+      //               await this.handleError(err);
+      //             } catch (finalErr) {
+      //               errors.push({
+      //                 item: err.product,
+      //                 error: finalErr as IWorkerError,
+      //               });
+      //             }
+      //           }
+      //         }
+      //       }
+      //     } catch (err) {
+      //       errors.push({
+      //         item: undefined as any,
+      //         error: err as IWorkerError,
+      //       });
+      //     } finally {
+      //       pool.release(page);
+      //     }
+      //   });
 
-      while (currentBatch.length && attempt <= this.maxRetries) {
-        console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+      //   await Promise.allSettled(workers);
+      //   return errors;
+      // };
 
-        const errors = await runBatch(currentBatch);
+      // let attempt = 1;
+      // let currentBatch = taskQueue;
 
-        console.log(`errors of SearchURL  for ${task.brand_name}  = `);
-        console.dir(errors, { depth: null, colors: true });
+      // while (currentBatch.length && attempt <= this.maxRetries) {
+      //   console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
 
-        const retryable = errors.filter(
-          (e): e is { item: IProduct; error: IWorkerError } =>
-            !!e.item && attempt < this.maxRetries && isRetryable(e.error),
-        );
+      //   const errors = await runBatch(currentBatch);
 
-        currentBatch = retryable.map(e => e.item);
+      //   console.log(`errors of SearchURL  for ${task.brand_name}  = `);
+      //   console.dir(errors, { depth: null, colors: true });
 
-        if (currentBatch.length) {
-          await waitBeforeRetry(attempt);
-        } else {
-          // оставшиеся ошибки записываем в глобальный пул ошибок
-          errors.forEach(e => {
-            allErrors.push({
-              error: e.error,
-              targetUrl: targetUrl ?? undefined,
-            });
-          });
-        }
+      //   const retryable = errors.filter(
+      //     (e): e is { item: IProduct; error: IWorkerError } =>
+      //       !!e.item && attempt < this.maxRetries && isRetryable(e.error),
+      //   );
 
-        attempt++;
-      }
+      //   currentBatch = retryable.map(e => e.item);
 
-      console.log(`All workers finished  for ${task.brand_name}`);
+      //   if (currentBatch.length) {
+      //     await waitBeforeRetry(attempt);
+      //   } else {
+      //     // оставшиеся ошибки записываем в глобальный пул ошибок
+      //     errors.forEach(e => {
+      //       allErrors.push({
+      //         error: e.error,
+      //         targetUrl: targetUrl ?? undefined,
+      //       });
+      //     });
+      //   }
 
-      const allDataNormalize = normalizeAllData(allData);
-      console.log('allDataNormalize = ', allDataNormalize);
+      //   attempt++;
+      // }
 
-      console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
-      console.dir(allErrors, { depth: null, colors: true });
+      // console.log(`All workers finished  for ${task.brand_name}`);
+
+      // const allDataNormalize = normalizeAllData(allData);
+      // console.log('allDataNormalize = ', allDataNormalize);
+
+      // console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
+      // console.dir(allErrors, { depth: null, colors: true });
 
       /* Скачиваю полученные urls  */
 
