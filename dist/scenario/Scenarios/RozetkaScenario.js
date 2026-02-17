@@ -66,7 +66,7 @@ class RozetkaScenario {
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
             let taskQueue = [...queue];
-            const productsPageLinks = [];
+            const productsPageLinks = {};
             const runBatch = async (items) => {
                 const errors = [];
                 let index = 0;
@@ -76,6 +76,7 @@ class RozetkaScenario {
                     return items[index++];
                 };
                 const workers = Array.from({ length: quantityPage }, async () => {
+                    var _a;
                     const page = await pool.acquire();
                     await page.goto(url_init, { waitUntil: 'domcontentloaded' });
                     const headers = this.buildHeaders(url_init);
@@ -85,13 +86,14 @@ class RozetkaScenario {
                         for (const r of result) {
                             if (!r.ok || !r.body)
                                 return [];
-                            r.body.data.content.records.goods.forEach(g => {
-                                if (!this.isGood(g) || r.body == null)
-                                    return;
+                            for (const g of r.body.data.content.records.goods) {
+                                if (!this.isGood(g))
+                                    continue;
                                 if (g.title.includes(r.body.data.content.text)) {
-                                    productsPageLinks.push(g.href);
+                                    productsPageLinks[_a = r.body.data.content.text] ?? (productsPageLinks[_a] = []);
+                                    productsPageLinks[r.body.data.content.text].push(g.href);
                                 }
-                            });
+                            }
                         }
                     }
                     catch (err) {
@@ -133,8 +135,91 @@ class RozetkaScenario {
             }
             console.log(`All workers finished  for ${task.brand_name}`);
             console.log('productsPageLinks = ', productsPageLinks);
+            const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
+            console.log('allDataNormalize = ');
+            console.dir(allDataNormalize, { depth: null, colors: true });
             console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
             console.dir(allErrors, { depth: null, colors: true });
+            const taskQueueProdPage = [];
+            for (const [sku, links] of Object.entries(productsPageLinks)) {
+                for (const link of links) {
+                    taskQueueProdPage.push({ sku, link });
+                }
+            }
+            const runBatchProdPage = async (items) => {
+                const errors = [];
+                let index = 0;
+                const getNext = () => {
+                    if (index >= items.length)
+                        return undefined;
+                    return items[index++];
+                };
+                const workers = Array.from({ length: quantityPage }, async () => {
+                    const page = await pool.acquire();
+                    try {
+                        while (true) {
+                            const item = getNext();
+                            if (!item)
+                                break;
+                            try {
+                                const result = await source.worker(item.link, page, limiter, undefined, item.sku);
+                                for (const r of result) {
+                                    for (const [sku, images] of Object.entries(r.data)) {
+                                        allData[sku] ?? (allData[sku] = []);
+                                        allData[sku].push(...images);
+                                    }
+                                    if (Array.isArray(r.errors)) {
+                                        for (const err of r.errors) {
+                                            try {
+                                                await this.handleError(err);
+                                            }
+                                            catch (finalErr) {
+                                                errors.push({
+                                                    item: { sku: item.sku },
+                                                    error: finalErr,
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            catch (err) {
+                                errors.push({
+                                    item: { sku: item.sku },
+                                    error: err,
+                                });
+                            }
+                        }
+                    }
+                    finally {
+                        pool.release(page);
+                    }
+                });
+                await Promise.allSettled(workers);
+                return errors;
+            };
+            let attemptProdPage = 1;
+            let currentBatchProdPage = taskQueueProdPage;
+            while (currentBatchProdPage.length && attemptProdPage <= this.maxRetries) {
+                console.log(`---> CollectImages for ${task.brand_name} attemptProdPage №`, attemptProdPage);
+                await limiter.sleep(1000, 5000);
+                const errors = await runBatchProdPage(currentBatchProdPage);
+                const retryable = errors.filter((e) => !!e.item && attemptProdPage < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
+                currentBatchProdPage = retryable.map(e => e.item);
+                if (currentBatchProdPage.length) {
+                    await (0, helpers_1.waitBeforeRetry)(attemptProdPage);
+                }
+                else {
+                    errors.forEach(e => {
+                        allErrors.push({
+                            error: e.error,
+                            targetUrl: undefined,
+                        });
+                    });
+                }
+                attemptProdPage++;
+            }
+            console.log('****** allData = ', allData);
             /* Скачиваю полученные urls  */
             // let imageQueue: IImageItem[] = [];
             // for (const [sku, urls] of Object.entries(allDataNormalize)) {

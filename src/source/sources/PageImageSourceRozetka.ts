@@ -13,25 +13,6 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     return task.type === 'recollect-product-photos';
   }
 
-  async worker(
-    targetUrl: string,
-    page: Page,
-    limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
-  ): Promise<IWorkerResult[]> {
-    const results = [];
-
-    while (true) {
-      const product = getNext();
-      if (!product) break;
-
-      await limiter.wait();
-      results.push(await this.execute(targetUrl, page, product));
-    }
-
-    return results;
-  }
-
   async workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
@@ -72,10 +53,6 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     return results;
   }
 
-  execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
-    throw new Error('Method not implemented.');
-  }
-
   async executeHttpRequest<T = unknown>(
     request: APIRequestContext,
     options: {
@@ -84,6 +61,8 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       headers?: Record<string, string>;
     },
   ): Promise<IHttpResult<T>> {
+    const limiter = new RateLimiter(5000);
+
     try {
       const response = await request.get(options.url, {
         params: options.params,
@@ -93,7 +72,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       const status = response.status();
 
       if (status === 429 || status === 403) {
-        await this.delay(10000);
+        await limiter.sleep(1000, 5000);
       }
 
       let body: T | null = null;
@@ -123,8 +102,64 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     }
   }
 
-  //todo использовать const limiter = new RateLimiter(2000);
-  delay(ms: number) {
-    return new Promise(res => setTimeout(res, ms));
+  async worker(
+    targetUrl: string,
+    page: Page,
+    limiter: RateLimiter,
+    getNext: () => IProduct | undefined,
+    sku: string,
+  ): Promise<IWorkerResult[]> {
+    const results = [];
+
+    while (true) {
+      if (!targetUrl) break;
+      await limiter.wait();
+      results.push(await this.execute(targetUrl, page, undefined, sku));
+    }
+
+    return results;
+  }
+
+  async execute(url: string, page: Page, product?: IProduct, sku?: string): Promise<IWorkerResult> {
+    const errors: IWorkerError[] = [];
+    const data: IDataImag = {};
+
+    try {
+      console.log('===>>>   Пробую url = ', url);
+
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
+
+      const gallery = page.locator('.container');
+
+      try {
+        await gallery.first().waitFor({ state: 'attached', timeout: 15000 });
+      } catch (error) {
+        throw new Error(`No gallery found on page: ${error}`);
+      }
+
+      const imageUrls: string[] = await gallery
+        .locator('img')
+        .evaluateAll(imgs =>
+          imgs
+            .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
+            .map(img => img.src),
+        );
+
+      console.log('======>>>   imageUrls = ', imageUrls);
+
+      if (imageUrls.length === 0) throw new Error('No valid image URLs found');
+      if (!sku) throw new Error('SKU is required');
+
+      data[sku] = imageUrls;
+    } catch (err) {
+      console.log('======>>>   err = ', err);
+      errors.push({
+        error: err,
+        product: product,
+        url: url,
+      } as IWorkerError);
+    }
+
+    return { data, errors };
   }
 }
