@@ -88,9 +88,10 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     if (!source) throw new Error("Don't found of source");
 
     const allErrors: IWorkerError[] = [];
+    const allData: IDataImag = {};
+    const limiter = new RateLimiter(5000);
+    const productsPageLinks: Record<string, string[]> = {};
     await this.browser.runInContext(async context => {
-      const allData: IDataImag = {};
-
       const url_init: string = 'https://rozetka.com.ua/';
       const targetUrl: string =
         'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
@@ -99,7 +100,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
       const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
       const queue = [...uniqueProducts];
-      const limiter = new RateLimiter(5000);
 
       const quantityPage = Math.min(queue.length, this.maxPage);
       const pool = new PagePool(context, quantityPage);
@@ -112,7 +112,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       };
 
       let taskQueue: IProduct[] = [...queue];
-      const productsPageLinks: Record<string, string[]> = {};
 
       const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
         const errors: ITaskError[] = [];
@@ -207,114 +206,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
       console.dir(allErrors, { depth: null, colors: true });
 
-      /*Хожу по полученным страницам товаров */ //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-      type IProductLinkItem = {
-        sku: string;
-        link: string;
-      };
-
-      type IProdPageError = {
-        item?: IProductLinkItem;
-        error: IWorkerError;
-      };
-
-      const taskQueueProdPage: IProductLinkItem[] = [];
-
-      for (const [sku, links] of Object.entries(productsPageLinks)) {
-        for (const link of links) {
-          taskQueueProdPage.push({ sku, link });
-        }
-      }
-
-      const runBatchProdPage = async (items: IProductLinkItem[]): Promise<IProdPageError[]> => {
-        const errors: IProdPageError[] = [];
-        let index = 0;
-
-        const getNext = (): IProductLinkItem | undefined => {
-          if (index >= items.length) return undefined;
-          return items[index++];
-        };
-
-        const workers = Array.from({ length: quantityPage }, async () => {
-          const page = await pool.acquire();
-
-          try {
-            while (true) {
-              const item = getNext();
-              if (!item) break;
-
-              try {
-                const result = await source.worker(item.link, page, limiter, undefined, item.sku);
-
-                for (const r of result) {
-                  for (const [sku, images] of Object.entries(r.data)) {
-                    allData[sku] ??= [];
-                    allData[sku].push(...images);
-                  }
-
-                  if (Array.isArray(r.errors)) {
-                    for (const err of r.errors) {
-                      try {
-                        await this.handleError(err);
-                      } catch (finalErr) {
-                        errors.push({
-                          item: { sku: item.sku } as any,
-                          error: finalErr as IWorkerError,
-                        });
-                      }
-                    }
-                  }
-                }
-              } catch (err) {
-                errors.push({
-                  item: { sku: item.sku } as any,
-                  error: err as IWorkerError,
-                });
-              }
-            }
-          } finally {
-            pool.release(page);
-          }
-        });
-
-        await Promise.allSettled(workers);
-        return errors;
-      };
-
-      let attemptProdPage = 1;
-      let currentBatchProdPage = taskQueueProdPage;
-
-      while (currentBatchProdPage.length && attemptProdPage <= this.maxRetries) {
-        console.log(`---> CollectImages for ${task.brand_name} attemptProdPage №`, attemptProdPage);
-
-        await limiter.sleep(1000, 5000);
-
-        const errors = await runBatchProdPage(currentBatchProdPage);
-
-        const retryable = errors.filter(
-          (e): e is { item: IProductLinkItem; error: IWorkerError } =>
-            !!e.item && attemptProdPage < this.maxRetries && isRetryable(e.error),
-        );
-
-        currentBatchProdPage = retryable.map(e => e.item);
-
-        if (currentBatchProdPage.length) {
-          await waitBeforeRetry(attemptProdPage);
-        } else {
-          errors.forEach(e => {
-            allErrors.push({
-              error: e.error,
-              targetUrl: undefined,
-            });
-          });
-        }
-
-        attemptProdPage++;
-      }
-
-      console.log('****** allData = ', allData);
-
       /* Скачиваю полученные urls  */
 
       // let imageQueue: IImageItem[] = [];
@@ -401,6 +292,131 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
     console.log('END allErrors = ');
     console.dir(allErrors, { depth: null, colors: true });
+
+    await limiter.sleep(1000, 5000);
+
+    console.log('========================   productsPageLinks = ', productsPageLinks);
+
+    await this.browser.runInContext(async context => {
+      /*Хожу по полученным страницам товаров */ //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+      type IProductLinkItem = {
+        sku: string;
+        link: string;
+      };
+
+      type IProdPageError = {
+        item?: IProductLinkItem;
+        error: IWorkerError;
+      };
+
+      const uniqueProducts = Object.entries(productsPageLinks).map(([sku, links]) => ({
+        sku,
+        links,
+      }));
+      const queue = [...uniqueProducts];
+      const limiter = new RateLimiter(5000);
+
+      const taskQueueProdPage: IProductLinkItem[] = [];
+
+      for (const [sku, links] of Object.entries(productsPageLinks)) {
+        for (const link of links) {
+          taskQueueProdPage.push({ sku, link });
+        }
+      }
+
+      const runBatchProdPage = async (items: IProductLinkItem[]): Promise<IProdPageError[]> => {
+        const errors: IProdPageError[] = [];
+        let index = 0;
+
+        const quantityPage = Math.min(queue.length, this.maxPage);
+        const pool = new PagePool(context, quantityPage);
+        this.registerResource(pool);
+
+        const getNext = (): IProductLinkItem | undefined => {
+          if (index >= items.length) return undefined;
+          return items[index++];
+        };
+
+        const workers = Array.from({ length: quantityPage }, async () => {
+          const page = await pool.acquire();
+
+          try {
+            while (true) {
+              const item = getNext();
+              if (!item) break;
+
+              try {
+                const result = await source.worker(item.link, page, limiter, undefined, item.sku);
+
+                for (const r of result) {
+                  for (const [sku, images] of Object.entries(r.data)) {
+                    allData[sku] ??= [];
+                    allData[sku].push(...images);
+                  }
+
+                  if (Array.isArray(r.errors)) {
+                    for (const err of r.errors) {
+                      try {
+                        await this.handleError(err);
+                      } catch (finalErr) {
+                        errors.push({
+                          item: { sku: item.sku } as any,
+                          error: finalErr as IWorkerError,
+                        });
+                      }
+                    }
+                  }
+                }
+              } catch (err) {
+                errors.push({
+                  item: { sku: item.sku } as any,
+                  error: err as IWorkerError,
+                });
+              }
+            }
+          } finally {
+            pool.release(page);
+          }
+        });
+
+        await Promise.allSettled(workers);
+        return errors;
+      };
+
+      let attemptProdPage = 1;
+      let currentBatchProdPage = taskQueueProdPage;
+
+      while (currentBatchProdPage.length && attemptProdPage <= this.maxRetries) {
+        console.log(`---> CollectImages for ${task.brand_name} attemptProdPage №`, attemptProdPage);
+
+        await limiter.sleep(1000, 5000);
+
+        const errors = await runBatchProdPage(currentBatchProdPage);
+
+        const retryable = errors.filter(
+          (e): e is { item: IProductLinkItem; error: IWorkerError } =>
+            !!e.item && attemptProdPage < this.maxRetries && isRetryable(e.error),
+        );
+
+        currentBatchProdPage = retryable.map(e => e.item);
+
+        if (currentBatchProdPage.length) {
+          await waitBeforeRetry(attemptProdPage);
+        } else {
+          errors.forEach(e => {
+            allErrors.push({
+              error: e.error,
+              targetUrl: undefined,
+            });
+          });
+        }
+
+        attemptProdPage++;
+      }
+
+      console.log('****** allData = ', allData);
+    }, 'fake');
 
     // await this.storage.saveJson(allErrors, {
     //   filename: `${task.brand_name}_unprocessed-products.json`,

@@ -54,19 +54,19 @@ class RozetkaScenario {
         if (!source)
             throw new Error("Don't found of source");
         const allErrors = [];
+        const allData = {};
+        const limiter = new RateLimiter_1.RateLimiter(5000);
+        const productsPageLinks = {};
         await this.browser.runInContext(async (context) => {
-            const allData = {};
             const url_init = 'https://rozetka.com.ua/';
             const targetUrl = 'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
             const products = task.products;
             const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
             const queue = [...uniqueProducts];
-            const limiter = new RateLimiter_1.RateLimiter(5000);
             const quantityPage = Math.min(queue.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
             let taskQueue = [...queue];
-            const productsPageLinks = {};
             const runBatch = async (items) => {
                 const errors = [];
                 let index = 0;
@@ -140,6 +140,85 @@ class RozetkaScenario {
             console.dir(allDataNormalize, { depth: null, colors: true });
             console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
             console.dir(allErrors, { depth: null, colors: true });
+            /* Скачиваю полученные urls  */
+            // let imageQueue: IImageItem[] = [];
+            // for (const [sku, urls] of Object.entries(allDataNormalize)) {
+            //   urls.forEach((url, i) => {
+            //     imageQueue.push({ sku, url, index: i + 1 });
+            //   });
+            // }
+            // const processImage = async (page: Page, item: IImageItem): Promise<void> => {
+            //   const { sku, url, index } = item;
+            //   const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
+            //   const filename = `${task.brand_name}_${sku}_${index}${ext}`;
+            //   await this.storage.save({
+            //     filename,
+            //     buffer,
+            //     targetDir: path.join(task.brand_name, sku),
+            //   });
+            // };
+            // const runBatchImage = async (items: IImageItem[]): Promise<IImageError[]> => {
+            //   const errors: IImageError[] = [];
+            //   const queue = [...items];
+            //   const workers = Array.from({ length: quantityPage }, async () => {
+            //     const page = await pool.acquire();
+            //     try {
+            //       while (true) {
+            //         const item = queue.shift();
+            //         if (!item) return;
+            //         try {
+            //           await processImage(page, item);
+            //         } catch (error) {
+            //           errors.push({ item, error: error as IWorkerError });
+            //         }
+            //       }
+            //     } finally {
+            //       pool.release(page);
+            //     }
+            //   });
+            //   await Promise.allSettled(workers);
+            //   return errors;
+            // };
+            // // todo должна быть централизованная обработка ошибок в методе handleError
+            // const procError = (errors: IImageError[], attempt: number): IImageError[] => {
+            //   return errors.filter(e => attempt < this.maxRetries && isRetryable(e.error));
+            // };
+            // let attemptImage = 1;
+            // let currentBatchImage = imageQueue;
+            // while (currentBatchImage.length && attemptImage <= this.maxRetries) {
+            //   console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
+            //   const errors = await runBatchImage(currentBatchImage);
+            //   console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
+            //   console.dir(errors, { depth: null, colors: true });
+            //   // Отбираем retryable
+            //   const retryable = procError(errors, attemptImage);
+            //   currentBatchImage = retryable.map(e => e.item);
+            //   if (currentBatchImage.length) {
+            //     await waitBeforeRetry(attemptImage);
+            //   } else {
+            //     // Сохраняем окончательные ошибки
+            //     errors.forEach(e => {
+            //       allErrors.push({
+            //         error: e.error,
+            //         targetUrl: e.item.url,
+            //       });
+            //     });
+            //   }
+            //   attemptImage++;
+            // }
+        }, 'fake');
+        console.log('END allErrors = ');
+        console.dir(allErrors, { depth: null, colors: true });
+        await limiter.sleep(1000, 5000);
+        console.log('========================   productsPageLinks = ', productsPageLinks);
+        await this.browser.runInContext(async (context) => {
+            /*Хожу по полученным страницам товаров */ //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            const uniqueProducts = Object.entries(productsPageLinks).map(([sku, links]) => ({
+                sku,
+                links,
+            }));
+            const queue = [...uniqueProducts];
+            const limiter = new RateLimiter_1.RateLimiter(5000);
             const taskQueueProdPage = [];
             for (const [sku, links] of Object.entries(productsPageLinks)) {
                 for (const link of links) {
@@ -149,6 +228,9 @@ class RozetkaScenario {
             const runBatchProdPage = async (items) => {
                 const errors = [];
                 let index = 0;
+                const quantityPage = Math.min(queue.length, this.maxPage);
+                const pool = new PagePool_1.PagePool(context, quantityPage);
+                this.registerResource(pool);
                 const getNext = () => {
                     if (index >= items.length)
                         return undefined;
@@ -220,75 +302,7 @@ class RozetkaScenario {
                 attemptProdPage++;
             }
             console.log('****** allData = ', allData);
-            /* Скачиваю полученные urls  */
-            // let imageQueue: IImageItem[] = [];
-            // for (const [sku, urls] of Object.entries(allDataNormalize)) {
-            //   urls.forEach((url, i) => {
-            //     imageQueue.push({ sku, url, index: i + 1 });
-            //   });
-            // }
-            // const processImage = async (page: Page, item: IImageItem): Promise<void> => {
-            //   const { sku, url, index } = item;
-            //   const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
-            //   const filename = `${task.brand_name}_${sku}_${index}${ext}`;
-            //   await this.storage.save({
-            //     filename,
-            //     buffer,
-            //     targetDir: path.join(task.brand_name, sku),
-            //   });
-            // };
-            // const runBatchImage = async (items: IImageItem[]): Promise<IImageError[]> => {
-            //   const errors: IImageError[] = [];
-            //   const queue = [...items];
-            //   const workers = Array.from({ length: quantityPage }, async () => {
-            //     const page = await pool.acquire();
-            //     try {
-            //       while (true) {
-            //         const item = queue.shift();
-            //         if (!item) return;
-            //         try {
-            //           await processImage(page, item);
-            //         } catch (error) {
-            //           errors.push({ item, error: error as IWorkerError });
-            //         }
-            //       }
-            //     } finally {
-            //       pool.release(page);
-            //     }
-            //   });
-            //   await Promise.allSettled(workers);
-            //   return errors;
-            // };
-            // // todo должна быть централизованная обработка ошибок в методе handleError
-            // const procError = (errors: IImageError[], attempt: number): IImageError[] => {
-            //   return errors.filter(e => attempt < this.maxRetries && isRetryable(e.error));
-            // };
-            // let attemptImage = 1;
-            // let currentBatchImage = imageQueue;
-            // while (currentBatchImage.length && attemptImage <= this.maxRetries) {
-            //   console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
-            //   const errors = await runBatchImage(currentBatchImage);
-            //   console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
-            //   console.dir(errors, { depth: null, colors: true });
-            //   // Отбираем retryable
-            //   const retryable = procError(errors, attemptImage);
-            //   currentBatchImage = retryable.map(e => e.item);
-            //   if (currentBatchImage.length) {
-            //     await waitBeforeRetry(attemptImage);
-            //   } else {
-            //     // Сохраняем окончательные ошибки
-            //     errors.forEach(e => {
-            //       allErrors.push({
-            //         error: e.error,
-            //         targetUrl: e.item.url,
-            //       });
-            //     });
-            //   }
-            //   attemptImage++;
-            // }
         }, 'fake');
-        console.log('END allErrors = ');
-        console.dir(allErrors, { depth: null, colors: true });
         // await this.storage.saveJson(allErrors, {
         //   filename: `${task.brand_name}_unprocessed-products.json`,
         //   targetDir: task.brand_name,
