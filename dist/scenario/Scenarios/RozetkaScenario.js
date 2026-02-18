@@ -102,6 +102,9 @@ class RozetkaScenario {
                                     productsPageLinks[_a = r.body.data.content.text] ?? (productsPageLinks[_a] = []);
                                     productsPageLinks[r.body.data.content.text].push(g.href);
                                     const result = await source.worker(g.href, page, limiter, undefined, r.body.data.content.text);
+                                    //!!!!!!!!!!!!!!!
+                                    //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
+                                    //!!!!!!!!!!!!!!!
                                     for (const r of result) {
                                         for (const [sku, images] of Object.entries(r.data)) {
                                             allData[sku] ?? (allData[sku] = []);

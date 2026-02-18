@@ -168,6 +168,10 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                     r.body.data.content.text,
                   );
 
+                  //!!!!!!!!!!!!!!!
+                  //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
+                  //!!!!!!!!!!!!!!!
+
                   for (const r of result) {
                     for (const [sku, images] of Object.entries(r.data)) {
                       allData[sku] ??= [];
