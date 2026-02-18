@@ -9,8 +9,11 @@ class PageImageSourceRozetka {
         const results = [];
         while (true) {
             const product = getNext();
-            if (!product)
+            if (!product) {
+                console.log('==>> workerHttpRequest(). Продукт отсутствует');
+                console.log('product = ', product);
                 break;
+            }
             const rawSku = product.sku;
             const starIndex = rawSku.indexOf('*');
             const sku = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
@@ -37,15 +40,50 @@ class PageImageSourceRozetka {
                 headers: options.headers,
             });
             const status = response.status();
-            if (status === 429 || status === 403) {
-                await limiter.sleep(1000, 5000);
+            const blockingStatuses = [401, 403, 405, 407, 429, 451, 503];
+            if (blockingStatuses.includes(status)) {
+                console.error(`[Blocking Detected] Status: ${status} | URL: ${response.url()}`);
+                switch (status) {
+                    case 429: // Rate Limit
+                        console.log('==>> Лимит запросов. Увеличиваем паузу...');
+                        await limiter.sleep(5000, 10000);
+                        break;
+                    case 403: // Forbidden / Anti-bot
+                    case 451: // Geo-Block
+                        console.log('==>> Обнаружена блокировка доступа. Требуется смена прокси/сессии.');
+                        // Здесь должна быть ваша логика смены прокси: await proxyManager.rotate();
+                        await limiter.sleep(2000, 5000);
+                        break;
+                    case 401: // Unauthorized
+                        console.log('==>> Сессия истекла. Перезапуск авторизации...');
+                        // Вызов функции логина
+                        break;
+                    case 503: // WAF Challenge (Cloudflare и др.)
+                        console.log('==>> Сервер временно недоступен или проверяет браузер.');
+                        await limiter.sleep(10000, 15000);
+                        break;
+                    default:
+                        console.log(`==>> Нестандартный статус блокировки: ${status}`);
+                        await limiter.sleep(1000, 3000);
+                }
             }
             let body = null;
             try {
                 body = await response.json();
             }
-            catch {
-                // если не JSON
+            catch (error) {
+                // Если не JSON, пробуем получить текст для диагностики блокировки
+                const rawText = await response.text().catch(() => 'Не удалось прочитать body');
+                const contentType = response.headers()['content-type'] || 'unknown';
+                console.error('==>> [Payload Error] Ожидался JSON, получен некорректный формат');
+                console.log(`Status: ${response.status()} | Content-Type: ${contentType}`);
+                console.log('--- Raw Body (первые 200 символов) ---');
+                console.log(rawText.substring(0, 200).trim());
+                console.log('------------------------------------------');
+                // Логика принятия решения на основе текста
+                if (rawText.includes('cloudflare') || rawText.includes('captcha')) {
+                    console.warn('!! Обнаружен экран проверки (WAF/Challenge) !!');
+                }
             }
             return {
                 ok: status >= 200 && status < 300,
@@ -68,12 +106,11 @@ class PageImageSourceRozetka {
     }
     async worker(targetUrl, page, limiter, getNext, sku) {
         const results = [];
-        while (true) {
-            if (!targetUrl)
-                break;
-            await limiter.wait();
-            results.push(await this.execute(targetUrl, page, undefined, sku));
-        }
+        // while (true) {
+        // if (!targetUrl) break;
+        await limiter.wait();
+        results.push(await this.execute(targetUrl, page, undefined, sku));
+        // }
         return results;
     }
     async execute(url, page, product, sku) {

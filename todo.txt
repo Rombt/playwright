@@ -4,6 +4,18 @@
     запуск приложения
         node dist/index.js
 
+    Инструменты оценки stealth-показателей веб драйвера (Playwright, Puppeteer, Selenium)
+        https://bot.sannysoft.com/
+            Сайт представляет собой чеклист тестов, которые имитируют проверки реальных антибот-систем (Cloudflare, Akamai, DataDome).
+            «золотой стандарт» для отладки фингерпринтов
+
+    для повышения защищённости от спам систем
+    Использование Playwright Stealth:
+        Плагин stealth через playwright-extra. Он автоматически подменяет параметры navigator.languages, webgl_vendor и скрывает свойство navigator.webdriver.
+            const { chromium } = require('playwright-extra');
+            const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+            chromium.use(StealthPlugin());
+
 
     Очерёдность обработки брендов:
         $brands = Array
