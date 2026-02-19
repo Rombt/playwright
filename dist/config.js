@@ -23,4 +23,11 @@ exports.config = {
     browser: {
         fingerprintFile: './fingerprint.config.json',
     },
+    logger: {
+        level: 'debug',
+        transports: [
+            { type: 'console' },
+            { type: 'file', options: { filePath: './logs/app.log', pretty: true } },
+        ],
+    },
 };

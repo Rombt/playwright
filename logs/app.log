@@ -1,0 +1,72 @@
+[2026-02-19T11:22:15.274Z] [INFO] task = 
+{
+  "task": {
+    "type": "recollect-product-photos",
+    "brand_id": null,
+    "brand_name": "adidas",
+    "metadata": {
+      "target_website": null
+    },
+    "products": [
+      {
+        "id_product": "54433",
+        "name_product": "Футболка чоловіча ADIDAS  TERREX MOUNTAIN  KB9601",
+        "sku": "KB9601*SS26 ",
+        "attributes": {
+          "color": "молоч.",
+          "size": "XXL"
+        }
+      }
+    ]
+  }
+}
+
+[2026-02-19T11:22:15.275Z] [INFO] task = 
+{
+  "task": {
+    "type": "recollect-product-photos",
+    "brand_id": null,
+    "brand_name": "columbia",
+    "metadata": {
+      "target_website": null
+    },
+    "products": [
+      {
+        "id_product": "54213",
+        "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
+        "sku": "1865231*AW27",
+        "attributes": {
+          "color": "чорн.",
+          "size": "41"
+        }
+      },
+      {
+        "id_product": "54223",
+        "name_product": "Чоловічі черевики Columbia Konos™ TRS OutDry™ Mid  collected ",
+        "sku": "2103761*AW27",
+        "attributes": {
+          "color": "чорн.",
+          "size": "44.5"
+        }
+      },
+      {
+        "id_product": "54217",
+        "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
+        "sku": "2079181*AW27",
+        "attributes": {
+          "color": "чорн.",
+          "size": "39.5"
+        }
+      }
+    ]
+  }
+}
+
+[2026-02-19T11:22:15.276Z] [ERROR] RozetkaScenario => run()
+{
+  "component": "RozetkaScenario",
+  "method": "run",
+  "message": "Cannot read properties of null (reading 'brand_name')",
+  "stack": "TypeError: Cannot read properties of null (reading 'brand_name')\n    at F:\\testing\\playwright\\dist\\scenario\\scenarios\\RozetkaScenario.js:68:65\n    at Array.map (<anonymous>)\n    at RozetkaScenario.process (F:\\testing\\playwright\\dist\\scenario\\scenarios\\RozetkaScenario.js:68:48)\n    at F:\\testing\\playwright\\dist\\scenario\\scenarios\\RozetkaScenario.js:29:58\n    at Array.map (<anonymous>)\n    at RozetkaScenario.run (F:\\testing\\playwright\\dist\\scenario\\scenarios\\RozetkaScenario.js:29:41)\n    at async App.run (F:\\testing\\playwright\\dist\\app\\App.js:60:13)\n    at async F:\\testing\\playwright\\dist\\index.js:6:5"
+}
+

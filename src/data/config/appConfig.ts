@@ -1,7 +1,18 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { config as appConfig } from '../../config';
-import { IAppConfig, RetryConfig, AsyncConfig, DataConfig, BrowserConfig } from './IAppConfig';
+import {
+  IAppConfig,
+  RetryConfig,
+  AsyncConfig,
+  DataConfig,
+  BrowserConfig,
+  LoggerConfig,
+} from './IAppConfig';
+import { ILoggerConfig } from '../logger/types/ILoggerConfig';
+import { ILogTransport } from '../logger/types/ILogTransport';
+import { ConsoleTransport } from '../logger/transport/ConsoleTransport';
+import { FileTransport } from '../logger/transport/FileTransport';
 
 export class AppConfig {
   private static instance: AppConfig;
@@ -14,9 +25,17 @@ export class AppConfig {
     this.config = this.buildConfig();
   }
 
+  //todo добавить путь к файлу конфига при инициализации и оставить import { config as appConfig } from '../../config'; по дефолту
+  public static init(): AppConfig {
+    if (!this.instance) {
+      this.instance = new AppConfig();
+    }
+    return this.instance;
+  }
+
   public static getInstance(): AppConfig {
     if (!this.instance) {
-      this.instance = new this();
+      throw new Error('AppConfig is not initialized. Call init() first.');
     }
     return this.instance;
   }
@@ -83,6 +102,25 @@ export class AppConfig {
     return this.processBrowser(appConfig).browser.fingerprintFile;
   }
 
+  public get loggerConfig(): LoggerConfig {
+    return this.processLogger(appConfig).logger;
+  }
+
+  public get loggerTransports(): ILogTransport[] {
+    const transports: ILogTransport[] = [];
+    const config = this.loggerConfig;
+
+    for (const t of config.transports ?? []) {
+      const factory = this.transportFactories[t.type];
+
+      if (factory) {
+        transports.push(factory(t));
+      }
+    }
+
+    return transports;
+  }
+
   // ==========  методы для обработки полей  ===============
 
   private processData(rawConfig: any): { data: DataConfig } {
@@ -137,6 +175,25 @@ export class AppConfig {
     };
   }
 
+  private processLogger(rawConfig: any): { logger: LoggerConfig } {
+    const loggerConfig = rawConfig?.logger ?? {};
+
+    const transports = Array.isArray(loggerConfig.transports)
+      ? loggerConfig.transports.map((t: any) => ({
+          type: typeof t.type === 'string' ? t.type : 'console',
+          options: t.options ?? {},
+        }))
+      : [{ type: 'console', options: {} }]; // дефолтный transport
+
+    return {
+      logger: {
+        level: typeof loggerConfig.level === 'string' ? loggerConfig.level : 'error',
+        transports,
+        jsonFormat: loggerConfig.jsonFormat !== false,
+      },
+    };
+  }
+
   //==========  helpers ========
 
   resolvePath(value: unknown): string {
@@ -146,4 +203,11 @@ export class AppConfig {
 
     return path.isAbsolute(value) ? value : path.resolve(this.baseDir, value);
   }
+
+  private transportFactories: Record<string, (config?: any) => ILogTransport> = {
+    console: () => new ConsoleTransport(),
+    file: (config: { options: { filePath: string; pretty: boolean } }) => {
+      return new FileTransport(config.options.filePath, config.options.pretty);
+    },
+  };
 }

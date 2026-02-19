@@ -2,15 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Logger = void 0;
 const ScopedLogger_1 = require("./ScopedLogger");
-const ConsoleTransport_1 = require("./transport/ConsoleTransport");
-const FileTransport_1 = require("./transport/FileTransport");
 const LOG_LEVEL_PRIORITY = {
     error: 0,
     warn: 1,
     info: 2,
     debug: 3,
 };
-const TRANSPORTS = [new ConsoleTransport_1.ConsoleTransport(), new FileTransport_1.FileTransport('./logs/app.log')];
 class Logger {
     constructor(config) {
         this.level = config.level;
@@ -56,7 +53,7 @@ class Logger {
         return new ScopedLogger_1.ScopedLogger(this, contextId);
     }
     write(entry) {
-        for (const transport of TRANSPORTS) {
+        for (const transport of this.transports) {
             try {
                 transport.write(entry);
             }

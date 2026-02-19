@@ -6,17 +6,12 @@ import { ILogTransport } from './types/ILogTransport';
 import { ScopedLogger } from './ScopedLogger';
 import { IRootLogger } from './types/IRootLogger';
 
-import { ConsoleTransport } from './transport/ConsoleTransport';
-import { FileTransport } from './transport/FileTransport';
-
 const LOG_LEVEL_PRIORITY: Record<LogLevel, number> = {
   error: 0,
   warn: 1,
   info: 2,
   debug: 3,
 };
-
-const TRANSPORTS = [new ConsoleTransport(), new FileTransport('./logs/app.log')];
 
 export class Logger implements ILogger, IRootLogger {
   private static instance: Logger | null = null;
@@ -79,7 +74,7 @@ export class Logger implements ILogger, IRootLogger {
   }
 
   public write(entry: ILogEntry): void {
-    for (const transport of TRANSPORTS) {
+    for (const transport of this.transports) {
       try {
         transport.write(entry);
       } catch (err) {
