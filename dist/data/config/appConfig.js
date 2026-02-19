@@ -8,7 +8,7 @@ const FileTransport_1 = require("../logger/transport/FileTransport");
 class AppConfig {
     constructor() {
         this.transportFactories = {
-            console: () => new ConsoleTransport_1.ConsoleTransport(),
+            console: (config) => new ConsoleTransport_1.ConsoleTransport(config.options.pretty),
             file: (config) => {
                 return new FileTransport_1.FileTransport(config.options.filePath, config.options.pretty);
             },

@@ -2,9 +2,30 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConsoleTransport = void 0;
 class ConsoleTransport {
+    constructor(pretty = true) {
+        this.pretty = pretty;
+    }
     write(entry) {
-        const output = `[${entry.timestamp.toISOString()}] [${entry.level.toUpperCase()}]${entry.contextId ? ` [${entry.contextId}]` : ''} ${entry.message}`;
-        console.log(output);
+        if (this.pretty) {
+            const meta = entry.meta && Object.keys(entry.meta).length
+                ? `\n${JSON.stringify(entry.meta, null, 2)}`
+                : '';
+            const line = `[${entry.timestamp.toISOString()}] ` +
+                `[${entry.level.toUpperCase()}] ` +
+                (entry.contextId ? `[${entry.contextId}] ` : '') +
+                `${entry.message}` +
+                meta;
+            console.log(line);
+        }
+        else {
+            console.log(JSON.stringify({
+                timestamp: entry.timestamp.toISOString(),
+                level: entry.level,
+                contextId: entry.contextId,
+                message: entry.message,
+                meta: entry.meta ?? {},
+            }));
+        }
     }
 }
 exports.ConsoleTransport = ConsoleTransport;

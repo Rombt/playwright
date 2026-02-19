@@ -24,7 +24,7 @@ export const config = {
   logger: {
     level: 'debug',
     transports: [
-      { type: 'console' },
+      { type: 'console', options: {} },
       { type: 'file', options: { filePath: './logs/app.log', pretty: true } },
     ],
   },

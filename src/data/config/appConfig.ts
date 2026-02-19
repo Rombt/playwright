@@ -205,7 +205,8 @@ export class AppConfig {
   }
 
   private transportFactories: Record<string, (config?: any) => ILogTransport> = {
-    console: () => new ConsoleTransport(),
+    console: (config: { options: { pretty: boolean } }) =>
+      new ConsoleTransport(config.options.pretty),
     file: (config: { options: { filePath: string; pretty: boolean } }) => {
       return new FileTransport(config.options.filePath, config.options.pretty);
     },
