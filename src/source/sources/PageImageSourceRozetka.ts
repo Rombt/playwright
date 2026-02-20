@@ -37,11 +37,15 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       indexForDebug++;
       const product = getNext();
       if (!product) {
-        this.logger.error(`While loop started. The product is absent`, {
+        this.logger.error(`Product is absent`, {
           component: 'PageImageSourceRozetka',
           method: 'workerHttpRequest',
-          indexForDebug: indexForDebug,
-          product: product,
+          action: 'whileIteration',
+          stage: 'start',
+          data: {
+            indexForDebug: indexForDebug,
+            product: product,
+          },
         });
         break;
       }
@@ -69,13 +73,17 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         loggerScope: loggerScope,
       };
 
-      loggerScope.debug(`While loop started successfully.`, {
+      loggerScope.debug(`Success.`, {
         component: 'PageImageSourceRozetka',
         method: 'workerHttpRequest',
-        indexForDebug: indexForDebug,
-        rawSku: rawSku,
-        sku: sku,
-        options: options,
+        action: 'whileIteration',
+        stage: 'start',
+        data: {
+          indexForDebug: indexForDebug,
+          rawSku: rawSku,
+          sku: sku,
+          options: options,
+        },
       });
 
       await limiter.wait();
