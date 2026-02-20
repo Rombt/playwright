@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RozetkaScenario = void 0;
 const fs_1 = require("fs");
 const path = require("path");
+const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
+const PagePool_1 = require("../../browser/pool/PagePool");
 const appConfig_1 = require("../../data/config/appConfig");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 const helpers_1 = require("../../common/helpers");
@@ -26,7 +28,7 @@ class RozetkaScenario {
             await this.prepare();
             for (let i = 0; i < arrTasks.length; i += this.maxTask) {
                 const batch = arrTasks.slice(i, i + this.maxTask);
-                await Promise.all(batch.map(task => this.process(task)));
+                await Promise.all(batch.map((task) => this.process(task)));
             }
         }
         catch (error) {
@@ -62,228 +64,283 @@ class RozetkaScenario {
         this.sources = await this.loadSources();
     }
     async process(task) {
-        this.logger.info('task = ', {
-            task,
-        });
-        const brandNames = Object.values(task).map(item => item.brand_name);
-        this.logger.info('brandNames = ', {
-            brandNames,
-        });
-        const source = this.sources.find(s => s.supports(task));
-        // const loggerScope = this.logger.withContext();
+        const loggerScope = this.logger.withContext(task.brand_name);
+        const source = this.sources.find((s) => s.supports(task));
         if (!source) {
-            this.logger.error('Source not found for task', {
+            loggerScope.error('Source not found for task', {
                 component: 'RozetkaScenario',
                 method: 'process',
                 task,
             });
             throw new Error('Source not found');
         }
-        // const allErrors: IWorkerError[] = [];
-        // const allData: IDataImag = {};
-        // const limiter = new RateLimiter(5000);
-        // const productsPageLinks: Record<string, string[]> = {};
-        // // await this.browser.runInContext(async context => {
-        // await this.browser.runInContextByChromium(async context => {
-        //   const url_init: string = 'https://rozetka.com.ua/';
-        //   const targetUrl: string =
-        //     'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
-        //   const products = task.products;
-        //   console.log('111111111111111');
-        //   const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
-        //   const queue = [...uniqueProducts];
-        //   const quantityPage = Math.min(queue.length, this.maxPage);
-        //   const pool = new PagePool(context, quantityPage);
-        //   this.registerResource(pool);
-        //   // //todo  Убрать!
-        //   type ITaskError = {
-        //     item?: IProduct;
-        //     error: IWorkerError;
-        //   };
-        //   let taskQueue: IProduct[] = [...queue];
-        //   const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
-        //     const errors: ITaskError[] = [];
-        //     let index = 0;
-        //     console.log('Products = ');
-        //     console.dir(items, { depth: null, colors: true });
-        //     const getNext = (): IProduct | undefined => {
-        //       if (index >= items.length) return undefined;
-        //       console.log('items[index++] = ', items[index++]);
-        //       return items[index++];
-        //     };
-        //     console.log('2222222 ');
-        //     const workers = Array.from({ length: quantityPage }, async () => {
-        //       const page = await pool.acquire();
-        //       await page.goto(url_init, { waitUntil: 'domcontentloaded' });
-        //       const headers = this.buildHeaders(url_init);
-        //       const request = context.request;
-        //       try {
-        //         console.log('3333333 ');
-        //         const result = (await source.workerHttpRequest(
-        //           request,
-        //           headers,
-        //           targetUrl,
-        //           limiter,
-        //           getNext,
-        //         )) as IHttpResult<IAutocompleteResponse>[];
-        //         console.log('444444 ');
-        //         for (const r of result) {
-        //           if (!r.ok || !r.body) return [];
-        //           for (const g of r.body.data.content.records.goods) {
-        //             if (!this.isGood(g)) continue;
-        //             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //             if (g.title.includes(r.body.data.content.text)) {
-        //               productsPageLinks[r.body.data.content.text] ??= [];
-        //               productsPageLinks[r.body.data.content.text].push(g.href);
-        //               const result = await source.worker(
-        //                 g.href,
-        //                 page,
-        //                 limiter,
-        //                 undefined,
-        //                 r.body.data.content.text,
-        //               );
-        //               //!!!!!!!!!!!!!!!
-        //               //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
-        //               //!!!!!!!!!!!!!!!
-        //               for (const r of result) {
-        //                 for (const [sku, images] of Object.entries(r.data)) {
-        //                   allData[sku] ??= [];
-        //                   allData[sku].push(...images);
-        //                 }
-        //                 if (Array.isArray(r.errors)) {
-        //                   for (const err of r.errors) {
-        //                     try {
-        //                       await this.handleError(err);
-        //                     } catch (finalErr) {
-        //                       errors.push({
-        //                         item: err.product,
-        //                         error: finalErr as IWorkerError,
-        //                       });
-        //                     }
-        //                   }
-        //                 }
-        //               }
-        //             }
-        //           }
-        //         }
-        //       } catch (err) {
-        //         errors.push({
-        //           item: undefined as any,
-        //           error: err as IWorkerError,
-        //         });
-        //       } finally {
-        //         pool.release(page);
-        //       }
-        //     });
-        //     await Promise.allSettled(workers);
-        //     return errors;
-        //   };
-        //   let attempt = 1;
-        //   let currentBatch = taskQueue;
-        //   while (currentBatch.length && attempt <= this.maxRetries) {
-        //     // todo выбрать какую то одну
-        //     // await limiter.sleepNormal(1000, 5000);
-        //     await limiter.sleep(1000, 5000);
-        //     console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
-        //     const errors = await runBatch(currentBatch);
-        //     const retryable = errors.filter(
-        //       (e): e is { item: IProduct; error: IWorkerError } =>
-        //         !!e.item && attempt < this.maxRetries && isRetryable(e.error),
-        //     );
-        //     currentBatch = retryable.map(e => e.item);
-        //     if (currentBatch.length) {
-        //       await waitBeforeRetry(attempt);
-        //     } else {
-        //       // оставшиеся ошибки записываем в глобальный пул ошибок
-        //       errors.forEach(e => {
-        //         allErrors.push({
-        //           error: e.error,
-        //           targetUrl: targetUrl ?? undefined,
-        //         });
-        //       });
-        //     }
-        //     attempt++;
-        //   }
-        //   console.log(`All workers finished  for ${task.brand_name}`);
-        //   console.log('productsPageLinks = ', productsPageLinks);
-        //   const allDataNormalize = normalizeAllData(allData);
-        //   console.log('allDataNormalize = ');
-        //   console.dir(allDataNormalize, { depth: null, colors: true });
-        //   console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
-        //   console.dir(allErrors, { depth: null, colors: true });
-        //   /* Скачиваю полученные urls  */
-        //   let imageQueue: IImageItem[] = [];
-        //   for (const [sku, urls] of Object.entries(allDataNormalize)) {
-        //     urls.forEach((url, i) => {
-        //       imageQueue.push({ sku, url, index: i + 1 });
-        //     });
-        //   }
-        //   const processImage = async (page: Page, item: IImageItem): Promise<void> => {
-        //     const { sku, url, index } = item;
-        //     const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
-        //     const filename = `${task.brand_name}_${sku}_${index}__R__${ext}`;
-        //     await this.storage.save({
-        //       filename,
-        //       buffer,
-        //       targetDir: path.join(task.brand_name, sku),
-        //     });
-        //   };
-        //   const runBatchImage = async (items: IImageItem[]): Promise<IImageError[]> => {
-        //     const errors: IImageError[] = [];
-        //     const queue = [...items];
-        //     const workers = Array.from({ length: quantityPage }, async () => {
-        //       const page = await pool.acquire();
-        //       try {
-        //         while (true) {
-        //           const item = queue.shift();
-        //           if (!item) return;
-        //           try {
-        //             await processImage(page, item);
-        //           } catch (error) {
-        //             errors.push({ item, error: error as IWorkerError });
-        //           }
-        //         }
-        //       } finally {
-        //         pool.release(page);
-        //       }
-        //     });
-        //     await Promise.allSettled(workers);
-        //     return errors;
-        //   };
-        //   // todo должна быть централизованная обработка ошибок в методе handleError
-        //   const procError = (errors: IImageError[], attempt: number): IImageError[] => {
-        //     return errors.filter(e => attempt < this.maxRetries && isRetryable(e.error));
-        //   };
-        //   let attemptImage = 1;
-        //   let currentBatchImage = imageQueue;
-        //   while (currentBatchImage.length && attemptImage <= this.maxRetries) {
-        //     console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
-        //     const errors = await runBatchImage(currentBatchImage);
-        //     console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
-        //     console.dir(errors, { depth: null, colors: true });
-        //     // Отбираем retryable
-        //     const retryable = procError(errors, attemptImage);
-        //     currentBatchImage = retryable.map(e => e.item);
-        //     if (currentBatchImage.length) {
-        //       await waitBeforeRetry(attemptImage);
-        //     } else {
-        //       // Сохраняем окончательные ошибки
-        //       errors.forEach(e => {
-        //         allErrors.push({
-        //           error: e.error,
-        //           targetUrl: e.item.url,
-        //         });
-        //       });
-        //     }
-        //     attemptImage++;
-        //   }
-        // }, 'fake');
-        // console.log(`All workers finished  for ${task.brand_name}`);
-        // const allDataNormalize = normalizeAllData(allData);
-        // console.log('allDataNormalize = ');
-        // console.dir(allDataNormalize, { depth: null, colors: true });
-        // console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
-        // console.dir(allErrors, { depth: null, colors: true });
+        const allErrors = [];
+        const allData = {};
+        const limiter = new RateLimiter_1.RateLimiter(5000);
+        const productsPageLinks = {};
+        // await this.browser.runInContext(async context => { //todo не забыть убрать
+        await this.browser.runInContextByChromium(async (context) => {
+            const url_init = 'https://rozetka.com.ua/';
+            const targetUrl = 'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
+            const products = task.products;
+            if (!Array.isArray(products) || products.length === 0) {
+                loggerScope.error('Products are absent', {
+                    component: 'RozetkaScenario',
+                    method: 'process',
+                    task,
+                });
+            }
+            const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
+            const queue = [...uniqueProducts];
+            loggerScope.debug('queue is gotten', {
+                component: 'RozetkaScenario',
+                method: 'process',
+                queue: queue,
+            });
+            if (!Array.isArray(queue) || queue.length === 0) {
+                loggerScope.error('Have problems this queue of unique products', {
+                    component: 'RozetkaScenario',
+                    method: 'process',
+                    task: task,
+                });
+            }
+            const quantityPage = Math.min(queue.length, this.maxPage);
+            const pool = new PagePool_1.PagePool(context, quantityPage);
+            this.registerResource(pool);
+            let taskQueue = [...queue];
+            const runBatch = async (items) => {
+                const errors = [];
+                let index = 0;
+                loggerScope.debug('runBatch started', {
+                    component: 'RozetkaScenario',
+                    method: 'process',
+                    const: 'runBatch',
+                    index: index,
+                    errors: errors,
+                });
+                const getNext = () => {
+                    if (index >= items.length)
+                        return undefined;
+                    loggerScope.debug('getNext', {
+                        component: 'RozetkaScenario',
+                        method: 'process',
+                        const: 'getNext',
+                        index: index,
+                    });
+                    return items[index++];
+                };
+                const workers = Array.from({ length: quantityPage }, async () => {
+                    var _a;
+                    const page = await pool.acquire();
+                    const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
+                    if (!response) {
+                        loggerScope.error('No response from page.goto', {
+                            component: 'RozetkaScenario',
+                            method: 'process',
+                            const: 'workers',
+                            response: response,
+                        });
+                        throw new Error('No response from page.goto');
+                    }
+                    if (!response.ok()) {
+                        loggerScope.error('Navigation failed', {
+                            component: 'RozetkaScenario',
+                            method: 'process',
+                            const: 'workers',
+                            responseStatus: response.status(),
+                            responseStatusText: response.statusText(),
+                        });
+                        throw new Error(`Navigation failed: ${response.status()} ${response.statusText()}`);
+                    }
+                    loggerScope.debug('Response from page.goto  succeeded', {
+                        component: 'RozetkaScenario',
+                        method: 'process',
+                        const: 'workers',
+                        response: response,
+                    });
+                    const headers = this.buildHeaders(url_init);
+                    if (!headers || typeof headers !== 'object') {
+                        loggerScope.error('Headers are invalid', {
+                            component: 'RozetkaScenario',
+                            method: 'process',
+                            const: 'workers',
+                            headers: headers,
+                        });
+                        throw new Error('Headers are invalid');
+                    }
+                    const request = context.request;
+                    if (!context.request) {
+                        loggerScope.error('APIRequestContext is undefined', {
+                            component: 'RozetkaScenario',
+                            method: 'process',
+                            const: 'workers',
+                            request: context.request,
+                        });
+                        throw new Error('APIRequestContext is undefined');
+                    }
+                    try {
+                        const result = (await source.workerHttpRequest(request, headers, targetUrl, limiter, getNext, {
+                            brand_name: task.brand_name,
+                        }));
+                        console.log('444444 ');
+                        for (const r of result) {
+                            if (!r.ok || !r.body)
+                                return [];
+                            for (const g of r.body.data.content.records.goods) {
+                                if (!this.isGood(g))
+                                    continue;
+                                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                if (g.title.includes(r.body.data.content.text)) {
+                                    productsPageLinks[_a = r.body.data.content.text] ?? (productsPageLinks[_a] = []);
+                                    productsPageLinks[r.body.data.content.text].push(g.href);
+                                    const result = await source.worker(g.href, page, limiter, undefined, r.body.data.content.text);
+                                    //!!!!!!!!!!!!!!!
+                                    //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
+                                    //!!!!!!!!!!!!!!!
+                                    for (const r of result) {
+                                        for (const [sku, images] of Object.entries(r.data)) {
+                                            allData[sku] ?? (allData[sku] = []);
+                                            allData[sku].push(...images);
+                                        }
+                                        if (Array.isArray(r.errors)) {
+                                            for (const err of r.errors) {
+                                                try {
+                                                    await this.handleError(err);
+                                                }
+                                                catch (finalErr) {
+                                                    errors.push({
+                                                        item: err.product,
+                                                        error: finalErr,
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (err) {
+                        errors.push({
+                            item: undefined,
+                            error: err,
+                        });
+                    }
+                    finally {
+                        pool.release(page);
+                    }
+                });
+                await Promise.allSettled(workers);
+                return errors;
+            };
+            let attempt = 1;
+            let currentBatch = taskQueue;
+            while (currentBatch.length && attempt <= this.maxRetries) {
+                // todo выбрать какую то одну
+                // await limiter.sleepNormal(1000, 5000);
+                await limiter.sleep(1000, 5000);
+                console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+                const errors = await runBatch(currentBatch);
+                const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
+                currentBatch = retryable.map((e) => e.item);
+                if (currentBatch.length) {
+                    await (0, helpers_1.waitBeforeRetry)(attempt);
+                }
+                else {
+                    // оставшиеся ошибки записываем в глобальный пул ошибок
+                    errors.forEach((e) => {
+                        allErrors.push({
+                            error: e.error,
+                            targetUrl: targetUrl ?? undefined,
+                        });
+                    });
+                }
+                attempt++;
+            }
+            console.log(`All workers finished  for ${task.brand_name}`);
+            console.log('productsPageLinks = ', productsPageLinks);
+            const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
+            console.log('allDataNormalize = ');
+            console.dir(allDataNormalize, { depth: null, colors: true });
+            console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
+            console.dir(allErrors, { depth: null, colors: true });
+            /* Скачиваю полученные urls  */
+            let imageQueue = [];
+            for (const [sku, urls] of Object.entries(allDataNormalize)) {
+                urls.forEach((url, i) => {
+                    imageQueue.push({ sku, url, index: i + 1 });
+                });
+            }
+            const processImage = async (page, item) => {
+                const { sku, url, index } = item;
+                const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
+                const filename = `${task.brand_name}_${sku}_${index}__R__${ext}`;
+                await this.storage.save({
+                    filename,
+                    buffer,
+                    targetDir: path.join(task.brand_name, sku),
+                });
+            };
+            const runBatchImage = async (items) => {
+                const errors = [];
+                const queue = [...items];
+                const workers = Array.from({ length: quantityPage }, async () => {
+                    const page = await pool.acquire();
+                    try {
+                        while (true) {
+                            const item = queue.shift();
+                            if (!item)
+                                return;
+                            try {
+                                await processImage(page, item);
+                            }
+                            catch (error) {
+                                errors.push({ item, error: error });
+                            }
+                        }
+                    }
+                    finally {
+                        pool.release(page);
+                    }
+                });
+                await Promise.allSettled(workers);
+                return errors;
+            };
+            // todo должна быть централизованная обработка ошибок в методе handleError
+            const procError = (errors, attempt) => {
+                return errors.filter((e) => attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
+            };
+            let attemptImage = 1;
+            let currentBatchImage = imageQueue;
+            while (currentBatchImage.length && attemptImage <= this.maxRetries) {
+                console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
+                const errors = await runBatchImage(currentBatchImage);
+                console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
+                console.dir(errors, { depth: null, colors: true });
+                // Отбираем retryable
+                const retryable = procError(errors, attemptImage);
+                currentBatchImage = retryable.map((e) => e.item);
+                if (currentBatchImage.length) {
+                    await (0, helpers_1.waitBeforeRetry)(attemptImage);
+                }
+                else {
+                    // Сохраняем окончательные ошибки
+                    errors.forEach((e) => {
+                        allErrors.push({
+                            error: e.error,
+                            targetUrl: e.item.url,
+                        });
+                    });
+                }
+                attemptImage++;
+            }
+        }, 'fake');
+        console.log(`All workers finished  for ${task.brand_name}`);
+        const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
+        console.log('allDataNormalize = ');
+        console.dir(allDataNormalize, { depth: null, colors: true });
+        console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
+        console.dir(allErrors, { depth: null, colors: true });
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // await limiter.sleep(1000, 5000);
         // const productsPageLinks = {
@@ -413,7 +470,7 @@ class RozetkaScenario {
     }
     getUnprocessedProducts(errors) {
         console.log('getUnprocessedProducts    errors = ', errors);
-        const unprocessedProducts = Array.from(new Map(errors.filter(e => e.product).map(e => [e.product.id_product, e.product])).values());
+        const unprocessedProducts = Array.from(new Map(errors.filter((e) => e.product).map((e) => [e.product.id_product, e.product])).values());
         return unprocessedProducts;
     }
     async finalize() {

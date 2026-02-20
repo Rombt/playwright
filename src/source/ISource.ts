@@ -25,6 +25,7 @@ export interface ISource<T extends ITask> {
     targetUrl: string,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
+    debugMeta?: Record<string, string>
   ): Promise<IHttpResult<unknown>[]>;
 
   worker(
