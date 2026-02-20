@@ -178,6 +178,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             component: 'RozetkaScenario',
             method: 'process',
             const: 'getNext',
+            itemsLength: items.length,
             index: index,
           });
 

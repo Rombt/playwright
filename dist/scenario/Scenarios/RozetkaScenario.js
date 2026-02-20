@@ -125,6 +125,7 @@ class RozetkaScenario {
                         component: 'RozetkaScenario',
                         method: 'process',
                         const: 'getNext',
+                        itemsLength: items.length,
                         index: index,
                     });
                     return items[index++];
