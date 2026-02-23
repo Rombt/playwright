@@ -121,8 +121,17 @@ export class PagePool implements IPagePool, IResource {
     // Прекращаем ожидание всех waiters
     for (const waiter of this.waiters) {
       try {
+        // Если использован wrappedResolve
         waiter(Promise.reject(new Error('PagePool is closing')) as unknown as Page);
-      } catch {}
+      } catch (err) {
+        this.loggerScope?.warn('Failed to reject waiter on close', {
+          component: 'PagePool',
+          method: 'close',
+          action: 'reject_waiter',
+          stage: 'cleanup',
+          error: err,
+        });
+      }
     }
     this.waiters = [];
 
@@ -131,10 +140,17 @@ export class PagePool implements IPagePool, IResource {
       try {
         await page.close();
       } catch (err) {
-        console.warn('Error closing page:', err);
+        this.loggerScope?.warn('Error closing page during pool close', {
+          component: 'PagePool',
+          method: 'close',
+          action: 'page.close',
+          stage: 'cleanup',
+          error: err,
+        });
       }
     }
 
+    // Сброс состояния пула
     this.free = [];
     this.created = 0;
   }
