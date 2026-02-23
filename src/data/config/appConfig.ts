@@ -130,7 +130,7 @@ export class AppConfig {
       Array.isArray(value)
         ? value
             .filter((v): v is string => typeof v === 'string')
-            .map(v => v.trim())
+            .map((v) => v.trim())
             .filter(Boolean)
         : [];
 
@@ -160,6 +160,8 @@ export class AppConfig {
         },
         pages: {
           maxPage: typeof asyncConfig.pages?.maxPage === 'number' ? asyncConfig.pages.maxPage : 10,
+          maxWaiters:
+            typeof asyncConfig.pages?.maxWaiters === 'number' ? asyncConfig.pages.maxWaiters : 50,
         },
       },
     };

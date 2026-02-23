@@ -16,6 +16,7 @@ export interface AsyncConfig {
 
   pages: {
     maxPage: number;
+    maxWaiters: number;
   };
 }
 

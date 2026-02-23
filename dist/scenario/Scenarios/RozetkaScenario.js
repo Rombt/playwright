@@ -87,23 +87,36 @@ class RozetkaScenario {
                 loggerScope.error('Products are absent', {
                     component: 'RozetkaScenario',
                     method: 'process',
-                    task,
+                    action: 'runInContextByChromium(...)',
+                    stage: 'init',
+                    data: {
+                        task: task,
+                    },
                 });
             }
             const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
             const queue = [...uniqueProducts];
-            loggerScope.debug('queue is gotten', {
-                component: 'RozetkaScenario',
-                method: 'process',
-                queue: queue,
-            });
             if (!Array.isArray(queue) || queue.length === 0) {
-                loggerScope.error('Have problems this queue of unique products', {
+                loggerScope.error('The queue of unique products was not received', {
                     component: 'RozetkaScenario',
                     method: 'process',
-                    task: task,
+                    action: 'getting uniqueProducts',
+                    stage: 'finish',
+                    data: {
+                        task: task,
+                    },
                 });
+                throw new Error('The queue of unique products was not received');
             }
+            loggerScope.debug('A queue of unique products is created', {
+                component: 'RozetkaScenario',
+                method: 'process',
+                action: 'getting uniqueProducts',
+                stage: 'finish',
+                data: {
+                    queue: queue,
+                },
+            });
             const quantityPage = Math.min(queue.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
@@ -133,6 +146,15 @@ class RozetkaScenario {
                 const workers = Array.from({ length: quantityPage }, async () => {
                     var _a;
                     const page = await pool.acquire();
+                    loggerScope.debug('A pool of pages is created', {
+                        component: 'RozetkaScenario',
+                        method: 'process',
+                        action: 'new PagePool(...)',
+                        stage: 'finish',
+                        data: {
+                            pool: pool,
+                        },
+                    });
                     const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
                     if (!response) {
                         loggerScope.error('No response from page.goto', {
@@ -183,17 +205,44 @@ class RozetkaScenario {
                         const result = (await source.workerHttpRequest(request, headers, targetUrl, limiter, getNext, {
                             brand_name: task.brand_name,
                         }));
-                        console.log('444444 ');
+                        loggerScope.debug('source.workerHttpRequest() succeed', {
+                            component: 'RozetkaScenario',
+                            method: 'process',
+                            result: result,
+                        });
                         for (const r of result) {
-                            if (!r.ok || !r.body)
-                                return [];
+                            if (!r.ok || !r.body) {
+                                loggerScope.debug('One of the results from source.workerHttpRequest() is invalid', {
+                                    component: 'RozetkaScenario',
+                                    method: 'process',
+                                    result: r,
+                                });
+                                throw new Error(`One of the results from source.workerHttpRequest() is invalid  ${r}`);
+                            }
                             for (const g of r.body.data.content.records.goods) {
-                                if (!this.isGood(g))
+                                if (!this.isValidGoodsItem(g)) {
+                                    loggerScope.debug('Missing or invalid goods in one of the workerHttpRequest results', {
+                                        component: 'RozetkaScenario',
+                                        method: 'process',
+                                        sku: r.body.data.content.text,
+                                    });
                                     continue;
-                                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                }
+                                loggerScope.debug('Started processing product', {
+                                    component: 'RozetkaScenario',
+                                    method: 'process',
+                                    sku: r.body.data.content.text,
+                                    currentProduct: g,
+                                });
                                 if (g.title.includes(r.body.data.content.text)) {
                                     productsPageLinks[_a = r.body.data.content.text] ?? (productsPageLinks[_a] = []);
                                     productsPageLinks[r.body.data.content.text].push(g.href);
+                                    loggerScope.debug('Product contains required SKU in the title', {
+                                        component: 'RozetkaScenario',
+                                        method: 'process',
+                                        sku: r.body.data.content.text,
+                                        currentProduct: g,
+                                    });
                                     const result = await source.worker(g.href, page, limiter, undefined, r.body.data.content.text);
                                     //!!!!!!!!!!!!!!!
                                     //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
@@ -218,10 +267,17 @@ class RozetkaScenario {
                                         }
                                     }
                                 }
+                                else {
+                                }
                             }
                         }
                     }
                     catch (err) {
+                        loggerScope.error('source.workerHttpRequest()  failed', {
+                            component: 'RozetkaScenario',
+                            method: 'process',
+                            err: err,
+                        });
                         errors.push({
                             item: undefined,
                             error: err,
@@ -504,7 +560,7 @@ class RozetkaScenario {
             Referer: refer,
         };
     }
-    isGood(value) {
+    isValidGoodsItem(value) {
         if (typeof value !== 'object' || value === null)
             return false;
         const v = value;

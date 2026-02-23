@@ -126,26 +126,40 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         loggerScope.error('Products are absent', {
           component: 'RozetkaScenario',
           method: 'process',
-          task,
+          action: 'runInContextByChromium(...)',
+          stage: 'init',
+          data: {
+            task: task,
+          },
         });
       }
 
       const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
       const queue = [...uniqueProducts];
 
-      loggerScope.debug('queue is gotten', {
-        component: 'RozetkaScenario',
-        method: 'process',
-        queue: queue,
-      });
-
       if (!Array.isArray(queue) || queue.length === 0) {
-        loggerScope.error('Have problems this queue of unique products', {
+        loggerScope.error('The queue of unique products was not received', {
           component: 'RozetkaScenario',
           method: 'process',
-          task: task,
+          action: 'getting uniqueProducts',
+          stage: 'finish',
+          data: {
+            task: task,
+          },
         });
+
+        throw new Error('The queue of unique products was not received');
       }
+
+      loggerScope.debug('A queue of unique products is created', {
+        component: 'RozetkaScenario',
+        method: 'process',
+        action: 'getting uniqueProducts',
+        stage: 'finish',
+        data: {
+          queue: queue,
+        },
+      });
 
       const quantityPage = Math.min(queue.length, this.maxPage);
       const pool = new PagePool(context, quantityPage);
@@ -187,6 +201,15 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
         const workers = Array.from({ length: quantityPage }, async () => {
           const page = await pool.acquire();
+          loggerScope.debug('A pool of pages is created', {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'new PagePool(...)',
+            stage: 'finish',
+            data: {
+              pool: pool,
+            },
+          });
 
           const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
 
@@ -256,16 +279,54 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               },
             )) as IHttpResult<IAutocompleteResponse>[];
 
-            console.log('444444 ');
+            loggerScope.debug('source.workerHttpRequest() succeed', {
+              component: 'RozetkaScenario',
+              method: 'process',
+              result: result,
+            });
 
             for (const r of result) {
-              if (!r.ok || !r.body) return [];
+              if (!r.ok || !r.body) {
+                loggerScope.debug('One of the results from source.workerHttpRequest() is invalid', {
+                  component: 'RozetkaScenario',
+                  method: 'process',
+                  result: r,
+                });
+                throw new Error(
+                  `One of the results from source.workerHttpRequest() is invalid  ${r}`,
+                );
+              }
+
               for (const g of r.body.data.content.records.goods) {
-                if (!this.isGood(g)) continue;
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if (!this.isValidGoodsItem(g)) {
+                  loggerScope.debug(
+                    'Missing or invalid goods in one of the workerHttpRequest results',
+                    {
+                      component: 'RozetkaScenario',
+                      method: 'process',
+                      sku: r.body.data.content.text,
+                    },
+                  );
+                  continue;
+                }
+
+                loggerScope.debug('Started processing product', {
+                  component: 'RozetkaScenario',
+                  method: 'process',
+                  sku: r.body.data.content.text,
+                  currentProduct: g,
+                });
+
                 if (g.title.includes(r.body.data.content.text)) {
                   productsPageLinks[r.body.data.content.text] ??= [];
                   productsPageLinks[r.body.data.content.text].push(g.href);
+
+                  loggerScope.debug('Product contains required SKU in the title', {
+                    component: 'RozetkaScenario',
+                    method: 'process',
+                    sku: r.body.data.content.text,
+                    currentProduct: g,
+                  });
 
                   const result = await source.worker(
                     g.href,
@@ -298,10 +359,17 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                       }
                     }
                   }
+                } else {
                 }
               }
             }
           } catch (err) {
+            loggerScope.error('source.workerHttpRequest()  failed', {
+              component: 'RozetkaScenario',
+              method: 'process',
+              err: err,
+            });
+
             errors.push({
               item: undefined as any,
               error: err as IWorkerError,
@@ -660,7 +728,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     };
   }
 
-  isGood(value: unknown): value is { title: string; href: string } {
+  isValidGoodsItem(value: unknown): value is { title: string; href: string } {
     if (typeof value !== 'object' || value === null) return false;
 
     const v = value as Record<string, unknown>;

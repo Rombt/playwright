@@ -97,7 +97,7 @@ class AppConfig {
         const resolveBrands = (value) => Array.isArray(value)
             ? value
                 .filter((v) => typeof v === 'string')
-                .map(v => v.trim())
+                .map((v) => v.trim())
                 .filter(Boolean)
             : [];
         return {
@@ -123,6 +123,7 @@ class AppConfig {
                 },
                 pages: {
                     maxPage: typeof asyncConfig.pages?.maxPage === 'number' ? asyncConfig.pages.maxPage : 10,
+                    maxWaiters: typeof asyncConfig.pages?.maxWaiters === 'number' ? asyncConfig.pages.maxWaiters : 50,
                 },
             },
         };

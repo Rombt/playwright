@@ -13,6 +13,7 @@ exports.config = {
         },
         pages: {
             maxPage: 2,
+            maxWaiters: 100,
         },
     },
     data: {

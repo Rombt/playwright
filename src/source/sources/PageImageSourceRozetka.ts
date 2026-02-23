@@ -37,11 +37,15 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       indexForDebug++;
       const product = getNext();
       if (!product) {
-        this.logger.error(`While loop started. The product is absent`, {
+        this.logger.error(`Product is absent`, {
           component: 'PageImageSourceRozetka',
           method: 'workerHttpRequest',
-          indexForDebug: indexForDebug,
-          product: product,
+          action: 'whileIteration',
+          stage: 'start',
+          data: {
+            indexForDebug: indexForDebug,
+            product: product,
+          },
         });
         break;
       }
@@ -69,13 +73,17 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         loggerScope: loggerScope,
       };
 
-      loggerScope.debug(`While loop started successfully.`, {
+      loggerScope.debug(`Success.`, {
         component: 'PageImageSourceRozetka',
         method: 'workerHttpRequest',
-        indexForDebug: indexForDebug,
-        rawSku: rawSku,
-        sku: sku,
-        options: options,
+        action: 'whileIteration',
+        stage: 'start',
+        data: {
+          indexForDebug: indexForDebug,
+          rawSku: rawSku,
+          sku: sku,
+          options: options,
+        },
       });
 
       await limiter.wait();
@@ -112,7 +120,11 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         options.loggerScope?.error(`[Blocking Detected]`, {
           component: 'PageImageSourceRozetka',
           method: 'executeHttpRequest',
-          responseUrl: response.url(),
+          action: 'request.get(...)',
+          stage: 'finish',
+          data: {
+            responseUrl: response.url(),
+          },
         });
 
         switch (status) {
@@ -175,7 +187,11 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         options.loggerScope?.debug(`The "response.json()" succeeded`, {
           component: 'PageImageSourceRozetka',
           method: 'workerHttpRequest',
-          body: body,
+          action: 'response.json()',
+          stage: 'finish',
+          data: {
+            body: body,
+          },
         });
       } catch (error) {
         // Если не JSON, пробуем получить текст для диагностики блокировки
@@ -185,9 +201,13 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         options.loggerScope?.error(`[Payload Error] Ожидался JSON, получен некорректный формат`, {
           component: 'PageImageSourceRozetka',
           method: 'executeHttpRequest',
+          action: 'response.json()',
+          stage: 'finish',
           status: status,
-          ContentType: contentType,
-          RawBody_200_symbol: rawText.substring(0, 200).trim(),
+          data: {
+            ContentType: contentType,
+            RawBody_200_symbol: rawText.substring(0, 200).trim(),
+          },
         });
 
         // Логика принятия решения на основе текста
@@ -207,9 +227,11 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         url: options.url,
       };
     } catch (error) {
-      options.loggerScope?.error(`The "response.json()" is failed`, {
+      options.loggerScope?.error(`Is failed`, {
         component: 'PageImageSourceRozetka',
         method: 'executeHttpRequest',
+        action: 'response.json()',
+        stage: 'finish',
         error: error,
       });
 
