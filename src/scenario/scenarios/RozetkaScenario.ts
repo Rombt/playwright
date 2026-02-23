@@ -393,6 +393,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                         try {
                           //!!!!!!!!!!!!!!!!!!!!
                           //todo убрать хард код 1 !!
+                          //!!   https://chatgpt.com/c/699c4f03-0890-832d-b585-ddb400ac1c4d  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                           await this.handleError(err, 1, {
                             sku: '',
                             loggerScope: loggerScope,
@@ -444,7 +445,16 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         // await limiter.sleepNormal(1000, 5000);
         await limiter.sleep(1000, 5000);
 
-        console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+        loggerScope?.debug(`Search URL for  ${task.brand_name}  attempt № ${attempt}`, {
+          component: 'PageImageSourceRozetka',
+          method: 'process',
+          action: ' while (currentBatch.length && attempt <= this.maxRetries)',
+          stage: 'start',
+          data: {
+            batchSize: currentBatch.length,
+            currentBatch: currentBatch,
+          },
+        });
 
         const errors = await runBatch(currentBatch);
 
@@ -454,6 +464,16 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         );
 
         currentBatch = retryable.map((e) => e.item);
+        loggerScope?.debug(`Received a new currentBatch`, {
+          component: 'PageImageSourceRozetka',
+          method: 'process',
+          action: 'retryable.map((e) => e.item)',
+          data: {
+            attempt: attempt,
+            batchSize: currentBatch.length,
+            currentBatch: currentBatch,
+          },
+        });
 
         if (currentBatch.length) {
           await waitBeforeRetry(attempt);

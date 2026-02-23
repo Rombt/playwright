@@ -294,6 +294,7 @@ class RozetkaScenario {
                                                 try {
                                                     //!!!!!!!!!!!!!!!!!!!!
                                                     //todo убрать хард код 1 !!
+                                                    //!!   https://chatgpt.com/c/699c4f03-0890-832d-b585-ddb400ac1c4d  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                                     await this.handleError(err, 1, {
                                                         sku: '',
                                                         loggerScope: loggerScope,
@@ -344,10 +345,29 @@ class RozetkaScenario {
                 // todo выбрать какую то одну
                 // await limiter.sleepNormal(1000, 5000);
                 await limiter.sleep(1000, 5000);
-                console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+                loggerScope?.debug(`Search URL for  ${task.brand_name}  attempt № ${attempt}`, {
+                    component: 'PageImageSourceRozetka',
+                    method: 'process',
+                    action: ' while (currentBatch.length && attempt <= this.maxRetries)',
+                    stage: 'start',
+                    data: {
+                        batchSize: currentBatch.length,
+                        currentBatch: currentBatch,
+                    },
+                });
                 const errors = await runBatch(currentBatch);
                 const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
                 currentBatch = retryable.map((e) => e.item);
+                loggerScope?.debug(`Received a new currentBatch`, {
+                    component: 'PageImageSourceRozetka',
+                    method: 'process',
+                    action: 'retryable.map((e) => e.item)',
+                    data: {
+                        attempt: attempt,
+                        batchSize: currentBatch.length,
+                        currentBatch: currentBatch,
+                    },
+                });
                 if (currentBatch.length) {
                     await (0, helpers_1.waitBeforeRetry)(attempt);
                 }
