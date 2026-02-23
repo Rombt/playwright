@@ -8,7 +8,12 @@ import { IHttpResult } from '../data/entities/IResults/IHttpResult';
 export interface ISource<T extends ITask> {
   supports(task: T): boolean;
 
-  execute(targetUrl: string, page: Page, product?: IProduct, sku?: string): Promise<IWorkerResult>;
+  execute(
+    targetUrl: string,
+    page: Page,
+    options?: {},
+    debugMeta?: Record<string, string>,
+  ): Promise<IWorkerResult>;
 
   executeHttpRequest<T = unknown>(
     request: APIRequestContext,
@@ -17,6 +22,7 @@ export interface ISource<T extends ITask> {
       params?: Record<string, string>;
       headers?: Record<string, string>;
     },
+    debugMeta?: Record<string, string>,
   ): Promise<IHttpResult<T>>;
 
   workerHttpRequest(
@@ -25,7 +31,7 @@ export interface ISource<T extends ITask> {
     targetUrl: string,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
-    debugMeta?: Record<string, string>
+    debugMeta?: Record<string, string>,
   ): Promise<IHttpResult<unknown>[]>;
 
   worker(
@@ -34,5 +40,6 @@ export interface ISource<T extends ITask> {
     limiter: RateLimiter,
     getNext?: () => IProduct | undefined,
     sku?: string,
+    debugMeta?: Record<string, string>,
   ): Promise<IWorkerResult[]>;
 }

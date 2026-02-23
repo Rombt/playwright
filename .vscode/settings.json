@@ -3,5 +3,5 @@
   "phpcs.executablePath": "composer/vendor/squizlabs/php_codesniffer/bin/phpcs.bat",
   "phpsab.standard": ".phpcs.xml",
   "phpcs.autoConfigSearch": true,
-  "cSpell.words": ["Rozetka"]
+  "cSpell.words": ["domcontentloaded", "retryable", "Rozetka"]
 }

@@ -36,15 +36,22 @@ class RozetkaScenario {
                 this.logger.error('RozetkaScenario => run()', {
                     component: 'RozetkaScenario',
                     method: 'run',
-                    message: error.message,
-                    stack: error.stack,
+                    data: {
+                        errorName: error instanceof Error ? error.name : undefined,
+                        errorMessage: error instanceof Error ? error.message : String(error),
+                        stack: error instanceof Error ? error.stack : undefined,
+                    },
                 });
             }
             else {
                 this.logger.error('RozetkaScenario => run()', {
                     component: 'RozetkaScenario',
                     method: 'run',
-                    error,
+                    data: {
+                        errorName: error instanceof Error ? error.name : undefined,
+                        errorMessage: error instanceof Error ? error.message : String(error),
+                        stack: error instanceof Error ? error.stack : undefined,
+                    },
                 });
             }
         }
@@ -127,7 +134,7 @@ class RozetkaScenario {
                 loggerScope.debug('runBatch started', {
                     component: 'RozetkaScenario',
                     method: 'process',
-                    const: 'runBatch',
+                    action: 'runBatch',
                     index: index,
                     errors: errors,
                 });
@@ -137,7 +144,7 @@ class RozetkaScenario {
                     loggerScope.debug('getNext', {
                         component: 'RozetkaScenario',
                         method: 'process',
-                        const: 'getNext',
+                        action: 'getNext',
                         itemsLength: items.length,
                         index: index,
                     });
@@ -146,7 +153,7 @@ class RozetkaScenario {
                 const workers = Array.from({ length: quantityPage }, async () => {
                     var _a;
                     const page = await pool.acquire();
-                    loggerScope.debug('A pool of pages is created', {
+                    loggerScope.debug('A page from the pool is received', {
                         component: 'RozetkaScenario',
                         method: 'process',
                         action: 'new PagePool(...)',
@@ -160,8 +167,10 @@ class RozetkaScenario {
                         loggerScope.error('No response from page.goto', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            const: 'workers',
-                            response: response,
+                            action: 'workers',
+                            data: {
+                                response: response,
+                            },
                         });
                         throw new Error('No response from page.goto');
                     }
@@ -169,25 +178,33 @@ class RozetkaScenario {
                         loggerScope.error('Navigation failed', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            const: 'workers',
-                            responseStatus: response.status(),
-                            responseStatusText: response.statusText(),
+                            action: 'workers',
+                            stage: 'process',
+                            status: response.status(),
+                            data: {
+                                responseStatusText: response.statusText(),
+                            },
                         });
                         throw new Error(`Navigation failed: ${response.status()} ${response.statusText()}`);
                     }
-                    loggerScope.debug('Response from page.goto  succeeded', {
+                    loggerScope.debug('Response from  page.goto  succeeded', {
                         component: 'RozetkaScenario',
                         method: 'process',
-                        const: 'workers',
-                        response: response,
+                        action: 'workers',
+                        status: response.status(),
+                        data: {
+                            response: response,
+                        },
                     });
                     const headers = this.buildHeaders(url_init);
                     if (!headers || typeof headers !== 'object') {
                         loggerScope.error('Headers are invalid', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            const: 'workers',
-                            headers: headers,
+                            action: 'workers',
+                            data: {
+                                headers: headers,
+                            },
                         });
                         throw new Error('Headers are invalid');
                     }
@@ -196,8 +213,10 @@ class RozetkaScenario {
                         loggerScope.error('APIRequestContext is undefined', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            const: 'workers',
-                            request: context.request,
+                            action: 'workers',
+                            data: {
+                                request: context.request,
+                            },
                         });
                         throw new Error('APIRequestContext is undefined');
                     }
@@ -208,14 +227,22 @@ class RozetkaScenario {
                         loggerScope.debug('source.workerHttpRequest() succeed', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            result: result,
+                            action: 'source.workerHttpRequest(...)',
+                            stage: 'finish',
+                            data: {
+                                result: result,
+                            },
                         });
                         for (const r of result) {
                             if (!r.ok || !r.body) {
-                                loggerScope.debug('One of the results from source.workerHttpRequest() is invalid', {
+                                loggerScope.error('One of the results from source.workerHttpRequest() is invalid', {
                                     component: 'RozetkaScenario',
                                     method: 'process',
-                                    result: r,
+                                    action: 'for (const r of result)',
+                                    stage: 'start',
+                                    data: {
+                                        result: r,
+                                    },
                                 });
                                 throw new Error(`One of the results from source.workerHttpRequest() is invalid  ${r}`);
                             }
@@ -224,15 +251,22 @@ class RozetkaScenario {
                                     loggerScope.debug('Missing or invalid goods in one of the workerHttpRequest results', {
                                         component: 'RozetkaScenario',
                                         method: 'process',
-                                        sku: r.body.data.content.text,
+                                        action: 'for (const g of r.body.data.content.records.goods)',
+                                        data: {
+                                            sku: r.body.data.content.text,
+                                        },
                                     });
                                     continue;
                                 }
                                 loggerScope.debug('Started processing product', {
                                     component: 'RozetkaScenario',
                                     method: 'process',
-                                    sku: r.body.data.content.text,
-                                    currentProduct: g,
+                                    action: 'for (const g of r.body.data.content.records.goods)',
+                                    stage: 'start',
+                                    data: {
+                                        sku: r.body.data.content.text,
+                                        currentProduct: g,
+                                    },
                                 });
                                 if (g.title.includes(r.body.data.content.text)) {
                                     productsPageLinks[_a = r.body.data.content.text] ?? (productsPageLinks[_a] = []);
@@ -240,10 +274,13 @@ class RozetkaScenario {
                                     loggerScope.debug('Product contains required SKU in the title', {
                                         component: 'RozetkaScenario',
                                         method: 'process',
-                                        sku: r.body.data.content.text,
-                                        currentProduct: g,
+                                        action: 'if (g.title.includes(r.body.data.content.text))',
+                                        data: {
+                                            sku: r.body.data.content.text,
+                                            currentProduct: g,
+                                        },
                                     });
-                                    const result = await source.worker(g.href, page, limiter, undefined, r.body.data.content.text);
+                                    const result = await source.worker(g.href, page, limiter, undefined, r.body.data.content.text, { brand_name: task.brand_name });
                                     //!!!!!!!!!!!!!!!
                                     //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
                                     //!!!!!!!!!!!!!!!
@@ -272,15 +309,19 @@ class RozetkaScenario {
                             }
                         }
                     }
-                    catch (err) {
+                    catch (error) {
                         loggerScope.error('source.workerHttpRequest()  failed', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            err: err,
+                            data: {
+                                errorName: error instanceof Error ? error.name : undefined,
+                                errorMessage: error instanceof Error ? error.message : String(error),
+                                stack: error instanceof Error ? error.stack : undefined,
+                            },
                         });
                         errors.push({
                             item: undefined,
-                            error: err,
+                            error: error,
                         });
                     }
                     finally {
