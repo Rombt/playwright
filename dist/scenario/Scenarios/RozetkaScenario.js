@@ -292,7 +292,13 @@ class RozetkaScenario {
                                         if (Array.isArray(r.errors)) {
                                             for (const err of r.errors) {
                                                 try {
-                                                    await this.handleError(err);
+                                                    //!!!!!!!!!!!!!!!!!!!!
+                                                    //todo убрать хард код 1 !!
+                                                    await this.handleError(err, 1, {
+                                                        sku: '',
+                                                        loggerScope: loggerScope,
+                                                        debugMeta: {},
+                                                    });
                                                 }
                                                 catch (finalErr) {
                                                     errors.push({
@@ -313,6 +319,7 @@ class RozetkaScenario {
                         loggerScope.error('source.workerHttpRequest()  failed', {
                             component: 'RozetkaScenario',
                             method: 'process',
+                            action: 'Array.from({ length: quantityPage }, async () => {...}',
                             data: {
                                 errorName: error instanceof Error ? error.name : undefined,
                                 errorMessage: error instanceof Error ? error.message : String(error),
@@ -584,12 +591,34 @@ class RozetkaScenario {
             }
         }
     }
-    async handleError(error, attempt = 1) {
-        console.error(`Error on attempt ${attempt}:`, error);
-        if (attempt < this.maxRetries && (0, helpers_1.isRetryable)(error)) {
-            await (0, helpers_1.waitBeforeRetry)(attempt);
-            return this.handleError(error, attempt + 1);
+    async handleError(error, attempt = 1, context) {
+        context?.loggerScope?.error(`Worker error on attempt ${attempt}`, {
+            component: 'PageImageSourceRozetka',
+            method: 'handleError',
+            action: 'retry_logic',
+            stage: 'error_caught',
+            data: {
+                attempt,
+                sku: context?.sku,
+                debugMeta: context?.debugMeta,
+                errorName: error instanceof Error ? error.name : undefined,
+                errorMessage: error instanceof Error ? error.message : String(error),
+                stack: error instanceof Error ? error.stack : undefined,
+            },
+        });
+        // Проверяем возможность повторной попытки
+        if (attempt < this.config.asyncRetry.maxRetries && (0, helpers_1.isRetryable)(error)) {
+            const delay = await (0, helpers_1.waitBeforeRetry)(attempt);
+            context?.loggerScope?.debug(`Retrying after delay ${delay}ms`, {
+                component: 'PageImageSourceRozetka',
+                method: 'handleError',
+                action: 'retry_logic',
+                stage: 'retry_scheduled',
+                data: { attempt, delay },
+            });
+            return this.handleError(error, attempt + 1, context);
         }
+        // Если retries исчерпаны — пробрасываем ошибку
         throw error;
     }
     buildHeaders(refer = '') {
