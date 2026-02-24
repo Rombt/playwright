@@ -29,73 +29,49 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     headers: Record<string, string>,
     targetUrl: string,
     limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
+    sku: string,
     debugMeta: Record<string, string>,
-  ): Promise<IHttpResult<IAutocompleteResponse>[]> {
-    const results: IHttpResult<IAutocompleteResponse>[] = [];
-
-    let indexForDebug = 0;
-
-    while (true) {
-      indexForDebug++;
-      const product = getNext();
-      if (!product) {
-        this.logger.error(`Product is absent`, {
-          component: 'PageImageSourceRozetka',
-          method: 'workerHttpRequest',
-          action: 'whileIteration',
-          stage: 'start',
-          data: {
-            indexForDebug: indexForDebug,
-            product: product,
-          },
-        });
-        break;
-      }
-
-      const loggerScope = this.logger.withContext(
-        `workerHttpRequest   ${debugMeta.brand_name}   ${product.sku}`,
-      );
-
-      const rawSku = product.sku;
-      const starIndex = rawSku.indexOf('*');
-      const sku =
-        (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
-          /^[\p{C}\s]+|[\p{C}\s]+$/gu,
-          '',
-        ) ?? '';
-
-      const options = {
-        url: targetUrl,
-        params: {
-          country: 'UA',
-          lang: 'ua',
-          text: sku,
-        },
-        headers: headers,
-        loggerScope: loggerScope,
-      };
-
-      loggerScope.debug(`Success.`, {
+  ): Promise<IHttpResult<IAutocompleteResponse>> {
+    if (!sku) {
+      this.logger.error(`sku is absent`, {
         component: 'PageImageSourceRozetka',
         method: 'workerHttpRequest',
-        action: 'whileIteration',
         stage: 'start',
         data: {
-          indexForDebug: indexForDebug,
-          rawSku: rawSku,
           sku: sku,
-          options: options,
         },
       });
-
-      await limiter.wait();
-
-      const requestResult = await this.executeHttpRequest<IAutocompleteResponse>(request, options);
-      results.push(requestResult);
+      throw new Error(`In workerHttpRequest method sku is absent`);
     }
 
-    return results;
+    const loggerScope = this.logger.withContext(
+      `workerHttpRequest   ${debugMeta.brand_name}   ${sku}`,
+    );
+
+    const options = {
+      url: targetUrl,
+      params: {
+        country: 'UA',
+        lang: 'ua',
+        text: sku,
+      },
+      headers: headers,
+      loggerScope: loggerScope,
+    };
+
+    loggerScope.debug(`Success.`, {
+      component: 'PageImageSourceRozetka',
+      method: 'workerHttpRequest',
+      stage: 'start',
+      data: {
+        sku: sku,
+        options: options,
+      },
+    });
+
+    const requestResult = await this.executeHttpRequest<IAutocompleteResponse>(request, options);
+
+    return requestResult;
   }
 
   async executeHttpRequest<T = unknown>(

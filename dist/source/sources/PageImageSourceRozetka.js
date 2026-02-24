@@ -11,56 +11,40 @@ class PageImageSourceRozetka {
     supports(task) {
         return task.type === 'recollect-product-photos';
     }
-    async workerHttpRequest(request, headers, targetUrl, limiter, getNext, debugMeta) {
-        const results = [];
-        let indexForDebug = 0;
-        while (true) {
-            indexForDebug++;
-            const product = getNext();
-            if (!product) {
-                this.logger.error(`Product is absent`, {
-                    component: 'PageImageSourceRozetka',
-                    method: 'workerHttpRequest',
-                    action: 'whileIteration',
-                    stage: 'start',
-                    data: {
-                        indexForDebug: indexForDebug,
-                        product: product,
-                    },
-                });
-                break;
-            }
-            const loggerScope = this.logger.withContext(`workerHttpRequest   ${debugMeta.brand_name}   ${product.sku}`);
-            const rawSku = product.sku;
-            const starIndex = rawSku.indexOf('*');
-            const sku = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
-            const options = {
-                url: targetUrl,
-                params: {
-                    country: 'UA',
-                    lang: 'ua',
-                    text: sku,
-                },
-                headers: headers,
-                loggerScope: loggerScope,
-            };
-            loggerScope.debug(`Success.`, {
+    async workerHttpRequest(request, headers, targetUrl, limiter, sku, debugMeta) {
+        if (!sku) {
+            this.logger.error(`sku is absent`, {
                 component: 'PageImageSourceRozetka',
                 method: 'workerHttpRequest',
-                action: 'whileIteration',
                 stage: 'start',
                 data: {
-                    indexForDebug: indexForDebug,
-                    rawSku: rawSku,
                     sku: sku,
-                    options: options,
                 },
             });
-            await limiter.wait();
-            const requestResult = await this.executeHttpRequest(request, options);
-            results.push(requestResult);
+            throw new Error(`In workerHttpRequest method sku is absent`);
         }
-        return results;
+        const loggerScope = this.logger.withContext(`workerHttpRequest   ${debugMeta.brand_name}   ${sku}`);
+        const options = {
+            url: targetUrl,
+            params: {
+                country: 'UA',
+                lang: 'ua',
+                text: sku,
+            },
+            headers: headers,
+            loggerScope: loggerScope,
+        };
+        loggerScope.debug(`Success.`, {
+            component: 'PageImageSourceRozetka',
+            method: 'workerHttpRequest',
+            stage: 'start',
+            data: {
+                sku: sku,
+                options: options,
+            },
+        });
+        const requestResult = await this.executeHttpRequest(request, options);
+        return requestResult;
     }
     async executeHttpRequest(request, options) {
         const limiter = new RateLimiter_1.RateLimiter(5000);

@@ -17,3 +17,8 @@ export interface IAutocompleteResponse {
     };
   };
 }
+
+export interface IAutocompleteGood {
+  title: string;
+  href: string;
+}

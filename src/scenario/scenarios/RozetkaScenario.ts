@@ -22,7 +22,11 @@ import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
 
 import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
-import { IHttpResult, IAutocompleteResponse } from '../../data/entities/IResults/IHttpResult';
+import {
+  IHttpResult,
+  IAutocompleteResponse,
+  IAutocompleteGood,
+} from '../../data/entities/IResults/IHttpResult';
 
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
@@ -108,7 +112,9 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   async process(task: ICollectProductPhotosTask): Promise<void> {
     const loggerScope = this.logger.withContext(task.brand_name);
 
-    const source = this.sources.find((s) => s.supports(task));
+    const source = this.sources.find((s) => s.supports(task)) as
+      | ISource<ICollectProductPhotosTask, IAutocompleteResponse>
+      | undefined;
     if (!source) {
       loggerScope.error('Source not found for task', {
         component: 'RozetkaScenario',
@@ -123,10 +129,16 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     const allData: IDataImag = {};
     const limiter = new RateLimiter(5000);
     const productsPageLinks: Record<string, string[]> = {};
-    // await this.browser.runInContext(async context => { //todo не забыть убрать
     await this.browser.runInContextByChromium(async (context) => {
-      const url_init: string = 'https://rozetka.com.ua/';
-      const targetUrl: string =
+      //!!==================================================================================================!!
+      type TaskResult =
+        | { status: 'success'; sku: string }
+        | { status: 'retry'; sku: string; error: IWorkerError }
+        | { status: 'fatal'; sku: string; error: IWorkerError };
+
+      //========================    Основной код сценария    ========================
+      const url_init = 'https://rozetka.com.ua/';
+      const targetUrl =
         'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
 
       const products = task.products;
@@ -135,453 +147,200 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         loggerScope.error('Products are absent', {
           component: 'RozetkaScenario',
           method: 'process',
-          action: 'runInContextByChromium(...)',
           stage: 'init',
-          data: {
-            task: task,
-          },
+          data: { task },
         });
+        throw new Error('Products are absent');
       }
 
       const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
-      const queue = [...uniqueProducts];
 
-      if (!Array.isArray(queue) || queue.length === 0) {
-        loggerScope.error('The queue of unique products was not received', {
-          component: 'RozetkaScenario',
-          method: 'process',
-          action: 'getting uniqueProducts',
-          stage: 'finish',
-          data: {
-            task: task,
-          },
-        });
+      let taskQueue: string[] = uniqueProducts.map((p) => p.sku);
 
-        throw new Error('The queue of unique products was not received');
-      }
+      const quantityPage = Math.min(taskQueue.length, this.maxPage);
 
-      loggerScope.debug('A queue of unique products is created', {
-        component: 'RozetkaScenario',
-        method: 'process',
-        action: 'getting uniqueProducts',
-        stage: 'finish',
-        data: {
-          queue: queue,
-        },
-      });
-
-      const quantityPage = Math.min(queue.length, this.maxPage);
       const pool = new PagePool(context, quantityPage);
       this.registerResource(pool);
+      //========================    /Основной код сценария    ========================
 
-      // //todo  Убрать!
-      type ITaskError = {
-        item?: IProduct;
-        error: IWorkerError;
+      //========================    Обработка ОДНОГО SKU    ========================
+      const processSku = async (sku: string, page: Page): Promise<TaskResult> => {
+        try {
+          const headers = this.buildHeaders(url_init);
+          if (!headers) {
+            throw new Error('Invalid headers');
+          }
+
+          const autocomplete = await withRetry(
+            () =>
+              source!.workerHttpRequest(context.request, headers, targetUrl, limiter, sku, {
+                brand_name: task.brand_name,
+              }),
+            {
+              maxRetries: this.config.asyncRetry.maxRetries,
+              isRetryable,
+            },
+          );
+
+          if (!autocomplete.ok || !autocomplete.body) {
+            loggerScope.error('autocomplete is invalid', {
+              component: 'RozetkaScenario',
+              method: 'process',
+              action: 'autocomplete = await withRetry(...)',
+              stage: 'start',
+              data: {
+                result: autocomplete,
+              },
+            });
+
+            throw new Error(
+              `One of the results from source.workerHttpRequest() is invalid  ${autocomplete}`,
+            );
+          }
+
+          for (const g of autocomplete.body?.data.content.records.goods ?? []) {
+            if (!this.isAutocompleteGood(g)) continue;
+
+            if (!g.title.includes(sku)) continue;
+
+            const result = await withRetry(
+              () =>
+                source.worker(g.href, page, limiter, undefined, sku, {
+                  brand_name: task.brand_name,
+                }),
+              {
+                maxRetries: this.config.asyncRetry.maxRetries,
+                isRetryable,
+              },
+            );
+
+            for (const r of result) {
+              for (const [skuKey, images] of Object.entries(r.data)) {
+                allData[skuKey] ??= [];
+                allData[skuKey].push(...images);
+              }
+            }
+          }
+
+          return { status: 'success', sku };
+        } catch (e) {
+          return isRetryable(e as IWorkerError)
+            ? { status: 'retry', sku, error: e as IWorkerError }
+            : { status: 'fatal', sku, error: e as IWorkerError };
+        }
       };
+      //========================    /Обработка ОДНОГО SKU    ========================
 
-      let taskQueue: IProduct[] = [...queue];
-
-      const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
-        const errors: ITaskError[] = [];
-        let index = 0;
-
-        loggerScope.debug('runBatch started', {
-          component: 'RozetkaScenario',
-          method: 'process',
-          action: 'runBatch',
-          index: index,
-          errors: errors,
-        });
-
-        const getNext = (): IProduct | undefined => {
-          if (index >= items.length) return undefined;
-
-          loggerScope.debug('getNext', {
-            component: 'RozetkaScenario',
-            method: 'process',
-            action: 'getNext',
-            itemsLength: items.length,
-            index: index,
-          });
-
-          return items[index++];
-        };
+      //========================   Batch runner (без getNext, без race)     ========================
+      async function runBatch(skus: string[]): Promise<TaskResult[]> {
+        const queue = [...skus];
+        const results: TaskResult[] = [];
 
         const workers = Array.from({ length: quantityPage }, async () => {
           const page = await pool.acquire();
-          loggerScope.debug('A page from the pool is received', {
-            component: 'RozetkaScenario',
-            method: 'process',
-            action: 'new PagePool(...)',
-            stage: 'finish',
-            data: {
-              pool: pool,
-            },
-          });
-
-          const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
-
-          if (!response) {
-            loggerScope.error('No response from page.goto', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'workers',
-              data: {
-                response: response,
-              },
-            });
-
-            throw new Error('No response from page.goto');
-          }
-
-          if (!response.ok()) {
-            loggerScope.error('Navigation failed', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'workers',
-              stage: 'process',
-              status: response.status(),
-              data: {
-                responseStatusText: response.statusText(),
-              },
-            });
-
-            throw new Error(`Navigation failed: ${response.status()} ${response.statusText()}`);
-          }
-
-          loggerScope.debug('Response from  page.goto  succeeded', {
-            component: 'RozetkaScenario',
-            method: 'process',
-            action: 'workers',
-            status: response.status(),
-            data: {
-              response: response,
-            },
-          });
-
-          const headers = this.buildHeaders(url_init);
-          if (!headers || typeof headers !== 'object') {
-            loggerScope.error('Headers are invalid', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'workers',
-              data: {
-                headers: headers,
-              },
-            });
-
-            throw new Error('Headers are invalid');
-          }
-
-          const request = context.request;
-          if (!context.request) {
-            loggerScope.error('APIRequestContext is undefined', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'workers',
-              data: {
-                request: context.request,
-              },
-            });
-
-            throw new Error('APIRequestContext is undefined');
-          }
 
           try {
-            const result = (await source.workerHttpRequest(
-              request,
-              headers,
-              targetUrl,
-              limiter,
-              getNext,
-              {
-                brand_name: task.brand_name,
-              },
-            )) as IHttpResult<IAutocompleteResponse>[];
-
-            loggerScope.debug('source.workerHttpRequest() succeed', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'source.workerHttpRequest(...)',
-              stage: 'finish',
-              data: {
-                result: result,
-              },
-            });
-
-            for (const r of result) {
-              if (!r.ok || !r.body) {
-                loggerScope.error('One of the results from source.workerHttpRequest() is invalid', {
-                  component: 'RozetkaScenario',
-                  method: 'process',
-                  action: 'for (const r of result)',
-                  stage: 'start',
-                  data: {
-                    result: r,
-                  },
-                });
-
-                throw new Error(
-                  `One of the results from source.workerHttpRequest() is invalid  ${r}`,
-                );
-              }
-
-              for (const g of r.body.data.content.records.goods) {
-                if (!this.isValidGoodsItem(g)) {
-                  loggerScope.debug(
-                    'Missing or invalid goods in one of the workerHttpRequest results',
-                    {
-                      component: 'RozetkaScenario',
-                      method: 'process',
-                      action: 'for (const g of r.body.data.content.records.goods)',
-                      data: {
-                        sku: r.body.data.content.text,
-                      },
-                    },
-                  );
-                  continue;
-                }
-
-                loggerScope.debug('Started processing product', {
-                  component: 'RozetkaScenario',
-                  method: 'process',
-                  action: 'for (const g of r.body.data.content.records.goods)',
-                  stage: 'start',
-                  data: {
-                    sku: r.body.data.content.text,
-                    currentProduct: g,
-                  },
-                });
-
-                if (g.title.includes(r.body.data.content.text)) {
-                  productsPageLinks[r.body.data.content.text] ??= [];
-                  productsPageLinks[r.body.data.content.text].push(g.href);
-
-                  loggerScope.debug('Product contains required SKU in the title', {
-                    component: 'RozetkaScenario',
-                    method: 'process',
-                    action: 'if (g.title.includes(r.body.data.content.text))',
-                    data: {
-                      sku: r.body.data.content.text,
-                      currentProduct: g,
-                    },
-                  });
-
-                  const result = await source.worker(
-                    g.href,
-                    page,
-                    limiter,
-                    undefined,
-                    r.body.data.content.text,
-
-                    { brand_name: task.brand_name },
-                  );
-
-                  //!!!!!!!!!!!!!!!
-                  //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
-                  //!!!!!!!!!!!!!!!
-
-                  for (const r of result) {
-                    for (const [sku, images] of Object.entries(r.data)) {
-                      allData[sku] ??= [];
-                      allData[sku].push(...images);
-                    }
-
-                    if (Array.isArray(r.errors)) {
-                      for (const err of r.errors) {
-                        try {
-                          //!!!!!!!!!!!!!!!!!!!!
-                          //todo убрать хард код 1 !!
-                          //!!   https://chatgpt.com/c/699c4f03-0890-832d-b585-ddb400ac1c4d  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                          await this.handleError(err, 1, {
-                            sku: '',
-                            loggerScope: loggerScope,
-                            debugMeta: {},
-                          });
-                        } catch (finalErr) {
-                          errors.push({
-                            item: err.product,
-                            error: finalErr as IWorkerError,
-                          });
-                        }
-                      }
-                    }
-                  }
-                } else {
-                }
-              }
+            const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
+            if (!response?.ok()) {
+              throw new Error(`Navigation failed: ${response?.status()}`);
             }
-          } catch (error) {
-            loggerScope.error('source.workerHttpRequest()  failed', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'Array.from({ length: quantityPage }, async () => {...}',
-              data: {
-                errorName: error instanceof Error ? error.name : undefined,
-                errorMessage: error instanceof Error ? error.message : String(error),
-                stack: error instanceof Error ? error.stack : undefined,
-              },
-            });
 
-            errors.push({
-              item: undefined as any,
-              error: error as IWorkerError,
-            });
+            while (queue.length) {
+              const sku = queue.shift();
+              if (!sku) {
+                loggerScope.error(`sku is absent`, {
+                  component: 'PageImageSourceRozetka',
+                  method: 'process',
+                  action: 'while (queue.length)',
+                  stage: 'start',
+                  data: {
+                    sku: sku,
+                  },
+                });
+                throw new Error(`In process method sku is absent`);
+              }
+
+              const rawSku = sku;
+              const starIndex = rawSku.indexOf('*');
+              const skuNormal =
+                (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
+                  /^[\p{C}\s]+|[\p{C}\s]+$/gu,
+                  '',
+                ) ?? '';
+
+              const result = await processSku(skuNormal, page);
+              results.push(result);
+            }
           } finally {
             pool.release(page);
           }
         });
 
-        await Promise.allSettled(workers);
-        return errors;
-      };
+        await Promise.all(workers);
+        return results;
+      }
+      //========================  /Batch runner (без getNext, без race)     ========================
 
+      //========================  Retry wrapper (ЕДИНСТВЕННЫЙ)     ========================
+
+      async function withRetry<T>(
+        action: () => Promise<T>,
+        options: {
+          maxRetries: number;
+          isRetryable: (error: IWorkerError) => boolean;
+          onRetry?: (attempt: number, error: unknown) => void;
+        },
+      ): Promise<T> {
+        let attempt = 1;
+
+        while (true) {
+          try {
+            return await action();
+          } catch (e) {
+            if (attempt >= options.maxRetries || !options.isRetryable(e as IWorkerError)) {
+              throw e;
+            }
+
+            options.onRetry?.(attempt, e);
+            await waitBeforeRetry(attempt);
+            attempt++;
+          }
+        }
+      }
+
+      //========================  /Retry wrapper (ЕДИНСТВЕННЫЙ)     =======================
+
+      //========================   ГЛАВНЫЙ RETRY ЦИКЛ     ========================
       let attempt = 1;
       let currentBatch = taskQueue;
 
       while (currentBatch.length && attempt <= this.maxRetries) {
-        // todo выбрать какую то одну
-        // await limiter.sleepNormal(1000, 5000);
         await limiter.sleep(1000, 5000);
 
-        loggerScope?.debug(`Search URL for  ${task.brand_name}  attempt № ${attempt}`, {
-          component: 'PageImageSourceRozetka',
-          method: 'process',
-          action: ' while (currentBatch.length && attempt <= this.maxRetries)',
-          stage: 'start',
-          data: {
-            batchSize: currentBatch.length,
-            currentBatch: currentBatch,
-          },
-        });
+        const results: TaskResult[] = await runBatch.call(this, currentBatch);
 
-        const errors = await runBatch(currentBatch);
-
-        const retryable = errors.filter(
-          (e): e is { item: IProduct; error: IWorkerError } =>
-            !!e.item && attempt < this.maxRetries && isRetryable(e.error),
+        const retryResults = results.filter(
+          (r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry',
         );
 
-        currentBatch = retryable.map((e) => e.item);
-        loggerScope?.debug(`Received a new currentBatch`, {
-          component: 'PageImageSourceRozetka',
-          method: 'process',
-          action: 'retryable.map((e) => e.item)',
-          data: {
-            attempt: attempt,
-            batchSize: currentBatch.length,
-            currentBatch: currentBatch,
-          },
-        });
+        const fatalResults = results.filter(
+          (r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal',
+        );
 
-        if (currentBatch.length) {
-          await waitBeforeRetry(attempt);
-        } else {
-          // оставшиеся ошибки записываем в глобальный пул ошибок
-          errors.forEach((e) => {
-            allErrors.push({
-              error: e.error,
-              targetUrl: targetUrl ?? undefined,
-            });
-          });
-        }
+        currentBatch = retryResults.map((r) => r.sku);
+
+        fatalResults.forEach((r) =>
+          allErrors.push({
+            error: r.error,
+            targetUrl,
+          }),
+        );
 
         attempt++;
       }
 
-      console.log(`All workers finished  for ${task.brand_name}`);
-      console.log('productsPageLinks = ', productsPageLinks);
-
-      const allDataNormalize = normalizeAllData(allData);
-      console.log('allDataNormalize = ');
-      console.dir(allDataNormalize, { depth: null, colors: true });
-
-      console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
-      console.dir(allErrors, { depth: null, colors: true });
-
-      /* Скачиваю полученные urls  */
-
-      let imageQueue: IImageItem[] = [];
-      for (const [sku, urls] of Object.entries(allDataNormalize)) {
-        urls.forEach((url, i) => {
-          imageQueue.push({ sku, url, index: i + 1 });
-        });
-      }
-
-      const processImage = async (page: Page, item: IImageItem): Promise<void> => {
-        const { sku, url, index } = item;
-        const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
-        const filename = `${task.brand_name}_${sku}_${index}__R__${ext}`;
-
-        await this.storage.save({
-          filename,
-          buffer,
-          targetDir: path.join(task.brand_name, sku),
-        });
-      };
-
-      const runBatchImage = async (items: IImageItem[]): Promise<IImageError[]> => {
-        const errors: IImageError[] = [];
-        const queue = [...items];
-
-        const workers = Array.from({ length: quantityPage }, async () => {
-          const page = await pool.acquire();
-
-          try {
-            while (true) {
-              const item = queue.shift();
-              if (!item) return;
-
-              try {
-                await processImage(page, item);
-              } catch (error) {
-                errors.push({ item, error: error as IWorkerError });
-              }
-            }
-          } finally {
-            pool.release(page);
-          }
-        });
-
-        await Promise.allSettled(workers);
-        return errors;
-      };
-
-      // todo должна быть централизованная обработка ошибок в методе handleError
-      const procError = (errors: IImageError[], attempt: number): IImageError[] => {
-        return errors.filter((e) => attempt < this.maxRetries && isRetryable(e.error));
-      };
-
-      let attemptImage = 1;
-      let currentBatchImage = imageQueue;
-
-      while (currentBatchImage.length && attemptImage <= this.maxRetries) {
-        console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
-
-        const errors = await runBatchImage(currentBatchImage);
-
-        console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
-        console.dir(errors, { depth: null, colors: true });
-
-        // Отбираем retryable
-        const retryable = procError(errors, attemptImage);
-        currentBatchImage = retryable.map((e) => e.item);
-
-        if (currentBatchImage.length) {
-          await waitBeforeRetry(attemptImage);
-        } else {
-          // Сохраняем окончательные ошибки
-          errors.forEach((e) => {
-            allErrors.push({
-              error: e.error,
-              targetUrl: e.item.url,
-            });
-          });
-        }
-
-        attemptImage++;
-      }
+      //========================   /ГЛАВНЫЙ RETRY ЦИКЛ     ========================
+      //!!==================================================================================================!!
     }, 'fake');
 
     console.log(`All workers finished  for ${task.brand_name}`);
@@ -829,11 +588,14 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     };
   }
 
-  isValidGoodsItem(value: unknown): value is { title: string; href: string } {
-    if (typeof value !== 'object' || value === null) return false;
-
-    const v = value as Record<string, unknown>;
-
-    return typeof v.title === 'string' && typeof v.href === 'string';
+  isAutocompleteGood(obj: unknown): obj is IAutocompleteGood {
+    return (
+      typeof obj === 'object' &&
+      obj !== null &&
+      'title' in obj &&
+      typeof (obj as any).title === 'string' &&
+      'href' in obj &&
+      typeof (obj as any).href === 'string'
+    );
   }
 }

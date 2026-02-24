@@ -85,8 +85,8 @@ class RozetkaScenario {
         const allData = {};
         const limiter = new RateLimiter_1.RateLimiter(5000);
         const productsPageLinks = {};
-        // await this.browser.runInContext(async context => { //todo не забыть убрать
         await this.browser.runInContextByChromium(async (context) => {
+            //========================    Основной код сценария    ========================
             const url_init = 'https://rozetka.com.ua/';
             const targetUrl = 'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
             const products = task.products;
@@ -94,371 +94,144 @@ class RozetkaScenario {
                 loggerScope.error('Products are absent', {
                     component: 'RozetkaScenario',
                     method: 'process',
-                    action: 'runInContextByChromium(...)',
                     stage: 'init',
-                    data: {
-                        task: task,
-                    },
+                    data: { task },
                 });
+                throw new Error('Products are absent');
             }
             const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
-            const queue = [...uniqueProducts];
-            if (!Array.isArray(queue) || queue.length === 0) {
-                loggerScope.error('The queue of unique products was not received', {
-                    component: 'RozetkaScenario',
-                    method: 'process',
-                    action: 'getting uniqueProducts',
-                    stage: 'finish',
-                    data: {
-                        task: task,
-                    },
-                });
-                throw new Error('The queue of unique products was not received');
-            }
-            loggerScope.debug('A queue of unique products is created', {
-                component: 'RozetkaScenario',
-                method: 'process',
-                action: 'getting uniqueProducts',
-                stage: 'finish',
-                data: {
-                    queue: queue,
-                },
-            });
-            const quantityPage = Math.min(queue.length, this.maxPage);
+            let taskQueue = uniqueProducts.map((p) => p.sku);
+            const quantityPage = Math.min(taskQueue.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
-            let taskQueue = [...queue];
-            const runBatch = async (items) => {
-                const errors = [];
-                let index = 0;
-                loggerScope.debug('runBatch started', {
-                    component: 'RozetkaScenario',
-                    method: 'process',
-                    action: 'runBatch',
-                    index: index,
-                    errors: errors,
-                });
-                const getNext = () => {
-                    if (index >= items.length)
-                        return undefined;
-                    loggerScope.debug('getNext', {
-                        component: 'RozetkaScenario',
-                        method: 'process',
-                        action: 'getNext',
-                        itemsLength: items.length,
-                        index: index,
-                    });
-                    return items[index++];
-                };
-                const workers = Array.from({ length: quantityPage }, async () => {
-                    var _a;
-                    const page = await pool.acquire();
-                    loggerScope.debug('A page from the pool is received', {
-                        component: 'RozetkaScenario',
-                        method: 'process',
-                        action: 'new PagePool(...)',
-                        stage: 'finish',
-                        data: {
-                            pool: pool,
-                        },
-                    });
-                    const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
-                    if (!response) {
-                        loggerScope.error('No response from page.goto', {
-                            component: 'RozetkaScenario',
-                            method: 'process',
-                            action: 'workers',
-                            data: {
-                                response: response,
-                            },
-                        });
-                        throw new Error('No response from page.goto');
-                    }
-                    if (!response.ok()) {
-                        loggerScope.error('Navigation failed', {
-                            component: 'RozetkaScenario',
-                            method: 'process',
-                            action: 'workers',
-                            stage: 'process',
-                            status: response.status(),
-                            data: {
-                                responseStatusText: response.statusText(),
-                            },
-                        });
-                        throw new Error(`Navigation failed: ${response.status()} ${response.statusText()}`);
-                    }
-                    loggerScope.debug('Response from  page.goto  succeeded', {
-                        component: 'RozetkaScenario',
-                        method: 'process',
-                        action: 'workers',
-                        status: response.status(),
-                        data: {
-                            response: response,
-                        },
-                    });
+            //========================    /Основной код сценария    ========================
+            //========================    Обработка ОДНОГО SKU    ========================
+            const processSku = async (sku, page) => {
+                try {
                     const headers = this.buildHeaders(url_init);
-                    if (!headers || typeof headers !== 'object') {
-                        loggerScope.error('Headers are invalid', {
+                    if (!headers) {
+                        throw new Error('Invalid headers');
+                    }
+                    const autocomplete = await withRetry(() => source.workerHttpRequest(context.request, headers, targetUrl, limiter, sku, {
+                        brand_name: task.brand_name,
+                    }), {
+                        maxRetries: this.config.asyncRetry.maxRetries,
+                        isRetryable: helpers_1.isRetryable,
+                    });
+                    if (!autocomplete.ok || !autocomplete.body) {
+                        loggerScope.error('autocomplete is invalid', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            action: 'workers',
+                            action: 'autocomplete = await withRetry(...)',
+                            stage: 'start',
                             data: {
-                                headers: headers,
+                                result: autocomplete,
                             },
                         });
-                        throw new Error('Headers are invalid');
+                        throw new Error(`One of the results from source.workerHttpRequest() is invalid  ${autocomplete}`);
                     }
-                    const request = context.request;
-                    if (!context.request) {
-                        loggerScope.error('APIRequestContext is undefined', {
-                            component: 'RozetkaScenario',
-                            method: 'process',
-                            action: 'workers',
-                            data: {
-                                request: context.request,
-                            },
-                        });
-                        throw new Error('APIRequestContext is undefined');
-                    }
-                    try {
-                        const result = (await source.workerHttpRequest(request, headers, targetUrl, limiter, getNext, {
+                    for (const g of autocomplete.body?.data.content.records.goods ?? []) {
+                        if (!this.isAutocompleteGood(g))
+                            continue;
+                        if (!g.title.includes(sku))
+                            continue;
+                        const result = await withRetry(() => source.worker(g.href, page, limiter, undefined, sku, {
                             brand_name: task.brand_name,
-                        }));
-                        loggerScope.debug('source.workerHttpRequest() succeed', {
-                            component: 'RozetkaScenario',
-                            method: 'process',
-                            action: 'source.workerHttpRequest(...)',
-                            stage: 'finish',
-                            data: {
-                                result: result,
-                            },
+                        }), {
+                            maxRetries: this.config.asyncRetry.maxRetries,
+                            isRetryable: helpers_1.isRetryable,
                         });
                         for (const r of result) {
-                            if (!r.ok || !r.body) {
-                                loggerScope.error('One of the results from source.workerHttpRequest() is invalid', {
-                                    component: 'RozetkaScenario',
-                                    method: 'process',
-                                    action: 'for (const r of result)',
-                                    stage: 'start',
-                                    data: {
-                                        result: r,
-                                    },
-                                });
-                                throw new Error(`One of the results from source.workerHttpRequest() is invalid  ${r}`);
-                            }
-                            for (const g of r.body.data.content.records.goods) {
-                                if (!this.isValidGoodsItem(g)) {
-                                    loggerScope.debug('Missing or invalid goods in one of the workerHttpRequest results', {
-                                        component: 'RozetkaScenario',
-                                        method: 'process',
-                                        action: 'for (const g of r.body.data.content.records.goods)',
-                                        data: {
-                                            sku: r.body.data.content.text,
-                                        },
-                                    });
-                                    continue;
-                                }
-                                loggerScope.debug('Started processing product', {
-                                    component: 'RozetkaScenario',
-                                    method: 'process',
-                                    action: 'for (const g of r.body.data.content.records.goods)',
-                                    stage: 'start',
-                                    data: {
-                                        sku: r.body.data.content.text,
-                                        currentProduct: g,
-                                    },
-                                });
-                                if (g.title.includes(r.body.data.content.text)) {
-                                    productsPageLinks[_a = r.body.data.content.text] ?? (productsPageLinks[_a] = []);
-                                    productsPageLinks[r.body.data.content.text].push(g.href);
-                                    loggerScope.debug('Product contains required SKU in the title', {
-                                        component: 'RozetkaScenario',
-                                        method: 'process',
-                                        action: 'if (g.title.includes(r.body.data.content.text))',
-                                        data: {
-                                            sku: r.body.data.content.text,
-                                            currentProduct: g,
-                                        },
-                                    });
-                                    const result = await source.worker(g.href, page, limiter, undefined, r.body.data.content.text, { brand_name: task.brand_name });
-                                    //!!!!!!!!!!!!!!!
-                                    //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
-                                    //!!!!!!!!!!!!!!!
-                                    for (const r of result) {
-                                        for (const [sku, images] of Object.entries(r.data)) {
-                                            allData[sku] ?? (allData[sku] = []);
-                                            allData[sku].push(...images);
-                                        }
-                                        if (Array.isArray(r.errors)) {
-                                            for (const err of r.errors) {
-                                                try {
-                                                    //!!!!!!!!!!!!!!!!!!!!
-                                                    //todo убрать хард код 1 !!
-                                                    //!!   https://chatgpt.com/c/699c4f03-0890-832d-b585-ddb400ac1c4d  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                                    await this.handleError(err, 1, {
-                                                        sku: '',
-                                                        loggerScope: loggerScope,
-                                                        debugMeta: {},
-                                                    });
-                                                }
-                                                catch (finalErr) {
-                                                    errors.push({
-                                                        item: err.product,
-                                                        error: finalErr,
-                                                    });
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else {
-                                }
+                            for (const [skuKey, images] of Object.entries(r.data)) {
+                                allData[skuKey] ?? (allData[skuKey] = []);
+                                allData[skuKey].push(...images);
                             }
                         }
                     }
-                    catch (error) {
-                        loggerScope.error('source.workerHttpRequest()  failed', {
-                            component: 'RozetkaScenario',
-                            method: 'process',
-                            action: 'Array.from({ length: quantityPage }, async () => {...}',
-                            data: {
-                                errorName: error instanceof Error ? error.name : undefined,
-                                errorMessage: error instanceof Error ? error.message : String(error),
-                                stack: error instanceof Error ? error.stack : undefined,
-                            },
-                        });
-                        errors.push({
-                            item: undefined,
-                            error: error,
-                        });
+                    return { status: 'success', sku };
+                }
+                catch (e) {
+                    return (0, helpers_1.isRetryable)(e)
+                        ? { status: 'retry', sku, error: e }
+                        : { status: 'fatal', sku, error: e };
+                }
+            };
+            //========================    /Обработка ОДНОГО SKU    ========================
+            //========================   Batch runner (без getNext, без race)     ========================
+            async function runBatch(skus) {
+                const queue = [...skus];
+                const results = [];
+                const workers = Array.from({ length: quantityPage }, async () => {
+                    const page = await pool.acquire();
+                    try {
+                        const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
+                        if (!response?.ok()) {
+                            throw new Error(`Navigation failed: ${response?.status()}`);
+                        }
+                        while (queue.length) {
+                            const sku = queue.shift();
+                            if (!sku) {
+                                loggerScope.error(`sku is absent`, {
+                                    component: 'PageImageSourceRozetka',
+                                    method: 'process',
+                                    action: 'while (queue.length)',
+                                    stage: 'start',
+                                    data: {
+                                        sku: sku,
+                                    },
+                                });
+                                throw new Error(`In process method sku is absent`);
+                            }
+                            const rawSku = sku;
+                            const starIndex = rawSku.indexOf('*');
+                            const skuNormal = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
+                            const result = await processSku(skuNormal, page);
+                            results.push(result);
+                        }
                     }
                     finally {
                         pool.release(page);
                     }
                 });
-                await Promise.allSettled(workers);
-                return errors;
-            };
+                await Promise.all(workers);
+                return results;
+            }
+            //========================  /Batch runner (без getNext, без race)     ========================
+            //========================  Retry wrapper (ЕДИНСТВЕННЫЙ)     ========================
+            async function withRetry(action, options) {
+                let attempt = 1;
+                while (true) {
+                    try {
+                        return await action();
+                    }
+                    catch (e) {
+                        if (attempt >= options.maxRetries || !options.isRetryable(e)) {
+                            throw e;
+                        }
+                        options.onRetry?.(attempt, e);
+                        await (0, helpers_1.waitBeforeRetry)(attempt);
+                        attempt++;
+                    }
+                }
+            }
+            //========================  /Retry wrapper (ЕДИНСТВЕННЫЙ)     =======================
+            //========================   ГЛАВНЫЙ RETRY ЦИКЛ     ========================
             let attempt = 1;
             let currentBatch = taskQueue;
             while (currentBatch.length && attempt <= this.maxRetries) {
-                // todo выбрать какую то одну
-                // await limiter.sleepNormal(1000, 5000);
                 await limiter.sleep(1000, 5000);
-                loggerScope?.debug(`Search URL for  ${task.brand_name}  attempt № ${attempt}`, {
-                    component: 'PageImageSourceRozetka',
-                    method: 'process',
-                    action: ' while (currentBatch.length && attempt <= this.maxRetries)',
-                    stage: 'start',
-                    data: {
-                        batchSize: currentBatch.length,
-                        currentBatch: currentBatch,
-                    },
-                });
-                const errors = await runBatch(currentBatch);
-                const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
-                currentBatch = retryable.map((e) => e.item);
-                loggerScope?.debug(`Received a new currentBatch`, {
-                    component: 'PageImageSourceRozetka',
-                    method: 'process',
-                    action: 'retryable.map((e) => e.item)',
-                    data: {
-                        attempt: attempt,
-                        batchSize: currentBatch.length,
-                        currentBatch: currentBatch,
-                    },
-                });
-                if (currentBatch.length) {
-                    await (0, helpers_1.waitBeforeRetry)(attempt);
-                }
-                else {
-                    // оставшиеся ошибки записываем в глобальный пул ошибок
-                    errors.forEach((e) => {
-                        allErrors.push({
-                            error: e.error,
-                            targetUrl: targetUrl ?? undefined,
-                        });
-                    });
-                }
+                const results = await runBatch.call(this, currentBatch);
+                const retryResults = results.filter((r) => r.status === 'retry');
+                const fatalResults = results.filter((r) => r.status === 'fatal');
+                currentBatch = retryResults.map((r) => r.sku);
+                fatalResults.forEach((r) => allErrors.push({
+                    error: r.error,
+                    targetUrl,
+                }));
                 attempt++;
             }
-            console.log(`All workers finished  for ${task.brand_name}`);
-            console.log('productsPageLinks = ', productsPageLinks);
-            const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
-            console.log('allDataNormalize = ');
-            console.dir(allDataNormalize, { depth: null, colors: true });
-            console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
-            console.dir(allErrors, { depth: null, colors: true });
-            /* Скачиваю полученные urls  */
-            let imageQueue = [];
-            for (const [sku, urls] of Object.entries(allDataNormalize)) {
-                urls.forEach((url, i) => {
-                    imageQueue.push({ sku, url, index: i + 1 });
-                });
-            }
-            const processImage = async (page, item) => {
-                const { sku, url, index } = item;
-                const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
-                const filename = `${task.brand_name}_${sku}_${index}__R__${ext}`;
-                await this.storage.save({
-                    filename,
-                    buffer,
-                    targetDir: path.join(task.brand_name, sku),
-                });
-            };
-            const runBatchImage = async (items) => {
-                const errors = [];
-                const queue = [...items];
-                const workers = Array.from({ length: quantityPage }, async () => {
-                    const page = await pool.acquire();
-                    try {
-                        while (true) {
-                            const item = queue.shift();
-                            if (!item)
-                                return;
-                            try {
-                                await processImage(page, item);
-                            }
-                            catch (error) {
-                                errors.push({ item, error: error });
-                            }
-                        }
-                    }
-                    finally {
-                        pool.release(page);
-                    }
-                });
-                await Promise.allSettled(workers);
-                return errors;
-            };
-            // todo должна быть централизованная обработка ошибок в методе handleError
-            const procError = (errors, attempt) => {
-                return errors.filter((e) => attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
-            };
-            let attemptImage = 1;
-            let currentBatchImage = imageQueue;
-            while (currentBatchImage.length && attemptImage <= this.maxRetries) {
-                console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
-                const errors = await runBatchImage(currentBatchImage);
-                console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
-                console.dir(errors, { depth: null, colors: true });
-                // Отбираем retryable
-                const retryable = procError(errors, attemptImage);
-                currentBatchImage = retryable.map((e) => e.item);
-                if (currentBatchImage.length) {
-                    await (0, helpers_1.waitBeforeRetry)(attemptImage);
-                }
-                else {
-                    // Сохраняем окончательные ошибки
-                    errors.forEach((e) => {
-                        allErrors.push({
-                            error: e.error,
-                            targetUrl: e.item.url,
-                        });
-                    });
-                }
-                attemptImage++;
-            }
+            //========================   /ГЛАВНЫЙ RETRY ЦИКЛ     ========================
+            //!!==================================================================================================!!
         }, 'fake');
         console.log(`All workers finished  for ${task.brand_name}`);
         const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
@@ -650,11 +423,13 @@ class RozetkaScenario {
             Referer: refer,
         };
     }
-    isValidGoodsItem(value) {
-        if (typeof value !== 'object' || value === null)
-            return false;
-        const v = value;
-        return typeof v.title === 'string' && typeof v.href === 'string';
+    isAutocompleteGood(obj) {
+        return (typeof obj === 'object' &&
+            obj !== null &&
+            'title' in obj &&
+            typeof obj.title === 'string' &&
+            'href' in obj &&
+            typeof obj.href === 'string');
     }
 }
 exports.RozetkaScenario = RozetkaScenario;

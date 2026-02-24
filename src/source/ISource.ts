@@ -5,7 +5,7 @@ import { RateLimiter } from '../browser/limiter/RateLimiter';
 import { IWorkerResult } from '../data/entities/IResults/IWorkerResult';
 import { IHttpResult } from '../data/entities/IResults/IHttpResult';
 
-export interface ISource<T extends ITask> {
+export interface ISource<T extends ITask, THttpResponse = unknown> {
   supports(task: T): boolean;
 
   execute(
@@ -30,9 +30,9 @@ export interface ISource<T extends ITask> {
     headers: Record<string, string>,
     targetUrl: string,
     limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
+    sku: string,
     debugMeta?: Record<string, string>,
-  ): Promise<IHttpResult<unknown>[]>;
+  ): Promise<IHttpResult<THttpResponse>>;
 
   worker(
     targetUrl: string,
