@@ -14,8 +14,8 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
     headers: Record<string, string>,
     targetUrl: string,
     limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
-  ): Promise<IHttpResult<unknown>[]> {
+    sku: string,
+  ): Promise<IHttpResult<unknown>> {
     throw new Error('Method not implemented.');
   }
   executeHttpRequest<T = unknown>(
@@ -81,10 +81,10 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
 
       const imageUrls = await gallery
         .locator('img')
-        .evaluateAll(imgs =>
+        .evaluateAll((imgs) =>
           imgs
             .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
-            .map(img => img.src),
+            .map((img) => img.src),
         );
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');

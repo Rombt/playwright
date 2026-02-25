@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceJoma {
-    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+    workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
     executeHttpRequest(request, options) {
@@ -54,9 +54,9 @@ class PageImageSourceJoma {
             await firstImg.waitFor({ state: 'attached', timeout: 15000 });
             const imageUrls = await gallery
                 .locator('img')
-                .evaluateAll(imgs => imgs
+                .evaluateAll((imgs) => imgs
                 .filter((img) => img instanceof HTMLImageElement)
-                .map(img => img.src));
+                .map((img) => img.src));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
             data[sku] = imageUrls;

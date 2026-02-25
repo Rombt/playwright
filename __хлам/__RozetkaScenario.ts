@@ -1,32 +1,32 @@
 import { BrowserContext, Page } from 'playwright-core';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { IScenario } from '../IScenario';
-import { ISource } from '../../source/ISource';
-import { Storage } from '../../storage/Storage';
-import { IBrowser } from '../../browser/IBrowser';
-import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
-import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
-import { IDownloadedFile } from '../../browser/IDownloadedFile';
-import { IDataImag } from '../../data/entities/IDataImag';
-import { ICollectProductPhotosBatch } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosBatch';
-import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
-import { IResource } from '../../browser/IResource';
-import { RateLimiter } from '../../browser/limiter/RateLimiter';
-import { PagePool } from '../../browser/pool/PagePool';
-import { IProduct } from '../../data/entities/IProduct';
-import { AppConfig } from '../../data/config/appConfig';
-import { UnprocessedCollector } from '../../data/collectors/UnprocessedCollector';
+import { IScenario } from '../src/scenario/IScenario';
+import { ISource } from '../src/source/ISource';
+import { Storage } from '../src/storage/Storage';
+import { IBrowser } from '../src/browser/IBrowser';
+import { IWorkerError } from '../src/data/entities/IErrors/IWorkerError';
+import { IWorkerResult } from '../src/data/entities/IResults/IWorkerResult';
+import { IDownloadedFile } from '../src/browser/IDownloadedFile';
+import { IDataImag } from '../src/data/entities/IDataImag';
+import { ICollectProductPhotosBatch } from '../src/data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosBatch';
+import { ICollectProductPhotosTask } from '../src/data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
+import { IResource } from '../src/browser/IResource';
+import { RateLimiter } from '../src/browser/limiter/RateLimiter';
+import { PagePool } from '../src/browser/pool/PagePool';
+import { IProduct } from '../src/data/entities/IProduct';
+import { AppConfig } from '../src/data/config/appConfig';
+import { UnprocessedCollector } from '../src/data/collectors/UnprocessedCollector';
 
-import { IImageItem } from '../../data/entities/IImageItem';
-import { IImageError } from '../../data/entities/IErrors/IImageError';
+import { IImageItem } from '../src/data/entities/IImageItem';
+import { IImageError } from '../src/data/entities/IErrors/IImageError';
 
-import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
-import { IHttpResult, IAutocompleteResponse } from '../../data/entities/IResults/IHttpResult';
+import { normalizeAllData, isRetryable, waitBeforeRetry } from '../src/common/helpers';
+import { IHttpResult, IAutocompleteResponse } from '../src/data/entities/IResults/IHttpResult';
 
-import { Logger } from '../../data/logger/Logger';
-import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
-import { ILogger } from '../../data/logger/types/ILogger';
+import { Logger } from '../src/data/logger/Logger';
+import { IScopedLogger } from '../src/data/logger/types/IScopedLogger';
+import { ILogger } from '../src/data/logger/types/ILogger';
 
 export class RozetkaScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>

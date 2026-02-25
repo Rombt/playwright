@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceGanzo {
-    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+    workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
     executeHttpRequest(request, options) {
@@ -54,8 +54,8 @@ class PageImageSourceGanzo {
             await firstImg.waitFor({ state: 'attached', timeout: 15000 });
             const imageUrls = await gallery
                 .locator('img')
-                .evaluateAll(imgs => imgs.map(img => img.getAttribute('src')).filter(Boolean));
-            const absoluteImageUrls = imageUrls.map(src => new URL(src, page.url()).toString());
+                .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src')).filter(Boolean));
+            const absoluteImageUrls = imageUrls.map((src) => new URL(src, page.url()).toString());
             if (absoluteImageUrls.length === 0)
                 throw new Error('No valid image URLs found');
             data[sku] = absoluteImageUrls;

@@ -14,10 +14,11 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
     headers: Record<string, string>,
     targetUrl: string,
     limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
-  ): Promise<IHttpResult<unknown>[]> {
+    sku: string,
+  ): Promise<IHttpResult<unknown>> {
     throw new Error('Method not implemented.');
   }
+
   executeHttpRequest<T = unknown>(
     request: APIRequestContext,
     options: { url: string; params?: Record<string, string>; headers?: Record<string, string> },
@@ -70,9 +71,9 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
         throw new Error(`No gallery found on page: ${error}`);
       }
 
-      const imageUrls: string[] = await galleries.evaluateAll(figures =>
+      const imageUrls: string[] = await galleries.evaluateAll((figures) =>
         figures
-          .map(fig => {
+          .map((fig) => {
             const img = fig.querySelector('img');
 
             if (img?.currentSrc && !img.currentSrc.startsWith('data:')) return img.currentSrc;

@@ -14,8 +14,8 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
     headers: Record<string, string>,
     targetUrl: string,
     limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
-  ): Promise<IHttpResult<unknown>[]> {
+    sku: string,
+  ): Promise<IHttpResult<unknown>> {
     throw new Error('Method not implemented.');
   }
   executeHttpRequest<T = unknown>(
@@ -96,9 +96,9 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
 
       const imageUrls = await gallery
         .locator('img')
-        .evaluateAll(imgs => imgs.map(img => img.getAttribute('src')).filter(Boolean));
+        .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src')).filter(Boolean));
 
-      const absoluteImageUrls = imageUrls.map(src => new URL(src!, page.url()).toString());
+      const absoluteImageUrls = imageUrls.map((src) => new URL(src!, page.url()).toString());
 
       if (absoluteImageUrls.length === 0) throw new Error('No valid image URLs found');
 

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourcePuma {
-    workerHttpRequest(request, headers, targetUrl, limiter, getNext) {
+    workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
     executeHttpRequest(request, options) {
@@ -37,8 +37,8 @@ class PageImageSourcePuma {
             catch (error) {
                 throw new Error(`No gallery found on page: ${error}`);
             }
-            const imageUrls = await galleries.evaluateAll(figures => figures
-                .map(fig => {
+            const imageUrls = await galleries.evaluateAll((figures) => figures
+                .map((fig) => {
                 const img = fig.querySelector('img');
                 if (img?.currentSrc && !img.currentSrc.startsWith('data:'))
                     return img.currentSrc;

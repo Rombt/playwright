@@ -14,8 +14,8 @@ export default class PageImageSourceAdidas implements ISource<ICollectProductPho
     headers: Record<string, string>,
     targetUrl: string,
     limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
-  ): Promise<IHttpResult<unknown>[]> {
+    sku: string,
+  ): Promise<IHttpResult<unknown>> {
     throw new Error('Method not implemented.');
   }
   executeHttpRequest<T = unknown>(
@@ -88,10 +88,10 @@ export default class PageImageSourceAdidas implements ISource<ICollectProductPho
       const images = gallery.locator('img');
       await images.first().waitFor({ state: 'attached', timeout: 15000 });
 
-      const imageUrls = await images.evaluateAll(imgs =>
+      const imageUrls = await images.evaluateAll((imgs) =>
         imgs
           .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
-          .map(img => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
+          .map((img) => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
           .filter((src): src is string => Boolean(src)),
       );
 

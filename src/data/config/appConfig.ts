@@ -163,8 +163,8 @@ export class AppConfig {
           maxWaiters:
             typeof asyncConfig.pages?.maxWaiters === 'number' ? asyncConfig.pages.maxWaiters : 50,
           pageLoadWait:
-            typeof asyncConfig.pages?.maxWaiters === 'number'
-              ? asyncConfig.pages.maxWaiters
+            typeof asyncConfig.pages?.pageLoadWait === 'number'
+              ? asyncConfig.pages.pageLoadWait
               : 15000,
         },
       },
