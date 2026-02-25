@@ -4,3 +4,4 @@ package-lock.json
 test-results/
 results/
 chrome-profile-fake/**
+logs/**
