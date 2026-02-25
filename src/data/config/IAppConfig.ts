@@ -1,7 +1,10 @@
+import { LogLevel } from '../logger/types/LogLevel';
+
 export interface IAppConfig {
   async?: AsyncConfig;
   data?: DataConfig;
   browser?: BrowserConfig;
+  logger?: LoggerConfig;
 }
 
 export interface AsyncConfig {
@@ -13,6 +16,8 @@ export interface AsyncConfig {
 
   pages: {
     maxPage: number;
+    maxWaiters: number;
+    pageLoadWait: number;
   };
 }
 
@@ -30,4 +35,15 @@ export interface DataConfig {
 
 export interface BrowserConfig {
   fingerprintFile: string;
+}
+
+export interface LoggerConfig {
+  level: LogLevel;
+  transports?: LoggerTransportConfig[];
+  jsonFormat?: boolean;
+}
+
+export interface LoggerTransportConfig {
+  type: string;
+  options?: any;
 }

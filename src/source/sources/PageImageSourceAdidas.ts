@@ -1,4 +1,4 @@
-import { Page } from 'playwright-core';
+import { APIRequestContext, Page } from 'playwright-core';
 import { ISource } from '../ISource';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
@@ -6,8 +6,25 @@ import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
+import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 
 export default class PageImageSourceAdidas implements ISource<ICollectProductPhotosTask> {
+  workerHttpRequest(
+    request: APIRequestContext,
+    headers: Record<string, string>,
+    targetUrl: string,
+    limiter: RateLimiter,
+    sku: string,
+  ): Promise<IHttpResult<unknown>> {
+    throw new Error('Method not implemented.');
+  }
+  executeHttpRequest<T = unknown>(
+    request: APIRequestContext,
+    options: { url: string; params?: Record<string, string>; headers?: Record<string, string> },
+  ): Promise<IHttpResult<T>> {
+    throw new Error('Method not implemented.');
+  }
+
   supports(task: ICollectProductPhotosTask): boolean {
     return task.metadata.target_website === 'https://www.adidas.ua/search?s={{sku_prod}}';
   }
@@ -17,7 +34,7 @@ export default class PageImageSourceAdidas implements ISource<ICollectProductPho
     page: Page,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
-  ): Promise<unknown[]> {
+  ): Promise<IWorkerResult[]> {
     const results = [];
 
     while (true) {
@@ -71,10 +88,10 @@ export default class PageImageSourceAdidas implements ISource<ICollectProductPho
       const images = gallery.locator('img');
       await images.first().waitFor({ state: 'attached', timeout: 15000 });
 
-      const imageUrls = await images.evaluateAll(imgs =>
+      const imageUrls = await images.evaluateAll((imgs) =>
         imgs
           .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
-          .map(img => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
+          .map((img) => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
           .filter((src): src is string => Boolean(src)),
       );
 

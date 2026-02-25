@@ -9,6 +9,10 @@ import { accessSync, readFileSync, constants } from 'node:fs';
 import { AppConfig } from '../data/config/appConfig';
 import { UnprocessedCollector } from '../data/collectors/UnprocessedCollector';
 
+import { Logger } from '../data/logger/Logger';
+import { ConsoleTransport } from '../data/logger/transport/ConsoleTransport';
+import { FileTransport } from '../data/logger/transport/FileTransport';
+
 //todo прочитать опции и предать в браузер
 // todo где то здесь должен создаваться браузер, один на всё приложение!
 // todo где закрывать браузер?
@@ -23,7 +27,11 @@ export class App<BrowserOptions> {
     private readonly pathBrowserOptions: string,
     private readonly pathContextOptions: string,
   ) {
-    this.config = AppConfig.getInstance();
+    this.config = AppConfig.init();
+    const logger = Logger.init({
+      level: this.config.loggerConfig.level,
+      transports: this.config.loggerTransports,
+    });
 
     const modeArg = process.argv.find(arg => arg.startsWith('--mode='));
     this.mode = modeArg?.split('=')[1] ?? 'dev';

@@ -125,9 +125,10 @@ class DefaultScenario {
             let currentBatch = taskQueue;
             while (currentBatch.length && attempt <= this.maxRetries) {
                 console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
+                // todo выбрать какую то одну
+                // await limiter.sleepNormal(1000, 5000);
+                await limiter.sleep(1000, 5000);
                 const errors = await runBatch(currentBatch);
-                console.log(`errors of SearchURL  for ${task.brand_name}  = `);
-                console.dir(errors, { depth: null, colors: true });
                 const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
                 currentBatch = retryable.map(e => e.item);
                 if (currentBatch.length) {
@@ -198,9 +199,10 @@ class DefaultScenario {
             let currentBatchImage = imageQueue;
             while (currentBatchImage.length && attemptImage <= this.maxRetries) {
                 console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
+                // todo выбрать какую то одну
+                // await limiter.sleepNormal(1000, 5000);
+                await limiter.sleep(1000, 5000);
                 const errors = await runBatchImage(currentBatchImage);
-                console.log(`errors of DownloadImage  for ${task.brand_name}  = `);
-                console.dir(errors, { depth: null, colors: true });
                 // Отбираем retryable
                 const retryable = procError(errors, attemptImage);
                 currentBatchImage = retryable.map(e => e.item);

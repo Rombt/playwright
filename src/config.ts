@@ -1,15 +1,17 @@
 export const config = {
   async: {
     retry: {
-      baseDelay: 100,
-      maxDelay: 5000,
+      baseDelay: 1000,
+      maxDelay: 20000,
       maxRetries: 5,
     },
     tasks: {
-      maxTask: 5,
+      maxTask: 2,
     },
     pages: {
-      maxPage: 10,
+      maxPage: 2,
+      maxWaiters: 100,
+      pageLoadWait: 10000,
     },
   },
   data: {
@@ -19,5 +21,13 @@ export const config = {
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',
+  },
+
+  logger: {
+    level: 'debug',
+    transports: [
+      { type: 'console', options: {} },
+      { type: 'file', options: { filePath: './logs/app.log', pretty: true } },
+    ],
   },
 };

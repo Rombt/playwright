@@ -1,6 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceAdidas {
+    workerHttpRequest(request, headers, targetUrl, limiter, sku) {
+        throw new Error('Method not implemented.');
+    }
+    executeHttpRequest(request, options) {
+        throw new Error('Method not implemented.');
+    }
     supports(task) {
         return task.metadata.target_website === 'https://www.adidas.ua/search?s={{sku_prod}}';
     }
@@ -46,9 +52,9 @@ class PageImageSourceAdidas {
                 throw new Error('No images found on page');
             const images = gallery.locator('img');
             await images.first().waitFor({ state: 'attached', timeout: 15000 });
-            const imageUrls = await images.evaluateAll(imgs => imgs
+            const imageUrls = await images.evaluateAll((imgs) => imgs
                 .filter((img) => img instanceof HTMLImageElement)
-                .map(img => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
+                .map((img) => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
                 .filter((src) => Boolean(src)));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');

@@ -1,4 +1,4 @@
-import { Page } from 'playwright-core';
+import { APIRequestContext, Page } from 'playwright-core';
 import { ISource } from '../ISource';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
@@ -6,8 +6,26 @@ import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
+import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 
 export default class PageImageSourcePuma implements ISource<ICollectProductPhotosTask> {
+  workerHttpRequest(
+    request: APIRequestContext,
+    headers: Record<string, string>,
+    targetUrl: string,
+    limiter: RateLimiter,
+    sku: string,
+  ): Promise<IHttpResult<unknown>> {
+    throw new Error('Method not implemented.');
+  }
+
+  executeHttpRequest<T = unknown>(
+    request: APIRequestContext,
+    options: { url: string; params?: Record<string, string>; headers?: Record<string, string> },
+  ): Promise<IHttpResult<T>> {
+    throw new Error('Method not implemented.');
+  }
+
   supports(task: ICollectProductPhotosTask): boolean {
     return (
       task.metadata.target_website === 'https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}'
@@ -53,9 +71,9 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
         throw new Error(`No gallery found on page: ${error}`);
       }
 
-      const imageUrls: string[] = await galleries.evaluateAll(figures =>
+      const imageUrls: string[] = await galleries.evaluateAll((figures) =>
         figures
-          .map(fig => {
+          .map((fig) => {
             const img = fig.querySelector('img');
 
             if (img?.currentSrc && !img.currentSrc.startsWith('data:')) return img.currentSrc;

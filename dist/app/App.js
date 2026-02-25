@@ -8,6 +8,7 @@ const RozetkaScenario_1 = require("../scenario/scenarios/RozetkaScenario");
 const node_fs_1 = require("node:fs");
 const appConfig_1 = require("../data/config/appConfig");
 const UnprocessedCollector_1 = require("../data/collectors/UnprocessedCollector");
+const Logger_1 = require("../data/logger/Logger");
 //todo прочитать опции и предать в браузер
 // todo где то здесь должен создаваться браузер, один на всё приложение!
 // todo где закрывать браузер?
@@ -17,7 +18,11 @@ class App {
         this.pathContextOptions = pathContextOptions;
         this.browserOptions = {};
         this.contextOptions = {};
-        this.config = appConfig_1.AppConfig.getInstance();
+        this.config = appConfig_1.AppConfig.init();
+        const logger = Logger_1.Logger.init({
+            level: this.config.loggerConfig.level,
+            transports: this.config.loggerTransports,
+        });
         const modeArg = process.argv.find(arg => arg.startsWith('--mode='));
         this.mode = modeArg?.split('=')[1] ?? 'dev';
         try {

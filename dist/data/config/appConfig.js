@@ -3,14 +3,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppConfig = void 0;
 const path = require("path");
 const config_1 = require("../../config");
+const ConsoleTransport_1 = require("../logger/transport/ConsoleTransport");
+const FileTransport_1 = require("../logger/transport/FileTransport");
 class AppConfig {
     constructor() {
+        this.transportFactories = {
+            console: (config) => new ConsoleTransport_1.ConsoleTransport(config.options.pretty),
+            file: (config) => {
+                return new FileTransport_1.FileTransport(config.options.filePath, config.options.pretty);
+            },
+        };
         this.baseDir = process.cwd();
         this.config = this.buildConfig();
     }
+    //todo добавить путь к файлу конфига при инициализации и оставить import { config as appConfig } from '../../config'; по дефолту
+    static init() {
+        if (!this.instance) {
+            this.instance = new AppConfig();
+        }
+        return this.instance;
+    }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new this();
+            throw new Error('AppConfig is not initialized. Call init() first.');
         }
         return this.instance;
     }
@@ -62,13 +77,27 @@ class AppConfig {
     get fingerprintFile() {
         return this.processBrowser(config_1.config).browser.fingerprintFile;
     }
+    get loggerConfig() {
+        return this.processLogger(config_1.config).logger;
+    }
+    get loggerTransports() {
+        const transports = [];
+        const config = this.loggerConfig;
+        for (const t of config.transports ?? []) {
+            const factory = this.transportFactories[t.type];
+            if (factory) {
+                transports.push(factory(t));
+            }
+        }
+        return transports;
+    }
     // ==========  методы для обработки полей  ===============
     processData(rawConfig) {
         const dataConfig = rawConfig?.data ?? {};
         const resolveBrands = (value) => Array.isArray(value)
             ? value
                 .filter((v) => typeof v === 'string')
-                .map(v => v.trim())
+                .map((v) => v.trim())
                 .filter(Boolean)
             : [];
         return {
@@ -94,6 +123,10 @@ class AppConfig {
                 },
                 pages: {
                     maxPage: typeof asyncConfig.pages?.maxPage === 'number' ? asyncConfig.pages.maxPage : 10,
+                    maxWaiters: typeof asyncConfig.pages?.maxWaiters === 'number' ? asyncConfig.pages.maxWaiters : 50,
+                    pageLoadWait: typeof asyncConfig.pages?.pageLoadWait === 'number'
+                        ? asyncConfig.pages.pageLoadWait
+                        : 15000,
                 },
             },
         };
@@ -103,6 +136,22 @@ class AppConfig {
         return {
             browser: {
                 fingerprintFile: this.resolvePath(browserConfig.fingerprintFile),
+            },
+        };
+    }
+    processLogger(rawConfig) {
+        const loggerConfig = rawConfig?.logger ?? {};
+        const transports = Array.isArray(loggerConfig.transports)
+            ? loggerConfig.transports.map((t) => ({
+                type: typeof t.type === 'string' ? t.type : 'console',
+                options: t.options ?? {},
+            }))
+            : [{ type: 'console', options: {} }]; // дефолтный transport
+        return {
+            logger: {
+                level: typeof loggerConfig.level === 'string' ? loggerConfig.level : 'error',
+                transports,
+                jsonFormat: loggerConfig.jsonFormat !== false,
             },
         };
     }

@@ -1,6 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PageImageSourceColumbia {
+    workerHttpRequest(request, headers, targetUrl, limiter, sku) {
+        throw new Error('Method not implemented.');
+    }
+    executeHttpRequest(request, options) {
+        throw new Error('Method not implemented.');
+    }
     supports(task) {
         return (task.metadata.target_website ===
             'https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch');
@@ -42,9 +48,9 @@ class PageImageSourceColumbia {
             await firstImg.waitFor({ state: 'attached', timeout: 15000 });
             const imageUrls = await gallery
                 .locator('img')
-                .evaluateAll(imgs => imgs
+                .evaluateAll((imgs) => imgs
                 .filter((img) => img instanceof HTMLImageElement)
-                .map(img => img.src));
+                .map((img) => img.src));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
             data[sku] = imageUrls;

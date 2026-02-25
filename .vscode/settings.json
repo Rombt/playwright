@@ -1,12 +1,7 @@
 {
-  "cSpell.words": [
-    "domcontentloaded",
-    "Ganzo",
-    "Joma",
-    "Retryable",
-    "Rozetka",
-    "Saucony",
-    "Скрапинг"
-  ],
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  // .vscode/settings.json
+  "phpcs.executablePath": "composer/vendor/squizlabs/php_codesniffer/bin/phpcs.bat",
+  "phpsab.standard": ".phpcs.xml",
+  "phpcs.autoConfigSearch": true,
+  "cSpell.words": ["domcontentloaded", "retryable", "Rozetka", "skus"]
 }
