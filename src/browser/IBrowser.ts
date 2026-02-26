@@ -1,4 +1,5 @@
 import { Page, Browser, BrowserContext } from 'playwright';
+import { ILogger } from '../data/logger/types/ILogger';
 
 export interface IBrowser<
   BrowserT = Browser,
@@ -24,6 +25,7 @@ export interface IBrowser<
   runInContextByChromium<Result>(
     fn: (context: BrowserContext) => Promise<Result>,
     mode?: 'real' | 'fake',
+    loggerScope?: ILogger,
   ): Promise<Result>;
 
   download(page: Page, url: string): Promise<{ buffer: Buffer; ext: string }>;

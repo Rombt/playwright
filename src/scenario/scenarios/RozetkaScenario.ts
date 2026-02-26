@@ -32,6 +32,11 @@ import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
 
+type TaskResult =
+  | { status: 'success'; sku: string }
+  | { status: 'retry'; sku: string; error: IWorkerError }
+  | { status: 'fatal'; sku: string; error: IWorkerError };
+
 export class RozetkaScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
@@ -66,42 +71,124 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         component: 'RozetkaScenario',
         method: 'run()',
         action: 'arrTasks = await this.load()',
-        data: {
-          arrTasks: arrTasks,
-        },
+        data: { arrTasks },
       });
 
       await this.prepare();
-
-      for (let i = 0; i < arrTasks.length; i += this.maxTask) {
-        const batch = arrTasks.slice(i, i + this.maxTask);
-        await Promise.all(batch.map((task) => this.process(task)));
-      }
+      await this.runWithWorkerPool(arrTasks, (task, loggerScope) =>
+        this.process(task, loggerScope),
+      );
     } catch (error) {
-      if (error instanceof Error) {
-        this.logger.error('RozetkaScenario => run()', {
-          component: 'RozetkaScenario',
-          method: 'run',
-          data: {
-            errorName: error instanceof Error ? error.name : undefined,
-            errorMessage: error instanceof Error ? error.message : String(error),
-            stack: error instanceof Error ? error.stack : undefined,
-          },
-        });
-      } else {
-        this.logger.error('RozetkaScenario => run()', {
-          component: 'RozetkaScenario',
-          method: 'run',
-          data: {
-            errorName: error instanceof Error ? error.name : undefined,
-            errorMessage: error instanceof Error ? error.message : String(error),
-            stack: error instanceof Error ? error.stack : undefined,
-          },
-        });
-      }
+      this.logger.error('RozetkaScenario => run()', {
+        component: 'RozetkaScenario',
+        method: 'run',
+        data: {
+          errorName: error instanceof Error ? error.name : undefined,
+          errorMessage: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined,
+        },
+      });
     } finally {
       await this.finalize();
     }
+  }
+
+  private async runWithWorkerPool<T>(
+    tasks: ICollectProductPhotosTask[],
+    handler: (task: ICollectProductPhotosTask, logger?: ILogger) => Promise<void>,
+  ): Promise<void> {
+    let index = 0;
+
+    const worker = async () => {
+      while (true) {
+        const currentIndex = index++;
+
+        this.logger.debug(`Worker № ${currentIndex} is started`, {
+          component: 'RozetkaScenario',
+          method: 'runWithWorkerPool',
+          action: 'while (true)',
+          stage: 'start',
+          data: {
+            currentIndex: currentIndex,
+          },
+        });
+
+        if (currentIndex >= tasks.length) {
+          this.logger.debug('All tasks are completed', {
+            component: 'RozetkaScenario',
+            method: 'runWithWorkerPool',
+            action: 'if (currentIndex >= tasks.length) {...}',
+            data: {
+              currentIndex: currentIndex,
+              tasksLength: tasks.length,
+            },
+          });
+
+          break;
+        }
+
+        const task = tasks[currentIndex];
+
+        const loggerScope = this.logger.withContext(`Worker № ${currentIndex}  ${task.brand_name}`);
+
+        loggerScope.debug('Received a new task', {
+          component: 'RozetkaScenario',
+          method: 'runWithWorkerPool',
+          action: 'const task = tasks[currentIndex];',
+          data: {
+            currentIndex: currentIndex,
+            task: task,
+          },
+        });
+
+        try {
+          loggerScope.debug('Gave task it for execution ', {
+            component: 'RozetkaScenario',
+            method: 'runWithWorkerPool',
+            action: 'try {...}',
+            data: {
+              currentIndex: currentIndex,
+              task: task,
+            },
+          });
+
+          await handler(task, loggerScope);
+
+          loggerScope.debug('The task execution is finish', {
+            component: 'RozetkaScenario',
+            method: 'runWithWorkerPool',
+            action: 'try {...}',
+            data: {
+              currentIndex: currentIndex,
+              task: task,
+            },
+          });
+        } catch (error) {
+          loggerScope.error('WorkerPool task error', {
+            component: 'RozetkaScenario',
+            method: 'runWithWorkerPool',
+            data: {
+              task,
+              errorName: error instanceof Error ? error.name : undefined,
+              errorMessage: error instanceof Error ? error.message : String(error),
+              stack: error instanceof Error ? error.stack : undefined,
+            },
+          });
+        }
+      }
+    };
+
+    const workers = Array.from({ length: this.maxTask }, () => worker());
+
+    await Promise.all(workers);
+    this.logger.info('All task groups have been processed', {
+      component: 'RozetkaScenario',
+      method: 'runWithWorkerPool',
+      action: 'workers = Array.from({ length: this.maxTask }, () => worker()',
+      data: {
+        totalTasks: tasks.length,
+      },
+    });
   }
 
   async load(): Promise<ICollectProductPhotosTask[]> {
@@ -119,14 +206,14 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     this.sources = await this.loadSources();
   }
 
-  async process(task: ICollectProductPhotosTask): Promise<void> {
-    const loggerScope = this.logger.withContext(task.brand_name);
+  async process(task: ICollectProductPhotosTask, loggerScope?: ILogger): Promise<void> {
+    // const loggerScope = this.logger.withContext(task.brand_name);
 
     const source = this.sources.find((s) => s.supports(task)) as
       | ISource<ICollectProductPhotosTask, IAutocompleteResponse>
       | undefined;
     if (!source) {
-      loggerScope.error('Source not found for task', {
+      loggerScope?.error('Source not found for task', {
         component: 'RozetkaScenario',
         method: 'process',
         task,
@@ -135,132 +222,95 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       throw new Error('Source not found');
     }
 
+    loggerScope?.debug(`The enter to the process method`, {
+      component: 'RozetkaScenario',
+      method: 'process',
+      stage: 'init',
+      data: {
+        task: task,
+      },
+    });
+
     const allErrors: IWorkerError[] = [];
     const allData: IDataImag = {};
     const limiter = new RateLimiter(5000);
     const productsPageLinks: Record<string, string[]> = {};
-    await this.browser.runInContextByChromium(async (context) => {
-      type TaskResult =
-        | { status: 'success'; sku: string }
-        | { status: 'retry'; sku: string; error: IWorkerError }
-        | { status: 'fatal'; sku: string; error: IWorkerError };
+    await this.browser.runInContextByChromium(
+      async (context) => {
+        //========================    Инициализация сценария    ========================
+        const url_init = 'https://rozetka.com.ua/';
+        const targetUrl =
+          'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
 
-      //========================    Инициализация сценария    ========================
-      const url_init = 'https://rozetka.com.ua/';
-      const targetUrl =
-        'https://search.rozetka.com.ua/ua/search/api/v7/autocomplete/?country=UA&lang=ua&text=';
+        const products = task.products;
 
-      const products = task.products;
-
-      if (!Array.isArray(products) || products.length === 0) {
-        loggerScope.error('Products are absent', {
+        loggerScope?.debug(`The enter to the browser.runInContext`, {
           component: 'RozetkaScenario',
           method: 'process',
           stage: 'init',
-          data: { task },
+          data: {
+            url_init: url_init,
+            targetUrl,
+            products,
+          },
         });
-        throw new Error('Products are absent');
-      }
 
-      const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
-      loggerScope.debug('A unique of unique products is created', {
-        component: 'RozetkaScenario',
-        method: 'process',
-        action: 'const uniqueProducts = Array.from(...)',
-        data: {
-          uniqueProducts: uniqueProducts,
-        },
-      });
+        if (!Array.isArray(products) || products.length === 0) {
+          loggerScope?.error('Products are absent', {
+            component: 'RozetkaScenario',
+            method: 'process',
+            stage: 'init',
+            data: { task },
+          });
+          throw new Error('Products are absent');
+        }
 
-      let taskQueue: string[] = uniqueProducts.map((p) => p.sku);
-      loggerScope.debug('A task queue s is created', {
-        component: 'RozetkaScenario',
-        method: 'process',
-        action: 'string[] = uniqueProducts.map(...)',
-        data: {
-          taskQueue: taskQueue,
-        },
-      });
+        const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
+        loggerScope?.debug('A unique of unique products is created', {
+          component: 'RozetkaScenario',
+          method: 'process',
+          action: 'const uniqueProducts = Array.from(...)',
+          data: {
+            uniqueProducts: uniqueProducts,
+          },
+        });
 
-      const quantityPage = Math.min(taskQueue.length, this.maxPage);
+        let taskQueue: string[] = uniqueProducts.map((p) => p.sku);
+        loggerScope?.debug('A task queue s is created', {
+          component: 'RozetkaScenario',
+          method: 'process',
+          action: 'string[] = uniqueProducts.map(...)',
+          data: {
+            taskQueue: taskQueue,
+          },
+        });
 
-      const pool = new PagePool(context, quantityPage);
-      this.registerResource(pool);
-      //========================    /Инициализация сценария    ========================
+        const quantityPage = Math.min(taskQueue.length, this.maxPage);
 
-      //========================    Обработка ОДНОГО SKU    ========================
-      const processSku = async (sku: string, page: Page): Promise<TaskResult> => {
-        try {
-          const headers = this.buildHeaders(url_init);
-          if (!headers || typeof headers !== 'object') {
-            loggerScope.error('Headers are invalid', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'processSku',
-              data: {
-                headers: headers,
-              },
-            });
+        const pool = new PagePool(context, quantityPage);
+        this.registerResource(pool);
+        //========================    /Инициализация сценария    ========================
 
-            throw new Error('Headers are invalid');
-          }
-
-          const autocomplete = await withRetry(
-            () =>
-              source!.workerHttpRequest(context.request, headers, targetUrl, limiter, sku, {
-                brand_name: task.brand_name,
-              }),
-            {
-              maxRetries: this.config.asyncRetry.maxRetries,
-              isRetryable,
-            },
-          );
-
-          if (!autocomplete.ok || !autocomplete.body) {
-            loggerScope.error('autocomplete is invalid', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'autocomplete = await withRetry(...)',
-              stage: 'start',
-              data: {
-                result: autocomplete,
-              },
-            });
-
-            throw new Error(
-              `One of the results from source.workerHttpRequest() is invalid  ${autocomplete}`,
-            );
-          }
-
-          for (const g of autocomplete.body?.data.content.records.goods ?? []) {
-            if (!this.isAutocompleteGood(g)) {
-              loggerScope.debug('Missing or invalid goods in the workerHttpRequest results', {
+        //========================    Обработка ОДНОГО SKU    ========================
+        const processSku = async (sku: string, page: Page): Promise<TaskResult> => {
+          try {
+            const headers = this.buildHeaders(url_init);
+            if (!headers || typeof headers !== 'object') {
+              loggerScope?.error('Headers are invalid', {
                 component: 'RozetkaScenario',
                 method: 'process',
-                action: 'for (const g of autocomplete.body?.data.content.records.goods ?? [])',
+                action: 'processSku',
                 data: {
-                  sku: g,
+                  headers: headers,
                 },
               });
-              continue;
+
+              throw new Error('Headers are invalid');
             }
 
-            if (!g.title.includes(sku)) continue;
-
-            loggerScope.debug('Product contains required SKU in the title', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'if (!g.title.includes(sku)) continue;',
-              data: {
-                sku: sku,
-                currentProduct: g,
-              },
-            });
-
-            // сбор фото у найденных товаров
-            const result = await withRetry(
+            const autocomplete = await withRetry(
               () =>
-                source.worker(g.href, page, limiter, undefined, sku, {
+                source!.workerHttpRequest(context.request, headers, targetUrl, limiter, sku, {
                   brand_name: task.brand_name,
                 }),
               {
@@ -269,199 +319,267 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               },
             );
 
-            loggerScope.debug(
-              `The collection of photos url for   ${task.brand_name}    ${sku}    is complete`,
-              {
+            if (!autocomplete.ok || !autocomplete.body) {
+              loggerScope?.error('autocomplete is invalid', {
                 component: 'RozetkaScenario',
                 method: 'process',
-                action: 'const result = await withRetry(...)',
+                action: 'autocomplete = await withRetry(...)',
+                stage: 'start',
                 data: {
-                  attempt: attempt,
-                  result: result,
+                  result: autocomplete,
                 },
-              },
-            );
+              });
 
-            //!!!!!!!!!!!!!!!
-            //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
-            //!!!!!!!!!!!!!!!
+              throw new Error(
+                `One of the results from source.workerHttpRequest() is invalid  ${autocomplete}`,
+              );
+            }
 
-            for (const r of result) {
-              for (const [skuKey, images] of Object.entries(r.data)) {
-                loggerScope.debug(`Found url photo for   ${task.brand_name}    ${skuKey}`, {
+            for (const g of autocomplete.body?.data.content.records.goods ?? []) {
+              if (!this.isAutocompleteGood(g)) {
+                loggerScope?.debug('Missing or invalid goods in the workerHttpRequest results', {
                   component: 'RozetkaScenario',
                   method: 'process',
-                  action: 'for (const r of result) {...}',
+                  action: 'for (const g of autocomplete.body?.data.content.records.goods ?? [])',
+                  data: {
+                    sku: g,
+                  },
+                });
+                continue;
+              }
+
+              if (!g.title.includes(sku)) continue;
+
+              loggerScope?.debug('Product contains required SKU in the title', {
+                component: 'RozetkaScenario',
+                method: 'process',
+                action: 'if (!g.title.includes(sku)) continue;',
+                data: {
+                  sku: sku,
+                  currentProduct: g,
+                },
+              });
+
+              // сбор фото у найденных товаров
+              const result = await withRetry(
+                () =>
+                  source.worker(g.href, page, limiter, undefined, sku, {
+                    brand_name: task.brand_name,
+                  }),
+                {
+                  maxRetries: this.config.asyncRetry.maxRetries,
+                  isRetryable,
+                },
+              );
+
+              loggerScope?.debug(
+                `The collection of photos url for   ${task.brand_name}    ${sku}    is complete`,
+                {
+                  component: 'RozetkaScenario',
+                  method: 'process',
+                  action: 'const result = await withRetry(...)',
                   data: {
                     attempt: attempt,
+                    result: result,
                   },
-                });
+                },
+              );
 
-                allData[skuKey] ??= [];
-                allData[skuKey].push(...images);
+              //!!!!!!!!!!!!!!!
+              //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
+              //!!!!!!!!!!!!!!!
+
+              for (const r of result) {
+                for (const [skuKey, images] of Object.entries(r.data)) {
+                  loggerScope?.debug(`Found url photo for   ${task.brand_name}    ${skuKey}`, {
+                    component: 'RozetkaScenario',
+                    method: 'process',
+                    action: 'for (const r of result) {...}',
+                    data: {
+                      attempt: attempt,
+                    },
+                  });
+
+                  allData[skuKey] ??= [];
+                  allData[skuKey].push(...images);
+                }
               }
             }
-          }
 
-          loggerScope.debug(`The process  ${task.brand_name}    ${sku}    is complete`, {
-            component: 'RozetkaScenario',
-            method: 'process',
-            action: 'for (const r of result) {...}',
-            data: {
-              attempt: attempt,
-              allData: allData,
-            },
-          });
-
-          return { status: 'success', sku };
-        } catch (e) {
-          loggerScope.error(`Error during processing ${sku}  `, {
-            component: 'RozetkaScenario',
-            method: 'process',
-            action: 'const result = await withRetry(...)',
-            data: {
-              attempt: attempt,
-              status: status,
-              error: e,
-            },
-          });
-
-          return isRetryable(e as IWorkerError)
-            ? { status: 'retry', sku, error: e as IWorkerError }
-            : { status: 'fatal', sku, error: e as IWorkerError };
-        }
-      };
-
-      //========================   Batch runner      ========================
-      async function runBatch(skus: string[]): Promise<TaskResult[]> {
-        const queue = [...skus];
-        const results: TaskResult[] = [];
-
-        loggerScope.debug(`Batch runner is started`, {
-          component: 'RozetkaScenario',
-          method: 'process',
-          action: 'runBatch(skus: string[])',
-          data: {
-            attempt: attempt,
-            currentBatchLength: currentBatch.length,
-            currentBatch: currentBatch,
-            queue: queue,
-            results: results,
-          },
-        });
-
-        const workers = Array.from({ length: quantityPage }, async () => {
-          const page = await pool.acquire();
-
-          loggerScope.debug(`Workers into Batch runner is started`, {
-            component: 'RozetkaScenario',
-            method: 'process',
-            action: 'const workers = Array.from(...)',
-            data: {
-              url_init: url_init,
-              page: page,
-            },
-          });
-
-          try {
-            const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
-
-            loggerScope.debug(`Try to go to ${url_init}`, {
+            loggerScope?.debug(`The process  ${task.brand_name}    ${sku}    is complete`, {
               component: 'RozetkaScenario',
               method: 'process',
-              action: 'response = await page.goto(...)',
-              data: {
-                url_init: url_init,
-                response: response,
-              },
-            });
-
-            if (!response?.ok()) {
-              throw new Error(`Navigation failed: ${response?.status()}`);
-            }
-
-            while (queue.length) {
-              const sku = queue.shift();
-              if (!sku) {
-                loggerScope.error(`sku is absent`, {
-                  component: 'PageImageSourceRozetka',
-                  method: 'process',
-                  action: 'while (queue.length)',
-                  stage: 'start',
-                  data: {
-                    sku: sku,
-                  },
-                });
-                throw new Error(`In process method sku is absent`);
-              }
-
-              const rawSku = sku;
-              const starIndex = rawSku.indexOf('*');
-              const skuNormal =
-                (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
-                  /^[\p{C}\s]+|[\p{C}\s]+$/gu,
-                  '',
-                ) ?? '';
-
-              const result = await processSku(skuNormal, page);
-              results.push(result);
-            }
-          } catch (err) {
-            const error = err instanceof Error ? err : new Error(String(err));
-
-            loggerScope.error(`Error into workers into Batch runner`, {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'catch (err)',
+              action: 'for (const r of result) {...}',
               data: {
                 attempt: attempt,
-                currentBatchLength: currentBatch.length,
-                currentBatch: currentBatch,
-                queue: queue,
-                results: results,
-                url_init: url_init,
-                message: error.message,
-                stack: error.stack,
-                name: error.name,
+                allData: allData,
               },
             });
-          } finally {
-            pool.release(page);
-          }
-        });
 
-        await Promise.all(workers);
-        return results;
-      }
-
-      //========================  Retry wrapper (ЕДИНСТВЕННЫЙ)     ========================
-      async function withRetry<T>(
-        action: () => Promise<T>,
-        options: {
-          maxRetries: number;
-          isRetryable: (error: IWorkerError) => boolean;
-          onRetry?: (attempt: number, error: unknown) => void;
-        },
-      ): Promise<T> {
-        let attempt = 1;
-
-        loggerScope.debug('withRetry() starting .... ', {
-          component: 'RozetkaScenario',
-          method: 'process',
-          action: 'async function withRetry(...){...}',
-          data: {
-            attempt: attempt,
-            action: action,
-            options: options,
-          },
-        });
-
-        while (true) {
-          try {
-            return await action();
+            return { status: 'success', sku };
           } catch (e) {
-            if (attempt >= options.maxRetries || !options.isRetryable(e as IWorkerError)) {
-              loggerScope.error('In withRetry() error don`t fixed  ', {
+            loggerScope?.error(`Error during processing ${sku}  `, {
+              component: 'RozetkaScenario',
+              method: 'process',
+              action: 'const result = await withRetry(...)',
+              data: {
+                attempt: attempt,
+                status: status,
+                error: e,
+              },
+            });
+
+            return isRetryable(e as IWorkerError)
+              ? { status: 'retry', sku, error: e as IWorkerError }
+              : { status: 'fatal', sku, error: e as IWorkerError };
+          }
+        };
+
+        //========================   Batch runner      ========================
+        async function runBatch(skus: string[]): Promise<TaskResult[]> {
+          const queue = [...skus];
+          const results: TaskResult[] = [];
+
+          loggerScope?.debug(`Batch runner is started`, {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'runBatch(skus: string[])',
+            data: {
+              attempt: attempt,
+              currentBatchLength: currentBatch.length,
+              currentBatch: currentBatch,
+              queue: queue,
+              results: results,
+            },
+          });
+
+          const workers = Array.from({ length: quantityPage }, async () => {
+            const page = await pool.acquire();
+
+            loggerScope?.debug(`Workers into Batch runner is started`, {
+              component: 'RozetkaScenario',
+              method: 'process',
+              action: 'const workers = Array.from(...)',
+              data: {
+                url_init: url_init,
+                page: page,
+              },
+            });
+
+            try {
+              const response = await page.goto(url_init, { waitUntil: 'domcontentloaded' });
+
+              loggerScope?.debug(`Try to go to ${url_init}`, {
+                component: 'RozetkaScenario',
+                method: 'process',
+                action: 'response = await page.goto(...)',
+                data: {
+                  url_init: url_init,
+                  response: response,
+                },
+              });
+
+              if (!response?.ok()) {
+                throw new Error(`Navigation failed: ${response?.status()}`);
+              }
+
+              while (queue.length) {
+                const sku = queue.shift();
+                if (!sku) {
+                  loggerScope?.error(`sku is absent`, {
+                    component: 'PageImageSourceRozetka',
+                    method: 'process',
+                    action: 'while (queue.length)',
+                    stage: 'start',
+                    data: {
+                      sku: sku,
+                    },
+                  });
+                  throw new Error(`In process method sku is absent`);
+                }
+
+                const rawSku = sku;
+                const starIndex = rawSku.indexOf('*');
+                const skuNormal =
+                  (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
+                    /^[\p{C}\s]+|[\p{C}\s]+$/gu,
+                    '',
+                  ) ?? '';
+
+                const result = await processSku(skuNormal, page);
+                results.push(result);
+              }
+            } catch (err) {
+              const error = err instanceof Error ? err : new Error(String(err));
+
+              loggerScope?.error(`Error into workers into Batch runner`, {
+                component: 'RozetkaScenario',
+                method: 'process',
+                action: 'catch (err)',
+                data: {
+                  attempt: attempt,
+                  currentBatchLength: currentBatch.length,
+                  currentBatch: currentBatch,
+                  queue: queue,
+                  results: results,
+                  url_init: url_init,
+                  message: error.message,
+                  stack: error.stack,
+                  name: error.name,
+                },
+              });
+            } finally {
+              pool.release(page);
+            }
+          });
+
+          await Promise.all(workers);
+          return results;
+        }
+
+        //========================  Retry wrapper (ЕДИНСТВЕННЫЙ)     ========================
+        async function withRetry<T>(
+          action: () => Promise<T>,
+          options: {
+            maxRetries: number;
+            isRetryable: (error: IWorkerError) => boolean;
+            onRetry?: (attempt: number, error: unknown) => void;
+          },
+        ): Promise<T> {
+          let attempt = 1;
+
+          loggerScope?.debug('withRetry() starting .... ', {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'async function withRetry(...){...}',
+            data: {
+              attempt: attempt,
+              action: action,
+              options: options,
+            },
+          });
+
+          while (true) {
+            try {
+              return await action();
+            } catch (e) {
+              if (attempt >= options.maxRetries || !options.isRetryable(e as IWorkerError)) {
+                loggerScope?.error('In withRetry() error don`t fixed  ', {
+                  component: 'RozetkaScenario',
+                  method: 'process',
+                  action: 'async function withRetry(...){...}',
+                  data: {
+                    attempt: attempt,
+                    action: action,
+                    options: options,
+                    error: e,
+                  },
+                });
+
+                throw e;
+              }
+
+              loggerScope?.error('In withRetry() try fix error  ', {
                 component: 'RozetkaScenario',
                 method: 'process',
                 action: 'async function withRetry(...){...}',
@@ -473,105 +591,81 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                 },
               });
 
-              throw e;
+              options.onRetry?.(attempt, e);
+              await waitBeforeRetry(attempt);
+              attempt++;
             }
-
-            loggerScope.error('In withRetry() try fix error  ', {
-              component: 'RozetkaScenario',
-              method: 'process',
-              action: 'async function withRetry(...){...}',
-              data: {
-                attempt: attempt,
-                action: action,
-                options: options,
-                error: e,
-              },
-            });
-
-            options.onRetry?.(attempt, e);
-            await waitBeforeRetry(attempt);
-            attempt++;
           }
         }
-      }
 
-      //========================   ГЛАВНЫЙ RETRY ЦИКЛ     ========================
-      let attempt = 1;
-      let currentBatch = taskQueue;
+        //========================   ГЛАВНЫЙ RETRY ЦИКЛ     ========================
+        let attempt = 1;
+        let currentBatch = taskQueue;
 
-      while (currentBatch.length && attempt <= this.maxRetries) {
-        await limiter.sleep(1000, 5000);
+        while (currentBatch.length && attempt <= this.maxRetries) {
+          await limiter.sleep(1000, 5000);
 
-        loggerScope.debug(`Main retry cycle is started`, {
-          component: 'RozetkaScenario',
-          method: 'process',
-          action: 'while (currentBatch.length && attempt <= this.maxRetries) {...}',
-          data: {
-            attempt: attempt,
-            currentBatchLength: currentBatch.length,
-            currentBatch: currentBatch,
-          },
-        });
+          loggerScope?.debug(`Main retry cycle is started`, {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'while (currentBatch.length && attempt <= this.maxRetries) {...}',
+            data: {
+              attempt: attempt,
+              currentBatchLength: currentBatch.length,
+              currentBatch: currentBatch,
+            },
+          });
 
-        const results: TaskResult[] = await runBatch.call(this, currentBatch);
+          const results: TaskResult[] = await runBatch.call(this, currentBatch);
 
-        const retryResults = results.filter(
-          (r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry',
-        );
+          const retryResults = results.filter(
+            (r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry',
+          );
 
-        loggerScope.debug(`Received retry results `, {
-          component: 'RozetkaScenario',
-          method: 'process',
-          action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
-          data: {
-            attempt: attempt,
-            retryResults: retryResults,
-          },
-        });
+          loggerScope?.debug(`Received retry results `, {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
+            data: {
+              attempt: attempt,
+              retryResults: retryResults,
+            },
+          });
 
-        const fatalResults = results.filter(
-          (r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal',
-        );
+          const fatalResults = results.filter(
+            (r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal',
+          );
 
-        loggerScope.debug(`Received fatal results `, {
-          component: 'RozetkaScenario',
-          method: 'process',
-          action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
-          data: {
-            attempt: attempt,
-            fatalResults: fatalResults,
-          },
-        });
+          loggerScope?.debug(`Received fatal results `, {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
+            data: {
+              attempt: attempt,
+              fatalResults: fatalResults,
+            },
+          });
 
-        currentBatch = retryResults.map((r) => r.sku);
+          currentBatch = retryResults.map((r) => r.sku);
 
-        fatalResults.forEach((r) =>
-          allErrors.push({
-            error: r.error,
-            targetUrl,
-          }),
-        );
+          fatalResults.forEach((r) =>
+            allErrors.push({
+              error: r.error,
+              targetUrl,
+            }),
+          );
 
-        attempt++;
-      }
+          attempt++;
+        }
 
-      //========================   /ГЛАВНЫЙ RETRY ЦИКЛ     ========================
-    }, 'fake');
-
-    loggerScope.debug(`The process of    ${task.brand_name}    is complete`, {
-      component: 'RozetkaScenario',
-      method: 'process',
-      action: 'this.browser.runInContextByChromium(...)',
-      data: {
-        allData: allData,
+        //========================   /ГЛАВНЫЙ RETRY ЦИКЛ     ========================
       },
-    });
-
-    console.log(`All workers finished  for ${task.brand_name}`);
+      'fake',
+      loggerScope,
+    );
 
     const allDataNormalize = normalizeAllData(allData);
-
-    loggerScope.debug(`The results are normalize`, {
+    loggerScope?.info(`The process of    ${task.brand_name}    is complete`, {
       component: 'RozetkaScenario',
       method: 'process',
       action: 'const allDataNormalize = normalizeAllData(allData)',
@@ -579,13 +673,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         allDataNormalize: allDataNormalize,
       },
     });
-
-    console.log('allDataNormalize = ');
-
-    console.dir(allDataNormalize, { depth: null, colors: true });
-
-    console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
-    console.dir(allErrors, { depth: null, colors: true });
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

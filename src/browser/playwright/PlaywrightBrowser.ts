@@ -1,4 +1,7 @@
 import * as path from 'path';
+import * as crypto from 'crypto';
+import * as fs from 'fs/promises';
+
 import { IBrowser as IBrowser } from '../IBrowser';
 import {
   chromium,
@@ -10,6 +13,7 @@ import {
   Page,
 } from 'playwright';
 import { FingerprintPool } from '../fingerprint/FingerprintPool';
+import { ILogger } from '../../data/logger/types/ILogger';
 
 export class PlaywrightBrowser
   implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions>
@@ -94,21 +98,56 @@ export class PlaywrightBrowser
   async runInContextByChromium<Result>(
     fn: (context: BrowserContext) => Promise<Result>,
     mode?: 'real' | 'fake',
+    loggerScope?: ILogger,
   ): Promise<Result> {
-    const userDataDir = path.resolve(
-      mode === 'real' ? './chrome-profile-real' : './chrome-profile-fake',
-    );
+    loggerScope?.debug('The enter to the runInContextByChromium', {
+      component: 'PlaywrightBrowser',
+      method: 'runInContextByChromium',
+      stage: 'init',
+      data: {},
+    });
 
-    const context = await chromium.launchPersistentContext(userDataDir, {
+    const baseDir = path.resolve('./browser-profiles/chrome-profiles');
+    await fs.mkdir(baseDir, { recursive: true });
+    const profileDir = path.join(baseDir, `chrome-profile-${crypto.randomUUID()}`);
+
+    const context = await chromium.launchPersistentContext(profileDir, {
       headless: false,
       channel: 'chrome',
       args: ['--disable-blink-features=AutomationControlled'],
     });
 
+    loggerScope?.debug('Context is received', {
+      component: 'PlaywrightBrowser',
+      method: 'runInContextByChromium',
+      stage: 'init',
+      data: {
+        context: context,
+      },
+    });
+
     try {
       return await fn(context);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
+
+      loggerScope?.error('Problems with browser context', {
+        component: 'PlaywrightBrowser',
+        method: 'runInContextByChromium',
+        action: 'return await fn(context);',
+        data: {
+          message: error.message,
+          stack: error.stack,
+          name: error.name,
+        },
+      });
+      throw error;
     } finally {
       await context.close();
+      await fs.rm(profileDir, {
+        recursive: true,
+        force: true,
+      });
     }
   }
 
