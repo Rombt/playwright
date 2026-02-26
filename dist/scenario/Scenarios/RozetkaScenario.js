@@ -297,6 +297,8 @@ class RozetkaScenario {
                                         attempt: attempt,
                                     },
                                 });
+                                const resultsDirPath = path.resolve(__dirname, '../../../results', task.brand_name, `${task.brand_name}_unprocessed-products.json`);
+                                this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
                                 allData[skuKey] ?? (allData[skuKey] = []);
                                 allData[skuKey].push(...images);
                             }
@@ -406,7 +408,7 @@ class RozetkaScenario {
                                 url_init: url_init,
                                 message: error.message,
                                 stack: error.stack,
-                                name: error.name,
+                                errorName: error.name,
                             },
                         });
                     }
@@ -520,112 +522,6 @@ class RozetkaScenario {
                 allDataNormalize: allDataNormalize,
             },
         });
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // await limiter.sleep(1000, 5000);
-        // const productsPageLinks = {
-        //   '1865231': ['https://rozetka.com.ua/ua/columbia_0990037254005_0192660465388/p388246605/'],
-        //   '2079181': ['https://rozetka.com.ua/ua/columbia-195981582994/p446003411/'],
-        //   '2103761': ['https://rozetka.com.ua/ua/columbia-195981625394/p446018603/'],
-        // };
-        // console.log('========================   productsPageLinks = ', productsPageLinks);
-        // await this.browser.runInContext(async context => {
-        // await this.browser.runInContextByChromium(async context => {
-        //   /*Хожу по полученным страницам товаров */ //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //   type IProductLinkItem = {
-        //     sku: string;
-        //     link: string;
-        //   };
-        //   type IProdPageError = {
-        //     item?: IProductLinkItem;
-        //     error: IWorkerError;
-        //   };
-        //   const uniqueProducts = Object.entries(productsPageLinks).map(([sku, links]) => ({
-        //     sku,
-        //     links,
-        //   }));
-        //   const queue = [...uniqueProducts];
-        //   const limiter = new RateLimiter(5000);
-        //   const taskQueueProdPage: IProductLinkItem[] = [];
-        //   for (const [sku, links] of Object.entries(productsPageLinks)) {
-        //     for (const link of links) {
-        //       taskQueueProdPage.push({ sku, link });
-        //     }
-        //   }
-        //   const runBatchProdPage = async (items: IProductLinkItem[]): Promise<IProdPageError[]> => {
-        //     const errors: IProdPageError[] = [];
-        //     let index = 0;
-        //     const quantityPage = Math.min(queue.length, this.maxPage);
-        //     const pool = new PagePool(context, quantityPage);
-        //     this.registerResource(pool);
-        //     const getNext = (): IProductLinkItem | undefined => {
-        //       if (index >= items.length) return undefined;
-        //       return items[index++];
-        //     };
-        //     const workers = Array.from({ length: quantityPage }, async () => {
-        //       const page = await pool.acquire();
-        //       try {
-        //         while (true) {
-        //           const item = getNext();
-        //           if (!item) break;
-        //           try {
-        //             const result = await source.worker(item.link, page, limiter, undefined, item.sku);
-        //             for (const r of result) {
-        //               for (const [sku, images] of Object.entries(r.data)) {
-        //                 allData[sku] ??= [];
-        //                 allData[sku].push(...images);
-        //               }
-        //               if (Array.isArray(r.errors)) {
-        //                 for (const err of r.errors) {
-        //                   try {
-        //                     await this.handleError(err);
-        //                   } catch (finalErr) {
-        //                     errors.push({
-        //                       item: { sku: item.sku } as any,
-        //                       error: finalErr as IWorkerError,
-        //                     });
-        //                   }
-        //                 }
-        //               }
-        //             }
-        //           } catch (err) {
-        //             errors.push({
-        //               item: { sku: item.sku } as any,
-        //               error: err as IWorkerError,
-        //             });
-        //           }
-        //         }
-        //       } finally {
-        //         pool.release(page);
-        //       }
-        //     });
-        //     await Promise.allSettled(workers);
-        //     return errors;
-        //   };
-        //   let attemptProdPage = 1;
-        //   let currentBatchProdPage = taskQueueProdPage;
-        //   while (currentBatchProdPage.length && attemptProdPage <= this.maxRetries) {
-        //     console.log(`---> CollectImages for ${task.brand_name} attemptProdPage №`, attemptProdPage);
-        //     await limiter.sleep(1000, 5000);
-        //     const errors = await runBatchProdPage(currentBatchProdPage);
-        //     const retryable = errors.filter(
-        //       (e): e is { item: IProductLinkItem; error: IWorkerError } =>
-        //         !!e.item && attemptProdPage < this.maxRetries && isRetryable(e.error),
-        //     );
-        //     currentBatchProdPage = retryable.map(e => e.item);
-        //     if (currentBatchProdPage.length) {
-        //       await waitBeforeRetry(attemptProdPage);
-        //     } else {
-        //       errors.forEach(e => {
-        //         allErrors.push({
-        //           error: e.error,
-        //           targetUrl: undefined,
-        //         });
-        //       });
-        //     }
-        //     attemptProdPage++;
-        //   }
-        //   console.log('****** allData = ', allData);
-        // }, 'fake');
         // await this.storage.saveJson(allErrors, {
         //   filename: `${task.brand_name}_unprocessed-products.json`,
         //   targetDir: task.brand_name,
@@ -711,6 +607,76 @@ class RozetkaScenario {
             typeof obj.title === 'string' &&
             'href' in obj &&
             typeof obj.href === 'string');
+    }
+    async removeItemBySku(filePath, skuToRemove, loggerScope) {
+        loggerScope?.debug(`The inter to the removeItemBySku(...)`, {
+            component: 'RozetkaScenario',
+            method: 'removeItemBySku(...)',
+            stage: 'start',
+            data: {
+                filePath: filePath,
+                skuToRemove: skuToRemove,
+            },
+        });
+        try {
+            const fileContent = await fs_1.promises.readFile(filePath, 'utf-8');
+            if (!fileContent.trim()) {
+                loggerScope?.debug(`Content is absent in the file`, {
+                    component: 'RozetkaScenario',
+                    method: 'removeItemBySku(...)',
+                    action: 'fileContent = await fs.readFile(...)',
+                    data: {
+                        filePath: filePath,
+                        skuToRemove: skuToRemove,
+                    },
+                });
+                return false;
+            }
+            const data = JSON.parse(fileContent);
+            loggerScope?.debug(`Received to the file`, {
+                component: 'RozetkaScenario',
+                method: 'removeItemBySku(...)',
+                action: 'data: IImageError[] = JSON.parse(fileContent)',
+                data: {
+                    filePath: filePath,
+                    skuToRemove: skuToRemove,
+                    data: data,
+                },
+            });
+            const initialLength = data.length;
+            const filtered = data.filter((item) => item?.error?.product?.sku.includes(skuToRemove));
+            if (filtered.length === initialLength) {
+                loggerScope?.debug(`Failed to remove SKU from file`, {
+                    component: 'RozetkaScenario',
+                    method: 'removeItemBySku(...)',
+                    action: 'fileContent = await fs.readFile(...)',
+                    data: {
+                        filePath: filePath,
+                        skuToRemove: skuToRemove,
+                    },
+                });
+                return false;
+            }
+            await fs_1.promises.writeFile(filePath, JSON.stringify(filtered, null, 2), 'utf-8');
+            return true;
+        }
+        catch (err) {
+            const error = err instanceof Error ? err : new Error(String(err));
+            loggerScope?.error(`Failed to read or write file`, {
+                component: 'RozetkaScenario',
+                method: 'removeItemBySku(...)',
+                action: 'fileContent = await fs.readFile(...)',
+                data: {
+                    filePath: filePath,
+                    skuToRemove: skuToRemove,
+                    errorName: error instanceof Error ? error.name : undefined,
+                    errorMessage: error instanceof Error ? error.message : String(error),
+                    stack: error instanceof Error ? error.stack : undefined,
+                },
+            });
+            console.error('Failed to read or write file:', err);
+            throw err;
+        }
     }
 }
 exports.RozetkaScenario = RozetkaScenario;

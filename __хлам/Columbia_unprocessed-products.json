@@ -1,0 +1,59 @@
+[
+  {
+    "error": {
+      "error": {
+        "name": "TimeoutError"
+      },
+      "product": {
+        "id_product": "54213",
+        "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
+        "sku": "1865231*AW27",
+        "attributes": {
+          "color": "чорн.",
+          "size": "41"
+        }
+      },
+      "url": "https://www.columbia.com/search?q=1865231&searchMethod=manualSearch",
+      "retryable": false
+    },
+    "targetUrl": "https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch"
+  },
+  {
+    "error": {
+      "error": {
+        "name": "TimeoutError"
+      },
+      "product": {
+        "id_product": "54223",
+        "name_product": "Чоловічі черевики Columbia Konos™ TRS OutDry™ Mid  collected ",
+        "sku": "2103761*AW27",
+        "attributes": {
+          "color": "чорн.",
+          "size": "44.5"
+        }
+      },
+      "url": "https://www.columbia.com/search?q=2103761&searchMethod=manualSearch",
+      "retryable": false
+    },
+    "targetUrl": "https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch"
+  },
+  {
+    "error": {
+      "error": {
+        "name": "TimeoutError"
+      },
+      "product": {
+        "id_product": "54217",
+        "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
+        "sku": "2079181*AW27",
+        "attributes": {
+          "color": "чорн.",
+          "size": "39.5"
+        }
+      },
+      "url": "https://www.columbia.com/search?q=2079181&searchMethod=manualSearch",
+      "retryable": false
+    },
+    "targetUrl": "https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch"
+  }
+]

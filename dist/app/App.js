@@ -23,7 +23,7 @@ class App {
             level: this.config.loggerConfig.level,
             transports: this.config.loggerTransports,
         });
-        const modeArg = process.argv.find(arg => arg.startsWith('--mode='));
+        const modeArg = process.argv.find((arg) => arg.startsWith('--mode='));
         this.mode = modeArg?.split('=')[1] ?? 'dev';
         try {
             //todo убрать повторяющийся код

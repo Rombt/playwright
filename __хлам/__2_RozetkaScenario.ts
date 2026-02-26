@@ -1,36 +1,36 @@
 import { BrowserContext, Page } from 'playwright-core';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { IScenario } from '../IScenario';
-import { ISource } from '../../source/ISource';
-import { Storage } from '../../storage/Storage';
-import { IBrowser } from '../../browser/IBrowser';
-import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
-import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
-import { IDownloadedFile } from '../../browser/IDownloadedFile';
-import { IDataImag } from '../../data/entities/IDataImag';
-import { ICollectProductPhotosBatch } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosBatch';
-import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
-import { IResource } from '../../browser/IResource';
-import { RateLimiter } from '../../browser/limiter/RateLimiter';
-import { PagePool } from '../../browser/pool/PagePool';
-import { IProduct } from '../../data/entities/IProduct';
-import { AppConfig } from '../../data/config/appConfig';
-import { UnprocessedCollector } from '../../data/collectors/UnprocessedCollector';
+import { IScenario } from '../src/scenario/IScenario';
+import { ISource } from '../src/source/ISource';
+import { Storage } from '../src/storage/Storage';
+import { IBrowser } from '../src/browser/IBrowser';
+import { IWorkerError } from '../src/data/entities/IErrors/IWorkerError';
+import { IWorkerResult } from '../src/data/entities/IResults/IWorkerResult';
+import { IDownloadedFile } from '../src/browser/IDownloadedFile';
+import { IDataImag } from '../src/data/entities/IDataImag';
+import { ICollectProductPhotosBatch } from '../src/data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosBatch';
+import { ICollectProductPhotosTask } from '../src/data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
+import { IResource } from '../src/browser/IResource';
+import { RateLimiter } from '../src/browser/limiter/RateLimiter';
+import { PagePool } from '../src/browser/pool/PagePool';
+import { IProduct } from '../src/data/entities/IProduct';
+import { AppConfig } from '../src/data/config/appConfig';
+import { UnprocessedCollector } from '../src/data/collectors/UnprocessedCollector';
 
-import { IImageItem } from '../../data/entities/IImageItem';
-import { IImageError } from '../../data/entities/IErrors/IImageError';
+import { IImageItem } from '../src/data/entities/IImageItem';
+import { IImageError } from '../src/data/entities/IErrors/IImageError';
 
-import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
+import { normalizeAllData, isRetryable, waitBeforeRetry } from '../src/common/helpers';
 import {
   IHttpResult,
   IAutocompleteResponse,
   IAutocompleteGood,
-} from '../../data/entities/IResults/IHttpResult';
+} from '../src/data/entities/IResults/IHttpResult';
 
-import { Logger } from '../../data/logger/Logger';
-import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
-import { ILogger } from '../../data/logger/types/ILogger';
+import { Logger } from '../src/data/logger/Logger';
+import { IScopedLogger } from '../src/data/logger/types/IScopedLogger';
+import { ILogger } from '../src/data/logger/types/ILogger';
 
 type TaskResult =
   | { status: 'success'; sku: string }
@@ -245,6 +245,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     const limiter = new RateLimiter(5000);
     const productsPageLinks: Record<string, string[]> = {};
 
+    /* 
+    //!Закрыл на время розработки скачивания картинок
     await this.browser.runInContextByChromium(
       async (context) => {
         //========================    Инициализация сценария    ========================
@@ -410,15 +412,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                     },
                   });
 
-                  const resultsDirPath = path.resolve(
-                    __dirname,
-                    '../../../results',
-                    task.brand_name,
-                    `${task.brand_name}_unprocessed-products.json`,
-                  );
-
-                  this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
-
                   allData[skuKey] ??= [];
                   allData[skuKey].push(...images);
                 }
@@ -544,7 +537,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                   url_init: url_init,
                   message: error.message,
                   stack: error.stack,
-                  errorName: error.name,
+                  name: error.name,
                 },
               });
             } finally {
@@ -693,6 +686,204 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       },
     });
 
+      //!/Закрыл на время розработки скачивания картинок
+    */
+
+    // await limiter.sleep(1000, 5000);
+
+    const productsPageLinks_test = {
+      '1865231': ['https://rozetka.com.ua/ua/columbia_0990037254005_0192660465388/p388246605/'],
+      '2079181': ['https://rozetka.com.ua/ua/columbia-195981582994/p446003411/'],
+      '2103761': ['https://rozetka.com.ua/ua/columbia-195981625394/p446018603/'],
+    };
+
+    await this.browser.runInContextByChromium(
+      async (context) => {
+        //========================    Скачивание фотографий по полученным URLs    ========================
+        const limiter = new RateLimiter(5000);
+
+        const taskQueueProdPage: IProductLinkItem[] = [];
+        for (const [sku, links] of Object.entries(productsPageLinks)) {
+          for (const link of links) {
+            taskQueueProdPage.push({ sku, link });
+          }
+        }
+
+        loggerScope?.debug('Product page task queue is created', {
+          component: 'ProductPageScenario',
+          method: 'process',
+          action: 'taskQueueProdPage push',
+          data: {
+            length: taskQueueProdPage.length,
+            taskQueueProdPage,
+          },
+        });
+
+        if (!taskQueueProdPage.length) {
+          loggerScope?.error('Product page links are absent', {
+            component: 'ProductPageScenario',
+            method: 'process',
+            stage: 'init',
+            data: { productsPageLinks },
+          });
+          throw new Error('Product page links are absent');
+        }
+
+        const quantityPage = Math.min(taskQueueProdPage.length, this.maxPage);
+        const pool = new PagePool(context, quantityPage);
+        this.registerResource(pool);
+
+        //========================    Обработка ОДНОГО URL    ========================
+        const processProductLink = async (
+          item: IProductLinkItem,
+          page: Page,
+        ): Promise<TaskResult> => {
+          try {
+            const result = await source.worker(item.link, page, limiter, undefined, item.sku);
+
+            loggerScope?.debug('Product page parsed', {
+              component: 'ProductPageScenario',
+              method: 'process',
+              action: 'source.worker(...)',
+              data: {
+                sku: item.sku,
+                link: item.link,
+                result: result,
+              },
+            });
+
+            for (const r of result) {
+              for (const [skuKey, images] of Object.entries(r.data)) {
+                allData[skuKey] ??= [];
+                allData[skuKey].push(...images);
+              }
+
+              if (Array.isArray(r.errors)) {
+                for (const err of r.errors) {
+                  await this.handleError(err);
+                }
+              }
+            }
+
+            return { status: 'success', sku: item.sku };
+          } catch (e) {
+            loggerScope?.error('Error during product page processing', {
+              component: 'ProductPageScenario',
+              method: 'process',
+              action: 'processProductLink',
+              data: {
+                sku: item.sku,
+                link: item.link,
+                error: e,
+              },
+            });
+
+            return isRetryable(e as IWorkerError)
+              ? { status: 'retry', sku: item.sku, error: e as IWorkerError }
+              : { status: 'fatal', sku: item.sku, error: e as IWorkerError };
+          }
+        };
+        //========================    /Обработка ОДНОГО LINK    ========================
+
+        //========================    Batch runner    ========================
+        const runBatch = async (items: IProductLinkItem[]): Promise<TaskResult[]> => {
+          const queue = [...items];
+          const results: TaskResult[] = [];
+
+          loggerScope?.debug('Batch runner for product pages started', {
+            component: 'ProductPageScenario',
+            method: 'process',
+            action: 'runBatch',
+            data: {
+              queueLength: queue.length,
+              queue,
+            },
+          });
+
+          const workers = Array.from({ length: quantityPage }, async () => {
+            const page = await pool.acquire();
+
+            try {
+              while (queue.length) {
+                const item = queue.shift();
+                if (!item) break;
+
+                const result = await processProductLink(item, page);
+                results.push(result);
+              }
+            } catch (err) {
+              loggerScope?.error('Worker error in product page batch', {
+                component: 'ProductPageScenario',
+                method: 'process',
+                action: 'worker catch',
+                data: {
+                  error: err,
+                },
+              });
+            } finally {
+              pool.release(page);
+            }
+          });
+
+          await Promise.all(workers);
+          return results;
+        };
+        //========================    /Batch runner    ========================
+
+        //========================    ГЛАВНЫЙ RETRY ЦИКЛ    ========================
+        let attempt = 1;
+        let currentBatch = taskQueueProdPage;
+
+        while (currentBatch.length && attempt <= this.maxRetries) {
+          loggerScope?.debug('Main retry cycle for product pages started', {
+            component: 'ProductPageScenario',
+            method: 'process',
+            action: 'main retry loop',
+            data: {
+              attempt,
+              currentBatchLength: currentBatch.length,
+            },
+          });
+
+          await limiter.sleep(1000, 5000);
+
+          const results = await runBatch(currentBatch);
+
+          const retryResults = results.filter(
+            (r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry',
+          );
+
+          const fatalResults = results.filter(
+            (r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal',
+          );
+
+          currentBatch = currentBatch.filter((item) =>
+            retryResults.some((r) => r.sku === item.sku),
+          );
+
+          fatalResults.forEach((r) =>
+            allErrors.push({
+              error: r.error,
+            }),
+          );
+
+          attempt++;
+        }
+
+        loggerScope?.debug('Product page processing complete', {
+          component: 'ProductPageScenario',
+          method: 'process',
+          data: {
+            allData,
+            allErrors,
+          },
+        });
+        //========================    /ГЛАВНЫЙ RETRY ЦИКЛ    ========================
+      },
+      'fake',
+      loggerScope,
+    );
+
     // await this.storage.saveJson(allErrors, {
     //   filename: `${task.brand_name}_unprocessed-products.json`,
     //   targetDir: task.brand_name,
@@ -804,91 +995,5 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       'href' in obj &&
       typeof (obj as any).href === 'string'
     );
-  }
-
-  async removeItemBySku(
-    filePath: string,
-    skuToRemove: string,
-    loggerScope?: ILogger,
-  ): Promise<boolean> {
-    loggerScope?.debug(`The inter to the removeItemBySku(...)`, {
-      component: 'RozetkaScenario',
-      method: 'removeItemBySku(...)',
-      stage: 'start',
-      data: {
-        filePath: filePath,
-        skuToRemove: skuToRemove,
-      },
-    });
-
-    try {
-      const fileContent = await fs.readFile(filePath, 'utf-8');
-
-      if (!fileContent.trim()) {
-        loggerScope?.debug(`Content is absent in the file`, {
-          component: 'RozetkaScenario',
-          method: 'removeItemBySku(...)',
-          action: 'fileContent = await fs.readFile(...)',
-          data: {
-            filePath: filePath,
-            skuToRemove: skuToRemove,
-          },
-        });
-
-        return false;
-      }
-
-      const data: IImageError[] = JSON.parse(fileContent);
-
-      loggerScope?.debug(`Received to the file`, {
-        component: 'RozetkaScenario',
-        method: 'removeItemBySku(...)',
-        action: 'data: IImageError[] = JSON.parse(fileContent)',
-        data: {
-          filePath: filePath,
-          skuToRemove: skuToRemove,
-          data: data,
-        },
-      });
-
-      const initialLength = data.length;
-
-      const filtered = data.filter((item) => item?.error?.product?.sku.includes(skuToRemove));
-
-      if (filtered.length === initialLength) {
-        loggerScope?.debug(`Failed to remove SKU from file`, {
-          component: 'RozetkaScenario',
-          method: 'removeItemBySku(...)',
-          action: 'fileContent = await fs.readFile(...)',
-          data: {
-            filePath: filePath,
-            skuToRemove: skuToRemove,
-          },
-        });
-
-        return false;
-      }
-
-      await fs.writeFile(filePath, JSON.stringify(filtered, null, 2), 'utf-8');
-
-      return true;
-    } catch (err) {
-      const error = err instanceof Error ? err : new Error(String(err));
-      loggerScope?.error(`Failed to read or write file`, {
-        component: 'RozetkaScenario',
-        method: 'removeItemBySku(...)',
-        action: 'fileContent = await fs.readFile(...)',
-        data: {
-          filePath: filePath,
-          skuToRemove: skuToRemove,
-          errorName: error instanceof Error ? error.name : undefined,
-          errorMessage: error instanceof Error ? error.message : String(error),
-          stack: error instanceof Error ? error.stack : undefined,
-        },
-      });
-
-      console.error('Failed to read or write file:', err);
-      throw err;
-    }
   }
 }
