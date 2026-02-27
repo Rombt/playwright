@@ -5,7 +5,8 @@ exports.config = {
     async: {
         retry: {
             baseDelay: 1000,
-            maxDelay: 20000,
+            maxDelay: 30000,
+            maxWaitForFreePage: 60000, // страница из пула освободится через maxDelay
             maxRetries: 5,
         },
         tasks: {

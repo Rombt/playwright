@@ -195,7 +195,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
     const workers = Array.from({ length: this.maxTask }, () => worker());
 
-    await Promise.all(workers);
+    await Promise.allSettled(workers);
     this.logger.info('All task groups have been processed', {
       component: 'RozetkaScenario',
       method: 'runWithWorkerPool',
@@ -564,7 +564,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             }
           });
 
-          await Promise.all(workers);
+          await Promise.allSettled(workers);
           return results;
         }
 
@@ -807,7 +807,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         }
       });
 
-      await Promise.all(workers);
+      await Promise.allSettled(workers);
       return results;
     };
 

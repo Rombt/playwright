@@ -24,6 +24,7 @@ export interface AsyncConfig {
 export interface RetryConfig {
   baseDelay: number;
   maxDelay: number;
+  maxWaitForFreePage: number;
   maxRetries: number;
 }
 

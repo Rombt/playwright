@@ -62,27 +62,32 @@ export class PagePool implements IPagePool, IResource {
       }
     }
 
+    // если количество страниц в пуле больше или равно разрешоному
+    // свободных страниц нет а просят ещё
     return new Promise<Page>((resolve, reject) => {
+      // ждать освобождения страницы не более this.config.asyncRetry.maxWaitForFreePage
       const timeout = setTimeout(() => {
         this.waiters = this.waiters.filter((w) => w !== wrappedResolve);
-        this.loggerScope?.error(
-          'Attempting to create a new page in the pool. Acquire with timeout',
-          {
-            component: 'PagePool',
-            method: 'acquire',
-            action: 'context.newPage',
-            stage: 'process',
-            data: {
-              created: this.created,
-              quantityLimit: this.quantityPage,
-              freePages: this.free.length,
-              waiters: this.waiters.length,
-            },
-          },
+
+        const error = new Error(
+          `PagePool acquire timeout: no free page became available within ${this.config.asyncRetry.maxWaitForFreePage}`,
         );
 
-        reject(new Error('Pool acquire timeout'));
-      }, this.config.asyncRetry.maxDelay);
+        Object.assign(error, {
+          component: 'PagePool',
+          method: 'acquire',
+          action: 'context.newPage',
+          stage: 'process',
+          data: {
+            created: this.created,
+            quantityLimit: this.quantityPage,
+            freePages: this.free.length,
+            waiters: this.waiters.length,
+          },
+        });
+
+        reject(error);
+      }, this.config.asyncRetry.maxWaitForFreePage);
 
       const wrappedResolve = (page: Page) => {
         clearTimeout(timeout);
@@ -101,7 +106,22 @@ export class PagePool implements IPagePool, IResource {
           },
         });
 
-        return Promise.reject(new Error('Pool waiters limit exceeded'));
+        const error = new Error(`Pool waiters limit exceeded`);
+
+        Object.assign(error, {
+          component: 'PagePool',
+          method: 'acquire',
+          action: 'context.newPage',
+          stage: 'process',
+          data: {
+            created: this.created,
+            quantityLimit: this.quantityPage,
+            freePages: this.free.length,
+            waiters: this.waiters.length,
+          },
+        });
+
+        reject(error);
       }
 
       this.waiters.push(wrappedResolve);

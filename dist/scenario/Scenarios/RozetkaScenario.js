@@ -123,7 +123,7 @@ class RozetkaScenario {
             }
         };
         const workers = Array.from({ length: this.maxTask }, () => worker());
-        await Promise.all(workers);
+        await Promise.allSettled(workers);
         this.logger.info('All task groups have been processed', {
             component: 'RozetkaScenario',
             method: 'runWithWorkerPool',
@@ -414,7 +414,7 @@ class RozetkaScenario {
                         pool.release(page);
                     }
                 });
-                await Promise.all(workers);
+                await Promise.allSettled(workers);
                 return results;
             }
             //========================   ГЛАВНЫЙ RETRY ЦИКЛ     ========================
@@ -603,7 +603,7 @@ class RozetkaScenario {
                     pool.release(page);
                 }
             });
-            await Promise.all(workers);
+            await Promise.allSettled(workers);
             return results;
         };
         //========================    ГЛАВНЫЙ RETRY ЦИКЛ    ========================
