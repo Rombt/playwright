@@ -4,6 +4,7 @@ import { IProduct } from '../data/entities/IProduct';
 import { RateLimiter } from '../browser/limiter/RateLimiter';
 import { IWorkerResult } from '../data/entities/IResults/IWorkerResult';
 import { IHttpResult } from '../data/entities/IResults/IHttpResult';
+import { ILogger } from '../data/logger/types/ILogger';
 
 export interface ISource<T extends ITask, THttpResponse = unknown> {
   supports(task: T): boolean;
@@ -32,6 +33,7 @@ export interface ISource<T extends ITask, THttpResponse = unknown> {
     limiter: RateLimiter,
     sku: string,
     debugMeta?: Record<string, string>,
+    loggerScope?: ILogger,
   ): Promise<IHttpResult<THttpResponse>>;
 
   worker(

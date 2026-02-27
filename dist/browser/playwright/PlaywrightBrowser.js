@@ -21,7 +21,7 @@ class PlaywrightBrowser {
         this.instance = await playwright_1.chromium.launch(this.launchOptions);
         return this.instance;
     }
-    async close() {
+    async close(profilesDir) {
         if (!this.instance)
             return;
         try {
@@ -40,6 +40,12 @@ class PlaywrightBrowser {
         finally {
             await this.instance.close();
             this.instance = null;
+            if (profilesDir) {
+                await fs.rm(profilesDir, {
+                    recursive: true,
+                    force: true,
+                });
+            }
         }
         console.log('Browser closed.');
     }
@@ -120,23 +126,91 @@ class PlaywrightBrowser {
             });
         }
     }
-    async download(page, url) {
+    async download(page, url, loggerScope) {
         let downloadEvent;
+        let buffer = Buffer.from([]);
+        let ext = '';
+        if (!page) {
+            loggerScope?.error(`Page is undefined; browser context has been closed`, {
+                component: 'PlaywrightBrowser',
+                method: 'download(...)',
+                action: 'page.waitForEvent(...)',
+                data: {
+                    url: url,
+                },
+            });
+            throw new Error('Page is undefined; browser context has been closed');
+        }
+        loggerScope?.debug(`Entering PlaywrightBrowser.download()`, {
+            component: 'PlaywrightBrowser',
+            method: 'download()',
+            action: 'start',
+            data: {
+                url: url,
+                page: page,
+            },
+        });
         const downloadPromise = page
             .waitForEvent('download')
             .then((d) => {
+            loggerScope?.debug(`Trying to download a file from url`, {
+                component: 'PlaywrightBrowser',
+                method: 'page.waitForEvent(...)',
+                data: {
+                    url: url,
+                    d: d,
+                },
+            });
             downloadEvent = d;
         })
-            .catch(() => { });
+            .catch((err) => {
+            const error = err instanceof Error ? err : new Error(String(err));
+            loggerScope?.error(`Image file download failed`, {
+                component: 'PlaywrightBrowser',
+                method: 'download(...)',
+                action: 'page.waitForEvent(...)',
+                data: {
+                    url: url,
+                    errorName: error instanceof Error ? error.name : undefined,
+                    errorMessage: error instanceof Error ? error.message : String(error),
+                    stack: error instanceof Error ? error.stack : undefined,
+                },
+            });
+            throw new Error('Image file download failed');
+        });
         const response = await page.goto(url);
         await downloadPromise;
         if (downloadEvent) {
+            loggerScope?.debug(`File download succeeded`, {
+                component: 'PlaywrightBrowser',
+                method: 'download()',
+                action: 'if (downloadEvent)',
+                data: {
+                    downloadEvent: downloadEvent,
+                },
+            });
             const suggestedFilename = downloadEvent.suggestedFilename();
             const ext = path.extname(suggestedFilename) || '.jpg';
             const stream = await downloadEvent.createReadStream();
             if (!stream) {
-                throw new Error('Download stream is null');
+                loggerScope?.error(`Failed to create read stream for downloaded file`, {
+                    component: 'PlaywrightBrowser',
+                    method: 'download(...)',
+                    action: 'page.waitForEvent(...)',
+                    data: {
+                        stream: stream,
+                    },
+                });
+                throw new Error('Failed to create read stream for downloaded file');
             }
+            loggerScope?.debug(`File read stream created successfully.`, {
+                component: 'PlaywrightBrowser',
+                method: 'download(...)',
+                action: 'page.waitForEvent(...)',
+                data: {
+                    stream: stream,
+                },
+            });
             const chunks = [];
             for await (const chunk of stream) {
                 chunks.push(chunk);
@@ -147,21 +221,71 @@ class PlaywrightBrowser {
             };
         }
         if (!response) {
-            throw new Error('No response received');
+            loggerScope?.error(`Failed to navigate to URL`, {
+                component: 'PlaywrightBrowser',
+                method: 'download(...)',
+                action: 'page.goto(url)',
+                data: {
+                    url: url,
+                },
+            });
+            throw new Error('Failed to navigate to URL');
         }
-        const buffer = await response.body();
-        const contentType = response.headers()['content-type'] || '';
-        let ext = '';
-        if (contentType.includes('image/jpeg'))
-            ext = '.jpg';
-        else if (contentType.includes('image/png'))
-            ext = '.png';
-        else if (contentType.includes('image/webp'))
-            ext = '.webp';
-        else if (contentType.includes('image/avif'))
-            ext = '.avif';
-        else if (contentType.includes('application/pdf'))
-            ext = '.pdf';
+        try {
+            buffer = await response.body();
+            const contentType = response.headers()['content-type'] || '';
+            if (!buffer || !contentType) {
+                //todo Обработка ситуации: пропустить, повторить, или выбросить ошибку
+                loggerScope?.error(`Response body or content-type is empty for URL`, {
+                    component: 'PlaywrightBrowser',
+                    method: 'download(...)',
+                    action: 'buffer = await response.body()',
+                    data: {
+                        url: url,
+                        buffer: buffer,
+                        contentType: contentType,
+                    },
+                });
+                throw new Error('Response body or content-type is empty for URL');
+            }
+            else {
+                if (contentType.includes('image/jpeg'))
+                    ext = '.jpg';
+                else if (contentType.includes('image/png'))
+                    ext = '.png';
+                else if (contentType.includes('image/webp'))
+                    ext = '.webp';
+                else if (contentType.includes('image/avif'))
+                    ext = '.avif';
+                else if (contentType.includes('application/pdf'))
+                    ext = '.pdf';
+                loggerScope?.debug(`Response body read successfully for URL`, {
+                    component: 'PlaywrightBrowser',
+                    method: 'download(...)',
+                    action: 'buffer = await response.body()',
+                    data: {
+                        url: url,
+                        ext: ext,
+                    },
+                });
+            }
+        }
+        catch (err) {
+            const error = err instanceof Error ? err : new Error(String(err));
+            loggerScope?.error(`Failed to read response body or headers from URL`, {
+                component: 'PlaywrightBrowser',
+                method: 'download(...)',
+                action: 'buffer = await response.body()',
+                data: {
+                    url: url,
+                    ext: ext,
+                    errorName: error instanceof Error ? error.name : undefined,
+                    errorMessage: error instanceof Error ? error.message : String(error),
+                    stack: error instanceof Error ? error.stack : undefined,
+                },
+            });
+            throw new Error('Failed to read response body or headers from URL');
+        }
         return { buffer, ext };
     }
 }

@@ -11,7 +11,7 @@ class PageImageSourceRozetka {
     supports(task) {
         return task.type === 'recollect-product-photos';
     }
-    async workerHttpRequest(request, headers, targetUrl, limiter, sku, debugMeta) {
+    async workerHttpRequest(request, headers, targetUrl, limiter, sku, debugMeta, loggerScope) {
         if (!sku) {
             this.logger.error(`sku is absent`, {
                 component: 'PageImageSourceRozetka',
@@ -23,7 +23,6 @@ class PageImageSourceRozetka {
             });
             throw new Error(`In workerHttpRequest method sku is absent`);
         }
-        const loggerScope = this.logger.withContext(`workerHttpRequest   ${debugMeta.brand_name}   ${sku}`);
         const options = {
             url: targetUrl,
             params: {
@@ -34,16 +33,16 @@ class PageImageSourceRozetka {
             headers: headers,
             loggerScope: loggerScope,
         };
-        loggerScope.debug(`Success.`, {
-            component: 'PageImageSourceRozetka',
-            method: 'workerHttpRequest',
-            stage: 'start',
-            data: {
-                sku: sku,
-                options: options,
-            },
-        });
         const requestResult = await this.executeHttpRequest(request, options);
+        // loggerScope.debug(`Success.`, {
+        //   component: 'PageImageSourceRozetka',
+        //   method: 'workerHttpRequest',
+        //   stage: 'start',
+        //   data: {
+        //     sku: sku,
+        //     options: options,
+        //   },
+        // });
         return requestResult;
     }
     async executeHttpRequest(request, options) {
@@ -126,7 +125,7 @@ class PageImageSourceRozetka {
                 // Если не JSON, пробуем получить текст для диагностики блокировки
                 const rawText = await response.text().catch(() => 'Не удалось прочитать body');
                 const contentType = response.headers()['content-type'] || 'unknown';
-                options.loggerScope?.error(`[Payload Error] Ожидался JSON, получен некорректный формат`, {
+                options.loggerScope?.error(`[Payload Error] Expected JSON, received invalid format`, {
                     component: 'PageImageSourceRozetka',
                     method: 'executeHttpRequest',
                     action: 'response.json()',
@@ -139,11 +138,13 @@ class PageImageSourceRozetka {
                 });
                 // Логика принятия решения на основе текста
                 if (rawText.includes('cloudflare') || rawText.includes('captcha')) {
-                    options.loggerScope?.error(`!!! Обнаружен экран проверки (WAF/Challenge) !!!`, {
+                    options.loggerScope?.error(`!!! Verification screen (WAF/Challenge) detected !!!`, {
                         component: 'PageImageSourceRozetka',
                         method: 'executeHttpRequest',
                     });
+                    throw new Error('!!! Verification screen (WAF/Challenge) detected !!!');
                 }
+                throw new Error('Expected JSON, received invalid format');
             }
             return {
                 ok: status >= 200 && status < 300,

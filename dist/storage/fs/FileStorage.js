@@ -7,10 +7,46 @@ class FileStorage {
     constructor(baseDir) {
         this.baseDir = baseDir;
     }
-    async save(file) {
+    async save(file, loggerScope) {
         const targetPath = path.join(this.trimNonPrintable(this.baseDir), this.trimNonPrintable(file.targetDir), this.trimNonPrintable(file.filename));
-        await fs.mkdir(path.dirname(targetPath), { recursive: true });
-        await fs.writeFile(targetPath, file.buffer);
+        loggerScope?.debug(`Entering FileStorage.save()`, {
+            component: 'FileStorage',
+            method: 'save()',
+            action: 'start',
+            data: {
+                targetPath: targetPath,
+                file: file,
+            },
+        });
+        try {
+            await fs.mkdir(path.dirname(targetPath), { recursive: true });
+            await fs.writeFile(targetPath, file.buffer);
+            loggerScope?.debug(`File saved successfully`, {
+                component: 'FileStorage',
+                method: 'save()',
+                action: 'fs.writeFile(...)',
+                data: {
+                    targetPath: targetPath,
+                    file: file,
+                },
+            });
+        }
+        catch (err) {
+            const error = err instanceof Error ? err : new Error(String(err));
+            loggerScope?.error(`Failed to save file`, {
+                component: 'FileStorage',
+                method: 'save()',
+                action: 'fs.writeFile(...)',
+                data: {
+                    targetPath: targetPath,
+                    file: file,
+                    errorName: error instanceof Error ? error.name : undefined,
+                    errorMessage: error instanceof Error ? error.message : String(error),
+                    stack: error instanceof Error ? error.stack : undefined,
+                },
+            });
+            throw err;
+        }
     }
     async saveJson(data, options) {
         const targetPath = path.join(this.baseDir, options.targetDir ?? '', options.filename);

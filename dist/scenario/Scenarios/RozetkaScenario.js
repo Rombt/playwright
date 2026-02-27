@@ -13,6 +13,7 @@ class RozetkaScenario {
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
+        this.allErrors = [];
         this.sources = [];
         this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
@@ -162,7 +163,6 @@ class RozetkaScenario {
                 task: task,
             },
         });
-        const allErrors = [];
         const allData = {};
         const limiter = new RateLimiter_1.RateLimiter(5000);
         const productsPageLinks = {};
@@ -227,12 +227,12 @@ class RozetkaScenario {
                         });
                         throw new Error('Headers are invalid');
                     }
-                    const autocomplete = await withRetry(() => source.workerHttpRequest(context.request, headers, targetUrl, limiter, sku, {
+                    const autocomplete = await this.withRetry(() => source.workerHttpRequest(context.request, headers, targetUrl, limiter, sku, {
                         brand_name: task.brand_name,
-                    }), {
+                    }, loggerScope), {
                         maxRetries: this.config.asyncRetry.maxRetries,
                         isRetryable: helpers_1.isRetryable,
-                    });
+                    }, loggerScope);
                     if (!autocomplete.ok || !autocomplete.body) {
                         loggerScope?.error('autocomplete is invalid', {
                             component: 'RozetkaScenario',
@@ -269,12 +269,12 @@ class RozetkaScenario {
                             },
                         });
                         // сбор фото у найденных товаров
-                        const result = await withRetry(() => source.worker(g.href, page, limiter, undefined, sku, {
+                        const result = await this.withRetry(() => source.worker(g.href, page, limiter, undefined, sku, {
                             brand_name: task.brand_name,
                         }), {
                             maxRetries: this.config.asyncRetry.maxRetries,
                             isRetryable: helpers_1.isRetryable,
-                        });
+                        }, loggerScope);
                         loggerScope?.debug(`The collection of photos url for   ${task.brand_name}    ${sku}    is complete`, {
                             component: 'RozetkaScenario',
                             method: 'process',
@@ -284,9 +284,6 @@ class RozetkaScenario {
                                 result: result,
                             },
                         });
-                        //!!!!!!!!!!!!!!!
-                        //todo при удачном сборе фото для данного sku нужно удалять этот товар из файла не обработанных товаров
-                        //!!!!!!!!!!!!!!!
                         for (const r of result) {
                             for (const [skuKey, images] of Object.entries(r.data)) {
                                 loggerScope?.debug(`Found url photo for   ${task.brand_name}    ${skuKey}`, {
@@ -295,10 +292,12 @@ class RozetkaScenario {
                                     action: 'for (const r of result) {...}',
                                     data: {
                                         attempt: attempt,
+                                        skuKey: skuKey,
+                                        images: images,
                                     },
                                 });
                                 const resultsDirPath = path.resolve(__dirname, '../../../results', task.brand_name, `${task.brand_name}_unprocessed-products.json`);
-                                this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
+                                await this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
                                 allData[skuKey] ?? (allData[skuKey] = []);
                                 allData[skuKey].push(...images);
                             }
@@ -344,7 +343,6 @@ class RozetkaScenario {
                         currentBatchLength: currentBatch.length,
                         currentBatch: currentBatch,
                         queue: queue,
-                        results: results,
                     },
                 });
                 const workers = Array.from({ length: quantityPage }, async () => {
@@ -419,55 +417,6 @@ class RozetkaScenario {
                 await Promise.all(workers);
                 return results;
             }
-            //========================  Retry wrapper (ЕДИНСТВЕННЫЙ)     ========================
-            async function withRetry(action, options) {
-                let attempt = 1;
-                loggerScope?.debug('withRetry() starting .... ', {
-                    component: 'RozetkaScenario',
-                    method: 'process',
-                    action: 'async function withRetry(...){...}',
-                    data: {
-                        attempt: attempt,
-                        action: action,
-                        options: options,
-                    },
-                });
-                while (true) {
-                    try {
-                        return await action();
-                    }
-                    catch (e) {
-                        if (attempt >= options.maxRetries || !options.isRetryable(e)) {
-                            loggerScope?.error('In withRetry() error don`t fixed  ', {
-                                component: 'RozetkaScenario',
-                                method: 'process',
-                                action: 'async function withRetry(...){...}',
-                                data: {
-                                    attempt: attempt,
-                                    action: action,
-                                    options: options,
-                                    error: e,
-                                },
-                            });
-                            throw e;
-                        }
-                        loggerScope?.error('In withRetry() try fix error  ', {
-                            component: 'RozetkaScenario',
-                            method: 'process',
-                            action: 'async function withRetry(...){...}',
-                            data: {
-                                attempt: attempt,
-                                action: action,
-                                options: options,
-                                error: e,
-                            },
-                        });
-                        options.onRetry?.(attempt, e);
-                        await (0, helpers_1.waitBeforeRetry)(attempt);
-                        attempt++;
-                    }
-                }
-            }
             //========================   ГЛАВНЫЙ RETRY ЦИКЛ     ========================
             let attempt = 1;
             let currentBatch = taskQueue;
@@ -505,27 +454,270 @@ class RozetkaScenario {
                     },
                 });
                 currentBatch = retryResults.map((r) => r.sku);
-                fatalResults.forEach((r) => allErrors.push({
+                fatalResults.forEach((r) => this.allErrors.push({
                     error: r.error,
                     targetUrl,
                 }));
                 attempt++;
             }
             //========================   /ГЛАВНЫЙ RETRY ЦИКЛ     ========================
+            const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
+            loggerScope?.info(`The process of    ${task.brand_name}    is complete`, {
+                component: 'RozetkaScenario',
+                method: 'process',
+                action: 'const allDataNormalize = normalizeAllData(allData)',
+                data: {
+                    allDataNormalize: allDataNormalize,
+                },
+            });
+            await this.downloadImages(allDataNormalize, task, pool, limiter, loggerScope);
         }, 'fake', loggerScope);
-        const allDataNormalize = (0, helpers_1.normalizeAllData)(allData);
-        loggerScope?.info(`The process of    ${task.brand_name}    is complete`, {
+    }
+    async downloadImages(UrlsBySku, task, pool, limiter, loggerScope) {
+        //========================    Инициализация очереди    ========================
+        const urlsQueue = [];
+        for (const [sku, urls] of Object.entries(UrlsBySku)) {
+            urls.forEach((url, i) => {
+                urlsQueue.push({ sku, url, index: i + 1 });
+            });
+        }
+        loggerScope?.debug(`Created a queue of images for download`, {
             component: 'RozetkaScenario',
-            method: 'process',
-            action: 'const allDataNormalize = normalizeAllData(allData)',
+            method: 'downloadImages',
+            action: 'urlsQueue.push({ sku, url, index: i + 1 })',
             data: {
-                allDataNormalize: allDataNormalize,
+                UrlsBySku: UrlsBySku,
+                urlsQueue: urlsQueue,
             },
         });
-        // await this.storage.saveJson(allErrors, {
-        //   filename: `${task.brand_name}_unprocessed-products.json`,
-        //   targetDir: task.brand_name,
-        // });
+        //========================    Обработка одного изображения    ========================
+        const downloadImageItem = async (item, page) => {
+            const { sku, url, index } = item;
+            try {
+                loggerScope?.debug(`Starting download of image file`, {
+                    component: 'RozetkaScenario',
+                    method: 'downloadImages',
+                    action: 'downloadImageItem',
+                    data: { sku: sku, url: url, index: index, page: page },
+                });
+                const { buffer, ext } = await this.withRetry(() => limiter.schedule(() => this.browser.download(page, url, loggerScope)), {
+                    maxRetries: this.config.asyncRetry.maxRetries,
+                    isRetryable: helpers_1.isRetryable,
+                }, loggerScope);
+                const filename = `${task.brand_name}_${sku}_${index}_R_1_${ext}`;
+                loggerScope?.debug(`Starting save of image file`, {
+                    component: 'RozetkaScenario',
+                    method: 'downloadImages',
+                    action: 'downloadImageItem',
+                    data: {
+                        index: index,
+                        sku: sku,
+                        url: url,
+                        filename: filename,
+                        buffer: buffer,
+                    },
+                });
+                await this.storage.save({
+                    filename,
+                    buffer,
+                    targetDir: path.join(task.brand_name, sku),
+                    loggerScope,
+                });
+                return { status: 'success', item };
+            }
+            catch (err) {
+                const error = err instanceof Error ? err : new Error(String(err));
+                loggerScope?.error(`Error during image processing`, {
+                    component: 'ImageDownloadScenario',
+                    method: 'downloadImages',
+                    action: 'downloadImageItem',
+                    data: {
+                        sku: sku,
+                        url: url,
+                        errorName: error instanceof Error ? error.name : undefined,
+                        errorMessage: error instanceof Error ? error.message : String(error),
+                        stack: error instanceof Error ? error.stack : undefined,
+                    },
+                });
+                return (0, helpers_1.isRetryable)(err)
+                    ? { status: 'retry', item, error: err }
+                    : { status: 'fatal', item, error: err };
+            }
+        };
+        //========================    Batch runner    ========================
+        const runBatchImages = async (items) => {
+            const queue = [...items];
+            const results = [];
+            const quantityPage = Math.min(queue.length, this.maxPage);
+            loggerScope?.debug(`Entering const runBatchImages`, {
+                component: 'RozetkaScenario',
+                method: 'downloadImages',
+                data: {
+                    quantityPage: quantityPage,
+                },
+            });
+            const workers = Array.from({ length: quantityPage }, async () => {
+                const page = await pool.acquire();
+                try {
+                    while (queue.length) {
+                        const item = queue.shift();
+                        loggerScope?.debug(`Entering  const workers ...`, {
+                            component: 'RozetkaScenario',
+                            method: 'downloadImages',
+                            action: 'while (...)',
+                            data: {
+                                queueLength: queue.length,
+                                item: item,
+                            },
+                        });
+                        if (!item) {
+                            loggerScope?.error(`Error while dequeuing item from queue.`, {
+                                component: 'RozetkaScenario',
+                                method: 'downloadImages',
+                                action: 'while (...)',
+                                data: {
+                                    queueLength: queue.length,
+                                    item: item,
+                                },
+                            });
+                            continue;
+                        }
+                        const result = await downloadImageItem(item, page);
+                        results.push(result);
+                    }
+                }
+                catch (err) {
+                    const error = err instanceof Error ? err : new Error(String(err));
+                    loggerScope?.error(`Error occurred while processing image item.`, {
+                        component: 'RozetkaScenario',
+                        method: 'downloadImages',
+                        action: 'while (...)',
+                        data: {
+                            errorName: error instanceof Error ? error.name : undefined,
+                            errorMessage: error instanceof Error ? error.message : String(error),
+                            stack: error instanceof Error ? error.stack : undefined,
+                        },
+                    });
+                }
+                finally {
+                    pool.release(page);
+                }
+            });
+            await Promise.all(workers);
+            return results;
+        };
+        //========================    ГЛАВНЫЙ RETRY ЦИКЛ    ========================
+        let attempt = 1;
+        let currentBatch = urlsQueue;
+        while (currentBatch.length && attempt <= this.maxRetries) {
+            await limiter.sleep(1000, 5000);
+            loggerScope?.debug(`Main download image retry cycle started`, {
+                component: 'RozetkaScenario',
+                method: 'downloadImages',
+                action: 'while (currentBatch.length && attempt <= this.maxRetries)',
+                data: {
+                    attempt: attempt,
+                    batchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                },
+            });
+            const results = await runBatchImages(currentBatch);
+            loggerScope?.debug(`Current batch of images processed successfully`, {
+                component: 'RozetkaScenario',
+                method: 'downloadImages',
+                action: 'while (currentBatch.length && attempt <= this.maxRetries)',
+                data: {
+                    attempt: attempt,
+                    batchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                    results: results,
+                },
+            });
+            const retryResults = results.filter((r) => r.status === 'retry');
+            loggerScope?.debug(`Retry results extracted successfully.`, {
+                component: 'RozetkaScenario',
+                method: 'downloadImages',
+                action: 'while (currentBatch.length && attempt <= this.maxRetries)',
+                data: {
+                    attempt: attempt,
+                    batchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                    retryResults: retryResults,
+                },
+            });
+            const fatalResults = results.filter((r) => r.status === 'fatal');
+            loggerScope?.debug(`Fatal results extracted successfully`, {
+                component: 'RozetkaScenario',
+                method: 'downloadImages',
+                action: 'while (currentBatch.length && attempt <= this.maxRetries)',
+                data: {
+                    attempt: attempt,
+                    batchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                    fatalResults: fatalResults,
+                },
+            });
+            currentBatch = retryResults.map((r) => r.item);
+            fatalResults.forEach((r) => this.allErrors.push({
+                error: r.error,
+                targetUrl: r.item.url,
+            }));
+            attempt++;
+        }
+        //========================    /downloadImages    ========================
+    }
+    async withRetry(action, options, loggerScope) {
+        let attempt = 1;
+        loggerScope?.debug('withRetry() starting .... ', {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'async function withRetry(...){...}',
+            data: {
+                attempt: attempt,
+                action: action,
+                options: options,
+            },
+        });
+        while (true) {
+            try {
+                return await action();
+            }
+            catch (err) {
+                const error = err instanceof Error ? err : new Error(String(err));
+                if (attempt >= options.maxRetries || !options.isRetryable(err)) {
+                    loggerScope?.error('In withRetry() error don`t fixed  ', {
+                        component: 'RozetkaScenario',
+                        method: 'process',
+                        action: 'async function withRetry(...){...}',
+                        data: {
+                            attempt: attempt,
+                            action: action,
+                            options: options,
+                            errorName: error instanceof Error ? error.name : undefined,
+                            errorMessage: error instanceof Error ? error.message : String(error),
+                            stack: error instanceof Error ? error.stack : undefined,
+                        },
+                    });
+                    throw err;
+                }
+                loggerScope?.error('In withRetry() try fix error  ', {
+                    component: 'RozetkaScenario',
+                    method: 'process',
+                    action: 'async function withRetry(...){...}',
+                    data: {
+                        attempt: attempt,
+                        action: action,
+                        options: options,
+                        errorName: error instanceof Error ? error.name : undefined,
+                        errorMessage: error instanceof Error ? error.message : String(error),
+                        stack: error instanceof Error ? error.stack : undefined,
+                    },
+                });
+                options.onRetry?.(attempt, err);
+                await (0, helpers_1.waitBeforeRetry)(attempt);
+                attempt++;
+            }
+        }
     }
     async loadSources() {
         const files = await fs_1.promises.readdir(this.sourcesFolder);
@@ -557,7 +749,9 @@ class RozetkaScenario {
                 console.warn('Error closing resource:', err);
             }
             finally {
-                this.browser.close(); //todo не уверен по поводу этого места закрытия браузера
+                //todo вынести в setting.ts
+                const profileDir = path.resolve('./browser-profiles/chrome-profiles');
+                this.browser.close(profileDir); //todo не уверен по поводу этого места закрытия браузера
             }
         }
     }
@@ -633,7 +827,7 @@ class RozetkaScenario {
                 return false;
             }
             const data = JSON.parse(fileContent);
-            loggerScope?.debug(`Received to the file`, {
+            loggerScope?.debug(`Received to the unprocessed products file`, {
                 component: 'RozetkaScenario',
                 method: 'removeItemBySku(...)',
                 action: 'data: IImageError[] = JSON.parse(fileContent)',

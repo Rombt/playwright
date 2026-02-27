@@ -12,7 +12,7 @@ export interface IBrowser<
   // запуск обычного браузера
   init(options?: LaunchOptionsT): Promise<BrowserT>;
 
-  close(): Promise<void>;
+  close(profileDir?: string): Promise<void>;
 
   // обычный контекст
   createContext(mode?: 'real' | 'fake'): Promise<ContextT>;
@@ -28,5 +28,9 @@ export interface IBrowser<
     loggerScope?: ILogger,
   ): Promise<Result>;
 
-  download(page: Page, url: string): Promise<{ buffer: Buffer; ext: string }>;
+  download(
+    page: Page,
+    url: string,
+    loggerScope?: ILogger,
+  ): Promise<{ buffer: Buffer; ext: string }>;
 }

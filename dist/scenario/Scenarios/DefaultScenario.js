@@ -35,7 +35,7 @@ class DefaultScenario {
             await this.prepare();
             for (let i = 0; i < arrTasks.length; i += this.maxTask) {
                 const batch = arrTasks.slice(i, i + this.maxTask);
-                await Promise.all(batch.map(task => this.process(task)));
+                await Promise.all(batch.map((task) => this.process(task)));
             }
         }
         catch (error) {
@@ -55,13 +55,13 @@ class DefaultScenario {
         if (!brands?.length) {
             return allTasks;
         }
-        return allTasks.filter(task => brands.includes(task.brand_name));
+        return allTasks.filter((task) => brands.includes(task.brand_name));
     }
     async prepare() {
         this.sources = await this.loadSources();
     }
     async process(task) {
-        const source = this.sources.find(s => s.supports(task));
+        const source = this.sources.find((s) => s.supports(task));
         if (!source)
             throw new Error();
         const allErrors = [];
@@ -69,7 +69,7 @@ class DefaultScenario {
             const allData = {};
             const targetUrl = task.metadata.target_website;
             const products = task.products;
-            const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
+            const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
             const queue = [...uniqueProducts];
             const limiter = new RateLimiter_1.RateLimiter(2000);
             const quantityPage = Math.min(queue.length, this.maxPage);
@@ -130,13 +130,13 @@ class DefaultScenario {
                 await limiter.sleep(1000, 5000);
                 const errors = await runBatch(currentBatch);
                 const retryable = errors.filter((e) => !!e.item && attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
-                currentBatch = retryable.map(e => e.item);
+                currentBatch = retryable.map((e) => e.item);
                 if (currentBatch.length) {
                     await (0, helpers_1.waitBeforeRetry)(attempt);
                 }
                 else {
                     // оставшиеся ошибки записываем в глобальный пул ошибок
-                    errors.forEach(e => {
+                    errors.forEach((e) => {
                         allErrors.push({
                             error: e.error,
                             targetUrl: targetUrl ?? undefined,
@@ -193,7 +193,7 @@ class DefaultScenario {
             };
             // todo должна быть централизованная обработка ошибок в методе handleError
             const procError = (errors, attempt) => {
-                return errors.filter(e => attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
+                return errors.filter((e) => attempt < this.maxRetries && (0, helpers_1.isRetryable)(e.error));
             };
             let attemptImage = 1;
             let currentBatchImage = imageQueue;
@@ -205,13 +205,13 @@ class DefaultScenario {
                 const errors = await runBatchImage(currentBatchImage);
                 // Отбираем retryable
                 const retryable = procError(errors, attemptImage);
-                currentBatchImage = retryable.map(e => e.item);
+                currentBatchImage = retryable.map((e) => e.item);
                 if (currentBatchImage.length) {
                     await (0, helpers_1.waitBeforeRetry)(attemptImage);
                 }
                 else {
                     // Сохраняем окончательные ошибки
-                    errors.forEach(e => {
+                    errors.forEach((e) => {
                         allErrors.push({
                             error: e.error,
                             targetUrl: e.item.url,
@@ -246,7 +246,7 @@ class DefaultScenario {
     }
     getUnprocessedProducts(errors) {
         console.log('getUnprocessedProducts    errors = ', errors);
-        const unprocessedProducts = Array.from(new Map(errors.filter(e => e.product).map(e => [e.product.id_product, e.product])).values());
+        const unprocessedProducts = Array.from(new Map(errors.filter((e) => e.product).map((e) => [e.product.id_product, e.product])).values());
         return unprocessedProducts;
     }
     async finalize() {

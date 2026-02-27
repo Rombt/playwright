@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import * as path from 'path';
 import { IScenario } from '../IScenario';
 import { ISource } from '../../source/ISource';
-import { Storage } from '../../storage/Storage';
+import { IStorage } from '../../storage/IStorage';
 import { IBrowser } from '../../browser/IBrowser';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
@@ -46,7 +46,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
-    private storage: Storage,
+    private storage: IStorage,
   ) {
     this.config = AppConfig.getInstance();
 
@@ -65,7 +65,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       for (let i = 0; i < arrTasks.length; i += this.maxTask) {
         const batch = arrTasks.slice(i, i + this.maxTask);
-        await Promise.all(batch.map(task => this.process(task)));
+        await Promise.all(batch.map((task) => this.process(task)));
       }
     } catch (error) {
       console.log('error in run() = ');
@@ -87,7 +87,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       return allTasks;
     }
 
-    return allTasks.filter(task => brands.includes(task.brand_name));
+    return allTasks.filter((task) => brands.includes(task.brand_name));
   }
 
   async prepare(): Promise<void> {
@@ -95,17 +95,17 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   }
 
   async process(task: ICollectProductPhotosTask): Promise<void> {
-    const source = this.sources.find(s => s.supports(task));
+    const source = this.sources.find((s) => s.supports(task));
 
     if (!source) throw new Error();
 
     const allErrors: IWorkerError[] = [];
-    await this.browser.runInContext(async context => {
+    await this.browser.runInContext(async (context) => {
       const allData: IDataImag = {};
 
       const targetUrl = task.metadata.target_website;
       const products = task.products;
-      const uniqueProducts = Array.from(new Map(products.map(p => [p.sku, p])).values());
+      const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
       const queue = [...uniqueProducts];
 
       const limiter = new RateLimiter(2000);
@@ -185,13 +185,13 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             !!e.item && attempt < this.maxRetries && isRetryable(e.error),
         );
 
-        currentBatch = retryable.map(e => e.item);
+        currentBatch = retryable.map((e) => e.item);
 
         if (currentBatch.length) {
           await waitBeforeRetry(attempt);
         } else {
           // оставшиеся ошибки записываем в глобальный пул ошибок
-          errors.forEach(e => {
+          errors.forEach((e) => {
             allErrors.push({
               error: e.error,
               targetUrl: targetUrl ?? undefined,
@@ -259,7 +259,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       // todo должна быть централизованная обработка ошибок в методе handleError
       const procError = (errors: IImageError[], attempt: number): IImageError[] => {
-        return errors.filter(e => attempt < this.maxRetries && isRetryable(e.error));
+        return errors.filter((e) => attempt < this.maxRetries && isRetryable(e.error));
       };
 
       let attemptImage = 1;
@@ -276,13 +276,13 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
         // Отбираем retryable
         const retryable = procError(errors, attemptImage);
-        currentBatchImage = retryable.map(e => e.item);
+        currentBatchImage = retryable.map((e) => e.item);
 
         if (currentBatchImage.length) {
           await waitBeforeRetry(attemptImage);
         } else {
           // Сохраняем окончательные ошибки
-          errors.forEach(e => {
+          errors.forEach((e) => {
             allErrors.push({
               error: e.error,
               targetUrl: e.item.url,
@@ -329,7 +329,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     console.log('getUnprocessedProducts    errors = ', errors);
 
     const unprocessedProducts = Array.from(
-      new Map(errors.filter(e => e.product).map(e => [e.product!.id_product, e.product!])).values(),
+      new Map(
+        errors.filter((e) => e.product).map((e) => [e.product!.id_product, e.product!]),
+      ).values(),
     );
     return unprocessedProducts;
   }

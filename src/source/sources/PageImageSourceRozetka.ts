@@ -31,6 +31,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     limiter: RateLimiter,
     sku: string,
     debugMeta: Record<string, string>,
+    loggerScope?: ILogger,
   ): Promise<IHttpResult<IAutocompleteResponse>> {
     if (!sku) {
       this.logger.error(`sku is absent`, {
@@ -44,10 +45,6 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       throw new Error(`In workerHttpRequest method sku is absent`);
     }
 
-    const loggerScope = this.logger.withContext(
-      `workerHttpRequest   ${debugMeta.brand_name}   ${sku}`,
-    );
-
     const options = {
       url: targetUrl,
       params: {
@@ -59,17 +56,17 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       loggerScope: loggerScope,
     };
 
-    loggerScope.debug(`Success.`, {
-      component: 'PageImageSourceRozetka',
-      method: 'workerHttpRequest',
-      stage: 'start',
-      data: {
-        sku: sku,
-        options: options,
-      },
-    });
-
     const requestResult = await this.executeHttpRequest<IAutocompleteResponse>(request, options);
+
+    // loggerScope.debug(`Success.`, {
+    //   component: 'PageImageSourceRozetka',
+    //   method: 'workerHttpRequest',
+    //   stage: 'start',
+    //   data: {
+    //     sku: sku,
+    //     options: options,
+    //   },
+    // });
 
     return requestResult;
   }
@@ -177,7 +174,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         const rawText = await response.text().catch(() => 'Не удалось прочитать body');
         const contentType = response.headers()['content-type'] || 'unknown';
 
-        options.loggerScope?.error(`[Payload Error] Ожидался JSON, получен некорректный формат`, {
+        options.loggerScope?.error(`[Payload Error] Expected JSON, received invalid format`, {
           component: 'PageImageSourceRozetka',
           method: 'executeHttpRequest',
           action: 'response.json()',
@@ -191,11 +188,13 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
 
         // Логика принятия решения на основе текста
         if (rawText.includes('cloudflare') || rawText.includes('captcha')) {
-          options.loggerScope?.error(`!!! Обнаружен экран проверки (WAF/Challenge) !!!`, {
+          options.loggerScope?.error(`!!! Verification screen (WAF/Challenge) detected !!!`, {
             component: 'PageImageSourceRozetka',
             method: 'executeHttpRequest',
           });
+          throw new Error('!!! Verification screen (WAF/Challenge) detected !!!');
         }
+        throw new Error('Expected JSON, received invalid format');
       }
 
       return {
