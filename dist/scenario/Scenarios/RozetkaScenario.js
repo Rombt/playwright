@@ -470,10 +470,10 @@ class RozetkaScenario {
                     allDataNormalize: allDataNormalize,
                 },
             });
-            await this.downloadImages(allDataNormalize, task, pool, limiter, loggerScope);
+            await this.downloadImages(allDataNormalize, task, context, limiter, loggerScope);
         }, 'fake', loggerScope);
     }
-    async downloadImages(UrlsBySku, task, pool, limiter, loggerScope) {
+    async downloadImages(UrlsBySku, task, context, limiter, loggerScope) {
         //========================    Инициализация очереди    ========================
         const urlsQueue = [];
         for (const [sku, urls] of Object.entries(UrlsBySku)) {
@@ -491,16 +491,16 @@ class RozetkaScenario {
             },
         });
         //========================    Обработка одного изображения    ========================
-        const downloadImageItem = async (item, page) => {
+        const downloadImageItem = async (item, context) => {
             const { sku, url, index } = item;
             try {
                 loggerScope?.debug(`Starting download of image file`, {
                     component: 'RozetkaScenario',
                     method: 'downloadImages',
                     action: 'downloadImageItem',
-                    data: { sku: sku, url: url, index: index, page: page },
+                    data: { sku: sku, url: url, index: index, context },
                 });
-                const { buffer, ext } = await this.withRetry(() => limiter.schedule(() => this.browser.download(page, url, loggerScope)), {
+                const { buffer, ext } = await this.withRetry(() => limiter.schedule(() => this.browser.downloadStaticResource(url, context, loggerScope)), {
                     maxRetries: this.config.asyncRetry.maxRetries,
                     isRetryable: helpers_1.isRetryable,
                 }, loggerScope);
@@ -557,7 +557,7 @@ class RozetkaScenario {
                 },
             });
             const workers = Array.from({ length: quantityPage }, async () => {
-                const page = await pool.acquire();
+                // const page = await pool.acquire();
                 try {
                     while (queue.length) {
                         const item = queue.shift();
@@ -582,7 +582,7 @@ class RozetkaScenario {
                             });
                             continue;
                         }
-                        const result = await downloadImageItem(item, page);
+                        const result = await downloadImageItem(item, context);
                         results.push(result);
                     }
                 }
@@ -600,7 +600,7 @@ class RozetkaScenario {
                     });
                 }
                 finally {
-                    pool.release(page);
+                    // pool.release(page);
                 }
             });
             await Promise.allSettled(workers);

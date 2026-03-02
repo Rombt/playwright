@@ -640,7 +640,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
           },
         });
 
-        await this.downloadImages(allDataNormalize, task, pool, limiter, loggerScope);
+        await this.downloadImages(allDataNormalize, task, context, limiter, loggerScope);
       },
       'fake',
       loggerScope,
@@ -650,7 +650,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   private async downloadImages(
     UrlsBySku: Record<string, string[]>,
     task: { brand_name: string },
-    pool: PagePool,
+    context: BrowserContext,
     limiter: RateLimiter,
     loggerScope?: ILogger,
   ): Promise<void> {
@@ -675,7 +675,10 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     });
     //========================    Обработка одного изображения    ========================
 
-    const downloadImageItem = async (item: IImageItem, page: Page): Promise<ImageTaskResult> => {
+    const downloadImageItem = async (
+      item: IImageItem,
+      context: BrowserContext,
+    ): Promise<ImageTaskResult> => {
       const { sku, url, index } = item;
 
       try {
@@ -683,11 +686,12 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
           component: 'RozetkaScenario',
           method: 'downloadImages',
           action: 'downloadImageItem',
-          data: { sku: sku, url: url, index: index, page: page },
+          data: { sku: sku, url: url, index: index, context },
         });
 
         const { buffer, ext } = await this.withRetry(
-          () => limiter.schedule(() => this.browser.download(page, url, loggerScope)),
+          () =>
+            limiter.schedule(() => this.browser.downloadStaticResource(url, context, loggerScope)),
           {
             maxRetries: this.config.asyncRetry.maxRetries,
             isRetryable,
@@ -757,7 +761,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       });
 
       const workers = Array.from({ length: quantityPage }, async () => {
-        const page = await pool.acquire();
+        // const page = await pool.acquire();
 
         try {
           while (queue.length) {
@@ -787,7 +791,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               continue;
             }
 
-            const result = await downloadImageItem(item, page);
+            const result = await downloadImageItem(item, context);
             results.push(result);
           }
         } catch (err) {
@@ -803,7 +807,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             },
           });
         } finally {
-          pool.release(page);
+          // pool.release(page);
         }
       });
 

@@ -33,4 +33,10 @@ export interface IBrowser<
     url: string,
     loggerScope?: ILogger,
   ): Promise<{ buffer: Buffer; ext: string }>;
+
+  downloadStaticResource(
+    url: string,
+    context: BrowserContext,
+    loggerScope?: ILogger,
+  ): Promise<{ buffer: Buffer; ext: string }>;
 }

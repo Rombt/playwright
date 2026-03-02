@@ -338,4 +338,104 @@ export class PlaywrightBrowser
 
     return { buffer, ext };
   }
+
+  async downloadStaticResource(
+    url: string,
+    context: BrowserContext,
+    loggerScope?: ILogger,
+  ): Promise<{ buffer: Buffer; ext: string }> {
+    loggerScope?.debug(`Entering PlaywrightBrowser.downloadStaticResource()`, {
+      component: 'PlaywrightBrowser',
+      method: 'downloadStaticResource()',
+      action: 'start',
+      data: { url },
+    });
+
+    let response;
+
+    try {
+      response = await context.request.get(url, {
+        timeout: 30000,
+      });
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
+
+      loggerScope?.error(`HTTP request failed`, {
+        component: 'PlaywrightBrowser',
+        method: 'downloadStaticResource()',
+        action: 'request.get',
+        data: {
+          url,
+          errorName: error.name,
+          errorMessage: error.message,
+          stack: error.stack,
+        },
+      });
+
+      throw error;
+    }
+
+    if (!response || !response.ok()) {
+      loggerScope?.error(`HTTP response not OK`, {
+        component: 'PlaywrightBrowser',
+        method: 'downloadStaticResource()',
+        action: 'response validation',
+        data: {
+          url,
+          status: response?.status(),
+        },
+      });
+
+      throw new Error(`HTTP ${response?.status()} while fetching resource`);
+    }
+
+    let buffer: Buffer;
+    let ext = '';
+
+    try {
+      buffer = await response.body();
+      const contentType = response.headers()['content-type'] ?? '';
+
+      if (!buffer || !contentType) {
+        throw new Error('Empty body or missing content-type');
+      }
+
+      if (contentType.includes('image/jpeg')) ext = '.jpg';
+      else if (contentType.includes('image/png')) ext = '.png';
+      else if (contentType.includes('image/webp')) ext = '.webp';
+      else if (contentType.includes('image/avif')) ext = '.avif';
+      else if (contentType.includes('application/pdf')) ext = '.pdf';
+      else ext = '';
+
+      loggerScope?.debug(`Static resource downloaded successfully`, {
+        component: 'PlaywrightBrowser',
+        method: 'downloadStaticResource()',
+        action: 'success',
+        data: {
+          url,
+          ext,
+          contentType,
+          size: buffer.length,
+        },
+      });
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
+
+      loggerScope?.error(`Failed to read response body`, {
+        component: 'PlaywrightBrowser',
+        method: 'downloadStaticResource()',
+        action: 'response.body()',
+        data: {
+          url,
+          errorName: error.name,
+          errorMessage: error.message,
+          stack: error.stack,
+        },
+      });
+
+      throw error;
+    }
+
+    return { buffer, ext };
+  }
 }
