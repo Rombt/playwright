@@ -25,7 +25,16 @@ import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/hel
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
-import { TaskResult, ImageResult } from '../../data/entities/IResults/ProcessResult';
+
+type TaskResult =
+  | { status: 'success' }
+  | { status: 'retry'; product: IProduct; error: IWorkerError }
+  | { status: 'fatal'; product: IProduct; error: IWorkerError };
+
+type ImageResult =
+  | { status: 'success' }
+  | { status: 'retry'; item: IImageItem; error: IWorkerError }
+  | { status: 'fatal'; item: IImageItem; error: IWorkerError };
 
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
@@ -198,7 +207,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     const data: ICollectProductPhotosBatch = JSON.parse(raw);
 
     const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
-    if (arrTasks.length === 0) {
+    if (arrTasks.length > 0) {
       this.logger.error('Tasks array is invalid or corrupted', {
         component: 'DefaultScenario',
         method: 'load()',
@@ -282,12 +291,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       const pool = new PagePool(context, quantityPage);
       this.registerResource(pool);
 
-      const processProduct = async (entity: IProduct): Promise<TaskResult> => {
+      const processProduct = async (product: IProduct): Promise<TaskResult> => {
         try {
           const page = await pool.acquire();
 
           const result = await this.withRetry(
-            () => source.worker(task.metadata.target_website!, page, limiter, () => entity),
+            () => source.worker(task.metadata.target_website!, page, limiter, () => product),
             {
               maxRetries: this.maxRetries,
               isRetryable,
@@ -309,8 +318,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           const error = err as IWorkerError;
 
           return isRetryable(error)
-            ? { status: 'retry', entity, error }
-            : { status: 'fatal', entity, error };
+            ? { status: 'retry', product, error }
+            : { status: 'fatal', product, error };
         }
       };
 
@@ -337,7 +346,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           }),
         );
 
-        currentBatch = retryResults.map((r) => r.entity);
+        currentBatch = retryResults.map((r) => r.product);
 
         attempt++;
       }
@@ -366,11 +375,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
     }
 
-    const processImage = async (entity: IImageItem): Promise<ImageResult> => {
+    const processImage = async (item: IImageItem): Promise<ImageResult> => {
       const page = await pool.acquire();
       try {
         const { buffer, ext } = await this.withRetry(
-          () => limiter.schedule(() => this.browser.download(page, entity.url)),
+          () => limiter.schedule(() => this.browser.download(page, item.url)),
           {
             maxRetries: this.maxRetries,
             isRetryable,
@@ -379,9 +388,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         );
 
         await this.storage.save({
-          filename: `${task.brand_name}_${entity.sku}_${entity.index}${ext}`,
+          filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
           buffer,
-          targetDir: path.join(task.brand_name, entity.sku),
+          targetDir: path.join(task.brand_name, item.sku),
         });
 
         return { status: 'success' };
@@ -389,8 +398,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         const error = err as IWorkerError;
 
         return isRetryable(error)
-          ? { status: 'retry', entity, error }
-          : { status: 'fatal', entity, error };
+          ? { status: 'retry', item, error }
+          : { status: 'fatal', item, error };
       }
     };
 
@@ -413,11 +422,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       fatalResults.forEach((r) =>
         this.allErrors.push({
           error: r.error,
-          targetUrl: r.entity.url,
+          targetUrl: r.item.url,
         }),
       );
 
-      currentBatch = retryResults.map((r) => r.entity);
+      currentBatch = retryResults.map((r) => r.item);
 
       attempt++;
     }

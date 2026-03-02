@@ -148,7 +148,7 @@ class DefaultScenario {
         const raw = await fs_1.promises.readFile(filePath, 'utf-8');
         const data = JSON.parse(raw);
         const arrTasks = Object.values(data.task);
-        if (arrTasks.length === 0) {
+        if (arrTasks.length > 0) {
             this.logger.error('Tasks array is invalid or corrupted', {
                 component: 'DefaultScenario',
                 method: 'load()',
@@ -218,10 +218,10 @@ class DefaultScenario {
             const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
-            const processProduct = async (entity) => {
+            const processProduct = async (product) => {
                 try {
                     const page = await pool.acquire();
-                    const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, limiter, () => entity), {
+                    const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, limiter, () => product), {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
                     }, loggerScope);
@@ -237,8 +237,8 @@ class DefaultScenario {
                 catch (err) {
                     const error = err;
                     return (0, helpers_1.isRetryable)(error)
-                        ? { status: 'retry', entity, error }
-                        : { status: 'fatal', entity, error };
+                        ? { status: 'retry', product, error }
+                        : { status: 'fatal', product, error };
                 }
             };
             let attempt = 1;
@@ -252,7 +252,7 @@ class DefaultScenario {
                     error: r.error,
                     targetUrl: task.metadata.target_website ?? undefined,
                 }));
-                currentBatch = retryResults.map((r) => r.entity);
+                currentBatch = retryResults.map((r) => r.product);
                 attempt++;
             }
             const normalized = (0, helpers_1.normalizeAllData)(allData);
@@ -268,25 +268,25 @@ class DefaultScenario {
         for (const [sku, urls] of Object.entries(urlsBySku)) {
             urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
         }
-        const processImage = async (entity) => {
+        const processImage = async (item) => {
             const page = await pool.acquire();
             try {
-                const { buffer, ext } = await this.withRetry(() => limiter.schedule(() => this.browser.download(page, entity.url)), {
+                const { buffer, ext } = await this.withRetry(() => limiter.schedule(() => this.browser.download(page, item.url)), {
                     maxRetries: this.maxRetries,
                     isRetryable: helpers_1.isRetryable,
                 }, loggerScope);
                 await this.storage.save({
-                    filename: `${task.brand_name}_${entity.sku}_${entity.index}${ext}`,
+                    filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
                     buffer,
-                    targetDir: path.join(task.brand_name, entity.sku),
+                    targetDir: path.join(task.brand_name, item.sku),
                 });
                 return { status: 'success' };
             }
             catch (err) {
                 const error = err;
                 return (0, helpers_1.isRetryable)(error)
-                    ? { status: 'retry', entity, error }
-                    : { status: 'fatal', entity, error };
+                    ? { status: 'retry', item, error }
+                    : { status: 'fatal', item, error };
             }
         };
         let attempt = 1;
@@ -298,9 +298,9 @@ class DefaultScenario {
             const fatalResults = results.filter((r) => r.status === 'fatal');
             fatalResults.forEach((r) => this.allErrors.push({
                 error: r.error,
-                targetUrl: r.entity.url,
+                targetUrl: r.item.url,
             }));
-            currentBatch = retryResults.map((r) => r.entity);
+            currentBatch = retryResults.map((r) => r.item);
             attempt++;
         }
     }
