@@ -145,13 +145,13 @@ class RozetkaScenario {
         this.sources = await this.loadSources();
     }
     async process(task, loggerScope) {
-        // const loggerScope = this.logger.withContext(task.brand_name);
         const source = this.sources.find((s) => s.supports(task));
         if (!source) {
             loggerScope?.error('Source not found for task', {
                 component: 'RozetkaScenario',
                 method: 'process',
-                task,
+                action: 'if (!source)',
+                task: task,
             });
             throw new Error('Source not found');
         }
@@ -161,6 +161,7 @@ class RozetkaScenario {
             stage: 'init',
             data: {
                 task: task,
+                source: source,
             },
         });
         const allData = {};
@@ -177,8 +178,8 @@ class RozetkaScenario {
                 stage: 'init',
                 data: {
                     url_init: url_init,
-                    targetUrl,
-                    products,
+                    targetUrl: targetUrl,
+                    products: products,
                 },
             });
             if (!Array.isArray(products) || products.length === 0) {
@@ -186,7 +187,7 @@ class RozetkaScenario {
                     component: 'RozetkaScenario',
                     method: 'process',
                     stage: 'init',
-                    data: { task },
+                    data: { task: task },
                 });
                 throw new Error('Products are absent');
             }

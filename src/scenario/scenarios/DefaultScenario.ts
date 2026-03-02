@@ -25,6 +25,7 @@ import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/hel
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
+import { TaskResult, ImageResult } from '../../data/entities/IResults/ProcessResult';
 
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
@@ -197,9 +198,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     const data: ICollectProductPhotosBatch = JSON.parse(raw);
 
     const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
-    if (arrTasks.length > 0) {
+    if (arrTasks.length === 0) {
       this.logger.error('Tasks array is invalid or corrupted', {
-        component: 'RozetkaScenario',
+        component: 'DefaultScenario',
         method: 'load()',
         data: {
           arrTasks: arrTasks,
@@ -222,33 +223,71 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     const source = this.sources.find((s) => s.supports(task));
 
     if (!source) {
+      loggerScope?.error('Source not found for task', {
+        component: 'DefaultScenario',
+        method: 'process',
+        action: 'if (!source)',
+        task,
+      });
       throw new Error('Source not found');
     }
 
-    const limiter = new RateLimiter(2000);
+    loggerScope?.debug(`The enter to the process method`, {
+      component: 'DefaultScenario',
+      method: 'process',
+      stage: 'init',
+      data: {
+        task: task,
+        source: source,
+      },
+    });
+
+    const limiter = new RateLimiter(5000);
     const allData: IDataImag = {};
 
     await this.browser.runInContext(async (context) => {
       const products = task.products;
 
+      if (!Array.isArray(products) || products.length === 0) {
+        loggerScope?.error('Products are absent', {
+          component: 'DefaultScenario',
+          method: 'process',
+          stage: 'init',
+          data: { task: task },
+        });
+        throw new Error('Products are absent');
+      }
+
+      loggerScope?.debug(`The enter to the browser.runInContext`, {
+        component: 'DefaultScenario',
+        method: 'process',
+        stage: 'init',
+        data: {
+          products: products,
+        },
+      });
+
       const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
+      loggerScope?.debug('A unique of unique products is created', {
+        component: 'DefaultScenario',
+        method: 'process',
+        action: 'const uniqueProducts = Array.from(...)',
+        data: {
+          uniqueProducts: uniqueProducts,
+        },
+      });
 
       const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
 
       const pool = new PagePool(context, quantityPage);
       this.registerResource(pool);
 
-      type TaskResult =
-        | { status: 'success' }
-        | { status: 'retry'; product: IProduct; error: IWorkerError }
-        | { status: 'fatal'; product: IProduct; error: IWorkerError };
-
-      const processProduct = async (product: IProduct): Promise<TaskResult> => {
+      const processProduct = async (entity: IProduct): Promise<TaskResult> => {
         try {
           const page = await pool.acquire();
 
           const result = await this.withRetry(
-            () => source.worker(task.metadata.target_website!, page, limiter, () => product),
+            () => source.worker(task.metadata.target_website!, page, limiter, () => entity),
             {
               maxRetries: this.maxRetries,
               isRetryable,
@@ -270,8 +309,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           const error = err as IWorkerError;
 
           return isRetryable(error)
-            ? { status: 'retry', product, error }
-            : { status: 'fatal', product, error };
+            ? { status: 'retry', entity, error }
+            : { status: 'fatal', entity, error };
         }
       };
 
@@ -298,7 +337,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           }),
         );
 
-        currentBatch = retryResults.map((r) => r.product);
+        currentBatch = retryResults.map((r) => r.entity);
 
         attempt++;
       }
@@ -327,16 +366,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
     }
 
-    type ImageResult =
-      | { status: 'success' }
-      | { status: 'retry'; item: IImageItem; error: IWorkerError }
-      | { status: 'fatal'; item: IImageItem; error: IWorkerError };
-
-    const processImage = async (item: IImageItem): Promise<ImageResult> => {
+    const processImage = async (entity: IImageItem): Promise<ImageResult> => {
       const page = await pool.acquire();
       try {
         const { buffer, ext } = await this.withRetry(
-          () => limiter.schedule(() => this.browser.download(page, item.url)),
+          () => limiter.schedule(() => this.browser.download(page, entity.url)),
           {
             maxRetries: this.maxRetries,
             isRetryable,
@@ -345,9 +379,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         );
 
         await this.storage.save({
-          filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+          filename: `${task.brand_name}_${entity.sku}_${entity.index}${ext}`,
           buffer,
-          targetDir: path.join(task.brand_name, item.sku),
+          targetDir: path.join(task.brand_name, entity.sku),
         });
 
         return { status: 'success' };
@@ -355,8 +389,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         const error = err as IWorkerError;
 
         return isRetryable(error)
-          ? { status: 'retry', item, error }
-          : { status: 'fatal', item, error };
+          ? { status: 'retry', entity, error }
+          : { status: 'fatal', entity, error };
       }
     };
 
@@ -379,11 +413,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       fatalResults.forEach((r) =>
         this.allErrors.push({
           error: r.error,
-          targetUrl: r.item.url,
+          targetUrl: r.entity.url,
         }),
       );
 
-      currentBatch = retryResults.map((r) => r.item);
+      currentBatch = retryResults.map((r) => r.entity);
 
       attempt++;
     }

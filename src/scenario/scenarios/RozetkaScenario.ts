@@ -222,8 +222,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   }
 
   async process(task: ICollectProductPhotosTask, loggerScope?: ILogger): Promise<void> {
-    // const loggerScope = this.logger.withContext(task.brand_name);
-
     const source = this.sources.find((s) => s.supports(task)) as
       | ISource<ICollectProductPhotosTask, IAutocompleteResponse>
       | undefined;
@@ -231,7 +229,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       loggerScope?.error('Source not found for task', {
         component: 'RozetkaScenario',
         method: 'process',
-        task,
+        action: 'if (!source)',
+        task: task,
       });
 
       throw new Error('Source not found');
@@ -243,6 +242,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       stage: 'init',
       data: {
         task: task,
+        source: source,
       },
     });
 
@@ -265,8 +265,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
           stage: 'init',
           data: {
             url_init: url_init,
-            targetUrl,
-            products,
+            targetUrl: targetUrl,
+            products: products,
           },
         });
 
@@ -275,7 +275,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             component: 'RozetkaScenario',
             method: 'process',
             stage: 'init',
-            data: { task },
+            data: { task: task },
           });
           throw new Error('Products are absent');
         }
