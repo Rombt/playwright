@@ -22,6 +22,10 @@ import { AppConfig } from '../../data/config/appConfig';
 
 import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
 
+import { Logger } from '../../data/logger/Logger';
+import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
+import { ILogger } from '../../data/logger/types/ILogger';
+
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
@@ -30,8 +34,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   private readonly maxPage: number;
   private readonly maxTask: number;
   private readonly sourcesFolder: string;
+  private readonly logger: Logger;
 
-  //todo отдельная папка для задач, но сначала интерфейс
   private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
   // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
   // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
@@ -43,12 +47,14 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
+  private allErrors: IWorkerError[] = [];
 
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
     private storage: IStorage,
   ) {
     this.config = AppConfig.getInstance();
+    this.logger = Logger.getInstance();
 
     this.maxRetries = this.config.asyncRetry.maxRetries;
     this.maxPage = this.config.asyncPages.maxPage;
@@ -58,22 +64,131 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
   async run(brands?: string[]): Promise<void> {
     try {
-      const arrTasks = await this.load(brands);
+      const tasks = await this.load(brands);
 
-      console.log('arrTasks = ', arrTasks);
+      this.logger.debug(`DefaultScenario started`, {
+        component: 'DefaultScenario',
+        method: 'run()',
+        action: 'await this.load(brands)',
+        data: {
+          brands: brands,
+          totalTasks: tasks.length,
+          tasks: tasks,
+        },
+      });
+
       await this.prepare();
 
-      for (let i = 0; i < arrTasks.length; i += this.maxTask) {
-        const batch = arrTasks.slice(i, i + this.maxTask);
-        await Promise.all(batch.map((task) => this.process(task)));
-      }
+      await this.runWithWorkerPool(tasks, (task, loggerScope) => this.process(task, loggerScope));
     } catch (error) {
-      console.log('error in run() = ');
-      console.dir(error, { depth: null, colors: true });
-      // await this.handleError(error);   //todo какие ошибки здесь ловить??
+      this.logger.error(`DefaultScenario run() error`, {
+        component: 'DefaultScenario',
+        method: 'run',
+        data: {
+          errorName: error instanceof Error ? error.name : undefined,
+          errorMessage: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined,
+        },
+      });
     } finally {
+      this.logger.debug(`DefaultScenario completed`, {
+        component: 'DefaultScenario',
+        method: 'run()',
+        action: '} finally {',
+        data: {
+          brands: brands,
+        },
+      });
+
       await this.finalize();
     }
+  }
+
+  private async runWithWorkerPool(
+    tasks: ICollectProductPhotosTask[],
+    handler: (task: ICollectProductPhotosTask, loggerScope?: ILogger) => Promise<void>,
+  ): Promise<void> {
+    let index = 0;
+
+    const worker = async () => {
+      while (true) {
+        const currentIndex = index++;
+
+        this.logger.debug(`Worker № ${currentIndex} is started`, {
+          component: 'DefaultScenario',
+          method: 'runWithWorkerPool',
+          action: 'while (true)',
+          stage: 'start',
+          data: {
+            currentIndex: currentIndex,
+          },
+        });
+
+        if (currentIndex >= tasks.length) {
+          this.logger.debug('All tasks are completed', {
+            component: 'DefaultScenario',
+            method: 'runWithWorkerPool',
+            action: 'if (currentIndex >= tasks.length) {...}',
+            data: {
+              currentIndex: currentIndex,
+              tasksLength: tasks.length,
+            },
+          });
+
+          break;
+        }
+
+        const task = tasks[currentIndex];
+        const loggerScope = this.logger.withContext(`Worker №${currentIndex} ${task.brand_name}`);
+
+        loggerScope.debug('Received a new task', {
+          component: 'DefaultScenario',
+          method: 'runWithWorkerPool',
+          action: 'const task = tasks[currentIndex];',
+          data: {
+            currentIndex: currentIndex,
+            task: task,
+          },
+        });
+
+        try {
+          loggerScope.debug('Gave task it for execution ', {
+            component: 'DefaultScenario',
+            method: 'runWithWorkerPool',
+            action: 'try {...}',
+            data: {
+              currentIndex: currentIndex,
+              task: task,
+            },
+          });
+
+          await handler(task, loggerScope);
+        } catch (error) {
+          loggerScope.error(`Worker task error`, {
+            component: 'DefaultScenario',
+            method: 'runWithWorkerPool',
+            data: {
+              task,
+              errorName: error instanceof Error ? error.name : undefined,
+              errorMessage: error instanceof Error ? error.message : String(error),
+              stack: error instanceof Error ? error.stack : undefined,
+            },
+          });
+        }
+      }
+    };
+
+    const workers = Array.from({ length: this.maxTask }, () => worker());
+
+    await Promise.allSettled(workers);
+    this.logger.info('All task groups have been processed', {
+      component: 'DefaultScenario',
+      method: 'runWithWorkerPool',
+      action: 'workers = Array.from({ length: this.maxTask }, () => worker()',
+      data: {
+        totalTasks: tasks.length,
+      },
+    });
   }
 
   async load(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
@@ -81,226 +196,230 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     const raw = await fs.readFile(filePath, 'utf-8');
     const data: ICollectProductPhotosBatch = JSON.parse(raw);
 
-    const allTasks = Object.values(data.task);
+    const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
+    if (arrTasks.length > 0) {
+      this.logger.error('Tasks array is invalid or corrupted', {
+        component: 'RozetkaScenario',
+        method: 'load()',
+        data: {
+          arrTasks: arrTasks,
+        },
+      });
 
-    if (!brands?.length) {
-      return allTasks;
+      throw new Error('Tasks array is invalid or corrupted');
     }
 
-    return allTasks.filter((task) => brands.includes(task.brand_name));
+    if (!brands?.length) return arrTasks;
+
+    return arrTasks.filter((task) => brands.includes(task.brand_name));
   }
 
   async prepare(): Promise<void> {
     this.sources = await this.loadSources();
   }
 
-  async process(task: ICollectProductPhotosTask): Promise<void> {
+  async process(task: ICollectProductPhotosTask, loggerScope?: ILogger): Promise<void> {
     const source = this.sources.find((s) => s.supports(task));
 
-    if (!source) throw new Error();
+    if (!source) {
+      throw new Error('Source not found');
+    }
 
-    const allErrors: IWorkerError[] = [];
+    const limiter = new RateLimiter(2000);
+    const allData: IDataImag = {};
+
     await this.browser.runInContext(async (context) => {
-      const allData: IDataImag = {};
-
-      const targetUrl = task.metadata.target_website;
       const products = task.products;
-      const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
-      const queue = [...uniqueProducts];
 
-      const limiter = new RateLimiter(2000);
-      const quantityPage = Math.min(queue.length, this.maxPage);
+      const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
+
+      const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
+
       const pool = new PagePool(context, quantityPage);
       this.registerResource(pool);
 
-      //todo  Убрать!
-      type ITaskError = {
-        item?: IProduct;
-        error: IWorkerError;
-      };
+      type TaskResult =
+        | { status: 'success' }
+        | { status: 'retry'; product: IProduct; error: IWorkerError }
+        | { status: 'fatal'; product: IProduct; error: IWorkerError };
 
-      let taskQueue: IProduct[] = [...queue];
-
-      const runBatch = async (items: IProduct[]): Promise<ITaskError[]> => {
-        const errors: ITaskError[] = [];
-        let index = 0;
-
-        const getNext = (): IProduct | undefined => {
-          if (index >= items.length) return undefined;
-          return items[index++];
-        };
-
-        const workers = Array.from({ length: quantityPage }, async () => {
+      const processProduct = async (product: IProduct): Promise<TaskResult> => {
+        try {
           const page = await pool.acquire();
 
-          try {
-            const result = await source.worker(targetUrl!, page, limiter, getNext);
+          const result = await this.withRetry(
+            () => source.worker(task.metadata.target_website!, page, limiter, () => product),
+            {
+              maxRetries: this.maxRetries,
+              isRetryable,
+            },
+            loggerScope,
+          );
 
-            for (const r of result) {
-              for (const [sku, images] of Object.entries(r.data)) {
-                allData[sku] ??= [];
-                allData[sku].push(...images);
-              }
-
-              if (Array.isArray(r.errors)) {
-                for (const err of r.errors) {
-                  try {
-                    await this.handleError(err);
-                  } catch (finalErr) {
-                    errors.push({
-                      item: err.product,
-                      error: finalErr as IWorkerError,
-                    });
-                  }
-                }
-              }
+          for (const r of result) {
+            for (const [sku, images] of Object.entries(r.data)) {
+              allData[sku] ??= [];
+              allData[sku].push(...images);
             }
-          } catch (err) {
-            errors.push({
-              item: undefined as any,
-              error: err as IWorkerError,
-            });
-          } finally {
-            pool.release(page);
           }
-        });
 
-        await Promise.allSettled(workers);
-        return errors;
+          pool.release(page);
+
+          return { status: 'success' };
+        } catch (err) {
+          const error = err as IWorkerError;
+
+          return isRetryable(error)
+            ? { status: 'retry', product, error }
+            : { status: 'fatal', product, error };
+        }
       };
 
       let attempt = 1;
-      let currentBatch = taskQueue;
+      let currentBatch = uniqueProducts;
 
       while (currentBatch.length && attempt <= this.maxRetries) {
-        console.log(`---> SearchURL for ${task.brand_name}  attempt №`, attempt);
-        // todo выбрать какую то одну
-        // await limiter.sleepNormal(1000, 5000);
         await limiter.sleep(1000, 5000);
 
-        const errors = await runBatch(currentBatch);
+        const results = await Promise.all(currentBatch.map(processProduct));
 
-        const retryable = errors.filter(
-          (e): e is { item: IProduct; error: IWorkerError } =>
-            !!e.item && attempt < this.maxRetries && isRetryable(e.error),
+        const retryResults = results.filter(
+          (r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry',
         );
 
-        currentBatch = retryable.map((e) => e.item);
+        const fatalResults = results.filter(
+          (r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal',
+        );
 
-        if (currentBatch.length) {
-          await waitBeforeRetry(attempt);
-        } else {
-          // оставшиеся ошибки записываем в глобальный пул ошибок
-          errors.forEach((e) => {
-            allErrors.push({
-              error: e.error,
-              targetUrl: targetUrl ?? undefined,
-            });
-          });
-        }
+        fatalResults.forEach((r) =>
+          this.allErrors.push({
+            error: r.error,
+            targetUrl: task.metadata.target_website ?? undefined,
+          }),
+        );
+
+        currentBatch = retryResults.map((r) => r.product);
 
         attempt++;
       }
 
-      console.log(`All workers finished  for ${task.brand_name}`);
+      const normalized = normalizeAllData(allData);
 
-      const allDataNormalize = normalizeAllData(allData);
-
-      console.log(`allErrors SearchURL  for ${task.brand_name}   = `);
-      console.dir(allErrors, { depth: null, colors: true });
-
-      /* Скачиваю полученные urls  */
-
-      let imageQueue: IImageItem[] = [];
-      for (const [sku, urls] of Object.entries(allDataNormalize)) {
-        urls.forEach((url, i) => {
-          imageQueue.push({ sku, url, index: i + 1 });
-        });
-      }
-
-      const processImage = async (page: Page, item: IImageItem): Promise<void> => {
-        const { sku, url, index } = item;
-        const { buffer, ext } = await limiter.schedule(() => this.browser.download(page, url));
-        const filename = `${task.brand_name}_${sku}_${index}${ext}`;
-
-        await this.storage.save({
-          filename,
-          buffer,
-          targetDir: path.join(task.brand_name, sku),
-        });
-      };
-
-      const runBatchImage = async (items: IImageItem[]): Promise<IImageError[]> => {
-        const errors: IImageError[] = [];
-        const queue = [...items];
-
-        const workers = Array.from({ length: quantityPage }, async () => {
-          const page = await pool.acquire();
-
-          try {
-            while (true) {
-              const item = queue.shift();
-              if (!item) return;
-
-              try {
-                await processImage(page, item);
-              } catch (error) {
-                errors.push({ item, error: error as IWorkerError });
-              }
-            }
-          } finally {
-            pool.release(page);
-          }
-        });
-
-        await Promise.allSettled(workers);
-        return errors;
-      };
-
-      // todo должна быть централизованная обработка ошибок в методе handleError
-      const procError = (errors: IImageError[], attempt: number): IImageError[] => {
-        return errors.filter((e) => attempt < this.maxRetries && isRetryable(e.error));
-      };
-
-      let attemptImage = 1;
-      let currentBatchImage = imageQueue;
-
-      while (currentBatchImage.length && attemptImage <= this.maxRetries) {
-        console.log(`---> DownloadImage  for ${task.brand_name}   attempt №`, attemptImage);
-
-        // todo выбрать какую то одну
-        // await limiter.sleepNormal(1000, 5000);
-        await limiter.sleep(1000, 5000);
-
-        const errors = await runBatchImage(currentBatchImage);
-
-        // Отбираем retryable
-        const retryable = procError(errors, attemptImage);
-        currentBatchImage = retryable.map((e) => e.item);
-
-        if (currentBatchImage.length) {
-          await waitBeforeRetry(attemptImage);
-        } else {
-          // Сохраняем окончательные ошибки
-          errors.forEach((e) => {
-            allErrors.push({
-              error: e.error,
-              targetUrl: e.item.url,
-            });
-          });
-        }
-
-        attemptImage++;
-      }
+      await this.downloadImages(normalized, task, pool, limiter, loggerScope);
     });
 
-    console.log('END allErrors = ');
-    console.dir(allErrors, { depth: null, colors: true });
-
-    await this.storage.saveJson(allErrors, {
+    await this.storage.saveJson(this.allErrors, {
       filename: `${task.brand_name}_unprocessed-products.json`,
       targetDir: task.brand_name,
     });
+  }
+
+  private async downloadImages(
+    urlsBySku: Record<string, string[]>,
+    task: ICollectProductPhotosTask,
+    pool: PagePool,
+    limiter: RateLimiter,
+    loggerScope?: ILogger,
+  ): Promise<void> {
+    const queue: IImageItem[] = [];
+
+    for (const [sku, urls] of Object.entries(urlsBySku)) {
+      urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
+    }
+
+    type ImageResult =
+      | { status: 'success' }
+      | { status: 'retry'; item: IImageItem; error: IWorkerError }
+      | { status: 'fatal'; item: IImageItem; error: IWorkerError };
+
+    const processImage = async (item: IImageItem): Promise<ImageResult> => {
+      const page = await pool.acquire();
+      try {
+        const { buffer, ext } = await this.withRetry(
+          () => limiter.schedule(() => this.browser.download(page, item.url)),
+          {
+            maxRetries: this.maxRetries,
+            isRetryable,
+          },
+          loggerScope,
+        );
+
+        await this.storage.save({
+          filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+          buffer,
+          targetDir: path.join(task.brand_name, item.sku),
+        });
+
+        return { status: 'success' };
+      } catch (err) {
+        const error = err as IWorkerError;
+
+        return isRetryable(error)
+          ? { status: 'retry', item, error }
+          : { status: 'fatal', item, error };
+      }
+    };
+
+    let attempt = 1;
+    let currentBatch = queue;
+
+    while (currentBatch.length && attempt <= this.maxRetries) {
+      await limiter.sleep(1000, 5000);
+
+      const results = await Promise.all(currentBatch.map(processImage));
+
+      const retryResults = results.filter(
+        (r): r is Extract<ImageResult, { status: 'retry' }> => r.status === 'retry',
+      );
+
+      const fatalResults = results.filter(
+        (r): r is Extract<ImageResult, { status: 'fatal' }> => r.status === 'fatal',
+      );
+
+      fatalResults.forEach((r) =>
+        this.allErrors.push({
+          error: r.error,
+          targetUrl: r.item.url,
+        }),
+      );
+
+      currentBatch = retryResults.map((r) => r.item);
+
+      attempt++;
+    }
+  }
+
+  private async withRetry<T>(
+    action: () => Promise<T>,
+    options: {
+      maxRetries: number;
+      isRetryable: (error: IWorkerError) => boolean;
+    },
+    loggerScope?: ILogger,
+  ): Promise<T> {
+    let attempt = 1;
+
+    while (true) {
+      try {
+        return await action();
+      } catch (err) {
+        if (attempt >= options.maxRetries || !options.isRetryable(err as IWorkerError)) {
+          throw err;
+        }
+
+        await waitBeforeRetry(attempt);
+        attempt++;
+      }
+    }
+  }
+
+  async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
+    if (attempt < this.maxRetries && isRetryable(error)) {
+      await waitBeforeRetry(attempt);
+      return this.handleError(error, attempt + 1);
+    }
+
+    throw error;
   }
 
   async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
@@ -313,8 +432,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       const fullPath = path.resolve(this.sourcesFolder, file);
 
       const sourceModule = require(fullPath);
-
       const SourceClass = sourceModule.default ?? sourceModule;
+
       sources.push(new SourceClass());
     }
 
@@ -325,37 +444,15 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     this.resources.push(res);
   }
 
-  getUnprocessedProducts(errors: IWorkerError[]): IProduct[] {
-    console.log('getUnprocessedProducts    errors = ', errors);
-
-    const unprocessedProducts = Array.from(
-      new Map(
-        errors.filter((e) => e.product).map((e) => [e.product!.id_product, e.product!]),
-      ).values(),
-    );
-    return unprocessedProducts;
-  }
-
   async finalize(): Promise<void> {
     for (const res of this.resources) {
       try {
         await res.close();
       } catch (err) {
-        console.warn('Error closing resource:', err);
-      } finally {
-        this.browser.close(); //todo не уверен по поводу этого места закрытия браузера
+        console.warn(err);
       }
     }
-  }
 
-  async handleError(error: IWorkerError, attempt: number = 1): Promise<void> {
-    console.error(`Error on attempt ${attempt}:`, error);
-
-    if (attempt < this.maxRetries && isRetryable(error)) {
-      await waitBeforeRetry(attempt);
-      return this.handleError(error, attempt + 1);
-    }
-
-    throw error;
+    this.browser.close();
   }
 }

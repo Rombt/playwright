@@ -183,7 +183,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             component: 'RozetkaScenario',
             method: 'runWithWorkerPool',
             data: {
-              task,
+              task: task,
               errorName: error instanceof Error ? error.name : undefined,
               errorMessage: error instanceof Error ? error.message : String(error),
               stack: error instanceof Error ? error.stack : undefined,
@@ -982,17 +982,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
   registerResource(res: IResource): void {
     this.resources.push(res);
-  }
-
-  getUnprocessedProducts(errors: IWorkerError[]): IProduct[] {
-    console.log('getUnprocessedProducts    errors = ', errors);
-
-    const unprocessedProducts = Array.from(
-      new Map(
-        errors.filter((e) => e.product).map((e) => [e.product!.id_product, e.product!]),
-      ).values(),
-    );
-    return unprocessedProducts;
   }
 
   async finalize(): Promise<void> {

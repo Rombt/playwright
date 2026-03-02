@@ -49,5 +49,5 @@ export interface IScenario<Browser = unknown, BrowserContext = unknown> {
    */
   loadSources(): Promise<ISource<ITask>[]>;
 
-  getUnprocessedProducts(errors: IWorkerError[]): IProduct[];
+  // getUnprocessedProducts(errors: IWorkerError[]): IProduct[];
 }

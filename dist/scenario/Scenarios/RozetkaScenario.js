@@ -113,7 +113,7 @@ class RozetkaScenario {
                         component: 'RozetkaScenario',
                         method: 'runWithWorkerPool',
                         data: {
-                            task,
+                            task: task,
                             errorName: error instanceof Error ? error.name : undefined,
                             errorMessage: error instanceof Error ? error.message : String(error),
                             stack: error instanceof Error ? error.stack : undefined,
@@ -734,11 +734,6 @@ class RozetkaScenario {
     }
     registerResource(res) {
         this.resources.push(res);
-    }
-    getUnprocessedProducts(errors) {
-        console.log('getUnprocessedProducts    errors = ', errors);
-        const unprocessedProducts = Array.from(new Map(errors.filter((e) => e.product).map((e) => [e.product.id_product, e.product])).values());
-        return unprocessedProducts;
     }
     async finalize() {
         for (const res of this.resources) {
