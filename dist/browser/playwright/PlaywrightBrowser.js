@@ -6,7 +6,6 @@ const crypto = require("crypto");
 const fs = require("fs/promises");
 const playwright_1 = require("playwright");
 const FingerprintPool_1 = require("../fingerprint/FingerprintPool");
-//!!!!!!!!!!!!    тестировать //!!!!!!!!!!!!!!!!!!!
 class PlaywrightBrowser {
     constructor(launchOptions, browserContextOptions) {
         this.launchOptions = launchOptions;

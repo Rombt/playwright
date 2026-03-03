@@ -7,10 +7,10 @@ export const config = {
       maxRetries: 5,
     },
     tasks: {
-      maxTask: 2,
+      maxTask: 5,
     },
     pages: {
-      maxPage: 2,
+      maxPage: 5,
       maxWaiters: 100,
       pageLoadWait: 10000,
     },
