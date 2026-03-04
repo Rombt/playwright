@@ -1,5 +1,6 @@
 import { Page, Browser, BrowserContext } from 'playwright';
 import { ILogger } from '../data/logger/types/ILogger';
+import { IDownloadResult } from '../data/entities/IResults/IDownloadResult';
 
 export interface IBrowser<
   BrowserT = Browser,
@@ -28,15 +29,18 @@ export interface IBrowser<
     loggerScope?: ILogger,
   ): Promise<Result>;
 
-  download(
-    page: Page,
-    url: string,
-    loggerScope?: ILogger,
-  ): Promise<{ buffer: Buffer; ext: string }>;
+  download(page: Page, url: string, loggerScope?: ILogger): Promise<IDownloadResult>;
 
   downloadStaticResource(
     url: string,
     context: BrowserContext,
     loggerScope?: ILogger,
-  ): Promise<{ buffer: Buffer; ext: string }>;
+  ): Promise<IDownloadResult>;
+
+  downloadWithFallback(
+    url: string,
+    page: Page,
+    context: BrowserContext,
+    loggerScope?: ILogger,
+  ): Promise<IDownloadResult>;
 }

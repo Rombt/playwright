@@ -537,6 +537,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     }
 
     const processImage = async (item: IImageItem): Promise<ImageResult> => {
+      await limiter.sleep(1000, this.config.asyncRetry.maxDelay); //todo переделать
       const page = await pool.acquire();
 
       loggerScope?.debug('Started processing an image item', {
@@ -563,8 +564,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                   maxRetries: this.maxRetries,
                 },
               });
-              // return this.browser.download(page, item.url);
-              return this.browser.downloadStaticResource(item.url, context);
+              return await this.browser.downloadWithFallback(item.url, page, context, loggerScope);
             }),
           {
             maxRetries: this.maxRetries,
@@ -627,14 +627,38 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         });
 
         return errorStatus;
+      } finally {
+        loggerScope?.debug('Releasing page back to pool', {
+          component: 'DefaultScenario',
+          method: 'downloadImages()',
+          action: 'processImage = async (item: IImageItem)',
+          data: {
+            item: item,
+            page: page,
+          },
+        });
+
+        pool.release(page);
       }
     };
 
     let attempt = 1;
     let currentBatch = queue;
 
+    loggerScope?.debug('Before retry loop for current batch initiated', {
+      component: 'DefaultScenario',
+      method: 'downloadImages()',
+      action: '',
+      data: {
+        attempt: attempt,
+        maxRetries: this.maxRetries,
+        currentBatchLength: currentBatch.length,
+        currentBatch: currentBatch,
+      },
+    });
+
     while (currentBatch.length && attempt <= this.maxRetries) {
-      await limiter.sleep(1000, 5000);
+      await limiter.sleep(1000, this.config.asyncRetry.maxDelay);
 
       loggerScope?.debug('Retry loop initiated for current batch', {
         component: 'DefaultScenario',

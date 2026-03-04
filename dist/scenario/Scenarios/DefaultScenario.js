@@ -414,6 +414,7 @@ class DefaultScenario {
             urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
         }
         const processImage = async (item) => {
+            await limiter.sleep(1000, this.config.asyncRetry.maxDelay); //todo переделать
             const page = await pool.acquire();
             loggerScope?.debug('Started processing an image item', {
                 component: 'DefaultScenario',
@@ -436,8 +437,7 @@ class DefaultScenario {
                             maxRetries: this.maxRetries,
                         },
                     });
-                    // return this.browser.download(page, item.url);
-                    return this.browser.downloadStaticResource(item.url, context);
+                    return await this.browser.downloadWithFallback(item.url, page, context, loggerScope);
                 }), {
                     maxRetries: this.maxRetries,
                     isRetryable: helpers_1.isRetryable,
@@ -492,11 +492,34 @@ class DefaultScenario {
                 });
                 return errorStatus;
             }
+            finally {
+                loggerScope?.debug('Releasing page back to pool', {
+                    component: 'DefaultScenario',
+                    method: 'downloadImages()',
+                    action: 'processImage = async (item: IImageItem)',
+                    data: {
+                        item: item,
+                        page: page,
+                    },
+                });
+                pool.release(page);
+            }
         };
         let attempt = 1;
         let currentBatch = queue;
+        loggerScope?.debug('Before retry loop for current batch initiated', {
+            component: 'DefaultScenario',
+            method: 'downloadImages()',
+            action: '',
+            data: {
+                attempt: attempt,
+                maxRetries: this.maxRetries,
+                currentBatchLength: currentBatch.length,
+                currentBatch: currentBatch,
+            },
+        });
         while (currentBatch.length && attempt <= this.maxRetries) {
-            await limiter.sleep(1000, 5000);
+            await limiter.sleep(1000, this.config.asyncRetry.maxDelay);
             loggerScope?.debug('Retry loop initiated for current batch', {
                 component: 'DefaultScenario',
                 method: 'downloadImages()',

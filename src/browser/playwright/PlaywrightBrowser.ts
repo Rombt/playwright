@@ -14,16 +14,23 @@ import {
 } from 'playwright';
 import { FingerprintPool } from '../fingerprint/FingerprintPool';
 import { ILogger } from '../../data/logger/types/ILogger';
+import { AppConfig } from '../../data/config/appConfig';
+import { RateLimiter } from '../../browser/limiter/RateLimiter';
 
 export class PlaywrightBrowser
   implements IBrowser<PWBrowser, BrowserContext, LaunchOptions, BrowserContextOptions>
 {
   private instance: PWBrowser | null = null;
+  private readonly config: AppConfig;
+  private readonly limiter: RateLimiter;
 
   constructor(
     private readonly launchOptions: LaunchOptions,
     private readonly browserContextOptions: BrowserContextOptions,
-  ) {}
+  ) {
+    this.config = AppConfig.getInstance();
+    this.limiter = new RateLimiter(5000);
+  }
 
   public get isInitialized(): boolean {
     return this.instance !== null;
@@ -164,6 +171,7 @@ export class PlaywrightBrowser
     loggerScope?: ILogger,
   ): Promise<{ buffer: Buffer; ext: string }> {
     let downloadEvent: Download | undefined;
+    let response;
     let buffer: Buffer = Buffer.from([]);
     let ext: string = '';
 
@@ -189,39 +197,35 @@ export class PlaywrightBrowser
       },
     });
 
-    const downloadPromise = page
-      .waitForEvent('download')
-      .then((d: Download) => {
-        loggerScope?.debug(`Trying to download a file from url`, {
-          component: 'PlaywrightBrowser',
-          method: 'page.waitForEvent(...)',
-          data: {
-            url: url,
-            d: d,
-          },
-        });
+    try {
+      const result = await Promise.allSettled([
+        page.waitForEvent('download', { timeout: this.config.asyncRetry.maxDelay }),
+        page.goto(url),
+      ]);
 
-        downloadEvent = d;
-      })
-      .catch((err) => {
-        const error = err instanceof Error ? err : new Error(String(err));
+      if (result[0].status === 'fulfilled') {
+        downloadEvent = result[0].value;
+      }
 
-        loggerScope?.error(`Image file download failed`, {
-          component: 'PlaywrightBrowser',
-          method: 'download(...)',
-          action: 'page.waitForEvent(...)',
-          data: {
-            url: url,
-            errorName: error instanceof Error ? error.name : undefined,
-            errorMessage: error instanceof Error ? error.message : String(error),
-            stack: error instanceof Error ? error.stack : undefined,
-          },
-        });
-        throw new Error('Image file download failed');
+      if (result[1].status === 'fulfilled') {
+        response = result[1].value;
+      }
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
+
+      loggerScope?.error(`Image file download failed`, {
+        component: 'PlaywrightBrowser',
+        method: 'download(...)',
+        action: "page.waitForEvent('download', { timeout: this.config.asyncRetry.maxDelay })",
+        data: {
+          url: url,
+          errorName: error instanceof Error ? error.name : undefined,
+          errorMessage: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined,
+        },
       });
-
-    const response = await page.goto(url);
-    await downloadPromise;
+      throw new Error('Image file download failed');
+    }
 
     if (downloadEvent) {
       loggerScope?.debug(`File download succeeded`, {
@@ -355,7 +359,7 @@ export class PlaywrightBrowser
 
     try {
       response = await context.request.get(url, {
-        timeout: 30000,
+        timeout: this.config.asyncRetry.maxDelay,
       });
     } catch (err) {
       const error = err instanceof Error ? err : new Error(String(err));
@@ -388,6 +392,13 @@ export class PlaywrightBrowser
 
       throw new Error(`HTTP ${response?.status()} while fetching resource`);
     }
+
+    loggerScope?.debug(`HTTP GET request completed`, {
+      component: 'PlaywrightBrowser',
+      method: 'downloadStaticResource()',
+      action: 'await context.request.get(...)',
+      data: { url: url, status: response.status(), response: response },
+    });
 
     let buffer: Buffer;
     let ext = '';
@@ -437,5 +448,65 @@ export class PlaywrightBrowser
     }
 
     return { buffer, ext };
+  }
+
+  async downloadWithFallback(
+    url: string,
+    page: Page,
+    context: BrowserContext,
+    loggerScope?: ILogger,
+  ): Promise<{ buffer: Buffer; ext: string }> {
+    loggerScope?.debug(`Entering downloadWithFallback()`, {
+      component: 'PlaywrightBrowser',
+      method: 'downloadWithFallback()',
+      data: { url },
+    });
+
+    try {
+      // Пробую через APIRequestContext
+      return await this.downloadStaticResource(url, context, loggerScope);
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
+
+      loggerScope?.warn(`Static download failed`, {
+        component: 'PlaywrightBrowser',
+        method: 'downloadWithFallback()',
+        data: {
+          url,
+          errorName: error.name,
+          errorMessage: error.message,
+        },
+      });
+
+      // Fallback ТОЛЬКО если это сетевая ошибка
+      if (!this.isNetworkError(error)) {
+        loggerScope?.warn(`Error is not network-related. Skipping fallback.`, {
+          component: 'PlaywrightBrowser',
+          method: 'downloadWithFallback()',
+          data: { url },
+        });
+
+        throw error;
+      }
+
+      loggerScope?.warn(`Network error detected. Switching to page download.`, {
+        component: 'PlaywrightBrowser',
+        method: 'downloadWithFallback()',
+        data: { url },
+      });
+
+      await this.limiter.sleep(10000, this.config.asyncRetry.maxDelay);
+
+      return await this.download(page, url, loggerScope);
+    }
+  }
+
+  private isNetworkError(error: Error): boolean {
+    return (
+      error.message.includes('ETIMEDOUT') ||
+      error.message.includes('ECONNRESET') ||
+      error.message.includes('ENOTFOUND') ||
+      error.message.includes('socket')
+    );
   }
 }

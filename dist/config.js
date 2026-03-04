@@ -22,6 +22,7 @@ exports.config = {
         resultsFolder: 'results',
         sourcesFolder: './dist/source/sources',
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
+        brands: ['Nike'],
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

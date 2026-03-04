@@ -6,11 +6,15 @@ const crypto = require("crypto");
 const fs = require("fs/promises");
 const playwright_1 = require("playwright");
 const FingerprintPool_1 = require("../fingerprint/FingerprintPool");
+const appConfig_1 = require("../../data/config/appConfig");
+const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 class PlaywrightBrowser {
     constructor(launchOptions, browserContextOptions) {
         this.launchOptions = launchOptions;
         this.browserContextOptions = browserContextOptions;
         this.instance = null;
+        this.config = appConfig_1.AppConfig.getInstance();
+        this.limiter = new RateLimiter_1.RateLimiter(5000);
     }
     get isInitialized() {
         return this.instance !== null;
@@ -128,6 +132,7 @@ class PlaywrightBrowser {
     }
     async download(page, url, loggerScope) {
         let downloadEvent;
+        let response;
         let buffer = Buffer.from([]);
         let ext = '';
         if (!page) {
@@ -150,25 +155,24 @@ class PlaywrightBrowser {
                 page: page,
             },
         });
-        const downloadPromise = page
-            .waitForEvent('download')
-            .then((d) => {
-            loggerScope?.debug(`Trying to download a file from url`, {
-                component: 'PlaywrightBrowser',
-                method: 'page.waitForEvent(...)',
-                data: {
-                    url: url,
-                    d: d,
-                },
-            });
-            downloadEvent = d;
-        })
-            .catch((err) => {
+        try {
+            const result = await Promise.allSettled([
+                page.waitForEvent('download', { timeout: this.config.asyncRetry.maxDelay }),
+                page.goto(url),
+            ]);
+            if (result[0].status === 'fulfilled') {
+                downloadEvent = result[0].value;
+            }
+            if (result[1].status === 'fulfilled') {
+                response = result[1].value;
+            }
+        }
+        catch (err) {
             const error = err instanceof Error ? err : new Error(String(err));
             loggerScope?.error(`Image file download failed`, {
                 component: 'PlaywrightBrowser',
                 method: 'download(...)',
-                action: 'page.waitForEvent(...)',
+                action: "page.waitForEvent('download', { timeout: this.config.asyncRetry.maxDelay })",
                 data: {
                     url: url,
                     errorName: error instanceof Error ? error.name : undefined,
@@ -177,9 +181,7 @@ class PlaywrightBrowser {
                 },
             });
             throw new Error('Image file download failed');
-        });
-        const response = await page.goto(url);
-        await downloadPromise;
+        }
         if (downloadEvent) {
             loggerScope?.debug(`File download succeeded`, {
                 component: 'PlaywrightBrowser',
@@ -298,7 +300,7 @@ class PlaywrightBrowser {
         let response;
         try {
             response = await context.request.get(url, {
-                timeout: 30000,
+                timeout: this.config.asyncRetry.maxDelay,
             });
         }
         catch (err) {
@@ -328,6 +330,12 @@ class PlaywrightBrowser {
             });
             throw new Error(`HTTP ${response?.status()} while fetching resource`);
         }
+        loggerScope?.debug(`HTTP GET request completed`, {
+            component: 'PlaywrightBrowser',
+            method: 'downloadStaticResource()',
+            action: 'await context.request.get(...)',
+            data: { url: url, status: response.status(), response: response },
+        });
         let buffer;
         let ext = '';
         try {
@@ -376,6 +384,51 @@ class PlaywrightBrowser {
             throw error;
         }
         return { buffer, ext };
+    }
+    async downloadWithFallback(url, page, context, loggerScope) {
+        loggerScope?.debug(`Entering downloadWithFallback()`, {
+            component: 'PlaywrightBrowser',
+            method: 'downloadWithFallback()',
+            data: { url },
+        });
+        try {
+            // Пробую через APIRequestContext
+            return await this.downloadStaticResource(url, context, loggerScope);
+        }
+        catch (err) {
+            const error = err instanceof Error ? err : new Error(String(err));
+            loggerScope?.warn(`Static download failed`, {
+                component: 'PlaywrightBrowser',
+                method: 'downloadWithFallback()',
+                data: {
+                    url,
+                    errorName: error.name,
+                    errorMessage: error.message,
+                },
+            });
+            // Fallback ТОЛЬКО если это сетевая ошибка
+            if (!this.isNetworkError(error)) {
+                loggerScope?.warn(`Error is not network-related. Skipping fallback.`, {
+                    component: 'PlaywrightBrowser',
+                    method: 'downloadWithFallback()',
+                    data: { url },
+                });
+                throw error;
+            }
+            loggerScope?.warn(`Network error detected. Switching to page download.`, {
+                component: 'PlaywrightBrowser',
+                method: 'downloadWithFallback()',
+                data: { url },
+            });
+            await this.limiter.sleep(10000, this.config.asyncRetry.maxDelay);
+            return await this.download(page, url, loggerScope);
+        }
+    }
+    isNetworkError(error) {
+        return (error.message.includes('ETIMEDOUT') ||
+            error.message.includes('ECONNRESET') ||
+            error.message.includes('ENOTFOUND') ||
+            error.message.includes('socket'));
     }
 }
 exports.PlaywrightBrowser = PlaywrightBrowser;
