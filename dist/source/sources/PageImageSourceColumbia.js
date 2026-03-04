@@ -1,6 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceColumbia {
+    // private readonly logger: Logger;
+    constructor() {
+        this.config = appConfig_1.AppConfig.getInstance();
+        // this.logger = Logger.getInstance();
+    }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
@@ -11,15 +17,31 @@ class PageImageSourceColumbia {
         return (task.metadata.target_website ===
             'https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch');
     }
-    async worker(targetUrl, page, limiter, getNext) {
+    async worker(targetUrl, page, limiter, getNext, loggerScope, sku, debugMeta) {
         const results = [];
-        while (true) {
-            const product = getNext();
-            if (!product)
-                break;
-            await limiter.wait();
-            results.push(await this.execute(targetUrl, page, product));
+        let product;
+        if (typeof getNext === 'function') {
+            product = getNext();
         }
+        else if (getNext) {
+            product = getNext;
+        }
+        if (!product) {
+            throw new Error('Product is undefined');
+        }
+        loggerScope?.debug('Worker initialized with valid product', {
+            component: 'DPageImageSourceColumbia',
+            method: 'worker(...)',
+            data: {
+                targetUrl: targetUrl,
+                page: page,
+                product: product,
+                limiter: limiter,
+                sku: sku,
+                debugMeta: debugMeta,
+            },
+        });
+        results.push(await this.execute(targetUrl, page, product));
         return results;
     }
     async execute(targetUrl, page, product) {

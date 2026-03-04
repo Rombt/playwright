@@ -229,6 +229,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     page: Page,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
+    logger?: ILogger,
     sku?: string,
     debugMeta?: Record<string, string>,
   ): Promise<IWorkerResult[]> {

@@ -7,8 +7,19 @@ import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
 import { IDataImag } from '../../data/entities/IDataImag';
 import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
+import { ILogger } from '../../data/logger/types/ILogger';
+import { Logger } from '../../data/logger/Logger';
+import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceColumbia implements ISource<ICollectProductPhotosTask> {
+  private readonly config: AppConfig;
+  // private readonly logger: Logger;
+
+  constructor() {
+    this.config = AppConfig.getInstance();
+    // this.logger = Logger.getInstance();
+  }
+
   workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
@@ -37,16 +48,38 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
     page: Page,
     limiter: RateLimiter,
     getNext: () => IProduct | undefined,
+    loggerScope?: ILogger,
+    sku?: string,
+    debugMeta?: Record<string, string>,
   ): Promise<IWorkerResult[]> {
     const results = [];
 
-    while (true) {
-      const product = getNext();
-      if (!product) break;
+    let product: IProduct | undefined;
 
-      await limiter.wait();
-      results.push(await this.execute(targetUrl, page, product));
+    if (typeof getNext === 'function') {
+      product = getNext();
+    } else if (getNext) {
+      product = getNext;
     }
+
+    if (!product) {
+      throw new Error('Product is undefined');
+    }
+
+    loggerScope?.debug('Worker initialized with valid product', {
+      component: 'DPageImageSourceColumbia',
+      method: 'worker(...)',
+      data: {
+        targetUrl: targetUrl,
+        page: page,
+        product: product,
+        limiter: limiter,
+        sku: sku,
+        debugMeta: debugMeta,
+      },
+    });
+
+    results.push(await this.execute(targetUrl, page, product));
 
     return results;
   }

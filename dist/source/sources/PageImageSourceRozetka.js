@@ -172,7 +172,7 @@ class PageImageSourceRozetka {
             };
         }
     }
-    async worker(targetUrl, page, limiter, getNext, sku, debugMeta) {
+    async worker(targetUrl, page, limiter, getNext, logger, sku, debugMeta) {
         const results = [];
         const loggerScope = this.logger.withContext(`worker ${debugMeta?.brand_name ?? 'no-brand'} ${sku ?? 'no-sku'}`);
         if (!targetUrl) {

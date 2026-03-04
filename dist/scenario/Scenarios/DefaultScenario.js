@@ -148,7 +148,7 @@ class DefaultScenario {
         const raw = await fs_1.promises.readFile(filePath, 'utf-8');
         const data = JSON.parse(raw);
         const arrTasks = Object.values(data.task);
-        if (arrTasks.length > 0) {
+        if (arrTasks.length === 0) {
             this.logger.error('Tasks array is invalid or corrupted', {
                 component: 'DefaultScenario',
                 method: 'load()',
@@ -170,7 +170,7 @@ class DefaultScenario {
         if (!source) {
             loggerScope?.error('Source not found for task', {
                 component: 'DefaultScenario',
-                method: 'process',
+                method: 'process()',
                 action: 'if (!source)',
                 task,
             });
@@ -178,7 +178,7 @@ class DefaultScenario {
         }
         loggerScope?.debug(`The enter to the process method`, {
             component: 'DefaultScenario',
-            method: 'process',
+            method: 'process()',
             stage: 'init',
             data: {
                 task: task,
@@ -192,7 +192,7 @@ class DefaultScenario {
             if (!Array.isArray(products) || products.length === 0) {
                 loggerScope?.error('Products are absent', {
                     component: 'DefaultScenario',
-                    method: 'process',
+                    method: 'process()',
                     stage: 'init',
                     data: { task: task },
                 });
@@ -200,7 +200,7 @@ class DefaultScenario {
             }
             loggerScope?.debug(`The enter to the browser.runInContext`, {
                 component: 'DefaultScenario',
-                method: 'process',
+                method: 'process()',
                 stage: 'init',
                 data: {
                     products: products,
@@ -209,7 +209,7 @@ class DefaultScenario {
             const uniqueProducts = Array.from(new Map(products.map((p) => [p.sku, p])).values());
             loggerScope?.debug('A unique of unique products is created', {
                 component: 'DefaultScenario',
-                method: 'process',
+                method: 'process()',
                 action: 'const uniqueProducts = Array.from(...)',
                 data: {
                     uniqueProducts: uniqueProducts,
@@ -219,98 +219,393 @@ class DefaultScenario {
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
             const processProduct = async (product) => {
+                if (!task.metadata.target_website) {
+                    loggerScope?.error('Task metadata does not contain target_website!!', {
+                        component: 'DefaultScenario',
+                        method: 'process()',
+                        action: 'if (!task.metadata.target_website)',
+                        data: {
+                            product: product,
+                            targetWebsite: task.metadata.target_website,
+                        },
+                    });
+                    throw new Error('Error!! Task metadata does not contain target_website!!');
+                }
                 try {
                     const page = await pool.acquire();
-                    const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, limiter, () => product), {
+                    loggerScope?.debug('Beginning processing of product', {
+                        component: 'DefaultScenario',
+                        method: 'process()',
+                        action: 'const processProduct = async (product: IProduct)',
+                        data: {
+                            product: product,
+                            targetWebsite: task.metadata.target_website,
+                            page: page,
+                            limiter: limiter,
+                        },
+                    });
+                    const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, limiter, product, loggerScope), {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
                     }, loggerScope);
+                    loggerScope?.debug('Product processing finished', {
+                        component: 'DefaultScenario',
+                        method: 'process()',
+                        action: 'await this.withRetry(...)',
+                        data: {
+                            product: product,
+                            targetWebsite: task.metadata.target_website,
+                            page: page,
+                            limiter: limiter,
+                            result: result,
+                        },
+                    });
                     for (const r of result) {
                         for (const [sku, images] of Object.entries(r.data)) {
                             allData[sku] ?? (allData[sku] = []);
                             allData[sku].push(...images);
                         }
                     }
+                    loggerScope?.debug('Image data aggregation finished', {
+                        component: 'DefaultScenario',
+                        method: 'process()',
+                        action: 'for (const r of result)',
+                        data: {
+                            product: product,
+                            targetWebsite: task.metadata.target_website,
+                            page: page,
+                            limiter: limiter,
+                            result: result,
+                            status: 'success',
+                            allDataCount: allData.length,
+                            allData: allData,
+                        },
+                    });
                     pool.release(page);
                     return { status: 'success' };
                 }
                 catch (err) {
                     const error = err;
-                    return (0, helpers_1.isRetryable)(error)
+                    const errorStatus = (0, helpers_1.isRetryable)(error)
                         ? { status: 'retry', product, error }
                         : { status: 'fatal', product, error };
+                    loggerScope?.error('Error during worker execution with retry mechanism.', {
+                        component: 'DefaultScenario',
+                        method: 'process()',
+                        action: 'for (const r of result)',
+                        data: {
+                            product: product,
+                            targetWebsite: task.metadata.target_website,
+                            status: errorStatus.status,
+                            errorName: error instanceof Error ? error.name : undefined,
+                            errorMessage: error instanceof Error ? error.message : String(error),
+                            stack: error instanceof Error ? error.stack : undefined,
+                        },
+                    });
+                    return errorStatus;
                 }
             };
             let attempt = 1;
             let currentBatch = uniqueProducts;
             while (currentBatch.length && attempt <= this.maxRetries) {
                 await limiter.sleep(1000, 5000);
-                const results = await Promise.all(currentBatch.map(processProduct));
+                loggerScope?.debug('Entering retry loop for current batch', {
+                    component: 'DefaultScenario',
+                    method: 'process()',
+                    action: 'while (currentBatch.length && attempt <= this.maxRetries) {...',
+                    data: {
+                        attempt: attempt,
+                        maxRetries: this.maxRetries,
+                        currentBatchLength: currentBatch.length,
+                        currentBatch: currentBatch,
+                    },
+                });
+                const results = (await Promise.allSettled(currentBatch.map(processProduct)))
+                    .filter((r) => r.status === 'fulfilled')
+                    .map((r) => r.value);
+                loggerScope?.debug('Current batch processing finished', {
+                    component: 'DefaultScenario',
+                    method: 'process()',
+                    action: 'results = (await Promise.allSettled(currentBatch.map(processProduct)))',
+                    data: {
+                        attempt: attempt,
+                        maxRetries: this.maxRetries,
+                        currentBatchLength: currentBatch.length,
+                        currentBatch: currentBatch,
+                        results: results,
+                    },
+                });
                 const retryResults = results.filter((r) => r.status === 'retry');
+                loggerScope?.debug('Filtered retryable tasks from current batch results', {
+                    component: 'DefaultScenario',
+                    method: 'process()',
+                    action: "(r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry')",
+                    data: {
+                        attempt: attempt,
+                        maxRetries: this.maxRetries,
+                        currentBatchLength: currentBatch.length,
+                        currentBatch: currentBatch,
+                        retryResults: retryResults,
+                        results: results,
+                    },
+                });
                 const fatalResults = results.filter((r) => r.status === 'fatal');
+                loggerScope?.debug('Filtered fatal tasks from current batch results', {
+                    component: 'DefaultScenario',
+                    method: 'process()',
+                    action: "(r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal')",
+                    data: {
+                        attempt: attempt,
+                        maxRetries: this.maxRetries,
+                        currentBatchLength: currentBatch.length,
+                        currentBatch: currentBatch,
+                        fatalResults: fatalResults,
+                        results: results,
+                    },
+                });
                 fatalResults.forEach((r) => this.allErrors.push({
                     error: r.error,
                     targetUrl: task.metadata.target_website ?? undefined,
                 }));
                 currentBatch = retryResults.map((r) => r.product);
+                loggerScope?.debug('Next batch prepared from retryable tasks', {
+                    component: 'DefaultScenario',
+                    method: 'process()',
+                    action: 'currentBatch = retryResults.map((r) => r.product)',
+                    data: {
+                        attempt: attempt,
+                        maxRetries: this.maxRetries,
+                        currentBatchLength: currentBatch.length,
+                        currentBatch: currentBatch,
+                    },
+                });
                 attempt++;
             }
             const normalized = (0, helpers_1.normalizeAllData)(allData);
-            await this.downloadImages(normalized, task, pool, limiter, loggerScope);
+            loggerScope?.debug('All data normalized', {
+                component: 'DefaultScenario',
+                method: 'process()',
+                action: 'normalized = normalizeAllData(allData)',
+                data: {
+                    normalized: normalized,
+                },
+            });
+            await this.downloadImages(normalized, task, pool, context, limiter, loggerScope);
         });
         await this.storage.saveJson(this.allErrors, {
             filename: `${task.brand_name}_unprocessed-products.json`,
             targetDir: task.brand_name,
         });
     }
-    async downloadImages(urlsBySku, task, pool, limiter, loggerScope) {
+    async downloadImages(urlsBySku, task, pool, context, limiter, loggerScope) {
         const queue = [];
+        loggerScope?.debug('Starting image download for current task', {
+            component: 'DefaultScenario',
+            method: 'downloadImages()',
+            action: 'async downloadImages(...)',
+            data: {
+                urlsBySku: urlsBySku,
+                task: task,
+                pool: pool,
+                limiter: limiter,
+            },
+        });
         for (const [sku, urls] of Object.entries(urlsBySku)) {
             urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
         }
         const processImage = async (item) => {
             const page = await pool.acquire();
+            loggerScope?.debug('Started processing an image item', {
+                component: 'DefaultScenario',
+                method: 'downloadImages()',
+                action: 'processImage = async (item: IImageItem)',
+                data: {
+                    item: item,
+                    page: page,
+                },
+            });
             try {
-                const { buffer, ext } = await this.withRetry(() => limiter.schedule(() => this.browser.download(page, item.url)), {
+                const { buffer, ext } = await this.withRetry(() => limiter.schedule(async () => {
+                    loggerScope?.debug('Starting scheduled action execution', {
+                        component: 'DefaultScenario',
+                        method: 'downloadImages()',
+                        action: 'limiter.schedule(async () => {',
+                        data: {
+                            item: item,
+                            page: page,
+                            maxRetries: this.maxRetries,
+                        },
+                    });
+                    // return this.browser.download(page, item.url);
+                    return this.browser.downloadStaticResource(item.url, context);
+                }), {
                     maxRetries: this.maxRetries,
                     isRetryable: helpers_1.isRetryable,
                 }, loggerScope);
+                loggerScope?.debug('Image download via withRetry completed', {
+                    component: 'DefaultScenario',
+                    method: 'downloadImages()',
+                    action: 'await this.withRetry(...)',
+                    data: {
+                        item: item,
+                        page: page,
+                        maxRetries: this.maxRetries,
+                        isRetryable: this.maxRetries,
+                        ext: ext,
+                    },
+                });
                 await this.storage.save({
                     filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
                     buffer,
                     targetDir: path.join(task.brand_name, item.sku),
                 });
+                loggerScope?.debug(`Image saved: ${task.brand_name}/${item.sku}/${item.index}${ext}`, {
+                    component: 'DefaultScenario',
+                    method: 'downloadImages()',
+                    action: 'this.storage.save({...})',
+                    data: {
+                        item: item,
+                        page: page,
+                        maxRetries: this.maxRetries,
+                        isRetryable: this.maxRetries,
+                        status: 'success',
+                    },
+                });
                 return { status: 'success' };
             }
             catch (err) {
                 const error = err;
-                return (0, helpers_1.isRetryable)(error)
+                const errorStatus = (0, helpers_1.isRetryable)(error)
                     ? { status: 'retry', item, error }
                     : { status: 'fatal', item, error };
+                loggerScope?.error(`Image download or save failed for SKU ${item.sku}`, {
+                    component: 'DefaultScenario',
+                    method: 'downloadImages()',
+                    action: 'this.storage.save({...})',
+                    data: {
+                        item: item,
+                        page: page,
+                        maxRetries: this.maxRetries,
+                        isRetryable: this.maxRetries,
+                        status: errorStatus.status,
+                    },
+                });
+                return errorStatus;
             }
         };
         let attempt = 1;
         let currentBatch = queue;
         while (currentBatch.length && attempt <= this.maxRetries) {
             await limiter.sleep(1000, 5000);
-            const results = await Promise.all(currentBatch.map(processImage));
+            loggerScope?.debug('Retry loop initiated for current batch', {
+                component: 'DefaultScenario',
+                method: 'downloadImages()',
+                action: 'while (currentBatch.length && attempt <= this.maxRetries)',
+                data: {
+                    attempt: attempt,
+                    maxRetries: this.maxRetries,
+                    currentBatchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                },
+            });
+            const results = (await Promise.allSettled(currentBatch.map(processImage)))
+                .filter((r) => r.status === 'fulfilled')
+                .map((r) => r.value);
+            loggerScope?.debug('Current batch processing finished', {
+                component: 'DefaultScenario',
+                method: 'downloadImages()',
+                action: 'results = (await Promise.allSettled(currentBatch.map(processImage)))',
+                data: {
+                    attempt: attempt,
+                    maxRetries: this.maxRetries,
+                    currentBatchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                    results: results,
+                },
+            });
             const retryResults = results.filter((r) => r.status === 'retry');
+            loggerScope?.debug('Filtered retryable tasks from current batch results', {
+                component: 'DefaultScenario',
+                method: 'downloadImages()',
+                action: "(r): r is Extract<ImageResult, { status: 'retry' }> => r.status === 'retry',))",
+                data: {
+                    attempt: attempt,
+                    maxRetries: this.maxRetries,
+                    currentBatchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                    retryResults: retryResults,
+                    results: results,
+                },
+            });
             const fatalResults = results.filter((r) => r.status === 'fatal');
+            loggerScope?.debug('Filtered fatal tasks from current batch results', {
+                component: 'DefaultScenario',
+                method: 'downloadImages()',
+                action: "(r): r is Extract<ImageResult, { status: 'fatal' }> => r.status === 'fatal',)",
+                data: {
+                    attempt: attempt,
+                    maxRetries: this.maxRetries,
+                    currentBatchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                    fatalResults: fatalResults,
+                    results: results,
+                },
+            });
             fatalResults.forEach((r) => this.allErrors.push({
                 error: r.error,
                 targetUrl: r.item.url,
             }));
             currentBatch = retryResults.map((r) => r.item);
+            loggerScope?.debug('Next batch prepared from retryable tasks', {
+                component: 'DefaultScenario',
+                method: 'downloadImages()',
+                action: 'currentBatch = retryResults.map((r) => r.item)',
+                data: {
+                    attempt: attempt,
+                    maxRetries: this.maxRetries,
+                    currentBatchLength: currentBatch.length,
+                    currentBatch: currentBatch,
+                },
+            });
             attempt++;
         }
     }
     async withRetry(action, options, loggerScope) {
         let attempt = 1;
+        loggerScope?.debug('Entering withRetry method', {
+            component: 'DefaultScenario',
+            method: 'async withRetry(...)',
+            data: {
+                options: options,
+                action: action,
+            },
+        });
         while (true) {
             try {
+                loggerScope?.debug('Entering while (true)', {
+                    component: 'DefaultScenario',
+                    method: 'withRetry(...)',
+                    action: 'while (true)',
+                    data: {
+                        options: options,
+                        action: action,
+                    },
+                });
                 return await action();
             }
             catch (err) {
+                const error = err instanceof Error ? err : new Error(String(err));
+                loggerScope?.error('Error in while loop', {
+                    method: 'withRetry(...)',
+                    action: 'while (true)',
+                    data: {
+                        options: options,
+                        action: action,
+                        errorName: error instanceof Error ? error.name : undefined,
+                        errorMessage: error instanceof Error ? error.message : String(error),
+                        stack: error instanceof Error ? error.stack : undefined,
+                    },
+                });
                 if (attempt >= options.maxRetries || !options.isRetryable(err)) {
                     throw err;
                 }

@@ -387,7 +387,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               // сбор фото у найденных товаров
               const result = await this.withRetry(
                 () =>
-                  source.worker(g.href, page, limiter, undefined, sku, {
+                  source.worker(g.href, page, limiter, undefined, undefined, sku, {
                     brand_name: task.brand_name,
                   }),
                 {
@@ -606,7 +606,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             (r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal',
           );
 
-          loggerScope?.debug(`Received fatal results `, {
+          loggerScope?.debug(`Received fatal results`, {
             component: 'RozetkaScenario',
             method: 'process',
             action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',

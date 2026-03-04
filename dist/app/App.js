@@ -29,7 +29,9 @@ class App {
         this.logger.info(`Application is running in ${this.mode} mode`, {
             component: 'App',
             method: 'constructor',
-            data: {},
+            data: {
+                config: this.config.get,
+            },
         });
         try {
             //todo убрать повторяющийся код
