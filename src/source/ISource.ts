@@ -40,7 +40,8 @@ export interface ISource<T extends ITask, THttpResponse = unknown> {
     targetUrl: string,
     page: Page,
     limiter: RateLimiter,
-    getNext?: () => IProduct | undefined,
+    getNext?: (() => IProduct | undefined) | IProduct,
+    loggerScope?: ILogger,
     sku?: string,
     debugMeta?: Record<string, string>,
   ): Promise<IWorkerResult[]>;

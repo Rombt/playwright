@@ -41,7 +41,9 @@ export class App<BrowserOptions> {
     this.logger.info(`Application is running in ${this.mode} mode`, {
       component: 'App',
       method: 'constructor',
-      data: {},
+      data: {
+        config: this.config.get,
+      },
     });
 
     try {

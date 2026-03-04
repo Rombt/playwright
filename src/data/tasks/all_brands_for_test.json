@@ -469,69 +469,6 @@
         }
       ]
     },
-    "45": {
-      "brand_id": "45",
-      "brand_name": "Puma",
-      "metadata": {
-        "target_website": null
-      },
-      "products": [
-        {
-          "id_product": "54476",
-          "name_product": "Брюки чоловічі PUMA Evostripe Core Pants Men 63153307",
-          "sku": "63153307111*SS26",
-          "attributes": {
-            "color": "т.сiр/чорн",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54476",
-          "name_product": "Брюки чоловічі PUMA Evostripe Core Pants Men 63153307",
-          "sku": "63153307111*SS26",
-          "attributes": {
-            "color": "т.сiр/чорн",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54476",
-          "name_product": "Брюки чоловічі PUMA Evostripe Core Pants Men 63153307",
-          "sku": "63153307111*SS26",
-          "attributes": {
-            "color": "т.сiр/чорн",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54476",
-          "name_product": "Брюки чоловічі PUMA Evostripe Core Pants Men 63153307",
-          "sku": "63153307111*SS26",
-          "attributes": {
-            "color": "т.сiр/чорн",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54476",
-          "name_product": "Брюки чоловічі PUMA Evostripe Core Pants Men 63153307",
-          "sku": "63153307111*SS26",
-          "attributes": {
-            "color": "т.сiр/чорн",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54486",
-          "name_product": "Рюкзак PUMA Scuderia Ferrari 22L 09224502",
-          "sku": "09224502111*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        }
-      ]
-    },
     "214": {
       "brand_id": "214",
       "brand_name": "M-TAC",

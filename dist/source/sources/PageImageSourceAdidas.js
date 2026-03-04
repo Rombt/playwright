@@ -10,15 +10,31 @@ class PageImageSourceAdidas {
     supports(task) {
         return task.metadata.target_website === 'https://www.adidas.ua/search?s={{sku_prod}}';
     }
-    async worker(targetUrl, page, limiter, getNext) {
+    async worker(targetUrl, page, limiter, getNext, loggerScope, sku, debugMeta) {
         const results = [];
-        while (true) {
-            const product = getNext();
-            if (!product)
-                break;
-            await limiter.wait();
-            results.push(await this.execute(targetUrl, page, product));
+        let product;
+        if (typeof getNext === 'function') {
+            product = getNext();
         }
+        else if (getNext) {
+            product = getNext;
+        }
+        if (!product) {
+            throw new Error('Product is undefined');
+        }
+        loggerScope?.debug('Worker initialized with valid product', {
+            component: 'DPageImageSourceColumbia',
+            method: 'worker(...)',
+            data: {
+                targetUrl: targetUrl,
+                page: page,
+                product: product,
+                limiter: limiter,
+                sku: sku,
+                debugMeta: debugMeta,
+            },
+        });
+        results.push(await this.execute(targetUrl, page, product));
         return results;
     }
     async execute(targetUrl, page, product) {

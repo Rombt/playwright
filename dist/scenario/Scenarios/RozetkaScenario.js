@@ -113,7 +113,7 @@ class RozetkaScenario {
                         component: 'RozetkaScenario',
                         method: 'runWithWorkerPool',
                         data: {
-                            task,
+                            task: task,
                             errorName: error instanceof Error ? error.name : undefined,
                             errorMessage: error instanceof Error ? error.message : String(error),
                             stack: error instanceof Error ? error.stack : undefined,
@@ -145,13 +145,13 @@ class RozetkaScenario {
         this.sources = await this.loadSources();
     }
     async process(task, loggerScope) {
-        // const loggerScope = this.logger.withContext(task.brand_name);
         const source = this.sources.find((s) => s.supports(task));
         if (!source) {
             loggerScope?.error('Source not found for task', {
                 component: 'RozetkaScenario',
                 method: 'process',
-                task,
+                action: 'if (!source)',
+                task: task,
             });
             throw new Error('Source not found');
         }
@@ -161,6 +161,7 @@ class RozetkaScenario {
             stage: 'init',
             data: {
                 task: task,
+                source: source,
             },
         });
         const allData = {};
@@ -177,8 +178,8 @@ class RozetkaScenario {
                 stage: 'init',
                 data: {
                     url_init: url_init,
-                    targetUrl,
-                    products,
+                    targetUrl: targetUrl,
+                    products: products,
                 },
             });
             if (!Array.isArray(products) || products.length === 0) {
@@ -186,7 +187,7 @@ class RozetkaScenario {
                     component: 'RozetkaScenario',
                     method: 'process',
                     stage: 'init',
-                    data: { task },
+                    data: { task: task },
                 });
                 throw new Error('Products are absent');
             }
@@ -269,7 +270,7 @@ class RozetkaScenario {
                             },
                         });
                         // сбор фото у найденных товаров
-                        const result = await this.withRetry(() => source.worker(g.href, page, limiter, undefined, sku, {
+                        const result = await this.withRetry(() => source.worker(g.href, page, limiter, undefined, undefined, sku, {
                             brand_name: task.brand_name,
                         }), {
                             maxRetries: this.config.asyncRetry.maxRetries,
@@ -444,7 +445,7 @@ class RozetkaScenario {
                     },
                 });
                 const fatalResults = results.filter((r) => r.status === 'fatal');
-                loggerScope?.debug(`Received fatal results `, {
+                loggerScope?.debug(`Received fatal results`, {
                     component: 'RozetkaScenario',
                     method: 'process',
                     action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
@@ -734,11 +735,6 @@ class RozetkaScenario {
     }
     registerResource(res) {
         this.resources.push(res);
-    }
-    getUnprocessedProducts(errors) {
-        console.log('getUnprocessedProducts    errors = ', errors);
-        const unprocessedProducts = Array.from(new Map(errors.filter((e) => e.product).map((e) => [e.product.id_product, e.product])).values());
-        return unprocessedProducts;
     }
     async finalize() {
         for (const res of this.resources) {

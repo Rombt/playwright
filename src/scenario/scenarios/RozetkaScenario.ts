@@ -183,7 +183,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             component: 'RozetkaScenario',
             method: 'runWithWorkerPool',
             data: {
-              task,
+              task: task,
               errorName: error instanceof Error ? error.name : undefined,
               errorMessage: error instanceof Error ? error.message : String(error),
               stack: error instanceof Error ? error.stack : undefined,
@@ -222,8 +222,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   }
 
   async process(task: ICollectProductPhotosTask, loggerScope?: ILogger): Promise<void> {
-    // const loggerScope = this.logger.withContext(task.brand_name);
-
     const source = this.sources.find((s) => s.supports(task)) as
       | ISource<ICollectProductPhotosTask, IAutocompleteResponse>
       | undefined;
@@ -231,7 +229,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       loggerScope?.error('Source not found for task', {
         component: 'RozetkaScenario',
         method: 'process',
-        task,
+        action: 'if (!source)',
+        task: task,
       });
 
       throw new Error('Source not found');
@@ -243,6 +242,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       stage: 'init',
       data: {
         task: task,
+        source: source,
       },
     });
 
@@ -265,8 +265,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
           stage: 'init',
           data: {
             url_init: url_init,
-            targetUrl,
-            products,
+            targetUrl: targetUrl,
+            products: products,
           },
         });
 
@@ -275,7 +275,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             component: 'RozetkaScenario',
             method: 'process',
             stage: 'init',
-            data: { task },
+            data: { task: task },
           });
           throw new Error('Products are absent');
         }
@@ -387,7 +387,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               // сбор фото у найденных товаров
               const result = await this.withRetry(
                 () =>
-                  source.worker(g.href, page, limiter, undefined, sku, {
+                  source.worker(g.href, page, limiter, undefined, undefined, sku, {
                     brand_name: task.brand_name,
                   }),
                 {
@@ -606,7 +606,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             (r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal',
           );
 
-          loggerScope?.debug(`Received fatal results `, {
+          loggerScope?.debug(`Received fatal results`, {
             component: 'RozetkaScenario',
             method: 'process',
             action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
@@ -982,17 +982,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
   registerResource(res: IResource): void {
     this.resources.push(res);
-  }
-
-  getUnprocessedProducts(errors: IWorkerError[]): IProduct[] {
-    console.log('getUnprocessedProducts    errors = ', errors);
-
-    const unprocessedProducts = Array.from(
-      new Map(
-        errors.filter((e) => e.product).map((e) => [e.product!.id_product, e.product!]),
-      ).values(),
-    );
-    return unprocessedProducts;
   }
 
   async finalize(): Promise<void> {
