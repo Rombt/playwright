@@ -463,7 +463,7 @@ export class PlaywrightBrowser
     });
 
     try {
-      // Пробую через APIRequestContext
+      //todo пока не понятно что лучше начинать со статики или ней заканчивать....
       // return await this.downloadStaticResource(url, context, loggerScope);
       return await this.download(page, url, loggerScope);
     } catch (err) {
@@ -496,8 +496,6 @@ export class PlaywrightBrowser
         method: 'downloadWithFallback()',
         data: { url },
       });
-
-      // await this.limiter.sleep(1000, 5000);
 
       // return await this.download(page, url, loggerScope);
       return await this.downloadStaticResource(url, context, loggerScope);

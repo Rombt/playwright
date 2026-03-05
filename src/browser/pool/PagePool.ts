@@ -128,7 +128,10 @@ export class PagePool implements IPagePool, IResource {
   }
 
   release(page: Page) {
+    if (!page) return;
+
     const waiter = this.waiters.shift();
+
     if (waiter) {
       waiter(page);
     } else {

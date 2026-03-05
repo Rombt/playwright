@@ -105,6 +105,8 @@ class PagePool {
         });
     }
     release(page) {
+        if (!page)
+            return;
         const waiter = this.waiters.shift();
         if (waiter) {
             waiter(page);

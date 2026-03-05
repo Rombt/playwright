@@ -58,7 +58,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
-  // private allErrors: IWorkerError[] = [];
 
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
@@ -319,7 +318,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             data: {
               product: product,
               targetWebsite: task.metadata.target_website,
-              page: page,
+
               limiter: limiter,
             },
           });
@@ -341,7 +340,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             data: {
               product: product,
               targetWebsite: task.metadata.target_website,
-              page: page,
+
               limiter: limiter,
               result: result,
             },
@@ -361,7 +360,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             data: {
               product: product,
               targetWebsite: task.metadata.target_website,
-              page: page,
+
               limiter: limiter,
               result: result,
               status: 'success',
@@ -402,8 +401,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       let currentBatch = uniqueProducts;
 
       while (currentBatch.length && attempt <= this.maxRetries) {
-        // await limiter.sleep(1000, 5000);
-
         loggerScope?.debug('Entering retry loop for current batch', {
           component: 'DefaultScenario',
           method: 'process()',
@@ -505,7 +502,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       });
 
       allErrors.push(
-        ...(await this.downloadImages(normalized, task, pool, context, limiter, loggerScope)),
+        ...(await this.downloadImages(normalized, task, context, limiter, loggerScope)),
       );
     });
 
@@ -518,13 +515,14 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   private async downloadImages(
     urlsBySku: Record<string, string[]>,
     task: ICollectProductPhotosTask,
-    pool: PagePool,
     context: BrowserContext,
     limiter: RateLimiter,
     loggerScope?: ILogger,
   ): Promise<IWorkerError[]> {
     const queue: IImageItem[] = [];
     const allErrors: IWorkerError[] = [];
+
+    const ImgPool = new PagePool(context, this.maxPage);
 
     loggerScope?.debug('Starting image download for current task', {
       component: 'DefaultScenario',
@@ -533,7 +531,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       data: {
         urlsBySku: urlsBySku,
         task: task,
-        pool: pool,
+        pool: ImgPool,
         limiter: limiter,
       },
     });
@@ -543,19 +541,20 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     }
 
     const processImage = async (item: IImageItem): Promise<ImageResult> => {
-      const page = await pool.acquire();
-
-      loggerScope?.debug('Started processing an image item', {
+      loggerScope?.debug(`Started processing an image item ${item.index}`, {
         component: 'DefaultScenario',
         method: 'downloadImages()',
         action: 'processImage = async (item: IImageItem)',
         data: {
           item: item,
-          page: page,
         },
       });
 
+      let page: Page | undefined;
+
       try {
+        page = await ImgPool.acquire();
+
         const { buffer, ext } = await this.withRetry(
           () =>
             limiter.schedule(async () => {
@@ -565,11 +564,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                 action: 'limiter.schedule(async () => {',
                 data: {
                   item: item,
-                  page: page,
+
                   maxRetries: this.maxRetries,
                 },
               });
-              return await this.browser.downloadWithFallback(item.url, page, context, loggerScope);
+              return await this.browser.downloadWithFallback(item.url, page!, context, loggerScope);
             }),
           {
             maxRetries: this.maxRetries,
@@ -587,7 +586,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             action: 'await this.withRetry(...)',
             data: {
               item: item,
-              page: page,
               maxRetries: this.maxRetries,
               isRetryable: this.maxRetries,
               ext: ext,
@@ -607,7 +605,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           action: 'this.storage.save({...})',
           data: {
             item: item,
-            page: page,
             maxRetries: this.maxRetries,
             isRetryable: this.maxRetries,
             status: 'success',
@@ -628,7 +625,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           action: 'this.storage.save({...})',
           data: {
             item: item,
-            page: page,
             maxRetries: this.maxRetries,
             isRetryable: this.maxRetries,
             status: errorStatus.status,
@@ -643,11 +639,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           action: 'processImage = async (item: IImageItem)',
           data: {
             item: item,
-            page: page,
           },
         });
 
-        pool.release(page);
+        if (page) {
+          ImgPool.release(page);
+        }
       }
     };
 
@@ -808,7 +805,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           },
         });
 
-        // if (attempt >= options.maxRetries || !options.isRetryable(err as IWorkerError)) {
         if (attempt >= options.maxRetries) {
           throw err;
         }

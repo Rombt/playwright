@@ -9,7 +9,6 @@ const appConfig_1 = require("../../data/config/appConfig");
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
 class DefaultScenario {
-    // private allErrors: IWorkerError[] = [];
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
@@ -241,7 +240,6 @@ class DefaultScenario {
                         data: {
                             product: product,
                             targetWebsite: task.metadata.target_website,
-                            page: page,
                             limiter: limiter,
                         },
                     });
@@ -256,7 +254,6 @@ class DefaultScenario {
                         data: {
                             product: product,
                             targetWebsite: task.metadata.target_website,
-                            page: page,
                             limiter: limiter,
                             result: result,
                         },
@@ -274,7 +271,6 @@ class DefaultScenario {
                         data: {
                             product: product,
                             targetWebsite: task.metadata.target_website,
-                            page: page,
                             limiter: limiter,
                             result: result,
                             status: 'success',
@@ -309,7 +305,6 @@ class DefaultScenario {
             let attempt = 1;
             let currentBatch = uniqueProducts;
             while (currentBatch.length && attempt <= this.maxRetries) {
-                // await limiter.sleep(1000, 5000);
                 loggerScope?.debug('Entering retry loop for current batch', {
                     component: 'DefaultScenario',
                     method: 'process()',
@@ -391,16 +386,17 @@ class DefaultScenario {
                     normalized: normalized,
                 },
             });
-            allErrors.push(...(await this.downloadImages(normalized, task, pool, context, limiter, loggerScope)));
+            allErrors.push(...(await this.downloadImages(normalized, task, context, limiter, loggerScope)));
         });
         await this.storage.saveJson(allErrors, {
             filename: `${task.brand_name}_unprocessed-products.json`,
             targetDir: task.brand_name,
         });
     }
-    async downloadImages(urlsBySku, task, pool, context, limiter, loggerScope) {
+    async downloadImages(urlsBySku, task, context, limiter, loggerScope) {
         const queue = [];
         const allErrors = [];
+        const ImgPool = new PagePool_1.PagePool(context, this.maxPage);
         loggerScope?.debug('Starting image download for current task', {
             component: 'DefaultScenario',
             method: 'downloadImages()',
@@ -408,7 +404,7 @@ class DefaultScenario {
             data: {
                 urlsBySku: urlsBySku,
                 task: task,
-                pool: pool,
+                pool: ImgPool,
                 limiter: limiter,
             },
         });
@@ -416,17 +412,17 @@ class DefaultScenario {
             urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
         }
         const processImage = async (item) => {
-            const page = await pool.acquire();
-            loggerScope?.debug('Started processing an image item', {
+            loggerScope?.debug(`Started processing an image item ${item.index}`, {
                 component: 'DefaultScenario',
                 method: 'downloadImages()',
                 action: 'processImage = async (item: IImageItem)',
                 data: {
                     item: item,
-                    page: page,
                 },
             });
+            let page;
             try {
+                page = await ImgPool.acquire();
                 const { buffer, ext } = await this.withRetry(() => limiter.schedule(async () => {
                     loggerScope?.debug('Starting scheduled action execution', {
                         component: 'DefaultScenario',
@@ -434,7 +430,6 @@ class DefaultScenario {
                         action: 'limiter.schedule(async () => {',
                         data: {
                             item: item,
-                            page: page,
                             maxRetries: this.maxRetries,
                         },
                     });
@@ -449,7 +444,6 @@ class DefaultScenario {
                     action: 'await this.withRetry(...)',
                     data: {
                         item: item,
-                        page: page,
                         maxRetries: this.maxRetries,
                         isRetryable: this.maxRetries,
                         ext: ext,
@@ -466,7 +460,6 @@ class DefaultScenario {
                     action: 'this.storage.save({...})',
                     data: {
                         item: item,
-                        page: page,
                         maxRetries: this.maxRetries,
                         isRetryable: this.maxRetries,
                         status: 'success',
@@ -485,7 +478,6 @@ class DefaultScenario {
                     action: 'this.storage.save({...})',
                     data: {
                         item: item,
-                        page: page,
                         maxRetries: this.maxRetries,
                         isRetryable: this.maxRetries,
                         status: errorStatus.status,
@@ -500,10 +492,11 @@ class DefaultScenario {
                     action: 'processImage = async (item: IImageItem)',
                     data: {
                         item: item,
-                        page: page,
                     },
                 });
-                pool.release(page);
+                if (page) {
+                    ImgPool.release(page);
+                }
             }
         };
         let attempt = 1;
@@ -631,7 +624,6 @@ class DefaultScenario {
                         stack: error instanceof Error ? error.stack : undefined,
                     },
                 });
-                // if (attempt >= options.maxRetries || !options.isRetryable(err as IWorkerError)) {
                 if (attempt >= options.maxRetries) {
                     throw err;
                 }
