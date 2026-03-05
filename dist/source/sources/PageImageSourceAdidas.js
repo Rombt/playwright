@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceAdidas {
+    constructor() {
+        this.config = appConfig_1.AppConfig.getInstance();
+    }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
@@ -49,7 +53,7 @@ class PageImageSourceAdidas {
             const link = page
                 .locator('div.list.store__list > div > div > div.product__image > a')
                 .first();
-            await link.waitFor({ state: 'attached', timeout: 30000 });
+            await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const relativeHref = await link.getAttribute('href');
             if (!relativeHref)
                 throw new Error('Product link not found');
@@ -58,7 +62,7 @@ class PageImageSourceAdidas {
             await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
             const gallery = page.locator('#gallery > div > div.slider__carousel.slick-slider.slick-initialized > div > div');
             try {
-                await gallery.waitFor({ state: 'attached', timeout: 15000 });
+                await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }
             catch (error) {
                 throw new Error('No gallery found on page');
@@ -67,7 +71,7 @@ class PageImageSourceAdidas {
             if (count === 0)
                 throw new Error('No images found on page');
             const images = gallery.locator('img');
-            await images.first().waitFor({ state: 'attached', timeout: 15000 });
+            await images.first().waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const imageUrls = await images.evaluateAll((imgs) => imgs
                 .filter((img) => img instanceof HTMLImageElement)
                 .map((img) => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
@@ -77,14 +81,16 @@ class PageImageSourceAdidas {
             data[sku] = imageUrls;
         }
         catch (err) {
-            errors.push({
-                error: err,
-                product: product,
-                url: url,
-            });
+            throw this.buildWorkerError(err, product, url);
         }
-        console.log('==>> data: ', data);
         return { data, errors };
+    }
+    buildWorkerError(err, product, targetUrl, retryable = true) {
+        return {
+            error: err,
+            product,
+            targetUrl,
+        };
     }
 }
 exports.default = PageImageSourceAdidas;

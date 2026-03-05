@@ -464,9 +464,11 @@ export class PlaywrightBrowser
 
     try {
       // Пробую через APIRequestContext
-      return await this.downloadStaticResource(url, context, loggerScope);
+      // return await this.downloadStaticResource(url, context, loggerScope);
+      return await this.download(page, url, loggerScope);
     } catch (err) {
-      const error = err instanceof Error ? err : new Error(String(err));
+      // const error = err instanceof Error ? err : new Error(String(err));
+      const { error, meta } = this.normalizeError(err);
 
       loggerScope?.warn(`Static download failed`, {
         component: 'PlaywrightBrowser',
@@ -495,9 +497,10 @@ export class PlaywrightBrowser
         data: { url },
       });
 
-      await this.limiter.sleep(10000, this.config.asyncRetry.maxDelay);
+      // await this.limiter.sleep(1000, 5000);
 
-      return await this.download(page, url, loggerScope);
+      // return await this.download(page, url, loggerScope);
+      return await this.downloadStaticResource(url, context, loggerScope);
     }
   }
 
@@ -508,5 +511,31 @@ export class PlaywrightBrowser
       error.message.includes('ENOTFOUND') ||
       error.message.includes('socket')
     );
+  }
+
+  private normalizeError(err: unknown): { error: Error; meta?: any } {
+    if (err instanceof Error) {
+      return { error: err };
+    }
+
+    if (typeof err === 'object' && err !== null) {
+      const obj = err as any;
+
+      const message =
+        typeof obj.message === 'string'
+          ? obj.message
+          : typeof obj.error?.message === 'string'
+          ? obj.error.message
+          : typeof obj.error?.name === 'string'
+          ? obj.error.name
+          : 'Unknown error';
+
+      return {
+        error: new Error(message),
+        meta: obj,
+      };
+    }
+
+    return { error: new Error(String(err)) };
   }
 }

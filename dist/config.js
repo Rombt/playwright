@@ -10,7 +10,7 @@ exports.config = {
             maxRetries: 5,
         },
         tasks: {
-            maxTask: 5,
+            maxTask: 2,
         },
         pages: {
             maxPage: 5,
@@ -22,7 +22,8 @@ exports.config = {
         resultsFolder: 'results',
         sourcesFolder: './dist/source/sources',
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
-        brands: ['Nike'],
+        // brands: ['Joma'],
+        // brands: ['New Balance'],
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

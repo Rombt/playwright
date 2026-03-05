@@ -9,8 +9,15 @@ import { IDataImag } from '../../data/entities/IDataImag';
 import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
+import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceNewBalance implements ISource<ICollectProductPhotosTask> {
+  private readonly config: AppConfig;
+
+  constructor() {
+    this.config = AppConfig.getInstance();
+  }
+
   workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
@@ -89,7 +96,7 @@ export default class PageImageSourceNewBalance implements ISource<ICollectProduc
         .locator('#catalog-list-all > ul > li > div.products__hover > div.product-item__image > a')
         .first();
 
-      await link.waitFor({ state: 'attached', timeout: 5000 });
+      await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const href = await link.getAttribute('href');
       if (!href) throw new Error('Product link not found');
@@ -98,7 +105,7 @@ export default class PageImageSourceNewBalance implements ISource<ICollectProduc
 
       const gallery = page.locator('#jsProductZoom > div.detail_photos_list');
       try {
-        await gallery.waitFor({ state: 'attached', timeout: 15000 });
+        await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {
         throw new Error('No gallery found on page');
       }
@@ -107,7 +114,7 @@ export default class PageImageSourceNewBalance implements ISource<ICollectProduc
       if (count === 0) throw new Error('No images found on page');
 
       const firstImg = gallery.locator('img').first();
-      await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+      await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const imageUrls = await gallery
         .locator('img')
@@ -121,15 +128,22 @@ export default class PageImageSourceNewBalance implements ISource<ICollectProduc
 
       data[sku] = imageUrls;
     } catch (err) {
-      errors.push({
-        error: err,
-        product: product,
-        url: url,
-      } as IWorkerError);
+      throw this.buildWorkerError(err, product, url);
     }
 
-    console.log('==>> data: ', data);
-
     return { data, errors };
+  }
+
+  private buildWorkerError(
+    err: unknown,
+    product: IProduct,
+    targetUrl: string,
+    retryable: boolean = true,
+  ): IWorkerError {
+    return {
+      error: err,
+      product,
+      targetUrl,
+    };
   }
 }

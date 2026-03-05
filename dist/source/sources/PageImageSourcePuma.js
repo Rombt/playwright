@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourcePuma {
+    constructor() {
+        this.config = appConfig_1.AppConfig.getInstance();
+    }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
@@ -48,7 +52,9 @@ class PageImageSourcePuma {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             const galleries = page.locator('figure.zoom-image-gallery__figure');
             try {
-                await galleries.first().waitFor({ state: 'attached', timeout: 15000 });
+                await galleries
+                    .first()
+                    .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }
             catch (error) {
                 throw new Error(`No gallery found on page: ${error}`);
@@ -73,13 +79,16 @@ class PageImageSourcePuma {
             data[sku] = imageUrls;
         }
         catch (err) {
-            errors.push({
-                error: err,
-                product: product,
-                url: url,
-            });
+            throw this.buildWorkerError(err, product, url);
         }
         return { data, errors };
+    }
+    buildWorkerError(err, product, targetUrl, retryable = true) {
+        return {
+            error: err,
+            product,
+            targetUrl,
+        };
     }
 }
 exports.default = PageImageSourcePuma;

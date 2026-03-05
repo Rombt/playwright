@@ -78,13 +78,16 @@ class PageImageSourceColumbia {
             data[sku] = imageUrls;
         }
         catch (err) {
-            errors.push({
-                error: err,
-                product: product,
-                url: url,
-            });
+            throw this.buildWorkerError(err, product, url);
         }
         return { data, errors };
+    }
+    buildWorkerError(err, product, targetUrl, retryable = true) {
+        return {
+            error: err,
+            product,
+            targetUrl,
+        };
     }
 }
 exports.default = PageImageSourceColumbia;

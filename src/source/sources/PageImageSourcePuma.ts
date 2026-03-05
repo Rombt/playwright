@@ -9,8 +9,15 @@ import { IDataImag } from '../../data/entities/IDataImag';
 import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
+import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourcePuma implements ISource<ICollectProductPhotosTask> {
+  private readonly config: AppConfig;
+
+  constructor() {
+    this.config = AppConfig.getInstance();
+  }
+
   workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
@@ -90,7 +97,9 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
       const galleries = page.locator('figure.zoom-image-gallery__figure');
 
       try {
-        await galleries.first().waitFor({ state: 'attached', timeout: 15000 });
+        await galleries
+          .first()
+          .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {
         throw new Error(`No gallery found on page: ${error}`);
       }
@@ -115,13 +124,22 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
 
       data[sku] = imageUrls;
     } catch (err) {
-      errors.push({
-        error: err,
-        product: product,
-        url: url,
-      } as IWorkerError);
+      throw this.buildWorkerError(err, product, url);
     }
 
     return { data, errors };
+  }
+
+  private buildWorkerError(
+    err: unknown,
+    product: IProduct,
+    targetUrl: string,
+    retryable: boolean = true,
+  ): IWorkerError {
+    return {
+      error: err,
+      product,
+      targetUrl,
+    };
   }
 }

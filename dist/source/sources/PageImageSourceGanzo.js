@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceGanzo {
+    constructor() {
+        this.config = appConfig_1.AppConfig.getInstance();
+    }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
@@ -49,7 +53,7 @@ class PageImageSourceGanzo {
             const link = page
                 .locator('#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a')
                 .first();
-            await link.waitFor({ state: 'attached', timeout: 30000 });
+            await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const relativeHref = await link.getAttribute('href');
             if (!relativeHref)
                 throw new Error('Product link not found');
@@ -58,7 +62,7 @@ class PageImageSourceGanzo {
             await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
             const gallery = page.locator('#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images');
             try {
-                await gallery.waitFor({ state: 'attached', timeout: 15000 });
+                await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }
             catch (error) {
                 throw new Error('No gallery found on page');
@@ -67,7 +71,7 @@ class PageImageSourceGanzo {
             if (count === 0)
                 throw new Error('No images found on page');
             const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+            await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const imageUrls = await gallery
                 .locator('img')
                 .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src')).filter(Boolean));
@@ -77,14 +81,16 @@ class PageImageSourceGanzo {
             data[sku] = absoluteImageUrls;
         }
         catch (err) {
-            errors.push({
-                error: err,
-                product: product,
-                url: url,
-            });
+            throw this.buildWorkerError(err, product, url);
         }
-        console.log('==>> data: ', data);
         return { data, errors };
+    }
+    buildWorkerError(err, product, targetUrl, retryable = true) {
+        return {
+            error: err,
+            product,
+            targetUrl,
+        };
     }
 }
 exports.default = PageImageSourceGanzo;

@@ -58,7 +58,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
-  private allErrors: IWorkerError[] = [];
+  // private allErrors: IWorkerError[] = [];
 
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
@@ -230,6 +230,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   }
 
   async process(task: ICollectProductPhotosTask, loggerScope?: ILogger): Promise<void> {
+    const allErrors: IWorkerError[] = [];
+
     const source = this.sources.find((s) => s.supports(task));
 
     if (!source) {
@@ -252,7 +254,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       },
     });
 
-    const limiter = new RateLimiter(5000);
+    const limiter = new RateLimiter(10000);
     const allData: IDataImag = {};
 
     await this.browser.runInContext(async (context) => {
@@ -328,6 +330,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
               maxRetries: this.maxRetries,
               isRetryable,
             },
+            limiter,
             loggerScope,
           );
 
@@ -399,7 +402,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       let currentBatch = uniqueProducts;
 
       while (currentBatch.length && attempt <= this.maxRetries) {
-        await limiter.sleep(1000, 5000);
+        // await limiter.sleep(1000, 5000);
 
         loggerScope?.debug('Entering retry loop for current batch', {
           component: 'DefaultScenario',
@@ -467,7 +470,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         });
 
         fatalResults.forEach((r) =>
-          this.allErrors.push({
+          allErrors.push({
             error: r.error,
             targetUrl: task.metadata.target_website ?? undefined,
           }),
@@ -501,10 +504,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         },
       });
 
-      await this.downloadImages(normalized, task, pool, context, limiter, loggerScope);
+      allErrors.push(
+        ...(await this.downloadImages(normalized, task, pool, context, limiter, loggerScope)),
+      );
     });
 
-    await this.storage.saveJson(this.allErrors, {
+    await this.storage.saveJson(allErrors, {
       filename: `${task.brand_name}_unprocessed-products.json`,
       targetDir: task.brand_name,
     });
@@ -517,8 +522,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     context: BrowserContext,
     limiter: RateLimiter,
     loggerScope?: ILogger,
-  ): Promise<void> {
+  ): Promise<IWorkerError[]> {
     const queue: IImageItem[] = [];
+    const allErrors: IWorkerError[] = [];
 
     loggerScope?.debug('Starting image download for current task', {
       component: 'DefaultScenario',
@@ -537,7 +543,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     }
 
     const processImage = async (item: IImageItem): Promise<ImageResult> => {
-      await limiter.sleep(1000, this.config.asyncRetry.maxDelay); //todo переделать
       const page = await pool.acquire();
 
       loggerScope?.debug('Started processing an image item', {
@@ -570,21 +575,25 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             maxRetries: this.maxRetries,
             isRetryable,
           },
+          limiter,
           loggerScope,
         );
 
-        loggerScope?.debug('Image download via withRetry completed', {
-          component: 'DefaultScenario',
-          method: 'downloadImages()',
-          action: 'await this.withRetry(...)',
-          data: {
-            item: item,
-            page: page,
-            maxRetries: this.maxRetries,
-            isRetryable: this.maxRetries,
-            ext: ext,
+        loggerScope?.debug(
+          `Image download via withRetry completed  ${task.brand_name}/${item.sku}/${item.index}${ext}`,
+          {
+            component: 'DefaultScenario',
+            method: 'downloadImages()',
+            action: 'await this.withRetry(...)',
+            data: {
+              item: item,
+              page: page,
+              maxRetries: this.maxRetries,
+              isRetryable: this.maxRetries,
+              ext: ext,
+            },
           },
-        });
+        );
 
         await this.storage.save({
           filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
@@ -658,7 +667,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     });
 
     while (currentBatch.length && attempt <= this.maxRetries) {
-      await limiter.sleep(1000, this.config.asyncRetry.maxDelay);
+      await limiter.sleep(1000, 5000);
 
       loggerScope?.debug('Retry loop initiated for current batch', {
         component: 'DefaultScenario',
@@ -726,7 +735,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       });
 
       fatalResults.forEach((r) =>
-        this.allErrors.push({
+        allErrors.push({
           error: r.error,
           targetUrl: r.item.url,
         }),
@@ -748,6 +757,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       attempt++;
     }
+
+    return allErrors;
   }
 
   private async withRetry<T>(
@@ -756,6 +767,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       maxRetries: number;
       isRetryable: (error: IWorkerError) => boolean;
     },
+    limiter: RateLimiter,
     loggerScope?: ILogger,
   ): Promise<T> {
     let attempt = 1;
@@ -783,7 +795,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
         return await action();
       } catch (err) {
-        const error = err instanceof Error ? err : new Error(String(err));
+        const { error, meta } = this.normalizeError(err);
         loggerScope?.error('Error in while loop', {
           method: 'withRetry(...)',
           action: 'while (true)',
@@ -796,7 +808,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           },
         });
 
-        if (attempt >= options.maxRetries || !options.isRetryable(err as IWorkerError)) {
+        // if (attempt >= options.maxRetries || !options.isRetryable(err as IWorkerError)) {
+        if (attempt >= options.maxRetries) {
           throw err;
         }
 
@@ -847,5 +860,32 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     }
 
     this.browser.close();
+  }
+
+  //todo перенести в helpers
+  private normalizeError(err: unknown): { error: Error; meta?: any } {
+    if (err instanceof Error) {
+      return { error: err };
+    }
+
+    if (typeof err === 'object' && err !== null) {
+      const obj = err as any;
+
+      const message =
+        typeof obj.message === 'string'
+          ? obj.message
+          : typeof obj.error?.message === 'string'
+          ? obj.error.message
+          : typeof obj.error?.name === 'string'
+          ? obj.error.name
+          : 'Unknown error';
+
+      return {
+        error: new Error(message),
+        meta: obj,
+      };
+    }
+
+    return { error: new Error(String(err)) };
   }
 }

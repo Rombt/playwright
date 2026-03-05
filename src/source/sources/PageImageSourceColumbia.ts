@@ -124,13 +124,22 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
 
       data[sku] = imageUrls;
     } catch (err) {
-      errors.push({
-        error: err,
-        product: product,
-        url: url,
-      } as IWorkerError);
+      throw this.buildWorkerError(err, product, url);
     }
 
     return { data, errors };
+  }
+
+  private buildWorkerError(
+    err: unknown,
+    product: IProduct,
+    targetUrl: string,
+    retryable: boolean = true,
+  ): IWorkerError {
+    return {
+      error: err,
+      product,
+      targetUrl,
+    };
   }
 }

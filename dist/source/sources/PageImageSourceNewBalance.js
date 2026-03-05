@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceNewBalance {
+    constructor() {
+        this.config = appConfig_1.AppConfig.getInstance();
+    }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
@@ -49,14 +53,14 @@ class PageImageSourceNewBalance {
             const link = page
                 .locator('#catalog-list-all > ul > li > div.products__hover > div.product-item__image > a')
                 .first();
-            await link.waitFor({ state: 'attached', timeout: 5000 });
+            await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const href = await link.getAttribute('href');
             if (!href)
                 throw new Error('Product link not found');
             await page.goto(href);
             const gallery = page.locator('#jsProductZoom > div.detail_photos_list');
             try {
-                await gallery.waitFor({ state: 'attached', timeout: 15000 });
+                await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }
             catch (error) {
                 throw new Error('No gallery found on page');
@@ -65,7 +69,7 @@ class PageImageSourceNewBalance {
             if (count === 0)
                 throw new Error('No images found on page');
             const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+            await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const imageUrls = await gallery
                 .locator('img')
                 .evaluateAll((imgs) => imgs
@@ -76,14 +80,16 @@ class PageImageSourceNewBalance {
             data[sku] = imageUrls;
         }
         catch (err) {
-            errors.push({
-                error: err,
-                product: product,
-                url: url,
-            });
+            throw this.buildWorkerError(err, product, url);
         }
-        console.log('==>> data: ', data);
         return { data, errors };
+    }
+    buildWorkerError(err, product, targetUrl, retryable = true) {
+        return {
+            error: err,
+            product,
+            targetUrl,
+        };
     }
 }
 exports.default = PageImageSourceNewBalance;

@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceJoma {
+    constructor() {
+        this.config = appConfig_1.AppConfig.getInstance();
+    }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
     }
@@ -34,13 +38,13 @@ class PageImageSourceJoma {
                 debugMeta: debugMeta,
             },
         });
-        results.push(await this.execute(targetUrl, page, product));
+        results.push(await this.execute(targetUrl, page, { product, loggerScope }));
         return results;
     }
-    async execute(targetUrl, page, product) {
+    async execute(targetUrl, page, options, debugMeta) {
         const errors = [];
         const data = {};
-        const rawSku = product.sku;
+        const rawSku = options.product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
         const url = targetUrl.replace('{{sku_prod}}', sku);
@@ -49,7 +53,7 @@ class PageImageSourceJoma {
             const link = page
                 .locator('body > div > main > div.categories > div.category > div.category-content > div > a')
                 .first();
-            await link.waitFor({ state: 'attached', timeout: 30000 });
+            await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const relativeHref = await link.getAttribute('href');
             if (!relativeHref)
                 throw new Error('Product link not found');
@@ -58,7 +62,7 @@ class PageImageSourceJoma {
             await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
             const gallery = page.locator('#splide01-list');
             try {
-                await gallery.waitFor({ state: 'attached', timeout: 15000 });
+                await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }
             catch (error) {
                 throw new Error('No gallery found on page');
@@ -67,25 +71,45 @@ class PageImageSourceJoma {
             if (count === 0)
                 throw new Error('No images found on page');
             const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+            await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const imageUrls = await gallery
                 .locator('img')
                 .evaluateAll((imgs) => imgs
                 .filter((img) => img instanceof HTMLImageElement)
                 .map((img) => img.src));
-            if (imageUrls.length === 0)
-                throw new Error('No valid image URLs found');
+            if (imageUrls.length === 0) {
+                options.loggerScope?.error(`No valid image URLs found`, {
+                    component: 'PageImageSourceNike',
+                    method: 'execute()',
+                    action: 'gallery.waitFor(...)',
+                    data: {
+                        imageUrlsLength: imageUrls.length,
+                        imageUrls: imageUrls,
+                    },
+                });
+                throw new Error('Error. No valid image URLs found');
+            }
             data[sku] = imageUrls;
         }
         catch (err) {
-            errors.push({
-                error: err,
-                product: product,
-                url: url,
-            });
+            throw this.buildWorkerError(err, options.product, url);
         }
-        console.log('==>> data: ', data);
+        options.loggerScope?.debug(`Collecting image URLs is complete`, {
+            component: 'PageImageSourceNike',
+            method: 'execute()',
+            action: 'data[sku] = imageUrls',
+            data: {
+                urls: data,
+            },
+        });
         return { data, errors };
+    }
+    buildWorkerError(err, product, targetUrl, retryable = true) {
+        return {
+            error: err,
+            product,
+            targetUrl,
+        };
     }
 }
 exports.default = PageImageSourceJoma;

@@ -9,8 +9,15 @@ import { IDataImag } from '../../data/entities/IDataImag';
 import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
+import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceMTac implements ISource<ICollectProductPhotosTask> {
+  private readonly config: AppConfig;
+
+  constructor() {
+    this.config = AppConfig.getInstance();
+  }
+
   workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
@@ -85,13 +92,13 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
       const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
-      await image.waitFor({ state: 'attached', timeout: 5000 });
+      await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       await image.click();
       const gallery = page.locator(
         'div.catalog-item-gallery > div > div.big-img.slider-for.slick-initialized.slick-slider > div > div',
       );
       try {
-        await gallery.waitFor({ state: 'attached', timeout: 15000 });
+        await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {
         throw new Error('No gallery found on page');
       }
@@ -100,7 +107,7 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       if (count === 0) throw new Error('No images found on page');
 
       const firstImg = gallery.locator('img').first();
-      await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+      await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const imageUrls = await gallery
         .locator('img')
@@ -114,15 +121,22 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
 
       data[sku] = imageUrls;
     } catch (err) {
-      errors.push({
-        error: err,
-        product: product,
-        url: url,
-      } as IWorkerError);
+      throw this.buildWorkerError(err, product, url);
     }
 
-    console.log('==========>>  data = ', data);
-
     return { data, errors };
+  }
+
+  private buildWorkerError(
+    err: unknown,
+    product: IProduct,
+    targetUrl: string,
+    retryable: boolean = true,
+  ): IWorkerError {
+    return {
+      error: err,
+      product,
+      targetUrl,
+    };
   }
 }

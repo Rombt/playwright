@@ -9,8 +9,15 @@ import { IDataImag } from '../../data/entities/IDataImag';
 import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
+import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
+  private readonly config: AppConfig;
+
+  constructor() {
+    this.config = AppConfig.getInstance();
+  }
+
   workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
@@ -94,7 +101,7 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
         )
         .first();
 
-      await link.waitFor({ state: 'attached', timeout: 30000 });
+      await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const relativeHref = await link.getAttribute('href');
       if (!relativeHref) throw new Error('Product link not found');
@@ -107,7 +114,7 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
         '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
       );
       try {
-        await gallery.waitFor({ state: 'attached', timeout: 15000 });
+        await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {
         throw new Error('No gallery found on page');
       }
@@ -116,7 +123,7 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
       if (count === 0) throw new Error('No images found on page');
 
       const firstImg = gallery.locator('img').first();
-      await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+      await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const imageUrls = await gallery
         .locator('img')
@@ -128,15 +135,22 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
 
       data[sku] = absoluteImageUrls;
     } catch (err) {
-      errors.push({
-        error: err,
-        product: product,
-        url: url,
-      } as IWorkerError);
+      throw this.buildWorkerError(err, product, url);
     }
 
-    console.log('==>> data: ', data);
-
     return { data, errors };
+  }
+
+  private buildWorkerError(
+    err: unknown,
+    product: IProduct,
+    targetUrl: string,
+    retryable: boolean = true,
+  ): IWorkerError {
+    return {
+      error: err,
+      product,
+      targetUrl,
+    };
   }
 }

@@ -58,12 +58,11 @@ export class PagePool implements IPagePool, IResource {
           },
         });
 
-        throw error; // обязательно пробрасываем
+        throw error;
       }
     }
 
-    // если количество страниц в пуле больше или равно разрешоному
-    // свободных страниц нет а просят ещё
+    // если количество страниц в пуле больше или равно разрешоному, свободных страниц нет а просят ещё
     return new Promise<Page>((resolve, reject) => {
       // ждать освобождения страницы не более this.config.asyncRetry.maxWaitForFreePage
       const timeout = setTimeout(() => {

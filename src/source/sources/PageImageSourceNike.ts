@@ -185,11 +185,7 @@ export default class PageImageSourceNike implements ISource<ICollectProductPhoto
 
       data[sku] = imageUrls;
     } catch (err) {
-      errors.push({
-        error: err,
-        product: options.product,
-        url: url,
-      } as IWorkerError);
+      throw this.buildWorkerError(err, options.product, url);
     }
 
     options.loggerScope?.debug(`Collecting image URLs is complete`, {
@@ -202,5 +198,18 @@ export default class PageImageSourceNike implements ISource<ICollectProductPhoto
     });
 
     return { data, errors };
+  }
+
+  private buildWorkerError(
+    err: unknown,
+    product: IProduct,
+    targetUrl: string,
+    retryable: boolean = true,
+  ): IWorkerError {
+    return {
+      error: err,
+      product,
+      targetUrl,
+    };
   }
 }

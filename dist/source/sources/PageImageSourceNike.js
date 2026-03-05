@@ -122,11 +122,7 @@ class PageImageSourceNike {
             data[sku] = imageUrls;
         }
         catch (err) {
-            errors.push({
-                error: err,
-                product: options.product,
-                url: url,
-            });
+            throw this.buildWorkerError(err, options.product, url);
         }
         options.loggerScope?.debug(`Collecting image URLs is complete`, {
             component: 'PageImageSourceNike',
@@ -137,6 +133,13 @@ class PageImageSourceNike {
             },
         });
         return { data, errors };
+    }
+    buildWorkerError(err, product, targetUrl, retryable = true) {
+        return {
+            error: err,
+            product,
+            targetUrl,
+        };
     }
 }
 exports.default = PageImageSourceNike;

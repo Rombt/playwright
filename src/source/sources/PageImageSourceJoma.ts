@@ -9,8 +9,15 @@ import { IDataImag } from '../../data/entities/IDataImag';
 import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
+import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceJoma implements ISource<ICollectProductPhotosTask> {
+  private readonly config: AppConfig;
+
+  constructor() {
+    this.config = AppConfig.getInstance();
+  }
+
   workerHttpRequest(
     request: APIRequestContext,
     headers: Record<string, string>,
@@ -67,16 +74,21 @@ export default class PageImageSourceJoma implements ISource<ICollectProductPhoto
       },
     });
 
-    results.push(await this.execute(targetUrl, page, product));
+    results.push(await this.execute(targetUrl, page, { product, loggerScope }));
 
     return results;
   }
 
-  async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
+  async execute(
+    targetUrl: string,
+    page: Page,
+    options: { product: IProduct; loggerScope?: ILogger },
+    debugMeta?: Record<string, string>,
+  ): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
     const data: IDataImag = {};
 
-    const rawSku = product.sku;
+    const rawSku = options.product.sku;
     const starIndex = rawSku.indexOf('*');
     const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
     const url = targetUrl.replace('{{sku_prod}}', sku);
@@ -90,7 +102,7 @@ export default class PageImageSourceJoma implements ISource<ICollectProductPhoto
         )
         .first();
 
-      await link.waitFor({ state: 'attached', timeout: 30000 });
+      await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const relativeHref = await link.getAttribute('href');
       if (!relativeHref) throw new Error('Product link not found');
@@ -101,7 +113,7 @@ export default class PageImageSourceJoma implements ISource<ICollectProductPhoto
 
       const gallery = page.locator('#splide01-list');
       try {
-        await gallery.waitFor({ state: 'attached', timeout: 15000 });
+        await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {
         throw new Error('No gallery found on page');
       }
@@ -110,7 +122,7 @@ export default class PageImageSourceJoma implements ISource<ICollectProductPhoto
       if (count === 0) throw new Error('No images found on page');
 
       const firstImg = gallery.locator('img').first();
-      await firstImg.waitFor({ state: 'attached', timeout: 15000 });
+      await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const imageUrls = await gallery
         .locator('img')
@@ -120,19 +132,47 @@ export default class PageImageSourceJoma implements ISource<ICollectProductPhoto
             .map((img) => img.src),
         );
 
-      if (imageUrls.length === 0) throw new Error('No valid image URLs found');
+      if (imageUrls.length === 0) {
+        options.loggerScope?.error(`No valid image URLs found`, {
+          component: 'PageImageSourceNike',
+          method: 'execute()',
+          action: 'gallery.waitFor(...)',
+          data: {
+            imageUrlsLength: imageUrls.length,
+            imageUrls: imageUrls,
+          },
+        });
+
+        throw new Error('Error. No valid image URLs found');
+      }
 
       data[sku] = imageUrls;
     } catch (err) {
-      errors.push({
-        error: err,
-        product: product,
-        url: url,
-      } as IWorkerError);
+      throw this.buildWorkerError(err, options.product, url);
     }
 
-    console.log('==>> data: ', data);
+    options.loggerScope?.debug(`Collecting image URLs is complete`, {
+      component: 'PageImageSourceNike',
+      method: 'execute()',
+      action: 'data[sku] = imageUrls',
+      data: {
+        urls: data,
+      },
+    });
 
     return { data, errors };
+  }
+
+  private buildWorkerError(
+    err: unknown,
+    product: IProduct,
+    targetUrl: string,
+    retryable: boolean = true,
+  ): IWorkerError {
+    return {
+      error: err,
+      product,
+      targetUrl,
+    };
   }
 }

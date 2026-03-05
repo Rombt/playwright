@@ -9,6 +9,7 @@ const appConfig_1 = require("../../data/config/appConfig");
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
 class DefaultScenario {
+    // private allErrors: IWorkerError[] = [];
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
@@ -22,7 +23,6 @@ class DefaultScenario {
         // private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
         this.sources = [];
         this.resources = [];
-        this.allErrors = [];
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
         this.maxRetries = this.config.asyncRetry.maxRetries;
@@ -166,6 +166,7 @@ class DefaultScenario {
         this.sources = await this.loadSources();
     }
     async process(task, loggerScope) {
+        const allErrors = [];
         const source = this.sources.find((s) => s.supports(task));
         if (!source) {
             loggerScope?.error('Source not found for task', {
@@ -185,7 +186,7 @@ class DefaultScenario {
                 source: source,
             },
         });
-        const limiter = new RateLimiter_1.RateLimiter(5000);
+        const limiter = new RateLimiter_1.RateLimiter(10000);
         const allData = {};
         await this.browser.runInContext(async (context) => {
             const products = task.products;
@@ -247,7 +248,7 @@ class DefaultScenario {
                     const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, limiter, product, loggerScope), {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
-                    }, loggerScope);
+                    }, limiter, loggerScope);
                     loggerScope?.debug('Product processing finished', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -308,7 +309,7 @@ class DefaultScenario {
             let attempt = 1;
             let currentBatch = uniqueProducts;
             while (currentBatch.length && attempt <= this.maxRetries) {
-                await limiter.sleep(1000, 5000);
+                // await limiter.sleep(1000, 5000);
                 loggerScope?.debug('Entering retry loop for current batch', {
                     component: 'DefaultScenario',
                     method: 'process()',
@@ -363,7 +364,7 @@ class DefaultScenario {
                         results: results,
                     },
                 });
-                fatalResults.forEach((r) => this.allErrors.push({
+                fatalResults.forEach((r) => allErrors.push({
                     error: r.error,
                     targetUrl: task.metadata.target_website ?? undefined,
                 }));
@@ -390,15 +391,16 @@ class DefaultScenario {
                     normalized: normalized,
                 },
             });
-            await this.downloadImages(normalized, task, pool, context, limiter, loggerScope);
+            allErrors.push(...(await this.downloadImages(normalized, task, pool, context, limiter, loggerScope)));
         });
-        await this.storage.saveJson(this.allErrors, {
+        await this.storage.saveJson(allErrors, {
             filename: `${task.brand_name}_unprocessed-products.json`,
             targetDir: task.brand_name,
         });
     }
     async downloadImages(urlsBySku, task, pool, context, limiter, loggerScope) {
         const queue = [];
+        const allErrors = [];
         loggerScope?.debug('Starting image download for current task', {
             component: 'DefaultScenario',
             method: 'downloadImages()',
@@ -414,7 +416,6 @@ class DefaultScenario {
             urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
         }
         const processImage = async (item) => {
-            await limiter.sleep(1000, this.config.asyncRetry.maxDelay); //todo переделать
             const page = await pool.acquire();
             loggerScope?.debug('Started processing an image item', {
                 component: 'DefaultScenario',
@@ -441,8 +442,8 @@ class DefaultScenario {
                 }), {
                     maxRetries: this.maxRetries,
                     isRetryable: helpers_1.isRetryable,
-                }, loggerScope);
-                loggerScope?.debug('Image download via withRetry completed', {
+                }, limiter, loggerScope);
+                loggerScope?.debug(`Image download via withRetry completed  ${task.brand_name}/${item.sku}/${item.index}${ext}`, {
                     component: 'DefaultScenario',
                     method: 'downloadImages()',
                     action: 'await this.withRetry(...)',
@@ -519,7 +520,7 @@ class DefaultScenario {
             },
         });
         while (currentBatch.length && attempt <= this.maxRetries) {
-            await limiter.sleep(1000, this.config.asyncRetry.maxDelay);
+            await limiter.sleep(1000, 5000);
             loggerScope?.debug('Retry loop initiated for current batch', {
                 component: 'DefaultScenario',
                 method: 'downloadImages()',
@@ -574,7 +575,7 @@ class DefaultScenario {
                     results: results,
                 },
             });
-            fatalResults.forEach((r) => this.allErrors.push({
+            fatalResults.forEach((r) => allErrors.push({
                 error: r.error,
                 targetUrl: r.item.url,
             }));
@@ -592,8 +593,9 @@ class DefaultScenario {
             });
             attempt++;
         }
+        return allErrors;
     }
-    async withRetry(action, options, loggerScope) {
+    async withRetry(action, options, limiter, loggerScope) {
         let attempt = 1;
         loggerScope?.debug('Entering withRetry method', {
             component: 'DefaultScenario',
@@ -617,7 +619,7 @@ class DefaultScenario {
                 return await action();
             }
             catch (err) {
-                const error = err instanceof Error ? err : new Error(String(err));
+                const { error, meta } = this.normalizeError(err);
                 loggerScope?.error('Error in while loop', {
                     method: 'withRetry(...)',
                     action: 'while (true)',
@@ -629,7 +631,8 @@ class DefaultScenario {
                         stack: error instanceof Error ? error.stack : undefined,
                     },
                 });
-                if (attempt >= options.maxRetries || !options.isRetryable(err)) {
+                // if (attempt >= options.maxRetries || !options.isRetryable(err as IWorkerError)) {
+                if (attempt >= options.maxRetries) {
                     throw err;
                 }
                 await (0, helpers_1.waitBeforeRetry)(attempt);
@@ -670,6 +673,27 @@ class DefaultScenario {
             }
         }
         this.browser.close();
+    }
+    //todo перенести в helpers
+    normalizeError(err) {
+        if (err instanceof Error) {
+            return { error: err };
+        }
+        if (typeof err === 'object' && err !== null) {
+            const obj = err;
+            const message = typeof obj.message === 'string'
+                ? obj.message
+                : typeof obj.error?.message === 'string'
+                    ? obj.error.message
+                    : typeof obj.error?.name === 'string'
+                        ? obj.error.name
+                        : 'Unknown error';
+            return {
+                error: new Error(message),
+                meta: obj,
+            };
+        }
+        return { error: new Error(String(err)) };
     }
 }
 exports.DefaultScenario = DefaultScenario;

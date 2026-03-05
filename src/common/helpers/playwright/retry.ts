@@ -7,8 +7,6 @@ export function isRetryable(error: IWorkerError): boolean {
   if (error instanceof Error) {
     const msg = error.message.toLowerCase();
 
-    error.retryable = true;
-
     // таймауты и network glitches
     if (msg.includes('timeout') || msg.includes('net::')) return true;
 
@@ -16,11 +14,5 @@ export function isRetryable(error: IWorkerError): boolean {
     if (msg.includes('element not found') || msg.includes('not visible')) return true;
   }
 
-  if ((error as any)?.retryable === true) {
-    error.retryable = true;
-    return true;
-  }
-
-  error.retryable = false;
   return false;
 }
