@@ -449,12 +449,19 @@ class DefaultScenario {
                         ext: ext,
                     },
                 });
+                // await this.storage.save({
+                //   filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+                //   buffer,
+                //   targetDir: path.join(task.brand_name, item.sku),
+                // });
+                const fileName = (0, helpers_1.buildSaveName)(this.config.saveNamePattern, task);
+                const dir = (0, helpers_1.buildSaveDir)(this.config.saveDirPattern, task);
                 await this.storage.save({
-                    filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+                    filename: `${fileName}_${item.index}${ext}`,
                     buffer,
-                    targetDir: path.join(task.brand_name, item.sku),
+                    targetDir: dir,
                 });
-                loggerScope?.debug(`Image saved: ${task.brand_name}/${item.sku}/${item.index}${ext}`, {
+                loggerScope?.debug(`Image saved: ${dir}/${fileName}_${item.index}${ext}`, {
                     component: 'DefaultScenario',
                     method: 'downloadImages()',
                     action: 'this.storage.save({...})',
@@ -463,6 +470,8 @@ class DefaultScenario {
                         maxRetries: this.maxRetries,
                         isRetryable: this.maxRetries,
                         status: 'success',
+                        filename: fileName,
+                        dir: dir,
                     },
                 });
                 return { status: 'success' };

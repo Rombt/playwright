@@ -21,9 +21,12 @@ exports.config = {
     data: {
         resultsFolder: 'results',
         sourcesFolder: './dist/source/sources',
+        /** формирования структур saveDir и saveName используются поля из ICollectProductPhotosTask.ts */
+        saveDirPattern: '${task.brand_name}', // структура(!) именования директории для каждой задачи. Пустая строка - в корень resultsFolder
+        saveNamePattern: '${item.id_product}', // структура(!) именования файла изображения. Пустая строка - имя файла будет таким как пришло из источника без изменений
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
         // brands: ['Joma'],
-        // brands: ['New Balance'],
+        brands: ['New Balance'],
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

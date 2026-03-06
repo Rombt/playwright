@@ -5,3 +5,4 @@ export * from './data/readProducts';
 export * from './data/writeProducts';
 export * from './data/getUnprocessedFilePath';
 export * from './data/extractBrandFromFileName';
+export * from './data/buildSavePath';

@@ -21,3 +21,4 @@ __exportStar(require("./data/readProducts"), exports);
 __exportStar(require("./data/writeProducts"), exports);
 __exportStar(require("./data/getUnprocessedFilePath"), exports);
 __exportStar(require("./data/extractBrandFromFileName"), exports);
+__exportStar(require("./data/buildSavePath"), exports);

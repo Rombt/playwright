@@ -62,6 +62,12 @@ class AppConfig {
     get sourcesFolder() {
         return this.processData(config_1.config).data.sourcesFolder;
     }
+    get saveDirPattern() {
+        return this.processData(config_1.config).data.saveDirPattern;
+    }
+    get saveNamePattern() {
+        return this.processData(config_1.config).data.saveNamePattern;
+    }
     get brands() {
         return this.processData(config_1.config).data.brands;
     }
@@ -104,6 +110,8 @@ class AppConfig {
             data: {
                 resultsFolder: this.resolvePath(dataConfig.resultsFolder),
                 sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
+                saveDirPattern: dataConfig.saveDirPattern, // todo валидация шаблонов
+                saveNamePattern: dataConfig.saveNamePattern, // todo валидация шаблонов
                 brands: resolveBrands(dataConfig.brands),
             },
         };

@@ -20,7 +20,13 @@ import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
 import { AppConfig } from '../../data/config/appConfig';
 
-import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
+import {
+  normalizeAllData,
+  isRetryable,
+  waitBeforeRetry,
+  buildSaveDir,
+  buildSaveName,
+} from '../../common/helpers';
 
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
@@ -593,13 +599,21 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           },
         );
 
+        // await this.storage.save({
+        //   filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+        //   buffer,
+        //   targetDir: path.join(task.brand_name, item.sku),
+        // });
+        const fileName = buildSaveName(this.config.saveNamePattern, task);
+        const dir = buildSaveDir(this.config.saveDirPattern, task);
+
         await this.storage.save({
-          filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+          filename: `${fileName}_${item.index}${ext}`,
           buffer,
-          targetDir: path.join(task.brand_name, item.sku),
+          targetDir: dir,
         });
 
-        loggerScope?.debug(`Image saved: ${task.brand_name}/${item.sku}/${item.index}${ext}`, {
+        loggerScope?.debug(`Image saved: ${dir}/${fileName}_${item.index}${ext}`, {
           component: 'DefaultScenario',
           method: 'downloadImages()',
           action: 'this.storage.save({...})',
@@ -608,6 +622,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             maxRetries: this.maxRetries,
             isRetryable: this.maxRetries,
             status: 'success',
+            filename: fileName,
+            dir: dir,
           },
         });
 
