@@ -31,6 +31,8 @@ export interface RetryConfig {
 export interface DataConfig {
   resultsFolder: string;
   sourcesFolder: string;
+  saveDirPattern: string;
+  saveNamePattern: string;
   brands: string[];
 }
 

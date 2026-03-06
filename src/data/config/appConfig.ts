@@ -82,6 +82,14 @@ export class AppConfig {
     return this.processData(appConfig).data.sourcesFolder;
   }
 
+  public get saveDirPattern(): string {
+    return this.processData(appConfig).data.saveDirPattern;
+  }
+
+  public get saveNamePattern(): string {
+    return this.processData(appConfig).data.saveNamePattern;
+  }
+
   public get brands(): string[] {
     return this.processData(appConfig).data.brands;
   }
@@ -138,6 +146,8 @@ export class AppConfig {
       data: {
         resultsFolder: this.resolvePath(dataConfig.resultsFolder),
         sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
+        saveDirPattern: dataConfig.saveDirPattern, // todo валидация шаблонов
+        saveNamePattern: dataConfig.saveNamePattern, // todo валидация шаблонов
         brands: resolveBrands(dataConfig.brands),
       },
     };
