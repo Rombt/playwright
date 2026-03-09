@@ -172,7 +172,7 @@ class PageImageSourceRozetka {
             };
         }
     }
-    async worker(targetUrl, page, limiter, getNext, logger, sku, debugMeta) {
+    async worker(targetUrl, page, limiter, product, logger, sku, debugMeta) {
         const results = [];
         const loggerScope = this.logger.withContext(`worker ${debugMeta?.brand_name ?? 'no-brand'} ${sku ?? 'no-sku'}`);
         if (!targetUrl) {
@@ -194,11 +194,18 @@ class PageImageSourceRozetka {
             },
         });
         const options = {
-            sku: sku ?? 'no sku',
+            product: product,
             loggerScope: loggerScope,
         };
         await limiter.wait();
         results.push(await this.execute(targetUrl, page, options));
+        loggerScope?.debug(`async worker() is finished ********************`, {
+            component: 'PageImageSourceRozetka',
+            method: 'worker',
+            data: {
+                results: results,
+            },
+        });
         return results;
     }
     async execute(url, page, options) {
@@ -287,9 +294,10 @@ class PageImageSourceRozetka {
                     data: { selector: selector_img },
                 });
             }
-            if (!options.sku)
+            if (!options.product.sku)
                 throw new Error('SKU is required');
-            data[options.sku] = imageUrls;
+            data[options.product.sku] = imageUrls;
+            data[options.product.sku].idProduct = options.product.id_product;
         }
         catch (err) {
             options.loggerScope?.error('Failed to navigate to page', {

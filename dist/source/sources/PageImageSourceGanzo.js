@@ -78,7 +78,8 @@ class PageImageSourceGanzo {
             const absoluteImageUrls = imageUrls.map((src) => new URL(src, page.url()).toString());
             if (absoluteImageUrls.length === 0)
                 throw new Error('No valid image URLs found');
-            data[sku] = absoluteImageUrls;
+            data[sku] = imageUrls;
+            data[sku].idProduct = product.id_product;
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);

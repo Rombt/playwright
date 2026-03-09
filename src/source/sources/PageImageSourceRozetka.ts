@@ -5,7 +5,7 @@ import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
-import { IDataImag } from '../../data/entities/IDataImag';
+import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 import { IHttpResult, IAutocompleteResponse } from '../../data/entities/IResults/IHttpResult';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
@@ -228,7 +228,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     targetUrl: string,
     page: Page,
     limiter: RateLimiter,
-    getNext: () => IProduct | undefined,
+    product: IProduct,
     logger?: ILogger,
     sku?: string,
     debugMeta?: Record<string, string>,
@@ -261,12 +261,20 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     });
 
     const options = {
-      sku: sku ?? 'no sku',
+      product: product,
       loggerScope: loggerScope,
     };
 
     await limiter.wait();
     results.push(await this.execute(targetUrl, page, options));
+
+    loggerScope?.debug(`async worker() is finished ********************`, {
+      component: 'PageImageSourceRozetka',
+      method: 'worker',
+      data: {
+        results: results,
+      },
+    });
 
     return results;
   }
@@ -274,7 +282,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
   async execute(
     url: string,
     page: Page,
-    options: { sku: string; loggerScope: ILogger },
+    options: { product: IProduct; loggerScope: ILogger },
   ): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
     const data: IDataImag = {};
@@ -370,8 +378,9 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
         });
       }
 
-      if (!options.sku) throw new Error('SKU is required');
-      data[options.sku] = imageUrls;
+      if (!options.product.sku) throw new Error('SKU is required');
+      data[options.product.sku] = imageUrls as IDataImagItem;
+      data[options.product.sku].idProduct = options.product.id_product;
     } catch (err) {
       options.loggerScope?.error('Failed to navigate to page', {
         component: 'PageImageSourceRozetka',

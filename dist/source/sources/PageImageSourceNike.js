@@ -120,6 +120,7 @@ class PageImageSourceNike {
                 throw new Error('Error. No valid image URLs found');
             }
             data[sku] = imageUrls;
+            data[sku].idProduct = options.product.id_product;
         }
         catch (err) {
             throw this.buildWorkerError(err, options.product, url);

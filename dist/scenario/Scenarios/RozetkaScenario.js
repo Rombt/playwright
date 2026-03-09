@@ -200,7 +200,8 @@ class RozetkaScenario {
                     uniqueProducts: uniqueProducts,
                 },
             });
-            let taskQueue = uniqueProducts.map((p) => p.sku);
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4
+            let taskQueue = uniqueProducts.map((p) => p);
             loggerScope?.debug('A task queue s is created', {
                 component: 'RozetkaScenario',
                 method: 'process',
@@ -214,21 +215,36 @@ class RozetkaScenario {
             this.registerResource(pool);
             //========================    /Инициализация сценария    ========================
             //========================    Обработка ОДНОГО SKU    ========================
-            const processSku = async (sku, page) => {
+            const processProduct = async (product, page) => {
+                if (!product.sku) {
+                    loggerScope?.error(`sku is absent`, {
+                        component: 'PageImageSourceRozetka',
+                        method: 'process',
+                        action: 'while (queue.length)',
+                        stage: 'start',
+                        data: {
+                            sku: product.sku,
+                        },
+                    });
+                    throw new Error(`In process method sku is absent`);
+                }
+                const rawSku = product.sku;
+                const starIndex = rawSku.indexOf('*');
+                const skuNormal = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
                 try {
                     const headers = this.buildHeaders(url_init);
                     if (!headers || typeof headers !== 'object') {
                         loggerScope?.error('Headers are invalid', {
                             component: 'RozetkaScenario',
                             method: 'process',
-                            action: 'processSku',
+                            action: 'processProduct',
                             data: {
                                 headers: headers,
                             },
                         });
                         throw new Error('Headers are invalid');
                     }
-                    const autocomplete = await this.withRetry(() => source.workerHttpRequest(context.request, headers, targetUrl, limiter, sku, {
+                    const autocomplete = await this.withRetry(() => source.workerHttpRequest(context.request, headers, targetUrl, limiter, skuNormal, {
                         brand_name: task.brand_name,
                     }, loggerScope), {
                         maxRetries: this.config.asyncRetry.maxRetries,
@@ -258,25 +274,26 @@ class RozetkaScenario {
                             });
                             continue;
                         }
-                        if (!g.title.includes(sku))
+                        if (!g.title.includes(product.sku))
                             continue;
                         loggerScope?.debug('Product contains required SKU in the title', {
                             component: 'RozetkaScenario',
                             method: 'process',
                             action: 'if (!g.title.includes(sku)) continue;',
                             data: {
-                                sku: sku,
+                                sku: product.sku,
                                 currentProduct: g,
                             },
                         });
                         // сбор фото у найденных товаров
-                        const result = await this.withRetry(() => source.worker(g.href, page, limiter, undefined, undefined, sku, {
+                        const result = await this.withRetry(() => source.worker(g.href, page, limiter, product, undefined, product.sku, {
+                            //!!!!!!!!!!!!!!!!1
                             brand_name: task.brand_name,
                         }), {
                             maxRetries: this.config.asyncRetry.maxRetries,
                             isRetryable: helpers_1.isRetryable,
                         }, loggerScope);
-                        loggerScope?.debug(`The collection of photos url for   ${task.brand_name}    ${sku}    is complete`, {
+                        loggerScope?.debug(`The collection of photos url for   ${task.brand_name}    ${product.sku}    is complete`, {
                             component: 'RozetkaScenario',
                             method: 'process',
                             action: 'const result = await withRetry(...)',
@@ -287,7 +304,7 @@ class RozetkaScenario {
                         });
                         for (const r of result) {
                             for (const [skuKey, images] of Object.entries(r.data)) {
-                                loggerScope?.debug(`Found url photo for   ${task.brand_name}    ${skuKey}`, {
+                                loggerScope?.debug(`Found url photo for ${task.brand_name} ${skuKey}`, {
                                     component: 'RozetkaScenario',
                                     method: 'process',
                                     action: 'for (const r of result) {...}',
@@ -295,16 +312,24 @@ class RozetkaScenario {
                                         attempt: attempt,
                                         skuKey: skuKey,
                                         images: images,
+                                        idProduct: images.idProduct, // теперь доступно
                                     },
                                 });
-                                const resultsDirPath = path.resolve(__dirname, '../../../results', task.brand_name, `${task.brand_name}_unprocessed-products.json`);
+                                const resultsDirPath = path.resolve(__dirname, '../../../results', //todo задать через конфиг
+                                task.brand_name, `${task.brand_name}_unprocessed-products.json`);
                                 await this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
-                                allData[skuKey] ?? (allData[skuKey] = []);
+                                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2
+                                // Создаем массив, если еще нет, и сохраняем idProduct
+                                if (!allData[skuKey]) {
+                                    const arr = [];
+                                    arr.idProduct = images.idProduct;
+                                    allData[skuKey] = arr;
+                                }
                                 allData[skuKey].push(...images);
                             }
                         }
                     }
-                    loggerScope?.debug(`The process  ${task.brand_name}    ${sku}    is complete`, {
+                    loggerScope?.debug(`The process  ${task.brand_name}    ${product.sku}    is complete`, {
                         component: 'RozetkaScenario',
                         method: 'process',
                         action: 'for (const r of result) {...}',
@@ -313,10 +338,10 @@ class RozetkaScenario {
                             allData: allData,
                         },
                     });
-                    return { status: 'success', sku };
+                    return { status: 'success', sku: product.sku };
                 }
                 catch (e) {
-                    loggerScope?.error(`Error during processing ${sku}  `, {
+                    loggerScope?.error(`Error during processing ${product.sku}  `, {
                         component: 'RozetkaScenario',
                         method: 'process',
                         action: 'const result = await withRetry(...)',
@@ -327,13 +352,13 @@ class RozetkaScenario {
                         },
                     });
                     return (0, helpers_1.isRetryable)(e)
-                        ? { status: 'retry', sku, error: e }
-                        : { status: 'fatal', sku, error: e };
+                        ? { status: 'retry', sku: product.sku, error: e }
+                        : { status: 'fatal', sku: product.sku, error: e };
                 }
             };
             //========================   Batch runner      ========================
-            async function runBatch(skus) {
-                const queue = [...skus];
+            async function runBatch(products) {
+                const queue = [...products];
                 const results = [];
                 loggerScope?.debug(`Batch runner is started`, {
                     component: 'RozetkaScenario',
@@ -372,23 +397,30 @@ class RozetkaScenario {
                             throw new Error(`Navigation failed: ${response?.status()}`);
                         }
                         while (queue.length) {
-                            const sku = queue.shift();
-                            if (!sku) {
-                                loggerScope?.error(`sku is absent`, {
-                                    component: 'PageImageSourceRozetka',
-                                    method: 'process',
-                                    action: 'while (queue.length)',
-                                    stage: 'start',
-                                    data: {
-                                        sku: sku,
-                                    },
-                                });
-                                throw new Error(`In process method sku is absent`);
-                            }
-                            const rawSku = sku;
-                            const starIndex = rawSku.indexOf('*');
-                            const skuNormal = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
-                            const result = await processSku(skuNormal, page);
+                            const product = queue.shift();
+                            // if (!sku) {
+                            //   loggerScope?.error(`sku is absent`, {
+                            //     component: 'PageImageSourceRozetka',
+                            //     method: 'process',
+                            //     action: 'while (queue.length)',
+                            //     stage: 'start',
+                            //     data: {
+                            //       sku: sku,
+                            //     },
+                            //   });
+                            //   throw new Error(`In process method sku is absent`);
+                            // }
+                            // const rawSku = sku;
+                            // const starIndex = rawSku.indexOf('*');
+                            // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!3
+                            // const skuNormal =
+                            //   (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
+                            //     /^[\p{C}\s]+|[\p{C}\s]+$/gu,
+                            //     '',
+                            //   ) ?? '';
+                            if (!product)
+                                return;
+                            const result = await processProduct(product, page);
                             results.push(result);
                         }
                     }
@@ -434,8 +466,17 @@ class RozetkaScenario {
                     },
                 });
                 const results = await runBatch.call(this, currentBatch);
+                loggerScope?.debug(`Received ALL results`, {
+                    component: 'RozetkaScenario',
+                    method: 'process',
+                    action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
+                    data: {
+                        attempt: attempt,
+                        results: results,
+                    },
+                });
                 const retryResults = results.filter((r) => r.status === 'retry');
-                loggerScope?.debug(`Received retry results `, {
+                loggerScope?.debug(`Received retry results`, {
                     component: 'RozetkaScenario',
                     method: 'process',
                     action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
@@ -454,7 +495,10 @@ class RozetkaScenario {
                         fatalResults: fatalResults,
                     },
                 });
-                currentBatch = retryResults.map((r) => r.sku);
+                // currentBatch = retryResults.map((r) => r.sku); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!5
+                currentBatch = retryResults
+                    .map((r) => taskQueue.find((p) => p.sku === r.sku))
+                    .filter((p) => p !== undefined);
                 fatalResults.forEach((r) => this.allErrors.push({
                     error: r.error,
                     targetUrl,
@@ -479,7 +523,12 @@ class RozetkaScenario {
         const urlsQueue = [];
         for (const [sku, urls] of Object.entries(UrlsBySku)) {
             urls.forEach((url, i) => {
-                urlsQueue.push({ sku, url, index: i + 1 });
+                urlsQueue.push({
+                    sku,
+                    url,
+                    index: i + 1,
+                    idProduct: urls.idProduct, // берем из массива
+                });
             });
         }
         loggerScope?.debug(`Created a queue of images for download`, {
