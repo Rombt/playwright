@@ -8,7 +8,7 @@ import { IBrowser } from '../../browser/IBrowser';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IDownloadedFile } from '../../browser/IDownloadedFile';
-import { IDataImag } from '../../data/entities/IDataImag';
+import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 import { ICollectProductPhotosBatch } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosBatch';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IResource } from '../../browser/IResource';
@@ -47,14 +47,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   private readonly sourcesFolder: string;
   private readonly logger: Logger;
 
-  private readonly taskPath: string = 'src/data/tasks/all_brands_for_test.json';
-  // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
-  // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
-  // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
-  // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
-  // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
-  // private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
-  // private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
+  private readonly taskPath: string;
 
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
@@ -70,6 +63,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     this.maxPage = this.config.asyncPages.maxPage;
     this.maxTask = this.config.asyncTasks.maxTask;
     this.sourcesFolder = this.config.sourcesFolder;
+    this.taskPath = this.config.taskPath;
   }
 
   async run(brands?: string[]): Promise<void> {
@@ -348,7 +342,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
           for (const r of result) {
             for (const [sku, images] of Object.entries(r.data)) {
-              allData[sku] ??= [];
+              if (!allData[sku]) {
+                const arr = [] as unknown as IDataImagItem;
+                arr.idProduct = images.idProduct;
+                allData[sku] = arr;
+              }
+
               allData[sku].push(...images);
             }
           }
@@ -508,7 +507,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
     await this.storage.saveJson(allErrors, {
       filename: `${task.brand_name}_unprocessed-products.json`,
-      targetDir: task.brand_name,
+      targetDir: '',
     });
   }
 
@@ -519,7 +518,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     limiter: RateLimiter,
     loggerScope?: ILogger,
   ): Promise<IWorkerError[]> {
-    const queue: IImageItem[] = [];
+    // const queue: IImageItem[] = [];
+    const queue: Array<{ sku: string; url: string; index: number; idProduct?: number }> = [];
     const allErrors: IWorkerError[] = [];
 
     const ImgPool = new PagePool(context, this.maxPage);
@@ -536,8 +536,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       },
     });
 
-    for (const [sku, urls] of Object.entries(urlsBySku)) {
-      urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
+    // for (const [sku,  urls] of Object.entries(urlsBySku)) {
+    //   urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
+    // }
+
+    for (const [sku, urls] of Object.entries(urlsBySku) as [string, IDataImagItem][]) {
+      urls.forEach((url, i) => queue.push({ sku, url, index: i + 1, idProduct: urls.idProduct }));
     }
 
     const processImage = async (item: IImageItem): Promise<ImageResult> => {
@@ -593,13 +597,19 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           },
         );
 
+        // await this.storage.save({
+        //   filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+        //   buffer,
+        //   targetDir: path.join(task.brand_name, item.sku),
+        // });
+
         await this.storage.save({
-          filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+          filename: `${item.idProduct}_${item.index}${ext}`,
           buffer,
-          targetDir: path.join(task.brand_name, item.sku),
+          targetDir: '',
         });
 
-        loggerScope?.debug(`Image saved: ${task.brand_name}/${item.sku}/${item.index}${ext}`, {
+        loggerScope?.debug(`Image saved: ${item.idProduct}_${item.index}${ext}`, {
           component: 'DefaultScenario',
           method: 'downloadImages()',
           action: 'this.storage.save({...})',
@@ -678,7 +688,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         },
       });
 
-      const results = (await Promise.allSettled(currentBatch.map(processImage)))
+      const results = (
+        await Promise.allSettled(currentBatch.map((item) => processImage(item as IImageItem)))
+      )
         .filter((r): r is PromiseFulfilledResult<ImageResult> => r.status === 'fulfilled')
         .map((r) => r.value);
 

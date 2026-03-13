@@ -12,14 +12,6 @@ class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
-        this.taskPath = 'src/data/tasks/all_brands_for_test.json';
-        // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
         this.sources = [];
         this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
@@ -28,6 +20,7 @@ class DefaultScenario {
         this.maxPage = this.config.asyncPages.maxPage;
         this.maxTask = this.config.asyncTasks.maxTask;
         this.sourcesFolder = this.config.sourcesFolder;
+        this.taskPath = this.config.taskPath;
     }
     async run(brands) {
         try {
@@ -260,7 +253,11 @@ class DefaultScenario {
                     });
                     for (const r of result) {
                         for (const [sku, images] of Object.entries(r.data)) {
-                            allData[sku] ?? (allData[sku] = []);
+                            if (!allData[sku]) {
+                                const arr = [];
+                                arr.idProduct = images.idProduct;
+                                allData[sku] = arr;
+                            }
                             allData[sku].push(...images);
                         }
                     }
@@ -390,10 +387,11 @@ class DefaultScenario {
         });
         await this.storage.saveJson(allErrors, {
             filename: `${task.brand_name}_unprocessed-products.json`,
-            targetDir: task.brand_name,
+            targetDir: '',
         });
     }
     async downloadImages(urlsBySku, task, context, limiter, loggerScope) {
+        // const queue: IImageItem[] = [];
         const queue = [];
         const allErrors = [];
         const ImgPool = new PagePool_1.PagePool(context, this.maxPage);
@@ -408,8 +406,11 @@ class DefaultScenario {
                 limiter: limiter,
             },
         });
+        // for (const [sku,  urls] of Object.entries(urlsBySku)) {
+        //   urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
+        // }
         for (const [sku, urls] of Object.entries(urlsBySku)) {
-            urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
+            urls.forEach((url, i) => queue.push({ sku, url, index: i + 1, idProduct: urls.idProduct }));
         }
         const processImage = async (item) => {
             loggerScope?.debug(`Started processing an image item ${item.index}`, {
@@ -449,12 +450,17 @@ class DefaultScenario {
                         ext: ext,
                     },
                 });
+                // await this.storage.save({
+                //   filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+                //   buffer,
+                //   targetDir: path.join(task.brand_name, item.sku),
+                // });
                 await this.storage.save({
-                    filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
+                    filename: `${item.idProduct}_${item.index}${ext}`,
                     buffer,
-                    targetDir: path.join(task.brand_name, item.sku),
+                    targetDir: '',
                 });
-                loggerScope?.debug(`Image saved: ${task.brand_name}/${item.sku}/${item.index}${ext}`, {
+                loggerScope?.debug(`Image saved: ${item.idProduct}_${item.index}${ext}`, {
                     component: 'DefaultScenario',
                     method: 'downloadImages()',
                     action: 'this.storage.save({...})',
@@ -525,7 +531,7 @@ class DefaultScenario {
                     currentBatch: currentBatch,
                 },
             });
-            const results = (await Promise.allSettled(currentBatch.map(processImage)))
+            const results = (await Promise.allSettled(currentBatch.map((item) => processImage(item))))
                 .filter((r) => r.status === 'fulfilled')
                 .map((r) => r.value);
             loggerScope?.debug('Current batch processing finished', {

@@ -5,7 +5,7 @@ import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { RateLimiter } from '../../browser/limiter/RateLimiter';
 import { IProduct } from '../../data/entities/IProduct';
-import { IDataImag } from '../../data/entities/IDataImag';
+import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
@@ -128,7 +128,8 @@ export default class PageImageSourceSaucony implements ISource<ICollectProductPh
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      data[sku] = imageUrls;
+      data[sku] = imageUrls as IDataImagItem;
+      data[sku].idProduct = product.id_product;
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }

@@ -1,5 +1,5 @@
 export interface IProduct {
-  id_product: string;
+  id_product: number;
   name_product: string;
   sku: string;
   attributes: {

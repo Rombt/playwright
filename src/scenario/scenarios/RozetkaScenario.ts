@@ -8,7 +8,7 @@ import { IBrowser } from '../../browser/IBrowser';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IDownloadedFile } from '../../browser/IDownloadedFile';
-import { IDataImag } from '../../data/entities/IDataImag';
+import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 import { ICollectProductPhotosBatch } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosBatch';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IResource } from '../../browser/IResource';
@@ -290,7 +290,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
           },
         });
 
-        let taskQueue: string[] = uniqueProducts.map((p) => p.sku);
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4
+        let taskQueue: IProduct[] = uniqueProducts.map((p) => p);
         loggerScope?.debug('A task queue s is created', {
           component: 'RozetkaScenario',
           method: 'process',
@@ -307,14 +308,35 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
         //========================    /Инициализация сценария    ========================
 
         //========================    Обработка ОДНОГО SKU    ========================
-        const processSku = async (sku: string, page: Page): Promise<TaskResult> => {
+        const processProduct = async (product: IProduct, page: Page): Promise<TaskResult> => {
+          if (!product.sku) {
+            loggerScope?.error(`sku is absent`, {
+              component: 'PageImageSourceRozetka',
+              method: 'process',
+              action: 'while (queue.length)',
+              stage: 'start',
+              data: {
+                sku: product.sku,
+              },
+            });
+            throw new Error(`In process method sku is absent`);
+          }
+
+          const rawSku = product.sku;
+          const starIndex = rawSku.indexOf('*');
+          const skuNormal =
+            (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
+              /^[\p{C}\s]+|[\p{C}\s]+$/gu,
+              '',
+            ) ?? '';
+
           try {
             const headers = this.buildHeaders(url_init);
             if (!headers || typeof headers !== 'object') {
               loggerScope?.error('Headers are invalid', {
                 component: 'RozetkaScenario',
                 method: 'process',
-                action: 'processSku',
+                action: 'processProduct',
                 data: {
                   headers: headers,
                 },
@@ -330,7 +352,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                   headers,
                   targetUrl,
                   limiter,
-                  sku,
+                  skuNormal,
                   {
                     brand_name: task.brand_name,
                   },
@@ -372,14 +394,14 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                 continue;
               }
 
-              if (!g.title.includes(sku)) continue;
+              if (!g.title.includes(product.sku)) continue;
 
               loggerScope?.debug('Product contains required SKU in the title', {
                 component: 'RozetkaScenario',
                 method: 'process',
                 action: 'if (!g.title.includes(sku)) continue;',
                 data: {
-                  sku: sku,
+                  sku: product.sku,
                   currentProduct: g,
                 },
               });
@@ -387,7 +409,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               // сбор фото у найденных товаров
               const result = await this.withRetry(
                 () =>
-                  source.worker(g.href, page, limiter, undefined, undefined, sku, {
+                  source.worker(g.href, page, limiter, product, undefined, product.sku, {
+                    //!!!!!!!!!!!!!!!!1
                     brand_name: task.brand_name,
                   }),
                 {
@@ -398,7 +421,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               );
 
               loggerScope?.debug(
-                `The collection of photos url for   ${task.brand_name}    ${sku}    is complete`,
+                `The collection of photos url for   ${task.brand_name}    ${product.sku}    is complete`,
                 {
                   component: 'RozetkaScenario',
                   method: 'process',
@@ -411,8 +434,11 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               );
 
               for (const r of result) {
-                for (const [skuKey, images] of Object.entries(r.data)) {
-                  loggerScope?.debug(`Found url photo for   ${task.brand_name}    ${skuKey}`, {
+                for (const [skuKey, images] of Object.entries(r.data) as [
+                  string,
+                  IDataImagItem,
+                ][]) {
+                  loggerScope?.debug(`Found url photo for ${task.brand_name} ${skuKey}`, {
                     component: 'RozetkaScenario',
                     method: 'process',
                     action: 'for (const r of result) {...}',
@@ -420,25 +446,33 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                       attempt: attempt,
                       skuKey: skuKey,
                       images: images,
+                      idProduct: images.idProduct, // теперь доступно
                     },
                   });
 
                   const resultsDirPath = path.resolve(
                     __dirname,
-                    '../../../results',
+                    '../../../results', //todo задать через конфиг
                     task.brand_name,
                     `${task.brand_name}_unprocessed-products.json`,
                   );
 
                   await this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
 
-                  allData[skuKey] ??= [];
+                  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2
+                  // Создаем массив, если еще нет, и сохраняем idProduct
+                  if (!allData[skuKey]) {
+                    const arr = [] as unknown as IDataImagItem;
+                    arr.idProduct = images.idProduct;
+                    allData[skuKey] = arr;
+                  }
+
                   allData[skuKey].push(...images);
                 }
               }
             }
 
-            loggerScope?.debug(`The process  ${task.brand_name}    ${sku}    is complete`, {
+            loggerScope?.debug(`The process  ${task.brand_name}    ${product.sku}    is complete`, {
               component: 'RozetkaScenario',
               method: 'process',
               action: 'for (const r of result) {...}',
@@ -448,9 +482,9 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               },
             });
 
-            return { status: 'success', sku };
+            return { status: 'success', sku: product.sku };
           } catch (e) {
-            loggerScope?.error(`Error during processing ${sku}  `, {
+            loggerScope?.error(`Error during processing ${product.sku}  `, {
               component: 'RozetkaScenario',
               method: 'process',
               action: 'const result = await withRetry(...)',
@@ -462,14 +496,14 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             });
 
             return isRetryable(e as IWorkerError)
-              ? { status: 'retry', sku, error: e as IWorkerError }
-              : { status: 'fatal', sku, error: e as IWorkerError };
+              ? { status: 'retry', sku: product.sku, error: e as IWorkerError }
+              : { status: 'fatal', sku: product.sku, error: e as IWorkerError };
           }
         };
 
         //========================   Batch runner      ========================
-        async function runBatch(skus: string[]): Promise<TaskResult[]> {
-          const queue = [...skus];
+        async function runBatch(products: IProduct[]): Promise<TaskResult[]> {
+          const queue = [...products];
           const results: TaskResult[] = [];
 
           loggerScope?.debug(`Batch runner is started`, {
@@ -515,29 +549,32 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               }
 
               while (queue.length) {
-                const sku = queue.shift();
-                if (!sku) {
-                  loggerScope?.error(`sku is absent`, {
-                    component: 'PageImageSourceRozetka',
-                    method: 'process',
-                    action: 'while (queue.length)',
-                    stage: 'start',
-                    data: {
-                      sku: sku,
-                    },
-                  });
-                  throw new Error(`In process method sku is absent`);
-                }
+                const product = queue.shift();
+                // if (!sku) {
+                //   loggerScope?.error(`sku is absent`, {
+                //     component: 'PageImageSourceRozetka',
+                //     method: 'process',
+                //     action: 'while (queue.length)',
+                //     stage: 'start',
+                //     data: {
+                //       sku: sku,
+                //     },
+                //   });
+                //   throw new Error(`In process method sku is absent`);
+                // }
 
-                const rawSku = sku;
-                const starIndex = rawSku.indexOf('*');
-                const skuNormal =
-                  (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
-                    /^[\p{C}\s]+|[\p{C}\s]+$/gu,
-                    '',
-                  ) ?? '';
+                // const rawSku = sku;
+                // const starIndex = rawSku.indexOf('*');
 
-                const result = await processSku(skuNormal, page);
+                // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!3
+                // const skuNormal =
+                //   (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
+                //     /^[\p{C}\s]+|[\p{C}\s]+$/gu,
+                //     '',
+                //   ) ?? '';
+
+                if (!product) return;
+                const result = await processProduct(product, page);
                 results.push(result);
               }
             } catch (err) {
@@ -588,11 +625,21 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
           const results: TaskResult[] = await runBatch.call(this, currentBatch);
 
+          loggerScope?.debug(`Received ALL results`, {
+            component: 'RozetkaScenario',
+            method: 'process',
+            action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
+            data: {
+              attempt: attempt,
+              results: results,
+            },
+          });
+
           const retryResults = results.filter(
             (r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry',
           );
 
-          loggerScope?.debug(`Received retry results `, {
+          loggerScope?.debug(`Received retry results`, {
             component: 'RozetkaScenario',
             method: 'process',
             action: 'const results: TaskResult[] = await runBatch.call(this, currentBatch);',
@@ -616,7 +663,10 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             },
           });
 
-          currentBatch = retryResults.map((r) => r.sku);
+          // currentBatch = retryResults.map((r) => r.sku); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!5
+          currentBatch = retryResults
+            .map((r) => taskQueue.find((p) => p.sku === r.sku))
+            .filter((p): p is IProduct => p !== undefined);
 
           fatalResults.forEach((r) =>
             this.allErrors.push({
@@ -658,9 +708,14 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
     const urlsQueue: IImageItem[] = [];
 
-    for (const [sku, urls] of Object.entries(UrlsBySku)) {
+    for (const [sku, urls] of Object.entries(UrlsBySku) as [string, IDataImagItem][]) {
       urls.forEach((url, i) => {
-        urlsQueue.push({ sku, url, index: i + 1 });
+        urlsQueue.push({
+          sku,
+          url,
+          index: i + 1,
+          idProduct: urls.idProduct, // берем из массива
+        });
       });
     }
 

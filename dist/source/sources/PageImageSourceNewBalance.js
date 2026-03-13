@@ -78,6 +78,7 @@ class PageImageSourceNewBalance {
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
             data[sku] = imageUrls;
+            data[sku].idProduct = product.id_product;
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);
