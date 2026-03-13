@@ -62,6 +62,9 @@ class AppConfig {
     get sourcesFolder() {
         return this.processData(config_1.config).data.sourcesFolder;
     }
+    get taskPath() {
+        return this.processData(config_1.config).data.taskPath;
+    }
     get brands() {
         return this.processData(config_1.config).data.brands;
     }
@@ -105,6 +108,7 @@ class AppConfig {
                 resultsFolder: this.resolvePath(dataConfig.resultsFolder),
                 sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
                 brands: resolveBrands(dataConfig.brands),
+                taskPath: this.resolvePath(dataConfig.taskPath),
             },
         };
     }
@@ -162,6 +166,20 @@ class AppConfig {
             throw new Error(`Invalid path value: expected string, got ${typeof value}`);
         }
         return path.isAbsolute(value) ? value : path.resolve(this.baseDir, value);
+    }
+    validateUserUrl(value) {
+        if (typeof value !== 'string')
+            return null;
+        try {
+            const url = new URL(value);
+            if (!['http:', 'https:'].includes(url.protocol)) {
+                return null;
+            }
+            return url.toString();
+        }
+        catch {
+            return null;
+        }
     }
 }
 exports.AppConfig = AppConfig;

@@ -81,6 +81,9 @@ export class AppConfig {
   public get sourcesFolder(): string {
     return this.processData(appConfig).data.sourcesFolder;
   }
+  public get taskPath(): string {
+    return this.processData(appConfig).data.taskPath;
+  }
 
   public get brands(): string[] {
     return this.processData(appConfig).data.brands;
@@ -139,6 +142,7 @@ export class AppConfig {
         resultsFolder: this.resolvePath(dataConfig.resultsFolder),
         sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
         brands: resolveBrands(dataConfig.brands),
+        taskPath: this.resolvePath(dataConfig.taskPath),
       },
     };
   }
@@ -203,7 +207,7 @@ export class AppConfig {
 
   //==========  helpers ========
 
-  resolvePath(value: unknown): string {
+  private resolvePath(value: unknown): string {
     if (typeof value !== 'string') {
       throw new Error(`Invalid path value: expected string, got ${typeof value}`);
     }
@@ -218,4 +222,20 @@ export class AppConfig {
       return new FileTransport(config.options.filePath, config.options.pretty);
     },
   };
+
+  private validateUserUrl(value: unknown): string | null {
+    if (typeof value !== 'string') return null;
+
+    try {
+      const url = new URL(value);
+
+      if (!['http:', 'https:'].includes(url.protocol)) {
+        return null;
+      }
+
+      return url.toString();
+    } catch {
+      return null;
+    }
+  }
 }

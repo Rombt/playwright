@@ -31,6 +31,7 @@ export interface RetryConfig {
 export interface DataConfig {
   resultsFolder: string;
   sourcesFolder: string;
+  taskPath: string;
   brands: string[];
 }
 

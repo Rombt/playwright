@@ -12,14 +12,6 @@ class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
         this.storage = storage;
-        this.taskPath = 'src/data/tasks/all_brands_for_test.json';
-        // private readonly taskPath: string = 'src/data/tasks/puma_for_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/m-tac_for_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/new_balance_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/nike_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/joma_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/adidas_tests.json';
-        // private readonly taskPath: string = 'src/data/tasks/ganzo_tests.json';
         this.sources = [];
         this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
@@ -28,6 +20,7 @@ class DefaultScenario {
         this.maxPage = this.config.asyncPages.maxPage;
         this.maxTask = this.config.asyncTasks.maxTask;
         this.sourcesFolder = this.config.sourcesFolder;
+        this.taskPath = this.config.taskPath;
     }
     async run(brands) {
         try {
