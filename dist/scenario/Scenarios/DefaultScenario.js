@@ -8,6 +8,7 @@ const PagePool_1 = require("../../browser/pool/PagePool");
 const appConfig_1 = require("../../data/config/appConfig");
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
+const SharpImageProcessor_1 = require("../../services/ImageProcessor/SharpImageProcessor");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -450,17 +451,20 @@ class DefaultScenario {
                         ext: ext,
                     },
                 });
-                // await this.storage.save({
-                //   filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
-                //   buffer,
-                //   targetDir: path.join(task.brand_name, item.sku),
-                // });
+                let _buf = buffer;
+                let _ext = ext;
+                if (this.config.convertToJpg) {
+                    const imageProcessor = new SharpImageProcessor_1.SharpImageProcessor(this.storage);
+                    _buf = await imageProcessor.convertBufferToJpg(buffer);
+                    _ext = '.jpg';
+                }
+                const fileName = `${item.idProduct}_${item.index}${_ext}`;
                 await this.storage.save({
-                    filename: `${item.idProduct}_${item.index}${ext}`,
-                    buffer,
+                    filename: fileName,
+                    buffer: _buf,
                     targetDir: '',
                 });
-                loggerScope?.debug(`Image saved: ${item.idProduct}_${item.index}${ext}`, {
+                loggerScope?.debug(`Image saved: ${fileName}`, {
                     component: 'DefaultScenario',
                     method: 'downloadImages()',
                     action: 'this.storage.save({...})',

@@ -9,6 +9,7 @@ const appConfig_1 = require("../../data/config/appConfig");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
+const SharpImageProcessor_1 = require("../../services/ImageProcessor/SharpImageProcessor");
 class RozetkaScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -554,24 +555,29 @@ class RozetkaScenario {
                     maxRetries: this.config.asyncRetry.maxRetries,
                     isRetryable: helpers_1.isRetryable,
                 }, loggerScope);
-                const filename = `${task.brand_name}_${sku}_${index}_R_1_${ext}`;
-                loggerScope?.debug(`Starting save of image file`, {
-                    component: 'RozetkaScenario',
-                    method: 'downloadImages',
-                    action: 'downloadImageItem',
-                    data: {
-                        index: index,
-                        sku: sku,
-                        url: url,
-                        filename: filename,
-                        buffer: buffer,
-                    },
-                });
+                let _buf = buffer;
+                let _ext = ext;
+                if (this.config.convertToJpg) {
+                    const imageProcessor = new SharpImageProcessor_1.SharpImageProcessor(this.storage);
+                    _buf = await imageProcessor.convertBufferToJpg(buffer);
+                    _ext = '.jpg';
+                }
+                const fileName = `${item.idProduct}_${item.index}_R_${_ext}`;
                 await this.storage.save({
-                    filename,
-                    buffer,
-                    targetDir: path.join(task.brand_name, sku),
-                    loggerScope,
+                    filename: fileName,
+                    buffer: _buf,
+                    targetDir: '',
+                });
+                loggerScope?.debug(`Image saved: ${fileName}`, {
+                    component: 'DefaultScenario',
+                    method: 'downloadImages()',
+                    action: 'this.storage.save({...})',
+                    data: {
+                        item: item,
+                        maxRetries: this.maxRetries,
+                        isRetryable: this.maxRetries,
+                        status: 'success',
+                    },
                 });
                 return { status: 'success', item };
             }

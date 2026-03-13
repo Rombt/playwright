@@ -4,23 +4,24 @@ exports.config = void 0;
 exports.config = {
     async: {
         retry: {
-            baseDelay: 10000,
-            maxDelay: 60000,
-            maxWaitForFreePage: 120000, // страница из пула освободится через maxDelay
+            baseDelay: 5000,
+            maxDelay: 30000,
+            maxWaitForFreePage: 60000, // т.к. страница из пула освободится через maxDelay
             maxRetries: 5,
         },
         tasks: {
             maxTask: 2,
         },
         pages: {
-            maxPage: 3,
+            maxPage: 2,
             maxWaiters: 100,
             pageLoadWait: 10000,
         },
     },
     data: {
-        resultsFolder: 'results',
+        resultsFolder: 'results_avif',
         sourcesFolder: './dist/source/sources',
+        convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
         // brands: ['Joma'],
         // brands: ['New Balance'],

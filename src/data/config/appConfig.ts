@@ -81,8 +81,13 @@ export class AppConfig {
   public get sourcesFolder(): string {
     return this.processData(appConfig).data.sourcesFolder;
   }
+
   public get taskPath(): string {
     return this.processData(appConfig).data.taskPath;
+  }
+
+  public get convertToJpg(): boolean {
+    return this.processData(appConfig).data.convertToJpg;
   }
 
   public get brands(): string[] {
@@ -141,6 +146,7 @@ export class AppConfig {
       data: {
         resultsFolder: this.resolvePath(dataConfig.resultsFolder),
         sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
+        convertToJpg: dataConfig.convertToJpg ?? false,
         brands: resolveBrands(dataConfig.brands),
         taskPath: this.resolvePath(dataConfig.taskPath),
       },

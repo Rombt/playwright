@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js --mode=full",
-    "retry": "node dist/index.js --mode=retry"
+    "retry": "node dist/index.js --mode=retry",
+    "img-convert": "node dist/scripts/convert-images.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,12 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.10",
+    "@types/node": "^25.5.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "node-fetch": "^3.3.2"
+    "-": "^0.0.1",
+    "node-fetch": "^3.3.2",
+    "sharp": "^0.34.5"
   }
 }

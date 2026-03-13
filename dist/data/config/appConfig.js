@@ -65,6 +65,9 @@ class AppConfig {
     get taskPath() {
         return this.processData(config_1.config).data.taskPath;
     }
+    get convertToJpg() {
+        return this.processData(config_1.config).data.convertToJpg;
+    }
     get brands() {
         return this.processData(config_1.config).data.brands;
     }
@@ -107,6 +110,7 @@ class AppConfig {
             data: {
                 resultsFolder: this.resolvePath(dataConfig.resultsFolder),
                 sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
+                convertToJpg: dataConfig.convertToJpg ?? false,
                 brands: resolveBrands(dataConfig.brands),
                 taskPath: this.resolvePath(dataConfig.taskPath),
             },

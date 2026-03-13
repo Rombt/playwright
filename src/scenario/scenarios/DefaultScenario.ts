@@ -25,6 +25,7 @@ import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/hel
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
+import { SharpImageProcessor as ImageProcessor } from '../../services/ImageProcessor/SharpImageProcessor';
 
 // todo один универсальный тип ProcessResult
 type TaskResult =
@@ -597,19 +598,23 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           },
         );
 
-        // await this.storage.save({
-        //   filename: `${task.brand_name}_${item.sku}_${item.index}${ext}`,
-        //   buffer,
-        //   targetDir: path.join(task.brand_name, item.sku),
-        // });
+        let _buf = buffer;
+        let _ext = ext;
 
+        if (this.config.convertToJpg) {
+          const imageProcessor: ImageProcessor = new ImageProcessor(this.storage);
+          _buf = await imageProcessor.convertBufferToJpg(buffer);
+          _ext = '.jpg';
+        }
+
+        const fileName = `${item.idProduct}_${item.index}${_ext}`;
         await this.storage.save({
-          filename: `${item.idProduct}_${item.index}${ext}`,
-          buffer,
+          filename: fileName,
+          buffer: _buf,
           targetDir: '',
         });
 
-        loggerScope?.debug(`Image saved: ${item.idProduct}_${item.index}${ext}`, {
+        loggerScope?.debug(`Image saved: ${fileName}`, {
           component: 'DefaultScenario',
           method: 'downloadImages()',
           action: 'this.storage.save({...})',

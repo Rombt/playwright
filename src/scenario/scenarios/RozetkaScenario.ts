@@ -31,6 +31,7 @@ import {
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
+import { SharpImageProcessor as ImageProcessor } from '../../services/ImageProcessor/SharpImageProcessor';
 
 type TaskResult =
   | { status: 'success'; sku: string }
@@ -754,26 +755,33 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
           loggerScope,
         );
 
-        const filename = `${task.brand_name}_${sku}_${index}_R_1_${ext}`;
+        let _buf = buffer;
+        let _ext = ext;
 
-        loggerScope?.debug(`Starting save of image file`, {
-          component: 'RozetkaScenario',
-          method: 'downloadImages',
-          action: 'downloadImageItem',
-          data: {
-            index: index,
-            sku: sku,
-            url: url,
-            filename: filename,
-            buffer: buffer,
-          },
-        });
+        if (this.config.convertToJpg) {
+          const imageProcessor: ImageProcessor = new ImageProcessor(this.storage);
+          _buf = await imageProcessor.convertBufferToJpg(buffer);
+          _ext = '.jpg';
+        }
+
+        const fileName = `${item.idProduct}_${item.index}_R_${_ext}`;
 
         await this.storage.save({
-          filename,
-          buffer,
-          targetDir: path.join(task.brand_name, sku),
-          loggerScope,
+          filename: fileName,
+          buffer: _buf,
+          targetDir: '',
+        });
+
+        loggerScope?.debug(`Image saved: ${fileName}`, {
+          component: 'DefaultScenario',
+          method: 'downloadImages()',
+          action: 'this.storage.save({...})',
+          data: {
+            item: item,
+            maxRetries: this.maxRetries,
+            isRetryable: this.maxRetries,
+            status: 'success',
+          },
         });
 
         return { status: 'success', item };
