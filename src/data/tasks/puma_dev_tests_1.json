@@ -1,0 +1,176 @@
+{
+  "generated_at": "2026-02-03_10-52",
+  "task": {
+    "45": {
+      "brand_id": "45",
+      "brand_name": "Puma",
+      "metadata": {
+        "target_website": "https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54931",
+          "name_product": "Рюкзак 09215637*SS26 PUMA",
+          "sku": "09215637*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54932",
+          "name_product": "Сумка 09218102*SS26 PUMA",
+          "sku": "09218102*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54933",
+          "name_product": "Сумка 9162901*SS26 PUMA",
+          "sku": "9162901*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54935",
+          "name_product": "Футболка чоловіча PUMA Scuderia Ferrari Tonal Shield Tee Men 63531101",
+          "sku": "63531101*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54935",
+          "name_product": "Футболка чоловіча PUMA Scuderia Ferrari Tonal Shield Tee Men 63531101",
+          "sku": "63531101*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54935",
+          "name_product": "Футболка чоловіча PUMA Scuderia Ferrari Tonal Shield Tee Men 63531101",
+          "sku": "63531101*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54935",
+          "name_product": "Футболка чоловіча PUMA Scuderia Ferrari Tonal Shield Tee Men 63531101",
+          "sku": "63531101*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54935",
+          "name_product": "Футболка чоловіча PUMA Scuderia Ferrari Tonal Shield Tee Men 63531101",
+          "sku": "63531101*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54937",
+          "name_product": "Футболка чолоівіча PUMA Essentials Block Tee Men 69169801",
+          "sku": "69169801*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54937",
+          "name_product": "Футболка чолоівіча PUMA Essentials Block Tee Men 69169801",
+          "sku": "69169801*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54937",
+          "name_product": "Футболка чолоівіча PUMA Essentials Block Tee Men 69169801",
+          "sku": "69169801*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54937",
+          "name_product": "Футболка чолоівіча PUMA Essentials Block Tee Men 69169801",
+          "sku": "69169801*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54937",
+          "name_product": "Футболка чолоівіча PUMA Essentials Block Tee Men 69169801",
+          "sku": "69169801*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54938",
+          "name_product": "Футболка чоловіча PUMA Essentials Block Tee Men 69169865",
+          "sku": "69169865*SS26",
+          "attributes": {
+            "color": "сір/біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54938",
+          "name_product": "Футболка чоловіча PUMA Essentials Block Tee Men 69169865",
+          "sku": "69169865*SS26",
+          "attributes": {
+            "color": "сір/біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54938",
+          "name_product": "Футболка чоловіча PUMA Essentials Block Tee Men 69169865",
+          "sku": "69169865*SS26",
+          "attributes": {
+            "color": "сір/біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54938",
+          "name_product": "Футболка чоловіча PUMA Essentials Block Tee Men 69169865",
+          "sku": "69169865*SS26",
+          "attributes": {
+            "color": "сір/біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54938",
+          "name_product": "Футболка чоловіча PUMA Essentials Block Tee Men 69169865",
+          "sku": "69169865*SS26",
+          "attributes": {
+            "color": "сір/біл",
+            "size": "XXL"
+          }
+        }
+      ]
+    }
+  }
+}

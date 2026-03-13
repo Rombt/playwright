@@ -2,10 +2,13 @@ node_modules/
 package-lock.json
 
 test-results/
-_results/
-results/
+
 chrome-profile-fake/**
 logs/
 logs/**
 browser-profiles/
 browser-profiles/**
+_results/
+results/
+_1_results/
+_2_results/
