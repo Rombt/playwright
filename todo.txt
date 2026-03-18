@@ -1,4 +1,7 @@
 
+    Нашивка  M-TAC Tact. girl №6 Hooligan 51468801
+    
+    
     запуск компилятора TS
         npx tsc --watch
     запуск приложения

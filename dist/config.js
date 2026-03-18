@@ -13,13 +13,13 @@ exports.config = {
             maxTask: 2,
         },
         pages: {
-            maxPage: 2,
-            maxWaiters: 100,
+            maxPage: 6,
+            maxWaiters: 50,
             pageLoadWait: 10000,
         },
     },
     data: {
-        resultsFolder: 'results_avif',
+        resultsFolder: 'results/results_m-tac_c_01.09.25',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -33,7 +33,8 @@ exports.config = {
         // taskPath: 'src/data/tasks/joma_tests.json',
         // taskPath: 'src/data/tasks/adidas_tests.json',
         // taskPath: 'src/data/tasks/ganzo_tests.json',
-        taskPath: 'src/data/tasks/puma_dev_tests_1.json',
+        // taskPath: 'src/data/tasks/puma_dev_tests_1.json',
+        taskPath: 'src/data/tasks/m-tac_c_01.09.25.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

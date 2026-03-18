@@ -13,13 +13,25 @@ class PagePool {
         this.config = appConfig_1.AppConfig.getInstance();
     }
     async acquire() {
+        this.loggerScope?.debug('async acquire()', {
+            component: 'PagePool',
+            method: 'acquire',
+            action: '**async acquire()',
+            stage: 'start',
+            data: {
+                created: this.created,
+                quantityLimit: this.quantityPage,
+                freePages: this.free.length,
+                waiters: this.waiters.length,
+            },
+        });
         if (this.free.length) {
             return this.free.pop();
         }
         if (this.created < this.quantityPage) {
+            this.created++;
             try {
                 const page = await this.context.newPage();
-                this.created++;
                 this.loggerScope?.debug(``, {
                     component: 'PagePool',
                     method: 'acquire',

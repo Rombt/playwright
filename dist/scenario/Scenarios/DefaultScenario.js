@@ -211,6 +211,8 @@ class DefaultScenario {
             });
             const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
+            // const pool = new PagePool(context, 10);
+            // const page = await pool.acquire();
             this.registerResource(pool);
             const processProduct = async (product) => {
                 if (!task.metadata.target_website) {
@@ -396,6 +398,8 @@ class DefaultScenario {
         const queue = [];
         const allErrors = [];
         const ImgPool = new PagePool_1.PagePool(context, this.maxPage);
+        // const ImgPool = new PagePool(context, 10);
+        // const page = await ImgPool.acquire();
         loggerScope?.debug('Starting image download for current task', {
             component: 'DefaultScenario',
             method: 'downloadImages()',
@@ -458,7 +462,7 @@ class DefaultScenario {
                     _buf = await imageProcessor.convertBufferToJpg(buffer);
                     _ext = '.jpg';
                 }
-                const fileName = `${item.idProduct}_${item.index}${_ext}`;
+                const fileName = `${item.idProduct}_${item.sku}_${item.index}${_ext}`;
                 await this.storage.save({
                     filename: fileName,
                     buffer: _buf,
