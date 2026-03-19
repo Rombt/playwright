@@ -1,0 +1,88 @@
+Принцип
+    Файл = это снимок (snapshot) данных, содержащий:
+Построен как упрощённый ETL snapshot:
+    парсинг (Playwright) → JSON
+        → нормализация
+        → импорт в БД / HTML
+Общая структура файла
+    {
+    "meta": { ... },
+    "products": [ ... ]
+    }
+    🔹 meta (метаданные файла)
+    "meta": {
+    "generatedAt": "2026-02-09T16:02:00Z",
+    "version": "",
+    "source": {
+        "type": "website",
+        "name": "example.com",
+        "url": "https://example.com"
+    }
+    }
+Поля:
+    generatedAt (string, ISO 8601)
+        Дата и время генерации файла.
+    version (string)
+        Версия формата данных. Используется для контроля изменений структуры.
+    source (object)
+        Информация об источнике данных:
+    type (string)
+        тип источника (website, api, и т.д.)
+    name (string)
+        идентификатор источника
+    url (string)
+        ссылка на источник
+    products (массив объектов товаров)
+        "products": [ Product ]
+    product (структура товара)
+        {
+            "productId": 123,
+            "sku": "ABC-123",
+            "attributes": [ ... ]
+        }
+Поля:
+    productId (number | string)
+        Внутренний идентификатор товара.
+    sku (string)
+        Уникальный артикул товара.
+    attributes (Attribute[])
+        Список характеристик товара.
+    Attribute (структура характеристики)
+        {
+            "key": null,
+            "name": "Цвет",
+            "value": "Чёрный",
+            "rawName": "Color",
+            "rawValue": "Black"
+        }
+Поля:
+    key (string | null)
+        Нормализованный ключ характеристики. 
+            На текущем этапе всегда null.
+            В будущем используется для:
+                фильтрации
+                сопоставления характеристик
+                работы с БД
+    name (string)
+        Отображаемое название характеристики (нормализованное).
+    value (string)
+        Отображаемое значение характеристики (нормализованное).
+    rawName (string)
+        Оригинальное название характеристики с сайта-источника.
+    rawValue (string)
+        Оригинальное значение характеристики с сайта-источника.
+Правила и ограничения
+    Обязательные поля
+        meta.generatedAt
+        meta.version
+        products
+        product.productId
+        product.sku
+        attribute.name
+        attribute.value
+    Типы данных
+        все значения характеристик — строки
+        rawName/rawValue должны сохраняться без изменений
+    Нормализация
+        name/value могут отличаться от rawName/rawValue
+        любые преобразования выполняются после парсинга
