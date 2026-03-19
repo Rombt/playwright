@@ -163,7 +163,8 @@ export class AppConfig {
         retry: {
           baseDelay: typeof retry.baseDelay === 'number' ? retry.baseDelay : 100,
           maxDelay: typeof retry.maxDelay === 'number' ? retry.maxDelay : 3000,
-          maxWaitForFreePage: typeof retry.maxRetries === 'number' ? retry.maxRetries : 60000,
+          maxWaitForFreePage:
+            typeof retry.maxWaitForFreePage === 'number' ? retry.maxWaitForFreePage : 60000,
           maxRetries: typeof retry.maxRetries === 'number' ? retry.maxRetries : 3,
         },
         tasks: {

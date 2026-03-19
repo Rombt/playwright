@@ -495,6 +495,7 @@ class DefaultScenario {
                         maxRetries: this.maxRetries,
                         isRetryable: this.maxRetries,
                         status: errorStatus.status,
+                        err: err,
                     },
                 });
                 return errorStatus;

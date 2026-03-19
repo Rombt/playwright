@@ -647,6 +647,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             maxRetries: this.maxRetries,
             isRetryable: this.maxRetries,
             status: errorStatus.status,
+            err: err,
           },
         });
 

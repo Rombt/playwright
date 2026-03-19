@@ -1,22 +1,22 @@
 export const config = {
   async: {
     retry: {
-      baseDelay: 5000,
+      baseDelay: 2000,
       maxDelay: 30000,
-      maxWaitForFreePage: 60000, // т.к. страница из пула освободится через maxDelay
-      maxRetries: 5,
+      maxWaitForFreePage: 240000, // т.к. страница из пула освободится через maxDelay
+      maxRetries: 10,
     },
     tasks: {
-      maxTask: 2,
+      maxTask: 4,
     },
     pages: {
-      maxPage: 6,
-      maxWaiters: 50,
+      maxPage: 10,
+      maxWaiters: 1500,
       pageLoadWait: 10000,
     },
   },
   data: {
-    resultsFolder: 'results/results_m-tac_c_01.09.25',
+    resultsFolder: 'results/results_m-tac_c_01.09.25_full_prod',
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
     // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -32,14 +32,14 @@ export const config = {
     // taskPath: 'src/data/tasks/adidas_tests.json',
     // taskPath: 'src/data/tasks/ganzo_tests.json',
     // taskPath: 'src/data/tasks/puma_dev_tests_1.json',
-    taskPath: 'src/data/tasks/m-tac_c_01.09.25.json',
+    taskPath: 'src/data/tasks/m-tac_c_01.09.25_prod.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',
   },
 
   logger: {
-    level: 'debug',
+    level: 'info',
     transports: [
       { type: 'console', options: {} },
       { type: 'file', options: { filePath: './logs/app.log', pretty: true } },
