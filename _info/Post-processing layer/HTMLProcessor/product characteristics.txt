@@ -6,18 +6,18 @@
         → импорт в БД / HTML
 Общая структура файла
     {
-    "meta": { ... },
-    "products": [ ... ]
+        "meta": { ... },
+        "products": [ ... ]
     }
-    🔹 meta (метаданные файла)
-    "meta": {
-    "generatedAt": "2026-02-09T16:02:00Z",
-    "version": "",
-    "source": {
-        "type": "website",
-        "name": "example.com",
-        "url": "https://example.com"
-    }
+        meta (метаданные файла)
+            "meta": {
+            "generatedAt": "2026-02-09T16:02:00Z",
+            "version": "",
+            "source": {
+                "type": "website",
+                "name": "example.com",
+                "url": "https://example.com"
+            }
     }
 Поля:
     generatedAt (string, ISO 8601)
