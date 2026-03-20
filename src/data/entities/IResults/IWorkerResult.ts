@@ -13,7 +13,15 @@ import { IDataImag } from '../IDataImag';
  *
  */
 
+// export interface IWorkerResult {
+//   data: IDataImag;
+//   errors: IWorkerError[];
+// }
+
 export interface IWorkerResult {
-  data: IDataImag;
+  data: {
+    images?: IDataImag;
+    html?: Record<string, string>;
+  };
   errors: IWorkerError[];
 }

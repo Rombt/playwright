@@ -1,8 +1,8 @@
 import { CheerioAPI } from 'cheerio';
-import { IProductCharacteristics } from './IAttribute';
+import { IAttribute } from './IAttribute';
 
 export interface IBaseHtmlProcessor {
-  process(html: string): IProductCharacteristics;
+  process(html: string): IAttribute[];
 }
 
 //? показался лишним

@@ -18,6 +18,7 @@ class MTacProcessor extends BaseHtmlProcessor_1.BaseHtmlProcessor {
         //     result[key] = value;
         //   }
         // });
+        console.log('======== MTacProcessor.extractAttributes() ==============');
         return result;
     }
 }

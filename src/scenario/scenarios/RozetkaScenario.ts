@@ -435,7 +435,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               );
 
               for (const r of result) {
-                for (const [skuKey, images] of Object.entries(r.data) as [
+                for (const [skuKey, images] of Object.entries(r.data.images ?? {}) as [
                   string,
                   IDataImagItem,
                 ][]) {

@@ -304,7 +304,7 @@ class RozetkaScenario {
                             },
                         });
                         for (const r of result) {
-                            for (const [skuKey, images] of Object.entries(r.data)) {
+                            for (const [skuKey, images] of Object.entries(r.data.images ?? {})) {
                                 loggerScope?.debug(`Found url photo for ${task.brand_name} ${skuKey}`, {
                                     component: 'RozetkaScenario',
                                     method: 'process',

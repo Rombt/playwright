@@ -286,8 +286,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
 
       const pool = new PagePool(context, quantityPage);
-      // const pool = new PagePool(context, 10);
-      // const page = await pool.acquire();
       this.registerResource(pool);
 
       const processProduct = async (product: IProduct): Promise<TaskResult> => {
@@ -344,7 +342,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           });
 
           for (const r of result) {
-            for (const [sku, images] of Object.entries(r.data)) {
+            for (const [sku, images] of Object.entries(r.data.images ?? {})) {
               if (!allData[sku]) {
                 const arr = [] as unknown as IDataImagItem;
                 arr.idProduct = images.idProduct;

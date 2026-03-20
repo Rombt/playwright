@@ -23,6 +23,8 @@ export class MTacProcessor extends BaseHtmlProcessor {
     //   }
     // });
 
+    console.log('======== MTacProcessor.extractAttributes() ==============');
+
     return result;
   }
 }
