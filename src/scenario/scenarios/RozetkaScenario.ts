@@ -31,7 +31,7 @@ import {
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
-import { SharpImageProcessor as ImageProcessor } from '../../services/ImageProcessor/SharpImageProcessor';
+import { SharpImageProcessor as ImageProcessor } from '../../processing/ImageProcessor/SharpImageProcessor';
 
 type TaskResult =
   | { status: 'success'; sku: string }

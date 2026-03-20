@@ -25,7 +25,7 @@ import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/hel
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
-import { SharpImageProcessor as ImageProcessor } from '../../services/ImageProcessor/SharpImageProcessor';
+import { SharpImageProcessor as ImageProcessor } from '../../processing/ImageProcessor/SharpImageProcessor';
 
 // todo один универсальный тип ProcessResult
 type TaskResult =
@@ -521,13 +521,10 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     limiter: RateLimiter,
     loggerScope?: ILogger,
   ): Promise<IWorkerError[]> {
-    // const queue: IImageItem[] = [];
     const queue: Array<{ sku: string; url: string; index: number; idProduct?: number }> = [];
     const allErrors: IWorkerError[] = [];
 
     const ImgPool = new PagePool(context, this.maxPage);
-    // const ImgPool = new PagePool(context, 10);
-    // const page = await ImgPool.acquire();
 
     loggerScope?.debug('Starting image download for current task', {
       component: 'DefaultScenario',
@@ -540,10 +537,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         limiter: limiter,
       },
     });
-
-    // for (const [sku,  urls] of Object.entries(urlsBySku)) {
-    //   urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
-    // }
 
     for (const [sku, urls] of Object.entries(urlsBySku) as [string, IDataImagItem][]) {
       urls.forEach((url, i) => queue.push({ sku, url, index: i + 1, idProduct: urls.idProduct }));

@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs/promises");
 const path = require("path");
-const SharpImageProcessor_1 = require("../services/ImageProcessor/SharpImageProcessor");
+const SharpImageProcessor_1 = require("../processing/ImageProcessor/SharpImageProcessor");
 const FileStorage_1 = require("../storage/fs/FileStorage");
-// запуск npm run  img-convert  -- "abs/path/to/folder/images"
+/* Функция предназначена для запуска отдельно от всего остального приложения.
+  npm run  img-convert  -- "abs/path/to/folder/images"
+*/
 async function run() {
     const args = process.argv.slice(2);
     if (args.length === 0) {

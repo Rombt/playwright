@@ -1,10 +1,12 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-import { SharpImageProcessor as ImageProcessor } from '../services/ImageProcessor/SharpImageProcessor';
+import { SharpImageProcessor as ImageProcessor } from '../processing/ImageProcessor/SharpImageProcessor';
 import { FileStorage } from '../storage/fs/FileStorage';
 
-// запуск npm run  img-convert  -- "abs/path/to/folder/images"
+/* Функция предназначена для запуска отдельно от всего остального приложения.
+  npm run  img-convert  -- "abs/path/to/folder/images"
+*/
 
 async function run(): Promise<void> {
   const args = process.argv.slice(2);

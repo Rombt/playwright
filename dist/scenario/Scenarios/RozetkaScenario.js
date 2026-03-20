@@ -9,7 +9,7 @@ const appConfig_1 = require("../../data/config/appConfig");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
-const SharpImageProcessor_1 = require("../../services/ImageProcessor/SharpImageProcessor");
+const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
 class RozetkaScenario {
     constructor(browser, storage) {
         this.browser = browser;

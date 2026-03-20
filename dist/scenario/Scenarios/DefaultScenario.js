@@ -8,7 +8,7 @@ const PagePool_1 = require("../../browser/pool/PagePool");
 const appConfig_1 = require("../../data/config/appConfig");
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
-const SharpImageProcessor_1 = require("../../services/ImageProcessor/SharpImageProcessor");
+const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -394,12 +394,9 @@ class DefaultScenario {
         });
     }
     async downloadImages(urlsBySku, task, context, limiter, loggerScope) {
-        // const queue: IImageItem[] = [];
         const queue = [];
         const allErrors = [];
         const ImgPool = new PagePool_1.PagePool(context, this.maxPage);
-        // const ImgPool = new PagePool(context, 10);
-        // const page = await ImgPool.acquire();
         loggerScope?.debug('Starting image download for current task', {
             component: 'DefaultScenario',
             method: 'downloadImages()',
@@ -411,9 +408,6 @@ class DefaultScenario {
                 limiter: limiter,
             },
         });
-        // for (const [sku,  urls] of Object.entries(urlsBySku)) {
-        //   urls.forEach((url, i) => queue.push({ sku, url, index: i + 1 }));
-        // }
         for (const [sku, urls] of Object.entries(urlsBySku)) {
             urls.forEach((url, i) => queue.push({ sku, url, index: i + 1, idProduct: urls.idProduct }));
         }
