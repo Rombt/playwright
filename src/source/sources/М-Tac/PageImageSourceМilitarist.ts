@@ -1,17 +1,17 @@
 import { APIRequestContext, Page } from 'playwright-core';
-import { ISource } from '../ISource';
-import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
-import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
-import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
-import { RateLimiter } from '../../browser/limiter/RateLimiter';
-import { IProduct } from '../../data/entities/IProduct';
-import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
-import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
-import { ILogger } from '../../data/logger/types/ILogger';
-import { Logger } from '../../data/logger/Logger';
-import { AppConfig } from '../../data/config/appConfig';
+import { ISource } from '../../ISource';
+import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
+import { IWorkerResult } from '../../../data/entities/IResults/IWorkerResult';
+import { IWorkerError } from '../../../data/entities/IErrors/IWorkerError';
+import { RateLimiter } from '../../../browser/limiter/RateLimiter';
+import { IProduct } from '../../../data/entities/IProduct';
+import { IDataImag, IDataImagItem } from '../../../data/entities/IDataImag';
+import { IHttpResult } from '../../../data/entities/IResults/IHttpResult';
+import { ILogger } from '../../../data/logger/types/ILogger';
+import { Logger } from '../../../data/logger/Logger';
+import { AppConfig } from '../../../data/config/appConfig';
 
-export default class PageImageSourceMTac implements ISource<ICollectProductPhotosTask> {
+export default class PageImageSourceMilitarist implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
 
   constructor() {

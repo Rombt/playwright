@@ -1,48 +1,51 @@
+запуск компилятора TS
+    npx tsc --watch
+запуск приложения
+    node dist/index.js
 
-    Нашивка  M-TAC Tact. girl №6 Hooligan 51468801
-    
-    
-    запуск компилятора TS
-        npx tsc --watch
-    запуск приложения
-        node dist/index.js
+Инструменты оценки stealth-показателей веб драйвера (Playwright, Puppeteer, Selenium)
+    https://bot.sannysoft.com/
+        Сайт представляет собой чеклист тестов, которые имитируют проверки реальных антибот-систем (Cloudflare, Akamai, DataDome).
+        «золотой стандарт» для отладки фингерпринтов
 
-    Инструменты оценки stealth-показателей веб драйвера (Playwright, Puppeteer, Selenium)
-        https://bot.sannysoft.com/
-            Сайт представляет собой чеклист тестов, которые имитируют проверки реальных антибот-систем (Cloudflare, Akamai, DataDome).
-            «золотой стандарт» для отладки фингерпринтов
-
-    для повышения защищённости от спам систем
-    Использование Playwright Stealth:
-        Плагин stealth через playwright-extra. Он автоматически подменяет параметры navigator.languages, webgl_vendor и скрывает свойство navigator.webdriver.
-            const { chromium } = require('playwright-extra');
-            const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-            chromium.use(StealthPlugin());
+для повышения защищённости от спам систем
+Использование Playwright Stealth:
+    Плагин stealth через playwright-extra. Он автоматически подменяет параметры navigator.languages, webgl_vendor и скрывает свойство navigator.webdriver.
+        const { chromium } = require('playwright-extra');
+        const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+        chromium.use(StealthPlugin());
 
 
-    Очерёдность обработки брендов:
-        $brands = Array
-            (
-                [0] => Puma             + +
-                [1] => M-TAC            + +
-                [2] => Columbia         + +
-                [3] => New Balance      + +
-                [4] => Outventure       -
-                [5] => Adidas           + +
-                [6] => Fila             -
-                [7] => 4F               -
-                [8] => KAPPA            -
-                [9] => Jack Wolfskin    -
-                [11] => Merrell         -
-                [12] => Nike            + +
-                [13] => Under Armour    -
-                [14] => FLY
-                [15] => Glissade        -
-                [16] => Hi-Tec          -
-                [17] => Saucony         + +
-                [18] => Skechers        -
-                [19] => Joma            + +
-            )
+РЕФАКТОРИНГ
+    убрать зоопарк sources переписав весь механизм по принципу processors
+
+
+
+
+
+Очерёдность обработки брендов:
+    $brands = Array
+        (
+            [0] => Puma             + +
+            [1] => M-TAC            + +
+            [2] => Columbia         + +
+            [3] => New Balance      + +
+            [4] => Outventure       -
+            [5] => Adidas           + +
+            [6] => Fila             -
+            [7] => 4F               -
+            [8] => KAPPA            -
+            [9] => Jack Wolfskin    -
+            [11] => Merrell         -
+            [12] => Nike            + +
+            [13] => Under Armour    -
+            [14] => FLY
+            [15] => Glissade        -
+            [16] => Hi-Tec          -
+            [17] => Saucony         + +
+            [18] => Skechers        -
+            [19] => Joma            + +
+        )
 
 Потенциальные источники:
     https://sportcity.ua/

@@ -837,20 +837,48 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     throw error;
   }
 
+  // async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
+  //   const files = await fs.readdir(this.sourcesFolder);
+  //   const sources: ISource<ICollectProductPhotosTask>[] = [];
+
+  //   for (const file of files) {
+  //     if (!file.endsWith('.js')) continue;
+
+  //     const fullPath = path.resolve(this.sourcesFolder, file);
+
+  //     const sourceModule = require(fullPath);
+  //     const SourceClass = sourceModule.default ?? sourceModule;
+
+  //     sources.push(new SourceClass());
+  //   }
+
+  //   return sources;
+  // }
+
   async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
-    const files = await fs.readdir(this.sourcesFolder);
     const sources: ISource<ICollectProductPhotosTask>[] = [];
 
-    for (const file of files) {
-      if (!file.endsWith('.js')) continue;
+    const walk = async (dir: string) => {
+      const files = await fs.readdir(dir, { withFileTypes: true });
 
-      const fullPath = path.resolve(this.sourcesFolder, file);
+      for (const file of files) {
+        const fullPath = path.resolve(dir, file.name);
 
-      const sourceModule = require(fullPath);
-      const SourceClass = sourceModule.default ?? sourceModule;
+        if (file.isDirectory()) {
+          await walk(fullPath);
+          continue;
+        }
 
-      sources.push(new SourceClass());
-    }
+        if (!file.name.endsWith('.js')) continue;
+
+        const sourceModule = require(fullPath);
+        const SourceClass = sourceModule.default ?? sourceModule;
+
+        sources.push(new SourceClass());
+      }
+    };
+
+    await walk(this.sourcesFolder);
 
     return sources;
   }
