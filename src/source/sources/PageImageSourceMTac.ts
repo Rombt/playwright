@@ -81,7 +81,8 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
 
   async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
-    const data: IDataImag = {};
+    const images: IDataImag = {};
+    const html: Record<string, string> = {};
 
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');
@@ -119,13 +120,19 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      data[sku] = imageUrls as IDataImagItem;
-      data[sku].idProduct = product.id_product;
+      images[sku] = imageUrls as IDataImagItem;
+      images[sku].idProduct = product.id_product;
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
 
-    return { data, errors };
+    return {
+      data: {
+        images,
+        html,
+      },
+      errors,
+    };
   }
 
   private buildWorkerError(

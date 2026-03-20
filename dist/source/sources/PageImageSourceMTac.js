@@ -43,7 +43,8 @@ class PageImageSourceMTac {
     }
     async execute(targetUrl, page, product) {
         const errors = [];
-        const data = {};
+        const images = {};
+        const html = {};
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
@@ -72,13 +73,19 @@ class PageImageSourceMTac {
                 .map((img) => img.src));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
-            data[sku] = imageUrls;
-            data[sku].idProduct = product.id_product;
+            images[sku] = imageUrls;
+            images[sku].idProduct = product.id_product;
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);
         }
-        return { data, errors };
+        return {
+            data: {
+                images,
+                html,
+            },
+            errors,
+        };
     }
     buildWorkerError(err, product, targetUrl, retryable = true) {
         return {
