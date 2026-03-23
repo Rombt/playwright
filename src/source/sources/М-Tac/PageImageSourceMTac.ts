@@ -97,7 +97,8 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       await image.click();
       const gallery = page.locator('div.product__main-slider.flex > div > div > div');
 
-      html = await page.locator('#uk-tab-2 > div').evaluate((el) => el.innerHTML);
+      // html = await page.locator('#uk-tab-2 > div').evaluate((el) => el.innerHTML);
+      html = await page.$eval('#uk-tab-2 > div.product-property', (el) => el.innerHTML);
 
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -124,6 +125,7 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       images[sku] = imageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;
     } catch (err) {
+      await page.screenshot({ path: `debug_photo/debug_${sku}.png`, fullPage: true });
       throw this.buildWorkerError(err, product, url);
     }
 
