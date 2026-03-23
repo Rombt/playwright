@@ -13,7 +13,6 @@ class MTacProcessor extends BaseHtmlProcessor_1.BaseHtmlProcessor {
                 $el.remove();
             }
         });
-        // const cleanHtmlDescription = dom.html(description);
         const cleanHtmlDescription = description.html() ?? '';
         const table = dom('table').first();
         table

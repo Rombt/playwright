@@ -15,7 +15,6 @@ export class MTacProcessor extends BaseHtmlProcessor {
       }
     });
 
-    // const cleanHtmlDescription = dom.html(description);
     const cleanHtmlDescription = description.html() ?? '';
 
     const table = dom('table').first();

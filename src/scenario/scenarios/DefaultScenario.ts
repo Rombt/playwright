@@ -28,6 +28,7 @@ import { ILogger } from '../../data/logger/types/ILogger';
 import { SharpImageProcessor as ImageProcessor } from '../../processing/ImageProcessor/SharpImageProcessor';
 
 import { HtmlProcessorFactory, Site } from '../../processing/HTMLProcessor';
+import { IProductRaw } from '../../processing/HTMLProcessor';
 
 // todo один универсальный тип ProcessResult
 type TaskResult =
@@ -252,6 +253,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
     const limiter = new RateLimiter(10000);
     const allData: IDataImag = {};
+    const allProductRaw: IProductRaw[] = [];
 
     await this.browser.runInContext(async (context) => {
       const products = task.products;
@@ -358,22 +360,15 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
               const processor = new HtmlProcessorFactory().create(Site.MTac);
               const rawContent = processor.process(r.data.html);
 
-              loggerScope?.debug('*****************r.data.html', {
-                component: 'DefaultScenario',
-                method: 'process()',
-                action: 'if (r.data.html)',
-                data: {
-                  product: product,
-                  targetWebsite: task.metadata.target_website,
-                  limiter: limiter,
-                  rDataHtml: r.data.html,
-                  rawContent: rawContent,
-                  result: result,
-                  status: 'success',
-                  allDataCount: allData.length,
-                  allData: allData,
-                },
-              });
+              if (Array.isArray(rawContent)) {
+                // здесь в будущем обработка атрибутов товара
+              } else {
+                allProductRaw.push({
+                  sku: product.sku,
+                  id: product.id_product,
+                  content: rawContent,
+                });
+              }
             }
           }
 
@@ -390,6 +385,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
               status: 'success',
               allDataCount: allData.length,
               allData: allData,
+              allProductRaw: allProductRaw,
             },
           });
 
@@ -528,6 +524,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       allErrors.push(
         ...(await this.downloadImages(normalized, task, context, limiter, loggerScope)),
       );
+    });
+
+    await this.storage.saveJson(allProductRaw, {
+      filename: `${task.brand_name}_products_raw.json`,
+      targetDir: '',
     });
 
     await this.storage.saveJson(allErrors, {

@@ -182,6 +182,7 @@ class DefaultScenario {
         });
         const limiter = new RateLimiter_1.RateLimiter(10000);
         const allData = {};
+        const allProductRaw = [];
         await this.browser.runInContext(async (context) => {
             const products = task.products;
             if (!Array.isArray(products) || products.length === 0) {
@@ -265,22 +266,16 @@ class DefaultScenario {
                         if (r.data.html) {
                             const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(HTMLProcessor_1.Site.MTac);
                             const rawContent = processor.process(r.data.html);
-                            loggerScope?.debug('*****************r.data.html', {
-                                component: 'DefaultScenario',
-                                method: 'process()',
-                                action: 'if (r.data.html)',
-                                data: {
-                                    product: product,
-                                    targetWebsite: task.metadata.target_website,
-                                    limiter: limiter,
-                                    rDataHtml: r.data.html,
-                                    rawContent: rawContent,
-                                    result: result,
-                                    status: 'success',
-                                    allDataCount: allData.length,
-                                    allData: allData,
-                                },
-                            });
+                            if (Array.isArray(rawContent)) {
+                                // здесь в будущем обработка атрибутов товара
+                            }
+                            else {
+                                allProductRaw.push({
+                                    sku: product.sku,
+                                    id: product.id_product,
+                                    content: rawContent,
+                                });
+                            }
                         }
                     }
                     loggerScope?.debug('Image data aggregation finished', {
@@ -295,6 +290,7 @@ class DefaultScenario {
                             status: 'success',
                             allDataCount: allData.length,
                             allData: allData,
+                            allProductRaw: allProductRaw,
                         },
                     });
                     pool.release(page);
@@ -406,6 +402,10 @@ class DefaultScenario {
                 },
             });
             allErrors.push(...(await this.downloadImages(normalized, task, context, limiter, loggerScope)));
+        });
+        await this.storage.saveJson(allProductRaw, {
+            filename: `${task.brand_name}_products_raw.json`,
+            targetDir: '',
         });
         await this.storage.saveJson(allErrors, {
             filename: `${task.brand_name}_unprocessed-products.json`,
