@@ -264,7 +264,7 @@ class DefaultScenario {
                             allData[sku].push(...images);
                         }
                         if (r.data.html) {
-                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(HTMLProcessor_1.Site.MTac);
+                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(task.brand_name.toLowerCase()); //!!!!!!!!!!!!!!!! текущий бренд  !!!!!!!!!!!!!!!
                             const rawContent = processor.process(r.data.html);
                             if (Array.isArray(rawContent)) {
                                 // здесь в будущем обработка атрибутов товара

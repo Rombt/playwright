@@ -5,13 +5,18 @@ import { Site } from './types/Site';
 import { MTacProcessor } from './processors/MTacProcessor';
 
 export class HtmlProcessorFactory implements IHtmlProcessorFactory {
-  public create(site: Site): IBaseHtmlProcessor {
-    switch (site) {
-      case Site.MTac:
-        return new MTacProcessor();
+  private processors: Record<string, new () => IBaseHtmlProcessor> = {
+    'm-tac': MTacProcessor,
+    // здесь добавлять новые бренды
+  };
 
-      default:
-        throw new Error(`Unsupported site: ${site}`);
+  public create(brand: string): IBaseHtmlProcessor {
+    const ProcessorClass = this.processors[brand.toLowerCase()];
+
+    if (!ProcessorClass) {
+      throw new Error(`Unsupported brand: ${brand}`);
     }
+
+    return new ProcessorClass();
   }
 }

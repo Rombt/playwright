@@ -357,7 +357,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             }
 
             if (r.data.html) {
-              const processor = new HtmlProcessorFactory().create(Site.MTac);
+              const processor = new HtmlProcessorFactory().create(task.brand_name.toLowerCase()); //!!!!!!!!!!!!!!!! текущий бренд  !!!!!!!!!!!!!!!
               const rawContent = processor.process(r.data.html);
 
               if (Array.isArray(rawContent)) {
