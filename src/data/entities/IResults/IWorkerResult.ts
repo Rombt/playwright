@@ -4,7 +4,7 @@ import { IDataImag } from '../IDataImag';
 export interface IWorkerResult {
   data: {
     images?: IDataImag;
-    html?: Record<string, string>;
+    html?: string;
   };
   errors: IWorkerError[];
 }

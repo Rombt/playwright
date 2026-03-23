@@ -82,7 +82,7 @@ export default class PageImageSourceMilitarist implements ISource<ICollectProduc
   async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
     const images: IDataImag = {};
-    const html: Record<string, string> = {};
+    let html: string = '';
 
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');

@@ -82,7 +82,7 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
   async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
     const images: IDataImag = {};
-    const html: Record<string, string> = {};
+    let html: string;
 
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');
@@ -92,12 +92,13 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
+      const image = page.locator('div.goods-top-block > div.goods-image > a').first(); //todo может быть много на странице получить и обработать все
       await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       await image.click();
-      const gallery = page.locator(
-        'div.catalog-item-gallery > div > div.big-img.slider-for.slick-initialized.slick-slider > div > div',
-      );
+      const gallery = page.locator('div.product__main-slider.flex > div > div > div');
+
+      html = await page.locator('#uk-tab-2 > div').evaluate((el) => el.innerHTML);
+
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {

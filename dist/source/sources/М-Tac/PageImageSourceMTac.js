@@ -44,17 +44,18 @@ class PageImageSourceMTac {
     async execute(targetUrl, page, product) {
         const errors = [];
         const images = {};
-        const html = {};
+        let html;
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
-            const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
+            const image = page.locator('div.goods-top-block > div.goods-image > a').first(); //todo может быть много на странице получить и обработать все
             await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             await image.click();
-            const gallery = page.locator('div.catalog-item-gallery > div > div.big-img.slider-for.slick-initialized.slick-slider > div > div');
+            const gallery = page.locator('div.product__main-slider.flex > div > div > div');
+            html = await page.locator('#uk-tab-2 > div').evaluate((el) => el.innerHTML);
             try {
                 await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }

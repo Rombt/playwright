@@ -5,7 +5,8 @@ const cheerio_1 = require("cheerio");
 class BaseHtmlProcessor {
     process(html) {
         const dom = this.parse(html);
-        return this.extractAttributes(dom);
+        // return this.extractAttributes(dom);
+        return this.extractRawContent(dom);
     }
     parse(html) {
         return (0, cheerio_1.load)(html);

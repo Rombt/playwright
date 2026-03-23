@@ -9,6 +9,7 @@ const appConfig_1 = require("../../data/config/appConfig");
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
 const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
+const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -260,6 +261,26 @@ class DefaultScenario {
                                 allData[sku] = arr;
                             }
                             allData[sku].push(...images);
+                        }
+                        if (r.data.html) {
+                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(HTMLProcessor_1.Site.MTac);
+                            const rawContent = processor.process(r.data.html);
+                            loggerScope?.debug('*****************r.data.html', {
+                                component: 'DefaultScenario',
+                                method: 'process()',
+                                action: 'if (r.data.html)',
+                                data: {
+                                    product: product,
+                                    targetWebsite: task.metadata.target_website,
+                                    limiter: limiter,
+                                    rDataHtml: r.data.html,
+                                    rawContent: rawContent,
+                                    result: result,
+                                    status: 'success',
+                                    allDataCount: allData.length,
+                                    allData: allData,
+                                },
+                            });
                         }
                     }
                     loggerScope?.debug('Image data aggregation finished', {
@@ -646,18 +667,6 @@ class DefaultScenario {
         }
         throw error;
     }
-    // async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
-    //   const files = await fs.readdir(this.sourcesFolder);
-    //   const sources: ISource<ICollectProductPhotosTask>[] = [];
-    //   for (const file of files) {
-    //     if (!file.endsWith('.js')) continue;
-    //     const fullPath = path.resolve(this.sourcesFolder, file);
-    //     const sourceModule = require(fullPath);
-    //     const SourceClass = sourceModule.default ?? sourceModule;
-    //     sources.push(new SourceClass());
-    //   }
-    //   return sources;
-    // }
     async loadSources() {
         const sources = [];
         const walk = async (dir) => {

@@ -44,7 +44,7 @@ class PageImageSourceMilitarist {
     async execute(targetUrl, page, product) {
         const errors = [];
         const images = {};
-        const html = {};
+        let html = '';
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
