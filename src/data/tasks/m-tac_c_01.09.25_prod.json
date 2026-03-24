@@ -5,7 +5,7 @@
       "brand_id": "214",
       "brand_name": "M-TAC",
       "metadata": {
-        "target_website": "https://militarist.ua/ua/search/?q={{sku_prod}}"
+        "target_website": "https://www.mtac.ua/search/?query={{sku_prod}}"
       },
       "products": [
         {

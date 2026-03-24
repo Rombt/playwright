@@ -82,7 +82,7 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
   async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
     const images: IDataImag = {};
-    let html: string;
+    let html: string = '';
 
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');
@@ -95,10 +95,8 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       const image = page.locator('div.goods-top-block > div.goods-image > a').first(); //todo может быть много на странице получить и обработать все
       await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       await image.click();
+
       const gallery = page.locator('div.product__main-slider.flex > div > div > div');
-
-      html = await page.locator('#uk-tab-2 > div').evaluate((el) => el.innerHTML);
-
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {
@@ -121,6 +119,16 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
+      const htmlCont = page.locator('.product-property').filter({
+        hasText: 'Характеристики товару',
+      });
+      await htmlCont
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      console.log('htmlCont.count() = ', await htmlCont.count());
+      html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
+
       images[sku] = imageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;
     } catch (err) {
@@ -135,6 +143,31 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
       errors,
     };
   }
+
+  // private async getHtmlFromTab(
+  //   page: Page,
+  //   timeout = this.config.asyncRetry.maxDelay,
+  // ): Promise<string> {
+  //   const selector = '#uk-tab-2 > div.product-property';
+
+  //   await page.waitForFunction(
+  //     (sel) => {
+  //       const el = document.querySelector(sel);
+  //       return el && el.innerHTML.trim().length > 0;
+  //     },
+  //     selector,
+  //     { timeout },
+  //   );
+
+  //   const html = await page.evaluate((sel) => {
+  //     const el = document.querySelector(sel);
+  //     return el?.innerHTML ?? '';
+  //   }, selector);
+
+  //   console.log('1111 html = ', html);
+
+  //   return html;
+  // }
 
   private buildWorkerError(
     err: unknown,

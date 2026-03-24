@@ -2,7 +2,7 @@ export const config = {
   async: {
     retry: {
       baseDelay: 2000,
-      maxDelay: 30000,
+      maxDelay: 20000,
       maxWaitForFreePage: 240000, // т.к. страница из пула освободится через maxDelay
       maxRetries: 10,
     },

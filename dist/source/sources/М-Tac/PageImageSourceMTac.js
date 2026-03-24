@@ -44,7 +44,7 @@ class PageImageSourceMTac {
     async execute(targetUrl, page, product) {
         const errors = [];
         const images = {};
-        let html;
+        let html = '';
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
@@ -55,7 +55,6 @@ class PageImageSourceMTac {
             await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             await image.click();
             const gallery = page.locator('div.product__main-slider.flex > div > div > div');
-            html = await page.locator('#uk-tab-2 > div').evaluate((el) => el.innerHTML);
             try {
                 await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }
@@ -74,6 +73,14 @@ class PageImageSourceMTac {
                 .map((img) => img.src));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
+            const htmlCont = page.locator('.product-property').filter({
+                hasText: 'Характеристики товару',
+            });
+            await htmlCont
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            console.log('htmlCont.count() = ', await htmlCont.count());
+            html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;
         }
@@ -88,6 +95,26 @@ class PageImageSourceMTac {
             errors,
         };
     }
+    // private async getHtmlFromTab(
+    //   page: Page,
+    //   timeout = this.config.asyncRetry.maxDelay,
+    // ): Promise<string> {
+    //   const selector = '#uk-tab-2 > div.product-property';
+    //   await page.waitForFunction(
+    //     (sel) => {
+    //       const el = document.querySelector(sel);
+    //       return el && el.innerHTML.trim().length > 0;
+    //     },
+    //     selector,
+    //     { timeout },
+    //   );
+    //   const html = await page.evaluate((sel) => {
+    //     const el = document.querySelector(sel);
+    //     return el?.innerHTML ?? '';
+    //   }, selector);
+    //   console.log('1111 html = ', html);
+    //   return html;
+    // }
     buildWorkerError(err, product, targetUrl, retryable = true) {
         return {
             error: err,

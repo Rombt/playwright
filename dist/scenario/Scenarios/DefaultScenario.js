@@ -264,7 +264,7 @@ class DefaultScenario {
                             allData[sku].push(...images);
                         }
                         if (r.data.html) {
-                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(task.brand_name.toLowerCase()); //!!!!!!!!!!!!!!!! текущий бренд  !!!!!!!!!!!!!!!
+                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(task.brand_name.toLowerCase());
                             const rawContent = processor.process(r.data.html);
                             if (Array.isArray(rawContent)) {
                                 // здесь в будущем обработка атрибутов товара
@@ -275,6 +275,7 @@ class DefaultScenario {
                                     id: product.id_product,
                                     content: rawContent,
                                 });
+                                //todo добавить возможность записывать в json файл кусками вместо того что бы держать в памяти
                             }
                         }
                     }

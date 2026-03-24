@@ -70,5 +70,64 @@ export class FileStorage implements IStorage {
     return value.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '');
   }
 
+  async appendJsonDeep<T extends Record<string, any>>(
+    data: T,
+    options: { filename: string; targetDir?: string },
+  ): Promise<void> {
+    const targetPath = path.join(this.baseDir, options.targetDir ?? '', options.filename);
+
+    await fs.mkdir(path.dirname(targetPath), { recursive: true });
+
+    let existingData: Record<string, any> = {};
+
+    try {
+      const fileContent = await fs.readFile(targetPath, 'utf-8');
+      if (fileContent.trim()) {
+        existingData = JSON.parse(fileContent);
+      }
+    } catch {
+      // ignore
+    }
+
+    const merged = this.deepMergeSafe(existingData, data);
+
+    await fs.writeFile(targetPath, JSON.stringify(merged, null, 2), 'utf-8');
+  }
+
+  private deepMergeSafe(target: any, source: any): any {
+    // если нет одного из значений
+    if (target === undefined) return source;
+    if (source === undefined) return target;
+
+    // массивы → дописываем
+    if (Array.isArray(target) && Array.isArray(source)) {
+      return [...target, ...source];
+    }
+
+    // оба объекта → merge
+    if (this.isObject(target) && this.isObject(source)) {
+      const result: Record<string, any> = { ...target };
+
+      for (const key of Object.keys(source)) {
+        result[key] = this.deepMergeSafe(target[key], source[key]);
+      }
+
+      return result;
+    }
+
+    // ❗ КЛЮЧЕВОЙ МОМЕНТ
+    // если типы разные — НЕ трогаем target
+    if (typeof target !== typeof source) {
+      return target;
+    }
+
+    // если одинаковый тип → обновляем
+    return source;
+  }
+
+  private isObject(value: any): value is Record<string, any> {
+    return value !== null && typeof value === 'object' && !Array.isArray(value);
+  }
+
   composeFileName() {}
 }

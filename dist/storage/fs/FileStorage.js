@@ -56,6 +56,51 @@ class FileStorage {
     trimNonPrintable(value) {
         return value.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '');
     }
+    async appendJsonDeep(data, options) {
+        const targetPath = path.join(this.baseDir, options.targetDir ?? '', options.filename);
+        await fs.mkdir(path.dirname(targetPath), { recursive: true });
+        let existingData = {};
+        try {
+            const fileContent = await fs.readFile(targetPath, 'utf-8');
+            if (fileContent.trim()) {
+                existingData = JSON.parse(fileContent);
+            }
+        }
+        catch {
+            // ignore
+        }
+        const merged = this.deepMergeSafe(existingData, data);
+        await fs.writeFile(targetPath, JSON.stringify(merged, null, 2), 'utf-8');
+    }
+    deepMergeSafe(target, source) {
+        // если нет одного из значений
+        if (target === undefined)
+            return source;
+        if (source === undefined)
+            return target;
+        // массивы → дописываем
+        if (Array.isArray(target) && Array.isArray(source)) {
+            return [...target, ...source];
+        }
+        // оба объекта → merge
+        if (this.isObject(target) && this.isObject(source)) {
+            const result = { ...target };
+            for (const key of Object.keys(source)) {
+                result[key] = this.deepMergeSafe(target[key], source[key]);
+            }
+            return result;
+        }
+        // ❗ КЛЮЧЕВОЙ МОМЕНТ
+        // если типы разные — НЕ трогаем target
+        if (typeof target !== typeof source) {
+            return target;
+        }
+        // если одинаковый тип → обновляем
+        return source;
+    }
+    isObject(value) {
+        return value !== null && typeof value === 'object' && !Array.isArray(value);
+    }
     composeFileName() { }
 }
 exports.FileStorage = FileStorage;
