@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HtmlProcessorFactory = void 0;
-const MTacProcessor_1 = require("./processors/MTacProcessor");
+const MilitaristProcessor_1 = require("./processors/MilitaristProcessor");
 class HtmlProcessorFactory {
     constructor() {
         this.processors = {
-            'm-tac': MTacProcessor_1.MTacProcessor,
+            // 'm-tac': MTacProcessor,  //todo придумать как обрабатывать один бренд разными процессами
+            'm-tac': MilitaristProcessor_1.MilitaristProcessor,
             // здесь добавлять новые бренды
         };
     }

@@ -265,6 +265,7 @@ class DefaultScenario {
                         }
                         if (r.data.html) {
                             const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(task.brand_name.toLowerCase());
+                            console.log('processor = ', processor);
                             const rawContent = processor.process(r.data.html);
                             if (Array.isArray(rawContent)) {
                                 // здесь в будущем обработка атрибутов товара

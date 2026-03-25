@@ -3,10 +3,12 @@ import { IBaseHtmlProcessor } from './types/IBaseHtmlProcessor';
 import { Site } from './types/Site';
 
 import { MTacProcessor } from './processors/MTacProcessor';
+import { MilitaristProcessor } from './processors/MilitaristProcessor';
 
 export class HtmlProcessorFactory implements IHtmlProcessorFactory {
   private processors: Record<string, new () => IBaseHtmlProcessor> = {
-    'm-tac': MTacProcessor,
+    // 'm-tac': MTacProcessor,  //todo придумать как обрабатывать один бренд разными процессами
+    'm-tac': MilitaristProcessor,
     // здесь добавлять новые бренды
   };
 

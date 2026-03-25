@@ -51,6 +51,13 @@ class PageImageSourceMilitarist {
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
+            //товаров не найдено
+            const goodsNoFound = page.locator('.page-content', {
+                hasText: 'За вашим запитом нічого не знайдено',
+            });
+            if ((await goodsNoFound.count()) > 0) {
+                throw new Error(`Goods not found on the page. ${sku}`); //todo запретить retry на эту ошибку
+            }
             const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
             await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             await image.click();
@@ -67,12 +74,22 @@ class PageImageSourceMilitarist {
             const firstImg = gallery.locator('img').first();
             await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             const imageUrls = await gallery
-                .locator('img')
-                .evaluateAll((imgs) => imgs
-                .filter((img) => img instanceof HTMLImageElement)
-                .map((img) => img.src));
+                .locator('link')
+                .evaluateAll((links) => links
+                .filter((link) => link instanceof HTMLLinkElement)
+                .map((link) => link.href));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
+            // поиск описания
+            // #short_desc_block
+            const htmlCont = page.locator('#short_desc_block').filter({
+                hasText: 'Короткі характеристики',
+            });
+            await htmlCont
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            console.log('htmlCont.count() = ', await htmlCont.count());
+            html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;
         }
