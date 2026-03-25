@@ -1,0 +1,1283 @@
+{
+  "generated_at": "2026-02-05_13-18",
+  "task": {
+    "214": {
+      "brand_id": "214",
+      "brand_name": "M-TAC",
+      "metadata": {
+        "target_website": "https://militarist.ua/ua/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53266",
+          "name_product": "Банер Tactical girl RPG 51552008 M-TAC",
+          "sku": "51552008",
+          "attributes": {
+            "color": "мульт.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53267",
+          "name_product": "Баул FG-BAULA UA",
+          "sku": "FG-BAULA-MM14",
+          "attributes": {
+            "color": "пікс",
+            "size": "90 л."
+          }
+        },
+        {
+          "id_product": "53268",
+          "name_product": "Баул FG-BAULA UA",
+          "sku": "FG-BAULA-COY",
+          "attributes": {
+            "color": "кой",
+            "size": "90 л."
+          }
+        },
+        {
+          "id_product": "53270",
+          "name_product": "Брелок ГУР МО України GRLD-220 UA",
+          "sku": "GRLD-220",
+          "attributes": {
+            "color": "латунь",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53271",
+          "name_product": "Бронеплита BRO-CAP6R-L-SIC M-TAC",
+          "sku": "BRO-CAP6R-L-SIC",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53272",
+          "name_product": "Брюки AGGR Lady 20069008 M-TAC",
+          "sku": "20069008",
+          "attributes": {
+            "color": "мульт",
+            "size": "26/30"
+          }
+        },
+        {
+          "id_product": "53272",
+          "name_product": "Брюки AGGR Lady 20069008 M-TAC",
+          "sku": "20069008",
+          "attributes": {
+            "color": "мульт",
+            "size": "28/30"
+          }
+        },
+        {
+          "id_product": "53272",
+          "name_product": "Брюки AGGR Lady 20069008 M-TAC",
+          "sku": "20069008",
+          "attributes": {
+            "color": "мульт",
+            "size": "28/32"
+          }
+        },
+        {
+          "id_product": "53272",
+          "name_product": "Брюки AGGR Lady 20069008 M-TAC",
+          "sku": "20069008",
+          "attributes": {
+            "color": "мульт",
+            "size": "30/30"
+          }
+        },
+        {
+          "id_product": "53272",
+          "name_product": "Брюки AGGR Lady 20069008 M-TAC",
+          "sku": "20069008",
+          "attributes": {
+            "color": "мульт",
+            "size": "30/32"
+          }
+        },
+        {
+          "id_product": "53278",
+          "name_product": "Вставка модульна (3 секції) 10197002 M-TAC",
+          "sku": "10197002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53279",
+          "name_product": "Вставка модульна (3 секції) 10197005 M-TAC",
+          "sku": "10197005",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53279",
+          "name_product": "Вставка модульна (3 секції) 10197005 M-TAC",
+          "sku": "10197005",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53280",
+          "name_product": "Вставка модульна для ключів 10068002 M-TAC",
+          "sku": "10068002",
+          "attributes": {
+            "color": "Black",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53281",
+          "name_product": "Вставка модульна для ключів 10068023 M-TAC",
+          "sku": "10068023",
+          "attributes": {
+            "color": "сір/зел",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53282",
+          "name_product": "Вставка модульна кишеня 10069002 M-TAC",
+          "sku": "10069002",
+          "attributes": {
+            "color": "Black",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53293",
+          "name_product": "Кружка зі складн. ручкою CL1C-M83 M-TAC",
+          "sku": "CL1C-M83",
+          "attributes": {
+            "color": "нерж.",
+            "size": "450ml"
+          }
+        },
+        {
+          "id_product": "53306",
+          "name_product": "Мультитул Type 12 60082911 M-TAC",
+          "sku": "60082911",
+          "attributes": {
+            "color": "стал.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53307",
+          "name_product": "Нашивка 51122533 Medic Cross LC M-TAC",
+          "sku": "51122533",
+          "attributes": {
+            "color": "кой/черв",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53308",
+          "name_product": "Нашивка 51348394 Пульт FPV M-TAC",
+          "sku": "51348394",
+          "attributes": {
+            "color": "рожев.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53309",
+          "name_product": "Нашивка 51393005 KITTY M-TAC",
+          "sku": "51393005",
+          "attributes": {
+            "color": "рож/кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53310",
+          "name_product": "Нашивка 51468005 Tactical girl №6 M-TAC",
+          "sku": "51468005",
+          "attributes": {
+            "color": "жовт/мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53311",
+          "name_product": "Нашивка 51498902 Ukraine LC GID M-TAC",
+          "sku": "51498902",
+          "attributes": {
+            "color": "чорн/жовт/син",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53312",
+          "name_product": "Нашивка 51498908 Ukraine LC GID M-TAC",
+          "sku": "51498908",
+          "attributes": {
+            "color": "мульт/жов/бл",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53313",
+          "name_product": "Нашивка 51564012 Time M-TAC",
+          "sku": "51564012",
+          "attributes": {
+            "color": "рож/чорн",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53315",
+          "name_product": "Нашивка M-TAC 51570005 Vampir",
+          "sku": "51570005",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53319",
+          "name_product": "Нашивка M-TAC AR-15 Velcro 51540023",
+          "sku": "51540023",
+          "attributes": {
+            "color": "сір/зел",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53320",
+          "name_product": "Нашивка R3-PTCH-NNV2P Ненависть вер.2",
+          "sku": "R3-PTCH-NNV2P",
+          "attributes": {
+            "color": "рож.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53328",
+          "name_product": "Органайзер утиліт. Elite Large 10157023-L M-TAC",
+          "sku": "10157023-L",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53329",
+          "name_product": "Органайзер утиліт. проз.Elite10147808 M-TAC",
+          "sku": "10147808-S",
+          "attributes": {
+            "color": "мульт",
+            "size": "22x14"
+          }
+        },
+        {
+          "id_product": "53330",
+          "name_product": "Паракорд 550 type III 10250110 M-TAC",
+          "sku": "10250110",
+          "attributes": {
+            "color": "т. зел",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "53331",
+          "name_product": "Паракорд 550 type III 10250144 M-TAC",
+          "sku": "10250144",
+          "attributes": {
+            "color": "помар.",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "53332",
+          "name_product": "Паракорд 550 type III PC15-OF M-TAC",
+          "sku": "MTC-PC15-OF",
+          "attributes": {
+            "color": "сір/зел",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "53333",
+          "name_product": "Паракорд SC-3DS15--OD Shock-Cord 3mm M-TAC",
+          "sku": "MTC-SC-3DS15--OD",
+          "attributes": {
+            "color": "зелен.",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "53334",
+          "name_product": "Паракорд Shock-Cord 3mm 10280005 M-TAC",
+          "sku": "10280005",
+          "attributes": {
+            "color": "кой",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "53336",
+          "name_product": "Підсумок для рації Motorola 10130002 M-TAC",
+          "sku": "10130002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53337",
+          "name_product": "Підсумок для РГД-5/Ф-1 10370008 M-TAC",
+          "sku": "10370008",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53338",
+          "name_product": "Підсумок для РГД-5/Ф-1 10370023 M-TAC",
+          "sku": "10370023",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53349",
+          "name_product": "Реглан Freedom 20524002 M-TAC",
+          "sku": "20524002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53349",
+          "name_product": "Реглан Freedom 20524002 M-TAC",
+          "sku": "20524002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53349",
+          "name_product": "Реглан Freedom 20524002 M-TAC",
+          "sku": "20524002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53349",
+          "name_product": "Реглан Freedom 20524002 M-TAC",
+          "sku": "20524002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53350",
+          "name_product": "Реглан UA Side 20494017 M-TAC",
+          "sku": "20494017",
+          "attributes": {
+            "color": "кой",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53350",
+          "name_product": "Реглан UA Side 20494017 M-TAC",
+          "sku": "20494017",
+          "attributes": {
+            "color": "кой",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53350",
+          "name_product": "Реглан UA Side 20494017 M-TAC",
+          "sku": "20494017",
+          "attributes": {
+            "color": "кой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53350",
+          "name_product": "Реглан UA Side 20494017 M-TAC",
+          "sku": "20494017",
+          "attributes": {
+            "color": "кой",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53350",
+          "name_product": "Реглан UA Side 20494017 M-TAC",
+          "sku": "20494017",
+          "attributes": {
+            "color": "кой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53351",
+          "name_product": "Ремінь Double Duty 10063005 M-TAC",
+          "sku": "10063005",
+          "attributes": {
+            "color": "кой",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53351",
+          "name_product": "Ремінь Double Duty 10063005 M-TAC",
+          "sku": "10063005",
+          "attributes": {
+            "color": "кой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53351",
+          "name_product": "Ремінь Double Duty 10063005 M-TAC",
+          "sku": "10063005",
+          "attributes": {
+            "color": "кой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53352",
+          "name_product": "Рукавички 90319005 Scout Tactical M-TAC",
+          "sku": "90319005",
+          "attributes": {
+            "color": "кой",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53352",
+          "name_product": "Рукавички 90319005 Scout Tactical M-TAC",
+          "sku": "90319005",
+          "attributes": {
+            "color": "кой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53352",
+          "name_product": "Рукавички 90319005 Scout Tactical M-TAC",
+          "sku": "90319005",
+          "attributes": {
+            "color": "кой",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53352",
+          "name_product": "Рукавички 90319005 Scout Tactical M-TAC",
+          "sku": "90319005",
+          "attributes": {
+            "color": "кой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53353",
+          "name_product": "Ручка тактична Type 3 60032002 M-TAC",
+          "sku": "60032002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53354",
+          "name_product": "Ручка тактична Type 5 60034002 M-TAC",
+          "sku": "60034002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53361",
+          "name_product": "Спальник 60078001 M-TAC",
+          "sku": "60078001",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53362",
+          "name_product": "Сумка скид маг Elite 10077008 M-TAC",
+          "sku": "10077008",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53363",
+          "name_product": "Сумка скид маг Lite Elite 10224008 M-TAC",
+          "sku": "10224008",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53371",
+          "name_product": "Темляк  M-TAC Zeus 10296101",
+          "sku": "10296101",
+          "attributes": {
+            "color": "олив",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53380",
+          "name_product": "Футболка довгий рукав 20067017 M-TAC",
+          "sku": "20067017",
+          "attributes": {
+            "color": "кой",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53380",
+          "name_product": "Футболка довгий рукав 20067017 M-TAC",
+          "sku": "20067017",
+          "attributes": {
+            "color": "кой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53380",
+          "name_product": "Футболка довгий рукав 20067017 M-TAC",
+          "sku": "20067017",
+          "attributes": {
+            "color": "кой",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53380",
+          "name_product": "Футболка довгий рукав 20067017 M-TAC",
+          "sku": "20067017",
+          "attributes": {
+            "color": "кой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53382",
+          "name_product": "Худі Born by Revolution 20112038 M-TAC",
+          "sku": "20112038",
+          "attributes": {
+            "color": "св.олива",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53382",
+          "name_product": "Худі Born by Revolution 20112038 M-TAC",
+          "sku": "20112038",
+          "attributes": {
+            "color": "св.олива",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53382",
+          "name_product": "Худі Born by Revolution 20112038 M-TAC",
+          "sku": "20112038",
+          "attributes": {
+            "color": "св.олива",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53382",
+          "name_product": "Худі Born by Revolution 20112038 M-TAC",
+          "sku": "20112038",
+          "attributes": {
+            "color": "св.олива",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53382",
+          "name_product": "Худі Born by Revolution 20112038 M-TAC",
+          "sku": "20112038",
+          "attributes": {
+            "color": "св.олива",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "53382",
+          "name_product": "Худі Born by Revolution 20112038 M-TAC",
+          "sku": "20112038",
+          "attributes": {
+            "color": "св.олива",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53383",
+          "name_product": "Худі My Home is my Castle 20113011 M-TAC",
+          "sku": "20113011",
+          "attributes": {
+            "color": "св.сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53383",
+          "name_product": "Худі My Home is my Castle 20113011 M-TAC",
+          "sku": "20113011",
+          "attributes": {
+            "color": "св.сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53383",
+          "name_product": "Худі My Home is my Castle 20113011 M-TAC",
+          "sku": "20113011",
+          "attributes": {
+            "color": "св.сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53383",
+          "name_product": "Худі My Home is my Castle 20113011 M-TAC",
+          "sku": "20113011",
+          "attributes": {
+            "color": "св.сір.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53383",
+          "name_product": "Худі My Home is my Castle 20113011 M-TAC",
+          "sku": "20113011",
+          "attributes": {
+            "color": "св.сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53384",
+          "name_product": "Худі Time 20555023 M-TAC",
+          "sku": "20555023",
+          "attributes": {
+            "color": "зел.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53384",
+          "name_product": "Худі Time 20555023 M-TAC",
+          "sku": "20555023",
+          "attributes": {
+            "color": "зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53384",
+          "name_product": "Худі Time 20555023 M-TAC",
+          "sku": "20555023",
+          "attributes": {
+            "color": "зел.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53385",
+          "name_product": "Черевики Winter Cross 30008102 M-TAC",
+          "sku": "30008102",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "53385",
+          "name_product": "Черевики Winter Cross 30008102 M-TAC",
+          "sku": "30008102",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "53385",
+          "name_product": "Черевики Winter Cross 30008102 M-TAC",
+          "sku": "30008102",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "53385",
+          "name_product": "Черевики Winter Cross 30008102 M-TAC",
+          "sku": "30008102",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "53385",
+          "name_product": "Черевики Winter Cross 30008102 M-TAC",
+          "sku": "30008102",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "53389",
+          "name_product": "Шапка тонка в'язка 40546035 M-TAC",
+          "sku": "40546035",
+          "attributes": {
+            "color": "помар.",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "53389",
+          "name_product": "Шапка тонка в'язка 40546035 M-TAC",
+          "sku": "40546035",
+          "attributes": {
+            "color": "помар.",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "53390",
+          "name_product": "Шапка-підшоломник RS 40591002 M-TAC",
+          "sku": "40591002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53390",
+          "name_product": "Шапка-підшоломник RS 40591002 M-TAC",
+          "sku": "40591002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53390",
+          "name_product": "Шапка-підшоломник RS 40591002 M-TAC",
+          "sku": "40591002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53390",
+          "name_product": "Шапка-підшоломник RS 40591002 M-TAC",
+          "sku": "40591002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53391",
+          "name_product": "Шарф-труба Elite фліс з затяж. 40545048 M-TAC",
+          "sku": "40545048",
+          "attributes": {
+            "color": "т.олив",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "53391",
+          "name_product": "Шарф-труба Elite фліс з затяж. 40545048 M-TAC",
+          "sku": "40545048",
+          "attributes": {
+            "color": "т.олив",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "53395",
+          "name_product": "Шеврон Поліція заг.(тип2) AKW-PLCALLBK",
+          "sku": "AKW-PLCALLBK",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53453",
+          "name_product": "Компл органайзерів Zip Elite 10459023 M-TAC",
+          "sku": "10459023",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53475",
+          "name_product": "Органайзер утиліт. M-TAC Elite Small 10157008-S",
+          "sku": "10157008-S",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53478",
+          "name_product": "Підсумок для газ. балонч. верт. 10327008 M-TAC",
+          "sku": "10327008",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53479",
+          "name_product": "Підсумок для короба M249 FAST 51710008 M-TAC",
+          "sku": "51710008",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53480",
+          "name_product": "Підсумок для короба M249 закр. 51711008 M-TAC",
+          "sku": "51711008",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53481",
+          "name_product": "Підсумок для короба ПК FAST 10013308 M-TAC",
+          "sku": "10013308",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53482",
+          "name_product": "Підсумок під мед. ножиці LC 10418008 M-TAC",
+          "sku": "10418008",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53483",
+          "name_product": "Підсумок під монокуляр PVS-14 Gen.3 10023108 M-TAC",
+          "sku": "10023108",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53519",
+          "name_product": "Нашивка DSNSTAPE ДСНС UA",
+          "sku": "AKW-DSNSTAPE",
+          "attributes": {
+            "color": "біл",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53519",
+          "name_product": "Нашивка DSNSTAPE ДСНС UA",
+          "sku": "AKW-DSNSTAPE",
+          "attributes": {
+            "color": "син",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53699",
+          "name_product": "Нашивка 51586000 дрон Boom Box",
+          "sku": "51586000",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53700",
+          "name_product": "Нашивка 51586100 Born to drop",
+          "sku": "51586100",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53844",
+          "name_product": "Рукавички Thinsulate 90309002 Fleece M-TAC",
+          "sku": "90309002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53844",
+          "name_product": "Рукавички Thinsulate 90309002 Fleece M-TAC",
+          "sku": "90309002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53844",
+          "name_product": "Рукавички Thinsulate 90309002 Fleece M-TAC",
+          "sku": "90309002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53845",
+          "name_product": "Стакан GAF-STNPU з ембл НПУ GAF",
+          "sku": "GAF-STNPU",
+          "attributes": {
+            "color": "прозор.",
+            "size": "300ml"
+          }
+        },
+        {
+          "id_product": "53846",
+          "name_product": "Стакан STWHZSU для віскі ЗСУ GAF",
+          "sku": "GAF-STWHZSU",
+          "attributes": {
+            "color": "прозор.",
+            "size": "300ml"
+          }
+        },
+        {
+          "id_product": "53852",
+          "name_product": "Ручка Тактична Type 2 60031002 M-TAC",
+          "sku": "60031002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53856",
+          "name_product": "Нашивка 51591000 Геракл",
+          "sku": "51591000",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53867",
+          "name_product": "Шарф-труба Elite фліс з затяж. 40586017 M-TAC",
+          "sku": "40586017",
+          "attributes": {
+            "color": "кой",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "53932",
+          "name_product": "Карабін GCLI-00002-PK пластик. M-TAC",
+          "sku": "GCLI-00002-PK",
+          "attributes": {
+            "color": "рож.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53932",
+          "name_product": "Карабін GCLI-00002-PK пластик. M-TAC",
+          "sku": "",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "53949",
+          "name_product": "Міні-піч спиртова 20814051 МАМО",
+          "sku": "20814051",
+          "attributes": {
+            "color": "сір.",
+            "size": "150ml"
+          }
+        },
+        {
+          "id_product": "53950",
+          "name_product": "Нашивка 51588000 Зевс",
+          "sku": "51588000",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54132",
+          "name_product": "Стакан STWHGUR для віскі ГУР GAF",
+          "sku": "GAF-STWHGUR",
+          "attributes": {
+            "color": "прозор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54518",
+          "name_product": "Лінійка GTA ET-20010 Ecopybook",
+          "sku": "ET-20010",
+          "attributes": {
+            "color": "прозор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54519",
+          "name_product": "Лінійка арт-й круг АК-3 ET-20014 Ecopybook",
+          "sku": "ET-20014",
+          "attributes": {
+            "color": "прозор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54520",
+          "name_product": "Лінійка ВТЛ (синій кант) ET-20041 Ecopybook",
+          "sku": "ET-20041",
+          "attributes": {
+            "color": "прозор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54773",
+          "name_product": "Аптечка IFAK Elite 10552002 M-TAC",
+          "sku": "10552002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54893",
+          "name_product": "Карабін S-Hook 60110005 M-TAC",
+          "sku": "60110005",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54894",
+          "name_product": "Карабін S-Hook 60110072 M-TAC",
+          "sku": "60110072",
+          "attributes": {
+            "color": "рож.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54895",
+          "name_product": "Карабін Type 1 60095004 M-TAC",
+          "sku": "60095004",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54896",
+          "name_product": "Карабін Type 3 60097001 M-TAC",
+          "sku": "60097001",
+          "attributes": {
+            "color": "ар.олив",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54897",
+          "name_product": "Карабін Type 3 60097004 M-TAC",
+          "sku": "60097004",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54898",
+          "name_product": "Карабін зі шнур 60108005 M-TAC",
+          "sku": "60108005",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54899",
+          "name_product": "Карабін пласт 60112005 M-TAC",
+          "sku": "60112005",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54900",
+          "name_product": "Карабін пласт 60112072 M-TAC",
+          "sku": "60112072",
+          "attributes": {
+            "color": "рож.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54945",
+          "name_product": "Карабін зі шнур 60108072 M-TAC",
+          "sku": "60108072",
+          "attributes": {
+            "color": "рож.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54946",
+          "name_product": "Кросівки Patrol R Gen.2 30404002 M-TAC",
+          "sku": "30404002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "54946",
+          "name_product": "Кросівки Patrol R Gen.2 30404002 M-TAC",
+          "sku": "30404002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "54946",
+          "name_product": "Кросівки Patrol R Gen.2 30404002 M-TAC",
+          "sku": "30404002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54946",
+          "name_product": "Кросівки Patrol R Gen.2 30404002 M-TAC",
+          "sku": "30404002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "54946",
+          "name_product": "Кросівки Patrol R Gen.2 30404002 M-TAC",
+          "sku": "30404002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "54946",
+          "name_product": "Кросівки Patrol R Gen.2 30404002 M-TAC",
+          "sku": "30404002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "54995",
+          "name_product": "Ніж складаний Type 14 60102211 M-TAC",
+          "sku": "60102211",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54996",
+          "name_product": "Ніж складаний Type 15 60103006 M-TAC",
+          "sku": "60103006",
+          "attributes": {
+            "color": "сір/син",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54997",
+          "name_product": "Ніж складаний Type 17 60105011 M-TAC",
+          "sku": "60105011",
+          "attributes": {
+            "color": "чорн/стал",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54998",
+          "name_product": "Ніж складаний Type 18 60106001 M-TAC",
+          "sku": "60106001",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54999",
+          "name_product": "Ніж складаний Type 19 60107033 M-TAC",
+          "sku": "60107033",
+          "attributes": {
+            "color": "сір/черв",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}
