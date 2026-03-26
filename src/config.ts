@@ -20,7 +20,9 @@ export const config = {
     // resultsFolder: 'results/results_militarist_c_01.09.25_full_prod',
     // resultsFolder: 'results/m-tac/militarist_1000x1000_test',
     // resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod',
-    resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod_2',
+    // resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod_2',
+    resultsFolder: 'results/ganzo/ganzo_c_01.09.25_646x646_full_prod',
+
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
     // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -33,12 +35,13 @@ export const config = {
     // taskPath: 'src/data/tasks/nike_tests.json',
     // taskPath: 'src/data/tasks/joma_tests.json',
     // taskPath: 'src/data/tasks/adidas_tests.json',
-    // taskPath: 'src/data/tasks/ganzo_tests.json',
     // taskPath: 'src/data/tasks/puma_dev_tests_1.json',
     // taskPath: 'src/data/tasks/m-tac/m-tac_for_tests.json',
     // taskPath: 'src/data/tasks/m-tac/m-tac_c_01.09.25_prod.json',
     // taskPath: 'src/data/tasks/m-tac/militarist_for_tests.json',
-    taskPath: 'src/data/tasks/m-tac/militarist_c_01.09.25_prod_2.json',
+    // taskPath: 'src/data/tasks/m-tac/militarist_c_01.09.25_prod_2.json',
+    // taskPath: 'src/data/tasks/ganzo/ganzo_tests.json',
+    taskPath: 'src/data/tasks/ganzo/ganzo_c_01.09.25_prod.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

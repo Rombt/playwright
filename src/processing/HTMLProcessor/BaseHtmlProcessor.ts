@@ -12,6 +12,7 @@ export abstract class BaseHtmlProcessor implements IBaseHtmlProcessor {
   }
 
   protected parse(html: string): CheerioAPI {
+    // console.log('html = ', html);
     return load(html);
   }
 

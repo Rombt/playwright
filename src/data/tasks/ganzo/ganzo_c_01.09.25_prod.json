@@ -1,0 +1,176 @@
+{
+  "generated_at": "2026-02-10_09-16",
+  "task": {
+    "248": {
+      "brand_id": "248",
+      "brand_name": "Ganzo",
+      "metadata": {
+        "target_website": "https://ganzo.ua/search?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53300",
+          "name_product": "Мультитул G201-H Ganzo (a)",
+          "sku": "G201-H",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53301",
+          "name_product": "Мультитул G303-B Ganzo (a)",
+          "sku": "G303-B",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53302",
+          "name_product": "Мультитул G304 Ganzo (a)",
+          "sku": "G304",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53303",
+          "name_product": "Мультитул NE20099 Ganzo (a)",
+          "sku": "NE20099\t",
+          "attributes": {
+            "color": "син",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53322",
+          "name_product": "Ніж складний G720-O Ganzo (а)",
+          "sku": "G720-O",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53323",
+          "name_product": "Ніж складний G7393P-OR Ganzo (a)",
+          "sku": "G7393P-OR",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54043",
+          "name_product": "Ніж складний G704B-BK Ganzo (а)",
+          "sku": "G704B-BK",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54044",
+          "name_product": "Ніж складний G721B-BK Ganzo (а)",
+          "sku": "G721B-BK",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54045",
+          "name_product": "Ніж складний G721B-GR Ganzo (а)",
+          "sku": "G721B-GR",
+          "attributes": {
+            "color": "зел/чорн",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54046",
+          "name_product": "Ніж складний G746-1-OR Ganzo (а)",
+          "sku": "G746-1-OR",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54366",
+          "name_product": "Мультитул G302-B Ganzo (a)",
+          "sku": "G302-B",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54367",
+          "name_product": "Мультитул G302-H Ganzo (a)",
+          "sku": "G302-H",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54368",
+          "name_product": "Ніж G806-BK з ножнами Ganzo (a)",
+          "sku": "G806-BK\t",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54369",
+          "name_product": "Ніж G806-GB з ножнами Ganzo (a)",
+          "sku": "G806-GB",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54370",
+          "name_product": "Ніж G806-OR з ножнами Ganzo (a)",
+          "sku": "G806-OR",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54371",
+          "name_product": "Ніж G807-BK з ножнами Ganzo (a)",
+          "sku": "G807BK",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54372",
+          "name_product": "Ніж G807-DY з ножнами Ganzo (a)",
+          "sku": "G807DY",
+          "attributes": {
+            "color": "беж.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54373",
+          "name_product": "Ніж G807-GY з ножнами Ganzo (a)",
+          "sku": "G807GY",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}
