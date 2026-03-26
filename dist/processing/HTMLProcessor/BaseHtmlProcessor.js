@@ -9,6 +9,7 @@ class BaseHtmlProcessor {
         return this.extractRawContent(dom);
     }
     parse(html) {
+        // console.log('html = ', html);
         return (0, cheerio_1.load)(html);
     }
 }

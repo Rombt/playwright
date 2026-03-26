@@ -81,7 +81,8 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
 
   async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
-    const data: IDataImag = {};
+    const images: IDataImag = {};
+    let html: string = '';
 
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');
@@ -133,13 +134,31 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
 
       if (absoluteImageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      data[sku] = imageUrls as IDataImagItem;
-      data[sku].idProduct = product.id_product;
+      // поиск описания
+      const htmlCont = page.locator('div.field-product-desc__item.field__item');
+      await htmlCont
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      // удаляю видео ролики
+      html = await htmlCont.evaluate((el) => {
+        el.querySelectorAll('div').forEach((div) => div.remove());
+        return el.innerHTML;
+      });
+
+      images[sku] = absoluteImageUrls as IDataImagItem;
+      images[sku].idProduct = product.id_product;
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
 
-    return { data, errors };
+    return {
+      data: {
+        images,
+        html,
+      },
+      errors,
+    };
   }
 
   private buildWorkerError(

@@ -130,7 +130,6 @@ export default class PageImageSourceMilitarist implements ISource<ICollectProduc
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
       // поиск описания
-      // #short_desc_block
       const htmlCont = page.locator('#short_desc_block').filter({
         hasText: 'Короткі характеристики',
       });
