@@ -22,7 +22,8 @@ exports.config = {
         // resultsFolder: 'results/results_test',
         // resultsFolder: 'results/results_militarist_c_01.09.25_full_prod',
         // resultsFolder: 'results/m-tac/militarist_1000x1000_test',
-        resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod',
+        // resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod',
+        resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod_2',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -39,7 +40,7 @@ exports.config = {
         // taskPath: 'src/data/tasks/m-tac/m-tac_for_tests.json',
         // taskPath: 'src/data/tasks/m-tac/m-tac_c_01.09.25_prod.json',
         // taskPath: 'src/data/tasks/m-tac/militarist_for_tests.json',
-        taskPath: 'src/data/tasks/m-tac/militarist_c_01.09.25_prod.json',
+        taskPath: 'src/data/tasks/m-tac/militarist_c_01.09.25_prod_2.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',
