@@ -7,9 +7,10 @@ class FileTransport {
     constructor(filePath, pretty = false) {
         this.pretty = pretty;
         this.filePath = path.resolve(filePath);
-        if (!fs.existsSync(this.filePath)) {
-            fs.writeFileSync(this.filePath, '', 'utf8');
-        }
+        // 1. Гарантируем существование директории (включая вложенные)
+        fs.mkdirSync(path.dirname(this.filePath), { recursive: true });
+        // 2. Гарантируем существование файла (без перезаписи)
+        fs.writeFileSync(this.filePath, '', { flag: 'a' });
     }
     write(entry) {
         let meta;
