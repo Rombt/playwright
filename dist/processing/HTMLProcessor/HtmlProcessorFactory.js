@@ -3,12 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HtmlProcessorFactory = void 0;
 const MilitaristProcessor_1 = require("./processors/MilitaristProcessor");
 const GanzoProcessor_1 = require("./processors/GanzoProcessor");
+const CamotecProcessor_1 = require("./processors/CamotecProcessor");
 class HtmlProcessorFactory {
     constructor() {
         this.processors = {
             // 'm-tac': MTacProcessor,  //todo придумать как обрабатывать один бренд разными процессами
             'm-tac': MilitaristProcessor_1.MilitaristProcessor,
             ganzo: GanzoProcessor_1.GanzoProcessor,
+            camotec: CamotecProcessor_1.CamotecProcessor,
             // здесь добавлять новые бренды
         };
     }

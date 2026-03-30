@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-02-10_09-16",
+  "task": {
+    "221": {
+      "brand_id": "221",
+      "brand_name": "camotec",
+      "metadata": {
+        "target_website": "https://camotec.ua/search/?searchString={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53273",
+          "name_product": "Брюки Lizard 2.0 DW 9331 Camotec",
+          "sku": "9331",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53274",
+          "name_product": "Брюки Lizard 2.0 DW 9339 Camotec",
+          "sku": "9339",
+          "attributes": {
+            "color": "олив",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53275",
+          "name_product": "Брюки SoftShell Vent 3.0 9295 Camotec",
+          "sku": "9295",
+          "attributes": {
+            "color": "мульт",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53276",
+          "name_product": "Брюки Stalker Vent 3.0 SoftShell 9144 Camotec",
+          "sku": "9144",
+          "attributes": {
+            "color": "олив",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53356",
+          "name_product": "Сорочка \"Буревій\" 9306 Camotec",
+          "sku": "9306",
+          "attributes": {
+            "color": "пісочн/біл",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}

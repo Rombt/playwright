@@ -3,5 +3,13 @@
   "phpcs.executablePath": "composer/vendor/squizlabs/php_codesniffer/bin/phpcs.bat",
   "phpsab.standard": ".phpcs.xml",
   "phpcs.autoConfigSearch": true,
-  "cSpell.words": ["domcontentloaded", "retryable", "Rozetka", "skus", "разрешоному"]
+  "cSpell.words": [
+    "camotec",
+    "domcontentloaded",
+    "ganzo",
+    "retryable",
+    "Rozetka",
+    "skus",
+    "разрешоному"
+  ]
 }
