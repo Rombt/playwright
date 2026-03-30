@@ -620,43 +620,31 @@ class DefaultScenario {
     }
     async withRetry(action, options, limiter, loggerScope) {
         let attempt = 1;
-        loggerScope?.debug('Entering withRetry method', {
-            component: 'DefaultScenario',
-            method: 'async withRetry(...)',
-            data: {
-                options: options,
-                action: action,
-            },
-        });
         while (true) {
             try {
-                loggerScope?.debug('Entering while (true)', {
-                    component: 'DefaultScenario',
-                    method: 'withRetry(...)',
-                    action: 'while (true)',
-                    data: {
-                        options: options,
-                        action: action,
-                    },
-                });
                 return await action();
             }
             catch (err) {
-                const { error, meta } = this.normalizeError(err);
-                loggerScope?.error('Error in while loop', {
-                    method: 'withRetry(...)',
-                    action: 'while (true)',
-                    data: {
-                        options: options,
-                        action: action,
-                        errorName: error instanceof Error ? error.name : undefined,
-                        errorMessage: error instanceof Error ? error.message : String(error),
-                        stack: error instanceof Error ? error.stack : undefined,
-                    },
+                const workerError = this.normalizeError(err);
+                loggerScope?.error('Error in withRetry', {
+                    attempt,
+                    maxRetries: options.maxRetries,
+                    message: workerError.error instanceof Error
+                        ? workerError.error.message
+                        : String(workerError.error),
+                    isRetryable: options.isRetryable(workerError),
                 });
-                if (attempt >= options.maxRetries) {
-                    throw err;
+                // Проверка retryable
+                if (!options.isRetryable(workerError)) {
+                    loggerScope?.debug('Error is NOT retryable → throwing');
+                    throw workerError;
                 }
+                // Проверка лимита попыток
+                if (attempt >= options.maxRetries) {
+                    loggerScope?.debug('Max retries reached → throwing');
+                    throw workerError;
+                }
+                // Retry
                 await (0, helpers_1.waitBeforeRetry)(attempt);
                 attempt++;
             }

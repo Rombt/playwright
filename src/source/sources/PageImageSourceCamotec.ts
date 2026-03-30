@@ -96,17 +96,34 @@ export default class PageImageSourceCamotec implements ISource<ICollectProductPh
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      const link = page.locator('#slick-slide00 > div > a').first();
+      const link = page.locator('.slick-track > .slick-slide > .img_wrap > a').first();
 
-      await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      const empty = page.locator('.text-center.emptyList', {
+        hasText: 'За вашим запитом',
+      });
+
+      try {
+        await Promise.race([
+          link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+          empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+        ]);
+      } catch {
+        throw new Error(`Search result not resolved. ${sku}`);
+      }
+
+      if ((await empty.count()) > 0) {
+        throw new Error(`Goods not found on the page. ${sku}`);
+      }
+
+      await link.waitFor({ state: 'visible' });
 
       const relativeHref = await link.getAttribute('href');
       if (!relativeHref) throw new Error('Product link not found');
+
       const absoluteHref = new URL(relativeHref, page.url()).toString();
-
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+      const gallery = page.locator('div.slider-for.slick-initialized.slick-slider');
 
-      const gallery = page.locator('div.slider-for.slick-initialized.slick-slider > div > div');
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
       } catch (error) {

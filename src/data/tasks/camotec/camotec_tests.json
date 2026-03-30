@@ -11,7 +11,7 @@
         {
           "id_product": "53273",
           "name_product": "Брюки Lizard 2.0 DW 9331 Camotec",
-          "sku": "9331",
+          "sku": "9331_1111",
           "attributes": {
             "color": "чорн.",
             "size": "L"
@@ -20,7 +20,7 @@
         {
           "id_product": "53274",
           "name_product": "Брюки Lizard 2.0 DW 9339 Camotec",
-          "sku": "9339",
+          "sku": "9339_1111",
           "attributes": {
             "color": "олив",
             "size": "L"
@@ -29,7 +29,7 @@
         {
           "id_product": "53275",
           "name_product": "Брюки SoftShell Vent 3.0 9295 Camotec",
-          "sku": "9295",
+          "sku": "9295_1111",
           "attributes": {
             "color": "мульт",
             "size": "XXL"

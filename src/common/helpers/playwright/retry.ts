@@ -1,16 +1,15 @@
 import { IWorkerError } from '../../../data/entities/IErrors/IWorkerError';
 
-export function isRetryable(error: IWorkerError): boolean {
-  if (!error) return false;
+export function isRetryable(workerError: IWorkerError): boolean {
+  if (!workerError || !workerError.error) return false;
 
-  // Если это ошибка Playwright с кодом timeout
-  if (error instanceof Error) {
-    const msg = error.message.toLowerCase();
+  const err = workerError.error;
 
-    // таймауты и network glitches
+  if (err instanceof Error) {
+    const msg = err.message.toLowerCase();
+
     if (msg.includes('timeout') || msg.includes('net::')) return true;
 
-    // если страница динамическая
     if (msg.includes('element not found') || msg.includes('not visible')) return true;
   }
 

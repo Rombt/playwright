@@ -43,13 +43,13 @@ export const config = {
     // taskPath: 'src/data/tasks/m-tac/militarist_c_01.09.25_prod_2.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_tests.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_c_01.09.25_prod.json',
-    // taskPath: 'src/data/tasks/camotec/camotec_tests.json',
-    taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod.json',
+    taskPath: 'src/data/tasks/camotec/camotec_tests.json',
+    // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',
   },
-
+  //
   logger: {
     // level: 'info',
     level: 'error',
