@@ -214,6 +214,7 @@ class DefaultScenario {
             const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
+            let page;
             const processProduct = async (product) => {
                 if (!task.metadata.target_website) {
                     loggerScope?.error('Task metadata does not contain target_website!!', {
@@ -228,7 +229,7 @@ class DefaultScenario {
                     throw new Error('Error!! Task metadata does not contain target_website!!');
                 }
                 try {
-                    const page = await pool.acquire();
+                    page = await pool.acquire();
                     loggerScope?.debug('Beginning processing of product', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -295,7 +296,7 @@ class DefaultScenario {
                             allProductRaw: allProductRaw,
                         },
                     });
-                    pool.release(page);
+                    // pool.release(page);
                     return { status: 'success' };
                 }
                 catch (err) {
@@ -317,6 +318,11 @@ class DefaultScenario {
                         },
                     });
                     return errorStatus;
+                }
+                finally {
+                    if (page) {
+                        pool.release(page);
+                    }
                 }
             };
             let attempt = 1;
@@ -508,8 +514,9 @@ class DefaultScenario {
                     data: {
                         item: item,
                         maxRetries: this.maxRetries,
-                        isRetryable: this.maxRetries,
+                        isRetryable: (0, helpers_1.isRetryable)(error),
                         status: errorStatus.status,
+                        error: error,
                         err: err,
                     },
                 });

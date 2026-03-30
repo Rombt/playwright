@@ -25,7 +25,8 @@ exports.config = {
         // resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod',
         // resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod_2',
         // resultsFolder: 'results/camotec/camotec_test',
-        resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod',
+        // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_2',
+        resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_3',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -44,8 +45,9 @@ exports.config = {
         // taskPath: 'src/data/tasks/m-tac/militarist_c_01.09.25_prod_2.json',
         // taskPath: 'src/data/tasks/ganzo/ganzo_tests.json',
         // taskPath: 'src/data/tasks/ganzo/ganzo_c_01.09.25_prod.json',
-        taskPath: 'src/data/tasks/camotec/camotec_tests.json',
-        // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod.json',
+        // taskPath: 'src/data/tasks/camotec/camotec_tests.json',
+        // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_2.json',
+        taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_3.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

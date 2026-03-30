@@ -151,6 +151,8 @@ export class PagePool implements IPagePool, IResource {
     } else {
       this.free.push(page);
     }
+
+    console.log('11 this.waiters.length = ', this.waiters.length);
   }
 
   async close(): Promise<void> {

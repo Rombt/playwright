@@ -406,6 +406,7 @@ class PlaywrightBrowser {
                     url,
                     errorName: error.name,
                     errorMessage: error.message,
+                    err: err,
                 },
             });
             // Fallback ТОЛЬКО если это сетевая ошибка

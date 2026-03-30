@@ -291,6 +291,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       const pool = new PagePool(context, quantityPage);
       this.registerResource(pool);
+      let page: Page;
 
       const processProduct = async (product: IProduct): Promise<TaskResult> => {
         if (!task.metadata.target_website) {
@@ -308,7 +309,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         }
 
         try {
-          const page = await pool.acquire();
+          page = await pool.acquire();
 
           loggerScope?.debug('Beginning processing of product', {
             component: 'DefaultScenario',
@@ -392,7 +393,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             },
           });
 
-          pool.release(page);
+          // pool.release(page);
 
           return { status: 'success' };
         } catch (err) {
@@ -417,6 +418,10 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           });
 
           return errorStatus;
+        } finally {
+          if (page) {
+            pool.release(page);
+          }
         }
       };
 
@@ -664,8 +669,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           data: {
             item: item,
             maxRetries: this.maxRetries,
-            isRetryable: this.maxRetries,
+            isRetryable: isRetryable(error),
             status: errorStatus.status,
+            error: error,
             err: err,
           },
         });
