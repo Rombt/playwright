@@ -23,7 +23,10 @@ export const config = {
     // resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod_2',
     // resultsFolder: 'results/camotec/camotec_test',
     // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_2',
-    resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_3',
+    // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_3',
+    // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_4',
+    // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_5',
+    resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_6',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -46,7 +49,10 @@ export const config = {
     // taskPath: 'src/data/tasks/ganzo/ganzo_c_01.09.25_prod.json',
     // taskPath: 'src/data/tasks/camotec/camotec_tests.json',
     // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_2.json',
-    taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_3.json',
+    // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_3.json',
+    // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_4.json',
+    // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_5.json',
+    taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_6.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

@@ -51,6 +51,8 @@ class PageImageSourceCamotec {
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
+            // todo разная вёрстка?!
+            // #\37 143 > div > div.imageBlock > div.sliderItemBlock > div:nth-child(1) > div > a
             const link = page.locator('.slick-track > .slick-slide > .img_wrap > a').first();
             const empty = page.locator('.text-center.emptyList', {
                 hasText: 'За вашим запитом',
