@@ -1,4 +1,5 @@
 import { LogLevel } from '../logger/types/LogLevel';
+import { IBrowserMode } from '../../browser/IBrowserMode';
 
 export interface IAppConfig {
   async?: AsyncConfig;
@@ -38,6 +39,7 @@ export interface DataConfig {
 
 export interface BrowserConfig {
   fingerprintFile: string;
+  mode: IBrowserMode;
 }
 
 export interface LoggerConfig {

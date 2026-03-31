@@ -83,6 +83,9 @@ class AppConfig {
     get fingerprintFile() {
         return this.processBrowser(config_1.config).browser.fingerprintFile;
     }
+    get browserMode() {
+        return this.processBrowser(config_1.config).browser.mode;
+    }
     get loggerConfig() {
         return this.processLogger(config_1.config).logger;
     }
@@ -142,9 +145,24 @@ class AppConfig {
     }
     processBrowser(rawConfig) {
         const browserConfig = rawConfig?.browser ?? {};
+        // --- fingerprintFile ---
+        const fingerprintFile = browserConfig.fingerprintFile
+            ? this.resolvePath(browserConfig.fingerprintFile)
+            : this.resolvePath('./fingerprints/fingerprint.config.json');
+        // --- mode ---
+        let mode = 'real';
+        if (browserConfig.mode !== undefined) {
+            if (browserConfig.mode === 'real' || browserConfig.mode === 'fake') {
+                mode = browserConfig.mode;
+            }
+            else {
+                throw new Error(`Invalid browser.mode: "${browserConfig.mode}". Allowed: real | fake`);
+            }
+        }
         return {
             browser: {
-                fingerprintFile: this.resolvePath(browserConfig.fingerprintFile),
+                fingerprintFile,
+                mode,
             },
         };
     }

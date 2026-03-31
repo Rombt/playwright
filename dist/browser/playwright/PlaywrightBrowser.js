@@ -69,7 +69,7 @@ class PlaywrightBrowser {
         return browser.newContext(this.browserContextOptions);
     }
     async runInContext(fn, mode) {
-        const context = await this.createContext(mode);
+        const context = await this.createContext(this.config.browserMode);
         await context.addInitScript(() => {
             Object.defineProperty(navigator, 'webdriver', {
                 get: () => false,

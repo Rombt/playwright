@@ -183,7 +183,8 @@ class DefaultScenario {
         const limiter = new RateLimiter_1.RateLimiter(10000);
         const allData = {};
         const allProductRaw = [];
-        await this.browser.runInContext(async (context) => {
+        // await this.browser.runInContext(async (context) => {
+        await this.browser.runInContextByChromium(async (context) => {
             const products = task.products;
             if (!Array.isArray(products) || products.length === 0) {
                 loggerScope?.error('Products are absent', {

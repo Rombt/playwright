@@ -13,6 +13,7 @@ import { ILoggerConfig } from '../logger/types/ILoggerConfig';
 import { ILogTransport } from '../logger/types/ILogTransport';
 import { ConsoleTransport } from '../logger/transport/ConsoleTransport';
 import { FileTransport } from '../logger/transport/FileTransport';
+import { IBrowserMode } from '../../browser/IBrowserMode';
 
 export class AppConfig {
   private static instance: AppConfig;
@@ -106,8 +107,12 @@ export class AppConfig {
     return this.processAsync(appConfig).async.pages;
   }
 
-  public get fingerprintFile(): string {
+  public get fingerprintFile(): string | undefined {
     return this.processBrowser(appConfig).browser.fingerprintFile;
+  }
+
+  public get browserMode(): IBrowserMode {
+    return this.processBrowser(appConfig).browser.mode;
   }
 
   public get loggerConfig(): LoggerConfig {
@@ -186,9 +191,26 @@ export class AppConfig {
   processBrowser(rawConfig: any): { browser: BrowserConfig } {
     const browserConfig = rawConfig?.browser ?? {};
 
+    // --- fingerprintFile ---
+    const fingerprintFile = browserConfig.fingerprintFile
+      ? this.resolvePath(browserConfig.fingerprintFile)
+      : this.resolvePath('./fingerprints/fingerprint.config.json');
+
+    // --- mode ---
+    let mode: IBrowserMode = 'real';
+
+    if (browserConfig.mode !== undefined) {
+      if (browserConfig.mode === 'real' || browserConfig.mode === 'fake') {
+        mode = browserConfig.mode;
+      } else {
+        throw new Error(`Invalid browser.mode: "${browserConfig.mode}". Allowed: real | fake`);
+      }
+    }
+
     return {
       browser: {
-        fingerprintFile: this.resolvePath(browserConfig.fingerprintFile),
+        fingerprintFile,
+        mode,
       },
     };
   }

@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as crypto from 'crypto';
 import * as fs from 'fs/promises';
+import { IBrowserMode } from '../IBrowserMode';
 
 import { IBrowser as IBrowser } from '../IBrowser';
 import {
@@ -70,7 +71,7 @@ export class PlaywrightBrowser
     console.log('Browser closed.');
   }
 
-  async createContext(mode: 'real' | 'fake' = 'real'): Promise<BrowserContext> {
+  async createContext(mode: IBrowserMode = 'real'): Promise<BrowserContext> {
     const browser = await this.init();
 
     if (mode === 'fake') {
@@ -92,9 +93,9 @@ export class PlaywrightBrowser
 
   async runInContext<Result>(
     fn: (context: BrowserContext) => Promise<Result>,
-    mode?: 'real' | 'fake',
+    mode?: IBrowserMode,
   ): Promise<Result> {
-    const context = await this.createContext(mode);
+    const context = await this.createContext(this.config.browserMode);
 
     await context.addInitScript(() => {
       Object.defineProperty(navigator, 'webdriver', {
@@ -111,7 +112,7 @@ export class PlaywrightBrowser
 
   async runInContextByChromium<Result>(
     fn: (context: BrowserContext) => Promise<Result>,
-    mode?: 'real' | 'fake',
+    mode?: IBrowserMode,
     loggerScope?: ILogger,
   ): Promise<Result> {
     loggerScope?.debug('The enter to the runInContextByChromium', {
