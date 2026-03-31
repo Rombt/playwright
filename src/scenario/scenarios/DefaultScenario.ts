@@ -518,6 +518,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         attempt++;
       }
 
+      //todo закрыть все страницы pool т.к. для downloadImages() будет использоваться другой pool
+
       const normalized = normalizeAllData(allData);
 
       loggerScope?.debug('All data normalized', {

@@ -1,0 +1,185 @@
+{
+  "generated_at": "2026-03-31_12-01",
+  "task": {
+    "293": {
+      "brand_id": "293",
+      "brand_name": "Kiborg",
+      "metadata": {
+        "target_website": "https://kiborg.com.ua/ru/#/search/{{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53946",
+          "name_product": "Підсумок 4050 під гранату KBG",
+          "sku": "4050",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54390",
+          "name_product": "Підсумок 4051 під гранату KBG",
+          "sku": "4051",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54391",
+          "name_product": "Підсумок 4052 під 1 маг KBG",
+          "sku": "4052",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54392",
+          "name_product": "Підсумок 4053 під 1 маг KBG",
+          "sku": "4053",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54393",
+          "name_product": "Підсумок 4055 жорст. посил. KBG",
+          "sku": "4055",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54394",
+          "name_product": "Підсумок 4059 жорст. посил. KBG",
+          "sku": "4059",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54395",
+          "name_product": "Підсумок 4060 утилітарний KBG",
+          "sku": "4060",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54396",
+          "name_product": "Підсумок 4061 утилітарний KBG",
+          "sku": "4061",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54397",
+          "name_product": "Підсумок 4062 утилітарний KBG",
+          "sku": "4062",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54398",
+          "name_product": "Підсумок 4064 утилітарний KBG",
+          "sku": "4064",
+          "attributes": {
+            "color": "чорн/мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54399",
+          "name_product": "Підсумок 4070 під 1 маг KBG",
+          "sku": "4070",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54400",
+          "name_product": "Підсумок 4772 під гранату KBG",
+          "sku": "4772",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54401",
+          "name_product": "Ремінь 1-точк 8031 (стропа) KBG",
+          "sku": "8031",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54402",
+          "name_product": "Ремінь 2-точк 8030 G-2 з пряжк шв рег KBG",
+          "sku": "8030",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54403",
+          "name_product": "Роз-й каремат посил 9-ти секц 8812 KBG",
+          "sku": "8812",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54404",
+          "name_product": "Сумка-баул 6019 KBG",
+          "sku": "6019",
+          "attributes": {
+            "color": "мульт",
+            "size": "120л"
+          }
+        },
+        {
+          "id_product": "54405",
+          "name_product": "Сумка-баул 6020 KBG",
+          "sku": "6020",
+          "attributes": {
+            "color": "мульт",
+            "size": "80л"
+          }
+        },
+        {
+          "id_product": "54406",
+          "name_product": "Сумка-баул 6022 KBG",
+          "sku": "6022",
+          "attributes": {
+            "color": "хакі",
+            "size": "80л"
+          }
+        },
+        {
+          "id_product": "54407",
+          "name_product": "Сумка-напашник 1978 KBG",
+          "sku": "1978",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

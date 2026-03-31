@@ -6,6 +6,7 @@ import { MTacProcessor } from './processors/MTacProcessor';
 import { MilitaristProcessor } from './processors/MilitaristProcessor';
 import { GanzoProcessor } from './processors/GanzoProcessor';
 import { CamotecProcessor } from './processors/CamotecProcessor';
+import { KiborgProcessor } from './processors/KiborgProcessor';
 
 export class HtmlProcessorFactory implements IHtmlProcessorFactory {
   private processors: Record<string, new () => IBaseHtmlProcessor> = {
@@ -13,6 +14,7 @@ export class HtmlProcessorFactory implements IHtmlProcessorFactory {
     'm-tac': MilitaristProcessor,
     ganzo: GanzoProcessor,
     camotec: CamotecProcessor,
+    kiborg: KiborgProcessor,
     // здесь добавлять новые бренды
   };
 

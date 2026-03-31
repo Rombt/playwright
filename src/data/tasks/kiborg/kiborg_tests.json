@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-03-30_16-28",
+  "task": {
+    "293": {
+      "brand_id": "293",
+      "brand_name": "Kiborg",
+      "metadata": {
+        "target_website": "https://kiborg.com.ua/ru/#/search/{{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "37994",
+          "name_product": "Футболка Columbia EM1990 CLB",
+          "sku": "1990",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53943",
+          "name_product": "Підсумок 1992 під тур-т KBG",
+          "sku": "1992",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53944",
+          "name_product": "Підсумок 1994 під тур-т KBG",
+          "sku": "1994",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53946",
+          "name_product": "Підсумок 4050 під гранату KBG",
+          "sku": "4050",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54387",
+          "name_product": "Підсумок 1995 жорст. посил. KBG",
+          "sku": "1995",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54388",
+          "name_product": "Підсумок 2017 під скид рулон KBG",
+          "sku": "2017",
+          "attributes": {
+            "color": "мульт",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}

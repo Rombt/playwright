@@ -26,7 +26,9 @@ export const config = {
     // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_3',
     // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_4',
     // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_5',
-    resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_6',
+    // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_6',
+    // resultsFolder: 'results/kiborg/kiborg_test',
+    resultsFolder: 'results/kiborg/kiborg_all_2',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -52,7 +54,9 @@ export const config = {
     // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_3.json',
     // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_4.json',
     // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_5.json',
-    taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_6.json',
+    // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_6.json',
+    // taskPath: 'src/data/tasks/kiborg/kiborg_tests.json',
+    taskPath: 'src/data/tasks/kiborg/kiborg_all_prod.json_2',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

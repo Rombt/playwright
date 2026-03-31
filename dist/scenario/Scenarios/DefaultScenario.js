@@ -400,6 +400,7 @@ class DefaultScenario {
                 });
                 attempt++;
             }
+            //todo закрыть все страницы pool т.к. для downloadImages() будет использоваться другой pool
             const normalized = (0, helpers_1.normalizeAllData)(allData);
             loggerScope?.debug('All data normalized', {
                 component: 'DefaultScenario',
