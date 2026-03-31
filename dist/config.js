@@ -31,7 +31,7 @@ exports.config = {
         // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_5',
         // resultsFolder: 'results/camotec/camotec_c_01.09.25_по_30.03.26_1000x1000_full_prod_6',
         // resultsFolder: 'results/kiborg/kiborg_test',
-        resultsFolder: 'results/bezet/bezet_test',
+        resultsFolder: 'results/bezet/bezet_all_3',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -57,7 +57,9 @@ exports.config = {
         // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_5.json',
         // taskPath: 'src/data/tasks/camotec/camotec_c_01.09.25_prod_6.json',
         // taskPath: 'src/data/tasks/kiborg/kiborg_tests.json',
-        taskPath: 'src/data/tasks/bezet/bezet_test.json',
+        taskPath: 'src/data/tasks/bezet/bezet_all_prod_3.json',
+        // taskPath: 'src/data/tasks/bezet/bezet_test.json',
+        // taskPath: 'src/data/tasks/bezet/bezet_test_short.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

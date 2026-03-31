@@ -98,12 +98,10 @@ export default class PageImageSourceBezet implements ISource<ICollectProductPhot
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      // body > div:nth-child(41) > div > div.multi-wrapper > div > div.multi-results > div > div.multi-cell.multi-lists > div > div:nth-child(1) > div > div > a
-      // .multi-grid
-      const link = page.locator('.multi-grid a').first();
+      const link = page.locator('.product > .info > a').first();
 
-      const empty = page.locator('.multi-noResults', {
-        hasText: 'Нічого не знайдено',
+      const empty = page.locator('.col-12 .row .flex-row-reverse > p', {
+        hasText: 'нічого не знайдено',
       });
 
       try {
@@ -119,10 +117,11 @@ export default class PageImageSourceBezet implements ISource<ICollectProductPhot
         throw new Error(`Goods not found on the page. ${sku}`);
       }
 
-      const links = page.locator('.multi-grid a');
+      const links = page.locator('.product > .info > a');
       await links.first().waitFor({ state: 'visible' });
 
       const quantityLinks = await links.count();
+
       let bestMatch = null;
       let bestScore = -Infinity;
 
@@ -148,8 +147,7 @@ export default class PageImageSourceBezet implements ISource<ICollectProductPhot
       const absoluteHref = new URL(relativeHref, page.url()).toString();
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
 
-      // #swiper-wrapper-80532ea6b8868d67 > div.sc-product-images-slide.swiper-slide.pb-3.pb-md-4.swiper-slide-active > span > img.zoomImg
-      const gallery = page.locator('.sc-product-images-main .swiper');
+      const gallery = page.locator('div.previews');
 
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -163,24 +161,23 @@ export default class PageImageSourceBezet implements ISource<ICollectProductPhot
       const firstImg = gallery.locator('img').first();
       await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      // div.swiper-slide img.zoomImg
       const imageUrls = await gallery
-        .locator('div.swiper-slide img.zoomImg')
-        .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src')).filter(Boolean));
+        .locator('.images_previews')
+        .evaluateAll((links) =>
+          links.map((link) => link.getAttribute('data-full')).filter(Boolean),
+        );
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
       // поиск описания
-      const htmlCont = page.locator('div.sc-product-content-left');
+      const htmlCont = page.locator('div.tab-content');
       await htmlCont
         .first()
         .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      // удаляю видео ролики
+      // удаляю script
       html = await htmlCont.evaluate((el) => {
-        el.querySelectorAll('div.ex_product_tab_1, div.sc-product-content-reviews').forEach((div) =>
-          div.remove(),
-        );
+        el.querySelectorAll('script').forEach((script) => script.remove());
         return el.innerHTML;
       });
 

@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-03-31_13-01",
+  "task": {
+    "275": {
+      "brand_id": "275",
+      "brand_name": "BEZET",
+      "metadata": {
+        "target_website": "https://www.bezet.com.ua/search?s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53451",
+          "name_product": "Брюки теплі Titan 10875 BEZET",
+          "sku": "10875",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}

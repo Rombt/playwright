@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-03-31_15-01",
+  "task": {
+    "275": {
+      "brand_id": "275",
+      "brand_name": "BEZET",
+      "metadata": {
+        "target_website": "https://www.bezet.com.ua/search?s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "19472",
+          "name_product": "Звукова плата Atcom USB-sound card (5.1) 3D sound (Windows 7 ready) (7807) USB 2.0, 5.1",
+          "sku": "7807",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37332",
+          "name_product": "Брюки Columbia WM8068CLB",
+          "sku": "8068",
+          "attributes": {
+            "color": "син",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37332",
+          "name_product": "Брюки Columbia WM8068CLB",
+          "sku": "8068",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37332",
+          "name_product": "Брюки Columbia WM8068CLB",
+          "sku": "8068",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37332",
+          "name_product": "Брюки Columbia WM8068CLB",
+          "sku": "8068",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37332",
+          "name_product": "Брюки Columbia WM8068CLB",
+          "sku": "8068",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37332",
+          "name_product": "Брюки Columbia WM8068CLB",
+          "sku": "8068",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}

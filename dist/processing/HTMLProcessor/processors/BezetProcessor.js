@@ -7,12 +7,11 @@ class BezetProcessor extends BaseHtmlProcessor_1.BaseHtmlProcessor {
     extractRawContent(dom) {
         (0, helpers_1.sanitizeDom)(dom);
         // удаляем лишнее
-        dom('.sc-product-tags').remove();
-        (0, helpers_1.removeElementsByFuzzyText)(dom, 'Власне виробництво');
-        const text = dom('.sc-product-content-text');
+        // dom('.sc-product-tags').remove();
+        // removeElementsByFuzzyText(dom, 'Власне виробництво');
+        const text = dom('#desc > #hidd');
         const textHtml = text.html() ?? '';
-        const attributes = dom('.sc-product-content-attributes-list');
-        attributes.find('.sc-product-content-attributes-list-title').remove();
+        const attributes = dom('#details');
         const attributesHtml = attributes.html();
         const cleanHtmlDescription = textHtml + attributesHtml;
         const cleanHtmlTable = '';
