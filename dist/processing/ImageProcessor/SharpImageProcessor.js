@@ -11,6 +11,7 @@ class SharpImageProcessor {
     async convertBufferToJpg(buffer, options) {
         const quality = options?.quality ?? 85;
         return sharp(buffer)
+            .flatten({ background: '#ffffff' })
             .jpeg({
             quality,
             progressive: options?.progressive ?? true,
