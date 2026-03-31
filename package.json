@@ -27,6 +27,7 @@
   "dependencies": {
     "-": "^0.0.1",
     "cheerio": "^1.2.0",
+    "fast-fuzzy": "^1.12.0",
     "node-fetch": "^3.3.2",
     "sharp": "^0.34.5"
   }
