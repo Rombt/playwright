@@ -1,0 +1,3722 @@
+{
+  "generated_at": "2026-02-10_09-16",
+  "task": {
+    "221": {
+      "brand_id": "221",
+      "brand_name": "camotec",
+      "metadata": {
+        "target_website": "https://camotec.ua/search/?searchString={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "21449",
+          "name_product": "Корпус Logicpower 8824 450W FAN 120mm Black",
+          "sku": "8824",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "25437",
+          "name_product": "Перехідник DVI 24+1pin to VGA Atcom (9214) DVI, VGA",
+          "sku": "9214",
+          "attributes": {
+            "color": "т.син/біл",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37208",
+          "name_product": "Бриджи Columbia AL 8605CLB",
+          "sku": "8605",
+          "attributes": {
+            "color": "зел/син",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37208",
+          "name_product": "Бриджи Columbia AL 8605CLB",
+          "sku": "8605",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S/16"
+          }
+        },
+        {
+          "id_product": "37208",
+          "name_product": "Бриджи Columbia AL 8605CLB",
+          "sku": "8605",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS/16"
+          }
+        },
+        {
+          "id_product": "37208",
+          "name_product": "Бриджи Columbia AL 8605CLB",
+          "sku": "8605",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M/16"
+          }
+        },
+        {
+          "id_product": "37210",
+          "name_product": "Бриджи Columbia AL8340CLB",
+          "sku": "8340",
+          "attributes": {
+            "color": "мульт.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37210",
+          "name_product": "Бриджи Columbia AL8340CLB",
+          "sku": "8340",
+          "attributes": {
+            "color": "белый",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "37210",
+          "name_product": "Бриджи Columbia AL8340CLB",
+          "sku": "8340",
+          "attributes": {
+            "color": "белый",
+            "size": "38 S"
+          }
+        },
+        {
+          "id_product": "37210",
+          "name_product": "Бриджи Columbia AL8340CLB",
+          "sku": "8340",
+          "attributes": {
+            "color": "белый",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "37210",
+          "name_product": "Бриджи Columbia AL8340CLB",
+          "sku": "8340",
+          "attributes": {
+            "color": "белый",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "37212",
+          "name_product": "Бриджи Columbia AL8652*SS14",
+          "sku": "8652",
+          "attributes": {
+            "color": "олива",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37212",
+          "name_product": "Бриджи Columbia AL8652*SS14",
+          "sku": "8652",
+          "attributes": {
+            "color": "бежевый",
+            "size": "36C"
+          }
+        },
+        {
+          "id_product": "37212",
+          "name_product": "Бриджи Columbia AL8652*SS14",
+          "sku": "8652",
+          "attributes": {
+            "color": "бежевый",
+            "size": "38C"
+          }
+        },
+        {
+          "id_product": "37212",
+          "name_product": "Бриджи Columbia AL8652*SS14",
+          "sku": "8652",
+          "attributes": {
+            "color": "бежевый",
+            "size": "40C"
+          }
+        },
+        {
+          "id_product": "37212",
+          "name_product": "Бриджи Columbia AL8652*SS14",
+          "sku": "8652",
+          "attributes": {
+            "color": "бежевый",
+            "size": "42C"
+          }
+        },
+        {
+          "id_product": "37212",
+          "name_product": "Бриджи Columbia AL8652*SS14",
+          "sku": "8652",
+          "attributes": {
+            "color": "бежевый",
+            "size": "44C"
+          }
+        },
+        {
+          "id_product": "37212",
+          "name_product": "Бриджи Columbia AL8652*SS14",
+          "sku": "8652",
+          "attributes": {
+            "color": "бежевый",
+            "size": "34C"
+          }
+        },
+        {
+          "id_product": "37213",
+          "name_product": "Бриджи Columbia AL8669*SS14",
+          "sku": "8669",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37213",
+          "name_product": "Бриджи Columbia AL8669*SS14",
+          "sku": "8669",
+          "attributes": {
+            "color": "т.синий",
+            "size": "38/18"
+          }
+        },
+        {
+          "id_product": "37213",
+          "name_product": "Бриджи Columbia AL8669*SS14",
+          "sku": "8669",
+          "attributes": {
+            "color": "т.синий",
+            "size": "40/18"
+          }
+        },
+        {
+          "id_product": "37213",
+          "name_product": "Бриджи Columbia AL8669*SS14",
+          "sku": "8669",
+          "attributes": {
+            "color": "т.синий",
+            "size": "42/18"
+          }
+        },
+        {
+          "id_product": "37213",
+          "name_product": "Бриджи Columbia AL8669*SS14",
+          "sku": "8669",
+          "attributes": {
+            "color": "т.синий",
+            "size": "44/18"
+          }
+        },
+        {
+          "id_product": "37213",
+          "name_product": "Бриджи Columbia AL8669*SS14",
+          "sku": "8669",
+          "attributes": {
+            "color": "т.синий",
+            "size": "46/18"
+          }
+        },
+        {
+          "id_product": "37213",
+          "name_product": "Бриджи Columbia AL8669*SS14",
+          "sku": "8669",
+          "attributes": {
+            "color": "т.синий",
+            "size": "34/18"
+          }
+        },
+        {
+          "id_product": "37254",
+          "name_product": "Брюки Columbia AJ 8564CLB",
+          "sku": "8564",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37254",
+          "name_product": "Брюки Columbia AJ 8564CLB",
+          "sku": "8564",
+          "attributes": {
+            "color": "св.кор.",
+            "size": "38/36"
+          }
+        },
+        {
+          "id_product": "37254",
+          "name_product": "Брюки Columbia AJ 8564CLB",
+          "sku": "8564",
+          "attributes": {
+            "color": "св.кор.",
+            "size": "40/36"
+          }
+        },
+        {
+          "id_product": "37254",
+          "name_product": "Брюки Columbia AJ 8564CLB",
+          "sku": "8564",
+          "attributes": {
+            "color": "св.кор.",
+            "size": "42/36"
+          }
+        },
+        {
+          "id_product": "37254",
+          "name_product": "Брюки Columbia AJ 8564CLB",
+          "sku": "8564",
+          "attributes": {
+            "color": "св.кор.",
+            "size": "44/36"
+          }
+        },
+        {
+          "id_product": "37254",
+          "name_product": "Брюки Columbia AJ 8564CLB",
+          "sku": "8564",
+          "attributes": {
+            "color": "св.кор.",
+            "size": "36/36"
+          }
+        },
+        {
+          "id_product": "37261",
+          "name_product": "Брюки Columbia AL8083CLB",
+          "sku": "8083",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37261",
+          "name_product": "Брюки Columbia AL8083CLB",
+          "sku": "8083",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38R"
+          }
+        },
+        {
+          "id_product": "37261",
+          "name_product": "Брюки Columbia AL8083CLB",
+          "sku": "8083",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40R"
+          }
+        },
+        {
+          "id_product": "37261",
+          "name_product": "Брюки Columbia AL8083CLB",
+          "sku": "8083",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42R"
+          }
+        },
+        {
+          "id_product": "37261",
+          "name_product": "Брюки Columbia AL8083CLB",
+          "sku": "8083",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44R"
+          }
+        },
+        {
+          "id_product": "37261",
+          "name_product": "Брюки Columbia AL8083CLB",
+          "sku": "8083",
+          "attributes": {
+            "color": "чёрный",
+            "size": "46R"
+          }
+        },
+        {
+          "id_product": "37261",
+          "name_product": "Брюки Columbia AL8083CLB",
+          "sku": "8083",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36R"
+          }
+        },
+        {
+          "id_product": "37262",
+          "name_product": "Брюки Columbia AL8086*AW16",
+          "sku": "8086",
+          "attributes": {
+            "color": "мульт.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37262",
+          "name_product": "Брюки Columbia AL8086*AW16",
+          "sku": "8086",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37262",
+          "name_product": "Брюки Columbia AL8086*AW16",
+          "sku": "8086",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37262",
+          "name_product": "Брюки Columbia AL8086*AW16",
+          "sku": "8086",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37262",
+          "name_product": "Брюки Columbia AL8086*AW16",
+          "sku": "8086",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "олива",
+            "size": "О(I) Rh+"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "бежевый",
+            "size": "34/34"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "бежевый",
+            "size": "36/32"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "бежевый",
+            "size": "36/34"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36R"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "бежевый",
+            "size": "38/34"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38R"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "бежевый",
+            "size": "40/32"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "бежевый",
+            "size": "40/34"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "серо-коричн.",
+            "size": "40/34"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "тёмно- серый",
+            "size": "40/34"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40R"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42R"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44R"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "чёрный",
+            "size": "46R"
+          }
+        },
+        {
+          "id_product": "37277",
+          "name_product": "Брюки Columbia AL8650CLB",
+          "sku": "8650",
+          "attributes": {
+            "color": "бежевый",
+            "size": "34/32"
+          }
+        },
+        {
+          "id_product": "37279",
+          "name_product": "Брюки Columbia AL8993*AW15",
+          "sku": "8993",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37279",
+          "name_product": "Брюки Columbia AL8993*AW15",
+          "sku": "8993",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36R"
+          }
+        },
+        {
+          "id_product": "37279",
+          "name_product": "Брюки Columbia AL8993*AW15",
+          "sku": "8993",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38R"
+          }
+        },
+        {
+          "id_product": "37279",
+          "name_product": "Брюки Columbia AL8993*AW15",
+          "sku": "8993",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40R"
+          }
+        },
+        {
+          "id_product": "37279",
+          "name_product": "Брюки Columbia AL8993*AW15",
+          "sku": "8993",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42R"
+          }
+        },
+        {
+          "id_product": "37279",
+          "name_product": "Брюки Columbia AL8993*AW15",
+          "sku": "8993",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44R"
+          }
+        },
+        {
+          "id_product": "37290",
+          "name_product": "Брюки Columbia AM8129CLB",
+          "sku": "8129",
+          "attributes": {
+            "color": "койот",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37290",
+          "name_product": "Брюки Columbia AM8129CLB",
+          "sku": "8129",
+          "attributes": {
+            "color": "чёрный",
+            "size": "32/32"
+          }
+        },
+        {
+          "id_product": "37290",
+          "name_product": "Брюки Columbia AM8129CLB",
+          "sku": "8129",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34/32"
+          }
+        },
+        {
+          "id_product": "37290",
+          "name_product": "Брюки Columbia AM8129CLB",
+          "sku": "8129",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36/32"
+          }
+        },
+        {
+          "id_product": "37290",
+          "name_product": "Брюки Columbia AM8129CLB",
+          "sku": "8129",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/32"
+          }
+        },
+        {
+          "id_product": "37290",
+          "name_product": "Брюки Columbia AM8129CLB",
+          "sku": "8129",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40/32"
+          }
+        },
+        {
+          "id_product": "37290",
+          "name_product": "Брюки Columbia AM8129CLB",
+          "sku": "8129",
+          "attributes": {
+            "color": "чёрный",
+            "size": "30/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "олива",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "30/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "30/34"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "коричн.",
+            "size": "32/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "32/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "32/34"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "коричн.",
+            "size": "34/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34/34"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "коричн.",
+            "size": "36/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36/34"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "коричн.",
+            "size": "38/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/34"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "коричн.",
+            "size": "40/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40/34"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42/34"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44/32"
+          }
+        },
+        {
+          "id_product": "37295",
+          "name_product": "Брюки Columbia AM8441CLB",
+          "sku": "8441",
+          "attributes": {
+            "color": "коричн.",
+            "size": "30/32"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "кой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "коричневый",
+            "size": "L/32"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "бежевый",
+            "size": "S/34"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "коричневый",
+            "size": "S/34"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "",
+            "size": "XXL/32"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "коричневый",
+            "size": "XXL/32"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "бежевый",
+            "size": "XXL/34"
+          }
+        },
+        {
+          "id_product": "37316",
+          "name_product": "Брюки Columbia EM8740",
+          "sku": "8740",
+          "attributes": {
+            "color": "",
+            "size": "L/32"
+          }
+        },
+        {
+          "id_product": "37326",
+          "name_product": "Брюки Columbia SL8391*AW15",
+          "sku": "8391",
+          "attributes": {
+            "color": "олив",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37326",
+          "name_product": "Брюки Columbia SL8391*AW15",
+          "sku": "8391",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37326",
+          "name_product": "Брюки Columbia SL8391*AW15",
+          "sku": "8391",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37326",
+          "name_product": "Брюки Columbia SL8391*AW15",
+          "sku": "8391",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37326",
+          "name_product": "Брюки Columbia SL8391*AW15",
+          "sku": "8391",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37326",
+          "name_product": "Брюки Columbia SL8391*AW15",
+          "sku": "8391",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "32/32"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "32/34"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34/32"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34/34"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36/34"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/32"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/34"
+          }
+        },
+        {
+          "id_product": "37334",
+          "name_product": "Брюки EM8767CLB",
+          "sku": "8767",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40/34"
+          }
+        },
+        {
+          "id_product": "37335",
+          "name_product": "Брюки EM8781",
+          "sku": "8781",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37335",
+          "name_product": "Брюки EM8781",
+          "sku": "8781",
+          "attributes": {
+            "color": "оливк.",
+            "size": "32/34"
+          }
+        },
+        {
+          "id_product": "37335",
+          "name_product": "Брюки EM8781",
+          "sku": "8781",
+          "attributes": {
+            "color": "оливк.",
+            "size": "36/34"
+          }
+        },
+        {
+          "id_product": "37335",
+          "name_product": "Брюки EM8781",
+          "sku": "8781",
+          "attributes": {
+            "color": "оливк.",
+            "size": "38/32"
+          }
+        },
+        {
+          "id_product": "37335",
+          "name_product": "Брюки EM8781",
+          "sku": "8781",
+          "attributes": {
+            "color": "оливк.",
+            "size": "38/34"
+          }
+        },
+        {
+          "id_product": "37335",
+          "name_product": "Брюки EM8781",
+          "sku": "8781",
+          "attributes": {
+            "color": "оливк.",
+            "size": "40/32"
+          }
+        },
+        {
+          "id_product": "37335",
+          "name_product": "Брюки EM8781",
+          "sku": "8781",
+          "attributes": {
+            "color": "оливк.",
+            "size": "40/34"
+          }
+        },
+        {
+          "id_product": "37336",
+          "name_product": "Брюки EM8789CLB",
+          "sku": "8789",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37336",
+          "name_product": "Брюки EM8789CLB",
+          "sku": "8789",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34/34"
+          }
+        },
+        {
+          "id_product": "37336",
+          "name_product": "Брюки EM8789CLB",
+          "sku": "8789",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36/34"
+          }
+        },
+        {
+          "id_product": "37336",
+          "name_product": "Брюки EM8789CLB",
+          "sku": "8789",
+          "attributes": {
+            "color": "серый",
+            "size": "38/34"
+          }
+        },
+        {
+          "id_product": "37336",
+          "name_product": "Брюки EM8789CLB",
+          "sku": "8789",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/34"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "олива",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "белый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "белый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "белый",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "белый",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37338",
+          "name_product": "Брюки SL8370",
+          "sku": "8370",
+          "attributes": {
+            "color": "белый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37441",
+          "name_product": "Джемпер Columbia WL6660CLB",
+          "sku": "6660",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37441",
+          "name_product": "Джемпер Columbia WL6660CLB",
+          "sku": "6660",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37442",
+          "name_product": "Джемпер Columbia WL6676CLB",
+          "sku": "6676",
+          "attributes": {
+            "color": "піксель",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37442",
+          "name_product": "Джемпер Columbia WL6676CLB",
+          "sku": "6676",
+          "attributes": {
+            "color": "сиреневый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37442",
+          "name_product": "Джемпер Columbia WL6676CLB",
+          "sku": "6676",
+          "attributes": {
+            "color": "сиреневый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37442",
+          "name_product": "Джемпер Columbia WL6676CLB",
+          "sku": "6676",
+          "attributes": {
+            "color": "сиреневый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37442",
+          "name_product": "Джемпер Columbia WL6676CLB",
+          "sku": "6676",
+          "attributes": {
+            "color": "белый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37442",
+          "name_product": "Джемпер Columbia WL6676CLB",
+          "sku": "6676",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37460",
+          "name_product": "Кальсоны AL8634CLB",
+          "sku": "8634",
+          "attributes": {
+            "color": "мульт.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37460",
+          "name_product": "Кальсоны AL8634CLB",
+          "sku": "8634",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S/R"
+          }
+        },
+        {
+          "id_product": "37460",
+          "name_product": "Кальсоны AL8634CLB",
+          "sku": "8634",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS/R"
+          }
+        },
+        {
+          "id_product": "37460",
+          "name_product": "Кальсоны AL8634CLB",
+          "sku": "8634",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M/R"
+          }
+        },
+        {
+          "id_product": "37469",
+          "name_product": "Кепка Columbia CM9002LB",
+          "sku": "9002",
+          "attributes": {
+            "color": "олив",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37469",
+          "name_product": "Кепка Columbia CM9002LB",
+          "sku": "9002",
+          "attributes": {
+            "color": "зелёный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37469",
+          "name_product": "Кепка Columbia CM9002LB",
+          "sku": "9002",
+          "attributes": {
+            "color": "оливк.",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37469",
+          "name_product": "Кепка Columbia CM9002LB",
+          "sku": "9002",
+          "attributes": {
+            "color": "т.синий",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37469",
+          "name_product": "Кепка Columbia CM9002LB",
+          "sku": "9002",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37471",
+          "name_product": "Кепка Columbia CU9131*SS15",
+          "sku": "9131",
+          "attributes": {
+            "color": "олива",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37471",
+          "name_product": "Кепка Columbia CU9131*SS15",
+          "sku": "9131",
+          "attributes": {
+            "color": "белый",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37471",
+          "name_product": "Кепка Columbia CU9131*SS15",
+          "sku": "9131",
+          "attributes": {
+            "color": "синий",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37471",
+          "name_product": "Кепка Columbia CU9131*SS15",
+          "sku": "9131",
+          "attributes": {
+            "color": "т.синий",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37471",
+          "name_product": "Кепка Columbia CU9131*SS15",
+          "sku": "9131",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37471",
+          "name_product": "Кепка Columbia CU9131*SS15",
+          "sku": "9131",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37720",
+          "name_product": "Перчатки Columbia SU9482*AW16",
+          "sku": "9482",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37720",
+          "name_product": "Перчатки Columbia SU9482*AW16",
+          "sku": "9482",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37720",
+          "name_product": "Перчатки Columbia SU9482*AW16",
+          "sku": "9482",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37720",
+          "name_product": "Перчатки Columbia SU9482*AW16",
+          "sku": "9482",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37723",
+          "name_product": "Пиджак Columbia EM7623",
+          "sku": "7623",
+          "attributes": {
+            "color": "піксель",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37723",
+          "name_product": "Пиджак Columbia EM7623",
+          "sku": "7623",
+          "attributes": {
+            "color": "синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37723",
+          "name_product": "Пиджак Columbia EM7623",
+          "sku": "7623",
+          "attributes": {
+            "color": "синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37723",
+          "name_product": "Пиджак Columbia EM7623",
+          "sku": "7623",
+          "attributes": {
+            "color": "синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37723",
+          "name_product": "Пиджак Columbia EM7623",
+          "sku": "7623",
+          "attributes": {
+            "color": "синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37723",
+          "name_product": "Пиджак Columbia EM7623",
+          "sku": "7623",
+          "attributes": {
+            "color": "бежевый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37723",
+          "name_product": "Пиджак Columbia EM7623",
+          "sku": "7623",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "мульт.",
+            "size": "61"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "коричневый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "белый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "коричневый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "белый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "коричневый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "белый",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "коричневый",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "белый",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "коричневый",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37740",
+          "name_product": "Поло Columbia AM 6692 CLB",
+          "sku": "6692",
+          "attributes": {
+            "color": "белый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "олив",
+            "size": "100л."
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "голубой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "салатовый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "голубой",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "салатовый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "голубой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "салатовый",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "голубой",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37848",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7056",
+          "sku": "7056",
+          "attributes": {
+            "color": "голубой",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37850",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7212",
+          "sku": "7212",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37850",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7212",
+          "sku": "7212",
+          "attributes": {
+            "color": "голубой",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37850",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7212",
+          "sku": "7212",
+          "attributes": {
+            "color": "голубой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37850",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7212",
+          "sku": "7212",
+          "attributes": {
+            "color": "голубой",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37850",
+          "name_product": "Рубашка Columbia (короткий рукав) EM7212",
+          "sku": "7212",
+          "attributes": {
+            "color": "голубой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37864",
+          "name_product": "Рубашка Columbia AL7261*SS15",
+          "sku": "7261",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "37864",
+          "name_product": "Рубашка Columbia AL7261*SS15",
+          "sku": "7261",
+          "attributes": {
+            "color": "красный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37864",
+          "name_product": "Рубашка Columbia AL7261*SS15",
+          "sku": "7261",
+          "attributes": {
+            "color": "красный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37864",
+          "name_product": "Рубашка Columbia AL7261*SS15",
+          "sku": "7261",
+          "attributes": {
+            "color": "красный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37864",
+          "name_product": "Рубашка Columbia AL7261*SS15",
+          "sku": "7261",
+          "attributes": {
+            "color": "красный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37864",
+          "name_product": "Рубашка Columbia AL7261*SS15",
+          "sku": "7261",
+          "attributes": {
+            "color": "красный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37872",
+          "name_product": "Рубашка Columbia AM9132*SS15",
+          "sku": "9132",
+          "attributes": {
+            "color": "койот",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37872",
+          "name_product": "Рубашка Columbia AM9132*SS15",
+          "sku": "9132",
+          "attributes": {
+            "color": "синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37872",
+          "name_product": "Рубашка Columbia AM9132*SS15",
+          "sku": "9132",
+          "attributes": {
+            "color": "синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37872",
+          "name_product": "Рубашка Columbia AM9132*SS15",
+          "sku": "9132",
+          "attributes": {
+            "color": "синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37872",
+          "name_product": "Рубашка Columbia AM9132*SS15",
+          "sku": "9132",
+          "attributes": {
+            "color": "синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37872",
+          "name_product": "Рубашка Columbia AM9132*SS15",
+          "sku": "9132",
+          "attributes": {
+            "color": "",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37873",
+          "name_product": "Рубашка Columbia AM9135*SS15",
+          "sku": "9135",
+          "attributes": {
+            "color": "мульт",
+            "size": "XXXL"
+          }
+        },
+        {
+          "id_product": "37873",
+          "name_product": "Рубашка Columbia AM9135*SS15",
+          "sku": "9135",
+          "attributes": {
+            "color": "серо-синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37873",
+          "name_product": "Рубашка Columbia AM9135*SS15",
+          "sku": "9135",
+          "attributes": {
+            "color": "серо-синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "37873",
+          "name_product": "Рубашка Columbia AM9135*SS15",
+          "sku": "9135",
+          "attributes": {
+            "color": "серо-синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "37873",
+          "name_product": "Рубашка Columbia AM9135*SS15",
+          "sku": "9135",
+          "attributes": {
+            "color": "",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "37890",
+          "name_product": "Рукавички SL9428",
+          "sku": "9428",
+          "attributes": {
+            "color": "олива",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "37951",
+          "name_product": "Туника Columbia AL7060",
+          "sku": "7060",
+          "attributes": {
+            "color": "чорний",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "37951",
+          "name_product": "Туника Columbia AL7060",
+          "sku": "7060",
+          "attributes": {
+            "color": "фиол.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "37951",
+          "name_product": "Туника Columbia AL7060",
+          "sku": "7060",
+          "attributes": {
+            "color": "фиол.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "37951",
+          "name_product": "Туника Columbia AL7060",
+          "sku": "7060",
+          "attributes": {
+            "color": "фиол.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "37951",
+          "name_product": "Туника Columbia AL7060",
+          "sku": "7060",
+          "attributes": {
+            "color": "фиол.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "38052",
+          "name_product": "Шапка Columbia CU9309*AW15",
+          "sku": "9309",
+          "attributes": {
+            "color": "син/блак",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "38052",
+          "name_product": "Шапка Columbia CU9309*AW15",
+          "sku": "9309",
+          "attributes": {
+            "color": "красный",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38052",
+          "name_product": "Шапка Columbia CU9309*AW15",
+          "sku": "9309",
+          "attributes": {
+            "color": "т.синий",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38052",
+          "name_product": "Шапка Columbia CU9309*AW15",
+          "sku": "9309",
+          "attributes": {
+            "color": "фиол.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38052",
+          "name_product": "Шапка Columbia CU9309*AW15",
+          "sku": "9309",
+          "attributes": {
+            "color": "чёрный",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38052",
+          "name_product": "Шапка Columbia CU9309*AW15",
+          "sku": "9309",
+          "attributes": {
+            "color": "голубой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38054",
+          "name_product": "Шапка Columbia CU9514*AW15",
+          "sku": "9514",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38054",
+          "name_product": "Шапка Columbia CU9514*AW15",
+          "sku": "9514",
+          "attributes": {
+            "color": "т.серый",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "38067",
+          "name_product": "Шапка Columbia CY9244*AW15",
+          "sku": "9244",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38067",
+          "name_product": "Шапка Columbia CY9244*AW15",
+          "sku": "9244",
+          "attributes": {
+            "color": "красный",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38067",
+          "name_product": "Шапка Columbia CY9244*AW15",
+          "sku": "9244",
+          "attributes": {
+            "color": "розовый",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38067",
+          "name_product": "Шапка Columbia CY9244*AW15",
+          "sku": "9244",
+          "attributes": {
+            "color": "синий",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38067",
+          "name_product": "Шапка Columbia CY9244*AW15",
+          "sku": "9244",
+          "attributes": {
+            "color": "чёрный",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "38067",
+          "name_product": "Шапка Columbia CY9244*AW15",
+          "sku": "9244",
+          "attributes": {
+            "color": "зелёный",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "44610",
+          "name_product": "Годинник 7555C спортивний Skmei (1992)",
+          "sku": "7555C",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "44611",
+          "name_product": "Годинник 7559C спортивний Skmei (2031)",
+          "sku": "7559C",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "44612",
+          "name_product": "Годинник 7562C спортивний Skmei (2152)",
+          "sku": "7562C",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "44637",
+          "name_product": "Пончо Pilgrim Rip-Stop 5922 Camotec",
+          "sku": "5922",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "45025",
+          "name_product": "Куртка 8837 (м)  WHS демис.",
+          "sku": "8837",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "синій",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.серый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "сиреневый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.серый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "сиреневый",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.серый",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "сиреневый",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.серый",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "45160",
+          "name_product": "Жилет 7156 (ж) Avecs",
+          "sku": "7156",
+          "attributes": {
+            "color": "сиреневый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "45405",
+          "name_product": "Куртка 8629-23 Аvecs (ж) лыжн.",
+          "sku": "8629",
+          "attributes": {
+            "color": "сірий",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "45405",
+          "name_product": "Куртка 8629-23 Аvecs (ж) лыжн.",
+          "sku": "8629",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "45405",
+          "name_product": "Куртка 8629-23 Аvecs (ж) лыжн.",
+          "sku": "8629",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "45405",
+          "name_product": "Куртка 8629-23 Аvecs (ж) лыжн.",
+          "sku": "8629",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "45405",
+          "name_product": "Куртка 8629-23 Аvecs (ж) лыжн.",
+          "sku": "8629",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "45405",
+          "name_product": "Куртка 8629-23 Аvecs (ж) лыжн.",
+          "sku": "8629",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "45411",
+          "name_product": "Куртка 8681-23 Аvecs (ж) лыжн.",
+          "sku": "8681",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "45411",
+          "name_product": "Куртка 8681-23 Аvecs (ж) лыжн.",
+          "sku": "8681",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "45411",
+          "name_product": "Куртка 8681-23 Аvecs (ж) лыжн.",
+          "sku": "8681",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "45411",
+          "name_product": "Куртка 8681-23 Аvecs (ж) лыжн.",
+          "sku": "8681",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "45411",
+          "name_product": "Куртка 8681-23 Аvecs (ж) лыжн.",
+          "sku": "8681",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "45411",
+          "name_product": "Куртка 8681-23 Аvecs (ж) лыжн.",
+          "sku": "8681",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "45523",
+          "name_product": "Термобелье 8686-3/4-AW21 Avecs (ж)",
+          "sku": "8686",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "45523",
+          "name_product": "Термобелье 8686-3/4-AW21 Avecs (ж)",
+          "sku": "8686",
+          "attributes": {
+            "color": "син/красн",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "45523",
+          "name_product": "Термобелье 8686-3/4-AW21 Avecs (ж)",
+          "sku": "8686",
+          "attributes": {
+            "color": "син/красн",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "45523",
+          "name_product": "Термобелье 8686-3/4-AW21 Avecs (ж)",
+          "sku": "8686",
+          "attributes": {
+            "color": "син/красн",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "46270",
+          "name_product": "Балаклава Pro CoolPass SJ 7812 Camotec",
+          "sku": "7812",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "47245",
+          "name_product": "Шорти Ranger TW 8130 Camotec",
+          "sku": "8130",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47245",
+          "name_product": "Шорти Ranger TW 8130 Camotec",
+          "sku": "8130",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47245",
+          "name_product": "Шорти Ranger TW 8130 Camotec",
+          "sku": "8130",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47245",
+          "name_product": "Шорти Ranger TW 8130 Camotec",
+          "sku": "8130",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47245",
+          "name_product": "Шорти Ranger TW 8130 Camotec",
+          "sku": "8130",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "47692",
+          "name_product": "Ремінь Портупея 0015 Camotec",
+          "sku": "0015",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47692",
+          "name_product": "Ремінь Портупея 0015 Camotec",
+          "sku": "0015",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47692",
+          "name_product": "Ремінь Портупея 0015 Camotec",
+          "sku": "0015",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47692",
+          "name_product": "Ремінь Портупея 0015 Camotec",
+          "sku": "0015",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47692",
+          "name_product": "Ремінь Портупея 0015 Camotec",
+          "sku": "0015",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "мульт.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "мульт.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "мульт.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "мульт.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47796",
+          "name_product": "Кофта Commander 2.0 8376 Camotec",
+          "sku": "8376",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXXL"
+          }
+        },
+        {
+          "id_product": "47945",
+          "name_product": "Брюки Герць Police Flex Pani 8416 Camotec",
+          "sku": "8416",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47955",
+          "name_product": "Кофта Commander 2.0 8377 Camotec",
+          "sku": "8377",
+          "attributes": {
+            "color": "кой",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "47955",
+          "name_product": "Кофта Commander 2.0 8377 Camotec",
+          "sku": "8377",
+          "attributes": {
+            "color": "кой",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47955",
+          "name_product": "Кофта Commander 2.0 8377 Camotec",
+          "sku": "8377",
+          "attributes": {
+            "color": "кой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47955",
+          "name_product": "Кофта Commander 2.0 8377 Camotec",
+          "sku": "8377",
+          "attributes": {
+            "color": "кой",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47955",
+          "name_product": "Кофта Commander 2.0 8377 Camotec",
+          "sku": "8377",
+          "attributes": {
+            "color": "кой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47955",
+          "name_product": "Кофта Commander 2.0 8377 Camotec",
+          "sku": "8377",
+          "attributes": {
+            "color": "кой",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "47957",
+          "name_product": "Кофта Nippy Hood Nord Fleece 6629 Camotec",
+          "sku": "6629",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "47957",
+          "name_product": "Кофта Nippy Hood Nord Fleece 6629 Camotec",
+          "sku": "6629",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47957",
+          "name_product": "Кофта Nippy Hood Nord Fleece 6629 Camotec",
+          "sku": "6629",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47957",
+          "name_product": "Кофта Nippy Hood Nord Fleece 6629 Camotec",
+          "sku": "6629",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47957",
+          "name_product": "Кофта Nippy Hood Nord Fleece 6629 Camotec",
+          "sku": "6629",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47962",
+          "name_product": "Куртка Patrol System 4.0 8304 Camotec",
+          "sku": "8304",
+          "attributes": {
+            "color": "мульт.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "47962",
+          "name_product": "Куртка Patrol System 4.0 8304 Camotec",
+          "sku": "8304",
+          "attributes": {
+            "color": "мульт.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "47962",
+          "name_product": "Куртка Patrol System 4.0 8304 Camotec",
+          "sku": "8304",
+          "attributes": {
+            "color": "мульт.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47962",
+          "name_product": "Куртка Patrol System 4.0 8304 Camotec",
+          "sku": "8304",
+          "attributes": {
+            "color": "мульт.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47962",
+          "name_product": "Куртка Patrol System 4.0 8304 Camotec",
+          "sku": "8304",
+          "attributes": {
+            "color": "мульт.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47962",
+          "name_product": "Куртка Patrol System 4.0 8304 Camotec",
+          "sku": "8304",
+          "attributes": {
+            "color": "мульт.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "48002",
+          "name_product": "Шапка Beanie 1.0 8417 Camotec",
+          "sku": "8417",
+          "attributes": {
+            "color": "олива",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "48072",
+          "name_product": "Шарф-труба WarmFlex 8423 Camotec",
+          "sku": "8423",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "48073",
+          "name_product": "Шкарпетки Merino Long 8531 Camotec",
+          "sku": "8531",
+          "attributes": {
+            "color": "олива",
+            "size": "40-42"
+          }
+        },
+        {
+          "id_product": "48073",
+          "name_product": "Шкарпетки Merino Long 8531 Camotec",
+          "sku": "8531",
+          "attributes": {
+            "color": "олива",
+            "size": "43-45"
+          }
+        },
+        {
+          "id_product": "50996",
+          "name_product": "Балаклава Pro CoolPass SJ 8892 Camotec",
+          "sku": "8892",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51003",
+          "name_product": "Бойова сорочка Raid 8671 Camotec",
+          "sku": "8671",
+          "attributes": {
+            "color": "синій",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "51003",
+          "name_product": "Бойова сорочка Raid 8671 Camotec",
+          "sku": "8671",
+          "attributes": {
+            "color": "синій",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51003",
+          "name_product": "Бойова сорочка Raid 8671 Camotec",
+          "sku": "8671",
+          "attributes": {
+            "color": "синій",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51003",
+          "name_product": "Бойова сорочка Raid 8671 Camotec",
+          "sku": "8671",
+          "attributes": {
+            "color": "синій",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51003",
+          "name_product": "Бойова сорочка Raid 8671 Camotec",
+          "sku": "8671",
+          "attributes": {
+            "color": "синій",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51007",
+          "name_product": "Брюки Герць 2.0 TW 9129 Camotec",
+          "sku": "9129",
+          "attributes": {
+            "color": "чорн/мульт",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "51007",
+          "name_product": "Брюки Герць 2.0 TW 9129 Camotec",
+          "sku": "9129",
+          "attributes": {
+            "color": "чорн/мульт",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51007",
+          "name_product": "Брюки Герць 2.0 TW 9129 Camotec",
+          "sku": "9129",
+          "attributes": {
+            "color": "чорн/мульт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51008",
+          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
+          "sku": "9247",
+          "attributes": {
+            "color": "пікс",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51008",
+          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
+          "sku": "9247",
+          "attributes": {
+            "color": "пікс",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51008",
+          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
+          "sku": "9247",
+          "attributes": {
+            "color": "пікс",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51008",
+          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
+          "sku": "9247",
+          "attributes": {
+            "color": "пікс",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51008",
+          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
+          "sku": "9247",
+          "attributes": {
+            "color": "пікс",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "51013",
+          "name_product": "Вітрівка Windout 2.0 9228 Camotec",
+          "sku": "9228",
+          "attributes": {
+            "color": "олив",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51013",
+          "name_product": "Вітрівка Windout 2.0 9228 Camotec",
+          "sku": "9228",
+          "attributes": {
+            "color": "олив",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51019",
+          "name_product": "Кітель Blitz RS 9001 Camotec",
+          "sku": "9001",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51019",
+          "name_product": "Кітель Blitz RS 9001 Camotec",
+          "sku": "9001",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51019",
+          "name_product": "Кітель Blitz RS 9001 Camotec",
+          "sku": "9001",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51019",
+          "name_product": "Кітель Blitz RS 9001 Camotec",
+          "sku": "9001",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51019",
+          "name_product": "Кітель Blitz RS 9001 Camotec",
+          "sku": "9001",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "51020",
+          "name_product": "Компл баз шару 2.0 SJ 8366 Camotec",
+          "sku": "8366",
+          "attributes": {
+            "color": "олив",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51020",
+          "name_product": "Компл баз шару 2.0 SJ 8366 Camotec",
+          "sku": "8366",
+          "attributes": {
+            "color": "олив",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51020",
+          "name_product": "Компл баз шару 2.0 SJ 8366 Camotec",
+          "sku": "8366",
+          "attributes": {
+            "color": "олив",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51020",
+          "name_product": "Компл баз шару 2.0 SJ 8366 Camotec",
+          "sku": "8366",
+          "attributes": {
+            "color": "олив",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51020",
+          "name_product": "Компл баз шару 2.0 SJ 8366 Camotec",
+          "sku": "8366",
+          "attributes": {
+            "color": "олив",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "51044",
+          "name_product": "Панама Combat Twill 8712 Camotec",
+          "sku": "8712",
+          "attributes": {
+            "color": "кой",
+            "size": "57"
+          }
+        },
+        {
+          "id_product": "51044",
+          "name_product": "Панама Combat Twill 8712 Camotec",
+          "sku": "8712",
+          "attributes": {
+            "color": "кой",
+            "size": "58"
+          }
+        },
+        {
+          "id_product": "51044",
+          "name_product": "Панама Combat Twill 8712 Camotec",
+          "sku": "8712",
+          "attributes": {
+            "color": "кой",
+            "size": "59"
+          }
+        },
+        {
+          "id_product": "51044",
+          "name_product": "Панама Combat Twill 8712 Camotec",
+          "sku": "8712",
+          "attributes": {
+            "color": "кой",
+            "size": "60"
+          }
+        },
+        {
+          "id_product": "51044",
+          "name_product": "Панама Combat Twill 8712 Camotec",
+          "sku": "8712",
+          "attributes": {
+            "color": "кой",
+            "size": "61"
+          }
+        },
+        {
+          "id_product": "51050",
+          "name_product": "Патч/Липучка Medic 9150 Camotec",
+          "sku": "9150",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51051",
+          "name_product": "Патч/Липучка Medic 9152 Camotec",
+          "sku": "9152",
+          "attributes": {
+            "color": "олив",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51052",
+          "name_product": "Патч/Липучка ЗСУ 8926 Camotec",
+          "sku": "8926",
+          "attributes": {
+            "color": "олив",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51068",
+          "name_product": "Поло Paladin 2.0 Long 8919 Camotec",
+          "sku": "8919",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51068",
+          "name_product": "Поло Paladin 2.0 Long 8919 Camotec",
+          "sku": "8919",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51068",
+          "name_product": "Поло Paladin 2.0 Long 8919 Camotec",
+          "sku": "8919",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51068",
+          "name_product": "Поло Paladin 2.0 Long 8919 Camotec",
+          "sku": "8919",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51068",
+          "name_product": "Поло Paladin 2.0 Long 8919 Camotec",
+          "sku": "8919",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "51069",
+          "name_product": "Поло Pani Army ID 2.0 8922 Camotec",
+          "sku": "8922",
+          "attributes": {
+            "color": "олив",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51069",
+          "name_product": "Поло Pani Army ID 2.0 8922 Camotec",
+          "sku": "8922",
+          "attributes": {
+            "color": "олив",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51069",
+          "name_product": "Поло Pani Army ID 2.0 8922 Camotec",
+          "sku": "8922",
+          "attributes": {
+            "color": "олив",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51069",
+          "name_product": "Поло Pani Army ID 2.0 8922 Camotec",
+          "sku": "8922",
+          "attributes": {
+            "color": "олив",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "51070",
+          "name_product": "Поло Pani Totem 8159 Camotec",
+          "sku": "8159",
+          "attributes": {
+            "color": "Tan",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51070",
+          "name_product": "Поло Pani Totem 8159 Camotec",
+          "sku": "8159",
+          "attributes": {
+            "color": "Tan",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51070",
+          "name_product": "Поло Pani Totem 8159 Camotec",
+          "sku": "8159",
+          "attributes": {
+            "color": "Tan",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51070",
+          "name_product": "Поло Pani Totem 8159 Camotec",
+          "sku": "8159",
+          "attributes": {
+            "color": "Tan",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51070",
+          "name_product": "Поло Pani Totem 8159 Camotec",
+          "sku": "8159",
+          "attributes": {
+            "color": "Tan",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "51071",
+          "name_product": "Поло Pani Totem LT 8849 Camotec",
+          "sku": "8849",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51071",
+          "name_product": "Поло Pani Totem LT 8849 Camotec",
+          "sku": "8849",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51071",
+          "name_product": "Поло Pani Totem LT 8849 Camotec",
+          "sku": "8849",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51071",
+          "name_product": "Поло Pani Totem LT 8849 Camotec",
+          "sku": "8849",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "51122",
+          "name_product": "Шарф-труба Basic CP Grid 2.0 8985 Camotec",
+          "sku": "8985",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51124",
+          "name_product": "Шеврон/липучка Medic 9146 Camotec",
+          "sku": "9146",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51125",
+          "name_product": "Шеврон/липучка Medic 9147 Camotec",
+          "sku": "9147",
+          "attributes": {
+            "color": "олив",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51126",
+          "name_product": "Шеврон/липучка Medic 9148 Camotec",
+          "sku": "9148",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51127",
+          "name_product": "Шеврон/липучка Medic 9149 Camotec",
+          "sku": "9149",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51128",
+          "name_product": "Шкарпетки X-Dry (2 п) LowAir Pro+ 9206 Camotec",
+          "sku": "9206",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41-43"
+          }
+        },
+        {
+          "id_product": "51190",
+          "name_product": "Термобілизна ThermoGrid 8546 Camotec",
+          "sku": "8546",
+          "attributes": {
+            "color": "графіт",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "51190",
+          "name_product": "Термобілизна ThermoGrid 8546 Camotec",
+          "sku": "8546",
+          "attributes": {
+            "color": "графіт",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51190",
+          "name_product": "Термобілизна ThermoGrid 8546 Camotec",
+          "sku": "8546",
+          "attributes": {
+            "color": "графіт",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51190",
+          "name_product": "Термобілизна ThermoGrid 8546 Camotec",
+          "sku": "8546",
+          "attributes": {
+            "color": "графіт",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51190",
+          "name_product": "Термобілизна ThermoGrid 8546 Camotec",
+          "sku": "8546",
+          "attributes": {
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51310",
+          "name_product": "Брюки Stalker Vent SoftShell 7331 Camotec",
+          "sku": "7331",
+          "attributes": {
+            "color": "олива",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "51310",
+          "name_product": "Брюки Stalker Vent SoftShell 7331 Camotec",
+          "sku": "7331",
+          "attributes": {
+            "color": "олива",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51310",
+          "name_product": "Брюки Stalker Vent SoftShell 7331 Camotec",
+          "sku": "7331",
+          "attributes": {
+            "color": "олива",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51310",
+          "name_product": "Брюки Stalker Vent SoftShell 7331 Camotec",
+          "sku": "7331",
+          "attributes": {
+            "color": "олива",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51310",
+          "name_product": "Брюки Stalker Vent SoftShell 7331 Camotec",
+          "sku": "7331",
+          "attributes": {
+            "color": "олива",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51322",
+          "name_product": "Кофта Army Himatec 8511 Camotec",
+          "sku": "8511",
+          "attributes": {
+            "color": "олива",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51322",
+          "name_product": "Кофта Army Himatec 8511 Camotec",
+          "sku": "8511",
+          "attributes": {
+            "color": "олива",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51322",
+          "name_product": "Кофта Army Himatec 8511 Camotec",
+          "sku": "8511",
+          "attributes": {
+            "color": "олива",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51322",
+          "name_product": "Кофта Army Himatec 8511 Camotec",
+          "sku": "8511",
+          "attributes": {
+            "color": "олива",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51322",
+          "name_product": "Кофта Army Himatec 8511 Camotec",
+          "sku": "8511",
+          "attributes": {
+            "color": "олива",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "51322",
+          "name_product": "Кофта Army Himatec 8511 Camotec",
+          "sku": "8511",
+          "attributes": {
+            "color": "олива",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "51360",
+          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
+          "sku": "1802",
+          "attributes": {
+            "color": "синій",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51360",
+          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
+          "sku": "1802",
+          "attributes": {
+            "color": "синій",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51360",
+          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
+          "sku": "1802",
+          "attributes": {
+            "color": "синій",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51360",
+          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
+          "sku": "1802",
+          "attributes": {
+            "color": "синій",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51360",
+          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
+          "sku": "1802",
+          "attributes": {
+            "color": "синій",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "51375",
+          "name_product": "Футболка Modal 2409 Camotec",
+          "sku": "2409",
+          "attributes": {
+            "color": "койот",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "51375",
+          "name_product": "Футболка Modal 2409 Camotec",
+          "sku": "2409",
+          "attributes": {
+            "color": "койот",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51375",
+          "name_product": "Футболка Modal 2409 Camotec",
+          "sku": "2409",
+          "attributes": {
+            "color": "койот",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51375",
+          "name_product": "Футболка Modal 2409 Camotec",
+          "sku": "2409",
+          "attributes": {
+            "color": "койот",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51375",
+          "name_product": "Футболка Modal 2409 Camotec",
+          "sku": "2409",
+          "attributes": {
+            "color": "койот",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51375",
+          "name_product": "Футболка Modal 2409 Camotec",
+          "sku": "2409",
+          "attributes": {
+            "color": "койот",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53972",
+          "name_product": "Погон НПУ Капітан 9242 Camotec",
+          "sku": "9242",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53973",
+          "name_product": "Погон НПУ Капрал 9236 Camotec",
+          "sku": "9236",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53974",
+          "name_product": "Погон НПУ Лейтенант 9240 Camotec",
+          "sku": "9240",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53975",
+          "name_product": "Погон НПУ Майор 9243 Camotec",
+          "sku": "9243",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53977",
+          "name_product": "Погон НПУ Підполковник 9245 Camotec",
+          "sku": "9245",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53978",
+          "name_product": "Погон НПУ Рядовий 9253 Camotec",
+          "sku": "9253",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53979",
+          "name_product": "Погон НПУ Сержант 9237 Camotec",
+          "sku": "9237",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53980",
+          "name_product": "Погон НПУ Ст Лейтенант 9241 Camotec",
+          "sku": "9241",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53981",
+          "name_product": "Погон НПУ Ст Сержант 9238 Camotec",
+          "sku": "9238",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

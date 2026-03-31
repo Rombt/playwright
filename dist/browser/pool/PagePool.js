@@ -126,7 +126,6 @@ class PagePool {
         else {
             this.free.push(page);
         }
-        console.log('11 this.waiters.length = ', this.waiters.length);
     }
     async close() {
         // Прекращаем ожидание всех waiters
