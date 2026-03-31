@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-03-31_13-01",
+  "task": {
+    "275": {
+      "brand_id": "275",
+      "brand_name": "BEZET",
+      "metadata": {
+        "target_website": "https://www.bezet.com.ua/search?s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "37157",
+          "name_product": "Бейсболка Columbia CM9484*SS14",
+          "sku": "9484",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+
+        {
+          "id_product": "37332",
+          "name_product": "Брюки Columbia WM8068CLB",
+          "sku": "8068",
+          "attributes": {
+            "color": "син",
+            "size": "XL"
+          }
+        },
+
+        {
+          "id_product": "37948",
+          "name_product": "Сумка Columbia UU9900CLB",
+          "sku": "9900",
+          "attributes": {
+            "color": "мульт",
+            "size": "S"
+          }
+        },
+
+        {
+          "id_product": "53451",
+          "name_product": "Брюки теплі Titan 10875 BEZET",
+          "sku": "10875",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+
+        {
+          "id_product": "53454",
+          "name_product": "Кофта Active 12035 BEZET",
+          "sku": "12035",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}
