@@ -5,6 +5,7 @@ const MilitaristProcessor_1 = require("./processors/MilitaristProcessor");
 const GanzoProcessor_1 = require("./processors/GanzoProcessor");
 const CamotecProcessor_1 = require("./processors/CamotecProcessor");
 const KiborgProcessor_1 = require("./processors/KiborgProcessor");
+const BezetProcessor_1 = require("./processors/BezetProcessor");
 class HtmlProcessorFactory {
     constructor() {
         this.processors = {
@@ -13,6 +14,7 @@ class HtmlProcessorFactory {
             ganzo: GanzoProcessor_1.GanzoProcessor,
             camotec: CamotecProcessor_1.CamotecProcessor,
             kiborg: KiborgProcessor_1.KiborgProcessor,
+            bezet: BezetProcessor_1.BezetProcessor,
             // здесь добавлять новые бренды
         };
     }

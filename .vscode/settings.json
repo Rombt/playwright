@@ -4,6 +4,7 @@
   "phpsab.standard": ".phpcs.xml",
   "phpcs.autoConfigSearch": true,
   "cSpell.words": [
+    "Bezet",
     "camotec",
     "domcontentloaded",
     "ganzo",
