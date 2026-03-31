@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-03-31_12-44",
+  "task": {
+    "293": {
+      "brand_id": "293",
+      "brand_name": "Kiborg",
+      "metadata": {
+        "target_website": "https://kiborg.com.ua/ru/#/search/{{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54403",
+          "name_product": "Роз-й каремат посил 9-ти секц 8812 KBG",
+          "sku": "8812",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54404",
+          "name_product": "Сумка-баул 6019 KBG",
+          "sku": "6019",
+          "attributes": {
+            "color": "мульт",
+            "size": "120л"
+          }
+        },
+        {
+          "id_product": "54405",
+          "name_product": "Сумка-баул 6020 KBG",
+          "sku": "6020",
+          "attributes": {
+            "color": "мульт",
+            "size": "80л"
+          }
+        },
+        {
+          "id_product": "54406",
+          "name_product": "Сумка-баул 6022 KBG",
+          "sku": "6022",
+          "attributes": {
+            "color": "хакі",
+            "size": "80л"
+          }
+        }
+      ]
+    }
+  }
+}
