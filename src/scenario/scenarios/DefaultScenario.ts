@@ -51,6 +51,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   private readonly maxTask: number;
   private readonly sourcesFolder: string;
   private readonly logger: Logger;
+  private readonly limiter: RateLimiter;
 
   private readonly taskPath: string;
 
@@ -64,6 +65,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   ) {
     this.config = AppConfig.getInstance();
     this.logger = Logger.getInstance();
+    this.limiter = new RateLimiter(10000);
 
     this.maxRetries = this.config.asyncRetry.maxRetries;
     this.maxPage = this.config.asyncPages.maxPage;
@@ -189,6 +191,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       }
 
       attempt++;
+
+      await this.limiter.sleepNormal(
+        this.config.asyncRetry.baseDelay,
+        this.config.asyncRetry.maxDelay,
+      );
     }
 
     this.logger.debug('Retry finished', {
@@ -317,7 +324,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       },
     });
 
-    const limiter = new RateLimiter(10000);
     const allData: IDataImag = {};
     const allProductRaw: IProductRaw[] = [];
 
@@ -386,17 +392,24 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
               product: product,
               targetWebsite: task.metadata.target_website,
 
-              limiter: limiter,
+              limiter: this.limiter,
             },
           });
 
           const result = await this.withRetry(
-            () => source.worker(task.metadata.target_website!, page, limiter, product, loggerScope),
+            () =>
+              source.worker(
+                task.metadata.target_website!,
+                page,
+                this.limiter,
+                product,
+                loggerScope,
+              ),
             {
               maxRetries: this.maxRetries,
               isRetryable,
             },
-            limiter,
+            this.limiter,
             loggerScope,
           );
 
@@ -408,7 +421,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
               product: product,
               targetWebsite: task.metadata.target_website,
 
-              limiter: limiter,
+              limiter: this.limiter,
               result: result,
             },
           });
@@ -451,7 +464,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             data: {
               product: product,
               targetWebsite: task.metadata.target_website,
-              limiter: limiter,
+              limiter: this.limiter,
               result: result,
               status: 'success',
               allDataCount: allData.length,
@@ -590,7 +603,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       });
 
       allErrors.push(
-        ...(await this.downloadImages(normalized, task, context, limiter, loggerScope)),
+        ...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)),
       );
     });
 

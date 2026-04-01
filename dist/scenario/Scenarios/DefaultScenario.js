@@ -20,6 +20,7 @@ class DefaultScenario {
         this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
+        this.limiter = new RateLimiter_1.RateLimiter(10000);
         this.maxRetries = this.config.asyncRetry.maxRetries;
         this.maxPage = this.config.asyncPages.maxPage;
         this.maxTask = this.config.asyncTasks.maxTask;
@@ -126,6 +127,7 @@ class DefaultScenario {
                 break;
             }
             attempt++;
+            await this.limiter.sleepNormal(this.config.asyncRetry.baseDelay, this.config.asyncRetry.maxDelay);
         }
         this.logger.debug('Retry finished', {
             component: 'DefaultScenario',
@@ -225,7 +227,6 @@ class DefaultScenario {
                 source: source,
             },
         });
-        const limiter = new RateLimiter_1.RateLimiter(10000);
         const allData = {};
         const allProductRaw = [];
         // await this.browser.runInContext(async (context) => {
@@ -283,13 +284,13 @@ class DefaultScenario {
                         data: {
                             product: product,
                             targetWebsite: task.metadata.target_website,
-                            limiter: limiter,
+                            limiter: this.limiter,
                         },
                     });
-                    const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, limiter, product, loggerScope), {
+                    const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, this.limiter, product, loggerScope), {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
-                    }, limiter, loggerScope);
+                    }, this.limiter, loggerScope);
                     loggerScope?.debug('Product processing finished', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -297,7 +298,7 @@ class DefaultScenario {
                         data: {
                             product: product,
                             targetWebsite: task.metadata.target_website,
-                            limiter: limiter,
+                            limiter: this.limiter,
                             result: result,
                         },
                     });
@@ -334,7 +335,7 @@ class DefaultScenario {
                         data: {
                             product: product,
                             targetWebsite: task.metadata.target_website,
-                            limiter: limiter,
+                            limiter: this.limiter,
                             result: result,
                             status: 'success',
                             allDataCount: allData.length,
@@ -440,7 +441,7 @@ class DefaultScenario {
                     normalized: normalized,
                 },
             });
-            allErrors.push(...(await this.downloadImages(normalized, task, context, limiter, loggerScope)));
+            allErrors.push(...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)));
         });
         await this.storage.saveJson(allProductRaw, {
             filename: `${task.brand_name}_products_raw.json`,
