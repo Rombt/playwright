@@ -8,6 +8,9 @@ class FingerprintPool {
     constructor() {
         this.active = new Set();
         this.config = appConfig_1.AppConfig.getInstance();
+        if (!this.config.fingerprintFile) {
+            throw new Error('fingerprintFile is required');
+        }
         const profilesFile = this.config.fingerprintFile;
         const fullPath = path.resolve(profilesFile);
         if (!fs.existsSync(fullPath)) {
@@ -21,7 +24,7 @@ class FingerprintPool {
         this.active = new Set();
     }
     get() {
-        const free = this.available.filter(p => !this.active.has(p));
+        const free = this.available.filter((p) => !this.active.has(p));
         if (free.length === 0)
             return null; // все заняты
         const profile = free[Math.floor(Math.random() * free.length)];

@@ -27,6 +27,7 @@ export interface RetryConfig {
   maxDelay: number;
   maxWaitForFreePage: number;
   maxRetries: number;
+  maxAttempts: number;
 }
 
 export interface DataConfig {

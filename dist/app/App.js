@@ -96,6 +96,28 @@ class App {
                     storage: storage,
                 },
             });
+            process.on('unhandledRejection', (reason) => {
+                console.error('UNHANDLED REJECTION:', reason);
+                this.logger.debug(`UNHANDLED REJECTION`, {
+                    component: 'App',
+                    method: 'run()',
+                    action: 'unhandledRejection',
+                    data: {
+                        reason: reason,
+                    },
+                });
+            });
+            process.on('uncaughtException', (error) => {
+                console.error('UNCAUGHT EXCEPTION:', error);
+                this.logger.debug(`UNCAUGHT EXCEPTION`, {
+                    component: 'App',
+                    method: 'run()',
+                    action: 'uncaughtException',
+                    data: {
+                        error: error,
+                    },
+                });
+            });
             const scenario = new DefaultScenario_1.DefaultScenario(browser, storage);
             await scenario.run(this.config.brands);
         }

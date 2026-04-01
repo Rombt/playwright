@@ -171,6 +171,7 @@ export class AppConfig {
           maxWaitForFreePage:
             typeof retry.maxWaitForFreePage === 'number' ? retry.maxWaitForFreePage : 60000,
           maxRetries: typeof retry.maxRetries === 'number' ? retry.maxRetries : 3,
+          maxAttempts: typeof retry.maxRetries === 'number' ? retry.maxRetries : 3,
         },
         tasks: {
           maxTask: typeof asyncConfig.tasks?.maxTask === 'number' ? asyncConfig.tasks.maxTask : 5,

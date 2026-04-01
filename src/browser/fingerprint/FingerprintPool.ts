@@ -11,6 +11,9 @@ export class FingerprintPool implements IFingerprintPool {
   constructor() {
     this.config = AppConfig.getInstance();
 
+    if (!this.config.fingerprintFile) {
+      throw new Error('fingerprintFile is required');
+    }
     const profilesFile: string = this.config.fingerprintFile;
     const fullPath = path.resolve(profilesFile);
 
@@ -28,7 +31,7 @@ export class FingerprintPool implements IFingerprintPool {
   }
 
   get(): IFingerprintProfile | null {
-    const free = this.available.filter(p => !this.active.has(p));
+    const free = this.available.filter((p) => !this.active.has(p));
     if (free.length === 0) return null; // все заняты
     const profile = free[Math.floor(Math.random() * free.length)];
     this.active.add(profile);

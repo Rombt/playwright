@@ -10,6 +10,7 @@ const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
 const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
 const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
+const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 class DefaultScenario {
     constructor(browser, storage) {
         this.browser = browser;
@@ -27,7 +28,7 @@ class DefaultScenario {
     async run(brands) {
         try {
             const tasks = await this.load(brands);
-            this.logger.debug(`DefaultScenario started`, {
+            this.logger.debug(`***** DefaultScenario started`, {
                 component: 'DefaultScenario',
                 method: 'run()',
                 action: 'await this.load(brands)',
@@ -39,6 +40,17 @@ class DefaultScenario {
             });
             await this.prepare();
             await this.runWithWorkerPool(tasks, (task, loggerScope) => this.process(task, loggerScope));
+            this.logger.debug(`after await this.runWithWorkerPool(tasks, (task, loggerScope)`, {
+                component: 'DefaultScenario',
+                method: 'run()',
+                action: '',
+                data: {
+                    brands: brands,
+                    totalTasks: tasks.length,
+                    tasks: tasks,
+                },
+            });
+            await this.retryUnprocessed(brands);
         }
         catch (error) {
             this.logger.error(`DefaultScenario run() error`, {
@@ -63,75 +75,105 @@ class DefaultScenario {
             await this.finalize();
         }
     }
+    async retryUnprocessed(brands) {
+        this.logger.debug('Enter to retryUnprocessed(brands?: string[])', {
+            component: 'DefaultScenario',
+            method: 'retryUnprocessed',
+            data: { brands: brands },
+        });
+        const collector = new UnprocessedCollector_1.UnprocessedCollector();
+        const maxAttempts = this.config.asyncRetry.maxAttempts;
+        let attempt = 0;
+        let prevCount = Infinity;
+        while (attempt < maxAttempts) {
+            const currentCount = collector.countTotal();
+            // нет ошибок → выходим
+            if (currentCount === 0) {
+                this.logger.debug('No unprocessed products left', {
+                    component: 'DefaultScenario',
+                    method: 'retryUnprocessed',
+                    data: { attempt },
+                });
+                break;
+            }
+            // нет прогресса → выходим
+            if (currentCount >= prevCount) {
+                this.logger.warn('No progress in retry, stopping', {
+                    component: 'DefaultScenario',
+                    method: 'retryUnprocessed',
+                    data: { attempt, currentCount, prevCount },
+                });
+                break;
+            }
+            attempt++;
+            prevCount = currentCount;
+            this.logger.debug('Retry attempt started', {
+                component: 'DefaultScenario',
+                method: 'retryUnprocessed',
+                data: {
+                    attempt,
+                    currentCount,
+                },
+            });
+            let tasks = collector.getPhotoCollectionTasks();
+            // фильтр по брендам (ВАЖНО)
+            if (brands?.length) {
+                tasks = tasks.filter((t) => brands.includes(t.brand_name));
+            }
+            if (!tasks.length)
+                break;
+            await this.runWithWorkerPool(tasks, (task, loggerScope) => this.process(task, loggerScope));
+        }
+        this.logger.debug('Retry finished', {
+            component: 'DefaultScenario',
+            method: 'retryUnprocessed',
+            data: {
+                attemptsDone: attempt,
+            },
+        });
+    }
     async runWithWorkerPool(tasks, handler) {
         let index = 0;
-        const worker = async () => {
+        const getNextTask = () => {
+            if (index >= tasks.length)
+                return null;
+            const currentIndex = index;
+            index++;
+            return {
+                task: tasks[currentIndex],
+                index: currentIndex,
+            };
+        };
+        const worker = async (workerId) => {
+            this.logger.debug(`Worker ${workerId} started`);
             while (true) {
-                const currentIndex = index++;
-                this.logger.debug(`Worker № ${currentIndex} is started`, {
-                    component: 'DefaultScenario',
-                    method: 'runWithWorkerPool',
-                    action: 'while (true)',
-                    stage: 'start',
-                    data: {
-                        currentIndex: currentIndex,
-                    },
-                });
-                if (currentIndex >= tasks.length) {
-                    this.logger.debug('All tasks are completed', {
-                        component: 'DefaultScenario',
-                        method: 'runWithWorkerPool',
-                        action: 'if (currentIndex >= tasks.length) {...}',
-                        data: {
-                            currentIndex: currentIndex,
-                            tasksLength: tasks.length,
-                        },
-                    });
-                    break;
+                const next = getNextTask();
+                if (!next) {
+                    this.logger.debug(`Worker ${workerId} finished`);
+                    return;
                 }
-                const task = tasks[currentIndex];
-                const loggerScope = this.logger.withContext(`Worker №${currentIndex} ${task.brand_name}`);
-                loggerScope.debug('Received a new task', {
-                    component: 'DefaultScenario',
-                    method: 'runWithWorkerPool',
-                    action: 'const task = tasks[currentIndex];',
-                    data: {
-                        currentIndex: currentIndex,
-                        task: task,
-                    },
-                });
+                const { task, index: currentIndex } = next;
+                const loggerScope = this.logger.withContext(`Worker ${workerId} Task#${currentIndex} ${task.brand_name}`);
+                loggerScope.debug('Task received');
                 try {
-                    loggerScope.debug('Gave task it for execution ', {
-                        component: 'DefaultScenario',
-                        method: 'runWithWorkerPool',
-                        action: 'try {...}',
-                        data: {
-                            currentIndex: currentIndex,
-                            task: task,
-                        },
-                    });
                     await handler(task, loggerScope);
+                    loggerScope.debug('Task completed');
                 }
                 catch (error) {
-                    loggerScope.error(`Worker task error`, {
-                        component: 'DefaultScenario',
-                        method: 'runWithWorkerPool',
-                        data: {
-                            task,
-                            errorName: error instanceof Error ? error.name : undefined,
-                            errorMessage: error instanceof Error ? error.message : String(error),
-                            stack: error instanceof Error ? error.stack : undefined,
-                        },
+                    loggerScope.error('Worker task error', {
+                        task,
+                        errorName: error instanceof Error ? error.name : undefined,
+                        errorMessage: error instanceof Error ? error.message : String(error),
+                        stack: error instanceof Error ? error.stack : undefined,
                     });
                 }
             }
         };
-        const workers = Array.from({ length: this.maxTask }, () => worker());
+        const workers = Array.from({ length: this.maxTask }, (_, i) => worker(i));
         await Promise.allSettled(workers);
         this.logger.info('All task groups have been processed', {
             component: 'DefaultScenario',
             method: 'runWithWorkerPool',
-            action: 'workers = Array.from({ length: this.maxTask }, () => worker()',
             data: {
                 totalTasks: tasks.length,
             },
@@ -328,77 +370,61 @@ class DefaultScenario {
             };
             let attempt = 1;
             let currentBatch = uniqueProducts;
-            while (currentBatch.length && attempt <= this.maxRetries) {
+            while (currentBatch.length > 0 && attempt < this.maxRetries) {
                 loggerScope?.debug('Entering retry loop for current batch', {
-                    component: 'DefaultScenario',
-                    method: 'process()',
-                    action: 'while (currentBatch.length && attempt <= this.maxRetries) {...',
-                    data: {
-                        attempt: attempt,
-                        maxRetries: this.maxRetries,
-                        currentBatchLength: currentBatch.length,
-                        currentBatch: currentBatch,
-                    },
+                    attempt,
+                    maxRetries: this.maxRetries,
+                    currentBatchLength: currentBatch.length,
                 });
-                const results = (await Promise.allSettled(currentBatch.map(processProduct)))
-                    .filter((r) => r.status === 'fulfilled')
-                    .map((r) => r.value);
-                loggerScope?.debug('Current batch processing finished', {
-                    component: 'DefaultScenario',
-                    method: 'process()',
-                    action: 'results = (await Promise.allSettled(currentBatch.map(processProduct)))',
-                    data: {
-                        attempt: attempt,
-                        maxRetries: this.maxRetries,
-                        currentBatchLength: currentBatch.length,
-                        currentBatch: currentBatch,
-                        results: results,
-                    },
-                });
+                const settled = await Promise.allSettled(currentBatch.map(processProduct));
+                // 👉 разделяем результаты
+                const fulfilled = settled.filter((r) => r.status === 'fulfilled');
+                const rejected = settled.filter((r) => r.status === 'rejected');
+                // 👉 логируем ошибки (ВАЖНО!)
+                if (rejected.length) {
+                    loggerScope?.error('Rejected promises detected', {
+                        rejected,
+                    });
+                    rejected.forEach((r) => {
+                        allErrors.push({
+                            error: r.reason,
+                            targetUrl: task.metadata.target_website ?? undefined,
+                        });
+                    });
+                }
+                const results = fulfilled.map((r) => r.value);
                 const retryResults = results.filter((r) => r.status === 'retry');
-                loggerScope?.debug('Filtered retryable tasks from current batch results', {
-                    component: 'DefaultScenario',
-                    method: 'process()',
-                    action: "(r): r is Extract<TaskResult, { status: 'retry' }> => r.status === 'retry')",
-                    data: {
-                        attempt: attempt,
-                        maxRetries: this.maxRetries,
-                        currentBatchLength: currentBatch.length,
-                        currentBatch: currentBatch,
-                        retryResults: retryResults,
-                        results: results,
-                    },
-                });
                 const fatalResults = results.filter((r) => r.status === 'fatal');
-                loggerScope?.debug('Filtered fatal tasks from current batch results', {
-                    component: 'DefaultScenario',
-                    method: 'process()',
-                    action: "(r): r is Extract<TaskResult, { status: 'fatal' }> => r.status === 'fatal')",
-                    data: {
-                        attempt: attempt,
-                        maxRetries: this.maxRetries,
-                        currentBatchLength: currentBatch.length,
-                        currentBatch: currentBatch,
-                        fatalResults: fatalResults,
-                        results: results,
-                    },
-                });
+                // 👉 собираем ошибки
                 fatalResults.forEach((r) => allErrors.push({
                     error: r.error,
                     targetUrl: task.metadata.target_website ?? undefined,
                 }));
-                currentBatch = retryResults.map((r) => r.product);
-                loggerScope?.debug('Next batch prepared from retryable tasks', {
-                    component: 'DefaultScenario',
-                    method: 'process()',
-                    action: 'currentBatch = retryResults.map((r) => r.product)',
-                    data: {
-                        attempt: attempt,
-                        maxRetries: this.maxRetries,
-                        currentBatchLength: currentBatch.length,
-                        currentBatch: currentBatch,
-                    },
+                // 👉 следующий батч
+                const nextBatch = retryResults.map((r) => r.product);
+                loggerScope?.debug('Batch processed', {
+                    attempt,
+                    currentBatchLength: currentBatch.length,
+                    nextBatchLength: nextBatch.length,
+                    retryCount: retryResults.length,
+                    fatalCount: fatalResults.length,
+                    rejectedCount: rejected.length,
                 });
+                // 💥 КРИТИЧЕСКИЕ ЗАЩИТЫ
+                // 1. нет retry → выходим
+                if (nextBatch.length === 0) {
+                    loggerScope?.debug('No retryable tasks left, breaking loop');
+                    break;
+                }
+                // 2. нет прогресса → выходим
+                if (nextBatch.length >= currentBatch.length) {
+                    loggerScope?.warn('No progress detected, breaking loop', {
+                        current: currentBatch.length,
+                        next: nextBatch.length,
+                    });
+                    break;
+                }
+                currentBatch = nextBatch;
                 attempt++;
             }
             //todo закрыть все страницы pool т.к. для downloadImages() будет использоваться другой pool
@@ -505,6 +531,11 @@ class DefaultScenario {
                 return { status: 'success' };
             }
             catch (err) {
+                //todo
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                /**
+                 * если картинка не закачана её url нужно сохранить в отдельный массив для повторного скачивания!
+                 */
                 const error = err;
                 const errorStatus = (0, helpers_1.isRetryable)(error)
                     ? { status: 'retry', item, error }
@@ -558,71 +589,77 @@ class DefaultScenario {
                 method: 'downloadImages()',
                 action: 'while (currentBatch.length && attempt <= this.maxRetries)',
                 data: {
-                    attempt: attempt,
+                    attempt,
                     maxRetries: this.maxRetries,
                     currentBatchLength: currentBatch.length,
-                    currentBatch: currentBatch,
+                    currentBatch,
                 },
             });
-            const results = (await Promise.allSettled(currentBatch.map((item) => processImage(item))))
+            const settledResults = await Promise.allSettled(currentBatch.map((item) => processImage(item)));
+            const rejectedResults = settledResults.filter((r) => r.status === 'rejected');
+            rejectedResults.forEach((r, index) => {
+                allErrors.push({
+                    error: r.reason instanceof Error ? r.reason : new Error(String(r.reason)),
+                    targetUrl: currentBatch[index]?.url,
+                });
+            });
+            loggerScope?.debug('Handled rejected promises from current batch', {
+                component: 'DefaultScenario',
+                method: 'downloadImages()',
+                action: 'rejectedResults.forEach(...)',
+                data: {
+                    attempt,
+                    rejectedCount: rejectedResults.length,
+                    rejectedResults,
+                },
+            });
+            // Обрабатываем fulfilled
+            const results = settledResults
                 .filter((r) => r.status === 'fulfilled')
                 .map((r) => r.value);
             loggerScope?.debug('Current batch processing finished', {
                 component: 'DefaultScenario',
                 method: 'downloadImages()',
-                action: 'results = (await Promise.allSettled(currentBatch.map(processImage)))',
+                action: 'results = fulfilled values',
                 data: {
-                    attempt: attempt,
+                    attempt,
                     maxRetries: this.maxRetries,
                     currentBatchLength: currentBatch.length,
-                    currentBatch: currentBatch,
-                    results: results,
+                    currentBatch,
+                    results,
                 },
             });
+            // retry
             const retryResults = results.filter((r) => r.status === 'retry');
             loggerScope?.debug('Filtered retryable tasks from current batch results', {
                 component: 'DefaultScenario',
                 method: 'downloadImages()',
-                action: "(r): r is Extract<ImageResult, { status: 'retry' }> => r.status === 'retry',))",
+                action: "r.status === 'retry'",
                 data: {
-                    attempt: attempt,
-                    maxRetries: this.maxRetries,
-                    currentBatchLength: currentBatch.length,
-                    currentBatch: currentBatch,
-                    retryResults: retryResults,
-                    results: results,
+                    attempt,
+                    retryResults,
                 },
             });
+            // fatal
             const fatalResults = results.filter((r) => r.status === 'fatal');
             loggerScope?.debug('Filtered fatal tasks from current batch results', {
                 component: 'DefaultScenario',
                 method: 'downloadImages()',
-                action: "(r): r is Extract<ImageResult, { status: 'fatal' }> => r.status === 'fatal',)",
+                action: "r.status === 'fatal'",
                 data: {
-                    attempt: attempt,
-                    maxRetries: this.maxRetries,
-                    currentBatchLength: currentBatch.length,
-                    currentBatch: currentBatch,
-                    fatalResults: fatalResults,
-                    results: results,
+                    attempt,
+                    fatalResults,
                 },
             });
-            fatalResults.forEach((r) => allErrors.push({
-                error: r.error,
-                targetUrl: r.item.url,
-            }));
+            //todo!! urls не сохранённых изображений писать в отдельный файл!
+            // fatalResults.forEach((r) =>
+            //   allErrors.push({
+            //     error: r.error,
+            //     targetUrl: r.item.url,
+            //   }),
+            // );
+            // 🔄 формируем новый батч только из retry
             currentBatch = retryResults.map((r) => r.item);
-            loggerScope?.debug('Next batch prepared from retryable tasks', {
-                component: 'DefaultScenario',
-                method: 'downloadImages()',
-                action: 'currentBatch = retryResults.map((r) => r.item)',
-                data: {
-                    attempt: attempt,
-                    maxRetries: this.maxRetries,
-                    currentBatchLength: currentBatch.length,
-                    currentBatch: currentBatch,
-                },
-            });
             attempt++;
         }
         return allErrors;
@@ -631,7 +668,13 @@ class DefaultScenario {
         let attempt = 1;
         while (true) {
             try {
-                return await action();
+                const result = options.timeoutMs
+                    ? await Promise.race([
+                        action(),
+                        new Promise((_, reject) => setTimeout(() => reject(new Error(`Timeout after ${options.timeoutMs}ms`)), options.timeoutMs)),
+                    ])
+                    : await action();
+                return result;
             }
             catch (err) {
                 const workerError = this.normalizeError(err);
@@ -643,17 +686,12 @@ class DefaultScenario {
                         : String(workerError.error),
                     isRetryable: options.isRetryable(workerError),
                 });
-                // Проверка retryable
                 if (!options.isRetryable(workerError)) {
-                    loggerScope?.debug('Error is NOT retryable → throwing');
                     throw workerError;
                 }
-                // Проверка лимита попыток
                 if (attempt >= options.maxRetries) {
-                    loggerScope?.debug('Max retries reached → throwing');
                     throw workerError;
                 }
-                // Retry
                 await (0, helpers_1.waitBeforeRetry)(attempt);
                 attempt++;
             }
