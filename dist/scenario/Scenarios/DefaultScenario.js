@@ -12,9 +12,10 @@ const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImag
 const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 class DefaultScenario {
-    constructor(browser, storage) {
+    constructor(browser, storage, mode) {
         this.browser = browser;
         this.storage = storage;
+        this.mode = mode;
         this.sources = [];
         this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
@@ -28,7 +29,7 @@ class DefaultScenario {
     async run(brands) {
         try {
             const tasks = await this.load(brands);
-            this.logger.debug(`***** DefaultScenario started`, {
+            this.logger.debug(`DefaultScenario started`, {
                 component: 'DefaultScenario',
                 method: 'run()',
                 action: 'await this.load(brands)',
@@ -76,18 +77,17 @@ class DefaultScenario {
         }
     }
     async retryUnprocessed(brands) {
-        this.logger.debug('Enter to retryUnprocessed(brands?: string[])', {
+        this.logger.debug('Enter retryUnprocessed', {
             component: 'DefaultScenario',
             method: 'retryUnprocessed',
-            data: { brands: brands },
+            data: { brands },
         });
         const collector = new UnprocessedCollector_1.UnprocessedCollector();
         const maxAttempts = this.config.asyncRetry.maxAttempts;
         let attempt = 0;
-        let prevCount = Infinity;
         while (attempt < maxAttempts) {
             const currentCount = collector.countTotal();
-            // нет ошибок → выходим
+            // всё обработано
             if (currentCount === 0) {
                 this.logger.debug('No unprocessed products left', {
                     component: 'DefaultScenario',
@@ -96,33 +96,36 @@ class DefaultScenario {
                 });
                 break;
             }
-            // нет прогресса → выходим
-            if (currentCount >= prevCount) {
-                this.logger.warn('No progress in retry, stopping', {
-                    component: 'DefaultScenario',
-                    method: 'retryUnprocessed',
-                    data: { attempt, currentCount, prevCount },
-                });
-                break;
-            }
-            attempt++;
-            prevCount = currentCount;
             this.logger.debug('Retry attempt started', {
                 component: 'DefaultScenario',
                 method: 'retryUnprocessed',
                 data: {
-                    attempt,
+                    attempt: attempt + 1,
                     currentCount,
                 },
             });
-            let tasks = collector.getPhotoCollectionTasks();
-            // фильтр по брендам (ВАЖНО)
+            let tasks = collector.getPhotoCollectionTasks(this.mode);
             if (brands?.length) {
                 tasks = tasks.filter((t) => brands.includes(t.brand_name));
             }
-            if (!tasks.length)
+            if (!tasks.length) {
+                this.logger.warn('No tasks generated, stopping retry', {
+                    component: 'DefaultScenario',
+                    method: 'retryUnprocessed',
+                });
                 break;
+            }
             await this.runWithWorkerPool(tasks, (task, loggerScope) => this.process(task, loggerScope));
+            const newCount = collector.countTotal();
+            if (newCount >= currentCount) {
+                this.logger.warn('No progress in retry, stopping', {
+                    component: 'DefaultScenario',
+                    method: 'retryUnprocessed',
+                    data: { attempt, currentCount, newCount },
+                });
+                break;
+            }
+            attempt++;
         }
         this.logger.debug('Retry finished', {
             component: 'DefaultScenario',

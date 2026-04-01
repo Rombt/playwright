@@ -11,9 +11,10 @@ const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
 const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
 class RozetkaScenario {
-    constructor(browser, storage) {
+    constructor(browser, storage, mode) {
         this.browser = browser;
         this.storage = storage;
+        this.mode = mode;
         this.allErrors = [];
         this.sources = [];
         this.resources = [];
@@ -136,7 +137,7 @@ class RozetkaScenario {
     }
     async load() {
         const unprocessedCollector = new UnprocessedCollector_1.UnprocessedCollector();
-        const arrTasks = unprocessedCollector.getPhotoCollectionTasks();
+        const arrTasks = unprocessedCollector.getPhotoCollectionTasks(this.mode);
         if (!Array.isArray(arrTasks)) {
             throw new Error('Task file must contain an array');
         }

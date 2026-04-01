@@ -16,9 +16,9 @@ class UnprocessedCollector {
         for (const file of files) {
             const items = this.readFile(file);
             for (const item of items) {
-                if (item?.error?.product) {
-                    products.push(item.error.product);
-                }
+                const product = this.extractProduct(item);
+                if (product)
+                    products.push(product);
             }
         }
         return products;
@@ -26,30 +26,53 @@ class UnprocessedCollector {
     getBrands() {
         return this.getAllBrandNames();
     }
-    getPhotoCollectionTasks() {
-        const brandedProducts = this.getProductsWithBrand();
+    //todo добавить target URL для каждого продукта
+    getPhotoCollectionTasks(mode) {
+        const brandedProducts = this.getBrandedProductsForTasks();
         const grouped = new Map();
-        for (const { brand, product } of brandedProducts) {
-            if (!grouped.has(brand)) {
+        for (const { brand, product, target_website } of brandedProducts) {
+            if (!grouped.has(brand))
                 grouped.set(brand, []);
-            }
-            grouped.get(brand).push(product);
+            grouped.get(brand).push({ product, target_website });
         }
         const tasks = [];
-        for (const [brand_name, products] of grouped.entries()) {
-            tasks.push({
-                type: 'recollect-product-photos',
+        for (const [brand_name, items] of grouped.entries()) {
+            const firstUrl = items[0]?.target_website ?? null;
+            const task = {
                 brand_id: null,
                 brand_name,
                 metadata: {
-                    target_website: null,
+                    target_website: firstUrl,
                 },
-                products,
-            });
+                products: items.map((i) => i.product),
+            };
+            if (mode === 'retry') {
+                task.type = 'recollect-product-photos';
+            }
+            tasks.push(task);
         }
         return tasks;
     }
-    getProductsWithBrand() {
+    // private getProductsWithBrand(): IBrandedProduct[] {
+    //   const files = this.getBrandFiles(null);
+    //   const result: IBrandedProduct[] = [];
+    //   for (const file of files) {
+    //     const brand = this.extractBrandFromFilename(file);
+    //     if (!brand) continue;
+    //     const items = this.readFile(file);
+    //     for (const item of items) {
+    //       const product = this.extractProduct(item);
+    //       if (product) {
+    //         result.push({
+    //           brand,
+    //           product,
+    //         });
+    //       }
+    //     }
+    //   }
+    //   return result;
+    // }
+    getBrandedProductsForTasks() {
         const files = this.getBrandFiles(null);
         const result = [];
         for (const file of files) {
@@ -58,11 +81,10 @@ class UnprocessedCollector {
                 continue;
             const items = this.readFile(file);
             for (const item of items) {
-                if (item?.error?.product) {
-                    result.push({
-                        brand,
-                        product: item.error.product,
-                    });
+                const product = this.extractProduct(item);
+                if (product) {
+                    const target_website = this.extractTargetUrl(item);
+                    result.push({ brand, product, target_website });
                 }
             }
         }
@@ -91,6 +113,13 @@ class UnprocessedCollector {
         }
     }
     // ============  helpers  ====================================
+    extractTargetUrl(item) {
+        return item?.targetUrl ?? null;
+    }
+    extractProduct(item) {
+        // сначала проверяем item.error.product, потом item.error.meta.product
+        return item?.error?.product ?? item?.error?.meta?.product ?? null;
+    }
     /**
      * Normalize brand input to lowercase array.
      * undefined → null (means all brands)
@@ -99,7 +128,7 @@ class UnprocessedCollector {
         if (!brand)
             return null;
         const brands = Array.isArray(brand) ? brand : [brand];
-        const normalized = brands.map(b => b.trim().toLowerCase()).filter(Boolean);
+        const normalized = brands.map((b) => b.trim().toLowerCase()).filter(Boolean);
         return normalized.length ? normalized : null;
     }
     /**
@@ -110,7 +139,7 @@ class UnprocessedCollector {
         if (!brands) {
             return allFiles;
         }
-        return allFiles.filter(file => {
+        return allFiles.filter((file) => {
             const brand = this.extractBrandFromFilename(file);
             return brand !== null && brands.includes(brand);
         });
@@ -151,7 +180,7 @@ class UnprocessedCollector {
      */
     getAllBrandNames() {
         return this.getAllBrandFiles()
-            .map(file => this.extractBrandFromFilename(file))
+            .map((file) => this.extractBrandFromFilename(file))
             .filter((b) => Boolean(b));
     }
     /**

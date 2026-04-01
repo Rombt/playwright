@@ -36,7 +36,7 @@ export class App<BrowserOptions> {
     this.logger = Logger.getInstance();
 
     const modeArg = process.argv.find((arg) => arg.startsWith('--mode='));
-    this.mode = modeArg?.split('=')[1] ?? 'dev';
+    this.mode = modeArg?.split('=')[1] ?? 'full';
 
     this.logger.info(`Application is running in ${this.mode} mode`, {
       component: 'App',
@@ -118,33 +118,7 @@ export class App<BrowserOptions> {
         },
       });
 
-      process.on('unhandledRejection', (reason) => {
-        console.error('UNHANDLED REJECTION:', reason);
-
-        this.logger.debug(`UNHANDLED REJECTION`, {
-          component: 'App',
-          method: 'run()',
-          action: 'unhandledRejection',
-          data: {
-            reason: reason,
-          },
-        });
-      });
-
-      process.on('uncaughtException', (error) => {
-        console.error('UNCAUGHT EXCEPTION:', error);
-
-        this.logger.debug(`UNCAUGHT EXCEPTION`, {
-          component: 'App',
-          method: 'run()',
-          action: 'uncaughtException',
-          data: {
-            error: error,
-          },
-        });
-      });
-
-      const scenario = new DefaultScenario(browser, storage);
+      const scenario = new DefaultScenario(browser, storage, this.mode);
       await scenario.run(this.config.brands);
     } else if (this.mode === 'retry' && unprocessedCount !== 0) {
       //todo добавить перебор сценариев для дополнительного поиска
@@ -158,7 +132,7 @@ export class App<BrowserOptions> {
         },
       });
 
-      const rozetkaScenario = new RozetkaScenario(browser, storage);
+      const rozetkaScenario = new RozetkaScenario(browser, storage, this.mode);
       await rozetkaScenario.run();
     }
   }

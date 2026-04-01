@@ -69,6 +69,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   constructor(
     private browser: IBrowser<Browser, Context, IDownloadedFile>,
     private storage: IStorage,
+    private mode: string,
   ) {
     this.config = AppConfig.getInstance();
     this.logger = Logger.getInstance();
@@ -209,7 +210,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
   async load(): Promise<ICollectProductPhotosTask[]> {
     const unprocessedCollector = new UnprocessedCollector();
-    const arrTasks = unprocessedCollector.getPhotoCollectionTasks();
+    const arrTasks = unprocessedCollector.getPhotoCollectionTasks(this.mode);
 
     if (!Array.isArray(arrTasks)) {
       throw new Error('Task file must contain an array');
