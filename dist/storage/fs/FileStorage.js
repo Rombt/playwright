@@ -54,7 +54,7 @@ class FileStorage {
         await fs.writeFile(targetPath, JSON.stringify(data, null, 2), 'utf-8');
     }
     async appendJsonUnique(data, options) {
-        const targetPath = path.join(options.targetDir ?? '', options.filename);
+        const targetPath = path.join(this.baseDir, options.targetDir ?? '', options.filename);
         await fs.mkdir(path.dirname(targetPath), { recursive: true });
         let existingData = [];
         try {

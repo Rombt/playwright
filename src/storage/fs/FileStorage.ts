@@ -70,7 +70,7 @@ export class FileStorage implements IStorage {
     data: T[],
     options: { filename: string; targetDir?: string },
   ): Promise<void> {
-    const targetPath = path.join(options.targetDir ?? '', options.filename);
+    const targetPath = path.join(this.baseDir, options.targetDir ?? '', options.filename);
 
     await fs.mkdir(path.dirname(targetPath), { recursive: true });
 
