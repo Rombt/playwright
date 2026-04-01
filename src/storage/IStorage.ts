@@ -12,7 +12,7 @@ export interface IStorage {
   saveJson<T>(data: T, options: { filename: string; targetDir?: string }): Promise<void>;
   appendJsonUnique<T extends WithSKU>(
     data: T[],
-    options: { filename: string; targetDir?: string; baseDir: string },
+    options: { filename: string; targetDir?: string },
   ): Promise<void>;
 }
 

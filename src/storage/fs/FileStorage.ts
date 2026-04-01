@@ -68,9 +68,9 @@ export class FileStorage implements IStorage {
 
   async appendJsonUnique<T extends WithSKU>(
     data: T[],
-    options: { filename: string; targetDir?: string; baseDir: string },
+    options: { filename: string; targetDir?: string },
   ): Promise<void> {
-    const targetPath = path.join(options.baseDir, options.targetDir ?? '', options.filename);
+    const targetPath = path.join(options.targetDir ?? '', options.filename);
 
     await fs.mkdir(path.dirname(targetPath), { recursive: true });
 

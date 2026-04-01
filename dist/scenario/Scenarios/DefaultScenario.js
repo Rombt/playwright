@@ -453,7 +453,6 @@ class DefaultScenario {
         })), {
             filename: `${task.brand_name}_products_raw.json`,
             targetDir: '',
-            baseDir: '',
         });
         await this.storage.saveJson(allErrors, {
             filename: `${task.brand_name}_unprocessed-products.json`,

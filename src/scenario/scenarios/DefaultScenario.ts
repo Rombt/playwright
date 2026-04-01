@@ -620,7 +620,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       {
         filename: `${task.brand_name}_products_raw.json`,
         targetDir: '',
-        baseDir: '',
       },
     );
     await this.storage.saveJson(allErrors, {
