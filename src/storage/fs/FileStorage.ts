@@ -1,4 +1,4 @@
-import { IStorage } from '../IStorage';
+import { IStorage, WithSKU } from '../IStorage';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { ILogger } from '../../data/logger/types/ILogger';
@@ -64,6 +64,40 @@ export class FileStorage implements IStorage {
 
     await fs.mkdir(path.dirname(targetPath), { recursive: true });
     await fs.writeFile(targetPath, JSON.stringify(data, null, 2), 'utf-8');
+  }
+
+  async appendJsonUnique<T extends WithSKU>(
+    data: T[],
+    options: { filename: string; targetDir?: string; baseDir: string },
+  ): Promise<void> {
+    const targetPath = path.join(options.baseDir, options.targetDir ?? '', options.filename);
+
+    await fs.mkdir(path.dirname(targetPath), { recursive: true });
+
+    let existingData: T[] = [];
+
+    try {
+      const content = await fs.readFile(targetPath, 'utf-8');
+      existingData = JSON.parse(content) as T[];
+    } catch (err: any) {
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      // если файла нет — оставляем пустой массив
+    }
+
+    // Создаём карту по sku для быстрого поиска
+    const existingMap = new Map(existingData.map((item) => [item.sku, item]));
+
+    // Добавляем только новых
+    for (const item of data) {
+      if (!existingMap.has(item.sku)) {
+        existingData.push(item);
+        existingMap.set(item.sku, item);
+      }
+    }
+
+    await fs.writeFile(targetPath, JSON.stringify(existingData, null, 2), 'utf-8');
   }
 
   trimNonPrintable(value: string): string {

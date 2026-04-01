@@ -53,6 +53,31 @@ class FileStorage {
         await fs.mkdir(path.dirname(targetPath), { recursive: true });
         await fs.writeFile(targetPath, JSON.stringify(data, null, 2), 'utf-8');
     }
+    async appendJsonUnique(data, options) {
+        const targetPath = path.join(options.baseDir, options.targetDir ?? '', options.filename);
+        await fs.mkdir(path.dirname(targetPath), { recursive: true });
+        let existingData = [];
+        try {
+            const content = await fs.readFile(targetPath, 'utf-8');
+            existingData = JSON.parse(content);
+        }
+        catch (err) {
+            if (err.code !== 'ENOENT') {
+                throw err;
+            }
+            // если файла нет — оставляем пустой массив
+        }
+        // Создаём карту по sku для быстрого поиска
+        const existingMap = new Map(existingData.map((item) => [item.sku, item]));
+        // Добавляем только новых
+        for (const item of data) {
+            if (!existingMap.has(item.sku)) {
+                existingData.push(item);
+                existingMap.set(item.sku, item);
+            }
+        }
+        await fs.writeFile(targetPath, JSON.stringify(existingData, null, 2), 'utf-8');
+    }
     trimNonPrintable(value) {
         return value.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '');
     }

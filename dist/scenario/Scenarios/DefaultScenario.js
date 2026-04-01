@@ -443,9 +443,17 @@ class DefaultScenario {
             });
             allErrors.push(...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)));
         });
-        await this.storage.saveJson(allProductRaw, {
+        // await this.storage.saveJson(allProductRaw, {
+        //   filename: `${task.brand_name}_products_raw.json`,
+        //   targetDir: '',
+        // });
+        await this.storage.appendJsonUnique(allProductRaw.map((item) => ({
+            ...item,
+            sku: String(item.sku),
+        })), {
             filename: `${task.brand_name}_products_raw.json`,
             targetDir: '',
+            baseDir: '',
         });
         await this.storage.saveJson(allErrors, {
             filename: `${task.brand_name}_unprocessed-products.json`,
