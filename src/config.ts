@@ -30,7 +30,7 @@ export const config = {
     // resultsFolder: 'results/bezet/bezet_test_short',
 
     // resultsFolder: 'results/all_brands',
-    resultsFolder: 'results/columbia/columbia_prod',
+    resultsFolder: 'results/columbia/columbia_test',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -57,7 +57,7 @@ export const config = {
     // taskPath: 'src/data/tasks/bezet/bezet_all_prod_3.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test_short.json',
-    taskPath: 'src/data/tasks/columbia/columbia_prod.json',
+    taskPath: 'src/data/tasks/columbia/columbia_test.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

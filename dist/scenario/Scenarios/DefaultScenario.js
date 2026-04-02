@@ -500,7 +500,6 @@ class DefaultScenario {
                             maxRetries: this.maxRetries,
                         },
                     });
-                    // return await this.browser.downloadWithFallback(item.url, page!, context, loggerScope);
                     return await this.browser.downloadWithFallback(item.url, page, context, loggerScope, { strategy: 'static-first' });
                 }), {
                     maxRetries: this.maxRetries,

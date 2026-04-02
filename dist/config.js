@@ -32,7 +32,7 @@ exports.config = {
         // resultsFolder: 'results/bezet/bezet_all_3',
         // resultsFolder: 'results/bezet/bezet_test_short',
         // resultsFolder: 'results/all_brands',
-        resultsFolder: 'results/columbia/columbia_prod',
+        resultsFolder: 'results/columbia/columbia_test',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -57,7 +57,7 @@ exports.config = {
         // taskPath: 'src/data/tasks/bezet/bezet_all_prod_3.json',
         // taskPath: 'src/data/tasks/bezet/bezet_test.json',
         // taskPath: 'src/data/tasks/bezet/bezet_test_short.json',
-        taskPath: 'src/data/tasks/columbia/columbia_prod.json',
+        taskPath: 'src/data/tasks/columbia/columbia_test.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

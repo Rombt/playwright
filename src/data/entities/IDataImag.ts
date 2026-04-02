@@ -1,7 +1,3 @@
-// export interface IDataImag {
-//   [sku: string]: string[];
-// }
-
 export interface IDataImagItem extends Array<string> {
   idProduct: number;
 }
