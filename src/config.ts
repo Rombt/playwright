@@ -12,6 +12,7 @@ export const config = {
     },
     pages: {
       maxPage: 10,
+      maxPageDownloadImg: 5, // если не задавать то будет равным maxPage если и maxPage не задано то 10
       maxWaiters: 1500,
       pageLoadWait: 10000,
     },

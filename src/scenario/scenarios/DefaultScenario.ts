@@ -48,6 +48,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   private readonly config: AppConfig;
   private readonly maxRetries: number;
   private readonly maxPage: number;
+  private readonly maxPageDownloadImg: number;
   private readonly maxTask: number;
   private readonly sourcesFolder: string;
   private readonly logger: Logger;
@@ -69,6 +70,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
     this.maxRetries = this.config.asyncRetry.maxRetries;
     this.maxPage = this.config.asyncPages.maxPage;
+    this.maxPageDownloadImg = this.config.asyncPages.maxPageDownloadImg;
     this.maxTask = this.config.asyncTasks.maxTask;
     this.sourcesFolder = this.config.sourcesFolder;
     this.taskPath = this.config.taskPath;
@@ -638,7 +640,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     const queue: Array<{ sku: string; url: string; index: number; idProduct?: number }> = [];
     const allErrors: IWorkerError[] = [];
 
-    const ImgPool = new PagePool(context, this.maxPage);
+    const ImgPool = new PagePool(context, this.maxPageDownloadImg);
 
     loggerScope?.debug('Starting image download for current task', {
       component: 'DefaultScenario',

@@ -23,6 +23,7 @@ class DefaultScenario {
         this.limiter = new RateLimiter_1.RateLimiter(10000);
         this.maxRetries = this.config.asyncRetry.maxRetries;
         this.maxPage = this.config.asyncPages.maxPage;
+        this.maxPageDownloadImg = this.config.asyncPages.maxPageDownloadImg;
         this.maxTask = this.config.asyncTasks.maxTask;
         this.sourcesFolder = this.config.sourcesFolder;
         this.taskPath = this.config.taskPath;
@@ -462,7 +463,7 @@ class DefaultScenario {
     async downloadImages(urlsBySku, task, context, limiter, loggerScope) {
         const queue = [];
         const allErrors = [];
-        const ImgPool = new PagePool_1.PagePool(context, this.maxPage);
+        const ImgPool = new PagePool_1.PagePool(context, this.maxPageDownloadImg);
         loggerScope?.debug('Starting image download for current task', {
             component: 'DefaultScenario',
             method: 'downloadImages()',

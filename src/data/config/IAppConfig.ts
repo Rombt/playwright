@@ -17,6 +17,7 @@ export interface AsyncConfig {
 
   pages: {
     maxPage: number;
+    maxPageDownloadImg: number;
     maxWaiters: number;
     pageLoadWait: number;
   };
