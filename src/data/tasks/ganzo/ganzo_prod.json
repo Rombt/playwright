@@ -1,0 +1,113 @@
+{
+  "generated_at": "2026-04-02_12-56",
+  "task": {
+    "248": {
+      "brand_id": "248",
+      "brand_name": "Ganzo",
+      "metadata": {
+        "target_website": "https://ganzo.ua/search?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "36854",
+          "name_product": "Мультитул G104S M-TAC",
+          "sku": "G104S",
+          "attributes": {
+            "color": "срібло",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "43756",
+          "name_product": "Ніж складний G720-B Ganzo",
+          "sku": "G720-B",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "43756",
+          "name_product": "Ніж складний G720-B Ganzo",
+          "sku": "G720-B",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "47419",
+          "name_product": "Сумка для скидання HD-0010",
+          "sku": "HD-0010",
+          "attributes": {
+            "color": "мульт.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "48502",
+          "name_product": "Ніж складний D727-BK Ganzo (а)",
+          "sku": "D727-BK",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53303",
+          "name_product": "Мультитул NE20099 Ganzo (a)",
+          "sku": "NE20099\t",
+          "attributes": {
+            "color": "син",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55159",
+          "name_product": "Ніж складний D704-GR Ganzo (а)",
+          "sku": "D704-GR",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55160",
+          "name_product": "Ніж складний D727M-GR Ganzo (D2 сталь) (а)",
+          "sku": "D727M-GR",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55161",
+          "name_product": "Ніж складний G6252-OR Ganzo (a)",
+          "sku": "G6252-OR",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55162",
+          "name_product": "Ніж складний G6803-GY Ganzo (a)",
+          "sku": "G6803-GY",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55163",
+          "name_product": "Ніж складний G729-GY Ganzo (a)",
+          "sku": "G729-GY",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

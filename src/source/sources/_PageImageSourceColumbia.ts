@@ -86,7 +86,8 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
 
   async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
-    const data: IDataImag = {};
+    const images: IDataImag = {};
+    let html: string = '';
 
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');
@@ -122,13 +123,30 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      data[sku] = imageUrls as IDataImagItem;
-      data[sku].idProduct = product.id_product;
+      // т.к. сайт донор англоязычный
+      // const htmlCont = page.locator('.product-property').filter({
+      //   hasText: 'Характеристики товару',
+      // });
+      // await htmlCont
+      //   .first()
+      //   .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      // console.log('htmlCont.count() = ', await htmlCont.count());
+      // html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
+
+      images[sku] = imageUrls as IDataImagItem;
+      images[sku].idProduct = product.id_product;
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
 
-    return { data, errors };
+    return {
+      data: {
+        images,
+        html,
+      },
+      errors,
+    };
   }
 
   private buildWorkerError(

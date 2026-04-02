@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-02-09_16-02",
+  "task": {
+    "9": {
+      "brand_id": "9",
+      "brand_name": "Columbia",
+      "metadata": {
+        "target_website": "https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch"
+      },
+      "products": [
+        {
+          "id_product": "54199",
+          "name_product": "Брюки 2085951*AW27 CLB (ж)",
+          "sku": "2085951*AW27",
+          "attributes": {
+            "color": "бір.",
+            "size": "L"
+          }
+        },
+
+        {
+          "id_product": "54201",
+          "name_product": "Брюки 2135681*AW27 CLB (ч)",
+          "sku": "2135681*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "30"
+          }
+        },
+
+        {
+          "id_product": "54584",
+          "name_product": "Брюки 2072051*AW27 CLB (ч)",
+          "sku": "2072051*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "30/32"
+          }
+        },
+
+        {
+          "id_product": "54585",
+          "name_product": "Брюки 2085231*AW27 CLB (ж)",
+          "sku": "2085231*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+
+        {
+          "id_product": "54586",
+          "name_product": "Брюки 2094941*AW27 CLB (ч)",
+          "sku": "2094941*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "30/32"
+          }
+        }
+      ]
+    }
+  }
+}
