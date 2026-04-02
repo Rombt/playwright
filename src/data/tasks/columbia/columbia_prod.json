@@ -5,7 +5,7 @@
       "brand_id": "9",
       "brand_name": "Columbia",
       "metadata": {
-        "target_website": "https://www.columbia.com/search?q={{sku_prod}}"
+        "target_website": "https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch"
       },
       "products": [
         {
