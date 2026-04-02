@@ -144,31 +144,6 @@ export default class PageImageSourceMTac implements ISource<ICollectProductPhoto
     };
   }
 
-  // private async getHtmlFromTab(
-  //   page: Page,
-  //   timeout = this.config.asyncRetry.maxDelay,
-  // ): Promise<string> {
-  //   const selector = '#uk-tab-2 > div.product-property';
-
-  //   await page.waitForFunction(
-  //     (sel) => {
-  //       const el = document.querySelector(sel);
-  //       return el && el.innerHTML.trim().length > 0;
-  //     },
-  //     selector,
-  //     { timeout },
-  //   );
-
-  //   const html = await page.evaluate((sel) => {
-  //     const el = document.querySelector(sel);
-  //     return el?.innerHTML ?? '';
-  //   }, selector);
-
-  //   console.log('1111 html = ', html);
-
-  //   return html;
-  // }
-
   private buildWorkerError(
     err: unknown,
     product: IProduct,

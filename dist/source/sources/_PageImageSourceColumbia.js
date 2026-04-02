@@ -46,8 +46,7 @@ class PageImageSourceColumbia {
     }
     async execute(targetUrl, page, product) {
         const errors = [];
-        const images = {};
-        let html = '';
+        const data = {};
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
@@ -76,28 +75,13 @@ class PageImageSourceColumbia {
                 .map((img) => img.src));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
-            // т.к. сайт донор англоязычный
-            // const htmlCont = page.locator('.product-property').filter({
-            //   hasText: 'Характеристики товару',
-            // });
-            // await htmlCont
-            //   .first()
-            //   .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            // console.log('htmlCont.count() = ', await htmlCont.count());
-            // html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
-            images[sku] = imageUrls;
-            images[sku].idProduct = product.id_product;
+            data[sku] = imageUrls;
+            data[sku].idProduct = product.id_product;
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);
         }
-        return {
-            data: {
-                images,
-                html,
-            },
-            errors,
-        };
+        return { data, errors };
     }
     buildWorkerError(err, product, targetUrl, retryable = true) {
         return {

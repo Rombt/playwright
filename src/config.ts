@@ -22,12 +22,15 @@ export const config = {
     // resultsFolder: 'results/results_militarist_c_01.09.25_full_prod',
     // resultsFolder: 'results/m-tac/militarist_1000x1000_test',
     // resultsFolder: 'results/m-tac/militarist_1000x1000_c_01.09.25_full_prod',
-    resultsFolder: 'results/m-tac/militarist_all_prod',
+    // resultsFolder: 'results/m-tac/militarist_all_prod',
     // resultsFolder: 'results/camotec/camotec_test',
     // resultsFolder: 'results/camotec/camotec_all_prod',
     // resultsFolder: 'results/kiborg/kiborg_test',
     // resultsFolder: 'results/bezet/bezet_all_3',
     // resultsFolder: 'results/bezet/bezet_test_short',
+
+    // resultsFolder: 'results/all_brands',
+    resultsFolder: 'results/columbia/columbia_prod',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -45,7 +48,7 @@ export const config = {
     // taskPath: 'src/data/tasks/m-tac/m-tac_for_tests.json',
     // taskPath: 'src/data/tasks/m-tac/m-tac_c_01.09.25_prod.json',
     // taskPath: 'src/data/tasks/m-tac/militarist_for_tests.json',
-    taskPath: 'src/data/tasks/m-tac/militarist_all_prod.json',
+    // taskPath: 'src/data/tasks/m-tac/militarist_all_prod.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_tests.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_c_01.09.25_prod.json',
     // taskPath: 'src/data/tasks/camotec/camotec_tests.json',
@@ -54,6 +57,7 @@ export const config = {
     // taskPath: 'src/data/tasks/bezet/bezet_all_prod_3.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test_short.json',
+    taskPath: 'src/data/tasks/columbia/columbia_prod.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

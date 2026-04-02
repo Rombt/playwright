@@ -1,11 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const appConfig_1 = require("../../data/config/appConfig");
-class PageImageSourceColumbia {
-    // private readonly logger: Logger;
+class PageImageSourcePuma {
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
-        // this.logger = Logger.getInstance();
     }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
@@ -14,8 +12,7 @@ class PageImageSourceColumbia {
         throw new Error('Method not implemented.');
     }
     supports(task) {
-        return (task.metadata.target_website ===
-            'https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch');
+        return (task.metadata.target_website === 'https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}');
     }
     async worker(targetUrl, page, limiter, getNext, loggerScope, sku, debugMeta) {
         const results = [];
@@ -46,58 +43,46 @@ class PageImageSourceColumbia {
     }
     async execute(targetUrl, page, product) {
         const errors = [];
-        const images = {};
-        let html = '';
+        const data = {};
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
-            const image = page.locator('#app-main img').first();
-            await image.waitFor({ state: 'attached', timeout: 5000 });
-            await image.click();
-            const gallery = page.locator('[data-component-id="image-gallery"]');
+            const galleries = page.locator('figure.zoom-image-gallery__figure');
             try {
-                await gallery.waitFor({ state: 'attached', timeout: 15000 });
+                await galleries
+                    .first()
+                    .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
             }
             catch (error) {
-                throw new Error('No gallery found on page');
+                throw new Error(`No gallery found on page: ${error}`);
             }
-            const count = await gallery.count();
-            if (count === 0)
-                throw new Error('No images found on page');
-            const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'attached', timeout: 15000 });
-            const imageUrls = await gallery
-                .locator('img')
-                .evaluateAll((imgs) => imgs
-                .filter((img) => img instanceof HTMLImageElement)
-                .map((img) => img.src));
+            const imageUrls = await galleries.evaluateAll((figures) => figures
+                .map((fig) => {
+                const img = fig.querySelector('img');
+                if (img?.currentSrc && !img.currentSrc.startsWith('data:'))
+                    return img.currentSrc;
+                const src = img?.getAttribute('src');
+                if (src && !src.startsWith('data:'))
+                    return src;
+                const lazy = img?.getAttribute('data-lazy');
+                if (lazy)
+                    return lazy;
+                return fig.getAttribute('data-large-img');
+            })
+                // вот type guard для TS
+                .filter((url) => url !== null && url !== undefined));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
-            // т.к. сайт донор англоязычный
-            // const htmlCont = page.locator('.product-property').filter({
-            //   hasText: 'Характеристики товару',
-            // });
-            // await htmlCont
-            //   .first()
-            //   .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            // console.log('htmlCont.count() = ', await htmlCont.count());
-            // html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
-            images[sku] = imageUrls;
-            images[sku].idProduct = product.id_product;
+            data[sku] = imageUrls;
+            data[sku].idProduct = product.id_product;
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);
         }
-        return {
-            data: {
-                images,
-                html,
-            },
-            errors,
-        };
+        return { data, errors };
     }
     buildWorkerError(err, product, targetUrl, retryable = true) {
         return {
@@ -107,4 +92,4 @@ class PageImageSourceColumbia {
         };
     }
 }
-exports.default = PageImageSourceColumbia;
+exports.default = PageImageSourcePuma;
