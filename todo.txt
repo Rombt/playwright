@@ -20,6 +20,14 @@
 РЕФАКТОРИНГ
     убрать зоопарк sources переписав весь механизм по принципу processors
 
+Бренды готовые к обработке:
+    m-tac
+    camotec
+    kiborg
+    bezet
+    ganzo
+
+"target_website": "https://ganzo.ua/search?search={{sku_prod}}"
 
 
 
@@ -55,8 +63,6 @@
     https://sportano.ua/
     https://megasport.ua/
     https://intertop.ua/
-
-
 
 const productsPageLinks = {
   '1865231': [
