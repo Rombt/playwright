@@ -451,57 +451,208 @@ export class PlaywrightBrowser
     return { buffer, ext };
   }
 
+  // async downloadWithFallback(
+  //   url: string,
+  //   page: Page,
+  //   context: BrowserContext,
+  //   loggerScope?: ILogger,
+  // ): Promise<{ buffer: Buffer; ext: string }> {
+  //   const scope = {
+  //     component: 'PlaywrightBrowser',
+  //     method: 'downloadWithFallback()',
+  //     url,
+  //   };
+
+  //   loggerScope?.debug(`Starting download (browser-first strategy)`, {
+  //     ...scope,
+  //   });
+
+  //   // --- PRIMARY: browser (page) ---
+  //   try {
+  //     const result = await this.download(page, url, loggerScope);
+
+  //     loggerScope?.debug(`Primary (browser) download succeeded`, {
+  //       ...scope,
+  //     });
+
+  //     return result;
+  //   } catch (err) {
+  //     const { error } = this.normalizeError(err);
+
+  //     loggerScope?.warn(`Primary (browser) download failed`, {
+  //       ...scope,
+  //       errorName: error.name,
+  //       errorMessage: error.message,
+  //     });
+
+  //     // решаем — делать fallback или нет
+  //     if (!this.shouldFallback(error)) {
+  //       loggerScope?.warn(`Error is not eligible for fallback`, {
+  //         ...scope,
+  //       });
+
+  //       throw error;
+  //     }
+
+  //     loggerScope?.warn(`Switching to fallback (static download)`, {
+  //       ...scope,
+  //     });
+
+  //     // --- FALLBACK: static ---
+  //     try {
+  //       const result = await this.downloadStaticResource(url, context, loggerScope);
+
+  //       loggerScope?.debug(`Fallback (static) download succeeded`, {
+  //         ...scope,
+  //       });
+
+  //       return result;
+  //     } catch (fallbackErr) {
+  //       const { error: fallbackError } = this.normalizeError(fallbackErr);
+
+  //       loggerScope?.error(`Fallback (static) download failed`, {
+  //         ...scope,
+  //         errorName: fallbackError.name,
+  //         errorMessage: fallbackError.message,
+  //       });
+
+  //       // не теряем цепочку ошибок
+  //       throw Object.assign(new Error(`Download failed for ${url}`), {
+  //         originalError: fallbackError,
+  //       });
+  //     }
+  //   }
+  // }
+
   async downloadWithFallback(
     url: string,
     page: Page,
     context: BrowserContext,
     loggerScope?: ILogger,
+    options?: { strategy?: 'static-first' | 'browser-first' },
   ): Promise<{ buffer: Buffer; ext: string }> {
-    loggerScope?.debug(`Entering downloadWithFallback()`, {
+    const scope = {
       component: 'PlaywrightBrowser',
       method: 'downloadWithFallback()',
-      data: { url },
-    });
+      url,
+    };
 
-    try {
-      //todo пока не понятно что лучше начинать со статики или ней заканчивать....
-      // return await this.downloadStaticResource(url, context, loggerScope);
-      return await this.download(page, url, loggerScope);
-    } catch (err) {
-      // const error = err instanceof Error ? err : new Error(String(err));
-      const { error, meta } = this.normalizeError(err);
+    const strategy = options?.strategy || 'browser-first';
+    loggerScope?.debug(`Starting download with strategy: ${strategy}`, scope);
 
-      loggerScope?.warn(`Static download failed`, {
-        component: 'PlaywrightBrowser',
-        method: 'downloadWithFallback()',
-        data: {
-          url,
+    const tryDownload = async (method: 'browser' | 'static') => {
+      if (method === 'browser') {
+        return this.download(page, url, loggerScope);
+      } else {
+        return this.downloadStaticResource(url, context, loggerScope);
+      }
+    };
+
+    // Определяем порядок методов в зависимости от стратегии
+    const methods: ('browser' | 'static')[] =
+      strategy === 'browser-first' ? ['browser', 'static'] : ['static', 'browser'];
+
+    let lastError: Error | null = null;
+
+    for (const method of methods) {
+      try {
+        const result = await tryDownload(method);
+        loggerScope?.debug(`${method} download succeeded`, scope);
+        return result;
+      } catch (err) {
+        const { error } = this.normalizeError(err);
+        lastError = error;
+
+        loggerScope?.warn(`${method} download failed`, {
+          ...scope,
           errorName: error.name,
           errorMessage: error.message,
-          err: err,
-        },
-      });
-
-      // Fallback ТОЛЬКО если это сетевая ошибка
-      if (!this.isNetworkError(error)) {
-        loggerScope?.warn(`Error is not network-related. Skipping fallback.`, {
-          component: 'PlaywrightBrowser',
-          method: 'downloadWithFallback()',
-          data: { url },
         });
 
-        throw error;
+        // Проверяем, нужен ли fallback
+        if (!this.shouldFallback(error)) {
+          loggerScope?.warn(`Error not eligible for fallback, stopping`, scope);
+          throw error;
+        } else {
+          loggerScope?.warn(`Fallback will be attempted`, scope);
+        }
       }
-
-      loggerScope?.warn(`Network error detected. Switching to page download.`, {
-        component: 'PlaywrightBrowser',
-        method: 'downloadWithFallback()',
-        data: { url },
-      });
-
-      // return await this.download(page, url, loggerScope);
-      return await this.downloadStaticResource(url, context, loggerScope);
     }
+
+    // Если все методы провалились
+    const e = new Error(`Download failed for ${url}`);
+    (e as any).originalError = lastError;
+    throw e;
+  }
+
+  private shouldFallback(error: Error): boolean {
+    const message = error.message?.toLowerCase() || '';
+
+    return (
+      // --- твои базовые проверки ---
+      this.isNetworkError(error) ||
+      this.isTimeoutError?.(error) ||
+      this.isHttpError?.(error, [403, 408, 429, 500, 502, 503, 504]) ||
+      // --- Playwright / Chromium network errors ---
+      message.includes('net::err_aborted') ||
+      message.includes('net::err_failed') ||
+      message.includes('net::err_connection_reset') ||
+      message.includes('net::err_internet_disconnected') ||
+      message.includes('net::err_connection_closed') ||
+      message.includes('net::err_timed_out') ||
+      message.includes('net::err_name_not_resolved') ||
+      // --- Playwright специфичные ---
+      message.includes('execution context was destroyed') ||
+      message.includes('navigation failed') ||
+      message.includes('target closed') ||
+      message.includes('page closed') ||
+      message.includes('browser has been closed') ||
+      // --- abort / cancel ---
+      message.includes('aborted') ||
+      message.includes('cancelled') ||
+      // --- response issues ---
+      message.includes('failed to fetch') ||
+      message.includes('load failed') ||
+      // --- generic playwright errors ---
+      message.includes('protocol error') ||
+      message.includes('session closed')
+    );
+  }
+
+  /**
+   * Проверяет, является ли ошибка таймаутом
+   */
+  private isTimeoutError(error: unknown): boolean {
+    if (!(error instanceof Error)) return false;
+
+    const msg = error.message.toLowerCase();
+
+    // Общие строки для таймаута
+    const timeoutPatterns = [
+      'timeout',
+      'timed out',
+      'navigation timeout',
+      'waiting for selector',
+      'network timeout',
+    ];
+
+    return timeoutPatterns.some((pattern) => msg.includes(pattern));
+  }
+
+  /**
+   * Проверяет, является ли ошибка HTTP ошибкой с кодом из списка
+   */
+  private isHttpError(error: unknown, codes: number[]): boolean {
+    if (!(error instanceof Error)) return false;
+
+    // Попробуем достать статус
+    const status = (error as any).status ?? (error as any).statusCode;
+
+    if (typeof status === 'number') return codes.includes(status);
+
+    // Иногда статус не приходит, смотрим в сообщении
+    const msg = error.message.toLowerCase();
+    return codes.some((code) => msg.includes(code.toString()));
   }
 
   private isNetworkError(error: Error): boolean {

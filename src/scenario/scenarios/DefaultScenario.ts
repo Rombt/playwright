@@ -686,7 +686,14 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                   maxRetries: this.maxRetries,
                 },
               });
-              return await this.browser.downloadWithFallback(item.url, page!, context, loggerScope);
+              // return await this.browser.downloadWithFallback(item.url, page!, context, loggerScope);
+              return await this.browser.downloadWithFallback(
+                item.url,
+                page!,
+                context,
+                loggerScope,
+                { strategy: 'static-first' },
+              );
             }),
           {
             maxRetries: this.maxRetries,

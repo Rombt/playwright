@@ -42,5 +42,6 @@ export interface IBrowser<
     page: Page,
     context: BrowserContext,
     loggerScope?: ILogger,
+    options?: { strategy?: 'static-first' | 'browser-first' },
   ): Promise<IDownloadResult>;
 }
