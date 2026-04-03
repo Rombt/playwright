@@ -1,0 +1,383 @@
+{
+  "generated_at": "2026-02-09_14-00",
+  "task": {
+    "306": {
+      "brand_id": "306",
+      "brand_name": "BRS",
+      "metadata": {
+        "target_website": "https://borsuk.com.ua/katalog/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "51017",
+          "name_product": "Каремат 160х60 х1.5 см. (Oxford) КР3.2 BRS",
+          "sku": "КР3.2",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51053",
+          "name_product": "Підсумок Cord Pl на 1 ріжок АК 1МВП1.1 BRS",
+          "sku": "1МВП1.1 ",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51077",
+          "name_product": "Рюкзак штурмовий (з кріп. шолома) ТРШ2.1 BRS",
+          "sku": "ТРШ2.1",
+          "attributes": {
+            "color": "мульт",
+            "size": "10л."
+          }
+        },
+        {
+          "id_product": "51078",
+          "name_product": "Рюкзак штурмовий (з кріп. шолома) ТРШ2.2 BRS",
+          "sku": "ТРШ2.2",
+          "attributes": {
+            "color": "пікс",
+            "size": "10л."
+          }
+        },
+        {
+          "id_product": "51084",
+          "name_product": "Сумка поясна XL (Cordura) СПХ1.1 BRS",
+          "sku": "СПХ1.1-0404",
+          "attributes": {
+            "color": "мульт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51088",
+          "name_product": "Сумка слінг Nomad (Cordura) ID_1746 BRS",
+          "sku": "ID_1746",
+          "attributes": {
+            "color": "койот",
+            "size": "4л."
+          }
+        },
+        {
+          "id_product": "51089",
+          "name_product": "Сумка слінг Nomad (Cordura) ID_1747 BRS",
+          "sku": "ID_1747",
+          "attributes": {
+            "color": "мульт",
+            "size": "4л."
+          }
+        },
+        {
+          "id_product": "51090",
+          "name_product": "Сумка слінг Nomad (Cordura) ID_1753 BRS",
+          "sku": "ID_1753",
+          "attributes": {
+            "color": "пікс",
+            "size": "4л."
+          }
+        },
+        {
+          "id_product": "51091",
+          "name_product": "Сумка-кобура (Cordura) СК1.1 BRS",
+          "sku": "СК1.1-0398",
+          "attributes": {
+            "color": "мульт",
+            "size": "4л."
+          }
+        },
+        {
+          "id_product": "51093",
+          "name_product": "Сумка-планш. Crossbody VPak (Cordura) ID_1703 BRS",
+          "sku": "ID_1703",
+          "attributes": {
+            "color": "мульт",
+            "size": "4л."
+          }
+        },
+        {
+          "id_product": "51100",
+          "name_product": "Устілки антипрокольні ID_1781 BRS",
+          "sku": "ID_1781",
+          "attributes": {
+            "color": "біл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "51100",
+          "name_product": "Устілки антипрокольні ID_1781 BRS",
+          "sku": "ID_1781",
+          "attributes": {
+            "color": "біл",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "51100",
+          "name_product": "Устілки антипрокольні ID_1781 BRS",
+          "sku": "ID_1781",
+          "attributes": {
+            "color": "біл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "51100",
+          "name_product": "Устілки антипрокольні ID_1781 BRS",
+          "sku": "ID_1781",
+          "attributes": {
+            "color": "біл",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "51100",
+          "name_product": "Устілки антипрокольні ID_1781 BRS",
+          "sku": "ID_1781",
+          "attributes": {
+            "color": "біл",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "51100",
+          "name_product": "Устілки антипрокольні ID_1781 BRS",
+          "sku": "ID_1781",
+          "attributes": {
+            "color": "біл",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "54775",
+          "name_product": "Аптечка Roll гор-на АРГ1.1-0453 BRS",
+          "sku": "АРГ1.1-0453",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54776",
+          "name_product": "Бал. пакет МБП-200х135х165-2 клас BRS",
+          "sku": "МБП-200х135х165-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54777",
+          "name_product": "Бал. пакет МБП-230х170-2 клас BRS",
+          "sku": "МБП-230х170-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54779",
+          "name_product": "Джгут-турнікет CAT ID_1898 BRS",
+          "sku": "ID_1898",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54780",
+          "name_product": "Евакуаційна стропа ЕС1-0477 BRS",
+          "sku": "ЕС1-0477",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54781",
+          "name_product": "Кавер (Fast) КФП1.1-0186 BRS",
+          "sku": "КФП1.1-0186",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54782",
+          "name_product": "Напашник Н1.1-0009 BRS",
+          "sku": "Н1.1-0009",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54784",
+          "name_product": "Ніж Ratio Division ID_1853 BRS",
+          "sku": "ID_1853",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54785",
+          "name_product": "Ніж Spartan blade ID_1932 BRS",
+          "sku": "ID_1932",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54786",
+          "name_product": "Ніж розк-й KNIVES НРК-014 BRS",
+          "sku": "НРК-014",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54787",
+          "name_product": "Під-к під 2 маг закр ID_1913 BRS",
+          "sku": "ID_1913",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54788",
+          "name_product": "Під-к під 3 маг зак-й 3МЗМ1.1-0163 BRS",
+          "sku": "3МЗМ1.1-0163",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54789",
+          "name_product": "Під-к під маг відк-й 2 ріж 2МВП1.1.1-0132 BRS",
+          "sku": "2МВП1.1.1-0132",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54790",
+          "name_product": "Під-к під маг закр 2 ріжка 2МЗМ1.1-0143 BRS",
+          "sku": "2МЗМ1.1-0143",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54791",
+          "name_product": "Під-к утил-й гор-й ПУГМ1.1-0194 BRS",
+          "sku": "ПУГМ1.1-0194",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54792",
+          "name_product": "Підс-к під баліст-й пакет СЖБ1.1-0255 BRS",
+          "sku": "СЖБ1.1-0255",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54793",
+          "name_product": "Підс-к під гр-ту NATO ПГН1.1-0068 BRS",
+          "sku": "ПГН1.1-0068",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55168",
+          "name_product": "Під-к під маг відк-й 1МВМ1.1-0120 BRS",
+          "sku": "1МВМ1.1-0120",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55174",
+          "name_product": "Сумка HEX Pac ID_1957 BRS",
+          "sku": "ID_1957",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55175",
+          "name_product": "Сумка HEX Pac ID_1958 BRS",
+          "sku": "ID_1958",
+          "attributes": {
+            "color": "хакі",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55176",
+          "name_product": "Сумка HEX Pac ID_1959 BRS",
+          "sku": "ID_1959",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55177",
+          "name_product": "Сумка Symmetry ID_1920 BRS",
+          "sku": "ID_1920",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55178",
+          "name_product": "Сумка скид. магаз.СС1.1-0039 BRS",
+          "sku": "СС1.1-0039",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55179",
+          "name_product": "Устілки антипрокольні ID_1783 BRS",
+          "sku": "ID_1783",
+          "attributes": {
+            "color": "біл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "55179",
+          "name_product": "Устілки антипрокольні ID_1783 BRS",
+          "sku": "ID_1783",
+          "attributes": {
+            "color": "біл",
+            "size": "44"
+          }
+        }
+      ]
+    }
+  }
+}

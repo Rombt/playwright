@@ -109,7 +109,7 @@ export default class PageImageSourceBRS implements ISource<ICollectProductPhotos
     const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {
-      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.goto(url, { waitUntil: 'networkidle' });
 
       const link = page.locator('div.catalogCard-view > a').first();
 

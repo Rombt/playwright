@@ -26,7 +26,18 @@ class PagePool {
             },
         });
         if (this.free.length) {
-            return this.free.pop();
+            const page = this.free.pop();
+            try {
+                await page.goto('about:blank');
+                await page.waitForLoadState('load');
+            }
+            catch (e) {
+                this.loggerScope?.warn('Failed to reset page, will recreate', { error: e });
+                await page.close();
+                this.created--;
+                return this.acquire(); // взять новую
+            }
+            return page;
         }
         if (this.created < this.quantityPage) {
             this.created++;

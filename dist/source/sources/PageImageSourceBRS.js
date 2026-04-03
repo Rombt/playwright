@@ -61,7 +61,7 @@ class PageImageSourceBRS {
         });
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
-            await page.goto(url, { waitUntil: 'domcontentloaded' });
+            await page.goto(url, { waitUntil: 'networkidle' });
             const link = page.locator('div.catalogCard-view > a').first();
             const empty = page.locator('.catalog__content > div > p', {
                 hasText: 'Немає товарів',
