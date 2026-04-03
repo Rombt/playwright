@@ -34,7 +34,7 @@ exports.config = {
         // resultsFolder: 'results/all_brands',
         // resultsFolder: 'results/columbia/columbia_test',
         // resultsFolder: 'results/brs/brs_prod',
-        resultsFolder: 'results/brs/brs_test',
+        resultsFolder: 'results/brs/brs_prod',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут

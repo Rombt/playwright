@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceBRS {
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
+        this.logger = Logger_1.Logger.getInstance();
     }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
@@ -48,6 +50,15 @@ class PageImageSourceBRS {
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
+        this.logger?.debug(`*** Normalize SKU ****`, {
+            component: 'PageImageSourceBRS',
+            method: 'execute()',
+            action: '(starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)',
+            data: {
+                originalSKU: product.sku,
+                sku: sku,
+            },
+        });
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });

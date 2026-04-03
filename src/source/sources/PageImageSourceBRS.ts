@@ -14,9 +14,11 @@ import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceBRS implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
+  private readonly logger: Logger;
 
   constructor() {
     this.config = AppConfig.getInstance();
+    this.logger = Logger.getInstance();
   }
 
   workerHttpRequest(
@@ -93,6 +95,17 @@ export default class PageImageSourceBRS implements ISource<ICollectProductPhotos
         /^[\p{C}\s]+|[\p{C}\s]+$/gu,
         '',
       ) ?? '';
+
+    this.logger?.debug(`*** Normalize SKU ****`, {
+      component: 'PageImageSourceBRS',
+      method: 'execute()',
+      action: '(starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)',
+      data: {
+        originalSKU: product.sku,
+        sku: sku,
+      },
+    });
+
     const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {

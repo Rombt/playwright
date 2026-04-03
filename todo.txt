@@ -73,3 +73,8 @@ const productsPageLinks = {
   '2079181': [ 'https://rozetka.com.ua/ua/columbia-195981582994/p446003411/' ],
   '2103761': [ 'https://rozetka.com.ua/ua/columbia-195981625394/p446018603/' ]
 };
+
+
+
+///!!!!!!!!!!!!!!!!!!!!!!!
+СК1.7, СК1.1-0398, ID_1776, ПСК2.2, 

@@ -366,7 +366,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       const pool = new PagePool(context, quantityPage);
       this.registerResource(pool);
-      // let page: Page;
 
       const processProduct = async (product: IProduct): Promise<TaskResult> => {
         if (!task.metadata.target_website) {
@@ -416,6 +415,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             loggerScope,
           );
 
+          //!!! здесь уже есть проблема с ID_1776
           loggerScope?.debug('Product processing finished', {
             component: 'DefaultScenario',
             method: 'process()',
@@ -472,6 +472,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             }
           }
 
+          //!!! здесь уже есть проблема с ID_1776
           loggerScope?.debug('Image data aggregation finished', {
             component: 'DefaultScenario',
             method: 'process()',

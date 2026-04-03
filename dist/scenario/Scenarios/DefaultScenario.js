@@ -262,7 +262,6 @@ class DefaultScenario {
             const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
-            // let page: Page;
             const processProduct = async (product) => {
                 if (!task.metadata.target_website) {
                     loggerScope?.error('Task metadata does not contain target_website!!', {
@@ -293,6 +292,7 @@ class DefaultScenario {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
                     }, this.limiter, loggerScope);
+                    //!!! здесь уже есть проблема с ID_1776
                     loggerScope?.debug('Product processing finished', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -339,6 +339,7 @@ class DefaultScenario {
                             }
                         }
                     }
+                    //!!! здесь уже есть проблема с ID_1776
                     loggerScope?.debug('Image data aggregation finished', {
                         component: 'DefaultScenario',
                         method: 'process()',

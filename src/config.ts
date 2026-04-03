@@ -31,7 +31,7 @@ export const config = {
     // resultsFolder: 'results/all_brands',
     // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_prod',
-    resultsFolder: 'results/brs/brs_test',
+    resultsFolder: 'results/brs/brs_prod',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
