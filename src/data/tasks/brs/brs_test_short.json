@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-09_14-00",
+  "task": {
+    "306": {
+      "brand_id": "306",
+      "brand_name": "BRS",
+      "metadata": {
+        "target_website": "https://borsuk.com.ua/katalog/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "51000",
+          "name_product": "Баул, сумка-рюкзак АБ2.2 BRS",
+          "sku": "АБ2.2",
+          "attributes": {
+            "color": "піксель",
+            "size": "120л"
+          }
+        }
+      ]
+    }
+  }
+}

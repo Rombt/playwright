@@ -456,7 +456,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             if (r.data.html) {
               const processor = new HtmlProcessorFactory().create(task.brand_name.toLowerCase());
 
-              console.log('processor = ', processor);
               const rawContent = processor.process(r.data.html);
 
               if (Array.isArray(rawContent)) {

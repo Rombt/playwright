@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-02-09_14-00",
+  "task": {
+    "306": {
+      "brand_id": "306",
+      "brand_name": "BRS",
+      "metadata": {
+        "target_website": "https://borsuk.com.ua/katalog/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "50999",
+          "name_product": "Баул, сумка-рюкзак АБ2.1 BRS",
+          "sku": "АБ2.1",
+          "attributes": {
+            "color": "мультик.",
+            "size": "120л"
+          }
+        },
+        {
+          "id_product": "51000",
+          "name_product": "Баул, сумка-рюкзак АБ2.2 BRS",
+          "sku": "АБ2.2",
+          "attributes": {
+            "color": "піксель",
+            "size": "120л"
+          }
+        },
+        {
+          "id_product": "51001",
+          "name_product": "Баул, сумка-рюкзак АБ2.3 BRS",
+          "sku": "АБ2.3",
+          "attributes": {
+            "color": "олива",
+            "size": "120л"
+          }
+        },
+        {
+          "id_product": "51002",
+          "name_product": "Баул, сумка-рюкзак АБ2.5 BRS",
+          "sku": "АБ2.5",
+          "attributes": {
+            "color": "чорний",
+            "size": "120л"
+          }
+        },
+        {
+          "id_product": "51016",
+          "name_product": "Каремат 160х60 х1.5 см. (Oxford) КР3.1 BRS",
+          "sku": "КР3.1",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "51017",
+          "name_product": "Каремат 160х60 х1.5 см. (Oxford) КР3.2 BRS",
+          "sku": "КР3.2",
+          "attributes": {
+            "color": "пікс",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

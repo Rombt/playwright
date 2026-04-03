@@ -9,6 +9,7 @@ import { CamotecProcessor } from './processors/CamotecProcessor';
 import { KiborgProcessor } from './processors/KiborgProcessor';
 import { BezetProcessor } from './processors/BezetProcessor';
 import { ColumbiaProcessor } from './processors/ColumbiaProcessor';
+import { BRSProcessor } from './processors/BRSProcessor';
 
 export class HtmlProcessorFactory implements IHtmlProcessorFactory {
   private processors: Record<string, new () => IBaseHtmlProcessor> = {
@@ -19,6 +20,7 @@ export class HtmlProcessorFactory implements IHtmlProcessorFactory {
     kiborg: KiborgProcessor,
     bezet: BezetProcessor,
     columbia: ColumbiaProcessor,
+    brs: BRSProcessor,
     // здесь добавлять новые бренды
   };
 
