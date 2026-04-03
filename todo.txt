@@ -26,6 +26,7 @@
     kiborg
     bezet
     ganzo
+    BRS
     columbia но т.к. сай источник англоязычный то только картинки
 
 "target_website": "https://ganzo.ua/search?search={{sku_prod}}"
