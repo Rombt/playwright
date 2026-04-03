@@ -262,7 +262,7 @@ class DefaultScenario {
             const quantityPage = Math.min(uniqueProducts.length, this.maxPage);
             const pool = new PagePool_1.PagePool(context, quantityPage);
             this.registerResource(pool);
-            let page;
+            // let page: Page;
             const processProduct = async (product) => {
                 if (!task.metadata.target_website) {
                     loggerScope?.error('Task metadata does not contain target_website!!', {
@@ -276,6 +276,7 @@ class DefaultScenario {
                     });
                     throw new Error('Error!! Task metadata does not contain target_website!!');
                 }
+                let page;
                 try {
                     page = await pool.acquire();
                     loggerScope?.debug('Beginning processing of product', {
@@ -304,13 +305,23 @@ class DefaultScenario {
                         },
                     });
                     for (const r of result) {
-                        for (const [sku, images] of Object.entries(r.data.images ?? {})) {
-                            if (!allData[sku]) {
+                        // for (const [sku, images] of Object.entries(r.data.images ?? {})) {   //!!!!!!!!!!!!!!!!!!!! <===
+                        for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
+                            const originalSku = product.sku;
+                            const normalizedSku = originalSku.split('*')[0];
+                            if (returnedSku !== normalizedSku) {
+                                loggerScope?.error('SKU mismatch from source', {
+                                    productSku: originalSku,
+                                    returnedSku,
+                                });
+                                throw new Error('SKU mismatch');
+                            }
+                            if (!allData[normalizedSku]) {
                                 const arr = [];
                                 arr.idProduct = images.idProduct;
-                                allData[sku] = arr;
+                                allData[normalizedSku] = arr;
                             }
-                            allData[sku].push(...images);
+                            allData[normalizedSku].push(...images);
                         }
                         if (r.data.html) {
                             const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(task.brand_name.toLowerCase());

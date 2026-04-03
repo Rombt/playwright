@@ -38,7 +38,7 @@ export interface ISource<T extends ITask, THttpResponse = unknown> {
 
   worker(
     targetUrl: string,
-    page: Page,
+    page: Page | undefined,
     limiter: RateLimiter,
     getNext?: (() => IProduct | undefined) | IProduct,
     loggerScope?: ILogger,

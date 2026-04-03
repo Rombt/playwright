@@ -366,7 +366,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
       const pool = new PagePool(context, quantityPage);
       this.registerResource(pool);
-      let page: Page;
+      // let page: Page;
 
       const processProduct = async (product: IProduct): Promise<TaskResult> => {
         if (!task.metadata.target_website) {
@@ -383,6 +383,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           throw new Error('Error!! Task metadata does not contain target_website!!');
         }
 
+        let page: Page | undefined;
         try {
           page = await pool.acquire();
 
@@ -429,14 +430,27 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           });
 
           for (const r of result) {
-            for (const [sku, images] of Object.entries(r.data.images ?? {})) {
-              if (!allData[sku]) {
-                const arr = [] as unknown as IDataImagItem;
-                arr.idProduct = images.idProduct;
-                allData[sku] = arr;
+            // for (const [sku, images] of Object.entries(r.data.images ?? {})) {   //!!!!!!!!!!!!!!!!!!!! <===
+            for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
+              const originalSku = product.sku;
+              const normalizedSku = originalSku.split('*')[0];
+
+              if (returnedSku !== normalizedSku) {
+                loggerScope?.error('SKU mismatch from source', {
+                  productSku: originalSku,
+                  returnedSku,
+                });
+
+                throw new Error('SKU mismatch');
               }
 
-              allData[sku].push(...images);
+              if (!allData[normalizedSku]) {
+                const arr = [] as unknown as IDataImagItem;
+                arr.idProduct = images.idProduct;
+                allData[normalizedSku] = arr;
+              }
+
+              allData[normalizedSku].push(...images);
             }
 
             if (r.data.html) {
