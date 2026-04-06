@@ -13,9 +13,11 @@ import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
+  private readonly logger: Logger;
 
   constructor() {
     this.config = AppConfig.getInstance();
+    this.logger = Logger.getInstance();
   }
 
   workerHttpRequest(
@@ -102,14 +104,40 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
         )
         .first();
 
-      await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      const empty = page.locator('.view-empty > p', {
+        hasText: 'нічого не знайдено',
+      });
+
+      try {
+        await Promise.race([
+          link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+          empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+        ]);
+      } catch {
+        throw new Error(`Search result not resolved. ${sku}`);
+      }
+
+      if ((await empty.count()) > 0) {
+        throw new Error(`Goods not found on the page. ${sku}`);
+      }
 
       const relativeHref = await link.getAttribute('href');
       if (!relativeHref) throw new Error('Product link not found');
       const absoluteHref = new URL(relativeHref, page.url()).toString();
 
-      console.log('===>>  absoluteHref = ', absoluteHref);
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+
+      const page_sku = page.locator('div.product-full__code div.field-product-vendor-code__item', {
+        hasText: `${sku}`,
+      });
+
+      await page_sku
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      if ((await page_sku.count()) === 0) {
+        throw new Error(`The page is not match sku  ${sku}`);
+      }
 
       const gallery = page.locator(
         '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
@@ -134,17 +162,30 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
 
       if (absoluteImageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      // поиск описания
-      const htmlCont = page.locator('div.field-product-desc__item.field__item');
-      await htmlCont
-        .first()
-        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      try {
+        // поиск описания
+        const htmlCont = page.locator('div.field-product-desc__item.field__item');
+        await htmlCont
+          .first()
+          .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      // удаляю видео ролики
-      html = await htmlCont.evaluate((el) => {
-        el.querySelectorAll('div').forEach((div) => div.remove());
-        return el.innerHTML;
-      });
+        // удаляю видео ролики
+        html = await htmlCont.evaluate((el) => {
+          el.querySelectorAll('div').forEach((div) => div.remove());
+          return el.innerHTML;
+        });
+      } catch (error) {
+        this.logger?.debug(`Description is absent`, {
+          component: 'PageImageSourceBRS',
+          method: 'execute()',
+          action:
+            'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+          data: {
+            sku: sku,
+            url: url,
+          },
+        });
+      }
 
       images[sku] = absoluteImageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;

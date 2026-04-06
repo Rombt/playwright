@@ -14,9 +14,11 @@ import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceBezet implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
+  private readonly logger: Logger;
 
   constructor() {
     this.config = AppConfig.getInstance();
+    this.logger = Logger.getInstance();
   }
 
   workerHttpRequest(
@@ -147,6 +149,17 @@ export default class PageImageSourceBezet implements ISource<ICollectProductPhot
       const absoluteHref = new URL(relativeHref, page.url()).toString();
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
 
+      const page_sku = page.locator('div.gallery span.sku', {
+        hasText: `${sku}`,
+      });
+      await page_sku
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      if ((await page_sku.count()) === 0) {
+        throw new Error(`The page is not match sku  ${sku}`);
+      }
+
       const gallery = page.locator('div.previews');
 
       try {
@@ -169,19 +182,30 @@ export default class PageImageSourceBezet implements ISource<ICollectProductPhot
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      // поиск описания
-      const htmlCont = page.locator('div.tab-content');
-      await htmlCont
-        .first()
-        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      try {
+        // поиск описания
+        const htmlCont = page.locator('div.tab-content');
+        await htmlCont
+          .first()
+          .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      // удаляю script
-      html = await htmlCont.evaluate((el) => {
-        el.querySelectorAll('script').forEach((script) => script.remove());
-        return el.innerHTML;
-      });
-
-      // console.log('htmlCont.count() = ', await htmlCont.count());
+        // удаляю script
+        html = await htmlCont.evaluate((el) => {
+          el.querySelectorAll('script').forEach((script) => script.remove());
+          return el.innerHTML;
+        });
+      } catch (error) {
+        this.logger?.debug(`Description is absent`, {
+          component: 'PageImageSourceBRS',
+          method: 'execute()',
+          action:
+            'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+          data: {
+            sku: sku,
+            url: url,
+          },
+        });
+      }
 
       images[sku] = imageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;

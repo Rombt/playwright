@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceCamotec {
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
+        this.logger = Logger_1.Logger.getInstance();
     }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
@@ -75,6 +77,15 @@ class PageImageSourceCamotec {
                 throw new Error('Product link not found');
             const absoluteHref = new URL(relativeHref, page.url()).toString();
             await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+            const page_sku = page.locator('div.infoCol > div.infoBlock div.infoAndReviewBlock p.vendorCode', {
+                hasText: `${sku}`,
+            });
+            await page_sku
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            if ((await page_sku.count()) === 0) {
+                throw new Error(`The page is not match sku  ${sku}`);
+            }
             const gallery = page.locator('div.slider-for.slick-initialized.slick-slider');
             try {
                 await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -93,13 +104,25 @@ class PageImageSourceCamotec {
                 .evaluateAll((links) => links.map((link) => link.getAttribute('href')).filter(Boolean));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
-            // поиск описания
-            const htmlCont = page.locator('#offerDescriptionText > div');
-            await htmlCont
-                .first()
-                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            console.log('htmlCont.count() = ', await htmlCont.count());
-            html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
+            try {
+                // поиск описания
+                const htmlCont = page.locator('#offerDescriptionText > div');
+                await htmlCont
+                    .first()
+                    .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+                html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
+            }
+            catch (error) {
+                this.logger?.debug(`Description is absent`, {
+                    component: 'PageImageSourceBRS',
+                    method: 'execute()',
+                    action: 'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+                    data: {
+                        sku: sku,
+                        url: url,
+                    },
+                });
+            }
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;
         }

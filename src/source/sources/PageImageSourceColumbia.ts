@@ -13,11 +13,11 @@ import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceColumbia implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
-  // private readonly logger: Logger;
+  private readonly logger: Logger;
 
   constructor() {
     this.config = AppConfig.getInstance();
-    // this.logger = Logger.getInstance();
+    this.logger = Logger.getInstance();
   }
 
   workerHttpRequest(
@@ -98,7 +98,38 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
     const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {
-      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.goto(url, { waitUntil: 'networkidle' });
+
+      const link = page
+        .locator('[data-component-id="product-tile"] > a.chakra-link[data-masterpid="' + sku + '"]')
+        .first();
+
+      const empty = page.locator('div.sf-product-empty-list-page > p.chakra-text', {
+        hasText: 'We couldn’t find anything for',
+      });
+
+      try {
+        await Promise.race([
+          link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+          empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+        ]);
+      } catch {
+        throw new Error(`Search result not resolved. ${sku}`);
+      }
+
+      if ((await empty.count()) > 0) {
+        throw new Error(`Goods not found on the page. ${sku}`);
+      }
+
+      if ((await link.count()) === 0) {
+        throw new Error('The page does not match the product SKU. ' + sku);
+      }
+
+      const relativeHref = await link.getAttribute('href');
+      if (!relativeHref) throw new Error('Product link not found');
+
+      const absoluteHref = new URL(relativeHref, page.url()).toString();
+      await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
 
       const image = page.locator('#app-main img').first();
 
@@ -116,11 +147,24 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
       }
 
       const swatchColors = page.locator('[data-component-id="swatch-group-color"] a.chakra-button');
+      await swatchColors.first().waitFor();
 
       const swatchCount = await swatchColors.count();
 
       // --- если нет цветов ---
       if (swatchCount === 0) {
+        this.logger?.debug(`swatchColors not found`, {
+          component: 'PageImageSourceColumbia',
+          method: 'execute()',
+          action:
+            'const swatchColors = page.locator(\'[data-component-id="swatch-group-color"] a.chakra-button\')',
+          data: {
+            url: url,
+            originalSKU: product.sku,
+            sku: sku,
+          },
+        });
+
         const imageUrls = Array.from(imageUrlsSet) as IDataImagItem;
         imageUrls.idProduct = product.id_product;
 

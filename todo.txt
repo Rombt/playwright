@@ -21,15 +21,14 @@
     убрать зоопарк sources переписав весь механизм по принципу processors
 
 Бренды готовые к обработке:
-    m-tac
-    camotec
-    kiborg
-    bezet
-    ganzo
-    BRS
-    columbia но т.к. сай источник англоязычный то только картинки
+    m-tac,
+    camotec,
+    kiborg,
+    bezet,
+    ganzo,
+    BRS,
+    columbia,
 
-"target_website": "https://ganzo.ua/search?search={{sku_prod}}"
 
 
 

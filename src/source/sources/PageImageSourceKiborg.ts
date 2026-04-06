@@ -14,9 +14,11 @@ import { AppConfig } from '../../data/config/appConfig';
 
 export default class PageImageSourceKiborg implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
+  private readonly logger: Logger;
 
   constructor() {
     this.config = AppConfig.getInstance();
+    this.logger = Logger.getInstance();
   }
 
   workerHttpRequest(
@@ -98,8 +100,6 @@ export default class PageImageSourceKiborg implements ISource<ICollectProductPho
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      // body > div:nth-child(41) > div > div.multi-wrapper > div > div.multi-results > div > div.multi-cell.multi-lists > div > div:nth-child(1) > div > div > a
-      // .multi-grid
       const link = page.locator('.multi-grid a').first();
 
       const empty = page.locator('.multi-noResults', {
@@ -120,7 +120,7 @@ export default class PageImageSourceKiborg implements ISource<ICollectProductPho
       }
 
       const links = page.locator('.multi-grid a');
-      await links.first().waitFor({ state: 'visible' });
+      await links.first().waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const quantityLinks = await links.count();
       let bestMatch = null;
@@ -148,7 +148,20 @@ export default class PageImageSourceKiborg implements ISource<ICollectProductPho
       const absoluteHref = new URL(relativeHref, page.url()).toString();
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
 
-      // #swiper-wrapper-80532ea6b8868d67 > div.sc-product-images-slide.swiper-slide.pb-3.pb-md-4.swiper-slide-active > span > img.zoomImg
+      const page_sku = page.locator(
+        'div.sc-product-info div.sc-product-info-lef div.sc-product-info-item',
+        {
+          hasText: `${sku}`,
+        },
+      );
+      await page_sku
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      if ((await page_sku.count()) === 0) {
+        throw new Error(`The page is not match sku  ${sku}`);
+      }
+
       const gallery = page.locator('.sc-product-images-main .swiper');
 
       try {
@@ -170,21 +183,24 @@ export default class PageImageSourceKiborg implements ISource<ICollectProductPho
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      // поиск описания
-      const htmlCont = page.locator('div.sc-product-content-left');
-      await htmlCont
-        .first()
-        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-
-      // удаляю видео ролики
-      html = await htmlCont.evaluate((el) => {
-        el.querySelectorAll('div.ex_product_tab_1, div.sc-product-content-reviews').forEach((div) =>
-          div.remove(),
-        );
-        return el.innerHTML;
-      });
-
-      // console.log('htmlCont.count() = ', await htmlCont.count());
+      try {
+        // поиск описания
+        const htmlCont = page.locator('div.sc-product-content-left');
+        await htmlCont
+          .first()
+          .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      } catch (error) {
+        this.logger?.debug(`Description is absent`, {
+          component: 'PageImageSourceBRS',
+          method: 'execute()',
+          action:
+            'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+          data: {
+            sku: sku,
+            url: url,
+          },
+        });
+      }
 
       images[sku] = imageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;

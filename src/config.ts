@@ -17,6 +17,7 @@ export const config = {
       pageLoadWait: 10000,
     },
   },
+
   data: {
     // resultsFolder: 'results/results_test',
     // resultsFolder: 'results/results_militarist_c_01.09.25_full_prod',
@@ -31,7 +32,7 @@ export const config = {
     // resultsFolder: 'results/all_brands',
     // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_prod',
-    resultsFolder: 'results/brs/brs_prod_2',
+    resultsFolder: 'results/brs/brs_test',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -58,7 +59,8 @@ export const config = {
     // taskPath: 'src/data/tasks/bezet/bezet_all_prod_3.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test_short.json',
-    taskPath: 'src/data/tasks/brs/brs_prod_2.json',
+    taskPath: 'src/data/tasks/brs/brs_test.json',
+    // taskPath: 'src/data/tasks/columbia/columbia_test.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

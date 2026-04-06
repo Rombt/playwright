@@ -50,15 +50,6 @@ class PageImageSourceBRS {
         const rawSku = product.sku;
         const starIndex = rawSku.indexOf('*');
         const sku = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
-        this.logger?.debug(`*** Normalize SKU ****`, {
-            component: 'PageImageSourceBRS',
-            method: 'execute()',
-            action: '(starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)',
-            data: {
-                originalSKU: product.sku,
-                sku: sku,
-            },
-        });
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'networkidle' });
@@ -84,7 +75,15 @@ class PageImageSourceBRS {
                 throw new Error('Product link not found');
             const absoluteHref = new URL(relativeHref, page.url()).toString();
             await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
-            // #main > div.wrapper > section > div.product__grid > div.product__column.product__column--left.product__column--sticky > div > div:nth-child(1) > div > div > div > div > section > div.gallery__photos
+            const page_sku = page.locator('div.product-header div.product-header__code', {
+                hasText: `${sku}`,
+            });
+            await page_sku
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            if ((await page_sku.count()) === 0) {
+                throw new Error(`The page is not match sku  ${sku}`);
+            }
             const gallery = page.locator('div.gallery__photos');
             try {
                 await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -105,15 +104,25 @@ class PageImageSourceBRS {
                 .map((url) => new URL(url, document.baseURI).href));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
-            // поиск описания
-            //
-            const htmlCont = page.locator('div.product-description[itemprop="description"]');
-            // const htmlCont = page.locator('div[itemprop="description"]');
-            await htmlCont
-                .first()
-                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
-            // console.log('htmlCont.count() = ', await htmlCont.count());
+            try {
+                // поиск описания
+                const htmlCont = page.locator('div.product__section > [itemprop="description"]');
+                await htmlCont
+                    .first()
+                    .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+                html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
+            }
+            catch (error) {
+                this.logger?.debug(`Description is absent`, {
+                    component: 'PageImageSourceBRS',
+                    method: 'execute()',
+                    action: 'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+                    data: {
+                        sku: sku,
+                        url: url,
+                    },
+                });
+            }
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;
         }

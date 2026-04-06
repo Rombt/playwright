@@ -56,6 +56,24 @@
             "color": "чорн.",
             "size": "30/32"
           }
+        },
+        {
+          "id_product": "54591",
+          "name_product": "Брюки 2136211*AW27 CLB (ж)",
+          "sku": "2136211*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54657",
+          "name_product": "Шкарпетки NCHCS3P*AW27 CLB",
+          "sku": "NCHCS3P*AW27",
+          "attributes": {
+            "color": "кольор.",
+            "size": "L"
+          }
         }
       ]
     }

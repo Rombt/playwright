@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Logger_1 = require("../../../data/logger/Logger");
 const appConfig_1 = require("../../../data/config/appConfig");
 class PageImageSourceMilitarist {
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
+        this.logger = Logger_1.Logger.getInstance();
     }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
@@ -51,16 +53,37 @@ class PageImageSourceMilitarist {
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
-            //товаров не найдено
-            const goodsNoFound = page.locator('.page-content', {
+            const link = page.locator('div.card_product-head > a').first();
+            const empty = page.locator('.page-content', {
                 hasText: 'За вашим запитом нічого не знайдено',
             });
-            if ((await goodsNoFound.count()) > 0) {
-                throw new Error(`Goods not found on the page. ${sku}`); //todo запретить retry на эту ошибку
+            try {
+                await Promise.race([
+                    link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+                    empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+                ]);
             }
-            const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
-            await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            await image.click();
+            catch {
+                throw new Error(`Search result not resolved. ${sku}`);
+            }
+            if ((await empty.count()) > 0) {
+                throw new Error(`Goods not found on the page. ${sku}`);
+            }
+            await link.waitFor({ state: 'visible' });
+            const relativeHref = await link.getAttribute('href');
+            if (!relativeHref)
+                throw new Error('Product link not found');
+            const absoluteHref = new URL(relativeHref, page.url()).toString();
+            await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+            const page_sku = page.locator('div.catalog-top-title > div.item-code', {
+                hasText: `${sku}`,
+            });
+            await page_sku
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            if ((await page_sku.count()) === 0) {
+                throw new Error(`The page is not match sku  ${sku}`);
+            }
             const gallery = page.locator('div.catalog-item-gallery > div > div.big-img.slider-for.slick-initialized.slick-slider > div > div');
             try {
                 await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -87,7 +110,6 @@ class PageImageSourceMilitarist {
             await htmlCont
                 .first()
                 .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            console.log('htmlCont.count() = ', await htmlCont.count());
             html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;

@@ -13,9 +13,11 @@ import { AppConfig } from '../../../data/config/appConfig';
 
 export default class PageImageSourceMilitarist implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
+  private readonly logger: Logger;
 
   constructor() {
     this.config = AppConfig.getInstance();
+    this.logger = Logger.getInstance();
   }
 
   workerHttpRequest(
@@ -92,18 +94,45 @@ export default class PageImageSourceMilitarist implements ISource<ICollectProduc
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      //товаров не найдено
-      const goodsNoFound = page.locator('.page-content', {
+      const link = page.locator('div.card_product-head > a').first();
+
+      const empty = page.locator('.page-content', {
         hasText: 'За вашим запитом нічого не знайдено',
       });
 
-      if ((await goodsNoFound.count()) > 0) {
-        throw new Error(`Goods not found on the page. ${sku}`); //todo запретить retry на эту ошибку
+      try {
+        await Promise.race([
+          link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+          empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+        ]);
+      } catch {
+        throw new Error(`Search result not resolved. ${sku}`);
       }
 
-      const image = page.locator('div.card_product-head > a').first(); //todo может быть много на странице получить и обработать все
-      await image.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-      await image.click();
+      if ((await empty.count()) > 0) {
+        throw new Error(`Goods not found on the page. ${sku}`);
+      }
+
+      await link.waitFor({ state: 'visible' });
+
+      const relativeHref = await link.getAttribute('href');
+      if (!relativeHref) throw new Error('Product link not found');
+
+      const absoluteHref = new URL(relativeHref, page.url()).toString();
+      await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+
+      const page_sku = page.locator('div.catalog-top-title > div.item-code', {
+        hasText: `${sku}`,
+      });
+
+      await page_sku
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      if ((await page_sku.count()) === 0) {
+        throw new Error(`The page is not match sku  ${sku}`);
+      }
+
       const gallery = page.locator(
         'div.catalog-item-gallery > div > div.big-img.slider-for.slick-initialized.slick-slider > div > div',
       );
@@ -137,7 +166,6 @@ export default class PageImageSourceMilitarist implements ISource<ICollectProduc
         .first()
         .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      console.log('htmlCont.count() = ', await htmlCont.count());
       html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
 
       images[sku] = imageUrls as IDataImagItem;
