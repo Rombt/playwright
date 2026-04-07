@@ -159,8 +159,9 @@ class DefaultScenario {
             try {
                 page = await pool.acquire();
                 const { buffer, ext } = await this.withRetry(() => this.browser.downloadWithFallback(item.url, page, context, loggerScope));
+                this.logger.debug('downloadImages', { item });
                 await this.storage.save({
-                    filename: `${item.sku}_${item.index}${ext}`,
+                    filename: `${item.sku}_${item.index}${ext}`, //!!!!!  добавить id product  !!!
                     buffer,
                     targetDir: '',
                 });

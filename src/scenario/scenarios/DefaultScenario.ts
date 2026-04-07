@@ -248,8 +248,10 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           this.browser.downloadWithFallback(item.url, page!, context, loggerScope),
         );
 
+        this.logger.debug('downloadImages', { item });
+
         await this.storage.save({
-          filename: `${item.sku}_${item.index}${ext}`,
+          filename: `${item.sku}_${item.index}${ext}`, //!!!!!  добавить id product  !!!
           buffer,
           targetDir: '',
         });
