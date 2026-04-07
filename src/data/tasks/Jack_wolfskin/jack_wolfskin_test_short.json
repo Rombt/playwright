@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-06_16-22",
+  "task": {
+    "13": {
+      "brand_id": "13",
+      "brand_name": "Jack Wolfskin",
+      "metadata": {
+        "target_website": "https://www.jack-wolfskin.com/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "47882",
+          "name_product": "Рюкзак 2020151*AW25 JW",
+          "sku": "2020151*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

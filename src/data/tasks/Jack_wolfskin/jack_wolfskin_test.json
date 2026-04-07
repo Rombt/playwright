@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-04-06_16-22",
+  "task": {
+    "13": {
+      "brand_id": "13",
+      "brand_name": "Jack Wolfskin",
+      "metadata": {
+        "target_website": "https://www.jack-wolfskin.com/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "8292",
+          "name_product": "Джемпер 1709021*AW21 JW (м)",
+          "sku": "1709021*AW21",
+          "attributes": {
+            "color": "чёрн./красн",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "47882",
+          "name_product": "Рюкзак 2020151*AW25 JW",
+          "sku": "2020151*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53837",
+          "name_product": "Джемпер 1711371*AW26 JW (ч)",
+          "sku": "1711371*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}

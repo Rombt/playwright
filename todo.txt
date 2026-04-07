@@ -28,6 +28,7 @@
     ganzo,
     BRS,
     columbia,
+    jack wolfskin,
 
 
 

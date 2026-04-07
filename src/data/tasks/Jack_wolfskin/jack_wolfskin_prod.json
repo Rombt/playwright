@@ -1,0 +1,3929 @@
+{
+  "generated_at": "2026-04-06_16-22",
+  "task": {
+    "13": {
+      "brand_id": "13",
+      "brand_name": "Jack Wolfskin",
+      "metadata": {
+        "target_website": "https://www.jack-wolfskin.com/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "4890",
+          "name_product": "Вьетнамки G 19424 (м) Adidas",
+          "sku": "19424",
+          "attributes": {
+            "color": "чёрный",
+            "size": "49/55"
+          }
+        },
+        {
+          "id_product": "4890",
+          "name_product": "Вьетнамки G 19424 (м) Adidas",
+          "sku": "19424",
+          "attributes": {
+            "color": "бело-чёрный",
+            "size": "40 1/2"
+          }
+        },
+        {
+          "id_product": "7063",
+          "name_product": "Рюкзак 2009071*AW20 JW",
+          "sku": "2009071",
+          "attributes": {
+            "color": "чёрный",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "7063",
+          "name_product": "Рюкзак 2009071*AW20 JW",
+          "sku": "2009071*AW20 ",
+          "attributes": {
+            "color": "",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "7064",
+          "name_product": "Сумка 8006401*AW20 JW",
+          "sku": "8006401*AW20 ",
+          "attributes": {
+            "color": "",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "7065",
+          "name_product": "Чемодан 2007031*AW20 JW",
+          "sku": "2007031*AW20 ",
+          "attributes": {
+            "color": "",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "8219",
+          "name_product": "Ботинки 4020461*AW19 JW (дет)",
+          "sku": "4020461*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "29"
+          }
+        },
+        {
+          "id_product": "8219",
+          "name_product": "Ботинки 4020461*AW19 JW (дет)",
+          "sku": "4020461*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "30"
+          }
+        },
+        {
+          "id_product": "8219",
+          "name_product": "Ботинки 4020461*AW19 JW (дет)",
+          "sku": "4020461*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "31"
+          }
+        },
+        {
+          "id_product": "8219",
+          "name_product": "Ботинки 4020461*AW19 JW (дет)",
+          "sku": "4020461*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "32"
+          }
+        },
+        {
+          "id_product": "8219",
+          "name_product": "Ботинки 4020461*AW19 JW (дет)",
+          "sku": "4020461*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "33"
+          }
+        },
+        {
+          "id_product": "8219",
+          "name_product": "Ботинки 4020461*AW19 JW (дет)",
+          "sku": "4020461*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "8219",
+          "name_product": "Ботинки 4020461*AW19 JW (дет)",
+          "sku": "4020461*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "35"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "8220",
+          "name_product": "Ботинки 4020491*AW19 JW (м)",
+          "sku": "4020491*AW19",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "47"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "8221",
+          "name_product": "Ботинки 4020501*AW19 JW (м)",
+          "sku": "4020501*AW19",
+          "attributes": {
+            "color": "т. зеленый",
+            "size": "47"
+          }
+        },
+        {
+          "id_product": "8223",
+          "name_product": "Брюки 1500062*AW19 JW (м)",
+          "sku": "1500062*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "8223",
+          "name_product": "Брюки 1500062*AW19 JW (м)",
+          "sku": "1500062*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "48"
+          }
+        },
+        {
+          "id_product": "8223",
+          "name_product": "Брюки 1500062*AW19 JW (м)",
+          "sku": "1500062*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "50"
+          }
+        },
+        {
+          "id_product": "8223",
+          "name_product": "Брюки 1500062*AW19 JW (м)",
+          "sku": "1500062*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "52"
+          }
+        },
+        {
+          "id_product": "8223",
+          "name_product": "Брюки 1500062*AW19 JW (м)",
+          "sku": "1500062*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "54"
+          }
+        },
+        {
+          "id_product": "8223",
+          "name_product": "Брюки 1500062*AW19 JW (м)",
+          "sku": "1500062*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "56"
+          }
+        },
+        {
+          "id_product": "8227",
+          "name_product": "Кепка 1907201*AW19 JW",
+          "sku": "1907201*AW19 ",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "8228",
+          "name_product": "Кепка 1907251*AW19 JW",
+          "sku": "1907251*AW19",
+          "attributes": {
+            "color": "синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "8229",
+          "name_product": "Клатч 8002261 JW",
+          "sku": "8002261*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "8230",
+          "name_product": "Кроссовки 4024362*AW19 JW (м)",
+          "sku": "4024362*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": "47"
+          }
+        },
+        {
+          "id_product": "8231",
+          "name_product": "Кроссовки 4024452*AW19 JW (ж)",
+          "sku": "4024452*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "8231",
+          "name_product": "Кроссовки 4024452*AW19 JW (ж)",
+          "sku": "4024452*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "8231",
+          "name_product": "Кроссовки 4024452*AW19 JW (ж)",
+          "sku": "4024452*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "8231",
+          "name_product": "Кроссовки 4024452*AW19 JW (ж)",
+          "sku": "4024452*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "8231",
+          "name_product": "Кроссовки 4024452*AW19 JW (ж)",
+          "sku": "4024452*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "39.5"
+          }
+        },
+        {
+          "id_product": "8231",
+          "name_product": "Кроссовки 4024452*AW19 JW (ж)",
+          "sku": "4024452*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "8231",
+          "name_product": "Кроссовки 4024452*AW19 JW (ж)",
+          "sku": "4024452*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "8232",
+          "name_product": "Куртка 1106901*AW19 JW (м)",
+          "sku": "1106901*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "8232",
+          "name_product": "Куртка 1106901*AW19 JW (м)",
+          "sku": "1106901*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "8232",
+          "name_product": "Куртка 1106901*AW19 JW (м)",
+          "sku": "1106901*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "8232",
+          "name_product": "Куртка 1106901*AW19 JW (м)",
+          "sku": "1106901*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "8232",
+          "name_product": "Куртка 1106901*AW19 JW (м)",
+          "sku": "1106901*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "8232",
+          "name_product": "Куртка 1106901*AW19 JW (м)",
+          "sku": "1106901*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "8233",
+          "name_product": "Куртка 1107862*AW19 JW (м)",
+          "sku": "1107862*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "8234",
+          "name_product": "Кэшбэг 8002281 JW",
+          "sku": "8002281*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8235",
+          "name_product": "Перчатки 1900871*AW19 JW",
+          "sku": "1900871*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "8235",
+          "name_product": "Перчатки 1900871*AW19 JW",
+          "sku": "1900871*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "8235",
+          "name_product": "Перчатки 1900871*AW19 JW",
+          "sku": "1900871*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "8235",
+          "name_product": "Перчатки 1900871*AW19 JW",
+          "sku": "1900871*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "8235",
+          "name_product": "Перчатки 1900871*AW19 JW",
+          "sku": "1900871*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "8237",
+          "name_product": "Подтяжки 1907351*AW19 JW",
+          "sku": "1907351*AW19",
+          "attributes": {
+            "color": "серый",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8237",
+          "name_product": "Подтяжки 1907351*AW19 JW",
+          "sku": "1907351*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8238",
+          "name_product": "Рюкзак 24040 JW",
+          "sku": "24040*AW19",
+          "attributes": {
+            "color": "т.сер.",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8238",
+          "name_product": "Рюкзак 24040 JW",
+          "sku": "24040*AW19",
+          "attributes": {
+            "color": "чёрн",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8239",
+          "name_product": "Сапоги 4024951*AW19 JW (дет)",
+          "sku": "4024951*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "29"
+          }
+        },
+        {
+          "id_product": "8239",
+          "name_product": "Сапоги 4024951*AW19 JW (дет)",
+          "sku": "4024951*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "30"
+          }
+        },
+        {
+          "id_product": "8239",
+          "name_product": "Сапоги 4024951*AW19 JW (дет)",
+          "sku": "4024951*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "31"
+          }
+        },
+        {
+          "id_product": "8239",
+          "name_product": "Сапоги 4024951*AW19 JW (дет)",
+          "sku": "4024951*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "32"
+          }
+        },
+        {
+          "id_product": "8239",
+          "name_product": "Сапоги 4024951*AW19 JW (дет)",
+          "sku": "4024951*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "33"
+          }
+        },
+        {
+          "id_product": "8239",
+          "name_product": "Сапоги 4024951*AW19 JW (дет)",
+          "sku": "4024951*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "8239",
+          "name_product": "Сапоги 4024951*AW19 JW (дет)",
+          "sku": "4024951*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "35"
+          }
+        },
+        {
+          "id_product": "8240",
+          "name_product": "Сумка 2007231 JW",
+          "sku": "2007231*AW19",
+          "attributes": {
+            "color": "чёрн",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8241",
+          "name_product": "Сумка 2007241 JW",
+          "sku": "2007241*AW19",
+          "attributes": {
+            "color": "чёрн",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8242",
+          "name_product": "Сумка 8005991 JW",
+          "sku": "8005991*AW19",
+          "attributes": {
+            "color": "чёрн",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8243",
+          "name_product": "Сумка 86425 JW",
+          "sku": "86425",
+          "attributes": {
+            "color": "т.син",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8243",
+          "name_product": "Сумка 86425 JW",
+          "sku": "86425*AW19",
+          "attributes": {
+            "color": "чёрн",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8243",
+          "name_product": "Сумка 86425 JW",
+          "sku": "86425*AW19",
+          "attributes": {
+            "color": "т.син",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "8292",
+          "name_product": "Джемпер 1709021*AW21 JW (м)",
+          "sku": "1709021*AW21",
+          "attributes": {
+            "color": "чёрн./красн",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "8292",
+          "name_product": "Джемпер 1709021*AW21 JW (м)",
+          "sku": "1709021*AW21",
+          "attributes": {
+            "color": "чёрн./красн",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "8292",
+          "name_product": "Джемпер 1709021*AW21 JW (м)",
+          "sku": "1709021*AW21",
+          "attributes": {
+            "color": "чёрн./красн",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "32675",
+          "name_product": "Напівчеревики Jack Wolfskin Refugio Texapore Low  4049851",
+          "sku": "4049851*AW22",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "коричн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "коричн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "коричн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "коричн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "коричн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "серый",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "32877",
+          "name_product": "Пуховик 1203591*AW21 JW (м)",
+          "sku": "1203591*AW21",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "32888",
+          "name_product": "Рюкзак 2007681*AW21 JW",
+          "sku": "2007681*AW21",
+          "attributes": {
+            "color": "чёрный",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "голубой",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "голубой",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "голубой",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "голубой",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "33004",
+          "name_product": "Джемпер 1305801*AW19 JW (м)",
+          "sku": "1305801*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "33006",
+          "name_product": "Носки 1904082*AW19 JW",
+          "sku": "1904082*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "35/37"
+          }
+        },
+        {
+          "id_product": "33006",
+          "name_product": "Носки 1904082*AW19 JW",
+          "sku": "1904082*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/40"
+          }
+        },
+        {
+          "id_product": "33006",
+          "name_product": "Носки 1904082*AW19 JW",
+          "sku": "1904082*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "41/43"
+          }
+        },
+        {
+          "id_product": "33007",
+          "name_product": "Носки 1904292*AW19 JW",
+          "sku": "1904292*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "35/37"
+          }
+        },
+        {
+          "id_product": "33007",
+          "name_product": "Носки 1904292*AW19 JW",
+          "sku": "1904292*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/40"
+          }
+        },
+        {
+          "id_product": "33007",
+          "name_product": "Носки 1904292*AW19 JW",
+          "sku": "1904292*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "41/43"
+          }
+        },
+        {
+          "id_product": "33008",
+          "name_product": "Перчатки 1901121*AW19 JW",
+          "sku": "1901121*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "33008",
+          "name_product": "Перчатки 1901121*AW19 JW",
+          "sku": "1901121*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "33008",
+          "name_product": "Перчатки 1901121*AW19 JW",
+          "sku": "1901121*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "33008",
+          "name_product": "Перчатки 1901121*AW19 JW",
+          "sku": "1901121*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "33008",
+          "name_product": "Перчатки 1901121*AW19 JW",
+          "sku": "1901121*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "33010",
+          "name_product": "Пуховик 1203591*AW19 JW (м)",
+          "sku": "1203591*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "33010",
+          "name_product": "Пуховик 1203591*AW19 JW (м)",
+          "sku": "1203591*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "33010",
+          "name_product": "Пуховик 1203591*AW19 JW (м)",
+          "sku": "1203591*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "33010",
+          "name_product": "Пуховик 1203591*AW19 JW (м)",
+          "sku": "1203591*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "33010",
+          "name_product": "Пуховик 1203591*AW19 JW (м)",
+          "sku": "1203591*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "33010",
+          "name_product": "Пуховик 1203591*AW19 JW (м)",
+          "sku": "1203591*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "теракот",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "теракот",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "теракот",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "теракот",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "33011",
+          "name_product": "Пуховик 1204131*AW19 JW (ж)",
+          "sku": "1204131*AW19",
+          "attributes": {
+            "color": "теракот",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "33012",
+          "name_product": "Шапка 1903891*AW19 JW",
+          "sku": "1903891*AW19",
+          "attributes": {
+            "color": "зелён.",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "33012",
+          "name_product": "Шапка 1903891*AW19 JW",
+          "sku": "1903891*AW19",
+          "attributes": {
+            "color": "красный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "33012",
+          "name_product": "Шапка 1903891*AW19 JW",
+          "sku": "1903891*AW19",
+          "attributes": {
+            "color": "серый",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "33012",
+          "name_product": "Шапка 1903891*AW19 JW",
+          "sku": "1903891*AW19",
+          "attributes": {
+            "color": "т.синий",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "33012",
+          "name_product": "Шапка 1903891*AW19 JW",
+          "sku": "1903891*AW19",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "38342",
+          "name_product": "Шапка 19392-AW23 JW",
+          "sku": "19392-AW23",
+          "attributes": {
+            "color": "син",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "38343",
+          "name_product": "Шапка 19590-AW23 JW",
+          "sku": "19590-AW23",
+          "attributes": {
+            "color": "",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "47882",
+          "name_product": "Рюкзак 2020151*AW25 JW",
+          "sku": "2020151*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "52491",
+          "name_product": "Аляска 1107672*AW18 JW (м)",
+          "sku": "1107672",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52491",
+          "name_product": "Аляска 1107672*AW18 JW (м)",
+          "sku": "1107672",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52491",
+          "name_product": "Аляска 1107672*AW18 JW (м)",
+          "sku": "1107672",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52491",
+          "name_product": "Аляска 1107672*AW18 JW (м)",
+          "sku": "1107672",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52492",
+          "name_product": "Ботинки 4011361*AW18 JW (м)",
+          "sku": "4011361",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52492",
+          "name_product": "Ботинки 4011361*AW18 JW (м)",
+          "sku": "4011361",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52492",
+          "name_product": "Ботинки 4011361*AW18 JW (м)",
+          "sku": "4011361",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52492",
+          "name_product": "Ботинки 4011361*AW18 JW (м)",
+          "sku": "4011361",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52492",
+          "name_product": "Ботинки 4011361*AW18 JW (м)",
+          "sku": "4011361",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52492",
+          "name_product": "Ботинки 4011361*AW18 JW (м)",
+          "sku": "4011361",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52492",
+          "name_product": "Ботинки 4011361*AW18 JW (м)",
+          "sku": "4011361",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "33"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "35"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "синий",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "синий",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52493",
+          "name_product": "Ботинки 4012003*AW18 JW (подр)",
+          "sku": "4012003",
+          "attributes": {
+            "color": "т.серый",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "33"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "35"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "52494",
+          "name_product": "Ботинки 4012013*AW18 JW (подр)",
+          "sku": "4012013",
+          "attributes": {
+            "color": "малин.",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52495",
+          "name_product": "Ботинки 4020501*AW18 JW (м)",
+          "sku": "4020501",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52495",
+          "name_product": "Ботинки 4020501*AW18 JW (м)",
+          "sku": "4020501",
+          "attributes": {
+            "color": "чёрный",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52495",
+          "name_product": "Ботинки 4020501*AW18 JW (м)",
+          "sku": "4020501",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52495",
+          "name_product": "Ботинки 4020501*AW18 JW (м)",
+          "sku": "4020501",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52495",
+          "name_product": "Ботинки 4020501*AW18 JW (м)",
+          "sku": "4020501",
+          "attributes": {
+            "color": "чёрный",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52495",
+          "name_product": "Ботинки 4020501*AW18 JW (м)",
+          "sku": "4020501",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52495",
+          "name_product": "Ботинки 4020501*AW18 JW (м)",
+          "sku": "4020501",
+          "attributes": {
+            "color": "чёрный",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52496",
+          "name_product": "Ботинки 4020531*AW18 JW (ж)",
+          "sku": "4020531",
+          "attributes": {
+            "color": "чёрный",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "52496",
+          "name_product": "Ботинки 4020531*AW18 JW (ж)",
+          "sku": "4020531",
+          "attributes": {
+            "color": "чёрный",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "52496",
+          "name_product": "Ботинки 4020531*AW18 JW (ж)",
+          "sku": "4020531",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52496",
+          "name_product": "Ботинки 4020531*AW18 JW (ж)",
+          "sku": "4020531",
+          "attributes": {
+            "color": "чёрный",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "52496",
+          "name_product": "Ботинки 4020531*AW18 JW (ж)",
+          "sku": "4020531",
+          "attributes": {
+            "color": "чёрный",
+            "size": "39.5"
+          }
+        },
+        {
+          "id_product": "52496",
+          "name_product": "Ботинки 4020531*AW18 JW (ж)",
+          "sku": "4020531",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52496",
+          "name_product": "Ботинки 4020531*AW18 JW (ж)",
+          "sku": "4020531",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "52497",
+          "name_product": "Брюки 1500072*AW18 JW ws (ж)",
+          "sku": "1500072",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "52497",
+          "name_product": "Брюки 1500072*AW18 JW ws (ж)",
+          "sku": "1500072",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "52497",
+          "name_product": "Брюки 1500072*AW18 JW ws (ж)",
+          "sku": "1500072",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52497",
+          "name_product": "Брюки 1500072*AW18 JW ws (ж)",
+          "sku": "1500072",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52497",
+          "name_product": "Брюки 1500072*AW18 JW ws (ж)",
+          "sku": "1500072",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52497",
+          "name_product": "Брюки 1500072*AW18 JW ws (ж)",
+          "sku": "1500072",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52498",
+          "name_product": "Брюки 1502371*AW18 JW ws (ж)",
+          "sku": "1502371",
+          "attributes": {
+            "color": "чёрный",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "52498",
+          "name_product": "Брюки 1502371*AW18 JW ws (ж)",
+          "sku": "1502371",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "52498",
+          "name_product": "Брюки 1502371*AW18 JW ws (ж)",
+          "sku": "1502371",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52498",
+          "name_product": "Брюки 1502371*AW18 JW ws (ж)",
+          "sku": "1502371",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52498",
+          "name_product": "Брюки 1502371*AW18 JW ws (ж)",
+          "sku": "1502371",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52498",
+          "name_product": "Брюки 1502371*AW18 JW ws (ж)",
+          "sku": "1502371",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52499",
+          "name_product": "Брюки 1502381*AW18 JW ws (м)",
+          "sku": "1502381",
+          "attributes": {
+            "color": "чёрный",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "52499",
+          "name_product": "Брюки 1502381*AW18 JW ws (м)",
+          "sku": "1502381",
+          "attributes": {
+            "color": "чёрный",
+            "size": "48"
+          }
+        },
+        {
+          "id_product": "52499",
+          "name_product": "Брюки 1502381*AW18 JW ws (м)",
+          "sku": "1502381",
+          "attributes": {
+            "color": "чёрный",
+            "size": "50"
+          }
+        },
+        {
+          "id_product": "52499",
+          "name_product": "Брюки 1502381*AW18 JW ws (м)",
+          "sku": "1502381",
+          "attributes": {
+            "color": "чёрный",
+            "size": "52"
+          }
+        },
+        {
+          "id_product": "52499",
+          "name_product": "Брюки 1502381*AW18 JW ws (м)",
+          "sku": "1502381",
+          "attributes": {
+            "color": "чёрный",
+            "size": "54"
+          }
+        },
+        {
+          "id_product": "52500",
+          "name_product": "Джемпер 1702061*AW18 JW (м)",
+          "sku": "1702061",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52500",
+          "name_product": "Джемпер 1702061*AW18 JW (м)",
+          "sku": "1702061",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52500",
+          "name_product": "Джемпер 1702061*AW18 JW (м)",
+          "sku": "1702061",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52500",
+          "name_product": "Джемпер 1702061*AW18 JW (м)",
+          "sku": "1702061",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52501",
+          "name_product": "Джемпер 1702972*AW18 JW (ж)",
+          "sku": "1702972",
+          "attributes": {
+            "color": "син/меланж",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52501",
+          "name_product": "Джемпер 1702972*AW18 JW (ж)",
+          "sku": "1702972",
+          "attributes": {
+            "color": "син/меланж",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52501",
+          "name_product": "Джемпер 1702972*AW18 JW (ж)",
+          "sku": "1702972",
+          "attributes": {
+            "color": "син/меланж",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52501",
+          "name_product": "Джемпер 1702972*AW18 JW (ж)",
+          "sku": "1702972",
+          "attributes": {
+            "color": "син/меланж",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52502",
+          "name_product": "Джемпер 1703791*AW18 JW (м)",
+          "sku": "1703791",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52502",
+          "name_product": "Джемпер 1703791*AW18 JW (м)",
+          "sku": "1703791",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52502",
+          "name_product": "Джемпер 1703791*AW18 JW (м)",
+          "sku": "1703791",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52502",
+          "name_product": "Джемпер 1703791*AW18 JW (м)",
+          "sku": "1703791",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52503",
+          "name_product": "Джемпер 1705631*AW18 JW (ж)",
+          "sku": "1705631",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52503",
+          "name_product": "Джемпер 1705631*AW18 JW (ж)",
+          "sku": "1705631",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52503",
+          "name_product": "Джемпер 1705631*AW18 JW (ж)",
+          "sku": "1705631",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52503",
+          "name_product": "Джемпер 1705631*AW18 JW (ж)",
+          "sku": "1705631",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52504",
+          "name_product": "Джемпер 1705641*AW18 JW (ж)",
+          "sku": "1705641",
+          "attributes": {
+            "color": "молоч.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52504",
+          "name_product": "Джемпер 1705641*AW18 JW (ж)",
+          "sku": "1705641",
+          "attributes": {
+            "color": "молоч.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52504",
+          "name_product": "Джемпер 1705641*AW18 JW (ж)",
+          "sku": "1705641",
+          "attributes": {
+            "color": "молоч.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52504",
+          "name_product": "Джемпер 1705641*AW18 JW (ж)",
+          "sku": "1705641",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52504",
+          "name_product": "Джемпер 1705641*AW18 JW (ж)",
+          "sku": "1705641",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52505",
+          "name_product": "Джемпер 1705801*AW18 JW (м)",
+          "sku": "1705801",
+          "attributes": {
+            "color": "т.серый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52505",
+          "name_product": "Джемпер 1705801*AW18 JW (м)",
+          "sku": "1705801",
+          "attributes": {
+            "color": "т.серый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52505",
+          "name_product": "Джемпер 1705801*AW18 JW (м)",
+          "sku": "1705801",
+          "attributes": {
+            "color": "т.серый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52505",
+          "name_product": "Джемпер 1705801*AW18 JW (м)",
+          "sku": "1705801",
+          "attributes": {
+            "color": "т.серый",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52506",
+          "name_product": "Жилет 1203671*AW18 JW (м)",
+          "sku": "1203671",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52506",
+          "name_product": "Жилет 1203671*AW18 JW (м)",
+          "sku": "1203671",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52506",
+          "name_product": "Жилет 1203671*AW18 JW (м)",
+          "sku": "1203671",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52506",
+          "name_product": "Жилет 1203671*AW18 JW (м)",
+          "sku": "1203671",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52507",
+          "name_product": "Кроссовки 4011381*AW18 JW (м)",
+          "sku": "4011381",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52507",
+          "name_product": "Кроссовки 4011381*AW18 JW (м)",
+          "sku": "4011381",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52507",
+          "name_product": "Кроссовки 4011381*AW18 JW (м)",
+          "sku": "4011381",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52507",
+          "name_product": "Кроссовки 4011381*AW18 JW (м)",
+          "sku": "4011381",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52507",
+          "name_product": "Кроссовки 4011381*AW18 JW (м)",
+          "sku": "4011381",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52507",
+          "name_product": "Кроссовки 4011381*AW18 JW (м)",
+          "sku": "4011381",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52507",
+          "name_product": "Кроссовки 4011381*AW18 JW (м)",
+          "sku": "4011381",
+          "attributes": {
+            "color": "черн/сер",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52508",
+          "name_product": "Кроссовки 4022081*AW18 JW (м)",
+          "sku": "4022081",
+          "attributes": {
+            "color": "черн/син",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52508",
+          "name_product": "Кроссовки 4022081*AW18 JW (м)",
+          "sku": "4022081",
+          "attributes": {
+            "color": "черн/син",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "52508",
+          "name_product": "Кроссовки 4022081*AW18 JW (м)",
+          "sku": "4022081",
+          "attributes": {
+            "color": "черн/син",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52508",
+          "name_product": "Кроссовки 4022081*AW18 JW (м)",
+          "sku": "4022081",
+          "attributes": {
+            "color": "черн/син",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "52508",
+          "name_product": "Кроссовки 4022081*AW18 JW (м)",
+          "sku": "4022081",
+          "attributes": {
+            "color": "черн/син",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "52508",
+          "name_product": "Кроссовки 4022081*AW18 JW (м)",
+          "sku": "4022081",
+          "attributes": {
+            "color": "черн/син",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52508",
+          "name_product": "Кроссовки 4022081*AW18 JW (м)",
+          "sku": "4022081",
+          "attributes": {
+            "color": "черн/син",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "52509",
+          "name_product": "Куртка 1105743*AW18 JW (м)",
+          "sku": "1105743",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52509",
+          "name_product": "Куртка 1105743*AW18 JW (м)",
+          "sku": "1105743",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52509",
+          "name_product": "Куртка 1105743*AW18 JW (м)",
+          "sku": "1105743",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52509",
+          "name_product": "Куртка 1105743*AW18 JW (м)",
+          "sku": "1105743",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52510",
+          "name_product": "Куртка 1106901*AW18 JW (м)",
+          "sku": "1106901",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52510",
+          "name_product": "Куртка 1106901*AW18 JW (м)",
+          "sku": "1106901",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52510",
+          "name_product": "Куртка 1106901*AW18 JW (м)",
+          "sku": "1106901",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52510",
+          "name_product": "Куртка 1106901*AW18 JW (м)",
+          "sku": "1106901",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52511",
+          "name_product": "Куртка 1107851*AW18 JW (ж)",
+          "sku": "1107851",
+          "attributes": {
+            "color": "розовый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52511",
+          "name_product": "Куртка 1107851*AW18 JW (ж)",
+          "sku": "1107851",
+          "attributes": {
+            "color": "розовый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52511",
+          "name_product": "Куртка 1107851*AW18 JW (ж)",
+          "sku": "1107851",
+          "attributes": {
+            "color": "розовый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52511",
+          "name_product": "Куртка 1107851*AW18 JW (ж)",
+          "sku": "1107851",
+          "attributes": {
+            "color": "розовый",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52512",
+          "name_product": "Куртка 1107862*AW18 JW (м)",
+          "sku": "1107862",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52512",
+          "name_product": "Куртка 1107862*AW18 JW (м)",
+          "sku": "1107862",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52512",
+          "name_product": "Куртка 1107862*AW18 JW (м)",
+          "sku": "1107862",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52512",
+          "name_product": "Куртка 1107862*AW18 JW (м)",
+          "sku": "1107862",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52513",
+          "name_product": "Куртка 1109721*AW18 JW (ж)",
+          "sku": "1109721",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52513",
+          "name_product": "Куртка 1109721*AW18 JW (ж)",
+          "sku": "1109721",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52513",
+          "name_product": "Куртка 1109721*AW18 JW (ж)",
+          "sku": "1109721",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52514",
+          "name_product": "Носки 1904102 JW (м)",
+          "sku": "1904102",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38/40"
+          }
+        },
+        {
+          "id_product": "52514",
+          "name_product": "Носки 1904102 JW (м)",
+          "sku": "1904102",
+          "attributes": {
+            "color": "чёрный",
+            "size": "41/43"
+          }
+        },
+        {
+          "id_product": "52514",
+          "name_product": "Носки 1904102 JW (м)",
+          "sku": "1904102",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44/47"
+          }
+        },
+        {
+          "id_product": "52516",
+          "name_product": "Пальто 1203341*AW18 JW (ж)",
+          "sku": "1203341",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52516",
+          "name_product": "Пальто 1203341*AW18 JW (ж)",
+          "sku": "1203341",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52516",
+          "name_product": "Пальто 1203341*AW18 JW (ж)",
+          "sku": "1203341",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52516",
+          "name_product": "Пальто 1203341*AW18 JW (ж)",
+          "sku": "1203341",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52516",
+          "name_product": "Пальто 1203341*AW18 JW (ж)",
+          "sku": "1203341",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52517",
+          "name_product": "Перчатки 1900871 JW",
+          "sku": "1900871",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52517",
+          "name_product": "Перчатки 1900871 JW",
+          "sku": "1900871",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52517",
+          "name_product": "Перчатки 1900871 JW",
+          "sku": "1900871",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52517",
+          "name_product": "Перчатки 1900871 JW",
+          "sku": "1900871",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52518",
+          "name_product": "Перчатки 1904432 JW",
+          "sku": "1904432",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52518",
+          "name_product": "Перчатки 1904432 JW",
+          "sku": "1904432",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52518",
+          "name_product": "Перчатки 1904432 JW",
+          "sku": "1904432",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52518",
+          "name_product": "Перчатки 1904432 JW",
+          "sku": "1904432",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52519",
+          "name_product": "Перчатки 1904771 JW",
+          "sku": "1904771",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52519",
+          "name_product": "Перчатки 1904771 JW",
+          "sku": "1904771",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52519",
+          "name_product": "Перчатки 1904771 JW",
+          "sku": "1904771",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52520",
+          "name_product": "Перчатки 19615 JW",
+          "sku": "19615",
+          "attributes": {
+            "color": "серый",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52520",
+          "name_product": "Перчатки 19615 JW",
+          "sku": "19615",
+          "attributes": {
+            "color": "т.серый",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52520",
+          "name_product": "Перчатки 19615 JW",
+          "sku": "19615",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52520",
+          "name_product": "Перчатки 19615 JW",
+          "sku": "19615",
+          "attributes": {
+            "color": "серый",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52520",
+          "name_product": "Перчатки 19615 JW",
+          "sku": "19615",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52521",
+          "name_product": "Полусапоги 4024611*AW18 JW (ж)",
+          "sku": "4024611",
+          "attributes": {
+            "color": "серый",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "52521",
+          "name_product": "Полусапоги 4024611*AW18 JW (ж)",
+          "sku": "4024611",
+          "attributes": {
+            "color": "серый",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "52521",
+          "name_product": "Полусапоги 4024611*AW18 JW (ж)",
+          "sku": "4024611",
+          "attributes": {
+            "color": "серый",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52521",
+          "name_product": "Полусапоги 4024611*AW18 JW (ж)",
+          "sku": "4024611",
+          "attributes": {
+            "color": "серый",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "52521",
+          "name_product": "Полусапоги 4024611*AW18 JW (ж)",
+          "sku": "4024611",
+          "attributes": {
+            "color": "серый",
+            "size": "39.5"
+          }
+        },
+        {
+          "id_product": "52521",
+          "name_product": "Полусапоги 4024611*AW18 JW (ж)",
+          "sku": "4024611",
+          "attributes": {
+            "color": "серый",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52521",
+          "name_product": "Полусапоги 4024611*AW18 JW (ж)",
+          "sku": "4024611",
+          "attributes": {
+            "color": "серый",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "52522",
+          "name_product": "Пуховик 1203411*AW18 JW (м)",
+          "sku": "1203411",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52522",
+          "name_product": "Пуховик 1203411*AW18 JW (м)",
+          "sku": "1203411",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52522",
+          "name_product": "Пуховик 1203411*AW18 JW (м)",
+          "sku": "1203411",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52522",
+          "name_product": "Пуховик 1203411*AW18 JW (м)",
+          "sku": "1203411",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52523",
+          "name_product": "Пуховик 1203491*AW18 JW (ж)",
+          "sku": "1203491",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52523",
+          "name_product": "Пуховик 1203491*AW18 JW (ж)",
+          "sku": "1203491",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52523",
+          "name_product": "Пуховик 1203491*AW18 JW (ж)",
+          "sku": "1203491",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52523",
+          "name_product": "Пуховик 1203491*AW18 JW (ж)",
+          "sku": "1203491",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "52523",
+          "name_product": "Пуховик 1203491*AW18 JW (ж)",
+          "sku": "1203491",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52524",
+          "name_product": "Пуховик 1203641*AW18 JW (ж)",
+          "sku": "1203641",
+          "attributes": {
+            "color": "т.синий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52524",
+          "name_product": "Пуховик 1203641*AW18 JW (ж)",
+          "sku": "1203641",
+          "attributes": {
+            "color": "т.синий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52524",
+          "name_product": "Пуховик 1203641*AW18 JW (ж)",
+          "sku": "1203641",
+          "attributes": {
+            "color": "т.синий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52524",
+          "name_product": "Пуховик 1203641*AW18 JW (ж)",
+          "sku": "1203641",
+          "attributes": {
+            "color": "т.синий",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "52525",
+          "name_product": "Рюкзак 24040 JW",
+          "sku": "24040",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52526",
+          "name_product": "Рюкзак 25300 JW",
+          "sku": "25300",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52527",
+          "name_product": "Сапоги 4020511*AW18 JW (ж)",
+          "sku": "4020511",
+          "attributes": {
+            "color": "св.серый",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "52527",
+          "name_product": "Сапоги 4020511*AW18 JW (ж)",
+          "sku": "4020511",
+          "attributes": {
+            "color": "св.серый",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "52527",
+          "name_product": "Сапоги 4020511*AW18 JW (ж)",
+          "sku": "4020511",
+          "attributes": {
+            "color": "св.серый",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52527",
+          "name_product": "Сапоги 4020511*AW18 JW (ж)",
+          "sku": "4020511",
+          "attributes": {
+            "color": "св.серый",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "52527",
+          "name_product": "Сапоги 4020511*AW18 JW (ж)",
+          "sku": "4020511",
+          "attributes": {
+            "color": "св.серый",
+            "size": "39.5"
+          }
+        },
+        {
+          "id_product": "52527",
+          "name_product": "Сапоги 4020511*AW18 JW (ж)",
+          "sku": "4020511",
+          "attributes": {
+            "color": "св.серый",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52527",
+          "name_product": "Сапоги 4020511*AW18 JW (ж)",
+          "sku": "4020511",
+          "attributes": {
+            "color": "св.серый",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "52528",
+          "name_product": "Сапоги 4028201*AW18 JW (ж)",
+          "sku": "4028201",
+          "attributes": {
+            "color": "серый",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "52528",
+          "name_product": "Сапоги 4028201*AW18 JW (ж)",
+          "sku": "4028201",
+          "attributes": {
+            "color": "серый",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "52528",
+          "name_product": "Сапоги 4028201*AW18 JW (ж)",
+          "sku": "4028201",
+          "attributes": {
+            "color": "серый",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "52528",
+          "name_product": "Сапоги 4028201*AW18 JW (ж)",
+          "sku": "4028201",
+          "attributes": {
+            "color": "серый",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "52528",
+          "name_product": "Сапоги 4028201*AW18 JW (ж)",
+          "sku": "4028201",
+          "attributes": {
+            "color": "серый",
+            "size": "39.5"
+          }
+        },
+        {
+          "id_product": "52528",
+          "name_product": "Сапоги 4028201*AW18 JW (ж)",
+          "sku": "4028201",
+          "attributes": {
+            "color": "серый",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52528",
+          "name_product": "Сапоги 4028201*AW18 JW (ж)",
+          "sku": "4028201",
+          "attributes": {
+            "color": "серый",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "52529",
+          "name_product": "Сумка 2004132 JW",
+          "sku": "2004132",
+          "attributes": {
+            "color": "т.синий",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52529",
+          "name_product": "Сумка 2004132 JW",
+          "sku": "2004132",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52530",
+          "name_product": "Сумка 8001141 JW",
+          "sku": "8001141",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52531",
+          "name_product": "Сумка 86000 JW",
+          "sku": "86000",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52532",
+          "name_product": "Термокружка 8000381 JW",
+          "sku": "8000381",
+          "attributes": {
+            "color": "серебро",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52533",
+          "name_product": "Шапка 1901811 JW",
+          "sku": "1901811",
+          "attributes": {
+            "color": "т.синий",
+            "size": "56/61"
+          }
+        },
+        {
+          "id_product": "52533",
+          "name_product": "Шапка 1901811 JW",
+          "sku": "1901811",
+          "attributes": {
+            "color": "чёрный",
+            "size": "56/61"
+          }
+        },
+        {
+          "id_product": "52534",
+          "name_product": "Шапка 1901891 JW",
+          "sku": "1901891",
+          "attributes": {
+            "color": "синий",
+            "size": "49/55"
+          }
+        },
+        {
+          "id_product": "52534",
+          "name_product": "Шапка 1901891 JW",
+          "sku": "1901891",
+          "attributes": {
+            "color": "т.синий",
+            "size": "49/55"
+          }
+        },
+        {
+          "id_product": "52534",
+          "name_product": "Шапка 1901891 JW",
+          "sku": "1901891",
+          "attributes": {
+            "color": "фуксия",
+            "size": "49/55"
+          }
+        },
+        {
+          "id_product": "52534",
+          "name_product": "Шапка 1901891 JW",
+          "sku": "1901891",
+          "attributes": {
+            "color": "чёрный",
+            "size": "49/55"
+          }
+        },
+        {
+          "id_product": "52535",
+          "name_product": "Шапка 1904631 JW",
+          "sku": "1904631",
+          "attributes": {
+            "color": "т.син/зел",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52535",
+          "name_product": "Шапка 1904631 JW",
+          "sku": "1904631",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52535",
+          "name_product": "Шапка 1904631 JW",
+          "sku": "1904631",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52536",
+          "name_product": "Шапка 1905191 JW",
+          "sku": "1905191",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52537",
+          "name_product": "Шапка 1905341 JW",
+          "sku": "1905341",
+          "attributes": {
+            "color": "коричн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52537",
+          "name_product": "Шапка 1905341 JW",
+          "sku": "1905341",
+          "attributes": {
+            "color": "красн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52537",
+          "name_product": "Шапка 1905341 JW",
+          "sku": "1905341",
+          "attributes": {
+            "color": "коричн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52537",
+          "name_product": "Шапка 1905341 JW",
+          "sku": "1905341",
+          "attributes": {
+            "color": "красн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52538",
+          "name_product": "Шапка 19590 JW",
+          "sku": "19590",
+          "attributes": {
+            "color": "белый",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52538",
+          "name_product": "Шапка 19590 JW",
+          "sku": "19590",
+          "attributes": {
+            "color": "т.серый",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52538",
+          "name_product": "Шапка 19590 JW",
+          "sku": "19590",
+          "attributes": {
+            "color": "т.синий",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52538",
+          "name_product": "Шапка 19590 JW",
+          "sku": "19590",
+          "attributes": {
+            "color": "фуксия",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52538",
+          "name_product": "Шапка 19590 JW",
+          "sku": "19590",
+          "attributes": {
+            "color": "чёрный",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52539",
+          "name_product": "Шапка 19614 JW",
+          "sku": "19614",
+          "attributes": {
+            "color": "т.серый",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52539",
+          "name_product": "Шапка 19614 JW",
+          "sku": "19614",
+          "attributes": {
+            "color": "т.синий",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52539",
+          "name_product": "Шапка 19614 JW",
+          "sku": "19614",
+          "attributes": {
+            "color": "чёрный",
+            "size": "55/59"
+          }
+        },
+        {
+          "id_product": "52540",
+          "name_product": "Шарф 1904671 JW",
+          "sku": "1904671",
+          "attributes": {
+            "color": "серый",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52540",
+          "name_product": "Шарф 1904671 JW",
+          "sku": "1904671",
+          "attributes": {
+            "color": "т.синий",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52540",
+          "name_product": "Шарф 1904671 JW",
+          "sku": "1904671",
+          "attributes": {
+            "color": "чёрный",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "52541",
+          "name_product": "Юбка 1503092*AW18 JW (ж)",
+          "sku": "1503092",
+          "attributes": {
+            "color": "чёрный",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "52541",
+          "name_product": "Юбка 1503092*AW18 JW (ж)",
+          "sku": "1503092",
+          "attributes": {
+            "color": "чёрный",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "52541",
+          "name_product": "Юбка 1503092*AW18 JW (ж)",
+          "sku": "1503092",
+          "attributes": {
+            "color": "чёрный",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "52541",
+          "name_product": "Юбка 1503092*AW18 JW (ж)",
+          "sku": "1503092",
+          "attributes": {
+            "color": "чёрный",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "53837",
+          "name_product": "Джемпер 1711371*AW26 JW (ч)",
+          "sku": "1711371*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53837",
+          "name_product": "Джемпер 1711371*AW26 JW (ч)",
+          "sku": "1711371*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53837",
+          "name_product": "Джемпер 1711371*AW26 JW (ч)",
+          "sku": "1711371*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53837",
+          "name_product": "Джемпер 1711371*AW26 JW (ч)",
+          "sku": "1711371*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53837",
+          "name_product": "Джемпер 1711371*AW26 JW (ч)",
+          "sku": "1711371*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53838",
+          "name_product": "Куртка 1207671*AW26 JW (ч)",
+          "sku": "1207671*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53839",
+          "name_product": "Куртка 1207701*AW26 JW (ч)",
+          "sku": "1207701*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53839",
+          "name_product": "Куртка 1207701*AW26 JW (ч)",
+          "sku": "1207701*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53839",
+          "name_product": "Куртка 1207701*AW26 JW (ч)",
+          "sku": "1207701*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53839",
+          "name_product": "Куртка 1207701*AW26 JW (ч)",
+          "sku": "1207701*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "53841",
+          "name_product": "Ремінь1912111*AW26 JW",
+          "sku": "1912111*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53842",
+          "name_product": "Рукавиці A65444*AW26 JW",
+          "sku": "A65444*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53842",
+          "name_product": "Рукавиці A65444*AW26 JW",
+          "sku": "A65444*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53842",
+          "name_product": "Рукавиці A65444*AW26 JW",
+          "sku": "A65444*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53842",
+          "name_product": "Рукавиці A65444*AW26 JW",
+          "sku": "A65444*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53842",
+          "name_product": "Рукавиці A65444*AW26 JW",
+          "sku": "A65444*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55188",
+          "name_product": "Сумка 2011021*SS26 JW",
+          "sku": "2011021*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55189",
+          "name_product": "Сумка 8007821*SS26 JW",
+          "sku": "8007821*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55190",
+          "name_product": "Футболка 1808382*SS26 JW (ч)",
+          "sku": "1808382*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55191",
+          "name_product": "Футболка чоловіча Jack Wolfskin Vonnan 1809951",
+          "sku": "1809951*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "55191",
+          "name_product": "Футболка чоловіча Jack Wolfskin Vonnan 1809951",
+          "sku": "1809951*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55191",
+          "name_product": "Футболка чоловіча Jack Wolfskin Vonnan 1809951",
+          "sku": "1809951*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55191",
+          "name_product": "Футболка чоловіча Jack Wolfskin Vonnan 1809951",
+          "sku": "1809951*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55191",
+          "name_product": "Футболка чоловіча Jack Wolfskin Vonnan 1809951",
+          "sku": "1809951*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        }
+      ]
+    }
+  }
+}
