@@ -71,7 +71,6 @@ class PageImageSourcePuma {
             if ((await empty.count()) > 0) {
                 throw new Error(`Goods not found on the page. ${sku}`);
             }
-            //!!!!!!!!!!!!
             // проверка соответствия полученной страницы sku товара
             const selector = 'div.product-info-main > div.size-cont-row div.product-article > span.product-article__value';
             const pageSku = page.locator(selector);

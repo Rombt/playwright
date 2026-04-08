@@ -29,6 +29,7 @@
     BRS,
     columbia,
     jack wolfskin,
+    puma,
 
 
 
