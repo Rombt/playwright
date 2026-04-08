@@ -183,24 +183,26 @@ export default class PageImageSourceKiborg implements ISource<ICollectProductPho
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      try {
-        // поиск описания
-        const htmlCont = page.locator('div.sc-product-content-left');
-        await htmlCont
-          .first()
-          .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-      } catch (error) {
+      // поиск описания
+      const htmlCont = page.locator('div.sc-product-content-left');
+      await htmlCont
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      const htmlContCount = await htmlCont.count();
+      if (htmlContCount === 0) {
         this.logger?.debug(`Description is absent`, {
-          component: 'PageImageSourceBRS',
+          component: 'PageImageSource ...',
           method: 'execute()',
-          action:
-            'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+          action: 'const htmlCont = page.locator(...)',
           data: {
             sku: sku,
             url: url,
           },
         });
       }
+
+      html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
 
       images[sku] = imageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;

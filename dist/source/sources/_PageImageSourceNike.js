@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceNike {
+    config;
     // private readonly logger: Logger;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();

@@ -12,12 +12,24 @@ const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImag
 const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 class DefaultScenario {
+    browser;
+    storage;
+    mode;
+    config;
+    maxRetries;
+    maxPage;
+    maxPageDownloadImg;
+    maxTask;
+    sourcesFolder;
+    logger;
+    limiter;
+    taskPath;
+    sources = [];
+    resources = [];
     constructor(browser, storage, mode) {
         this.browser = browser;
         this.storage = storage;
         this.mode = mode;
-        this.sources = [];
-        this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
         this.limiter = new RateLimiter_1.RateLimiter(10000);
@@ -463,10 +475,6 @@ class DefaultScenario {
             });
             allErrors.push(...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)));
         });
-        // await this.storage.saveJson(allProductRaw, {
-        //   filename: `${task.brand_name}_products_raw.json`,
-        //   targetDir: '',
-        // });
         await this.storage.appendJsonUnique(allProductRaw.map((item) => ({
             ...item,
             sku: String(item.sku),
@@ -542,7 +550,7 @@ class DefaultScenario {
                     _buf = await imageProcessor.convertBufferToJpg(buffer);
                     _ext = '.jpg';
                 }
-                const fileName = `${item.idProduct}_${item.sku}_${item.index}${_ext}`;
+                const fileName = `${item.idProduct}_${item.sku.replaceAll('/', '-')}_${item.index}${_ext}`;
                 await this.storage.save({
                     filename: fileName,
                     buffer: _buf,

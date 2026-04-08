@@ -9,6 +9,9 @@ const LOG_LEVEL_PRIORITY = {
     debug: 3,
 };
 class Logger {
+    static instance = null;
+    level;
+    transports;
     constructor(config) {
         this.level = config.level;
         this.transports = config.transports;
@@ -67,4 +70,3 @@ class Logger {
     }
 }
 exports.Logger = Logger;
-Logger.instance = null;

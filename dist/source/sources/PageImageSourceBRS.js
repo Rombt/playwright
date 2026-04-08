@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceBRS {
+    config;
+    logger;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();

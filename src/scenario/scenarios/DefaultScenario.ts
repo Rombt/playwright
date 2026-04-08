@@ -633,11 +633,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       );
     });
 
-    // await this.storage.saveJson(allProductRaw, {
-    //   filename: `${task.brand_name}_products_raw.json`,
-    //   targetDir: '',
-    // });
-
     await this.storage.appendJsonUnique(
       allProductRaw.map((item) => ({
         ...item,
@@ -750,7 +745,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           _ext = '.jpg';
         }
 
-        const fileName = `${item.idProduct}_${item.sku}_${item.index}${_ext}`;
+        const fileName = `${item.idProduct}_${item.sku.replaceAll('/', '-')}_${item.index}${_ext}`;
         await this.storage.save({
           filename: fileName,
           buffer: _buf,

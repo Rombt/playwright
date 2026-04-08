@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConsoleTransport = void 0;
 class ConsoleTransport {
+    pretty;
     constructor(pretty = true) {
         this.pretty = pretty;
     }

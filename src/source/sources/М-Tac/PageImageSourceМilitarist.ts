@@ -166,6 +166,19 @@ export default class PageImageSourceMilitarist implements ISource<ICollectProduc
         .first()
         .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
+      const htmlContCount = await htmlCont.count();
+      if (htmlContCount === 0) {
+        this.logger?.debug(`Description is absent`, {
+          component: 'PageImageSource ...',
+          method: 'execute()',
+          action: 'const htmlCont = page.locator(...)',
+          data: {
+            sku: sku,
+            url: url,
+          },
+        });
+      }
+
       html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
 
       images[sku] = imageUrls as IDataImagItem;

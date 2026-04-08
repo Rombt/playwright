@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Logger_1 = require("../../../data/logger/Logger");
 const appConfig_1 = require("../../../data/config/appConfig");
 class PageImageSourceMilitarist {
+    config;
+    logger;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
@@ -110,6 +112,18 @@ class PageImageSourceMilitarist {
             await htmlCont
                 .first()
                 .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            const htmlContCount = await htmlCont.count();
+            if (htmlContCount === 0) {
+                this.logger?.debug(`Description is absent`, {
+                    component: 'PageImageSource ...',
+                    method: 'execute()',
+                    action: 'const htmlCont = page.locator(...)',
+                    data: {
+                        sku: sku,
+                        url: url,
+                    },
+                });
+            }
             html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;

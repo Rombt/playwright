@@ -4,6 +4,8 @@ const fast_fuzzy_1 = require("fast-fuzzy");
 const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceBezet {
+    config;
+    logger;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
@@ -118,29 +120,28 @@ class PageImageSourceBezet {
                 .evaluateAll((links) => links.map((link) => link.getAttribute('data-full')).filter(Boolean));
             if (imageUrls.length === 0)
                 throw new Error('No valid image URLs found');
-            try {
-                // поиск описания
-                const htmlCont = page.locator('div.tab-content');
-                await htmlCont
-                    .first()
-                    .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-                // удаляю script
-                html = await htmlCont.evaluate((el) => {
-                    el.querySelectorAll('script').forEach((script) => script.remove());
-                    return el.innerHTML;
-                });
-            }
-            catch (error) {
+            // поиск описания
+            const htmlCont = page.locator('div.tab-content');
+            await htmlCont
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            const htmlContCount = await htmlCont.count();
+            if (htmlContCount === 0) {
                 this.logger?.debug(`Description is absent`, {
-                    component: 'PageImageSourceBRS',
+                    component: 'PageImageSource ...',
                     method: 'execute()',
-                    action: 'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+                    action: 'const htmlCont = page.locator(...)',
                     data: {
                         sku: sku,
                         url: url,
                     },
                 });
             }
+            // удаляю script
+            html = await htmlCont.evaluate((el) => {
+                el.querySelectorAll('script').forEach((script) => script.remove());
+                return el.innerHTML;
+            });
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;
         }

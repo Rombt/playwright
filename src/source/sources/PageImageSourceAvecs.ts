@@ -143,16 +143,16 @@ export default class PageImageSourceAvecs implements ISource<ICollectProductPhot
 
       //!!
       // проверка соответствия страницы запрашиваемому sku
-      const page_sku = page.locator('div.product-info_info-holder div.model-holder', {
-        hasText: `${sku}`,
-      });
-      await page_sku
-        .first()
-        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      // const page_sku = page.locator('div.product-info_info-holder div.model-holder', {
+      //   hasText: `${sku}`,
+      // });
+      // await page_sku
+      //   .first()
+      //   .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      if ((await page_sku.count()) === 0) {
-        throw new Error(`The product page is not match sku  ${sku}`);
-      }
+      // if ((await page_sku.count()) === 0) {
+      //   throw new Error(`The product page is not match sku  ${sku}`);
+      // }
 
       // переключить язык страницы на украинский
       const dropdown = page.locator('#form-language').first();
@@ -186,7 +186,7 @@ export default class PageImageSourceAvecs implements ISource<ICollectProductPhot
         'div.product-info__colors > div.product-info__colors-btns > div.product-info__color > label',
       );
       await swatchColors.first().waitFor();
-      // так как цвета обозначены другим sku их не собираю, но могу, если что
+      // так как цвета обозначены другим sku их не собираю
       // const swatchCount = await swatchColors.count();
       const swatchCount = 0;
 
@@ -260,6 +260,27 @@ export default class PageImageSourceAvecs implements ISource<ICollectProductPhot
 
         images[sku] = imageUrls;
       }
+
+      // поиск описания
+      const htmlCont = page.locator('div.info-product__text:has(.description-block)');
+      await htmlCont
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      const htmlContCount = await htmlCont.count();
+      if (htmlContCount === 0) {
+        this.logger?.debug(`Description is absent`, {
+          component: 'PageImageSource ...',
+          method: 'execute()',
+          action: 'const htmlCont = page.locator(...)',
+          data: {
+            sku: sku,
+            url: url,
+          },
+        });
+      }
+
+      html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }

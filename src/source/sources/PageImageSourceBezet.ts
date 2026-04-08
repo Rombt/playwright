@@ -182,30 +182,30 @@ export default class PageImageSourceBezet implements ISource<ICollectProductPhot
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      try {
-        // поиск описания
-        const htmlCont = page.locator('div.tab-content');
-        await htmlCont
-          .first()
-          .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      // поиск описания
+      const htmlCont = page.locator('div.tab-content');
+      await htmlCont
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-        // удаляю script
-        html = await htmlCont.evaluate((el) => {
-          el.querySelectorAll('script').forEach((script) => script.remove());
-          return el.innerHTML;
-        });
-      } catch (error) {
+      const htmlContCount = await htmlCont.count();
+      if (htmlContCount === 0) {
         this.logger?.debug(`Description is absent`, {
-          component: 'PageImageSourceBRS',
+          component: 'PageImageSource ...',
           method: 'execute()',
-          action:
-            'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+          action: 'const htmlCont = page.locator(...)',
           data: {
             sku: sku,
             url: url,
           },
         });
       }
+
+      // удаляю script
+      html = await htmlCont.evaluate((el) => {
+        el.querySelectorAll('script').forEach((script) => script.remove());
+        return el.innerHTML;
+      });
 
       images[sku] = imageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;

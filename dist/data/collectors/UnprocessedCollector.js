@@ -5,6 +5,8 @@ const fs = require("fs");
 const path = require("path");
 const appConfig_1 = require("../../data/config/appConfig");
 class UnprocessedCollector {
+    config;
+    resultsFolder;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
         this.resultsFolder = this.config.resultsFolder;

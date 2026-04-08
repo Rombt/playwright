@@ -4,6 +4,8 @@ const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceAvecs {
+    config;
+    logger;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
@@ -94,15 +96,15 @@ class PageImageSourceAvecs {
             link.click();
             //!!
             // проверка соответствия страницы запрашиваемому sku
-            const page_sku = page.locator('div.product-info_info-holder div.model-holder', {
-                hasText: `${sku}`,
-            });
-            await page_sku
-                .first()
-                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            if ((await page_sku.count()) === 0) {
-                throw new Error(`The product page is not match sku  ${sku}`);
-            }
+            // const page_sku = page.locator('div.product-info_info-holder div.model-holder', {
+            //   hasText: `${sku}`,
+            // });
+            // await page_sku
+            //   .first()
+            //   .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            // if ((await page_sku.count()) === 0) {
+            //   throw new Error(`The product page is not match sku  ${sku}`);
+            // }
             // переключить язык страницы на украинский
             const dropdown = page.locator('#form-language').first();
             await dropdown.click();
@@ -127,7 +129,7 @@ class PageImageSourceAvecs {
             //!!
             const swatchColors = page.locator('div.product-info__colors > div.product-info__colors-btns > div.product-info__color > label');
             await swatchColors.first().waitFor();
-            // так как цвета обозначены другим sku их не собираю, но могу, если что
+            // так как цвета обозначены другим sku их не собираю
             // const swatchCount = await swatchColors.count();
             const swatchCount = 0;
             // --- если нет цветов ---
@@ -183,6 +185,24 @@ class PageImageSourceAvecs {
                 imageUrls.idProduct = product.id_product;
                 images[sku] = imageUrls;
             }
+            // поиск описания
+            const htmlCont = page.locator('div.info-product__text:has(.description-block)');
+            await htmlCont
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            const htmlContCount = await htmlCont.count();
+            if (htmlContCount === 0) {
+                this.logger?.debug(`Description is absent`, {
+                    component: 'PageImageSource ...',
+                    method: 'execute()',
+                    action: 'const htmlCont = page.locator(...)',
+                    data: {
+                        sku: sku,
+                        url: url,
+                    },
+                });
+            }
+            html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);

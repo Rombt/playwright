@@ -4,6 +4,8 @@ exports.FileTransport = void 0;
 const fs = require("fs");
 const path = require("path");
 class FileTransport {
+    pretty;
+    filePath;
     constructor(filePath, pretty = false) {
         this.pretty = pretty;
         this.filePath = path.resolve(filePath);
