@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-04-07_14-22",
+  "task": {
+    "45": {
+      "brand_id": "45",
+      "brand_name": "Puma",
+      "metadata": {
+        "target_website": "https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "44667",
+          "name_product": "Труси 93832501*SS24 PUMA (ч)",
+          "sku": "93832501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "44678",
+          "name_product": "Шкарпетки 93838106*SS24 PUMA",
+          "sku": "93838106*SS24",
+          "attributes": {
+            "color": "фіолет",
+            "size": "35/38"
+          }
+        },
+        {
+          "id_product": "44679",
+          "name_product": "Шкарпетки 93839501*SS24 PUMA",
+          "sku": "93839501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "39/42"
+          }
+        }
+      ]
+    }
+  }
+}

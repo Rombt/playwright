@@ -32,7 +32,7 @@ export const config = {
     // resultsFolder: 'results/all_brands',
     // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_prod',
-    resultsFolder: 'results/jack_wolfskin/jack_wolfskin_test',
+    resultsFolder: 'results/puma/puma_test',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -60,8 +60,8 @@ export const config = {
     // taskPath: 'src/data/tasks/bezet/bezet_test.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test_short.json',
     // taskPath: 'src/data/tasks/columbia/columbia_test.json',
-    taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_test.json',
     // taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_test_short.json',
+    taskPath: 'src/data/tasks/puma/puma_test.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

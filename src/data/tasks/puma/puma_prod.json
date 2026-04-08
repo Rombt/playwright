@@ -1,0 +1,302 @@
+{
+  "generated_at": "2026-04-07_14-22",
+  "task": {
+    "45": {
+      "brand_id": "45",
+      "brand_name": "Puma",
+      "metadata": {
+        "target_website": "https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "44667",
+          "name_product": "Труси 93832501*SS24 PUMA (ч)",
+          "sku": "93832501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "44667",
+          "name_product": "Труси 93832501*SS24 PUMA (ч)",
+          "sku": "93832501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "44667",
+          "name_product": "Труси 93832501*SS24 PUMA (ч)",
+          "sku": "93832501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "44678",
+          "name_product": "Шкарпетки 93838106*SS24 PUMA",
+          "sku": "93838106*SS24",
+          "attributes": {
+            "color": "фіолет",
+            "size": "35/38"
+          }
+        },
+        {
+          "id_product": "44678",
+          "name_product": "Шкарпетки 93838106*SS24 PUMA",
+          "sku": "93838106*SS24",
+          "attributes": {
+            "color": "фіолет",
+            "size": "39/42"
+          }
+        },
+        {
+          "id_product": "44679",
+          "name_product": "Шкарпетки 93839501*SS24 PUMA",
+          "sku": "93839501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "39/42"
+          }
+        },
+        {
+          "id_product": "44679",
+          "name_product": "Шкарпетки 93839501*SS24 PUMA",
+          "sku": "93839501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "43/46"
+          }
+        },
+        {
+          "id_product": "46455",
+          "name_product": "Футболка 67926960*SS24 PUMA (підл)",
+          "sku": "67926960*SS24",
+          "attributes": {
+            "color": "св.фіолет",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "46455",
+          "name_product": "Футболка 67926960*SS24 PUMA (підл)",
+          "sku": "67926960*SS24",
+          "attributes": {
+            "color": "св.фіолет",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "46455",
+          "name_product": "Футболка 67926960*SS24 PUMA (підл)",
+          "sku": "67926960*SS24",
+          "attributes": {
+            "color": "св.фіолет",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "46455",
+          "name_product": "Футболка 67926960*SS24 PUMA (підл)",
+          "sku": "67926960*SS24",
+          "attributes": {
+            "color": "св.фіолет",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "46455",
+          "name_product": "Футболка 67926960*SS24 PUMA (підл)",
+          "sku": "67926960*SS24",
+          "attributes": {
+            "color": "св.фіолет",
+            "size": "176"
+          }
+        },
+        {
+          "id_product": "47770",
+          "name_product": "Костюм 68381767*AW25 PUMA (ч)",
+          "sku": "68381767*AW25",
+          "attributes": {
+            "color": "беж/чорн",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47770",
+          "name_product": "Костюм 68381767*AW25 PUMA (ч)",
+          "sku": "68381767*AW25",
+          "attributes": {
+            "color": "беж/чорн",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47770",
+          "name_product": "Костюм 68381767*AW25 PUMA (ч)",
+          "sku": "68381767*AW25",
+          "attributes": {
+            "color": "беж/чорн",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47781",
+          "name_product": "Куртка 84893801*AW25 PUMA (ч)",
+          "sku": "84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47781",
+          "name_product": "Куртка 84893801*AW25 PUMA (ч)",
+          "sku": "84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47781",
+          "name_product": "Куртка 84893801*AW25 PUMA (ч)",
+          "sku": "84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47781",
+          "name_product": "Куртка 84893801*AW25 PUMA (ч)",
+          "sku": "84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47781",
+          "name_product": "Куртка 84893801*AW25 PUMA (ч)",
+          "sku": "84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "47874",
+          "name_product": "Куртка чоловіча Puma ESS Padded Jacket 84893801*AW25",
+          "sku": "EU 84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "47874",
+          "name_product": "Куртка чоловіча Puma ESS Padded Jacket 84893801*AW25",
+          "sku": "EU 84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "47874",
+          "name_product": "Куртка чоловіча Puma ESS Padded Jacket 84893801*AW25",
+          "sku": "EU 84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "47874",
+          "name_product": "Куртка чоловіча Puma ESS Padded Jacket 84893801*AW25",
+          "sku": "EU 84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "47874",
+          "name_product": "Куртка чоловіча Puma ESS Padded Jacket 84893801*AW25",
+          "sku": "EU 84893801*AW25",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "48445",
+          "name_product": "Шапка 02487401*AW25 PUMA",
+          "sku": "02487401*AW25",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "53062",
+          "name_product": "Труси 93832005*AW26 PUMA (ч)",
+          "sku": "93832005*AW26",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        }
+      ]
+    }
+  }
+}

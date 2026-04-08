@@ -157,7 +157,6 @@ export default class PageImageSourceJackWolfskin implements ISource<ICollectProd
         throw new Error(`The page is not match sku  ${sku}`);
       }
 
-      //!!!!!!!!!!!!!!!!!!!!!!
       const image = page
         .locator('div[aria-label="Product image gallery"] img.jwsdw-pdp-mediaItem-image')
         .first();

@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-07_14-22",
+  "task": {
+    "45": {
+      "brand_id": "45",
+      "brand_name": "Puma",
+      "metadata": {
+        "target_website": "https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "44679",
+          "name_product": "Шкарпетки 93839501*SS24 PUMA",
+          "sku": "93839501*SS24",
+          "attributes": {
+            "color": "чорний",
+            "size": "39/42"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { APIRequestContext, Page, Locator } from 'playwright-core';
+import { APIRequestContext, Page } from 'playwright-core';
 import { ISource } from '../ISource';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
@@ -11,7 +11,7 @@ import { ILogger } from '../../data/logger/types/ILogger';
 import { Logger } from '../../data/logger/Logger';
 import { AppConfig } from '../../data/config/appConfig';
 
-export default class PageImageSourceColumbia implements ISource<ICollectProductPhotosTask> {
+export default class PageImageSourcePuma implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
   private readonly logger: Logger;
 
@@ -29,6 +29,7 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
   ): Promise<IHttpResult<unknown>> {
     throw new Error('Method not implemented.');
   }
+
   executeHttpRequest<T = unknown>(
     request: APIRequestContext,
     options: { url: string; params?: Record<string, string>; headers?: Record<string, string> },
@@ -38,8 +39,7 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
 
   supports(task: ICollectProductPhotosTask): boolean {
     return (
-      task.metadata.target_website ===
-      'https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch'
+      task.metadata.target_website === 'https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}'
     );
   }
 
@@ -91,27 +91,24 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
 
     const limiter = new RateLimiter(this.config.asyncRetry.maxDelay);
 
-    // нормализация SKU
     const rawSku = product.sku;
-    const sku = rawSku.includes('*') ? rawSku.split('*')[0] : rawSku;
-
+    const starIndex = rawSku.indexOf('*');
+    const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
     const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {
-      await page.goto(url, { waitUntil: 'networkidle' });
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      const link = page
-        .locator('[data-component-id="product-tile"] > a.chakra-link[data-masterpid="' + sku + '"]')
-        .first();
+      const galleries = page.locator('#gallery > div.product-gallery-w');
 
-      const empty = page.locator('div.sf-product-empty-list-page > p.chakra-text', {
-        hasText: 'We couldn’t find anything for',
+      const empty = page.locator('div.search-no-result > h1.search-no-result__title', {
+        hasText: `За запитом "${sku}" нічого не знайдено`,
       });
 
       try {
         await Promise.race([
-          link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
-          empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+          galleries.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay }),
+          empty.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay }),
         ]);
       } catch {
         throw new Error(`Search result not resolved. ${sku}`);
@@ -121,17 +118,44 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
         throw new Error(`Goods not found on the page. ${sku}`);
       }
 
-      if ((await link.count()) === 0) {
-        throw new Error('The page does not match the product SKU. ' + sku);
+      // проверка соответствия полученной страницы sku товара
+      const selector =
+        'div.product-info-main > div.size-cont-row div.product-article > span.product-article__value';
+      const pageSku = page.locator(selector);
+
+      await pageSku.first().waitFor({
+        state: 'attached',
+        timeout: this.config.asyncRetry.maxDelay,
+      });
+
+      const elHandle = await pageSku.first().elementHandle();
+
+      if (!elHandle) {
+        throw new Error('SKU element not found in DOM');
       }
 
-      const relativeHref = await link.getAttribute('href');
-      if (!relativeHref) throw new Error('Product link not found');
+      await page.waitForFunction(
+        (selector: string) => {
+          const el = document.querySelector(selector);
+          return el && el.textContent && el.textContent.trim().length > 0;
+        },
+        selector,
+        { timeout: this.config.asyncRetry.maxDelay },
+      );
 
-      const absoluteHref = new URL(relativeHref, page.url()).toString();
-      await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+      const text = (await page.locator(selector).first().innerText()).trim();
 
-      const image = page.locator('#app-main img').first();
+      const normalizeSku = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const normalizedPageSku = normalizeSku(text);
+      const normalizedExpectedSku = normalizeSku(sku);
+
+      if (!normalizedPageSku.includes(normalizedExpectedSku)) {
+        throw new Error(`The page is not match sku  ${sku}`);
+      }
+
+      const image = page
+        .locator('#gallery > div.product-gallery-w div.gallery-item > div.zoom-image-gallery img')
+        .first();
 
       await image.waitFor({
         state: 'visible',
@@ -146,7 +170,10 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
         imageUrlsSet.add(img);
       }
 
-      const swatchColors = page.locator('[data-component-id="swatch-group-color"] a.chakra-button');
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      message": "locator.click: Timeout 30000ms exceeded
+      const swatchColors = page.locator(
+        'div.product-info-main > div.colors > ul.colors__list > li.color-item > a',
+      );
       await swatchColors.first().waitFor();
 
       const swatchCount = await swatchColors.count();
@@ -156,8 +183,7 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
         this.logger?.debug(`swatchColors not found`, {
           component: 'PageImageSourceColumbia',
           method: 'execute()',
-          action:
-            'const swatchColors = page.locator(\'[data-component-id="swatch-group-color"] a.chakra-button\')',
+          action: 'const swatchColors = page.locator(...)',
           data: {
             url: url,
             originalSKU: product.sku,
@@ -179,7 +205,7 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
           const swatch = swatchColors.nth(i);
 
           // пропускаем уже активный цвет
-          const isActive = await swatch.getAttribute('aria-pressed');
+          const isActive = await swatch.getAttribute('._active');
           if (isActive === 'true') continue;
 
           const prevSrc = await image.getAttribute('src');
@@ -190,14 +216,16 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
           try {
             await page.waitForFunction(
               (prev) => {
-                const img = document.querySelector('#app-main img');
+                const img = document.querySelector(
+                  '#gallery > div.product-gallery-w div.gallery-item > div.zoom-image-gallery img',
+                );
                 return img && img.getAttribute('src') !== prev;
               },
               prevSrc,
               { timeout: 5000 },
             );
           } catch {
-            // fallback если сайт не меняет src (часто бывает)
+            // fallback если сайт не меняет src
             await page.waitForTimeout(500);
           }
 
@@ -215,8 +243,28 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
 
         const imageUrls = Array.from(imageUrlsSet) as IDataImagItem;
         imageUrls.idProduct = product.id_product;
-
         images[sku] = imageUrls;
+
+        try {
+          // поиск описания
+          const htmlCont = page.locator('[data-pdp-description-container] > div'); //!!!
+          await htmlCont
+            .first()
+            .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+          html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
+        } catch (error) {
+          this.logger?.debug(`Description is absent`, {
+            component: 'PageImageSourceBRS',
+            method: 'execute()',
+            action:
+              'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
+            data: {
+              sku: sku,
+              url: url,
+            },
+          });
+        }
       }
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
@@ -232,7 +280,7 @@ export default class PageImageSourceColumbia implements ISource<ICollectProductP
   }
 
   private async processingGallery(page: Page): Promise<string[]> {
-    const gallery = page.locator('[data-component-id="image-gallery"]');
+    const gallery = page.locator('#gallery > div.product-gallery-w > div.product-gallery');
     try {
       await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
     } catch (error) {

@@ -104,7 +104,6 @@ class PageImageSourceJackWolfskin {
             if ((await page_sku.count()) === 0) {
                 throw new Error(`The page is not match sku  ${sku}`);
             }
-            //!!!!!!!!!!!!!!!!!!!!!!
             const image = page
                 .locator('div[aria-label="Product image gallery"] img.jwsdw-pdp-mediaItem-image')
                 .first();

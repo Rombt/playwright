@@ -8,6 +8,7 @@ const KiborgProcessor_1 = require("./processors/KiborgProcessor");
 const BezetProcessor_1 = require("./processors/BezetProcessor");
 const ColumbiaProcessor_1 = require("./processors/ColumbiaProcessor");
 const BRSProcessor_1 = require("./processors/BRSProcessor");
+const PumaProcessor_1 = require("./processors/PumaProcessor");
 class HtmlProcessorFactory {
     constructor() {
         this.processors = {
@@ -19,6 +20,7 @@ class HtmlProcessorFactory {
             bezet: BezetProcessor_1.BezetProcessor,
             columbia: ColumbiaProcessor_1.ColumbiaProcessor,
             brs: BRSProcessor_1.BRSProcessor,
+            puma: PumaProcessor_1.PumaProcessor,
             // здесь добавлять новые бренды
         };
     }
