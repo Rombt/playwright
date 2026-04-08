@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-08_10-11",
+  "task": {
+    "194": {
+      "brand_id": "194",
+      "brand_name": "Avecs",
+      "metadata": {
+        "target_website": "https://avecs.com/en/search-ru?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55245",
+          "name_product": "Костюм чоловічий спортивний AVECS   50599/1",
+          "sku": "50599/1-SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}

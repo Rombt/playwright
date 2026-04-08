@@ -27,6 +27,7 @@
     bezet,
     ganzo,
     BRS,
+    Злий борсук,
     columbia,
     jack wolfskin,
     puma,
