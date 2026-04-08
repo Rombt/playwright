@@ -42,6 +42,10 @@ type ImageResult =
   | { status: 'retry'; item: IImageItem; error: IWorkerError }
   | { status: 'fatal'; item: IImageItem; error: IWorkerError };
 
+const BRAND_ALIASES: Record<string, string[]> = {
+  brs: ['Злий борсук'],
+};
+
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
 {
@@ -454,7 +458,19 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             }
 
             if (r.data.html) {
-              const processor = new HtmlProcessorFactory().create(task.brand_name.toLowerCase());
+              const brandKey = this.resolveBrandName(task.brand_name);
+              loggerScope?.debug('Start processing description of product', {
+                component: 'DefaultScenario',
+                method: 'process()',
+                action: 'brandKey = this.resolveBrandName(task.brand_name)',
+                data: {
+                  product: product,
+                  taskBrandName: task.brand_name,
+                  brandKey: brandKey,
+                },
+              });
+
+              const processor = new HtmlProcessorFactory().create(brandKey.toLowerCase());
 
               const rawContent = processor.process(r.data.html);
 
@@ -472,7 +488,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             }
           }
 
-          //!!! здесь уже есть проблема с ID_1776
           loggerScope?.debug('Image data aggregation finished', {
             component: 'DefaultScenario',
             method: 'process()',
@@ -642,6 +657,20 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       filename: `${task.brand_name}_unprocessed-products.json`,
       targetDir: '',
     });
+  }
+
+  private resolveBrandName(input: string): string {
+    const normalizedInput = input.trim().toLowerCase();
+
+    for (const [target, aliases] of Object.entries(BRAND_ALIASES)) {
+      const match = aliases.find((alias) => alias.toLowerCase() === normalizedInput);
+
+      if (match) {
+        return target;
+      }
+    }
+
+    return normalizedInput;
   }
 
   private async downloadImages(

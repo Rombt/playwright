@@ -26,7 +26,7 @@
     kiborg,
     bezet,
     ganzo,
-    BRS,
+    злий барсук,
     columbia,
     jack wolfskin,
     puma,

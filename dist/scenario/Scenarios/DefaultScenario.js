@@ -11,6 +11,9 @@ const Logger_1 = require("../../data/logger/Logger");
 const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
 const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
+const BRAND_ALIASES = {
+    brs: ['Злий борсук'],
+};
 class DefaultScenario {
     constructor(browser, storage, mode) {
         this.browser = browser;
@@ -324,7 +327,18 @@ class DefaultScenario {
                             allData[normalizedSku].push(...images);
                         }
                         if (r.data.html) {
-                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(task.brand_name.toLowerCase());
+                            const brandKey = this.resolveBrandName(task.brand_name);
+                            loggerScope?.debug('Start processing description of product', {
+                                component: 'DefaultScenario',
+                                method: 'process()',
+                                action: 'brandKey = this.resolveBrandName(task.brand_name)',
+                                data: {
+                                    product: product,
+                                    taskBrandName: task.brand_name,
+                                    brandKey: brandKey,
+                                },
+                            });
+                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(brandKey.toLowerCase());
                             const rawContent = processor.process(r.data.html);
                             if (Array.isArray(rawContent)) {
                                 // здесь в будущем обработка атрибутов товара
@@ -339,7 +353,6 @@ class DefaultScenario {
                             }
                         }
                     }
-                    //!!! здесь уже есть проблема с ID_1776
                     loggerScope?.debug('Image data aggregation finished', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -470,6 +483,16 @@ class DefaultScenario {
             filename: `${task.brand_name}_unprocessed-products.json`,
             targetDir: '',
         });
+    }
+    resolveBrandName(input) {
+        const normalizedInput = input.trim().toLowerCase();
+        for (const [target, aliases] of Object.entries(BRAND_ALIASES)) {
+            const match = aliases.find((alias) => alias.toLowerCase() === normalizedInput);
+            if (match) {
+                return target;
+            }
+        }
+        return normalizedInput;
     }
     async downloadImages(urlsBySku, task, context, limiter, loggerScope) {
         const queue = [];
