@@ -6,13 +6,11 @@ const config_1 = require("../../config");
 const ConsoleTransport_1 = require("../logger/transport/ConsoleTransport");
 const FileTransport_1 = require("../logger/transport/FileTransport");
 class AppConfig {
+    static instance;
+    rawConfig;
+    config;
+    baseDir;
     constructor() {
-        this.transportFactories = {
-            console: (config) => new ConsoleTransport_1.ConsoleTransport(config.options.pretty),
-            file: (config) => {
-                return new FileTransport_1.FileTransport(config.options.filePath, config.options.pretty);
-            },
-        };
         this.baseDir = process.cwd();
         this.config = this.buildConfig();
     }
@@ -191,6 +189,12 @@ class AppConfig {
         }
         return path.isAbsolute(value) ? value : path.resolve(this.baseDir, value);
     }
+    transportFactories = {
+        console: (config) => new ConsoleTransport_1.ConsoleTransport(config.options.pretty),
+        file: (config) => {
+            return new FileTransport_1.FileTransport(config.options.filePath, config.options.pretty);
+        },
+    };
     validateUserUrl(value) {
         if (typeof value !== 'string')
             return null;

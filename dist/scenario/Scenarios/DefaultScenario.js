@@ -15,12 +15,24 @@ const BRAND_ALIASES = {
     brs: ['Злий борсук'],
 };
 class DefaultScenario {
+    browser;
+    storage;
+    mode;
+    config;
+    maxRetries;
+    maxPage;
+    maxPageDownloadImg;
+    maxTask;
+    sourcesFolder;
+    logger;
+    limiter;
+    taskPath;
+    sources = [];
+    resources = [];
     constructor(browser, storage, mode) {
         this.browser = browser;
         this.storage = storage;
         this.mode = mode;
-        this.sources = [];
-        this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
         this.limiter = new RateLimiter_1.RateLimiter(10000);
@@ -295,7 +307,6 @@ class DefaultScenario {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
                     }, this.limiter, loggerScope);
-                    //!!! здесь уже есть проблема с ID_1776
                     loggerScope?.debug('Product processing finished', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -308,23 +319,33 @@ class DefaultScenario {
                         },
                     });
                     for (const r of result) {
-                        // for (const [sku, images] of Object.entries(r.data.images ?? {})) {   //!!!!!!!!!!!!!!!!!!!! <===
-                        for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
-                            const originalSku = product.sku;
-                            const normalizedSku = originalSku.split('*')[0];
-                            if (returnedSku !== normalizedSku) {
-                                loggerScope?.error('SKU mismatch from source', {
-                                    productSku: originalSku,
-                                    returnedSku,
-                                });
-                                throw new Error('SKU mismatch');
-                            }
-                            if (!allData[normalizedSku]) {
+                        // отключил так как проверка соответствия
+                        // полученных изображений  product.sku
+                        // ответственность того кото обрабатывает страницу
+                        // for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
+                        //   const originalSku = product.sku;
+                        //   const normalizedSku = originalSku.split('*')[0];
+                        //   if (returnedSku !== normalizedSku) {
+                        //     loggerScope?.error('SKU mismatch from source', {
+                        //       productSku: originalSku,
+                        //       returnedSku,
+                        //     });
+                        //     throw new Error('SKU mismatch');
+                        //   }
+                        //   if (!allData[normalizedSku]) {
+                        //     const arr = [] as unknown as IDataImagItem;
+                        //     arr.idProduct = images.idProduct;
+                        //     allData[normalizedSku] = arr;
+                        //   }
+                        //   allData[normalizedSku].push(...images);
+                        // }
+                        for (const [sku, images] of Object.entries(r.data.images ?? {})) {
+                            if (!allData[sku]) {
                                 const arr = [];
                                 arr.idProduct = images.idProduct;
-                                allData[normalizedSku] = arr;
+                                allData[sku] = arr;
                             }
-                            allData[normalizedSku].push(...images);
+                            allData[sku].push(...images);
                         }
                         if (r.data.html) {
                             const brandKey = this.resolveBrandName(task.brand_name);
@@ -468,10 +489,6 @@ class DefaultScenario {
             });
             allErrors.push(...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)));
         });
-        // await this.storage.saveJson(allProductRaw, {
-        //   filename: `${task.brand_name}_products_raw.json`,
-        //   targetDir: '',
-        // });
         await this.storage.appendJsonUnique(allProductRaw.map((item) => ({
             ...item,
             sku: String(item.sku),
@@ -557,7 +574,7 @@ class DefaultScenario {
                     _buf = await imageProcessor.convertBufferToJpg(buffer);
                     _ext = '.jpg';
                 }
-                const fileName = `${item.idProduct}_${item.sku}_${item.index}${_ext}`;
+                const fileName = `${item.idProduct}_${item.sku.replaceAll('/', '-')}_${item.index}${_ext}`;
                 await this.storage.save({
                     filename: fileName,
                     buffer: _buf,

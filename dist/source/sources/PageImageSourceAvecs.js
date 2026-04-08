@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
-class PageImageSourcePuma {
+class PageImageSourceAvecs {
     config;
     logger;
     constructor() {
@@ -17,7 +17,7 @@ class PageImageSourcePuma {
         throw new Error('Method not implemented.');
     }
     supports(task) {
-        return (task.metadata.target_website === 'https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}');
+        return task.metadata.target_website === 'https://avecs.com/en/search-ru?search={{sku_prod}}';
     }
     async worker(targetUrl, page, limiter, getNext, loggerScope, sku, debugMeta) {
         const results = [];
@@ -32,7 +32,7 @@ class PageImageSourcePuma {
             throw new Error('Product is undefined');
         }
         loggerScope?.debug('Worker initialized with valid product', {
-            component: 'DPageImageSourceColumbia',
+            component: 'DPageImageSourceAvecs',
             method: 'worker(...)',
             data: {
                 targetUrl: targetUrl,
@@ -51,19 +51,36 @@ class PageImageSourcePuma {
         const images = {};
         let html = '';
         const limiter = new RateLimiter_1.RateLimiter(this.config.asyncRetry.maxDelay);
+        // нормализация SKU
         const rawSku = product.sku;
-        const starIndex = rawSku.indexOf('*');
-        const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
+        // const sku = rawSku.includes('*') ? rawSku.split('*')[0] : rawSku;
+        const sku = rawSku.split(/[* -]/)[0];
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
-            await page.goto(url, { waitUntil: 'domcontentloaded' });
-            const galleries = page.locator('#gallery > div.product-gallery-w');
-            const empty = page.locator('div.search-no-result > h1.search-no-result__title', {
-                hasText: `За запитом "${sku}" нічого не знайдено`,
+            await page.goto(url, { waitUntil: 'networkidle' });
+            //!!
+            const [id, variant] = sku.split('/');
+            const normalized = `${id}-${variant}`;
+            const link = page.locator(`a.product-card__img img[src*="${normalized}"]`).first();
+            const countLink = await link.count();
+            this.logger?.debug(`The link is found on the page`, {
+                component: 'PageImageSourceAvecs',
+                method: 'execute()',
+                action: 'link = page.locator(...)',
+                data: {
+                    url: url,
+                    rawSku: rawSku,
+                    sku: sku,
+                    normalizedSku: normalized,
+                    linkCount: countLink,
+                },
+            });
+            const empty = page.locator('div.products-search p', {
+                hasText: 'There is no product that matches the search criteria',
             });
             try {
                 await Promise.race([
-                    galleries.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay }),
+                    link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay }),
                     empty.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay }),
                 ]);
             }
@@ -73,49 +90,52 @@ class PageImageSourcePuma {
             if ((await empty.count()) > 0) {
                 throw new Error(`Goods not found on the page. ${sku}`);
             }
-            // проверка соответствия полученной страницы sku товара
-            const selector = 'div.product-info-main > div.size-cont-row div.product-article > span.product-article__value';
-            const pageSku = page.locator(selector);
-            await pageSku.first().waitFor({
-                state: 'attached',
-                timeout: this.config.asyncRetry.maxDelay,
-            });
-            const elHandle = await pageSku.first().elementHandle();
-            if (!elHandle) {
-                throw new Error('SKU element not found in DOM');
+            if ((await link.count()) === 0) {
+                throw new Error('The page search does not match the product SKU. ' + sku);
             }
-            await page.waitForFunction((selector) => {
-                const el = document.querySelector(selector);
-                return el && el.textContent && el.textContent.trim().length > 0;
-            }, selector, { timeout: this.config.asyncRetry.maxDelay });
-            const text = (await page.locator(selector).first().innerText()).trim();
-            const normalizeSku = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
-            const normalizedPageSku = normalizeSku(text);
-            const normalizedExpectedSku = normalizeSku(sku);
-            if (!normalizedPageSku.includes(normalizedExpectedSku)) {
-                throw new Error(`The page is not match sku  ${sku}`);
-            }
-            const image = page
-                .locator('#gallery > div.product-gallery-w div.gallery-item > div.zoom-image-gallery img')
-                .first();
+            link.click();
+            //!!
+            // проверка соответствия страницы запрашиваемому sku
+            // const page_sku = page.locator('div.product-info_info-holder div.model-holder', {
+            //   hasText: `${sku}`,
+            // });
+            // await page_sku
+            //   .first()
+            //   .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            // if ((await page_sku.count()) === 0) {
+            //   throw new Error(`The product page is not match sku  ${sku}`);
+            // }
+            // переключить язык страницы на украинский
+            const dropdown = page.locator('#form-language').first();
+            await dropdown.click();
+            const uaOption = dropdown.locator('a.language-select[name="uk-ua"]').first();
+            await uaOption.waitFor({ state: 'visible' });
+            await Promise.all([page.locator('html[lang="uk"]').waitFor(), uaOption.click()]);
+            //!!
+            const selectorImage = 'div.swiper-wrapper > div.swiper-slide > img';
+            const image = page.locator(selectorImage).first();
             await image.waitFor({
                 state: 'visible',
                 timeout: this.config.asyncRetry.maxDelay,
             });
+            //!!
+            const selectorGallery = `div.product-main div.product-show__slider > div.swiper-wrapper`;
             const imageUrlsSet = new Set();
             // --- первая галерея ---
-            const initialImages = await this.processingGallery(page);
+            const initialImages = await this.processingGallery(page, selectorGallery);
             for (const img of initialImages) {
                 imageUrlsSet.add(img);
             }
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      message": "locator.click: Timeout 30000ms exceeded
-            const swatchColors = page.locator('div.product-info-main > div.colors > ul.colors__list > li.color-item > a');
+            //!!
+            const swatchColors = page.locator('div.product-info__colors > div.product-info__colors-btns > div.product-info__color > label');
             await swatchColors.first().waitFor();
-            const swatchCount = await swatchColors.count();
+            // так как цвета обозначены другим sku их не собираю
+            // const swatchCount = await swatchColors.count();
+            const swatchCount = 0;
             // --- если нет цветов ---
             if (swatchCount === 0) {
                 this.logger?.debug(`swatchColors not found`, {
-                    component: 'PageImageSourceColumbia',
+                    component: 'PageImageSourceAvecs',
                     method: 'execute()',
                     action: 'const swatchColors = page.locator(...)',
                     data: {
@@ -133,26 +153,29 @@ class PageImageSourcePuma {
                     state: 'visible',
                     timeout: this.config.asyncRetry.maxDelay,
                 });
+                const url = new URL(page.url());
+                const normalized = url.origin + url.pathname;
                 for (let i = 0; i < swatchCount; i++) {
                     const swatch = swatchColors.nth(i);
+                    //!!
                     // пропускаем уже активный цвет
-                    const isActive = await swatch.getAttribute('._active');
-                    if (isActive === 'true')
+                    const link = await swatch.getAttribute('data-link');
+                    if (link === normalized)
                         continue;
                     const prevSrc = await image.getAttribute('src');
                     await swatch.click();
                     // ждём либо смену картинки, либо таймаут fallback
                     try {
                         await page.waitForFunction((prev) => {
-                            const img = document.querySelector('#gallery > div.product-gallery-w div.gallery-item > div.zoom-image-gallery img');
+                            const img = document.querySelector(selectorImage);
                             return img && img.getAttribute('src') !== prev;
                         }, prevSrc, { timeout: 5000 });
                     }
                     catch {
-                        // fallback если сайт не меняет src
+                        // fallback если сайт не меняет src (часто бывает)
                         await page.waitForTimeout(500);
                     }
-                    const newImages = await this.processingGallery(page);
+                    const newImages = await this.processingGallery(page, selectorGallery);
                     for (const img of newImages) {
                         imageUrlsSet.add(img);
                     }
@@ -161,26 +184,25 @@ class PageImageSourcePuma {
                 const imageUrls = Array.from(imageUrlsSet);
                 imageUrls.idProduct = product.id_product;
                 images[sku] = imageUrls;
-                try {
-                    // поиск описания
-                    const htmlCont = page.locator('[data-pdp-description-container] > div'); //!!!
-                    await htmlCont
-                        .first()
-                        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-                    html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
-                }
-                catch (error) {
-                    this.logger?.debug(`Description is absent`, {
-                        component: 'PageImageSourceBRS',
-                        method: 'execute()',
-                        action: 'const htmlCont = page.locator(\'div.product__section > [itemprop="description"]\'',
-                        data: {
-                            sku: sku,
-                            url: url,
-                        },
-                    });
-                }
             }
+            // поиск описания
+            const htmlCont = page.locator('div.info-product__text:has(.description-block)');
+            await htmlCont
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            const htmlContCount = await htmlCont.count();
+            if (htmlContCount === 0) {
+                this.logger?.debug(`Description is absent`, {
+                    component: 'PageImageSource ...',
+                    method: 'execute()',
+                    action: 'const htmlCont = page.locator(...)',
+                    data: {
+                        sku: sku,
+                        url: url,
+                    },
+                });
+            }
+            html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);
@@ -193,14 +215,18 @@ class PageImageSourcePuma {
             errors,
         };
     }
-    async processingGallery(page) {
-        const gallery = page.locator('#gallery > div.product-gallery-w > div.product-gallery');
-        try {
-            await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-        }
-        catch (error) {
-            throw new Error('No gallery found on page');
-        }
+    async processingGallery(page, selectorGallery) {
+        const gallery = page.locator(selectorGallery);
+        const countGallery = await gallery.count();
+        this.logger?.debug(`The gallery is found on the page`, {
+            component: 'PageImageSourceAvecs',
+            method: 'processingGallery()',
+            action: 'age.locator(selectorGallery)',
+            data: {
+                galleryCount: countGallery,
+            },
+        });
+        await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
         const count = await gallery.count();
         if (count === 0)
             throw new Error('No images found on page');
@@ -223,4 +249,4 @@ class PageImageSourcePuma {
         };
     }
 }
-exports.default = PageImageSourcePuma;
+exports.default = PageImageSourceAvecs;

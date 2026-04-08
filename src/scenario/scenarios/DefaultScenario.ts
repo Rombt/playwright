@@ -419,7 +419,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             loggerScope,
           );
 
-          //!!! здесь уже есть проблема с ID_1776
           loggerScope?.debug('Product processing finished', {
             component: 'DefaultScenario',
             method: 'process()',
@@ -434,27 +433,39 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           });
 
           for (const r of result) {
-            // for (const [sku, images] of Object.entries(r.data.images ?? {})) {   //!!!!!!!!!!!!!!!!!!!! <===
-            for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
-              const originalSku = product.sku;
-              const normalizedSku = originalSku.split('*')[0];
+            // отключил так как проверка соответствия
+            // полученных изображений  product.sku
+            // ответственность того кото обрабатывает страницу
+            // for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
+            //   const originalSku = product.sku;
+            //   const normalizedSku = originalSku.split('*')[0];
 
-              if (returnedSku !== normalizedSku) {
-                loggerScope?.error('SKU mismatch from source', {
-                  productSku: originalSku,
-                  returnedSku,
-                });
+            //   if (returnedSku !== normalizedSku) {
+            //     loggerScope?.error('SKU mismatch from source', {
+            //       productSku: originalSku,
+            //       returnedSku,
+            //     });
 
-                throw new Error('SKU mismatch');
-              }
+            //     throw new Error('SKU mismatch');
+            //   }
 
-              if (!allData[normalizedSku]) {
+            //   if (!allData[normalizedSku]) {
+            //     const arr = [] as unknown as IDataImagItem;
+            //     arr.idProduct = images.idProduct;
+            //     allData[normalizedSku] = arr;
+            //   }
+
+            //   allData[normalizedSku].push(...images);
+            // }
+
+            for (const [sku, images] of Object.entries(r.data.images ?? {})) {
+              if (!allData[sku]) {
                 const arr = [] as unknown as IDataImagItem;
                 arr.idProduct = images.idProduct;
-                allData[normalizedSku] = arr;
+                allData[sku] = arr;
               }
 
-              allData[normalizedSku].push(...images);
+              allData[sku].push(...images);
             }
 
             if (r.data.html) {
@@ -638,11 +649,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       );
     });
 
-    // await this.storage.saveJson(allProductRaw, {
-    //   filename: `${task.brand_name}_products_raw.json`,
-    //   targetDir: '',
-    // });
-
     await this.storage.appendJsonUnique(
       allProductRaw.map((item) => ({
         ...item,
@@ -769,7 +775,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           _ext = '.jpg';
         }
 
-        const fileName = `${item.idProduct}_${item.sku}_${item.index}${_ext}`;
+        const fileName = `${item.idProduct}_${item.sku.replaceAll('/', '-')}_${item.index}${_ext}`;
         await this.storage.save({
           filename: fileName,
           buffer: _buf,

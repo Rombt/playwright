@@ -2,6 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AutocompleteClient = void 0;
 class AutocompleteClient {
+    page;
+    searchInputSelector;
+    apiUrlPart;
+    typeDelayMs;
     constructor(page, searchInputSelector, apiUrlPart = '/autocomplete/', typeDelayMs = 120) {
         this.page = page;
         this.searchInputSelector = searchInputSelector;

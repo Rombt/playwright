@@ -13,11 +13,16 @@ const Logger_1 = require("../data/logger/Logger");
 // todo где то здесь должен создаваться браузер, один на всё приложение!
 // todo где закрывать браузер?
 class App {
+    pathBrowserOptions;
+    pathContextOptions;
+    browserOptions = {};
+    contextOptions = {};
+    config;
+    mode;
+    logger;
     constructor(pathBrowserOptions, pathContextOptions) {
         this.pathBrowserOptions = pathBrowserOptions;
         this.pathContextOptions = pathContextOptions;
-        this.browserOptions = {};
-        this.contextOptions = {};
         this.config = appConfig_1.AppConfig.init();
         Logger_1.Logger.init({
             level: this.config.loggerConfig.level,

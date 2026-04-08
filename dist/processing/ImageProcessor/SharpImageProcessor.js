@@ -5,6 +5,7 @@ const sharp = require("sharp");
 const fs = require("fs/promises");
 const path = require("path");
 class SharpImageProcessor {
+    storage;
     constructor(storage) {
         this.storage = storage;
     }

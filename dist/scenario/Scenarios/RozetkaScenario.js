@@ -11,13 +11,22 @@ const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
 const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
 class RozetkaScenario {
+    browser;
+    storage;
+    mode;
+    config;
+    maxRetries;
+    maxPage;
+    maxTask;
+    sourcesFolder;
+    logger;
+    allErrors = [];
+    sources = [];
+    resources = [];
     constructor(browser, storage, mode) {
         this.browser = browser;
         this.storage = storage;
         this.mode = mode;
-        this.allErrors = [];
-        this.sources = [];
-        this.resources = [];
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
         this.maxRetries = this.config.asyncRetry.maxRetries;

@@ -9,10 +9,14 @@ const FingerprintPool_1 = require("../fingerprint/FingerprintPool");
 const appConfig_1 = require("../../data/config/appConfig");
 const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 class PlaywrightBrowser {
+    launchOptions;
+    browserContextOptions;
+    instance = null;
+    config;
+    limiter;
     constructor(launchOptions, browserContextOptions) {
         this.launchOptions = launchOptions;
         this.browserContextOptions = browserContextOptions;
-        this.instance = null;
         this.config = appConfig_1.AppConfig.getInstance();
         this.limiter = new RateLimiter_1.RateLimiter(5000);
     }

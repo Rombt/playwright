@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScopedLogger = void 0;
 class ScopedLogger {
+    root;
+    contextId;
     constructor(root, contextId) {
         this.root = root;
         this.contextId = contextId;

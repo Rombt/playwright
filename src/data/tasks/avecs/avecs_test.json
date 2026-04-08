@@ -1,0 +1,275 @@
+{
+  "generated_at": "2026-04-08_10-11",
+  "task": {
+    "194": {
+      "brand_id": "194",
+      "brand_name": "Avecs",
+      "metadata": {
+        "target_website": "https://avecs.com/en/search-ru?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "красный",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "чёрный",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "красный",
+            "size": "38 S"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "чёрный",
+            "size": "38 S"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "красный",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "чёрный",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "красный",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "чёрный",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "красный",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "52381",
+          "name_product": "Пуховик 3670 (ж) Avecs",
+          "sku": "3670",
+          "attributes": {
+            "color": "чёрный",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "54888",
+          "name_product": "Вітровка   AVECS чорна з матеріалу Softshel 50559B/1",
+          "sku": "50559B/1-SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "4XL"
+          }
+        },
+        {
+          "id_product": "54888",
+          "name_product": "Вітровка   AVECS чорна з матеріалу Softshel 50559B/1",
+          "sku": "50559B/1-SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "5XL"
+          }
+        },
+        {
+          "id_product": "54888",
+          "name_product": "Вітровка   AVECS чорна з матеріалу Softshel 50559B/1",
+          "sku": "50559B/1-SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "6XL"
+          }
+        },
+        {
+          "id_product": "55242",
+          "name_product": "Велотреки жіночі Avecs з технологією Hygroscopic  30637/1",
+          "sku": "30637/1-SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55242",
+          "name_product": "Велотреки жіночі Avecs з технологією Hygroscopic  30637/1",
+          "sku": "30637/1-SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55242",
+          "name_product": "Велотреки жіночі Avecs з технологією Hygroscopic  30637/1",
+          "sku": "30637/1-SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55242",
+          "name_product": "Велотреки жіночі Avecs з технологією Hygroscopic  30637/1",
+          "sku": "30637/1-SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55243",
+          "name_product": "Костюм чоловічий Спортивний AVECS 50598/1",
+          "sku": "50598/1",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55243",
+          "name_product": "Костюм чоловічий Спортивний AVECS 50598/1",
+          "sku": "50598/1",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55243",
+          "name_product": "Костюм чоловічий Спортивний AVECS 50598/1",
+          "sku": "50598/1",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55243",
+          "name_product": "Костюм чоловічий Спортивний AVECS 50598/1",
+          "sku": "50598/1",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55244",
+          "name_product": "Костюм чоловічий Спортивний  AVECS  50598/17",
+          "sku": "50598/17 -SS26 ",
+          "attributes": {
+            "color": "т.сірий",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55244",
+          "name_product": "Костюм чоловічий Спортивний  AVECS  50598/17",
+          "sku": "50598/17 -SS26 ",
+          "attributes": {
+            "color": "т.сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55244",
+          "name_product": "Костюм чоловічий Спортивний  AVECS  50598/17",
+          "sku": "50598/17 -SS26 ",
+          "attributes": {
+            "color": "т.сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55244",
+          "name_product": "Костюм чоловічий Спортивний  AVECS  50598/17",
+          "sku": "50598/17 -SS26 ",
+          "attributes": {
+            "color": "т.сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55245",
+          "name_product": "Костюм чоловічий спортивний AVECS   50599/1",
+          "sku": "50599/1-SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55245",
+          "name_product": "Костюм чоловічий спортивний AVECS   50599/1",
+          "sku": "50599/1-SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55245",
+          "name_product": "Костюм чоловічий спортивний AVECS   50599/1",
+          "sku": "50599/1-SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55245",
+          "name_product": "Костюм чоловічий спортивний AVECS   50599/1",
+          "sku": "50599/1-SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}

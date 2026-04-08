@@ -5,8 +5,10 @@ const fs = require("fs");
 const path = require("path");
 const appConfig_1 = require("../../data/config/appConfig");
 class FingerprintPool {
+    available;
+    active = new Set();
+    config;
     constructor() {
-        this.active = new Set();
         this.config = appConfig_1.AppConfig.getInstance();
         if (!this.config.fingerprintFile) {
             throw new Error('fingerprintFile is required');

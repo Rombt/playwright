@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RateLimiter = void 0;
 class RateLimiter {
+    intervalMs;
+    lastRun = 0;
     constructor(intervalMs) {
         this.intervalMs = intervalMs;
-        this.lastRun = 0;
     }
     async wait() {
         const now = Date.now();

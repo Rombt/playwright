@@ -3,13 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PagePool = void 0;
 const appConfig_1 = require("../../data/config/appConfig");
 class PagePool {
+    context;
+    quantityPage;
+    loggerScope;
+    config;
+    free = [];
+    created = 0;
+    waiters = [];
     constructor(context, quantityPage, loggerScope) {
         this.context = context;
         this.quantityPage = quantityPage;
         this.loggerScope = loggerScope;
-        this.free = [];
-        this.created = 0;
-        this.waiters = [];
         this.config = appConfig_1.AppConfig.getInstance();
     }
     async acquire() {
