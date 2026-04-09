@@ -97,15 +97,15 @@ class PageImageSourceAvecs {
             link.click();
             //!!
             // проверка соответствия страницы запрашиваемому sku
-            // const page_sku = page.locator('div.product-info_info-holder div.model-holder', {
-            //   hasText: `${sku}`,
-            // });
-            // await page_sku
-            //   .first()
-            //   .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            // if ((await page_sku.count()) === 0) {
-            //   throw new Error(`The product page is not match sku  ${sku}`);
-            // }
+            const page_sku = page.locator('div.product-info_info-holder div.model-holder', {
+                hasText: `${sku}`,
+            });
+            await page_sku
+                .first()
+                .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            if ((await page_sku.count()) === 0) {
+                throw new Error(`The product page is not match sku  ${sku}`);
+            }
             // переключить язык страницы на украинский
             const dropdown = page.locator('#form-language').first();
             await dropdown.click();

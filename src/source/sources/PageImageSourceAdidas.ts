@@ -83,11 +83,12 @@ export default class PageImageSourceAdidas implements ISource<ICollectProductPho
 
   async execute(targetUrl: string, page: Page, product: IProduct): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
-    const data: IDataImag = {};
+    const images: IDataImag = {};
+    let html = '';
 
     const rawSku = product.sku;
     const starIndex = rawSku.indexOf('*');
-    const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
+    const sku = (starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku).trim().toLowerCase();
     const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {
@@ -123,41 +124,78 @@ export default class PageImageSourceAdidas implements ISource<ICollectProductPho
       const relativeHref = await link.getAttribute('href');
       if (!relativeHref) throw new Error('Product link not found');
       const absoluteHref = new URL(relativeHref, page.url()).toString();
-
-      console.log('===>>  absoluteHref = ', absoluteHref);
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
+      // link.click(); // если page.goto(absoluteHref)  не сработал
 
-      const gallery = page.locator(
-        '#gallery > div > div.slider__carousel.slick-slider.slick-initialized > div > div',
-      );
-      try {
-        await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-      } catch (error) {
-        throw new Error('No gallery found on page');
-      }
+      //!!
+      const image = page.locator('#gallery div.slick-track img').first();
+
+      await image.waitFor({
+        state: 'attached',
+        timeout: this.config.asyncRetry.maxDelay,
+      });
+
+      //!!
+      const gallery = page.locator('#gallery div.slick-track');
+      await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
       const count = await gallery.count();
       if (count === 0) throw new Error('No images found on page');
 
-      const images = gallery.locator('img');
-      await images.first().waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      //!!
+      const firstImg = gallery.locator('img').first();
+      await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      const imageUrls = await images.evaluateAll((imgs) =>
-        imgs
-          .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
-          .map((img) => img.getAttribute('data-src') || img.getAttribute('data-srcset'))
-          .filter((src): src is string => Boolean(src)),
-      );
+      const imageUrls = await gallery
+        .locator('div.slick-slide div.product__image picture.image > img')
+        .evaluateAll((imgs) => {
+          const normalizeCloudinary = (url: string) => {
+            return url
+              .replace(/w_\d+/, 'w_1200') // ширина побольше
+              .replace(/q_\d+/, 'q_100'); // максимальное качество
+          };
+
+          const urls = imgs
+            .map((img) => {
+              let url = null;
+
+              const dataSrc = img.getAttribute('data-src');
+              if (dataSrc) {
+                url = dataSrc;
+              } else {
+                const dataSrcset = img.getAttribute('data-srcset');
+                if (dataSrcset) {
+                  url = dataSrcset.split(',')[0].trim().split(' ')[0];
+                } else {
+                  const src = img.getAttribute('src');
+                  if (src && !src.includes('.svg')) {
+                    url = src;
+                  }
+                }
+              }
+
+              return url ? normalizeCloudinary(url) : null;
+            })
+            .filter(Boolean);
+
+          return Array.from(new Set(urls));
+        });
 
       if (imageUrls.length === 0) throw new Error('No valid image URLs found');
 
-      data[sku] = imageUrls as IDataImagItem;
-      data[sku].idProduct = product.id_product;
+      images[sku] = imageUrls as IDataImagItem;
+      images[sku].idProduct = product.id_product;
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
 
-    return { data, errors };
+    return {
+      data: {
+        images,
+        html,
+      },
+      errors,
+    };
   }
 
   private buildWorkerError(

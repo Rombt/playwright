@@ -63,7 +63,8 @@ exports.config = {
         // taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_test_short.json',
         // taskPath: 'src/data/tasks/puma/puma_test.json',
         // taskPath: 'src/data/tasks/avecs/avecs_test_short.json',
-        taskPath: 'src/data/tasks/adidas/adidas_tests.json',
+        // taskPath: 'src/data/tasks/adidas/adidas_tests.json',
+        taskPath: 'src/data/tasks/adidas/adidas_tests_short.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',
