@@ -185,6 +185,35 @@ export default class PageImageSourceAdidas implements ISource<ICollectProductPho
 
       images[sku] = imageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;
+
+      // поиск описания
+      const htmlCont = page.locator('#description');
+      await htmlCont
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      const htmlContCount = await htmlCont.count();
+      if (htmlContCount === 0) {
+        this.logger?.debug(`Description is absent`, {
+          component: 'PageImageSource ...',
+          method: 'execute()',
+          action: 'const htmlCont = page.locator(...)',
+          data: {
+            sku: sku,
+            url: url,
+          },
+        });
+      }
+
+      // html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
+      // удаляю лишнее
+      html = await page.locator('#description').evaluate((el) => {
+        el.querySelectorAll('#widgets').forEach((e) => e.remove());
+        el.querySelectorAll('.description__image').forEach((e) => e.remove());
+        el.querySelectorAll('h2, h3').forEach((e) => e.remove());
+        el.querySelectorAll('.description__subtitle').forEach((e) => e.remove());
+        return el.innerHTML;
+      });
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
