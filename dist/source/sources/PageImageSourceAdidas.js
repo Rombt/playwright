@@ -152,15 +152,20 @@ class PageImageSourceAdidas {
                     },
                 });
             }
-            // html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
             // удаляю лишнее
-            html = await page.locator('#description').evaluate((el) => {
-                el.querySelectorAll('#widgets').forEach((e) => e.remove());
-                el.querySelectorAll('.description__image').forEach((e) => e.remove());
-                el.querySelectorAll('h2, h3').forEach((e) => e.remove());
-                el.querySelectorAll('.description__subtitle').forEach((e) => e.remove());
-                return el.innerHTML;
-            });
+            const selectors = ['#description', '#care', '#bullets'];
+            const htmlParts = [];
+            for (const selector of selectors) {
+                const loc = page.locator(selector);
+                if (await loc.count()) {
+                    const part = await loc.evaluate((el) => {
+                        el.querySelectorAll('.description__image, h2, h3, .description__subtitle, svg').forEach((e) => e.remove());
+                        return el.innerHTML;
+                    });
+                    htmlParts.push(part);
+                }
+            }
+            html = htmlParts.join('\n');
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);

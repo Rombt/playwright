@@ -7,7 +7,7 @@ exports.config = {
             baseDelay: 2000,
             maxDelay: 30000,
             maxWaitForFreePage: 240000, // т.к. страница из пула освободится через maxDelay
-            maxRetries: 10, // количество повторов в одной обработке
+            maxRetries: 3, // количество повторов в одной обработке
             maxAttempts: 5, // количество повторных обработок не обработанных продуктов
         },
         tasks: {
@@ -63,8 +63,8 @@ exports.config = {
         // taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_test_short.json',
         // taskPath: 'src/data/tasks/puma/puma_test.json',
         // taskPath: 'src/data/tasks/avecs/avecs_test_short.json',
-        // taskPath: 'src/data/tasks/adidas/adidas_tests.json',
-        taskPath: 'src/data/tasks/adidas/adidas_tests_short.json',
+        taskPath: 'src/data/tasks/adidas/adidas_tests.json',
+        // taskPath: 'src/data/tasks/adidas/adidas_tests_short.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',
