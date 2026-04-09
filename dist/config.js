@@ -34,7 +34,8 @@ exports.config = {
         // resultsFolder: 'results/all_brands',
         // resultsFolder: 'results/columbia/columbia_test',
         // resultsFolder: 'results/brs/brs_prod',
-        resultsFolder: 'results/avecs/avecs_test',
+        // resultsFolder: 'results/avecs/avecs_test',
+        resultsFolder: 'results/adidas/adidas_test',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -45,7 +46,6 @@ exports.config = {
         // taskPath: 'src/data/tasks/new_balance_tests.json',
         // taskPath: 'src/data/tasks/nike_tests.json',
         // taskPath: 'src/data/tasks/joma_tests.json',
-        // taskPath: 'src/data/tasks/adidas_tests.json',
         // taskPath: 'src/data/tasks/puma_dev_tests_1.json',
         // taskPath: 'src/data/tasks/m-tac/m-tac_for_tests.json',
         // taskPath: 'src/data/tasks/m-tac/m-tac_c_01.09.25_prod.json',
@@ -62,7 +62,8 @@ exports.config = {
         // taskPath: 'src/data/tasks/columbia/columbia_test.json',
         // taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_test_short.json',
         // taskPath: 'src/data/tasks/puma/puma_test.json',
-        taskPath: 'src/data/tasks/avecs/avecs_test_short.json',
+        // taskPath: 'src/data/tasks/avecs/avecs_test_short.json',
+        taskPath: 'src/data/tasks/adidas/adidas_tests.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

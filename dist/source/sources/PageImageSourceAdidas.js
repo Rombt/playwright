@@ -1,9 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceAdidas {
+    config;
+    logger;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
+        this.logger = Logger_1.Logger.getInstance();
     }
     workerHttpRequest(request, headers, targetUrl, limiter, sku) {
         throw new Error('Method not implemented.');
@@ -49,11 +53,30 @@ class PageImageSourceAdidas {
         const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
         const url = targetUrl.replace('{{sku_prod}}', sku);
         try {
-            await page.goto(url, { waitUntil: 'domcontentloaded' });
+            // await page.goto(url, { waitUntil: 'domcontentloaded' });
+            await page.goto(url, { waitUntil: 'networkidle' });
+            //!!
             const link = page
-                .locator('div.list.store__list > div > div > div.product__image > a')
+                .locator(`div.product__content > div.product__image > a[href*="${sku}"]`)
                 .first();
+            const countLink = await link.count();
+            this.logger?.debug(`The link is found on the page`, {
+                component: 'PageImageSourceAvecs',
+                method: 'execute()',
+                action: 'link = page.locator(...)',
+                data: {
+                    url: url,
+                    rawSku: rawSku,
+                    sku: sku,
+                    linkCount: countLink,
+                },
+            });
             await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            // страница поиска не содержит характерных надписей на случай если товар не найден
+            // по этому опираюсь только на наличие ссылки на страницу товара
+            if ((await link.count()) === 0) {
+                throw new Error('The page search does not match the product SKU. ' + sku);
+            }
             const relativeHref = await link.getAttribute('href');
             if (!relativeHref)
                 throw new Error('Product link not found');

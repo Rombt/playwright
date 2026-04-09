@@ -1,0 +1,239 @@
+{
+  "generated_at": "2026-04-09_12-25",
+  "task": {
+    "43": {
+      "brand_id": "43",
+      "brand_name": "Adidas",
+      "metadata": {
+        "target_website": "https://www.adidas.ua/search?s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XS"
+          }
+        }
+      ]
+    }
+  }
+}

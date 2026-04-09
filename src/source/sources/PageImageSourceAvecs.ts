@@ -118,6 +118,7 @@ export default class PageImageSourceAvecs implements ISource<ICollectProductPhot
         },
       });
 
+      //!!
       const empty = page.locator('div.products-search p', {
         hasText: 'There is no product that matches the search criteria',
       });

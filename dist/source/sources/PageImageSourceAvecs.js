@@ -75,6 +75,7 @@ class PageImageSourceAvecs {
                     linkCount: countLink,
                 },
             });
+            //!!
             const empty = page.locator('div.products-search p', {
                 hasText: 'There is no product that matches the search criteria',
             });
