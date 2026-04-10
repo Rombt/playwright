@@ -31,7 +31,8 @@
     columbia,
     jack wolfskin,
     puma,
-    adidas
+    adidas,
+    new balance,
 
 
 
