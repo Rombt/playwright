@@ -58,7 +58,7 @@ class PageImageSourceNewBalance {
             await page.goto(url, { waitUntil: 'networkidle' });
             //!!
             const link = page
-                .locator(`div.product__content > div.product__image > a[href*="${sku}"]`)
+                .locator(`ul.products > li.products__item div.product-item__image > a[href*="${sku}"]`)
                 .first();
             const countLink = await link.count();
             this.logger?.debug(`The link is found on the page`, {
@@ -72,11 +72,21 @@ class PageImageSourceNewBalance {
                     linkCount: countLink,
                 },
             });
-            await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            // страница поиска не содержит характерных надписей на случай если товар не найден
-            // по этому опираюсь только на наличие ссылки на страницу товара
-            if ((await link.count()) === 0) {
-                throw new Error('The page search does not match the product SKU. ' + sku);
+            //!!
+            const empty = page.locator('div.no-result > h2.no-result__title ', {
+                hasText: 'РЕЗУЛЬТАТІВ НЕ ЗНАЙДЕНО',
+            });
+            try {
+                await Promise.race([
+                    link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay }),
+                    empty.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay }),
+                ]);
+            }
+            catch {
+                throw new Error(`Search result not resolved. ${sku}`);
+            }
+            if ((await empty.count()) > 0) {
+                throw new Error(`Goods not found on the page. ${sku}`);
             }
             const relativeHref = await link.getAttribute('href');
             if (!relativeHref)
@@ -85,58 +95,13 @@ class PageImageSourceNewBalance {
             await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
             // link.click(); // если page.goto(absoluteHref)  не сработал
             //!!
-            const image = page.locator('#gallery div.slick-track img').first();
+            const image = page.locator('#jsProductZoom > div.detail_photos_list > img').first();
             await image.waitFor({
                 state: 'attached',
                 timeout: this.config.asyncRetry.maxDelay,
             });
-            //!!
-            const gallery = page.locator('#gallery div.slick-track');
-            await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            const count = await gallery.count();
-            if (count === 0)
-                throw new Error('No images found on page');
-            //!!
-            const firstImg = gallery.locator('img').first();
-            await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-            const imageUrls = await gallery
-                .locator('div.slick-slide div.product__image picture.image > img')
-                .evaluateAll((imgs) => {
-                const normalizeCloudinary = (url) => {
-                    return url
-                        .replace(/w_\d+/, 'w_1200') // ширина побольше
-                        .replace(/q_\d+/, 'q_100'); // максимальное качество
-                };
-                const urls = imgs
-                    .map((img) => {
-                    let url = null;
-                    const dataSrc = img.getAttribute('data-src');
-                    if (dataSrc) {
-                        url = dataSrc;
-                    }
-                    else {
-                        const dataSrcset = img.getAttribute('data-srcset');
-                        if (dataSrcset) {
-                            url = dataSrcset.split(',')[0].trim().split(' ')[0];
-                        }
-                        else {
-                            const src = img.getAttribute('src');
-                            if (src && !src.includes('.svg')) {
-                                url = src;
-                            }
-                        }
-                    }
-                    return url ? normalizeCloudinary(url) : null;
-                })
-                    .filter(Boolean);
-                return Array.from(new Set(urls));
-            });
-            if (imageUrls.length === 0)
-                throw new Error('No valid image URLs found');
-            images[sku] = imageUrls;
-            images[sku].idProduct = product.id_product;
-            // поиск описания
-            const htmlCont = page.locator('#description');
+            // ---------  поиск описания  -------------
+            const htmlCont = page.locator('section.descr-sec');
             await htmlCont
                 .first()
                 .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -152,20 +117,70 @@ class PageImageSourceNewBalance {
                     },
                 });
             }
-            // удаляю лишнее
-            const selectors = ['#description', '#care', '#bullets'];
+            // ---  предварительная обработка  ---
+            // блоки в которых буду искать
+            const selectors = ['div.descr-sec__tabs'];
             const htmlParts = [];
             for (const selector of selectors) {
                 const loc = page.locator(selector);
                 if (await loc.count()) {
                     const part = await loc.evaluate((el) => {
-                        el.querySelectorAll('.description__image, h2, h3, .description__subtitle, svg').forEach((e) => e.remove());
+                        // блоки которые будут удалены
+                        el.querySelectorAll('div.size-table , div.descr-sec__video, div.close, button').forEach((e) => e.remove());
                         return el.innerHTML;
                     });
                     htmlParts.push(part);
                 }
             }
             html = htmlParts.join('\n');
+            // ---------  сбор изображений  -------------
+            image.click(); // для активации галереи
+            // await page.waitForSelector('div.swiper-block div.swiper-wrapper > div.swiper-slide-active img', {
+            //   state: 'visible',
+            // });
+            //!!
+            const gallery = page.locator('div.swiper-block div.swiper-wrapper');
+            await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            const count = await gallery.count();
+            if (count === 0)
+                throw new Error('No images found on page');
+            //!!
+            const firstImg = gallery.locator('img').first();
+            await firstImg.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+            const imageUrls = await gallery.locator('div.swiper-slide').evaluateAll((slides) => {
+                const getBestFromSrcset = (srcset) => {
+                    return srcset
+                        .split(',')
+                        .map((s) => s.trim().split(' ')[0])
+                        .pop(); // берём самое большое изображение
+                };
+                const urls = slides
+                    .map((slide) => {
+                    let url = null;
+                    // 1. Пробую source
+                    const source = slide.querySelector('source');
+                    if (source) {
+                        const srcset = source.getAttribute('srcset');
+                        if (srcset) {
+                            url = getBestFromSrcset(srcset);
+                        }
+                    }
+                    // 2. fallback → img[data-src]
+                    if (!url) {
+                        const img = slide.querySelector('img');
+                        if (img) {
+                            url = img.getAttribute('data-src') || img.getAttribute('src');
+                        }
+                    }
+                    return url;
+                })
+                    .filter(Boolean);
+                return Array.from(new Set(urls));
+            });
+            if (imageUrls.length === 0)
+                throw new Error('No valid image URLs found');
+            images[sku] = imageUrls;
+            images[sku].idProduct = product.id_product;
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);

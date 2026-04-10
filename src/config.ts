@@ -33,7 +33,7 @@ export const config = {
     // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_prod',
     // resultsFolder: 'results/avecs/avecs_test',
-    resultsFolder: 'results/adidas/adidas_test',
+    resultsFolder: 'results/new_balance/new_balance_test',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -43,7 +43,6 @@ export const config = {
 
     // taskPath: 'src/data/tasks/all_brands_for_test.json',
     // taskPath: 'src/data/tasks/puma_for_tests.json',
-    // taskPath: 'src/data/tasks/new_balance_tests.json',
     // taskPath: 'src/data/tasks/nike_tests.json',
     // taskPath: 'src/data/tasks/joma_tests.json',
     // taskPath: 'src/data/tasks/puma_dev_tests_1.json',
@@ -63,8 +62,9 @@ export const config = {
     // taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_test_short.json',
     // taskPath: 'src/data/tasks/puma/puma_test.json',
     // taskPath: 'src/data/tasks/avecs/avecs_test_short.json',
-    taskPath: 'src/data/tasks/adidas/adidas_tests.json',
+    // taskPath: 'src/data/tasks/adidas/adidas_tests.json',
     // taskPath: 'src/data/tasks/adidas/adidas_tests_short.json',
+    taskPath: 'src/data/tasks/new_balance/new_balance_tests.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',
