@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-09_10-57",
+  "task": {
+    "16": {
+      "brand_id": "16",
+      "brand_name": "New Balance",
+      "metadata": {
+        "target_website": "https://newbalance.ua/store?page=1&s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54309",
+          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
+          "sku": "MS41520AG*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}

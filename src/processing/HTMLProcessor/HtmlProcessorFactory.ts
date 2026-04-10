@@ -28,7 +28,7 @@ export class HtmlProcessorFactory implements IHtmlProcessorFactory {
     puma: PumaProcessor,
     avecs: AvecsProcessor,
     adidas: AdidasProcessor,
-    new_balance: NewBalanceProcessor,
+    'new balance': NewBalanceProcessor,
   };
 
   public create(brand: string): IBaseHtmlProcessor {

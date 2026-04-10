@@ -25,7 +25,7 @@ class HtmlProcessorFactory {
         puma: PumaProcessor_1.PumaProcessor,
         avecs: AvecsProcessor_1.AvecsProcessor,
         adidas: AdidasProcessor_1.AdidasProcessor,
-        new_balance: NewBalanceProcessor_1.NewBalanceProcessor,
+        'new balance': NewBalanceProcessor_1.NewBalanceProcessor,
     };
     create(brand) {
         const ProcessorClass = this.processors[brand.toLowerCase()];
