@@ -488,9 +488,7 @@ class DefaultScenario {
                 },
             });
             //!!!!
-            // allErrors.push(
-            //   ...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)),
-            // );
+            allErrors.push(...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)));
         });
         await this.storage.appendJsonUnique(allProductRaw.map((item) => ({
             ...item,
