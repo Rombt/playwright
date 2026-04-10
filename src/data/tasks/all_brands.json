@@ -82,6 +82,249 @@
         }
       ]
     },
+    "13": {
+      "brand_id": "13",
+      "brand_name": "Jack Wolfskin",
+      "metadata": {
+        "target_website": "https://www.jack-wolfskin.com/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53840",
+          "name_product": "Пуховик A65097*AW26 JW (ж)",
+          "sku": "A65097*AW26",
+          "attributes": {
+            "color": "сір.",
+            "size": "XS"
+          }
+        }
+      ]
+    },
+    "16": {
+      "brand_id": "16",
+      "brand_name": "New Balance",
+      "metadata": {
+        "target_website": "https://newbalance.ua/store?page=1&s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53443",
+          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
+          "sku": "MJ53504GT*AW26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53443",
+          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
+          "sku": "MJ53504GT*AW26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53443",
+          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
+          "sku": "MJ53504GT*AW26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53443",
+          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
+          "sku": "MJ53504GT*AW26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53443",
+          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
+          "sku": "MJ53504GT*AW26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "XXL"
+          }
+        }
+      ]
+    },
+    "43": {
+      "brand_id": "43",
+      "brand_name": "Adidas",
+      "metadata": {
+        "target_website": "https://www.adidas.ua/search?s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55141",
+          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
+          "sku": "KB9419*SS26 ",
+          "attributes": {
+            "color": "рож.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55141",
+          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
+          "sku": "KB9419*SS26 ",
+          "attributes": {
+            "color": "рож.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55141",
+          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
+          "sku": "KB9419*SS26 ",
+          "attributes": {
+            "color": "рож.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55141",
+          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
+          "sku": "KB9419*SS26 ",
+          "attributes": {
+            "color": "рож.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55141",
+          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
+          "sku": "KB9419*SS26 ",
+          "attributes": {
+            "color": "рож.",
+            "size": "XS"
+          }
+        }
+      ]
+    },
+    "45": {
+      "brand_id": "45",
+      "brand_name": "Puma",
+      "metadata": {
+        "target_website": "https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53062",
+          "name_product": "Труси 93832005*AW26 PUMA (ч)",
+          "sku": "93832005*AW26",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53411",
+          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
+          "sku": "70575003*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        }
+      ]
+    },
     "214": {
       "brand_id": "214",
       "brand_name": "M-TAC",
@@ -89,114 +332,6 @@
         "target_website": "https://militarist.ua/ua/search/?q={{sku_prod}}"
       },
       "products": [
-        {
-          "id_product": "49975",
-          "name_product": "*",
-          "sku": "*++",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "50622",
-          "name_product": "*",
-          "sku": "",
-          "attributes": {
-            "color": "олив",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "50622",
-          "name_product": "*",
-          "sku": "",
-          "attributes": {
-            "color": "олив",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "50622",
-          "name_product": "*",
-          "sku": "",
-          "attributes": {
-            "color": "олив",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "50994",
-          "name_product": "*",
-          "sku": "",
-          "attributes": {
-            "color": "син/жовт",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51049",
-          "name_product": "Паракорд SC-3DS15-C Shock-Cord 3mm M-TAC",
-          "sku": "MTC-SC-3DS15-C",
-          "attributes": {
-            "color": "кой",
-            "size": "15м"
-          }
-        },
-        {
-          "id_product": "51356",
-          "name_product": "Погон НГУ Ст Лейтенант AKW-NGUHSTLTN UA",
-          "sku": "AKW-NGUHSTLTN",
-          "attributes": {
-            "color": "хижак",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51357",
-          "name_product": "Погон НГУ Ст Сержант AKW-NGUHSTLTN UA",
-          "sku": "AKW-NGUHSTSGT",
-          "attributes": {
-            "color": "хижак",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51358",
-          "name_product": "Погон НГУ Ст Солдат AKW-NGUHSTSLD UA",
-          "sku": "AKW-NGUHSTSLD",
-          "attributes": {
-            "color": "хижак",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51378",
-          "name_product": "Чугайстер пінний душ сухий одноразовий 2081DSO",
-          "sku": "2081DSO",
-          "attributes": {
-            "color": "біл",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51379",
-          "name_product": "Шеврон 17-та танк бригAKW-17OTBROD UA",
-          "sku": "AKW-17OTBROD",
-          "attributes": {
-            "color": "олив",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51380",
-          "name_product": "Шеврон ВСП ЗСУ тризуб AKW-VSPTRC UA",
-          "sku": "AKW-VSPTRC",
-          "attributes": {
-            "color": "кольор.",
-            "size": "O/S"
-          }
-        },
         {
           "id_product": "53293",
           "name_product": "Кружка зі складн. ручкою CL1C-M83 M-TAC",
@@ -241,15 +376,6 @@
             "color": "",
             "size": ""
           }
-        },
-        {
-          "id_product": "55164",
-          "name_product": "Обкл ДСНС (ID+жетон) COV-DSNS-IDZH  M-TAC",
-          "sku": "COV-DSNS-IDZH",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
         }
       ]
     },
@@ -260,96 +386,6 @@
         "target_website": "https://camotec.ua/search/?searchString={{sku_prod}}"
       },
       "products": [
-        {
-          "id_product": "51008",
-          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
-          "sku": "9247",
-          "attributes": {
-            "color": "пікс",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "51008",
-          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
-          "sku": "9247",
-          "attributes": {
-            "color": "пікс",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "51008",
-          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
-          "sku": "9247",
-          "attributes": {
-            "color": "пікс",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "51008",
-          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
-          "sku": "9247",
-          "attributes": {
-            "color": "пікс",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "51008",
-          "name_product": "Брюки Герць 2.0 TW 9247 Camotec",
-          "sku": "9247",
-          "attributes": {
-            "color": "пікс",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "51360",
-          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
-          "sku": "1802",
-          "attributes": {
-            "color": "синій",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "51360",
-          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
-          "sku": "1802",
-          "attributes": {
-            "color": "синій",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "51360",
-          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
-          "sku": "1802",
-          "attributes": {
-            "color": "синій",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "51360",
-          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
-          "sku": "1802",
-          "attributes": {
-            "color": "синій",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "51360",
-          "name_product": "Поло Tactical ID Antistatic 1802 Camotec",
-          "sku": "1802",
-          "attributes": {
-            "color": "синій",
-            "size": "XXL"
-          }
-        },
         {
           "id_product": "53972",
           "name_product": "Погон НПУ Капітан 9242 Camotec",
@@ -439,6 +475,168 @@
             "color": "мульт",
             "size": "XL"
           }
+        },
+        {
+          "id_product": "55275",
+          "name_product": "TG/CTC Кріпл Molle з кар-м 8744 Camotec",
+          "sku": "8744",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55276",
+          "name_product": "Брюки Guard DW LT 9653 Camotec",
+          "sku": "9653",
+          "attributes": {
+            "color": "олива",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55276",
+          "name_product": "Брюки Guard DW LT 9653 Camotec",
+          "sku": "9653",
+          "attributes": {
+            "color": "олива",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55276",
+          "name_product": "Брюки Guard DW LT 9653 Camotec",
+          "sku": "9653",
+          "attributes": {
+            "color": "олива",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55276",
+          "name_product": "Брюки Guard DW LT 9653 Camotec",
+          "sku": "9653",
+          "attributes": {
+            "color": "олива",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55276",
+          "name_product": "Брюки Guard DW LT 9653 Camotec",
+          "sku": "9653",
+          "attributes": {
+            "color": "олива",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55277",
+          "name_product": "Патч Герб України (4.5*8) 9098 Camotec",
+          "sku": "9098",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55278",
+          "name_product": "Патч Конюшина 9121 Camotec",
+          "sku": "9121",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55279",
+          "name_product": "Патч/Лип UKRAINE (2.5*9) 8643 Camotec",
+          "sku": "8643",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55280",
+          "name_product": "Патч/Липучка охорона 0753 Camotec",
+          "sku": "0753",
+          "attributes": {
+            "color": "чорн.",
+            "size": "31*10"
+          }
+        },
+        {
+          "id_product": "55281",
+          "name_product": "Прапор/Лип Укр з Тр-м 9280 Camotec",
+          "sku": "9280",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55281",
+          "name_product": "Прапор/Лип Укр з Тр-м 9280 Camotec",
+          "sku": "9280",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "55282",
+          "name_product": "Футболка Chiton Patrol 7175 Camotec",
+          "sku": "7175",
+          "attributes": {
+            "color": "олива",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55282",
+          "name_product": "Футболка Chiton Patrol 7175 Camotec",
+          "sku": "7175",
+          "attributes": {
+            "color": "олива",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55282",
+          "name_product": "Футболка Chiton Patrol 7175 Camotec",
+          "sku": "7175",
+          "attributes": {
+            "color": "олива",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55282",
+          "name_product": "Футболка Chiton Patrol 7175 Camotec",
+          "sku": "7175",
+          "attributes": {
+            "color": "олива",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55283",
+          "name_product": "Шарф-труба Basic CP Grid 2.0 8982 Camotec",
+          "sku": "8982",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55284",
+          "name_product": "Шарф-труба Eco Cotton 0812 Camotec",
+          "sku": "0812",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
         }
       ]
     },
@@ -460,148 +658,13 @@
         }
       ]
     },
-    "306": {
-      "brand_id": "306",
-      "brand_name": "BRS",
+    "283": {
+      "brand_id": "283",
+      "brand_name": "Злий Борсук",
       "metadata": {
-        "target_website": "https://borsuk.com.ua/katalog/search/?q={{sku_prod}}"
+        "target_website": null
       },
       "products": [
-        {
-          "id_product": "51017",
-          "name_product": "Каремат 160х60 х1.5 см. (Oxford) КР3.2 BRS",
-          "sku": "КР3.2",
-          "attributes": {
-            "color": "пікс",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51053",
-          "name_product": "Підсумок Cord Pl на 1 ріжок АК 1МВП1.1 BRS",
-          "sku": "1МВП1.1 ",
-          "attributes": {
-            "color": "мульт",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "51077",
-          "name_product": "Рюкзак штурмовий (з кріп. шолома) ТРШ2.1 BRS",
-          "sku": "ТРШ2.1",
-          "attributes": {
-            "color": "мульт",
-            "size": "10л."
-          }
-        },
-        {
-          "id_product": "51078",
-          "name_product": "Рюкзак штурмовий (з кріп. шолома) ТРШ2.2 BRS",
-          "sku": "ТРШ2.2",
-          "attributes": {
-            "color": "пікс",
-            "size": "10л."
-          }
-        },
-        {
-          "id_product": "51084",
-          "name_product": "Сумка поясна XL (Cordura) СПХ1.1 BRS",
-          "sku": "СПХ1.1-0404",
-          "attributes": {
-            "color": "мульт",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "51088",
-          "name_product": "Сумка слінг Nomad (Cordura) ID_1746 BRS",
-          "sku": "ID_1746",
-          "attributes": {
-            "color": "койот",
-            "size": "4л."
-          }
-        },
-        {
-          "id_product": "51089",
-          "name_product": "Сумка слінг Nomad (Cordura) ID_1747 BRS",
-          "sku": "ID_1747",
-          "attributes": {
-            "color": "мульт",
-            "size": "4л."
-          }
-        },
-        {
-          "id_product": "51090",
-          "name_product": "Сумка слінг Nomad (Cordura) ID_1753 BRS",
-          "sku": "ID_1753",
-          "attributes": {
-            "color": "пікс",
-            "size": "4л."
-          }
-        },
-        {
-          "id_product": "51093",
-          "name_product": "Сумка-планш. Crossbody VPak (Cordura) ID_1703 BRS",
-          "sku": "ID_1703",
-          "attributes": {
-            "color": "мульт",
-            "size": "4л."
-          }
-        },
-        {
-          "id_product": "51100",
-          "name_product": "Устілки антипрокольні ID_1781 BRS",
-          "sku": "ID_1781",
-          "attributes": {
-            "color": "біл",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "51100",
-          "name_product": "Устілки антипрокольні ID_1781 BRS",
-          "sku": "ID_1781",
-          "attributes": {
-            "color": "біл",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "51100",
-          "name_product": "Устілки антипрокольні ID_1781 BRS",
-          "sku": "ID_1781",
-          "attributes": {
-            "color": "біл",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "51100",
-          "name_product": "Устілки антипрокольні ID_1781 BRS",
-          "sku": "ID_1781",
-          "attributes": {
-            "color": "біл",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "51100",
-          "name_product": "Устілки антипрокольні ID_1781 BRS",
-          "sku": "ID_1781",
-          "attributes": {
-            "color": "біл",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "51100",
-          "name_product": "Устілки антипрокольні ID_1781 BRS",
-          "sku": "ID_1781",
-          "attributes": {
-            "color": "біл",
-            "size": "46"
-          }
-        },
         {
           "id_product": "54776",
           "name_product": "Бал. пакет МБП-200х135х165-2 клас BRS",
@@ -630,111 +693,12 @@
           }
         },
         {
-          "id_product": "54784",
-          "name_product": "Ніж Ratio Division ID_1853 BRS",
-          "sku": "ID_1853",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "54785",
-          "name_product": "Ніж Spartan blade ID_1932 BRS",
-          "sku": "ID_1932",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "54786",
-          "name_product": "Ніж розк-й KNIVES НРК-014 BRS",
-          "sku": "НРК-014",
-          "attributes": {
-            "color": "пікс",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "54787",
-          "name_product": "Під-к під 2 маг закр ID_1913 BRS",
-          "sku": "ID_1913",
-          "attributes": {
-            "color": "мульт",
-            "size": "O/S"
-          }
-        },
-        {
           "id_product": "54793",
           "name_product": "Підс-к під гр-ту NATO ПГН1.1-0068 BRS",
           "sku": "ПГН1.1-0068",
           "attributes": {
             "color": "мульт",
             "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55174",
-          "name_product": "Сумка HEX Pac ID_1957 BRS",
-          "sku": "ID_1957",
-          "attributes": {
-            "color": "кой",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55175",
-          "name_product": "Сумка HEX Pac ID_1958 BRS",
-          "sku": "ID_1958",
-          "attributes": {
-            "color": "хакі",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55176",
-          "name_product": "Сумка HEX Pac ID_1959 BRS",
-          "sku": "ID_1959",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55177",
-          "name_product": "Сумка Symmetry ID_1920 BRS",
-          "sku": "ID_1920",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55178",
-          "name_product": "Сумка скид. магаз.СС1.1-0039 BRS",
-          "sku": "СС1.1-0039",
-          "attributes": {
-            "color": "мульт",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55179",
-          "name_product": "Устілки антипрокольні ID_1783 BRS",
-          "sku": "ID_1783",
-          "attributes": {
-            "color": "біл",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "55179",
-          "name_product": "Устілки антипрокольні ID_1783 BRS",
-          "sku": "ID_1783",
-          "attributes": {
-            "color": "біл",
-            "size": "44"
           }
         }
       ]

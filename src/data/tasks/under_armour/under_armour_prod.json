@@ -1,0 +1,869 @@
+{
+  "generated_at": "2026-04-06_14-03",
+  "task": {
+    "21": {
+      "brand_id": "21",
+      "brand_name": "Under Armour",
+      "metadata": {
+        "target_website": "https://www.underarmour.com/en-us/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55285",
+          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
+          "sku": "1382727-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55285",
+          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
+          "sku": "1382727-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55285",
+          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
+          "sku": "1382727-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55285",
+          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
+          "sku": "1382727-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55285",
+          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
+          "sku": "1382727-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55286",
+          "name_product": "Кепка 1376700-100*SS26 UA",
+          "sku": "1376700-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "55286",
+          "name_product": "Кепка 1376700-100*SS26 UA",
+          "sku": "1376700-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "M/L"
+          }
+        },
+        {
+          "id_product": "55286",
+          "name_product": "Кепка 1376700-100*SS26 UA",
+          "sku": "1376700-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "55286",
+          "name_product": "Кепка 1376700-100*SS26 UA",
+          "sku": "1376700-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XL/2XL"
+          }
+        },
+        {
+          "id_product": "55287",
+          "name_product": "Костюм 1357139-001*SS26 UA (ч)",
+          "sku": "1357139-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55287",
+          "name_product": "Костюм 1357139-001*SS26 UA (ч)",
+          "sku": "1357139-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55287",
+          "name_product": "Костюм 1357139-001*SS26 UA (ч)",
+          "sku": "1357139-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55287",
+          "name_product": "Костюм 1357139-001*SS26 UA (ч)",
+          "sku": "1357139-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55288",
+          "name_product": "Костюм 1365147-001*SS26 UA (ж)",
+          "sku": "1365147-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55288",
+          "name_product": "Костюм 1365147-001*SS26 UA (ж)",
+          "sku": "1365147-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55288",
+          "name_product": "Костюм 1365147-001*SS26 UA (ж)",
+          "sku": "1365147-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55288",
+          "name_product": "Костюм 1365147-001*SS26 UA (ж)",
+          "sku": "1365147-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55288",
+          "name_product": "Костюм 1365147-001*SS26 UA (ж)",
+          "sku": "1365147-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "36.5"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "55290",
+          "name_product": "Кросівки 3028252-002*SS26 UA (ч)",
+          "sku": "3028252-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "55292",
+          "name_product": "Кросівки 6011293-001*SS26 UA (ч)",
+          "sku": "6011293-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "55293",
+          "name_product": "Куртка 1389631-520*SS26 UA (ж)",
+          "sku": "1389631-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55293",
+          "name_product": "Куртка 1389631-520*SS26 UA (ж)",
+          "sku": "1389631-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55293",
+          "name_product": "Куртка 1389631-520*SS26 UA (ж)",
+          "sku": "1389631-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55293",
+          "name_product": "Куртка 1389631-520*SS26 UA (ж)",
+          "sku": "1389631-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55293",
+          "name_product": "Куртка 1389631-520*SS26 UA (ж)",
+          "sku": "1389631-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55294",
+          "name_product": "Куртка 6003001-289*SS26 UA (ч)",
+          "sku": "6003001-289*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55294",
+          "name_product": "Куртка 6003001-289*SS26 UA (ч)",
+          "sku": "6003001-289*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55294",
+          "name_product": "Куртка 6003001-289*SS26 UA (ч)",
+          "sku": "6003001-289*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55294",
+          "name_product": "Куртка 6003001-289*SS26 UA (ч)",
+          "sku": "6003001-289*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55295",
+          "name_product": "Легінси 6010002-008*SS26 UA (ж)",
+          "sku": "6010002-008*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55295",
+          "name_product": "Легінси 6010002-008*SS26 UA (ж)",
+          "sku": "6010002-008*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55295",
+          "name_product": "Легінси 6010002-008*SS26 UA (ж)",
+          "sku": "6010002-008*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55295",
+          "name_product": "Легінси 6010002-008*SS26 UA (ж)",
+          "sku": "6010002-008*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55295",
+          "name_product": "Легінси 6010002-008*SS26 UA (ж)",
+          "sku": "6010002-008*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55296",
+          "name_product": "Майка 6007656-520*SS26 UA (ж)",
+          "sku": "6007656-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55296",
+          "name_product": "Майка 6007656-520*SS26 UA (ж)",
+          "sku": "6007656-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55296",
+          "name_product": "Майка 6007656-520*SS26 UA (ж)",
+          "sku": "6007656-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55296",
+          "name_product": "Майка 6007656-520*SS26 UA (ж)",
+          "sku": "6007656-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55296",
+          "name_product": "Майка 6007656-520*SS26 UA (ж)",
+          "sku": "6007656-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55297",
+          "name_product": "Рюкзак 1384672-007*SS26 UA",
+          "sku": "1384672-007*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55298",
+          "name_product": "Рюкзак 1384672-289*SS26 UA",
+          "sku": "1384672-289*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55299",
+          "name_product": "Футболка 1329582-100*SS26 UA (ч)",
+          "sku": "1329582-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55299",
+          "name_product": "Футболка 1329582-100*SS26 UA (ч)",
+          "sku": "1329582-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55299",
+          "name_product": "Футболка 1329582-100*SS26 UA (ч)",
+          "sku": "1329582-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55299",
+          "name_product": "Футболка 1329582-100*SS26 UA (ч)",
+          "sku": "1329582-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55299",
+          "name_product": "Футболка 1329582-100*SS26 UA (ч)",
+          "sku": "1329582-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55300",
+          "name_product": "Футболка 1376830-002*SS26 UA (ч)",
+          "sku": "1376830-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55300",
+          "name_product": "Футболка 1376830-002*SS26 UA (ч)",
+          "sku": "1376830-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55300",
+          "name_product": "Футболка 1376830-002*SS26 UA (ч)",
+          "sku": "1376830-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55300",
+          "name_product": "Футболка 1376830-002*SS26 UA (ч)",
+          "sku": "1376830-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55300",
+          "name_product": "Футболка 1376830-002*SS26 UA (ч)",
+          "sku": "1376830-002*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55301",
+          "name_product": "Футболка 1383648-100*SS26 UA (ж)",
+          "sku": "1383648-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55301",
+          "name_product": "Футболка 1383648-100*SS26 UA (ж)",
+          "sku": "1383648-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55301",
+          "name_product": "Футболка 1383648-100*SS26 UA (ж)",
+          "sku": "1383648-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55301",
+          "name_product": "Футболка 1383648-100*SS26 UA (ж)",
+          "sku": "1383648-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55301",
+          "name_product": "Футболка 1383648-100*SS26 UA (ж)",
+          "sku": "1383648-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55302",
+          "name_product": "Футболка 6009833-001*SS26 UA (ч)",
+          "sku": "6009833-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55302",
+          "name_product": "Футболка 6009833-001*SS26 UA (ч)",
+          "sku": "6009833-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55302",
+          "name_product": "Футболка 6009833-001*SS26 UA (ч)",
+          "sku": "6009833-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55302",
+          "name_product": "Футболка 6009833-001*SS26 UA (ч)",
+          "sku": "6009833-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55302",
+          "name_product": "Футболка 6009833-001*SS26 UA (ч)",
+          "sku": "6009833-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        }
+      ]
+    }
+  }
+}

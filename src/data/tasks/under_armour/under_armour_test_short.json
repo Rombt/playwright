@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-06_14-03",
+  "task": {
+    "21": {
+      "brand_id": "21",
+      "brand_name": "Under Armour",
+      "metadata": {
+        "target_website": "https://www.underarmour.com/en-us/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55285",
+          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
+          "sku": "1382727-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}
