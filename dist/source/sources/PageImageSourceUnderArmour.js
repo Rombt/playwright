@@ -132,7 +132,7 @@ class PageImageSourceUnderArmour {
             for (const slide of slides) {
                 await slide.scrollIntoViewIfNeeded();
             }
-            // локатор картинок (НЕ называем images!)
+            // локатор картинок
             const imageElements = gallery.locator('img');
             await imageElements.first().waitFor({
                 state: 'attached',
@@ -143,11 +143,8 @@ class PageImageSourceUnderArmour {
                 const normalizeScene7 = (url) => {
                     try {
                         const u = new URL(url);
-                        // максимум качества
-                        u.searchParams.set('wid', '2000');
-                        u.searchParams.set('hei', '2000');
-                        u.searchParams.set('qlt', '100');
-                        u.searchParams.set('scl', '1');
+                        // только качество, без апскейла
+                        u.searchParams.set('qlt', '90');
                         u.searchParams.set('fmt', 'jpg');
                         return u.toString();
                     }
@@ -155,23 +152,40 @@ class PageImageSourceUnderArmour {
                         return url;
                     }
                 };
+                const extractFromSrcset = (srcset) => {
+                    const candidates = srcset
+                        .split(',')
+                        .map((item) => {
+                        const [url, size] = item.trim().split(' ');
+                        const width = size ? parseInt(size.replace('w', ''), 10) : 0;
+                        return { url, width };
+                    })
+                        .filter((c) => c.url);
+                    if (!candidates.length)
+                        return null;
+                    // берём максимально возможный реальный размер
+                    candidates.sort((a, b) => b.width - a.width);
+                    return candidates[0].url;
+                };
                 const extractBestUrl = (img) => {
-                    // 1. data-src
+                    // 1. data-srcset (часто у lazy)
+                    const dataSrcset = img.getAttribute('data-srcset');
+                    if (dataSrcset) {
+                        const url = extractFromSrcset(dataSrcset);
+                        if (url)
+                            return url;
+                    }
+                    // 2. srcset (основной источник)
+                    const srcset = img.getAttribute('srcset');
+                    if (srcset) {
+                        const url = extractFromSrcset(srcset);
+                        if (url)
+                            return url;
+                    }
+                    // 3. data-src
                     const dataSrc = img.getAttribute('data-src');
                     if (dataSrc)
                         return dataSrc;
-                    // 2. data-srcset (берём самый большой)
-                    const dataSrcset = img.getAttribute('data-srcset');
-                    if (dataSrcset) {
-                        const parts = dataSrcset.split(',');
-                        return parts[parts.length - 1].trim().split(' ')[0];
-                    }
-                    // 3. srcset
-                    const srcset = img.getAttribute('srcset');
-                    if (srcset) {
-                        const parts = srcset.split(',');
-                        return parts[parts.length - 1].trim().split(' ')[0];
-                    }
                     // 4. fallback src
                     const src = img.getAttribute('src');
                     if (src && !src.includes('.svg'))
@@ -184,15 +198,13 @@ class PageImageSourceUnderArmour {
                     return rawUrl ? normalizeScene7(rawUrl) : null;
                 })
                     .filter((url) => Boolean(url));
-                // убираем дубликаты
+                // удаляем дубликаты
                 return Array.from(new Set(urls));
             });
             // проверка
             if (imageUrls.length === 0) {
                 throw new Error('No valid image URLs found');
             }
-            if (imageUrls.length === 0)
-                throw new Error('No valid image URLs found');
             images[sku] = imageUrls;
             images[sku].idProduct = product.id_product;
         }

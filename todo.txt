@@ -33,6 +33,7 @@
     puma,
     adidas,
     new balance,
+    under armour,
 
 
 
