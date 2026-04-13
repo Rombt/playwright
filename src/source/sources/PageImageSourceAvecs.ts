@@ -140,7 +140,7 @@ export default class PageImageSourceAvecs implements ISource<ICollectProductPhot
         throw new Error('The page search does not match the product SKU. ' + sku);
       }
 
-      link.click();
+      await link.click();
 
       //!!
       // проверка соответствия страницы запрашиваемому sku

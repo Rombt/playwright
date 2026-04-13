@@ -94,7 +94,7 @@ class PageImageSourceAvecs {
             if ((await link.count()) === 0) {
                 throw new Error('The page search does not match the product SKU. ' + sku);
             }
-            link.click();
+            await link.click();
             //!!
             // проверка соответствия страницы запрашиваемому sku
             const page_sku = page.locator('div.product-info_info-holder div.model-holder', {

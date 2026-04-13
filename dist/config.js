@@ -35,7 +35,7 @@ exports.config = {
         // resultsFolder: 'results/columbia/columbia_test',
         // resultsFolder: 'results/brs/brs_prod',
         // resultsFolder: 'results/avecs/avecs_test',
-        resultsFolder: 'results/new_balance/new_balance_test',
+        resultsFolder: 'results/under_armour/under_armour_test',
         sourcesFolder: './dist/source/sources',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
@@ -64,8 +64,9 @@ exports.config = {
         // taskPath: 'src/data/tasks/avecs/avecs_test_short.json',
         // taskPath: 'src/data/tasks/adidas/adidas_tests.json',
         // taskPath: 'src/data/tasks/adidas/adidas_tests_short.json',
-        taskPath: 'src/data/tasks/new_balance/new_balance_tests.json',
+        // taskPath: 'src/data/tasks/new_balance/new_balance_tests.json',
         // taskPath: 'src/data/tasks/new_balance/new_balance_tests_short.json',
+        taskPath: 'src/data/tasks/under_armour/under_armour_test.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

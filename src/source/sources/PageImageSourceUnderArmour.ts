@@ -93,26 +93,37 @@ export default class PageImageSourceUnderArmour implements ISource<ICollectProdu
     // нормализация SKU
     const rawSku = product.sku;
     const sku = rawSku.includes('*') ? rawSku.split('*')[0] : rawSku;
+    const [id, variant] = sku.split('-');
 
-    const url = targetUrl.replace('{{sku_prod}}', sku);
+    const url = targetUrl.replace('{{sku_prod}}', id);
 
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      try {
-        const acceptBtn = page.locator('button[aria-label="Accept All"]');
-        await acceptBtn.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-        await acceptBtn.click();
-        await acceptBtn.waitFor({ state: 'detached' });
-      } catch (e) {
-        // кнопки нет — игнорируем
-      }
-      await page.mouse.click(100, 100);
+      //!!
+      const link = page
+        .locator(
+          `div[data-testid="product-tile-container"] a.ProductTile-module-scss-module__YG6sUW__product-image-link[href*="${id}"]`,
+        )
+        .first();
 
-      const link = page.locator('div.jwsdw-pop-image-wrapper > a.jwsdw-pop-image-link').first();
+      const countLink = await link.count();
+      this.logger?.debug(`The link is found on the page`, {
+        component: 'PageImageSourceUnderArmour',
+        method: 'execute()',
+        action: 'link = page.locator(...)',
+        data: {
+          url: url,
+          rawSku: rawSku,
+          sku: sku,
+          id: id,
+          variant: variant,
+          linkCount: countLink,
+        },
+      });
 
-      const empty = page.locator('div.jwsdw-pageWrapper h1', {
-        hasText: 'We’ve got sidetracked somehow',
+      const empty = page.locator('div[data-testid="empty-search-result"] > span', {
+        hasText: 'Sorry, no results for',
       });
 
       try {
@@ -144,114 +155,117 @@ export default class PageImageSourceUnderArmour implements ISource<ICollectProdu
       const absoluteHref = new URL(relativeHref, page.url()).toString();
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
 
-      const page_sku = page.locator(
-        'ul.jws-accordionWrapper > li.jwsdw-productDetail-description span[data-product-id]',
-        {
-          hasText: `${sku}`,
-        },
-      );
+      //!!
+      // проверка соответствия страницы запрашиваемому sku
+      const input_page_sku = page.locator(`input[name="colors"][value="${variant}"]`);
+      await input_page_sku.waitFor();
 
-      await page_sku
-        .first()
-        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      const id_input_page_sku = await input_page_sku.getAttribute('id');
+      const label_page_sku = page.locator(`label[for="${id_input_page_sku}"]`);
 
-      if ((await page_sku.count()) === 0) {
-        throw new Error(`The page is not match sku  ${sku}`);
-      }
+      await label_page_sku.click();
 
+      //!!
       const image = page
-        .locator('div[aria-label="Product image gallery"] img.jwsdw-pdp-mediaItem-image')
+        .locator(
+          `div.ProductImages-module-scss-module__NG3QBq__pdpImages div.swiper-wrapper div.swiper-slide img[src*="${id}-${variant}"]`,
+        )
         .first();
 
       await image.waitFor({
         state: 'visible',
         timeout: this.config.asyncRetry.maxDelay,
       });
-
-      const imageUrlsSet = new Set<string>();
-
-      // --- первая галерея ---
-      const initialImages = await this.processingGallery(page);
-      for (const img of initialImages) {
-        imageUrlsSet.add(img);
-      }
-
-      const swatchColors = page.locator(
-        '[aria-label="Color selection"] > button.jwsdw-product-color-btn',
+      //!!
+      // галерея
+      const gallery = page.locator(
+        'div.ProductImages-module-scss-module__NG3QBq__pdpImages div.swiper-wrapper',
       );
-      await swatchColors.first().waitFor();
 
-      const swatchCount = await swatchColors.count();
+      await gallery.waitFor({
+        state: 'attached',
+        timeout: this.config.asyncRetry.maxDelay,
+      });
 
-      // --- если нет цветов ---
-      if (swatchCount === 0) {
-        this.logger?.debug(`swatchColors not found`, {
-          component: 'PageImageSourceColumbia',
-          method: 'execute()',
-          action:
-            'const swatchColors = page.locator(\'[aria-label="Color selection"] > button.jwsdw-product-color-btn\')',
-          data: {
-            url: url,
-            originalSKU: product.sku,
-            sku: sku,
-          },
-        });
-
-        const imageUrls = Array.from(imageUrlsSet) as IDataImagItem;
-        imageUrls.idProduct = product.id_product;
-
-        images[sku] = imageUrls;
-      } else {
-        await swatchColors.first().waitFor({
-          state: 'visible',
-          timeout: this.config.asyncRetry.maxDelay,
-        });
-
-        for (let i = 0; i < swatchCount; i++) {
-          const swatch = swatchColors.nth(i);
-
-          // пропускаем уже активный цвет
-          const isActive = await swatch.getAttribute('aria-checked'); //!!
-          if (isActive === 'true') continue;
-
-          const prevSrc = await image.getAttribute('src');
-
-          await swatch.click();
-
-          // ждём либо смену картинки, либо таймаут fallback
-          try {
-            await page.waitForFunction(
-              (prev) => {
-                const img = document.querySelector(
-                  'div[aria-label="Product image gallery"] img.jwsdw-pdp-mediaItem-image',
-                ); //!!
-                return img && img.getAttribute('src') !== prev;
-              },
-              prevSrc,
-              { timeout: 5000 },
-            );
-          } catch {
-            // fallback если сайт не меняет src (часто бывает)
-            await page.waitForTimeout(500);
-          }
-
-          const newImages = await this.processingGallery(page);
-
-          for (const img of newImages) {
-            imageUrlsSet.add(img);
-          }
-
-          await limiter.sleepNormal(
-            this.config.asyncRetry.baseDelay,
-            this.config.asyncRetry.maxDelay,
-          );
-        }
-
-        const imageUrls = Array.from(imageUrlsSet) as IDataImagItem;
-        imageUrls.idProduct = product.id_product;
-
-        images[sku] = imageUrls;
+      // прогружаем все слайды (Swiper lazy)
+      const slides = await page.locator('div.swiper-slide').all();
+      for (const slide of slides) {
+        await slide.scrollIntoViewIfNeeded();
       }
+
+      // локатор картинок (НЕ называем images!)
+      const imageElements = gallery.locator('img');
+
+      await imageElements.first().waitFor({
+        state: 'attached',
+        timeout: this.config.asyncRetry.maxDelay,
+      });
+
+      // извлечение URL
+      const imageUrls = await imageElements.evaluateAll((imgs) => {
+        const normalizeScene7 = (url: string) => {
+          try {
+            const u = new URL(url);
+
+            // максимум качества
+            u.searchParams.set('wid', '2000');
+            u.searchParams.set('hei', '2000');
+            u.searchParams.set('qlt', '100');
+            u.searchParams.set('scl', '1');
+            u.searchParams.set('fmt', 'jpg');
+
+            return u.toString();
+          } catch {
+            return url;
+          }
+        };
+
+        const extractBestUrl = (img: HTMLImageElement) => {
+          // 1. data-src
+          const dataSrc = img.getAttribute('data-src');
+          if (dataSrc) return dataSrc;
+
+          // 2. data-srcset (берём самый большой)
+          const dataSrcset = img.getAttribute('data-srcset');
+          if (dataSrcset) {
+            const parts = dataSrcset.split(',');
+            return parts[parts.length - 1].trim().split(' ')[0];
+          }
+
+          // 3. srcset
+          const srcset = img.getAttribute('srcset');
+          if (srcset) {
+            const parts = srcset.split(',');
+            return parts[parts.length - 1].trim().split(' ')[0];
+          }
+
+          // 4. fallback src
+          const src = img.getAttribute('src');
+          if (src && !src.includes('.svg')) return src;
+
+          return null;
+        };
+
+        const urls = imgs
+          .map((img) => {
+            const rawUrl = extractBestUrl(img as HTMLImageElement);
+            return rawUrl ? normalizeScene7(rawUrl) : null;
+          })
+          .filter((url): url is string => Boolean(url));
+
+        // убираем дубликаты
+        return Array.from(new Set(urls));
+      });
+
+      // проверка
+      if (imageUrls.length === 0) {
+        throw new Error('No valid image URLs found');
+      }
+
+      if (imageUrls.length === 0) throw new Error('No valid image URLs found');
+
+      images[sku] = imageUrls as IDataImagItem;
+      images[sku].idProduct = product.id_product;
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
@@ -263,33 +277,6 @@ export default class PageImageSourceUnderArmour implements ISource<ICollectProdu
       },
       errors,
     };
-  }
-  private async processingGallery(page: Page): Promise<string[]> {
-    const gallery = page.locator('div[aria-label="Product image gallery"]');
-    try {
-      await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-    } catch (error) {
-      throw new Error('No gallery found on page');
-    }
-
-    const count = await gallery.count();
-    if (count === 0) throw new Error('No images found on page');
-
-    const firstImg = gallery.locator('img').first();
-    await firstImg.waitFor({ state: 'attached', timeout: 15000 });
-
-    //!!!!!!!!!!!!!!!!!!!!!!!!!
-    const imageUrls = await gallery
-      .locator('img')
-      .evaluateAll((imgs: Element[]) =>
-        imgs
-          .filter((img): img is HTMLImageElement => img instanceof HTMLImageElement)
-          .map((img) => img.src),
-      );
-
-    if (imageUrls.length === 0) throw new Error('No valid image URLs found');
-
-    return imageUrls;
   }
 
   private buildWorkerError(
