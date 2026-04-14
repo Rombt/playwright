@@ -186,6 +186,27 @@ export default class PageImageSourceJoma implements ISource<ICollectProductPhoto
 
       images[sku] = absoluteImageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;
+
+      // поиск описания
+      const htmlCont = page.locator('div.product__column > div.product__description');
+      await htmlCont
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      const htmlContCount = await htmlCont.count();
+      if (htmlContCount === 0) {
+        this.logger?.debug(`Description is absent`, {
+          component: 'PageImageSource ...',
+          method: 'execute()',
+          action: 'const htmlCont = page.locator(...)',
+          data: {
+            sku: sku,
+            url: url,
+          },
+        });
+      }
+
+      html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
