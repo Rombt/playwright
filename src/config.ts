@@ -33,7 +33,7 @@ export const config = {
     // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_prod',
     // resultsFolder: 'results/avecs/avecs_test',
-    resultsFolder: 'results/under_armour/under_armour_test',
+    resultsFolder: 'results/joma/joma_test',
 
     sourcesFolder: './dist/source/sources',
     convertToJpg: true,
@@ -66,7 +66,7 @@ export const config = {
     // taskPath: 'src/data/tasks/adidas/adidas_tests_short.json',
     // taskPath: 'src/data/tasks/new_balance/new_balance_tests.json',
     // taskPath: 'src/data/tasks/new_balance/new_balance_tests_short.json',
-    taskPath: 'src/data/tasks/under_armour/under_armour_test.json',
+    taskPath: 'src/data/tasks/joma/joma_test_short.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

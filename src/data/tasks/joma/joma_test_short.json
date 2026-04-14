@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-06_14-03",
+  "task": {
+    "25": {
+      "brand_id": "25",
+      "brand_name": "Joma",
+      "metadata": {
+        "target_website": "https://joma.ua/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54881",
+          "name_product": "Сороконіжки  Дитячі футбольні Joma TOLEDO  TOJS2609TF",
+          "sku": "TOJS2609TF",
+          "attributes": {
+            "color": "жовт.",
+            "size": "30"
+          }
+        }
+      ]
+    }
+  }
+}
