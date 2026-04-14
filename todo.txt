@@ -35,6 +35,7 @@
     adidas,
     new balance,
     under armour,
+    joma,
 
 
 
