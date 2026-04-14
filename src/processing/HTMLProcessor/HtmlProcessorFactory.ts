@@ -14,6 +14,7 @@ import { PumaProcessor } from './processors/PumaProcessor';
 import { AvecsProcessor } from './processors/AvecsProcessor';
 import { AdidasProcessor } from './processors/AdidasProcessor';
 import { NewBalanceProcessor } from './processors/NewBalanceProcessor';
+import { JomaProcessor } from './processors/JomaProcessor';
 
 export class HtmlProcessorFactory implements IHtmlProcessorFactory {
   private processors: Record<string, new () => IBaseHtmlProcessor> = {
@@ -29,6 +30,7 @@ export class HtmlProcessorFactory implements IHtmlProcessorFactory {
     avecs: AvecsProcessor,
     adidas: AdidasProcessor,
     'new balance': NewBalanceProcessor,
+    joma: JomaProcessor,
   };
 
   public create(brand: string): IBaseHtmlProcessor {

@@ -170,7 +170,6 @@ export default class PageImageSourcePuma implements ISource<ICollectProductPhoto
         imageUrlsSet.add(img);
       }
 
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      message": "locator.click: Timeout 30000ms exceeded
       const swatchColors = page.locator(
         'div.product-info-main > div.colors > ul.colors__list > li.color-item > a',
       );

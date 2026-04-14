@@ -108,7 +108,6 @@ class PageImageSourcePuma {
             for (const img of initialImages) {
                 imageUrlsSet.add(img);
             }
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      message": "locator.click: Timeout 30000ms exceeded
             const swatchColors = page.locator('div.product-info-main > div.colors > ul.colors__list > li.color-item > a');
             await swatchColors.first().waitFor();
             const swatchCount = await swatchColors.count();

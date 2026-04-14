@@ -42,14 +42,15 @@ class PageImageSourceJoma {
                 debugMeta: debugMeta,
             },
         });
-        results.push(await this.execute(targetUrl, page, product));
+        results.push(await this.execute(targetUrl, page, { product, loggerScope }));
         return results;
     }
-    async execute(targetUrl, page, product) {
+    async execute(targetUrl, page, options, debugMeta) {
         const errors = [];
         const images = {};
         let html = '';
-        const rawSku = product.sku;
+        //!!
+        const rawSku = options.product.sku;
         const sku = rawSku.split(/[*-]/)[0];
         const partsSku = rawSku.split(/[.-]/); // ["100052", "700"]
         const url = targetUrl.replace('{{sku_prod}}', sku);
@@ -120,17 +121,35 @@ class PageImageSourceJoma {
             });
             const srcs = await imgs.evaluateAll((elements) => elements.map((el) => el.getAttribute('src') || ''));
             const baseUrl = page.url();
-            const absoluteImageUrls = srcs
+            const imageUrls = srcs
                 .map((src) => (src ? new URL(src, baseUrl).href : null))
                 .filter(Boolean);
-            if (absoluteImageUrls.length === 0)
-                throw new Error('No valid image URLs found');
-            images[sku] = absoluteImageUrls;
-            images[sku].idProduct = product.id_product;
+            if (imageUrls.length === 0) {
+                options.loggerScope?.error(`No valid image URLs found`, {
+                    component: 'PageImageSourceNike',
+                    method: 'execute()',
+                    action: 'gallery.waitFor(...)',
+                    data: {
+                        imageUrlsLength: imageUrls.length,
+                        imageUrls: imageUrls,
+                    },
+                });
+                throw new Error('Error. No valid image URLs found');
+            }
+            images[sku] = imageUrls;
+            images[sku].idProduct = options.product.id_product;
         }
         catch (err) {
-            throw this.buildWorkerError(err, product, url);
+            throw this.buildWorkerError(err, options.product, url);
         }
+        options.loggerScope?.debug(`Collecting image URLs is complete`, {
+            component: 'PageImageSourceNike',
+            method: 'execute()',
+            action: 'data[sku] = imageUrls',
+            data: {
+                urls: images,
+            },
+        });
         return {
             data: {
                 images,
