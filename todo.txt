@@ -36,6 +36,7 @@
     new balance,
     under armour,
     joma,
+    salomon
 
 
 
