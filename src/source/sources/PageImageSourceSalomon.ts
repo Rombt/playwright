@@ -87,58 +87,53 @@ export default class PageImageSourceSalomon implements ISource<ICollectProductPh
     let html: string = '';
 
     const rawSku = product.sku;
-    const sku = rawSku.split(/[*-]/)[0];
-    const partsSku = rawSku.split(/[.-]/); // ["100052", "700"]
+    const starIndex = rawSku.indexOf('*');
+    const sku = starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku;
     const url = targetUrl.replace('{{sku_prod}}', sku);
 
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      let locatorLink;
+      //!!
+      const link = page
+        .locator('div[data-testid="container"] a:has(section[aria-label*="Main product image"])')
+        .first();
 
-      if (partsSku.length > 1) {
-        locatorLink = page.locator(
-          `div.category > div.category-content > div.category-item > a[href*="${partsSku[0]}"][href*="${partsSku[1]}"]`,
-        );
-      } else {
-        locatorLink = page.locator(
-          `div.category > div.category-content > div.category-item > a[href*="${partsSku[0]}"]`,
-        );
-      }
-
-      const link = locatorLink.first();
-
-      const countLink = await link.count();
-      this.logger?.debug(`The link is found on the page`, {
-        component: 'PageImageSourceSalomon',
-        method: 'execute()',
-        action: 'link = page.locator(...)',
-        data: {
-          url: url,
-          rawSku: rawSku,
-          sku: sku,
-          linkCount: countLink,
-        },
+      const empty = page.locator('h2', {
+        hasText: 'Sorry, we hebben geen resultaten gevonden',
       });
 
-      await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+      try {
+        await Promise.race([
+          link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+          empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
+        ]);
+      } catch {
+        throw new Error(`Search result not resolved. ${sku}`);
+      }
 
-      // страница поиска не содержит характерных надписей на случай если товар не найден
-      // по этому опираюсь только на наличие ссылки на страницу товара
-      if ((await link.count()) === 0) {
-        throw new Error('The page search does not match the product SKU. ' + sku);
+      if ((await empty.count()) > 0) {
+        throw new Error(`Goods not found on the page. ${sku}`);
       }
 
       const relativeHref = await link.getAttribute('href');
       if (!relativeHref) throw new Error('Product link not found');
-
       const absoluteHref = new URL(relativeHref, page.url()).toString();
+
       await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
 
+      await page.waitForURL(
+        (url) => {
+          const u = new URL(url.toString());
+          return u.pathname.includes(sku);
+        },
+        {
+          timeout: this.config.asyncRetry.maxDelay,
+        },
+      );
+
       //!!
-      const image = page
-        .locator('div.product__column > div.slider ul.splide__list > li.splide__slide img')
-        .first();
+      const image = page.locator('section.s-area-gallery button.s-w-full.s-h-full > img').first();
 
       await image.waitFor({
         state: 'attached',
@@ -146,7 +141,7 @@ export default class PageImageSourceSalomon implements ISource<ICollectProductPh
       });
 
       //!!
-      const gallery = page.locator('div.product__column > div.slider ul.splide__list');
+      const gallery = page.locator('section.s-area-gallery');
 
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -157,56 +152,13 @@ export default class PageImageSourceSalomon implements ISource<ICollectProductPh
       const count = await gallery.count();
       if (count === 0) throw new Error('No images found on page');
 
-      const imgs = gallery.locator('li.splide__slide img');
-
-      const countImgs = await imgs.count();
-      this.logger?.debug(`The imgs is found on the page`, {
-        component: 'PageImageSourceSalomon',
-        method: 'execute()',
-        action: 'imgs = page.locator(...)',
-        data: {
-          url: url,
-          rawSku: rawSku,
-          sku: sku,
-          imgsCount: countImgs,
-        },
-      });
-
-      const srcs = await imgs.evaluateAll((elements) =>
-        elements.map((el) => el.getAttribute('src') || ''),
-      );
-
-      const baseUrl = page.url();
-
-      const absoluteImageUrls = srcs
-        .map((src) => (src ? new URL(src, baseUrl).href : null))
-        .filter(Boolean);
-
-      if (absoluteImageUrls.length === 0) throw new Error('No valid image URLs found');
+      //!!
+      const absoluteImageUrls = await page
+        .locator('section.s-area-gallery img')
+        .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src') || ''));
 
       images[sku] = absoluteImageUrls as IDataImagItem;
       images[sku].idProduct = product.id_product;
-
-      // поиск описания
-      const htmlCont = page.locator('div.product__column > div.product__description');
-      await htmlCont
-        .first()
-        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
-
-      const htmlContCount = await htmlCont.count();
-      if (htmlContCount === 0) {
-        this.logger?.debug(`Description is absent`, {
-          component: 'PageImageSource ...',
-          method: 'execute()',
-          action: 'const htmlCont = page.locator(...)',
-          data: {
-            sku: sku,
-            url: url,
-          },
-        });
-      }
-
-      html = await htmlCont.innerHTML({ timeout: this.config.asyncRetry.maxDelay });
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
