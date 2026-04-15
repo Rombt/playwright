@@ -8,3 +8,5 @@ export * from './data/extractBrandFromFileName';
 export * from './data/sanitizeDom';
 export * from './data/removeAllAttributes';
 export * from './data/removeElementsByFuzzyText';
+export * from './data/normalizeSku';
+export * from './data/matchFastFuzzy';

@@ -11,9 +11,7 @@ const Logger_1 = require("../../data/logger/Logger");
 const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
 const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
-const BRAND_ALIASES = {
-    brs: ['Злий борсук'],
-};
+const brand_aliases_1 = require("../../data/entities/brand_aliases");
 class DefaultScenario {
     browser;
     storage;
@@ -320,26 +318,6 @@ class DefaultScenario {
                         },
                     });
                     for (const r of result) {
-                        // отключил так как проверка соответствия
-                        // полученных изображений  product.sku
-                        // ответственность того кото обрабатывает страницу
-                        // for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
-                        //   const originalSku = product.sku;
-                        //   const normalizedSku = originalSku.split('*')[0];
-                        //   if (returnedSku !== normalizedSku) {
-                        //     loggerScope?.error('SKU mismatch from source', {
-                        //       productSku: originalSku,
-                        //       returnedSku,
-                        //     });
-                        //     throw new Error('SKU mismatch');
-                        //   }
-                        //   if (!allData[normalizedSku]) {
-                        //     const arr = [] as unknown as IDataImagItem;
-                        //     arr.idProduct = images.idProduct;
-                        //     allData[normalizedSku] = arr;
-                        //   }
-                        //   allData[normalizedSku].push(...images);
-                        // }
                         for (const [sku, images] of Object.entries(r.data.images ?? {})) {
                             if (!allData[sku]) {
                                 const arr = [];
@@ -505,7 +483,7 @@ class DefaultScenario {
     }
     resolveBrandName(input) {
         const normalizedInput = input.trim().toLowerCase();
-        for (const [target, aliases] of Object.entries(BRAND_ALIASES)) {
+        for (const [target, aliases] of Object.entries(brand_aliases_1.BRAND_ALIASES)) {
             const match = aliases.find((alias) => alias.toLowerCase() === normalizedInput);
             if (match) {
                 return target;
@@ -597,7 +575,6 @@ class DefaultScenario {
             }
             catch (err) {
                 //todo
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 /**
                  * если картинка не закачана её url нужно сохранить в отдельный массив для повторного скачивания!
                  */

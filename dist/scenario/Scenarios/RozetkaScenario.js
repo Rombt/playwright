@@ -10,6 +10,8 @@ const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollect
 const helpers_1 = require("../../common/helpers");
 const Logger_1 = require("../../data/logger/Logger");
 const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImageProcessor");
+const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
+const brand_aliases_1 = require("../../data/entities/brand_aliases");
 class RozetkaScenario {
     browser;
     storage;
@@ -214,6 +216,7 @@ class RozetkaScenario {
             },
         });
         const allData = {};
+        const allProductRaw = [];
         const limiter = new RateLimiter_1.RateLimiter(5000);
         const productsPageLinks = {};
         await this.browser.runInContextByChromium(async (context) => {
@@ -277,9 +280,7 @@ class RozetkaScenario {
                     });
                     throw new Error(`In process method sku is absent`);
                 }
-                const rawSku = product.sku;
-                const starIndex = rawSku.indexOf('*');
-                const skuNormal = (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '') ?? '';
+                const skuNormal = (0, helpers_1.normalizeSku)(product.sku);
                 try {
                     const headers = this.buildHeaders(url_init);
                     if (!headers || typeof headers !== 'object') {
@@ -323,14 +324,35 @@ class RozetkaScenario {
                             });
                             continue;
                         }
-                        if (!g.title.includes(product.sku))
+                        const productMatch = (0, helpers_1.fuzzyMatchStrings)({
+                            a: g.title,
+                            b: product.name_product,
+                            // sku: skuNormal,
+                            sku: product.sku,
+                            threshold: 0.4555,
+                        });
+                        if (!productMatch.match) {
+                            loggerScope?.debug('Product do NOT contains required SKU in the title', {
+                                component: 'RozetkaScenario',
+                                method: 'process',
+                                action: 'if (!g.title.includes(sku)) continue;',
+                                data: {
+                                    sku: product.sku,
+                                    skuNormal: skuNormal,
+                                    productMatch: productMatch,
+                                    productNameProduct: product.name_product,
+                                    currentProduct: g,
+                                },
+                            });
                             continue;
+                        }
                         loggerScope?.debug('Product contains required SKU in the title', {
                             component: 'RozetkaScenario',
                             method: 'process',
                             action: 'if (!g.title.includes(sku)) continue;',
                             data: {
                                 sku: product.sku,
+                                skuNormal: skuNormal,
                                 currentProduct: g,
                             },
                         });
@@ -352,29 +374,39 @@ class RozetkaScenario {
                             },
                         });
                         for (const r of result) {
-                            for (const [skuKey, images] of Object.entries(r.data.images ?? {})) {
-                                loggerScope?.debug(`Found url photo for ${task.brand_name} ${skuKey}`, {
-                                    component: 'RozetkaScenario',
-                                    method: 'process',
-                                    action: 'for (const r of result) {...}',
-                                    data: {
-                                        attempt: attempt,
-                                        skuKey: skuKey,
-                                        images: images,
-                                        idProduct: images.idProduct, // теперь доступно
-                                    },
-                                });
-                                const resultsDirPath = path.resolve(__dirname, '../../../results', //todo задать через конфиг
-                                task.brand_name, `${task.brand_name}_unprocessed-products.json`);
-                                await this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
-                                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2
-                                // Создаем массив, если еще нет, и сохраняем idProduct
-                                if (!allData[skuKey]) {
+                            for (const [sku, images] of Object.entries(r.data.images ?? {})) {
+                                if (!allData[sku]) {
                                     const arr = [];
                                     arr.idProduct = images.idProduct;
-                                    allData[skuKey] = arr;
+                                    allData[sku] = arr;
                                 }
-                                allData[skuKey].push(...images);
+                                allData[sku].push(...images);
+                            }
+                            if (r.data.html) {
+                                const brandKey = this.resolveBrandName(task.brand_name);
+                                loggerScope?.debug('Start processing description of product', {
+                                    component: 'DefaultScenario',
+                                    method: 'process()',
+                                    action: 'brandKey = this.resolveBrandName(task.brand_name)',
+                                    data: {
+                                        product: product,
+                                        taskBrandName: task.brand_name,
+                                        brandKey: brandKey,
+                                    },
+                                });
+                                const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(brandKey.toLowerCase());
+                                const rawContent = processor.process(r.data.html);
+                                if (Array.isArray(rawContent)) {
+                                    // здесь в будущем обработка атрибутов товара
+                                }
+                                else {
+                                    allProductRaw.push({
+                                        sku: product.sku,
+                                        id: product.id_product,
+                                        content: rawContent,
+                                    });
+                                    //todo добавить возможность записывать в json файл кусками вместо того что бы держать в памяти
+                                }
                             }
                         }
                     }
@@ -447,26 +479,6 @@ class RozetkaScenario {
                         }
                         while (queue.length) {
                             const product = queue.shift();
-                            // if (!sku) {
-                            //   loggerScope?.error(`sku is absent`, {
-                            //     component: 'PageImageSourceRozetka',
-                            //     method: 'process',
-                            //     action: 'while (queue.length)',
-                            //     stage: 'start',
-                            //     data: {
-                            //       sku: sku,
-                            //     },
-                            //   });
-                            //   throw new Error(`In process method sku is absent`);
-                            // }
-                            // const rawSku = sku;
-                            // const starIndex = rawSku.indexOf('*');
-                            // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!3
-                            // const skuNormal =
-                            //   (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
-                            //     /^[\p{C}\s]+|[\p{C}\s]+$/gu,
-                            //     '',
-                            //   ) ?? '';
                             if (!product)
                                 return;
                             const result = await processProduct(product, page);
@@ -567,6 +579,16 @@ class RozetkaScenario {
             await this.downloadImages(allDataNormalize, task, context, limiter, loggerScope);
         }, 'fake', loggerScope);
     }
+    resolveBrandName(input) {
+        const normalizedInput = input.trim().toLowerCase();
+        for (const [target, aliases] of Object.entries(brand_aliases_1.BRAND_ALIASES)) {
+            const match = aliases.find((alias) => alias.toLowerCase() === normalizedInput);
+            if (match) {
+                return target;
+            }
+        }
+        return normalizedInput;
+    }
     async downloadImages(UrlsBySku, task, context, limiter, loggerScope) {
         //========================    Инициализация очереди    ========================
         const urlsQueue = [];
@@ -610,7 +632,7 @@ class RozetkaScenario {
                     _buf = await imageProcessor.convertBufferToJpg(buffer);
                     _ext = '.jpg';
                 }
-                const fileName = `${item.idProduct}_${item.index}_R_${_ext}`;
+                const fileName = `${item.idProduct}_` + `${(0, helpers_1.normalizeSku)(item.sku)}` + `${item.index}_R_` + `${_ext}`;
                 await this.storage.save({
                     filename: fileName,
                     buffer: _buf,

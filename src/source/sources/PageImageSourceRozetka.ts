@@ -47,6 +47,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
 
     const options = {
       url: targetUrl,
+      sku: sku,
       params: {
         country: 'UA',
         lang: 'ua',
@@ -75,6 +76,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     request: APIRequestContext,
     options: {
       url: string;
+      sku: string;
       params?: Record<string, string>;
       headers?: Record<string, string>;
       loggerScope?: ILogger;
@@ -166,6 +168,7 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
           action: 'response.json()',
           stage: 'finish',
           data: {
+            sku: options.sku,
             body: body,
           },
         });
@@ -285,7 +288,8 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
     options: { product: IProduct; loggerScope: ILogger },
   ): Promise<IWorkerResult> {
     const errors: IWorkerError[] = [];
-    const data: IDataImag = {};
+    const images: IDataImag = {};
+    let html: string = '';
 
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
@@ -379,8 +383,8 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       }
 
       if (!options.product.sku) throw new Error('SKU is required');
-      data[options.product.sku] = imageUrls as IDataImagItem;
-      data[options.product.sku].idProduct = options.product.id_product;
+      images[options.product.sku] = imageUrls as IDataImagItem;
+      images[options.product.sku].idProduct = options.product.id_product;
     } catch (err) {
       options.loggerScope?.error('Failed to navigate to page', {
         component: 'PageImageSourceRozetka',
@@ -401,6 +405,12 @@ export default class PageImageSourceRozetka implements ISource<ICollectProductPh
       } as IWorkerError);
     }
 
-    return { data, errors };
+    return {
+      data: {
+        images,
+        html,
+      },
+      errors,
+    };
   }
 }
