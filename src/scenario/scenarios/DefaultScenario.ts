@@ -30,6 +30,7 @@ import { SharpImageProcessor as ImageProcessor } from '../../processing/ImagePro
 import { HtmlProcessorFactory, Site } from '../../processing/HTMLProcessor';
 import { IProductRaw } from '../../processing/HTMLProcessor';
 import { UnprocessedCollector } from '../../data/collectors/UnprocessedCollector';
+import { BRAND_ALIASES } from '../../data/entities/brand_aliases';
 
 // todo один универсальный тип ProcessResult
 type TaskResult =
@@ -41,10 +42,6 @@ type ImageResult =
   | { status: 'success' }
   | { status: 'retry'; item: IImageItem; error: IWorkerError }
   | { status: 'fatal'; item: IImageItem; error: IWorkerError };
-
-const BRAND_ALIASES: Record<string, string[]> = {
-  brs: ['Злий борсук'],
-};
 
 export class DefaultScenario<Browser, Context extends BrowserContext>
   implements IScenario<Browser, Context>
@@ -279,18 +276,21 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   }
 
   async load(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
+    return this.loadTasks(brands);
+  }
+
+  private async loadTasks(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
     const filePath = path.resolve(process.cwd(), this.taskPath);
     const raw = await fs.readFile(filePath, 'utf-8');
     const data: ICollectProductPhotosBatch = JSON.parse(raw);
 
     const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
+
     if (arrTasks.length === 0) {
       this.logger.error('Tasks array is invalid or corrupted', {
         component: 'DefaultScenario',
-        method: 'load()',
-        data: {
-          arrTasks: arrTasks,
-        },
+        method: 'loadTasks()',
+        data: { arrTasks },
       });
 
       throw new Error('Tasks array is invalid or corrupted');
@@ -433,31 +433,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           });
 
           for (const r of result) {
-            // отключил так как проверка соответствия
-            // полученных изображений  product.sku
-            // ответственность того кото обрабатывает страницу
-            // for (const [returnedSku, images] of Object.entries(r.data.images ?? {})) {
-            //   const originalSku = product.sku;
-            //   const normalizedSku = originalSku.split('*')[0];
-
-            //   if (returnedSku !== normalizedSku) {
-            //     loggerScope?.error('SKU mismatch from source', {
-            //       productSku: originalSku,
-            //       returnedSku,
-            //     });
-
-            //     throw new Error('SKU mismatch');
-            //   }
-
-            //   if (!allData[normalizedSku]) {
-            //     const arr = [] as unknown as IDataImagItem;
-            //     arr.idProduct = images.idProduct;
-            //     allData[normalizedSku] = arr;
-            //   }
-
-            //   allData[normalizedSku].push(...images);
-            // }
-
             for (const [sku, images] of Object.entries(r.data.images ?? {})) {
               if (!allData[sku]) {
                 const arr = [] as unknown as IDataImagItem;
@@ -798,7 +773,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         return { status: 'success' };
       } catch (err) {
         //todo
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         /**
          * если картинка не закачана её url нужно сохранить в отдельный массив для повторного скачивания!
          */

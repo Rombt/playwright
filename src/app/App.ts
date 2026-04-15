@@ -13,6 +13,8 @@ import { Logger } from '../data/logger/Logger';
 import { ConsoleTransport } from '../data/logger/transport/ConsoleTransport';
 import { FileTransport } from '../data/logger/transport/FileTransport';
 
+import { ScenarioFactory } from '../scenario/ScenarioFactory';
+
 //todo прочитать опции и предать в браузер
 // todo где то здесь должен создаваться браузер, один на всё приложение!
 // todo где закрывать браузер?
@@ -118,7 +120,7 @@ export class App<BrowserOptions> {
         },
       });
 
-      const scenario = new DefaultScenario(browser, storage, this.mode);
+      const scenario = ScenarioFactory.create(this.config.scenario, browser, storage, this.mode);
       await scenario.run(this.config.brands);
     } else if (this.mode === 'retry' && unprocessedCount !== 0) {
       //todo добавить перебор сценариев для дополнительного поиска

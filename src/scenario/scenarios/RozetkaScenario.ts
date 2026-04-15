@@ -21,7 +21,14 @@ import { UnprocessedCollector } from '../../data/collectors/UnprocessedCollector
 import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
 
-import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
+import {
+  normalizeAllData,
+  isRetryable,
+  waitBeforeRetry,
+  normalizeSku,
+  fuzzyMatchStrings,
+} from '../../common/helpers';
+
 import {
   IHttpResult,
   IAutocompleteResponse,
@@ -32,6 +39,9 @@ import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { SharpImageProcessor as ImageProcessor } from '../../processing/ImageProcessor/SharpImageProcessor';
+import { HtmlProcessorFactory, Site } from '../../processing/HTMLProcessor';
+import { IProductRaw } from '../../processing/HTMLProcessor';
+import { BRAND_ALIASES } from '../../data/entities/brand_aliases';
 
 type TaskResult =
   | { status: 'success'; sku: string }
@@ -63,6 +73,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   private readonly logger: Logger;
   private allErrors: IWorkerError[] = [];
 
+  private readonly taskPath: string;
+
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
 
@@ -78,11 +90,12 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     this.maxPage = this.config.asyncPages.maxPage;
     this.maxTask = this.config.asyncTasks.maxTask;
     this.sourcesFolder = this.config.sourcesFolder;
+    this.taskPath = this.config.taskPath;
   }
 
-  async run(): Promise<void> {
+  async run(brands?: string[]): Promise<void> {
     try {
-      const arrTasks = await this.load();
+      const arrTasks = await this.load(brands);
 
       this.logger.debug(`The array of unprocessed products was received`, {
         component: 'RozetkaScenario',
@@ -208,15 +221,58 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     });
   }
 
-  async load(): Promise<ICollectProductPhotosTask[]> {
-    const unprocessedCollector = new UnprocessedCollector();
-    const arrTasks = unprocessedCollector.getPhotoCollectionTasks(this.mode);
+  async load(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
+    let arrTasks;
+
+    if (this.mode === 'retry') {
+      const unprocessedCollector = new UnprocessedCollector();
+      arrTasks = unprocessedCollector.getPhotoCollectionTasks(this.mode);
+    } else if (this.mode === 'full') {
+      arrTasks = await this.loadTasks(brands);
+
+      arrTasks.forEach((task) => {
+        task.type = 'recollect-product-photos';
+        task.metadata.target_website = null;
+      });
+    }
+
+    this.logger.debug(`The array of tasks was received`, {
+      component: 'RozetkaScenario',
+      method: 'load()',
+      action: '',
+      data: {
+        thisMode: this.mode,
+        arrTasks: arrTasks,
+      },
+    });
 
     if (!Array.isArray(arrTasks)) {
       throw new Error('Task file must contain an array');
     }
 
     return arrTasks;
+  }
+
+  private async loadTasks(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
+    const filePath = path.resolve(process.cwd(), this.taskPath);
+    const raw = await fs.readFile(filePath, 'utf-8');
+    const data: ICollectProductPhotosBatch = JSON.parse(raw);
+
+    const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
+
+    if (arrTasks.length === 0) {
+      this.logger.error('Tasks array is invalid or corrupted', {
+        component: 'DefaultScenario',
+        method: 'loadTasks()',
+        data: { arrTasks },
+      });
+
+      throw new Error('Tasks array is invalid or corrupted');
+    }
+
+    if (!brands?.length) return arrTasks;
+
+    return arrTasks.filter((task) => brands.includes(task.brand_name));
   }
 
   async prepare(): Promise<void> {
@@ -249,6 +305,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     });
 
     const allData: IDataImag = {};
+    const allProductRaw: IProductRaw[] = [];
     const limiter = new RateLimiter(5000);
     const productsPageLinks: Record<string, string[]> = {};
 
@@ -324,13 +381,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
             throw new Error(`In process method sku is absent`);
           }
 
-          const rawSku = product.sku;
-          const starIndex = rawSku.indexOf('*');
-          const skuNormal =
-            (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
-              /^[\p{C}\s]+|[\p{C}\s]+$/gu,
-              '',
-            ) ?? '';
+          const skuNormal = normalizeSku(product.sku);
 
           try {
             const headers = this.buildHeaders(url_init);
@@ -396,7 +447,29 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                 continue;
               }
 
-              if (!g.title.includes(product.sku)) continue;
+              const productMatch = fuzzyMatchStrings({
+                a: g.title,
+                b: product.name_product,
+                // sku: skuNormal,
+                sku: product.sku,
+                threshold: 0.4555,
+              });
+
+              if (!productMatch.match) {
+                loggerScope?.debug('Product do NOT contains required SKU in the title', {
+                  component: 'RozetkaScenario',
+                  method: 'process',
+                  action: 'if (!g.title.includes(sku)) continue;',
+                  data: {
+                    sku: product.sku,
+                    skuNormal: skuNormal,
+                    productMatch: productMatch,
+                    productNameProduct: product.name_product,
+                    currentProduct: g,
+                  },
+                });
+                continue;
+              }
 
               loggerScope?.debug('Product contains required SKU in the title', {
                 component: 'RozetkaScenario',
@@ -404,6 +477,7 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
                 action: 'if (!g.title.includes(sku)) continue;',
                 data: {
                   sku: product.sku,
+                  skuNormal: skuNormal,
                   currentProduct: g,
                 },
               });
@@ -436,40 +510,44 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
               );
 
               for (const r of result) {
-                for (const [skuKey, images] of Object.entries(r.data.images ?? {}) as [
-                  string,
-                  IDataImagItem,
-                ][]) {
-                  loggerScope?.debug(`Found url photo for ${task.brand_name} ${skuKey}`, {
-                    component: 'RozetkaScenario',
-                    method: 'process',
-                    action: 'for (const r of result) {...}',
+                for (const [sku, images] of Object.entries(r.data.images ?? {})) {
+                  if (!allData[sku]) {
+                    const arr = [] as unknown as IDataImagItem;
+                    arr.idProduct = images.idProduct;
+                    allData[sku] = arr;
+                  }
+
+                  allData[sku].push(...images);
+                }
+
+                if (r.data.html) {
+                  const brandKey = this.resolveBrandName(task.brand_name);
+                  loggerScope?.debug('Start processing description of product', {
+                    component: 'DefaultScenario',
+                    method: 'process()',
+                    action: 'brandKey = this.resolveBrandName(task.brand_name)',
                     data: {
-                      attempt: attempt,
-                      skuKey: skuKey,
-                      images: images,
-                      idProduct: images.idProduct, // теперь доступно
+                      product: product,
+                      taskBrandName: task.brand_name,
+                      brandKey: brandKey,
                     },
                   });
 
-                  const resultsDirPath = path.resolve(
-                    __dirname,
-                    '../../../results', //todo задать через конфиг
-                    task.brand_name,
-                    `${task.brand_name}_unprocessed-products.json`,
-                  );
+                  const processor = new HtmlProcessorFactory().create(brandKey.toLowerCase());
 
-                  await this.removeItemBySku(resultsDirPath, skuKey, loggerScope);
+                  const rawContent = processor.process(r.data.html);
 
-                  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2
-                  // Создаем массив, если еще нет, и сохраняем idProduct
-                  if (!allData[skuKey]) {
-                    const arr = [] as unknown as IDataImagItem;
-                    arr.idProduct = images.idProduct;
-                    allData[skuKey] = arr;
+                  if (Array.isArray(rawContent)) {
+                    // здесь в будущем обработка атрибутов товара
+                  } else {
+                    allProductRaw.push({
+                      sku: product.sku,
+                      id: product.id_product,
+                      content: rawContent,
+                    });
+
+                    //todo добавить возможность записывать в json файл кусками вместо того что бы держать в памяти
                   }
-
-                  allData[skuKey].push(...images);
                 }
               }
             }
@@ -552,29 +630,6 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
 
               while (queue.length) {
                 const product = queue.shift();
-                // if (!sku) {
-                //   loggerScope?.error(`sku is absent`, {
-                //     component: 'PageImageSourceRozetka',
-                //     method: 'process',
-                //     action: 'while (queue.length)',
-                //     stage: 'start',
-                //     data: {
-                //       sku: sku,
-                //     },
-                //   });
-                //   throw new Error(`In process method sku is absent`);
-                // }
-
-                // const rawSku = sku;
-                // const starIndex = rawSku.indexOf('*');
-
-                // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!3
-                // const skuNormal =
-                //   (starIndex !== -1 ? rawSku?.slice(0, starIndex) : rawSku)?.replace(
-                //     /^[\p{C}\s]+|[\p{C}\s]+$/gu,
-                //     '',
-                //   ) ?? '';
-
                 if (!product) return;
                 const result = await processProduct(product, page);
                 results.push(result);
@@ -699,6 +754,20 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     );
   }
 
+  private resolveBrandName(input: string): string {
+    const normalizedInput = input.trim().toLowerCase();
+
+    for (const [target, aliases] of Object.entries(BRAND_ALIASES)) {
+      const match = aliases.find((alias) => alias.toLowerCase() === normalizedInput);
+
+      if (match) {
+        return target;
+      }
+    }
+
+    return normalizedInput;
+  }
+
   private async downloadImages(
     UrlsBySku: Record<string, string[]>,
     task: { brand_name: string },
@@ -765,7 +834,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
           _ext = '.jpg';
         }
 
-        const fileName = `${item.idProduct}_${item.index}_R_${_ext}`;
+        const fileName =
+          `${item.idProduct}_` + `${normalizeSku(item.sku)}` + `${item.index}_R_` + `${_ext}`;
 
         await this.storage.save({
           filename: fileName,

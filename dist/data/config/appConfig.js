@@ -54,6 +54,9 @@ class AppConfig {
     get get() {
         return this.config;
     }
+    get scenario() {
+        return this.processData(config_1.config).data.scenario ?? 'default';
+    }
     get resultsFolder() {
         return this.processData(config_1.config).data.resultsFolder;
     }
@@ -114,6 +117,7 @@ class AppConfig {
                 convertToJpg: dataConfig.convertToJpg ?? false,
                 brands: resolveBrands(dataConfig.brands),
                 taskPath: this.resolvePath(dataConfig.taskPath),
+                scenario: typeof dataConfig.scenario === 'string' ? dataConfig.scenario : 'default',
             },
         };
     }

@@ -4,6 +4,8 @@ const RateLimiter_1 = require("../../browser/limiter/RateLimiter");
 const Logger_1 = require("../../data/logger/Logger");
 const appConfig_1 = require("../../data/config/appConfig");
 class PageImageSourceRozetka {
+    config;
+    logger;
     constructor() {
         this.config = appConfig_1.AppConfig.getInstance();
         this.logger = Logger_1.Logger.getInstance();
@@ -25,6 +27,7 @@ class PageImageSourceRozetka {
         }
         const options = {
             url: targetUrl,
+            sku: sku,
             params: {
                 country: 'UA',
                 lang: 'ua',
@@ -117,6 +120,7 @@ class PageImageSourceRozetka {
                     action: 'response.json()',
                     stage: 'finish',
                     data: {
+                        sku: options.sku,
                         body: body,
                     },
                 });
@@ -210,7 +214,8 @@ class PageImageSourceRozetka {
     }
     async execute(url, page, options) {
         const errors = [];
-        const data = {};
+        const images = {};
+        let html = '';
         try {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             options.loggerScope?.debug(`Navigated to page`, {
@@ -296,8 +301,8 @@ class PageImageSourceRozetka {
             }
             if (!options.product.sku)
                 throw new Error('SKU is required');
-            data[options.product.sku] = imageUrls;
-            data[options.product.sku].idProduct = options.product.id_product;
+            images[options.product.sku] = imageUrls;
+            images[options.product.sku].idProduct = options.product.id_product;
         }
         catch (err) {
             options.loggerScope?.error('Failed to navigate to page', {
@@ -317,7 +322,13 @@ class PageImageSourceRozetka {
                 url: url,
             });
         }
-        return { data, errors };
+        return {
+            data: {
+                images,
+                html,
+            },
+            errors,
+        };
     }
 }
 exports.default = PageImageSourceRozetka;
