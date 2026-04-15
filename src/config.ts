@@ -34,9 +34,9 @@ export const config = {
     // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_prod',
     // resultsFolder: 'results/avecs/avecs_test',
-    // resultsFolder: 'results/joma/joma_test',
     // resultsFolder: 'results/salomon/salomon_test',
-    resultsFolder: 'results/under_armour/under_armour_test',
+    // resultsFolder: 'results/under_armour/under_armour_test',
+    resultsFolder: 'results/joma/joma_test',
 
     sourcesFolder: './dist/source/sources',
     scenario: 'rozetka',

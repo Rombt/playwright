@@ -219,6 +219,11 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
       arrTasks = unprocessedCollector.getPhotoCollectionTasks(this.mode);
     } else if (this.mode === 'full') {
       arrTasks = await this.loadTasks(brands);
+
+      arrTasks.forEach((task) => {
+        task.type = 'recollect-product-photos';
+        task.metadata.target_website = null;
+      });
     }
 
     this.logger.debug(`The array of tasks was received`, {
