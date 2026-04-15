@@ -5,7 +5,7 @@
       "brand_id": "12",
       "brand_name": "Salomon",
       "metadata": {
-        "target_website": "https://www.salomon.com/en-nl/s?q={{sku_prod}}"
+        "target_website": "https://www.sportovna.com.ua/search/?productsPerPage=24&limiter%5Bfulltext%5D={{sku_prod}}"
       },
       "products": [
         {
