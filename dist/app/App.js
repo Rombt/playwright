@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const PlaywrightBrowser_1 = require("../browser/playwright/PlaywrightBrowser");
 const FileStorage_1 = require("../storage/fs/FileStorage");
-const DefaultScenario_1 = require("../scenario/scenarios/DefaultScenario");
 const RozetkaScenario_1 = require("../scenario/scenarios/RozetkaScenario");
 const node_fs_1 = require("node:fs");
 const appConfig_1 = require("../data/config/appConfig");
 const UnprocessedCollector_1 = require("../data/collectors/UnprocessedCollector");
 const Logger_1 = require("../data/logger/Logger");
+const ScenarioFactory_1 = require("../scenario/ScenarioFactory");
 //todo прочитать опции и предать в браузер
 // todo где то здесь должен создаваться браузер, один на всё приложение!
 // todo где закрывать браузер?
@@ -101,7 +101,8 @@ class App {
                     storage: storage,
                 },
             });
-            const scenario = new DefaultScenario_1.DefaultScenario(browser, storage, this.mode);
+            // const scenario = new DefaultScenario(browser, storage, this.mode);
+            const scenario = ScenarioFactory_1.ScenarioFactory.create(this.config.scenario, browser, storage, this.mode);
             await scenario.run(this.config.brands);
         }
         else if (this.mode === 'retry' && unprocessedCount !== 0) {

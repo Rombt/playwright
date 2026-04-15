@@ -37,8 +37,10 @@ exports.config = {
         // resultsFolder: 'results/brs/brs_prod',
         // resultsFolder: 'results/avecs/avecs_test',
         // resultsFolder: 'results/joma/joma_test',
-        resultsFolder: 'results/salomon/salomon_test',
+        // resultsFolder: 'results/salomon/salomon_test',
+        resultsFolder: 'results/under_armour/under_armour_test',
         sourcesFolder: './dist/source/sources',
+        scenario: 'rozetka',
         convertToJpg: true,
         // brands: ['M-TAC', 'New Balance', 'Saucony', 'Columbia'], // указать те которые должны быть обработаны. Кроме них другие обрабатываться не будут
         // brands: ['Joma'],

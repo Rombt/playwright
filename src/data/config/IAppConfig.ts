@@ -37,6 +37,7 @@ export interface DataConfig {
   convertToJpg: boolean;
   taskPath: string;
   brands: string[];
+  scenario?: string;
 }
 
 export interface BrowserConfig {

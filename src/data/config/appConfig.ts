@@ -75,6 +75,10 @@ export class AppConfig {
     return this.config;
   }
 
+  public get scenario(): string {
+    return this.processData(appConfig).data.scenario ?? 'default';
+  }
+
   public get resultsFolder(): string {
     return this.processData(appConfig).data.resultsFolder;
   }
@@ -154,6 +158,7 @@ export class AppConfig {
         convertToJpg: dataConfig.convertToJpg ?? false,
         brands: resolveBrands(dataConfig.brands),
         taskPath: this.resolvePath(dataConfig.taskPath),
+        scenario: typeof dataConfig.scenario === 'string' ? dataConfig.scenario : 'default',
       },
     };
   }
