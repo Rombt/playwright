@@ -201,6 +201,9 @@ class DefaultScenario {
         });
     }
     async load(brands) {
+        return this.loadTasks(brands);
+    }
+    async loadTasks(brands) {
         const filePath = path.resolve(process.cwd(), this.taskPath);
         const raw = await fs_1.promises.readFile(filePath, 'utf-8');
         const data = JSON.parse(raw);
@@ -208,10 +211,8 @@ class DefaultScenario {
         if (arrTasks.length === 0) {
             this.logger.error('Tasks array is invalid or corrupted', {
                 component: 'DefaultScenario',
-                method: 'load()',
-                data: {
-                    arrTasks: arrTasks,
-                },
+                method: 'loadTasks()',
+                data: { arrTasks },
             });
             throw new Error('Tasks array is invalid or corrupted');
         }

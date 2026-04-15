@@ -63,6 +63,8 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
   private readonly logger: Logger;
   private allErrors: IWorkerError[] = [];
 
+  private readonly taskPath: string;
+
   private sources: ISource<ICollectProductPhotosTask>[] = [];
   private resources: IResource[] = [];
 
@@ -78,11 +80,12 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     this.maxPage = this.config.asyncPages.maxPage;
     this.maxTask = this.config.asyncTasks.maxTask;
     this.sourcesFolder = this.config.sourcesFolder;
+    this.taskPath = this.config.taskPath;
   }
 
-  async run(): Promise<void> {
+  async run(brands?: string[]): Promise<void> {
     try {
-      const arrTasks = await this.load();
+      const arrTasks = await this.load(brands);
 
       this.logger.debug(`The array of unprocessed products was received`, {
         component: 'RozetkaScenario',
@@ -208,15 +211,53 @@ export class RozetkaScenario<Browser, Context extends BrowserContext>
     });
   }
 
-  async load(): Promise<ICollectProductPhotosTask[]> {
-    const unprocessedCollector = new UnprocessedCollector();
-    const arrTasks = unprocessedCollector.getPhotoCollectionTasks(this.mode);
+  async load(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
+    let arrTasks;
+
+    if (this.mode === 'retry') {
+      const unprocessedCollector = new UnprocessedCollector();
+      arrTasks = unprocessedCollector.getPhotoCollectionTasks(this.mode);
+    } else if (this.mode === 'full') {
+      arrTasks = await this.loadTasks(brands);
+    }
+
+    this.logger.debug(`The array of tasks was received`, {
+      component: 'RozetkaScenario',
+      method: 'load()',
+      action: '',
+      data: {
+        thisMode: this.mode,
+        arrTasks: arrTasks,
+      },
+    });
 
     if (!Array.isArray(arrTasks)) {
       throw new Error('Task file must contain an array');
     }
 
     return arrTasks;
+  }
+
+  private async loadTasks(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
+    const filePath = path.resolve(process.cwd(), this.taskPath);
+    const raw = await fs.readFile(filePath, 'utf-8');
+    const data: ICollectProductPhotosBatch = JSON.parse(raw);
+
+    const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
+
+    if (arrTasks.length === 0) {
+      this.logger.error('Tasks array is invalid or corrupted', {
+        component: 'DefaultScenario',
+        method: 'loadTasks()',
+        data: { arrTasks },
+      });
+
+      throw new Error('Tasks array is invalid or corrupted');
+    }
+
+    if (!brands?.length) return arrTasks;
+
+    return arrTasks.filter((task) => brands.includes(task.brand_name));
   }
 
   async prepare(): Promise<void> {

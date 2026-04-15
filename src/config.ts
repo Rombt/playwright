@@ -70,8 +70,8 @@ export const config = {
     // taskPath: 'src/data/tasks/adidas/adidas_tests_short.json',
     // taskPath: 'src/data/tasks/new_balance/new_balance_tests.json',
     // taskPath: 'src/data/tasks/new_balance/new_balance_tests_short.json',
-    // taskPath: 'src/data/tasks/joma/joma_test.json',
-    taskPath: 'src/data/tasks/salomon/salomon_test.json',
+    taskPath: 'src/data/tasks/joma/joma_test.json',
+    // taskPath: 'src/data/tasks/salomon/salomon_test.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

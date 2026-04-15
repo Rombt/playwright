@@ -279,18 +279,21 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   }
 
   async load(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
+    return this.loadTasks(brands);
+  }
+
+  private async loadTasks(brands?: string[]): Promise<ICollectProductPhotosTask[]> {
     const filePath = path.resolve(process.cwd(), this.taskPath);
     const raw = await fs.readFile(filePath, 'utf-8');
     const data: ICollectProductPhotosBatch = JSON.parse(raw);
 
     const arrTasks: ICollectProductPhotosTask[] = Object.values(data.task);
+
     if (arrTasks.length === 0) {
       this.logger.error('Tasks array is invalid or corrupted', {
         component: 'DefaultScenario',
-        method: 'load()',
-        data: {
-          arrTasks: arrTasks,
-        },
+        method: 'loadTasks()',
+        data: { arrTasks },
       });
 
       throw new Error('Tasks array is invalid or corrupted');

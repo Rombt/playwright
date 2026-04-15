@@ -120,7 +120,6 @@ export class App<BrowserOptions> {
         },
       });
 
-      // const scenario = new DefaultScenario(browser, storage, this.mode);
       const scenario = ScenarioFactory.create(this.config.scenario, browser, storage, this.mode);
       await scenario.run(this.config.brands);
     } else if (this.mode === 'retry' && unprocessedCount !== 0) {

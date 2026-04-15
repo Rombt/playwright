@@ -101,7 +101,6 @@ class App {
                     storage: storage,
                 },
             });
-            // const scenario = new DefaultScenario(browser, storage, this.mode);
             const scenario = ScenarioFactory_1.ScenarioFactory.create(this.config.scenario, browser, storage, this.mode);
             await scenario.run(this.config.brands);
         }
