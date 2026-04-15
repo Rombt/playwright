@@ -14,7 +14,8 @@ exports.config = {
             maxTask: 4,
         },
         pages: {
-            maxPage: 10,
+            maxPage: 10, // for all brands
+            // maxPage: 1, // for salomon
             maxPageDownloadImg: 5, // если не задавать то будет равным maxPage если и maxPage не задано то 10
             maxWaiters: 1500,
             pageLoadWait: 10000,
