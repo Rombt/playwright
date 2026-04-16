@@ -28,3 +28,4 @@ __exportStar(require("./data/removeAllAttributes"), exports);
 __exportStar(require("./data/removeElementsByFuzzyText"), exports);
 __exportStar(require("./data/normalizeSku"), exports);
 __exportStar(require("./data/matchFastFuzzy"), exports);
+__exportStar(require("./html/normalizeDomToList"), exports);

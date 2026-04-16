@@ -12,3 +12,4 @@ export * from './data/removeAllAttributes';
 export * from './data/removeElementsByFuzzyText';
 export * from './data/normalizeSku';
 export * from './data/matchFastFuzzy';
+export * from './html/normalizeDomToList';
