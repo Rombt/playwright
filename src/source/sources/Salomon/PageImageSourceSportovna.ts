@@ -97,46 +97,29 @@ export default class PageImageSourceSportovna implements ISource<ICollectProduct
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      //!!
-      const link = page
-        .locator('div[data-testid="container"] a:has(section[aria-label*="Main product image"])')
-        .first();
-
-      const empty = page.locator('h2', {
-        hasText: 'Sorry, we hebben geen resultaten gevonden',
+      const noProduct = page.locator('#products-list ', {
+        hasText: 'нічого не знайдено',
       });
 
-      try {
-        await Promise.race([
-          link.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
-          empty.waitFor({ state: 'visible', timeout: this.config.asyncRetry.maxDelay }),
-        ]);
-      } catch {
-        throw new Error(`Search result not resolved. ${sku}`);
-      }
-
-      if ((await empty.count()) > 0) {
+      if ((await noProduct.count()) > 0) {
         throw new Error(`Goods not found on the page. ${sku}`);
       }
 
-      const relativeHref = await link.getAttribute('href');
-      if (!relativeHref) throw new Error('Product link not found');
-      const absoluteHref = new URL(relativeHref, page.url()).toString();
+      //!!
+      // страницы результатов поиска у этого источника нет
+      const page_sku = page.locator('h1', {
+        hasText: `${sku}`,
+      });
+      await page_sku
+        .first()
+        .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
 
-      await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
-
-      await page.waitForURL(
-        (url) => {
-          const u = new URL(url.toString());
-          return u.pathname.includes(sku);
-        },
-        {
-          timeout: this.config.asyncRetry.maxDelay,
-        },
-      );
+      if ((await page_sku.count()) === 0) {
+        throw new Error(`The page is not match sku  ${sku}`);
+      }
 
       //!!
-      const image = page.locator('section.s-area-gallery button.s-w-full.s-h-full > img').first();
+      const image = page.locator('div.product-gallery div.slick-track li img').first();
 
       await image.waitFor({
         state: 'attached',
@@ -144,7 +127,7 @@ export default class PageImageSourceSportovna implements ISource<ICollectProduct
       });
 
       //!!
-      const gallery = page.locator('section.s-area-gallery');
+      const gallery = page.locator('div.product-gallery div.slick-track');
 
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -156,11 +139,35 @@ export default class PageImageSourceSportovna implements ISource<ICollectProduct
       if (count === 0) throw new Error('No images found on page');
 
       //!!
-      const absoluteImageUrls = await page
-        .locator('section.s-area-gallery img')
-        .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src') || ''));
+      const urlImages = await page
+        .locator('.product-gallery__main-item picture')
+        .evaluateAll((pictures) =>
+          pictures.map((pic) => {
+            const source = pic.querySelector('source');
+            const img = pic.querySelector('img');
 
-      images[sku] = absoluteImageUrls as IDataImagItem;
+            const srcset = source?.getAttribute('srcset') || img?.getAttribute('srcset');
+
+            let url = img?.getAttribute('src') || '';
+
+            if (srcset) {
+              const candidates = srcset.split(',').map((item) => {
+                const [u, size] = item.trim().split(' ');
+                return {
+                  url: u,
+                  width: parseInt(size.replace('w', ''), 10),
+                };
+              });
+
+              url = candidates.sort((a, b) => b.width - a.width)[0]?.url || url;
+            }
+
+            // убираем ресайз → получаем оригинал
+            return url.replace(/_w\d+_h\d+/, '');
+          }),
+        );
+
+      images[sku] = Array.from(new Set(urlImages)) as IDataImagItem;
       images[sku].idProduct = product.id_product;
     } catch (err) {
       throw this.buildWorkerError(err, product, url);

@@ -25,10 +25,10 @@ exports.config = {
         // resultsFolder: 'results/skechers',
         resultsFolder: 'results/salomon/salomon_test',
         sourcesFolder: './dist/source/sources',
-        scenario: 'rozetka',
+        // scenario: 'rozetka',   // для отсутствующих sources
         convertToJpg: true,
         // taskPath: 'src/data/tasks/skechers/skechers.json',
-        taskPath: 'src/data/tasks/salomon/salomon_test.json',
+        taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

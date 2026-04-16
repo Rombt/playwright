@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-06_14-03",
+  "task": {
+    "12": {
+      "brand_id": "12",
+      "brand_name": "Salomon",
+      "metadata": {
+        "target_website": "https://www.sportovna.com.ua/search/?productsPerPage=24&limiter%5Bfulltext%5D={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55335",
+          "name_product": "Кросівки L47801500*SS26 SLM (ж)",
+          "sku": "L47801500*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "36 2/3"
+          }
+        }
+      ]
+    }
+  }
+}
