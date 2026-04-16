@@ -16,6 +16,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./data/normalize"), exports);
 __exportStar(require("./playwright/retry"), exports);
+__exportStar(require("./playwright/extractSlickImages"), exports);
+__exportStar(require("./playwright/extractRawHtml"), exports);
 __exportStar(require("./async/wait"), exports);
 __exportStar(require("./data/readProducts"), exports);
 __exportStar(require("./data/writeProducts"), exports);

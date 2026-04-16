@@ -1,5 +1,7 @@
 export * from './data/normalize';
 export * from './playwright/retry';
+export * from './playwright/extractSlickImages';
+export * from './playwright/extractRawHtml';
 export * from './async/wait';
 export * from './data/readProducts';
 export * from './data/writeProducts';

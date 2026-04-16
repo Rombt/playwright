@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Logger_1 = require("../../../data/logger/Logger");
 const appConfig_1 = require("../../../data/config/appConfig");
+const helpers_1 = require("../../../common/helpers");
 class PageImageSourceSportovna {
     config;
     logger;
@@ -91,28 +92,19 @@ class PageImageSourceSportovna {
             if (count === 0)
                 throw new Error('No images found on page');
             //!!
-            const urlImages = await page
-                .locator('.product-gallery__main-item picture')
-                .evaluateAll((pictures) => pictures.map((pic) => {
-                const source = pic.querySelector('source');
-                const img = pic.querySelector('img');
-                const srcset = source?.getAttribute('srcset') || img?.getAttribute('srcset');
-                let url = img?.getAttribute('src') || '';
-                if (srcset) {
-                    const candidates = srcset.split(',').map((item) => {
-                        const [u, size] = item.trim().split(' ');
-                        return {
-                            url: u,
-                            width: parseInt(size.replace('w', ''), 10),
-                        };
-                    });
-                    url = candidates.sort((a, b) => b.width - a.width)[0]?.url || url;
-                }
-                // убираем ресайз → получаем оригинал
-                return url.replace(/_w\d+_h\d+/, '');
-            }));
+            const urlImages = await (0, helpers_1.extractSlickImages)(page, {
+                container: gallery,
+            });
             images[sku] = Array.from(new Set(urlImages));
             images[sku].idProduct = product.id_product;
+            html = await (0, helpers_1.extractRawHtml)(page, {
+                containers: ['.product-quick-description-banner', '.tabs product-tabs'],
+                removeSelectors: [
+                    '.product-best-for',
+                    '.product_tabs_reviews',
+                    '.product_tabs_full_describe',
+                ],
+            });
         }
         catch (err) {
             throw this.buildWorkerError(err, product, url);
