@@ -1,11 +1,5 @@
 import { Page, Locator } from 'playwright';
-
-type ExtractHtmlOptions = {
-  containers: (string | Locator)[];
-  removeSelectors?: string[];
-  expand?: boolean;
-  separator?: string; // разделитель между блоками
-};
+import { IExtractHtmlOptions } from './types/IExtractHtmlOptions';
 
 /**
  * Универсальный extractor сырого HTML из указанных контейнеров.
@@ -35,7 +29,7 @@ type ExtractHtmlOptions = {
  * Получение чистого HTML-контента из сложных UI-страниц (с табами, аккордеонами,
  * галереями и динамическими блоками) для последующего парсинга или анализа.
  */
-export async function extractRawHtml(page: Page, options: ExtractHtmlOptions): Promise<string> {
+export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): Promise<string> {
   const { containers, removeSelectors = [], expand = true, separator = '\n' } = options;
 
   const locators: Locator[] = containers.map((c) => (typeof c === 'string' ? page.locator(c) : c));

@@ -1,0 +1,257 @@
+{
+  "generated_at": "2026-02-09_14-00",
+  "task": {
+    "257": {
+      "brand_id": "257",
+      "brand_name": "SvaStone",
+      "metadata": {
+        "target_website": "https://svastone.com/search/?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "51109",
+          "name_product": "Футболка We Are From Ukraine SS-TS-WFU SVA",
+          "sku": "SS-TS-WFU",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "51109",
+          "name_product": "Футболка We Are From Ukraine SS-TS-WFU SVA",
+          "sku": "SS-TS-WFU",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "51109",
+          "name_product": "Футболка We Are From Ukraine SS-TS-WFU SVA",
+          "sku": "SS-TS-WFU",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "51109",
+          "name_product": "Футболка We Are From Ukraine SS-TS-WFU SVA",
+          "sku": "SS-TS-WFU",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "51109",
+          "name_product": "Футболка We Are From Ukraine SS-TS-WFU SVA",
+          "sku": "SS-TS-WFU",
+          "attributes": {
+            "color": "сірий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53376",
+          "name_product": "Футболка No Knife No Life SS-TS-NKNL SVA",
+          "sku": "SS-TS-NKNL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53376",
+          "name_product": "Футболка No Knife No Life SS-TS-NKNL SVA",
+          "sku": "SS-TS-NKNL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53376",
+          "name_product": "Футболка No Knife No Life SS-TS-NKNL SVA",
+          "sku": "SS-TS-NKNL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53376",
+          "name_product": "Футболка No Knife No Life SS-TS-NKNL SVA",
+          "sku": "SS-TS-NKNL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53376",
+          "name_product": "Футболка No Knife No Life SS-TS-NKNL SVA",
+          "sku": "SS-TS-NKNL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53377",
+          "name_product": "Футболка SVa Stone  Traveler SS-TS-TRVL",
+          "sku": "SS-TS-TRVL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53377",
+          "name_product": "Футболка SVa Stone  Traveler SS-TS-TRVL",
+          "sku": "SS-TS-TRVL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53377",
+          "name_product": "Футболка SVa Stone  Traveler SS-TS-TRVL",
+          "sku": "SS-TS-TRVL",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53381",
+          "name_product": "Футболка Sva Stone  Сокира Перуна SS-TS-SP",
+          "sku": "SS-TS-SP",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "53381",
+          "name_product": "Футболка Sva Stone  Сокира Перуна SS-TS-SP",
+          "sku": "SS-TS-SP",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53381",
+          "name_product": "Футболка Sva Stone  Сокира Перуна SS-TS-SP",
+          "sku": "SS-TS-SP",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53381",
+          "name_product": "Футболка Sva Stone  Сокира Перуна SS-TS-SP",
+          "sku": "SS-TS-SP",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53381",
+          "name_product": "Футболка Sva Stone  Сокира Перуна SS-TS-SP",
+          "sku": "SS-TS-SP",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54857",
+          "name_product": "Брюки SVA rip-stop Hammer SS-PNTS-H",
+          "sku": "SS-PNTS-H\t",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "54857",
+          "name_product": "Брюки SVA rip-stop Hammer SS-PNTS-H",
+          "sku": "SS-PNTS-H\t",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54857",
+          "name_product": "Брюки SVA rip-stop Hammer SS-PNTS-H",
+          "sku": "SS-PNTS-H\t",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54857",
+          "name_product": "Брюки SVA rip-stop Hammer SS-PNTS-H",
+          "sku": "SS-PNTS-H\t",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54861",
+          "name_product": "Світшот Fortress SVA SS-HJ-FEO",
+          "sku": "SS-HJ-FEO",
+          "attributes": {
+            "color": "олива",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "54861",
+          "name_product": "Світшот Fortress SVA SS-HJ-FEO",
+          "sku": "SS-HJ-FEO",
+          "attributes": {
+            "color": "олива",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54861",
+          "name_product": "Світшот Fortress SVA SS-HJ-FEO",
+          "sku": "SS-HJ-FEO",
+          "attributes": {
+            "color": "олива",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54861",
+          "name_product": "Світшот Fortress SVA SS-HJ-FEO",
+          "sku": "SS-HJ-FEO",
+          "attributes": {
+            "color": "олива",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54861",
+          "name_product": "Світшот Fortress SVA SS-HJ-FEO",
+          "sku": "SS-HJ-FEO",
+          "attributes": {
+            "color": "олива",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,39 +1,58 @@
-import { Page, Locator } from 'playwright';
+import { Page, Locator } from '@playwright/test';
 import { IExtractImgOptions } from './types/IExtractImgOptions';
 
-export async function extractSlickImages(page: Page, options: IExtractImgOptions) {
+export async function extractSplideImages(page: Page, options: IExtractImgOptions) {
   const container =
     typeof options.container === 'string' ? page.locator(options.container) : options.container;
 
-  // 1. Ждём галерею
-  await container.locator('.slick-slide').first().waitFor({ timeout: 5000 });
+  // 1. Ждём инициализацию Splide
+  await container.locator('.splide__slide').first().waitFor({ timeout: 5000 });
 
-  // 2. "Будим" ТОЛЬКО этот слайдер
+  // 2. "Будим" слайдер (принудительно прогоняем состояние)
   await container.evaluate(async (root) => {
     function sleep(ms: number) {
       return new Promise((r) => setTimeout(r, ms));
     }
 
-    // ищем track внутри контейнера
-    const track = root.querySelector('.slick-track') as HTMLElement | null;
+    const track = root.querySelector('.splide__track') as HTMLElement | null;
+    const slides = Array.from(root.querySelectorAll('.splide__slide')) as HTMLElement[];
+
+    // 1) пробуем через API Splide (если доступен)
+    const splideInstance = (root as any)?.splide;
+    if (splideInstance) {
+      try {
+        splideInstance.go('>'); // следующий
+        await sleep(200);
+        splideInstance.go('<'); // назад
+      } catch {}
+    }
+
+    // 2) fallback — имитация прокрутки через transform
     if (track) {
       track.scrollLeft = track.scrollWidth;
-      await sleep(300);
+      await sleep(200);
       track.scrollLeft = 0;
     }
 
-    // кликаем next внутри контейнера
-    const nextBtn = root.querySelector('.slick-next') as HTMLElement | null;
+    // 3) кликаем стрелки (если есть)
+    const nextBtn = root.querySelector('.splide__arrow--next') as HTMLElement | null;
+
     if (nextBtn) {
       for (let i = 0; i < 5; i++) {
         nextBtn.click();
-        await sleep(300);
+        await sleep(200);
       }
+    }
+
+    // 4) пробуем активировать все слайды (важно для lazy-load)
+    for (const slide of slides) {
+      slide.dispatchEvent(new Event('mouseenter', { bubbles: true }));
+      slide.dispatchEvent(new Event('mouseover', { bubbles: true }));
     }
   });
 
-  // 3. Собираем изображения ТОЛЬКО внутри контейнера
-  const images = await container.locator('.slick-slide').evaluateAll((slides) => {
+  // 3. Извлекаем изображения
+  const images = await container.locator('.splide__slide').evaluateAll((slides) => {
     function parseSrcset(srcset: string) {
       return srcset.split(',').map((item) => {
         const [url, size] = item.trim().split(' ');
@@ -78,6 +97,6 @@ export async function extractSlickImages(page: Page, options: IExtractImgOptions
     return results;
   });
 
-  // 4. Убираем дубликаты
+  // 4. дедупликация
   return Array.from(new Set(images));
 }
