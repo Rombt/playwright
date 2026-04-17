@@ -14,6 +14,7 @@ export interface ISource<T extends ITask, THttpResponse = unknown> {
     page: Page,
     options?: {},
     debugMeta?: Record<string, string>,
+    sku?: string,
   ): Promise<IWorkerResult>;
 
   executeHttpRequest<T = unknown>(

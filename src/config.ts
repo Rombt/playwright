@@ -24,7 +24,8 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     resultsFolder: 'results/svastone/svastone_test',
 
-    sourcesFolder: './dist/source/sources',
+    // sourcesFolder: './dist/source/sources',
+    sourcesFolder: './dist/source/sources_s',
     // scenario: 'rozetka',   // для отсутствующих sources
     convertToJpg: true,
     // taskPath: 'src/data/tasks/skechers/skechers.json',

@@ -1000,6 +1000,34 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     throw error;
   }
 
+  // async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
+  //   const sources: ISource<ICollectProductPhotosTask>[] = [];
+
+  //   const walk = async (dir: string) => {
+  //     const files = await fs.readdir(dir, { withFileTypes: true });
+
+  //     for (const file of files) {
+  //       const fullPath = path.resolve(dir, file.name);
+
+  //       if (file.isDirectory()) {
+  //         await walk(fullPath);
+  //         continue;
+  //       }
+
+  //       if (!file.name.endsWith('.js')) continue;
+
+  //       const sourceModule = require(fullPath);
+  //       const SourceClass = sourceModule.default ?? sourceModule;
+
+  //       sources.push(new SourceClass());
+  //     }
+  //   };
+
+  //   await walk(this.sourcesFolder);
+
+  //   return sources;
+  // }
+
   async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
     const sources: ISource<ICollectProductPhotosTask>[] = [];
 
@@ -1016,10 +1044,24 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
         if (!file.name.endsWith('.js')) continue;
 
-        const sourceModule = require(fullPath);
-        const SourceClass = sourceModule.default ?? sourceModule;
+        try {
+          const sourceModule = require(fullPath);
+          const SourceClass = sourceModule.default ?? sourceModule;
 
-        sources.push(new SourceClass());
+          const instance = new SourceClass();
+
+          // 🔥 safety check
+          if (!instance?.supports || !instance?.worker) {
+            console.warn('[SKIP NON SOURCE]', fullPath);
+            continue;
+          }
+
+          console.log('[SOURCE LOADED]', instance.constructor.name);
+
+          sources.push(instance);
+        } catch (err) {
+          console.error('[SOURCE LOAD ERROR]', fullPath, err);
+        }
       }
     };
 
