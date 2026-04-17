@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node dist/index.js --mode=full",
     "retry": "node dist/index.js --mode=retry",
-    "img-convert": "node dist/scripts/convert-images.js"
+    "img-convert": "node dist/scripts/convert-images.js",
+    "deploy": "powershell -ExecutionPolicy Bypass -File deploy.ps1"
   },
   "repository": {
     "type": "git",
