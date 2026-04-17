@@ -43,6 +43,7 @@ export interface DataConfig {
 export interface BrowserConfig {
   fingerprintFile: string;
   mode: IBrowserMode;
+  downloadImages: boolean;
 }
 
 export interface LoggerConfig {

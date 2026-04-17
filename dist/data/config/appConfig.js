@@ -87,6 +87,9 @@ class AppConfig {
     get browserMode() {
         return this.processBrowser(config_1.config).browser.mode;
     }
+    get downloadImages() {
+        return this.processBrowser(config_1.config).browser.downloadImages;
+    }
     get loggerConfig() {
         return this.processLogger(config_1.config).logger;
     }
@@ -163,10 +166,13 @@ class AppConfig {
                 throw new Error(`Invalid browser.mode: "${browserConfig.mode}". Allowed: real | fake`);
             }
         }
+        // --- downloadImages ---
+        const downloadImages = browserConfig.downloadImages ?? true;
         return {
             browser: {
                 fingerprintFile,
                 mode,
+                downloadImages,
             },
         };
     }

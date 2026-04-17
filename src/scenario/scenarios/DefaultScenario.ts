@@ -619,10 +619,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         },
       });
 
-      //!!!!
-      // allErrors.push(
-      //   ...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)),
-      // );
+      //нужно при отладке текстовых процессоров
+      if (this.config.downloadImages) {
+        allErrors.push(
+          ...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)),
+        );
+      }
     });
 
     await this.storage.appendJsonUnique(

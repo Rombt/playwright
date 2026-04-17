@@ -118,6 +118,9 @@ export class AppConfig {
   public get browserMode(): IBrowserMode {
     return this.processBrowser(appConfig).browser.mode;
   }
+  public get downloadImages(): boolean {
+    return this.processBrowser(appConfig).browser.downloadImages;
+  }
 
   public get loggerConfig(): LoggerConfig {
     return this.processLogger(appConfig).logger;
@@ -215,10 +218,14 @@ export class AppConfig {
       }
     }
 
+    // --- downloadImages ---
+    const downloadImages = browserConfig.downloadImages ?? true;
+
     return {
       browser: {
         fingerprintFile,
         mode,
+        downloadImages,
       },
     };
   }
