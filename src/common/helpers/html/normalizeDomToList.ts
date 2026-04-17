@@ -150,8 +150,8 @@ function sanitizeDom($: CheerioAPI) {
     'video',
     'iframe',
     'noscript',
-    '[aria-hidden="true"]',
-    '[hidden]',
+    // '[aria-hidden="true"]',
+    // '[hidden]',
   ];
 
   remove.forEach((sel) => $(sel).remove());
@@ -179,50 +179,103 @@ function extractListItems($: CheerioAPI, root: any, removeSelectors: string[]): 
     clone.find(sel).remove();
   });
 
-  // 1. LI
+  const items: string[] = [];
+
+  // =========================
+  // 1. DETAILS / ACCORDION
+  // =========================
+  clone.find('details').each((_: number, el: any) => {
+    const $el = $(el);
+
+    const title = cleanText($el.find('summary').first().text());
+
+    // берём ВСЁ кроме summary
+    const bodyClone = $el.clone();
+    bodyClone.find('summary').remove();
+
+    const bodyText = cleanText(bodyClone.text());
+
+    if (bodyText) {
+      items.push(title ? `${title}: ${bodyText}` : bodyText);
+    }
+  });
+
+  // =========================
+  // 2. LI
+  // =========================
   const liItems = clone.find('li');
 
   if (liItems.length) {
-    const result: string[] = [];
-
     liItems.each((_: number, el: Element) => {
       const text = cleanText($(el).text());
-      if (text) result.push(text);
+      if (text) items.push(text);
     });
-
-    return result;
   }
 
-  // 2. P
+  // =========================
+  // 3. P (НО только НЕ внутри details)
+  // =========================
   const paragraphs = clone.find('p');
 
   if (paragraphs.length) {
-    const result: string[] = [];
-
     paragraphs.each((_: number, el: Element) => {
-      const text = cleanText($(el).text());
-      if (text) result.push(text);
-    });
+      const $p = $(el);
 
-    return result;
+      // избегаем дубля если уже обработали details
+      if ($p.closest('details').length) return;
+
+      const text = cleanText($p.text());
+      if (text) items.push(text);
+    });
   }
 
-  // 3. BR split (ВАЖНО: без load!)
+  // =========================
+  // 4. BR fallback
+  // =========================
   const html = clone.html() || '';
 
   const parts: string[] = [];
 
-  html.split(/<br\s*\/?>/i).forEach((s: string) => {
-    const text = cleanText($(s).text());
+  clone.contents().each((_: string, node: Element) => {
+    const el = $(node);
+
+    if (el.is('details')) {
+      const title = cleanText(el.find('summary').first().text());
+
+      const bodyText = cleanText(el.clone().find('summary').remove().end().text());
+
+      if (bodyText) {
+        parts.push(title ? `${title}: ${bodyText}` : bodyText);
+      }
+
+      return;
+    }
+
+    // 2. paragraphs
+    if (el.is('p')) {
+      const text = cleanText(el.text());
+      if (text) parts.push(text);
+      return;
+    }
+
+    // 3. fallback text nodes
+    const text = cleanText(el.text());
     if (text) parts.push(text);
   });
 
-  if (parts.length) return parts;
+  if (parts.length) {
+    items.push(...parts);
+  }
 
-  // 4. fallback
-  const text = cleanText(clone.text());
+  // =========================
+  // 5. fallback
+  // =========================
+  if (!items.length) {
+    const text = cleanText(clone.text());
+    if (text) items.push(text);
+  }
 
-  return text ? [text] : [];
+  return items;
 }
 
 /**
