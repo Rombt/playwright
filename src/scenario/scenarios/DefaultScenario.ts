@@ -620,9 +620,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       });
 
       //!!!!
-      allErrors.push(
-        ...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)),
-      );
+      // allErrors.push(
+      //   ...(await this.downloadImages(normalized, task, context, this.limiter, loggerScope)),
+      // );
     });
 
     await this.storage.appendJsonUnique(

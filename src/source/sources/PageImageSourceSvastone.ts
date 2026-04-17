@@ -168,10 +168,10 @@ export default class PageImageSourceSvastone implements ISource<ICollectProductP
       images[sku] = Array.from(new Set(urlImages)) as IDataImagItem;
       images[sku].idProduct = product.id_product;
 
-      // html = await extractRawHtml(page, {
-      //   containers: ['.hero-product__body > div.hero-product__spoilers '],
-      //   removeSelectors: ['button.spoilers__item'],
-      // });
+      html = await extractRawHtml(page, {
+        containers: ['.hero-product__body > div.hero-product__spoilers '],
+        removeSelectors: ['button.spoilers__item'],
+      });
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }

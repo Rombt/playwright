@@ -21,14 +21,16 @@ export const config = {
 
   data: {
     // resultsFolder: 'results/skechers',
-    resultsFolder: 'results/svastone/svastone_test',
+    resultsFolder: 'results/salomon/salomon_test',
+    // resultsFolder: 'results/svastone/svastone_test',
 
     sourcesFolder: './dist/source/sources',
     // scenario: 'rozetka',   // для отсутствующих sources
     convertToJpg: true,
     // taskPath: 'src/data/tasks/skechers/skechers.json',
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
-    taskPath: 'src/data/tasks/svastone/svastone_tests_short.json',
+    taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
+    // taskPath: 'src/data/tasks/svastone/svastone_test_short.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

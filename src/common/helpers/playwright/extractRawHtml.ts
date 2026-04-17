@@ -39,6 +39,7 @@ export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): 
   }
 
   const results: string[] = [];
+  const seen = new Set<string>();
 
   for (const locator of locators) {
     const elements = await locator.all();
@@ -49,7 +50,6 @@ export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): 
 
         const defaultRemove = [
           'svg',
-          'img',
           'picture',
           'video',
           'canvas',
@@ -61,24 +61,38 @@ export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): 
           '[class*="icon"]',
         ];
 
-        // удаляем мусор
-        [...defaultRemove, ...removeSelectors].forEach((selector) => {
+        // 1. удаляем только визуальный мусор (НЕ hidden контент)
+        const allRemove = [...defaultRemove, ...removeSelectors];
+
+        for (const selector of allRemove) {
           clone.querySelectorAll(selector).forEach((el) => el.remove());
-        });
+        }
 
-        // скрытые элементы
-        clone.querySelectorAll('[hidden], [aria-hidden="true"]').forEach((el) => el.remove());
+        // 2. НЕ удаляем hidden / aria-hidden / display none
+        // потому что нам нужен полный сырой DOM
 
-        // чистим атрибуты
+        // 3. чистим атрибуты (но аккуратно)
         clone.querySelectorAll('*').forEach((el) => {
           el.removeAttribute('style');
           el.removeAttribute('class');
         });
 
+        // 4. нормализация текста
+        function clean(node: Node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent = node.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+          }
+
+          node.childNodes.forEach(clean);
+        }
+
+        clean(clone);
+
         return clone.innerHTML.trim();
       }, removeSelectors);
 
-      if (html) {
+      if (html && !seen.has(html)) {
+        seen.add(html);
         results.push(html);
       }
     }
@@ -88,51 +102,41 @@ export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): 
 }
 
 async function expandInteractiveElements(page: Page) {
-  // 1. details
-  const details = page.locator('details:not([open])');
-  const countDetails = await details.count();
-
-  for (let i = 0; i < countDetails; i++) {
-    await details.nth(i).evaluate((el: HTMLDetailsElement) => {
+  // details → просто открыть (без лишней логики)
+  await page.locator('details').evaluateAll((els) => {
+    els.forEach((el: any) => {
       el.open = true;
     });
-  }
+  });
 
-  // 2. aria-expanded
+  // aria-expanded
   const expandable = page.locator('[aria-expanded="false"]');
-  const countExpandable = await expandable.count();
 
-  for (let i = 0; i < countExpandable; i++) {
-    const el = expandable.nth(i);
-
+  for (let i = 0; i < (await expandable.count()); i++) {
     try {
-      await el.click({ timeout: 1000 });
+      await expandable.nth(i).click({ timeout: 600 });
     } catch {}
   }
 
-  // 3. табы (role=tab)
+  // tabs
   const tabs = page.locator('[role="tab"]');
-  const countTabs = await tabs.count();
 
-  for (let i = 0; i < countTabs; i++) {
+  for (let i = 0; i < (await tabs.count()); i++) {
     try {
-      await tabs.nth(i).click({ timeout: 1000 });
+      await tabs.nth(i).click({ timeout: 600 });
       await page.waitForTimeout(100);
     } catch {}
   }
 
-  // 4. частые классы (аккордеоны)
-  const triggers = page.locator('.accordion, .collapse, .tab, button[aria-controls]');
+  // универсальные триггеры
+  const triggers = page.locator('button[aria-controls], [data-toggle], [data-target]');
 
-  const countTriggers = await triggers.count();
-
-  for (let i = 0; i < countTriggers; i++) {
+  for (let i = 0; i < (await triggers.count()); i++) {
     try {
-      await triggers.nth(i).click({ timeout: 500 });
+      await triggers.nth(i).click({ timeout: 400 });
     } catch {}
   }
 
-  // финальное ожидание
-  await page.waitForLoadState('networkidle').catch(() => {});
-  await page.waitForTimeout(300);
+  // даём DOM догрузиться
+  await page.waitForTimeout(500);
 }
