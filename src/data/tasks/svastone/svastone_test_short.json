@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-09_14-00",
+  "task": {
+    "257": {
+      "brand_id": "257",
+      "brand_name": "SvaStone",
+      "metadata": {
+        "target_website": "https://svastone.com/search/?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "51109",
+          "name_product": "Футболка We Are From Ukraine SS-TS-WFU SVA",
+          "sku": "SS-TS-WFU",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        }
+      ]
+    }
+  }
+}

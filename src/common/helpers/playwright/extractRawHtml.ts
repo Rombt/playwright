@@ -1,11 +1,5 @@
 import { Page, Locator } from 'playwright';
-
-type ExtractHtmlOptions = {
-  containers: (string | Locator)[];
-  removeSelectors?: string[];
-  expand?: boolean;
-  separator?: string; // разделитель между блоками
-};
+import { IExtractHtmlOptions } from './types/IExtractHtmlOptions';
 
 /**
  * Универсальный extractor сырого HTML из указанных контейнеров.
@@ -35,27 +29,28 @@ type ExtractHtmlOptions = {
  * Получение чистого HTML-контента из сложных UI-страниц (с табами, аккордеонами,
  * галереями и динамическими блоками) для последующего парсинга или анализа.
  */
-export async function extractRawHtml(page: Page, options: ExtractHtmlOptions): Promise<string> {
-  const { containers, removeSelectors = [], expand = true, separator = '\n' } = options;
+export async function extractRawHtml(page: Page, options: any): Promise<string> {
+  const { containers, removeSelectors = [], separator = '\n' } = options;
 
-  const locators: Locator[] = containers.map((c) => (typeof c === 'string' ? page.locator(c) : c));
+  const locators: Locator[] = containers.map((c: any) =>
+    typeof c === 'string' ? page.locator(c) : c,
+  );
 
-  if (expand) {
-    await expandInteractiveElements(page);
-  }
+  // мягкое раскрытие (НЕ критичное)
+  await softExpand(page);
 
   const results: string[] = [];
+  const seen = new Set<string>();
 
   for (const locator of locators) {
     const elements = await locator.all();
 
     for (const el of elements) {
-      const html = await el.evaluate((root, removeSelectors) => {
+      const data = await el.evaluate((root, removeSelectors) => {
         const clone = root.cloneNode(true) as HTMLElement;
 
-        const defaultRemove = [
+        const remove = [
           'svg',
-          'img',
           'picture',
           'video',
           'canvas',
@@ -65,27 +60,28 @@ export async function extractRawHtml(page: Page, options: ExtractHtmlOptions): P
           'script',
           '[role="img"]',
           '[class*="icon"]',
+          ...removeSelectors,
         ];
 
-        // удаляем мусор
-        [...defaultRemove, ...removeSelectors].forEach((selector) => {
-          clone.querySelectorAll(selector).forEach((el) => el.remove());
-        });
+        // удалить мусор
+        for (const sel of remove) {
+          clone.querySelectorAll(sel).forEach((n) => n.remove());
+        }
 
-        // скрытые элементы
-        clone.querySelectorAll('[hidden], [aria-hidden="true"]').forEach((el) => el.remove());
-
-        // чистим атрибуты
-        clone.querySelectorAll('*').forEach((el) => {
-          el.removeAttribute('style');
-          el.removeAttribute('class');
-        });
+        // нормализация текста (главный фикс)
+        // const text = clone.innerText
+        //   .replace(/\s+\n/g, '\n')
+        //   .replace(/\n\s+/g, '\n')
+        //   .replace(/[ \t]+/g, ' ')
+        //   .trim();
+        // return text;
 
         return clone.innerHTML.trim();
       }, removeSelectors);
 
-      if (html) {
-        results.push(html);
+      if (data && !seen.has(data)) {
+        seen.add(data);
+        results.push(data);
       }
     }
   }
@@ -93,52 +89,28 @@ export async function extractRawHtml(page: Page, options: ExtractHtmlOptions): P
   return results.join(separator).trim();
 }
 
-async function expandInteractiveElements(page: Page) {
-  // 1. details
-  const details = page.locator('details:not([open])');
-  const countDetails = await details.count();
+async function softExpand(page: Page) {
+  // details
+  await page.locator('details').evaluateAll((els) => {
+    els.forEach((el: any) => (el.open = true));
+  });
 
-  for (let i = 0; i < countDetails; i++) {
-    await details.nth(i).evaluate((el: HTMLDetailsElement) => {
-      el.open = true;
-    });
-  }
-
-  // 2. aria-expanded
-  const expandable = page.locator('[aria-expanded="false"]');
-  const countExpandable = await expandable.count();
-
-  for (let i = 0; i < countExpandable; i++) {
-    const el = expandable.nth(i);
-
+  // aria-expanded
+  const exp = page.locator('[aria-expanded="false"]');
+  for (let i = 0; i < (await exp.count()); i++) {
     try {
-      await el.click({ timeout: 1000 });
+      await exp.nth(i).click({ timeout: 400 });
     } catch {}
   }
 
-  // 3. табы (role=tab)
+  // tabs (очень осторожно)
   const tabs = page.locator('[role="tab"]');
-  const countTabs = await tabs.count();
-
-  for (let i = 0; i < countTabs; i++) {
+  for (let i = 0; i < (await tabs.count()); i++) {
     try {
-      await tabs.nth(i).click({ timeout: 1000 });
-      await page.waitForTimeout(100);
+      await tabs.nth(i).click({ timeout: 400 });
+      await page.waitForTimeout(80);
     } catch {}
   }
 
-  // 4. частые классы (аккордеоны)
-  const triggers = page.locator('.accordion, .collapse, .tab, button[aria-controls]');
-
-  const countTriggers = await triggers.count();
-
-  for (let i = 0; i < countTriggers; i++) {
-    try {
-      await triggers.nth(i).click({ timeout: 500 });
-    } catch {}
-  }
-
-  // финальное ожидание
-  await page.waitForLoadState('networkidle').catch(() => {});
   await page.waitForTimeout(300);
 }

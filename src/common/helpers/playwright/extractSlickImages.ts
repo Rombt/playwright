@@ -1,10 +1,7 @@
 import { Page, Locator } from 'playwright';
+import { IExtractImgOptions } from './types/IExtractImgOptions';
 
-type SlickExtractorOptions = {
-  container: Locator | string;
-};
-
-export async function extractSlickImages(page: Page, options: SlickExtractorOptions) {
+export async function extractSlickImages(page: Page, options: IExtractImgOptions) {
   const container =
     typeof options.container === 'string' ? page.locator(options.container) : options.container;
 
