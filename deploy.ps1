@@ -29,7 +29,7 @@ if (!(Test-Path $dest)) {
 Write-Host "Syncing DIST..."
 
 robocopy $source $dest /MIR /R:2 /W:2 `
-    /XD "tasks" "results" `
+    /XD "tasks" "results" "node_modules" `
     /XF "config.js" "package.json"
 
 # --- 2. Копирование дополнительных путей ---

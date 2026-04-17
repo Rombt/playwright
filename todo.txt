@@ -36,7 +36,8 @@
     new balance,
     under armour,
     joma,
-    salomon
+    salomon,
+    svastone
 
 
 Бренды которые нужно обрабатывать только через Розетку:
