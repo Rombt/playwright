@@ -1,16 +1,16 @@
 import { APIRequestContext, Page } from 'playwright-core';
-import { ISource } from '../../ISource';
-import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
-import { IWorkerResult } from '../../../data/entities/IResults/IWorkerResult';
-import { IWorkerError } from '../../../data/entities/IErrors/IWorkerError';
-import { RateLimiter } from '../../../browser/limiter/RateLimiter';
-import { IProduct } from '../../../data/entities/IProduct';
-import { IDataImag, IDataImagItem } from '../../../data/entities/IDataImag';
-import { IHttpResult } from '../../../data/entities/IResults/IHttpResult';
-import { ILogger } from '../../../data/logger/types/ILogger';
-import { Logger } from '../../../data/logger/Logger';
-import { AppConfig } from '../../../data/config/appConfig';
-import { extractSlickImages, extractRawHtml } from '../../../common/helpers';
+import { ISource } from '../ISource';
+import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
+import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
+import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
+import { RateLimiter } from '../../browser/limiter/RateLimiter';
+import { IProduct } from '../../data/entities/IProduct';
+import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
+import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
+import { ILogger } from '../../data/logger/types/ILogger';
+import { Logger } from '../../data/logger/Logger';
+import { AppConfig } from '../../data/config/appConfig';
+import { extractSplideImages, extractRawHtml } from '../../common/helpers';
 
 export default class PageImageSourceSvastone implements ISource<ICollectProductPhotosTask> {
   private readonly config: AppConfig;
@@ -95,19 +95,40 @@ export default class PageImageSourceSvastone implements ISource<ICollectProductP
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-      const noProduct = page.locator('#products-list ', {
-        hasText: 'нічого не знайдено',
+      const container = page.locator('#product-container');
+      await container.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      const isEmpty = await page.locator('#product-container').evaluate((el) => {
+        return el.children.length === 0;
       });
 
-      if ((await noProduct.count()) > 0) {
+      if (isEmpty) {
         throw new Error(`Goods not found on the page. ${sku}`);
       }
 
-      //!!
-      // страницы результатов поиска у этого источника нет
-      const page_sku = page.locator('h1', {
+      const link = page
+        .locator('#product-container > article.item-product > div.item-product__image > a')
+        .first();
+
+      await link.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+
+      if ((await link.count()) === 0) {
+        throw new Error(`The link to the product page not found. ${sku}`);
+      }
+
+      const relativeHref = await link.getAttribute('href');
+      if (!relativeHref) throw new Error('Product link not found');
+      const absoluteHref = new URL(relativeHref, page.url()).toString();
+
+      await page.goto(absoluteHref, {
+        waitUntil: 'domcontentloaded',
+        timeout: this.config.asyncRetry.maxDelay,
+      });
+
+      const page_sku = page.locator('div.hero-product__block div.hero-product__article', {
         hasText: `${sku}`,
       });
+
       await page_sku
         .first()
         .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -117,7 +138,9 @@ export default class PageImageSourceSvastone implements ISource<ICollectProductP
       }
 
       //!!
-      const image = page.locator('div.product-gallery div.slick-track li img').first();
+      const image = page
+        .locator('div.splide__track > ul.splide__list > li.splide__slide.is-active img')
+        .first();
 
       await image.waitFor({
         state: 'attached',
@@ -125,7 +148,8 @@ export default class PageImageSourceSvastone implements ISource<ICollectProductP
       });
 
       //!!
-      const gallery = page.locator('div.product-gallery div.slick-track');
+      // const gallery = page.locator('div.splide__track > ul.splide__list');
+      const gallery = page.locator('#splide02-list');
 
       try {
         await gallery.waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
@@ -137,21 +161,17 @@ export default class PageImageSourceSvastone implements ISource<ICollectProductP
       if (count === 0) throw new Error('No images found on page');
 
       //!!
-      const urlImages = await extractSlickImages(page, {
+      const urlImages = await extractSplideImages(page, {
         container: gallery,
       });
 
       images[sku] = Array.from(new Set(urlImages)) as IDataImagItem;
       images[sku].idProduct = product.id_product;
 
-      html = await extractRawHtml(page, {
-        containers: ['.product-quick-description-banner', '.tabs product-tabs'],
-        removeSelectors: [
-          '.product-best-for',
-          '.product_tabs_reviews',
-          '.product_tabs_full_describe',
-        ],
-      });
+      // html = await extractRawHtml(page, {
+      //   containers: ['.hero-product__body > div.hero-product__spoilers '],
+      //   removeSelectors: ['button.spoilers__item'],
+      // });
     } catch (err) {
       throw this.buildWorkerError(err, product, url);
     }
