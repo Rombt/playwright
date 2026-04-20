@@ -308,6 +308,16 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   async process(task: ICollectProductPhotosTask, loggerScope?: ILogger): Promise<void> {
     const allErrors: IWorkerError[] = [];
 
+    loggerScope?.debug(`************The enter to the process method`, {
+      component: 'DefaultScenario',
+      method: 'process()',
+      stage: 'this.sources.find((s) => s.supports(task))',
+      data: {
+        task: task,
+        thisSources: this.sources,
+      },
+    });
+
     const source = this.sources.find((s) => s.supports(task));
 
     if (!source) {
@@ -1028,47 +1038,95 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   //   return sources;
   // }
 
+  //********************** */
+
   async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
     const sources: ISource<ICollectProductPhotosTask>[] = [];
 
-    const walk = async (dir: string) => {
-      const files = await fs.readdir(dir, { withFileTypes: true });
+    type SourceConstructor = new () => ISource<ICollectProductPhotosTask>;
 
-      for (const file of files) {
-        const fullPath = path.resolve(dir, file.name);
+    const isConstructable = (fn: unknown): fn is SourceConstructor => {
+      return (
+        typeof fn === 'function' &&
+        !!(fn as any).prototype &&
+        (fn as any).prototype.constructor === fn
+      );
+    };
 
-        if (file.isDirectory()) {
-          await walk(fullPath);
-          continue;
-        }
+    const resolveSourceClass = (module: any, fullPath: string): SourceConstructor => {
+      // 1. Приоритетные экспорты
+      const priority: unknown[] = [module.default, module.Source, module.Stage];
 
-        if (!file.name.endsWith('.js')) continue;
-
-        try {
-          const sourceModule = require(fullPath);
-          const SourceClass = sourceModule.default ?? sourceModule;
-
-          const instance = new SourceClass();
-
-          // 🔥 safety check
-          if (!instance?.supports || !instance?.worker) {
-            console.warn('[SKIP NON SOURCE]', fullPath);
-            continue;
-          }
-
-          console.log('[SOURCE LOADED]', instance.constructor.name);
-
-          sources.push(instance);
-        } catch (err) {
-          console.error('[SOURCE LOAD ERROR]', fullPath, err);
+      for (const candidate of priority) {
+        if (isConstructable(candidate)) {
+          return candidate;
         }
       }
+
+      // 2. fallback — только если найден ровно один кандидат
+      const candidates = Object.values(module).filter(isConstructable);
+
+      if (candidates.length === 1) {
+        return candidates[0];
+      }
+
+      // 3. ошибка с диагностикой
+      const exportKeys = Object.keys(module);
+
+      throw new Error(
+        `Не удалось определить класс в файле: ${fullPath}.
+        Экспорты: ${exportKeys.join(', ')}.
+        Ожидается default export или именованный (Source / Stage).`,
+      );
+    };
+
+    const walk = async (dir: string): Promise<void> => {
+      const entries = await fs.readdir(dir, { withFileTypes: true });
+
+      await Promise.all(
+        entries.map(async (entry) => {
+          const fullPath = path.resolve(dir, entry.name);
+
+          if (entry.isDirectory()) {
+            await walk(fullPath);
+            return;
+          }
+
+          if (!entry.name.endsWith('.js')) return;
+
+          try {
+            const sourceModule = require(fullPath);
+
+            const SourceClass = resolveSourceClass(sourceModule, fullPath);
+
+            const instance = new SourceClass();
+
+            // проверка контракта
+            if (
+              !instance ||
+              typeof instance.supports !== 'function' ||
+              typeof instance.worker !== 'function'
+            ) {
+              console.warn('[SKIP NON SOURCE]', fullPath);
+              return;
+            }
+
+            console.log('[SOURCE LOADED]', SourceClass.name);
+
+            sources.push(instance);
+          } catch (err) {
+            console.error('[SOURCE LOAD ERROR]', fullPath, err);
+          }
+        }),
+      );
     };
 
     await walk(this.sourcesFolder);
 
     return sources;
   }
+
+  //********************** */
 
   registerResource(res: IResource): void {
     this.resources.push(res);

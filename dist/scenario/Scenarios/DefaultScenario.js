@@ -223,6 +223,15 @@ class DefaultScenario {
     }
     async process(task, loggerScope) {
         const allErrors = [];
+        loggerScope?.debug(`************The enter to the process method`, {
+            component: 'DefaultScenario',
+            method: 'process()',
+            stage: 'this.sources.find((s) => s.supports(task))',
+            data: {
+                task: task,
+                thisSources: this.sources,
+            },
+        });
         const source = this.sources.find((s) => s.supports(task));
         if (!source) {
             loggerScope?.error('Source not found for task', {
@@ -767,38 +776,66 @@ class DefaultScenario {
     //   await walk(this.sourcesFolder);
     //   return sources;
     // }
+    //********************** */
     async loadSources() {
         const sources = [];
-        const walk = async (dir) => {
-            const files = await fs_1.promises.readdir(dir, { withFileTypes: true });
-            for (const file of files) {
-                const fullPath = path.resolve(dir, file.name);
-                if (file.isDirectory()) {
-                    await walk(fullPath);
-                    continue;
+        const isConstructable = (fn) => {
+            return (typeof fn === 'function' &&
+                !!fn.prototype &&
+                fn.prototype.constructor === fn);
+        };
+        const resolveSourceClass = (module, fullPath) => {
+            // 1. Приоритетные экспорты
+            const priority = [module.default, module.Source, module.Stage];
+            for (const candidate of priority) {
+                if (isConstructable(candidate)) {
+                    return candidate;
                 }
-                if (!file.name.endsWith('.js'))
-                    continue;
+            }
+            // 2. fallback — только если найден ровно один кандидат
+            const candidates = Object.values(module).filter(isConstructable);
+            if (candidates.length === 1) {
+                return candidates[0];
+            }
+            // 3. ошибка с диагностикой
+            const exportKeys = Object.keys(module);
+            throw new Error(`Не удалось определить класс в файле: ${fullPath}.
+        Экспорты: ${exportKeys.join(', ')}.
+        Ожидается default export или именованный (Source / Stage).`);
+        };
+        const walk = async (dir) => {
+            const entries = await fs_1.promises.readdir(dir, { withFileTypes: true });
+            await Promise.all(entries.map(async (entry) => {
+                const fullPath = path.resolve(dir, entry.name);
+                if (entry.isDirectory()) {
+                    await walk(fullPath);
+                    return;
+                }
+                if (!entry.name.endsWith('.js'))
+                    return;
                 try {
                     const sourceModule = require(fullPath);
-                    const SourceClass = sourceModule.default ?? sourceModule;
+                    const SourceClass = resolveSourceClass(sourceModule, fullPath);
                     const instance = new SourceClass();
-                    // 🔥 safety check
-                    if (!instance?.supports || !instance?.worker) {
+                    // проверка контракта
+                    if (!instance ||
+                        typeof instance.supports !== 'function' ||
+                        typeof instance.worker !== 'function') {
                         console.warn('[SKIP NON SOURCE]', fullPath);
-                        continue;
+                        return;
                     }
-                    console.log('[SOURCE LOADED]', instance.constructor.name);
+                    console.log('[SOURCE LOADED]', SourceClass.name);
                     sources.push(instance);
                 }
                 catch (err) {
                     console.error('[SOURCE LOAD ERROR]', fullPath, err);
                 }
-            }
+            }));
         };
         await walk(this.sourcesFolder);
         return sources;
     }
+    //********************** */
     registerResource(res) {
         this.resources.push(res);
     }

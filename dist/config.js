@@ -24,7 +24,8 @@ exports.config = {
     data: {
         // resultsFolder: 'results/skechers',
         // resultsFolder: 'results/salomon/salomon_test',
-        resultsFolder: 'results/svastone/svastone_test',
+        // resultsFolder: 'results/svastone/svastone_test',
+        resultsFolder: 'results/brs/brs_test_1',
         // sourcesFolder: './dist/source/sources',
         sourcesFolder: './dist/source/sources_s',
         // scenario: 'rozetka',   // для отсутствующих sources
@@ -32,7 +33,8 @@ exports.config = {
         // taskPath: 'src/data/tasks/skechers/skechers.json',
         // taskPath: 'src/data/tasks/svastone/svastone_test.json',
         // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
-        taskPath: 'src/data/tasks/svastone/svastone_test_short.json',
+        // taskPath: 'src/data/tasks/svastone/svastone_test_short.json',
+        taskPath: 'src/data/tasks/brs/brs_test_short.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',
