@@ -334,3 +334,5 @@ HYBRID SOURCE ARCHITECTURE — КРИТИКА
     ОГРАНИЧЕННАЯ АДАПТИВНОСТЬ
         Архитектура хорошо работает для типовых кейсов,
         но плохо справляется с нестандартными сценариями.
+
+HYBRID STEP-BASED FLOW + STEP + STRATEGY + CONTEXT + RESOLVER      

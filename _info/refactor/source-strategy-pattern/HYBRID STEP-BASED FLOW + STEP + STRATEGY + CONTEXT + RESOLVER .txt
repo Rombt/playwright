@@ -1,0 +1,270 @@
+HYBRID STEP-BASED SCRAPING ARCHITECTURE
+(FLOW + STEP + STRATEGY + CONTEXT + RESOLVER)
+
+ОБЩЕЕ ОПРЕДЕЛЕНИЕ
+
+    Данная архитектура представляет собой эволюцию pipeline-подхода в сторону flow-oriented модели выполнения.
+
+    Основная идея:
+        управление процессом (flow) отделено от реализации отдельных операций.
+
+    Система строится вокруг:
+        динамического flow (Step-based execution)
+        единого контекста выполнения (ExecutionContext)
+        стратегий как деталей реализации шагов (Strategy)
+        резолвера для выбора стратегии (Resolver)
+        capability-слоя для работы с DOM (Actions)
+
+    Scraping рассматривается как:
+        управляемый сценарий выполнения (flow),
+        состоящий из атомарных шагов,
+        которые могут изменять порядок выполнения в зависимости от состояния.
+
+    Главный принцип:
+        Step решает ЧТО делать
+        Strategy в рамках одного шага решает КАК делать
+
+    Цель архитектуры:
+        обеспечить баланс между:
+        гибкостью (динамический flow)
+        контролируемостью (явный execution)
+        переиспользуемостью (Strategy)
+        прозрачностью (Context + logging)
+
+ОСНОВНЫЕ КОМПОНЕНТЫ
+
+    1. SOURCE (ТОЧКА ВХОДА)
+
+        Source — это фасад системы:
+
+            interface ISource<TTask> {
+                supports(task: TTask): boolean;
+                execute(ctx: ExecutionContext): Promise<IWorkerResult>;
+            }
+
+        Ответственность:
+            определяет применимость
+            создаёт ExecutionContext
+            запускает Flow
+            возвращает результат
+
+        Source НЕ содержит:
+            логики парсинга
+            логики шагов
+            логики стратегий
+
+    2. EXECUTION CONTEXT (КЛЮЧЕВОЙ ЭЛЕМЕНТ)
+
+        Единый объект состояния выполнения:
+
+            interface ExecutionContext {
+                page: Page;
+
+                input: {
+                    url: string;
+                    sku?: string;
+                };
+
+                state: {
+                    productUrl?: string;
+                    images?: string[];
+                    description?: string;
+                };
+
+                actions: {
+                    click(selector: string): Promise<void>;
+                    scroll(): Promise<void>;
+                    waitForImages(): Promise<void>;
+                };
+
+                debug: {
+                    strategies?: Array<{
+                        step: string;
+                        strategy: string;
+                        score: number;
+                    }>;
+                };
+
+                diagnostics: IDiagnostics;
+            }
+
+        Свойства:
+            единая точка данных
+            отсутствие “протекания” состояния
+            прозрачность flow
+            интеграция с логированием
+
+        Принцип:
+            все шаги читают и пишут только в ctx
+
+    3. FLOW (EXECUTION MODEL)
+
+        Flow это замена жёсткого pipeline он управляет выполнением:
+
+            let currentStep = startStep;
+
+            while (currentStep) {
+                await currentStep.run(ctx);
+                currentStep = currentStep.next(ctx);
+            }
+
+        Свойства:
+            динамический порядок выполнения
+            поддержка ветвлений
+            поддержка fallback переходов
+            возможность пропуска шагов
+
+
+    4. STEP (ЕДИНИЦА FLOW)
+
+        Step — атомарная единица выполнения:
+
+        interface IStep {
+            run(ctx: ExecutionContext): Promise<void>;
+            next(ctx: ExecutionContext): IStep | null;
+        }
+
+        Ответственность:
+            выполняет одну логическую операцию
+            принимает решение о следующем шаге
+
+        Примеры шагов:
+            OpenSearchStep
+            FindProductLinkStep
+            OpenProductPageStep
+            ValidatePageStep
+            ExtractImagesStep
+            ExtractDescriptionStep
+            BuildResultStep
+
+        Свойства:
+            минимальная ответственность
+            явное управление flow
+            отсутствие скрытой логики
+
+    5. STRATEGY (РЕАЛИЗАЦИЯ ВНУТРИ STEP)
+
+        Strategy используется внутри Step:
+
+        interface IImageStrategy {
+            canHandle(ctx: ExecutionContext): Promise<boolean>;
+            score(ctx: ExecutionContext): Promise<number>;
+            extract(ctx: ExecutionContext): Promise<string[]>;
+        }
+
+        Роль:
+            реализует конкретный способ выполнения задачи
+
+        Примеры:
+            SwiperImageStrategy
+            GalleryImageStrategy
+            FallbackImageStrategy
+
+        Принцип:
+            Step выбирает стратегию
+            Strategy выполняет работу
+
+        Важно:
+            Strategy не управляет flow
+            Strategy не знает про другие шаги
+
+    6. RESOLVER (ВЫБОР СТРАТЕГИИ)
+
+        Resolver выбирает стратегию:
+            interface IStrategyResolver<T> {
+                resolve(ctx: ExecutionContext, strategies: T[]): Promise<T>;
+            }
+
+        Базовый алгоритм:
+            1. фильтрация:
+                strategies.filter(s => s.canHandle(ctx))
+            2. ранжирование:
+                вычисление score
+            3. выбор лучшей
+            4. fallback если пусто
+
+        Дополнительно:
+            логирование выбора в ctx.debug
+            интеграция с diagnostics
+
+    7. CAPABILITY LAYER (ACTIONS)
+
+        Actions — это стандартизированный слой работы с DOM:
+            ctx.actions.click(selector)
+            ctx.actions.scroll()
+            ctx.actions.waitForImages()
+
+        Роль:
+            инкапсулировать работу с Playwright
+            убрать дублирование
+            стабилизировать взаимодействие с DOM
+
+        Важно:
+            стратегии не работают напрямую с page
+            всё через actions
+
+    8. EXPLAINABILITY (ОБЯЗАТЕЛЬНО)
+
+        Каждый выбор стратегии логируется:
+
+            ctx.debug.strategies.push({
+                step: 'ExtractImagesStep',
+                strategy: 'SwiperStrategy',
+                score: 85
+            });
+
+        Это даёт:
+            прозрачность
+            удобную отладку
+            возможность анализа
+
+    9. FALLBACK КАК WARNING
+
+        Fallback не скрывается:
+
+            ctx.diagnostics.warn('Fallback strategy used', {
+                step: 'ExtractImagesStep'
+            });
+
+        Свойства:
+            система не падает
+            но сигнализирует о проблеме
+
+        Опционально:
+            strict mode (в будущем)
+
+    10. LIGHT SOURCE (УПРОЩЁННЫЙ РЕЖИМ)
+        Назначение:
+            избежать overengineering
+
+        Для простых сайтов:
+
+            new LightSource({
+                extractImages: async (ctx) => [...]
+            });
+
+        Свойства:
+            минимальная абстракция
+            быстрый старт
+            без сложного flow
+
+    11. ПРИНЦИПЫ АРХИТЕКТУРЫ
+
+        Flow > Pipeline
+            управление важнее последовательности
+
+        Step > Method
+            явные шаги вместо скрытых вызовов
+
+        Context > Arguments
+            единое состояние вместо передачи параметров
+
+        Selection > Iteration
+            сначала выбираем стратегию, потом выполняем
+
+        Explainability > Magic
+            любое решение должно быть объяснимо
+
+        Controlled Side Effects
+            все изменения только через ctx
+
