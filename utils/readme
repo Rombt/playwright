@@ -1,0 +1,8 @@
+Варианты запуска скриптов из командной строки
+
+Запуск из любой папки
+    C:\scripts\copy-tree-content.ps1 -BasePath C:\projects\tokvex
+    где
+        C:\scripts\copy-tree-content.ps1 -- путь к скрипту
+        -BasePath -- обязательный параметр запускаемого скрипта, если есть
+        C:\projects\tokvex -- значение обязательного параметра
