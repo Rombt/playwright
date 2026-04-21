@@ -1,0 +1,296 @@
+HYBRID SOURCE ARCHITECTURE (TEMPLATE METHOD + STRATEGY + RESOLVER)
+
+ОБЩЕЕ ОПРЕДЕЛЕНИЕ
+
+Данная архитектура представляет собой гибридный подход к построению scraping-системы, 
+    в котором:
+        процесс выполнения (pipeline) фиксирован и централизован
+        вариативность реализуется через стратегии (Strategy)
+        выбор конкретной стратегии делегирован отдельному компоненту (Resolver)
+
+    Scraping рассматривается как:
+        детерминированный линейный процесс (pipeline)
+        с заменяемыми реализациями отдельных этапов
+
+    Главный принцип:
+        структура выполнения фиксирована,
+        поведение каждого этапа определяется стратегией,
+        выбор стратегии происходит автоматически на основе анализа DOM.
+
+    Главная цель:
+        обеспечить баланс между:
+            предсказуемостью
+            гибкостью
+            переиспользуемостью
+            устойчивостью к изменениям DOM
+
+Архитектура представляет собой:
+
+    Template Method (фиксированный pipeline)
+        +
+    Strategy (вариативность этапов)
+        +
+    Resolver (интеллектуальный выбор стратегии)
+        +
+    Fallback (устойчивость)
+
+ОСНОВНЫЕ КОМПОНЕНТЫ
+
+    1. SOURCE (ОРКЕСТРАТОР)
+
+    Source — это точка входа и координатор выполнения которая:
+            определяет, подходит ли для задачи (supports)
+            запускает выполнение pipeline (execute)
+            управляет жизненным циклом
+            возвращает результат
+            не содержит бизнес-логики извлечения.
+            делегирует выполнение базовому классу
+
+    Сигнатура:
+        interface ISource<TTask> {
+            supports(task: TTask): boolean;
+
+            execute(
+                targetUrl: string,
+                page: Page,
+                options?: {},
+                debugMeta?: Record<string, string>,
+                sku?: string,
+            ): Promise<IWorkerResult>;
+        }
+
+
+
+    2. BASE SOURCE (TEMPLATE METHOD)
+
+        BaseSource реализует паттерн Template Method который:
+            фиксирует структуру pipeline
+            определяет порядок выполнения этапов
+            делегирует реализацию этапов стратегиям
+
+        Pipeline:
+            1. openSearchPage
+            2. findProductLink
+            3. openProductPage
+            4. validatePage
+            5. extractImages
+            6. extractDescription
+            7. buildResult
+
+        Пример:
+
+            async execute(...) {
+                await openSearchPage(...)
+                const link = await findProductLink(...)
+                await openProductPage(link)
+                await validatePage(...)
+
+                const images = await extractImages(...)
+                const description = await extractDescription(...)
+
+                return buildResult(images, description)
+            }
+
+        Pipeline НЕ изменяется и является общей контрактной частью системы.
+
+
+    3. STRATEGY (РЕАЛИЗАЦИИ ЭТАПОВ)
+
+        Каждый этап pipeline реализуется через стратегии.
+
+        Стратегия:
+            инкапсулирует конкретную реализацию
+            работает с Page
+            возвращает результат
+            не управляет сценарием
+
+        Примеры стратегий:
+            SearchStrategy
+            ProductLinkStrategy
+            ValidationStrategy
+            ImageExtractionStrategy
+            DescriptionExtractionStrategy
+
+        Пример интерфейса:
+
+            interface IImageStrategy {
+                score(page: Page): Promise<number>;
+                extract(page: Page): Promise<string[]>;
+            }
+
+        Ключевые свойства:
+            узкая специализация
+            отсутствие побочных эффектов вне своей задачи
+            независимость от других стратегий
+
+
+    4. RESOLVER (ВЫБОР СТРАТЕГИИ)
+
+        Resolver отвечает за выбор подходящей стратегии.
+
+        Он:
+            получает список стратегий
+            вычисляет score для каждой
+            выбирает лучшую
+
+        Сигнатура:
+
+            interface IStrategyResolver<TStrategy> {
+                resolve(page: Page): Promise<TStrategy>;
+            }
+
+        Алгоритм:
+
+            1. вызвать score у всех стратегий
+            2. отфильтровать по threshold
+            3. выбрать стратегию с максимальным score
+            4. если нет кандидатов — использовать fallback
+
+        Пример:
+
+            resolve(page):
+                candidates = strategies
+                    .map(s => ({ strategy: s, score: s.score(page) }))
+                    .filter(x => x.score >= threshold)
+
+                if candidates пуст:
+                    return fallbackStrategy
+
+            return стратегия с максимальным score
+
+
+    5. SCORE-BASED MATCHING
+
+        Вместо бинарного canHandle используется оценка (score) который
+            отражает вероятность применимости стратегии.
+
+        Источники сигналов:
+
+            1. Селекторы
+                наличие классов (swiper, slick)
+                data-атрибуты
+
+            2. Структура DOM
+                повторяющиеся элементы
+                вложенность
+                наличие img/src/srcset
+
+            3. Количественные признаки
+                количество элементов
+                плотность изображений
+
+            4. (опционально) Поведение
+                реакция на клик
+                lazy loading
+
+        Пример:
+
+            score = 0
+
+            если найден '.swiper' → +50
+            если есть '.swiper-slide' → +30
+            если внутри есть img → +20
+
+        Threshold:
+            минимальное значение score для допуска стратегии
+
+
+    6. FALLBACK STRATEGY
+
+        Fallback — обязательный элемент системы который используется, если:
+            ни одна стратегия не прошла threshold
+            результат недостаточно качественный
+
+        Пример fallback для изображений:
+
+            собрать все <img> в области товара
+            отфильтровать:
+                по размеру
+                по дубликатам
+                по видимости
+
+        Fallback обеспечивает устойчивость системы.
+
+
+    7. DECLARATIVE CONFIGURATION
+
+        Source конфигурируется декларативно.
+
+        Пример:
+
+            new Source({
+                searchStrategies: [...],
+                imageStrategies: [...],
+                descriptionStrategies: [...],
+            })
+
+        Source не знает деталей реализации.
+        Он оперирует наборами стратегий.
+
+
+    8. ОТВЕТСТВЕННОСТИ
+
+        Разделение ответственности:
+
+            Source
+                управление pipeline
+
+            BaseSource
+                структура выполнения (Template Method)
+
+            Strategy
+                конкретная реализация этапа
+
+            Resolver
+                выбор стратегии
+
+            Fallback
+                гарантия результата
+
+
+    9. ПРИНЦИПЫ АРХИТЕКТУРЫ
+
+        Фиксированный pipeline
+            порядок выполнения неизменен
+
+        Заменяемость
+            каждый этап может иметь несколько реализаций
+            некоторые этапы могут быть не обязательными
+
+        Декларативность
+            поведение определяется конфигурацией
+
+        Selection > Iteration
+            сначала выбирается стратегия, затем выполняется
+
+        Detection > Guessing
+            выбор основан на анализе DOM, а не переборе
+
+        Устойчивость
+            система не падает при изменении DOM
+
+
+    10. ОГРАНИЧЕНИЯ
+
+        Архитектура плохо подходит для:
+
+            нелинейных сценариев
+            сложных ветвлений
+            многошаговых переходов
+            сценариев с динамическим flow
+
+        В таких случаях требуется переход к Step-based архитектуре.
+
+
+    11. ОБЛАСТЬ ПРИМЕНЕНИЯ
+
+        Подходит для:
+
+            линейных scraping pipeline
+            e-commerce страниц
+            типовых задач извлечения данных
+            систем с большим количеством сайтов
+            стабильных или умеренно изменяемых DOM
+
+
+
