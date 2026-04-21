@@ -35,7 +35,7 @@ class BasePageSource {
                 result.images = await this.imageExtractor.extract(page, debugMeta);
             }
             catch (e) {
-                // не валим пайплайн
+                throw new Error("Don't implemented imageExtractor");
             }
         }
         if (this.descriptionExtractor) {
@@ -44,6 +44,7 @@ class BasePageSource {
             }
             catch (e) {
                 // не валим пайплайн
+                throw new Error("Don't implemented descriptionExtractor");
             }
         }
         return result;

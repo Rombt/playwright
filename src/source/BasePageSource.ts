@@ -75,7 +75,7 @@ export abstract class BasePageSource<T extends ITask> implements ISource<T> {
       try {
         result.images = await this.imageExtractor.extract(page, debugMeta);
       } catch (e) {
-        // не валим пайплайн
+        throw new Error("Don't implemented imageExtractor");
       }
     }
 
@@ -84,6 +84,7 @@ export abstract class BasePageSource<T extends ITask> implements ISource<T> {
         result.description = await this.descriptionExtractor.extract(page, debugMeta);
       } catch (e) {
         // не валим пайплайн
+        throw new Error("Don't implemented descriptionExtractor");
       }
     }
 

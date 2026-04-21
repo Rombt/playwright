@@ -14,10 +14,6 @@ import { DirectPageResolver } from '../strategies/resolvers/DirectPageResolver';
 import { SimpleDescriptionExtractor } from '../strategies/extractors/SimpleDescriptionExtractor';
 
 export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
-  // =========================
-  // STRATEGIES
-  // =========================
-
   protected resolver = new DirectPageResolver();
 
   protected imageExtractor = undefined; // пока без ImageExtractor
@@ -26,42 +22,9 @@ export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
     'div.product__section > [itemprop="description"]',
   );
 
-  // =========================
-  // SUPPORT CHECK
-  // =========================
-
   supports(task: ICollectProductPhotosTask): boolean {
     return task.metadata.target_website === 'https://borsuk.com.ua/katalog/search/?q={{sku_prod}}';
   }
-
-  // =========================
-  // HTTP (legacy untouched)
-  // =========================
-
-  executeHttpRequest<T = unknown>(
-    request: APIRequestContext,
-    options: {
-      url: string;
-      params?: Record<string, string>;
-      headers?: Record<string, string>;
-    },
-  ): Promise<IHttpResult<T>> {
-    throw new Error('Not implemented');
-  }
-
-  workerHttpRequest(
-    request: APIRequestContext,
-    headers: Record<string, string>,
-    targetUrl: string,
-    limiter: RateLimiter,
-    sku: string,
-  ): Promise<IHttpResult<unknown>> {
-    throw new Error('Not implemented');
-  }
-
-  // =========================
-  // WORKER (оставляем почти как есть)
-  // =========================
 
   async worker(
     targetUrl: string,
@@ -83,10 +46,6 @@ export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
     return [result];
   }
 
-  // =========================
-  // MINIMAL EXECUTION
-  // =========================
-
   async execute(
     targetUrl: string,
     page: Page,
@@ -102,10 +61,8 @@ export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
       }
 
       const normalizedSku = this.normalizeSku(sku);
-
       const url = targetUrl.replace('{{sku_prod}}', normalizedSku);
 
-      // 1. открыть search page
       await page.goto(url, { waitUntil: 'domcontentloaded' });
 
       const link = page.locator('div.catalogCard-view > a').first();
@@ -127,7 +84,7 @@ export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
       const absolute = new URL(href, page.url()).toString();
       await page.goto(absolute, { waitUntil: 'domcontentloaded' });
 
-      // 2. check sku
+      // check sku
       const skuLocator = page.locator('div.product-header div.product-header__code', {
         hasText: sku,
       });
@@ -137,7 +94,7 @@ export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
         timeout: 15000,
       });
 
-      // 3. extraction via strategies
+      // extraction via strategies
       const extraction = await this.extract(page);
 
       return this.buildResult(extraction, errors, normalizedSku);
@@ -145,10 +102,6 @@ export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
       throw this.buildError(err, targetUrl, sku);
     }
   }
-
-  // =========================
-  // SKU NORMALIZER
-  // =========================
 
   private normalizeSku(rawSku: string): string {
     const starIndex = rawSku.indexOf('*');
@@ -158,15 +111,33 @@ export class BRSSource extends BasePageSource<ICollectProductPhotosTask> {
       .trim();
   }
 
-  // =========================
-  // ERROR
-  // =========================
-
   private buildError(err: unknown, targetUrl: string, sku?: string): IWorkerError {
     return {
       error: err,
       targetUrl,
       sku,
     } as any;
+  }
+
+  // HTTP (legacy untouched)
+  executeHttpRequest<T = unknown>(
+    request: APIRequestContext,
+    options: {
+      url: string;
+      params?: Record<string, string>;
+      headers?: Record<string, string>;
+    },
+  ): Promise<IHttpResult<T>> {
+    throw new Error('Not implemented');
+  }
+
+  workerHttpRequest(
+    request: APIRequestContext,
+    headers: Record<string, string>,
+    targetUrl: string,
+    limiter: RateLimiter,
+    sku: string,
+  ): Promise<IHttpResult<unknown>> {
+    throw new Error('Not implemented');
   }
 }

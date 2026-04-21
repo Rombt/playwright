@@ -5,30 +5,12 @@ const BasePageSource_1 = require("../BasePageSource");
 const DirectPageResolver_1 = require("../strategies/resolvers/DirectPageResolver");
 const SimpleDescriptionExtractor_1 = require("../strategies/extractors/SimpleDescriptionExtractor");
 class BRSSource extends BasePageSource_1.BasePageSource {
-    // =========================
-    // STRATEGIES
-    // =========================
     resolver = new DirectPageResolver_1.DirectPageResolver();
     imageExtractor = undefined; // пока без ImageExtractor
     descriptionExtractor = new SimpleDescriptionExtractor_1.SimpleDescriptionExtractor('div.product__section > [itemprop="description"]');
-    // =========================
-    // SUPPORT CHECK
-    // =========================
     supports(task) {
         return task.metadata.target_website === 'https://borsuk.com.ua/katalog/search/?q={{sku_prod}}';
     }
-    // =========================
-    // HTTP (legacy untouched)
-    // =========================
-    executeHttpRequest(request, options) {
-        throw new Error('Not implemented');
-    }
-    workerHttpRequest(request, headers, targetUrl, limiter, sku) {
-        throw new Error('Not implemented');
-    }
-    // =========================
-    // WORKER (оставляем почти как есть)
-    // =========================
     async worker(targetUrl, page, limiter, getNext, loggerScope, sku, debugMeta) {
         const product = typeof getNext === 'function' ? getNext() : getNext;
         if (!product) {
@@ -37,9 +19,6 @@ class BRSSource extends BasePageSource_1.BasePageSource {
         const result = await this.execute(targetUrl, page, {}, debugMeta, product.sku);
         return [result];
     }
-    // =========================
-    // MINIMAL EXECUTION
-    // =========================
     async execute(targetUrl, page, options, debugMeta, sku) {
         const errors = [];
         try {
@@ -48,7 +27,6 @@ class BRSSource extends BasePageSource_1.BasePageSource {
             }
             const normalizedSku = this.normalizeSku(sku);
             const url = targetUrl.replace('{{sku_prod}}', normalizedSku);
-            // 1. открыть search page
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             const link = page.locator('div.catalogCard-view > a').first();
             const empty = page.locator('.catalog__content > div > p', { hasText: 'Немає товарів' });
@@ -64,7 +42,7 @@ class BRSSource extends BasePageSource_1.BasePageSource {
                 throw new Error('Product link not found');
             const absolute = new URL(href, page.url()).toString();
             await page.goto(absolute, { waitUntil: 'domcontentloaded' });
-            // 2. check sku
+            // check sku
             const skuLocator = page.locator('div.product-header div.product-header__code', {
                 hasText: sku,
             });
@@ -72,7 +50,7 @@ class BRSSource extends BasePageSource_1.BasePageSource {
                 state: 'attached',
                 timeout: 15000,
             });
-            // 3. extraction via strategies
+            // extraction via strategies
             const extraction = await this.extract(page);
             return this.buildResult(extraction, errors, normalizedSku);
         }
@@ -80,24 +58,25 @@ class BRSSource extends BasePageSource_1.BasePageSource {
             throw this.buildError(err, targetUrl, sku);
         }
     }
-    // =========================
-    // SKU NORMALIZER
-    // =========================
     normalizeSku(rawSku) {
         const starIndex = rawSku.indexOf('*');
         return (starIndex !== -1 ? rawSku.slice(0, starIndex) : rawSku)
             .replace(/^[\p{C}\s]+|[\p{C}\s]+$/gu, '')
             .trim();
     }
-    // =========================
-    // ERROR
-    // =========================
     buildError(err, targetUrl, sku) {
         return {
             error: err,
             targetUrl,
             sku,
         };
+    }
+    // HTTP (legacy untouched)
+    executeHttpRequest(request, options) {
+        throw new Error('Not implemented');
+    }
+    workerHttpRequest(request, headers, targetUrl, limiter, sku) {
+        throw new Error('Not implemented');
     }
 }
 exports.BRSSource = BRSSource;
