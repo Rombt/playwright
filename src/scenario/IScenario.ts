@@ -1,5 +1,5 @@
 import { ITask } from '../data/entities/ITask';
-import { ISource } from '../source/ISource';
+import { ISource } from '../source/types/ISource';
 import { IResource } from '../browser/IResource';
 import { IProduct } from '../data/entities/IProduct';
 import { IWorkerError } from '../data/entities/IErrors/IWorkerError';

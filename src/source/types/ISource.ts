@@ -1,10 +1,10 @@
 import { Page, APIRequestContext } from 'playwright';
-import { ITask } from '../data/entities/ITask';
-import { IProduct } from '../data/entities/IProduct';
-import { RateLimiter } from '../browser/limiter/RateLimiter';
-import { IWorkerResult } from '../data/entities/IResults/IWorkerResult';
-import { IHttpResult } from '../data/entities/IResults/IHttpResult';
-import { ILogger } from '../data/logger/types/ILogger';
+import { ITask } from '../../data/entities/ITask';
+import { IProduct } from '../../data/entities/IProduct';
+import { RateLimiter } from '../../browser/limiter/RateLimiter';
+import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
+import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
+import { ILogger } from '../../data/logger/types/ILogger';
 
 export interface ISource<T extends ITask, THttpResponse = unknown> {
   supports(task: T): boolean;
