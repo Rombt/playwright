@@ -1,5 +1,5 @@
 import { APIRequestContext, Page } from 'playwright-core';
-import { ISource } from '../../ISource';
+import { ISource } from '../../types/ISource';
 import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IWorkerResult } from '../../../data/entities/IResults/IWorkerResult';
 import { IWorkerError } from '../../../data/entities/IErrors/IWorkerError';
