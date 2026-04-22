@@ -76,21 +76,18 @@ TypeScript/JavaScript для упрощения импортов. Со врем�
 
 #>
 
-
-
 param (
     [string]$TargetDir = ".",
-    [string]$OutputFile = "index.ts"
+    [string]$OutputFile = "index.ts",
+    [string[]]$Exclude = @()
 )
 
 # -----------------------------
 # ⚙️ Настройки
 # -----------------------------
 
-# Какие файлы включаем
 $allowedExtensions = @(".ts", ".js")
 
-# Какие папки игнорируем по умолчанию
 $ignoredDirs = @(
     "node_modules",
     "dist",
@@ -100,14 +97,21 @@ $ignoredDirs = @(
     "out"
 )
 
-# Какие папки игнорируем по указанию 
-[string[]]$Exclude = @()
-
 # -----------------------------
 # 📂 Подготовка
 # -----------------------------
 
 $basePath = (Resolve-Path $TargetDir).Path
+
+# Нормализуем exclude (ОДИН раз)
+$normalizedExcludes = $Exclude | ForEach-Object {
+    try {
+        (Resolve-Path $_).Path.TrimEnd('\')
+    }
+    catch {
+        $_.TrimEnd('\')
+    }
+}
 
 # -----------------------------
 # 🔍 Получение файлов
@@ -115,20 +119,33 @@ $basePath = (Resolve-Path $TargetDir).Path
 
 $files = Get-ChildItem -Path $basePath -Recurse -File | Where-Object {
 
-    # Проверка расширения
+    # Расширение
     if ($_.Extension -notin $allowedExtensions) { return $false }
 
-    # Исключаем index.ts
+    # Сам index
     if ($_.Name -eq $OutputFile) { return $false }
 
-    # Проверка игнорируемых папок
+    # Игнор стандартных папок
     foreach ($dir in $ignoredDirs) {
         if ($_.FullName -match "\\$dir\\") { return $false }
     }
 
-    # Проверка пользовательских исключений
-    foreach ($ex in $Exclude) {
-        if ($_.FullName -like "*$ex*") { return $false }
+    # Пользовательские exclude
+    foreach ($ex in $normalizedExcludes) {
+
+        # Абсолютный путь → строгое сравнение начала пути
+        if ([System.IO.Path]::IsPathRooted($ex)) {
+            $exPath = $ex + "\"
+            if ($_.FullName.StartsWith($exPath, [System.StringComparison]::OrdinalIgnoreCase)) {
+                return $false
+            }
+        }
+        else {
+            # Относительный путь или имя
+            if ($_.FullName -like "*$ex*") {
+                return $false
+            }
+        }
     }
 
     return $true
@@ -140,8 +157,14 @@ $files = Get-ChildItem -Path $basePath -Recurse -File | Where-Object {
 
 $exports = $files | ForEach-Object {
 
+    # Относительный путь
     $relativePath = $_.FullName.Substring($basePath.Length)
 
+    # Нормализация слэшей
+    $relativePath = $relativePath -replace "\\", "/"
+    $relativePath = $relativePath.TrimStart("/")
+
+    # Удаление расширения (БЕЗ бага с точкой)
     $dir = Split-Path $relativePath
     $name = [System.IO.Path]::GetFileNameWithoutExtension($relativePath)
 
@@ -152,10 +175,6 @@ $exports = $files | ForEach-Object {
         $relativePath = $name
     }
 
-    $relativePath = $relativePath -replace "\\", "/"
-
-    $relativePath = $relativePath.TrimStart("/")
-
     [PSCustomObject]@{
         Path  = $relativePath
         Depth = ($relativePath.Split("/").Count)
@@ -165,8 +184,6 @@ $exports = $files | ForEach-Object {
 # -----------------------------
 # 🔤 Сортировка
 # -----------------------------
-# 1. Сначала по глубине (папки сверху)
-# 2. Потом по алфавиту
 
 $sorted = $exports | Sort-Object `
 @{Expression = "Depth"; Ascending = $true }, `
@@ -181,7 +198,7 @@ $content = $sorted | ForEach-Object {
 }
 
 # -----------------------------
-# 💾 Запись в файл
+# 💾 Запись файла
 # -----------------------------
 
 $outputPath = Join-Path $basePath $OutputFile
