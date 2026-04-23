@@ -1,5 +1,6 @@
 import { ITask } from '../data/entities/ITask';
-import { ISource } from '../source/types/ISourceOld';
+import { ICollectProductPhotosTask } from '../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
+import { ISource } from '../source/types/ISource';
 import { IResource } from '../browser/IResource';
 import { IProduct } from '../data/entities/IProduct';
 import { IWorkerError } from '../data/entities/IErrors/IWorkerError';
@@ -47,7 +48,7 @@ export interface IScenario<Browser = unknown, BrowserContext = unknown> {
    * Загружает все доступные Source.
    * Возвращает массив объектов, реализующих ISource.
    */
-  loadSources(): Promise<ISource<ITask>[]>;
+  loadSources(): Promise<ISource<ICollectProductPhotosTask>[]>;
 
   // getUnprocessedProducts(errors: IWorkerError[]): IProduct[];
 }

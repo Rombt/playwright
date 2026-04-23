@@ -31,7 +31,7 @@
 .\copy-tree-content.ps1 -BasePath .
 
 .EXAMPLE
-.\copy-tree-content.ps1 -BasePath "C:\project\src" -RelativeTo "C:\project"
+.\copy-tree-content.ps1 -BasePath "C:\project\src" -RelativeTo "F:\testing\playwright"
 
 .EXAMPLE
 C:\scripts\copy-tree-content.ps1 -BasePath C:\projects\tokvex
@@ -52,14 +52,14 @@ C:\scripts\copy-tree-content.ps1 -BasePath C:\projects\tokvex
 #>
 
 param(
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [string]$BasePath,
 
     [string]$RelativeTo,
 
-    [string[]]$ExcludeExtensions = @("*.png","*.jpg","*.jpeg","*.gif","*.exe","*.lock"),
+    [string[]]$ExcludeExtensions = @("*.png", "*.jpg", "*.jpeg", "*.gif", "*.exe", "*.lock"),
 
-    [string[]]$ExcludeDirs = @("node_modules",".git","dist","build")
+    [string[]]$ExcludeDirs = @("node_modules", ".git", "dist", "build")
 )
 
 # Нормализуем пути
@@ -67,7 +67,8 @@ $BasePath = (Resolve-Path $BasePath).Path
 
 if (-not $RelativeTo) {
     $RelativeTo = $BasePath
-} else {
+}
+else {
     $RelativeTo = (Resolve-Path $RelativeTo).Path
 }
 
@@ -83,13 +84,13 @@ Sort-Object FullName
 
 $output = foreach ($file in $files) {
     $from = New-Object System.Uri($RelativeTo + '\')
-    $to   = New-Object System.Uri($file.FullName)
+    $to = New-Object System.Uri($file.FullName)
 
     $relative = [System.Uri]::UnescapeDataString(
         $from.MakeRelativeUri($to).ToString()
     ).Replace('/', '\')
 
-@"
+    @"
 --- FILE: $relative ---
 $(Get-Content $file.FullName -Raw)
 

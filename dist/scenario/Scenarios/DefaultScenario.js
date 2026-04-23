@@ -223,6 +223,7 @@ class DefaultScenario {
     async prepare() {
         this.sources = await this.loadSources();
     }
+    /* deprecated */
     async process(task, loggerScope) {
         const allErrors = [];
         const source = this.sources.find((s) => s.supports(task));
@@ -305,7 +306,27 @@ class DefaultScenario {
                         },
                     });
                     //!!!!!!!!!!!!!!!!! 1111
-                    const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, this.limiter, product, loggerScope), {
+                    const result = await this.withRetry(async () => {
+                        const actions = new source_1.ActionsFactory().create(page);
+                        const ctx = {
+                            page: page,
+                            logger: loggerScope,
+                            task,
+                            input: {
+                                url: task.metadata.target_website,
+                                sku: product.sku,
+                                product,
+                            },
+                            state: {},
+                            actions,
+                            errors: [],
+                            debug: {
+                                strategies: [],
+                            },
+                            control: {},
+                        };
+                        return await source.execute(ctx);
+                    }, {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
                     }, this.limiter, loggerScope);
@@ -320,40 +341,35 @@ class DefaultScenario {
                             result: result,
                         },
                     });
-                    for (const r of result) {
-                        for (const [sku, images] of Object.entries(r.data.images ?? {})) {
-                            if (!allData[sku]) {
-                                const arr = [];
-                                arr.idProduct = images.idProduct;
-                                allData[sku] = arr;
-                            }
-                            allData[sku].push(...images);
+                    const r = result;
+                    for (const [sku, images] of Object.entries(r.data.images ?? {})) {
+                        if (!allData[sku]) {
+                            const arr = [];
+                            arr.idProduct = images.idProduct;
+                            allData[sku] = arr;
                         }
-                        if (r.data.html) {
-                            const brandKey = this.resolveBrandName(task.brand_name);
-                            loggerScope?.debug('Start processing description of product', {
-                                component: 'DefaultScenario',
-                                method: 'process()',
-                                action: 'brandKey = this.resolveBrandName(task.brand_name)',
-                                data: {
-                                    product: product,
-                                    taskBrandName: task.brand_name,
-                                    brandKey: brandKey,
-                                },
+                        allData[sku].push(...images);
+                    }
+                    if (r.data.html) {
+                        const brandKey = this.resolveBrandName(task.brand_name);
+                        loggerScope?.debug('Start processing description of product', {
+                            component: 'DefaultScenario',
+                            method: 'process()',
+                            action: 'brandKey = this.resolveBrandName(task.brand_name)',
+                            data: {
+                                product: product,
+                                taskBrandName: task.brand_name,
+                                brandKey: brandKey,
+                            },
+                        });
+                        const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(brandKey.toLowerCase());
+                        const rawContent = processor.process(r.data.html);
+                        if (!Array.isArray(rawContent)) {
+                            allProductRaw.push({
+                                sku: product.sku,
+                                id: product.id_product,
+                                content: rawContent,
                             });
-                            const processor = new HTMLProcessor_1.HtmlProcessorFactory().create(brandKey.toLowerCase());
-                            const rawContent = processor.process(r.data.html);
-                            if (Array.isArray(rawContent)) {
-                                // здесь в будущем обработка атрибутов товара
-                            }
-                            else {
-                                allProductRaw.push({
-                                    sku: product.sku,
-                                    id: product.id_product,
-                                    content: rawContent,
-                                });
-                                //todo добавить возможность записывать в json файл кусками вместо того что бы держать в памяти
-                            }
                         }
                     }
                     loggerScope?.debug('Image data aggregation finished', {
@@ -486,6 +502,120 @@ class DefaultScenario {
             targetDir: '',
         });
     }
+    //!!!!!!!!!!!  22222
+    // processProduct = async (
+    //   task: ICollectProductPhotosTask,
+    //   loggerScope?: ILogger,
+    // ): Promise<TaskResult> => {
+    //   if (!task.metadata.target_website) {
+    //     loggerScope?.error('Task metadata does not contain target_website!!', {
+    //       component: 'DefaultScenario',
+    //       method: 'process()',
+    //       action: 'if (!task.metadata.target_website)',
+    //       data: {
+    //         product,
+    //         targetWebsite: task.metadata.target_website,
+    //       },
+    //     });
+    //     throw new Error('Error!! Task metadata does not contain target_website!!');
+    //   }
+    //   let page: Page | undefined;
+    //   try {
+    //     page = await pool.acquire();
+    //     loggerScope?.debug('Beginning processing of product', {
+    //       component: 'DefaultScenario',
+    //       method: 'process()',
+    //       data: {
+    //         product,
+    //         targetWebsite: task.metadata.target_website,
+    //       },
+    //     });
+    //     const result = await this.withRetry(
+    //       async () => {
+    //         // 🔹 создаём actions (Scenario responsibility)
+    //         const actions = new ActionsFactory().create(page!);
+    //         // 🔹 создаём ExecutionContext (НОВЫЙ на каждый retry)
+    //         const ctx: IExecutionContext<ICollectProductPhotosTask> = {
+    //           page: page!,
+    //           logger: loggerScope as IScopedLogger,
+    //           task,
+    //           input: {
+    //             url: task.metadata.target_website!,
+    //             sku: product.sku,
+    //             product,
+    //           },
+    //           state: {},
+    //           actions,
+    //           errors: [],
+    //           debug: {
+    //             strategies: [],
+    //           },
+    //           control: {},
+    //         };
+    //         // 🔹 вызов новой модели Source
+    //         return await source.execute(ctx);
+    //       },
+    //       {
+    //         maxRetries: this.maxRetries,
+    //         isRetryable,
+    //       },
+    //       this.limiter,
+    //       loggerScope,
+    //     );
+    //     loggerScope?.debug('Product processing finished', {
+    //       component: 'DefaultScenario',
+    //       method: 'process()',
+    //       data: {
+    //         product,
+    //         result,
+    //       },
+    //     });
+    //     // 🔹 теперь result — ОДИН объект, не массив
+    //     const r = result;
+    //     if (r.data.images) {
+    //       for (const [sku, images] of Object.entries(r.data.images)) {
+    //         if (!allData[sku]) {
+    //           const arr = [] as unknown as IDataImagItem;
+    //           arr.idProduct = images.idProduct;
+    //           allData[sku] = arr;
+    //         }
+    //         allData[sku].push(...images);
+    //       }
+    //     }
+    //     if (r.data.html) {
+    //       const brandKey = this.resolveBrandName(task.brand_name);
+    //       const processor = new HtmlProcessorFactory().create(brandKey.toLowerCase());
+    //       const rawContent = processor.process(r.data.html);
+    //       if (!Array.isArray(rawContent)) {
+    //         allProductRaw.push({
+    //           sku: product.sku,
+    //           id: product.id_product,
+    //           content: rawContent,
+    //         });
+    //       }
+    //     }
+    //     return { status: 'success' };
+    //   } catch (err) {
+    //     const error = err as IWorkerError;
+    //     const errorStatus: TaskResult = isRetryable(error)
+    //       ? { status: 'retry', product, error }
+    //       : { status: 'fatal', product, error };
+    //     loggerScope?.error('Error during source execution with retry mechanism.', {
+    //       component: 'DefaultScenario',
+    //       method: 'process()',
+    //       data: {
+    //         product,
+    //         status: errorStatus.status,
+    //         errorMessage: error instanceof Error ? error.message : String(error),
+    //       },
+    //     });
+    //     return errorStatus;
+    //   } finally {
+    //     if (page) {
+    //       pool.release(page);
+    //     }
+    //   }
+    // };
     resolveBrandName(input) {
         const normalizedInput = input.trim().toLowerCase();
         for (const [target, aliases] of Object.entries(brand_aliases_1.BRAND_ALIASES)) {
@@ -711,6 +841,7 @@ class DefaultScenario {
         }
         return allErrors;
     }
+    //!!!!!!!!!! 33333
     async withRetry(action, options, limiter, loggerScope) {
         let attempt = 1;
         while (true) {

@@ -70,9 +70,6 @@ class GanzoFlowStep {
                 });
             }
             // --- save result ---
-            //   const images: IDataImag = {};
-            //   images[sku] = absoluteImageUrls as IDataImagItem;
-            //   images[sku].idProduct = product.id_product;
             ctx.state.images = absoluteImageUrls;
             ctx.state.html = html;
         }

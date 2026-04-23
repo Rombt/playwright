@@ -1,5 +1,6 @@
-export interface IPage {
+//todo этот интерфейс один из первых, сейчас абсолютно не актуален удалить
 
+export interface IPage {
   // Навигация
   goto(url: string): Promise<void>;
 

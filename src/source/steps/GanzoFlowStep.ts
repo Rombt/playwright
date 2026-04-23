@@ -2,13 +2,14 @@ import { IActionsFactory } from '../types/IActionsFactory';
 import { IExecutionContext } from '../types/IExecutionContext';
 import { IStep } from '../types/IStep';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
+import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 
 export class GanzoFlowStep implements IStep {
   constructor(private actionsFactory: IActionsFactory) {}
 
   public readonly name = 'Ganzo';
 
-  async run(ctx: IExecutionContext): Promise<void> {
+  async run(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<void> {
     const page = ctx.page;
     const actions = ctx.actions;
 
@@ -99,10 +100,6 @@ export class GanzoFlowStep implements IStep {
       }
 
       // --- save result ---
-      //   const images: IDataImag = {};
-      //   images[sku] = absoluteImageUrls as IDataImagItem;
-      //   images[sku].idProduct = product.id_product;
-
       ctx.state.images = absoluteImageUrls;
 
       ctx.state.html = html;

@@ -8,9 +8,7 @@ import { IActions } from './IActions';
 import { IStrategyDebugEntry } from './IStrategyDebugEntry';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 
-export interface IExecutionContext<
-  TTask extends ICollectProductPhotosTask = ICollectProductPhotosTask,
-> {
+export interface IExecutionContext<TTask extends ITask = ITask> {
   // core
   page: Page;
   logger: IScopedLogger;
