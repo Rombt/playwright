@@ -12,6 +12,8 @@ const SharpImageProcessor_1 = require("../../processing/ImageProcessor/SharpImag
 const HTMLProcessor_1 = require("../../processing/HTMLProcessor");
 const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollector");
 const brand_aliases_1 = require("../../data/entities/brand_aliases");
+/* new imports */
+const source_1 = require("../../source");
 class DefaultScenario {
     browser;
     storage;
@@ -302,6 +304,7 @@ class DefaultScenario {
                             limiter: this.limiter,
                         },
                     });
+                    //!!!!!!!!!!!!!!!!! 1111
                     const result = await this.withRetry(() => source.worker(task.metadata.target_website, page, this.limiter, product, loggerScope), {
                         maxRetries: this.maxRetries,
                         isRetryable: helpers_1.isRetryable,
@@ -748,8 +751,34 @@ class DefaultScenario {
         }
         throw error;
     }
+    /* deprecated */
+    // async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
+    //   const sources: ISource<ICollectProductPhotosTask>[] = [];
+    //   const walk = async (dir: string) => {
+    //     const files = await fs.readdir(dir, { withFileTypes: true });
+    //     for (const file of files) {
+    //       const fullPath = path.resolve(dir, file.name);
+    //       if (file.isDirectory()) {
+    //         await walk(fullPath);
+    //         continue;
+    //       }
+    //       if (!file.name.endsWith('.js')) continue;
+    //       const sourceModule = require(fullPath);
+    //       const SourceClass = sourceModule.default ?? sourceModule;
+    //       sources.push(new SourceClass());
+    //     }
+    //   };
+    //   await walk(this.sourcesFolder);
+    //   return sources;
+    // }
     async loadSources() {
         const sources = [];
+        const deps = {
+            flowRunner: new source_1.FlowRunner(),
+            resolver: new source_1.DefaultStrategyResolver(),
+            actionsFactory: new source_1.ActionsFactory(),
+            logger: this.logger,
+        };
         const walk = async (dir) => {
             const files = await fs_1.promises.readdir(dir, { withFileTypes: true });
             for (const file of files) {
@@ -761,8 +790,9 @@ class DefaultScenario {
                 if (!file.name.endsWith('.js'))
                     continue;
                 const sourceModule = require(fullPath);
-                const SourceClass = sourceModule.default ?? sourceModule;
-                sources.push(new SourceClass());
+                const definition = sourceModule.default ?? sourceModule;
+                console.log('definition = ', definition);
+                sources.push(definition.create(deps));
             }
         };
         await walk(this.sourcesFolder);

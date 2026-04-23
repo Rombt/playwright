@@ -2,7 +2,7 @@ import { BrowserContext, Page } from 'playwright-core';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { IScenario } from '../IScenario';
-import { ISource } from '../../source/types/ISource';
+import { ISource } from '../../source/types/ISourceOld';
 import { IStorage } from '../../storage/IStorage';
 import { IBrowser } from '../../browser/IBrowser';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';

@@ -22,15 +22,16 @@ export const config = {
   data: {
     // resultsFolder: 'results/skechers',
     // resultsFolder: 'results/salomon/salomon_test',
-    resultsFolder: 'results/svastone/svastone_test',
+    resultsFolder: 'results/ganzo/ganzo_test',
 
+    //                     source\sources\PageImageSourceGanzo.ts
     sourcesFolder: './dist/source/sources',
     // scenario: 'rozetka',   // для отсутствующих sources
     convertToJpg: true,
     // taskPath: 'src/data/tasks/skechers/skechers.json',
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
-    taskPath: 'src/data/tasks/svastone/svastone_test_short.json',
+    taskPath: 'src/data/tasks/ganzo/ganzo_test.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

@@ -1,48 +1,9 @@
-import { Page, APIRequestContext } from 'playwright';
-import { ITask } from '../../data/entities/ITask';
-import { IProduct } from '../../data/entities/IProduct';
-import { RateLimiter } from '../../browser/limiter/RateLimiter';
+import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
-import { IHttpResult } from '../../data/entities/IResults/IHttpResult';
-import { ILogger } from '../../data/logger/types/ILogger';
+import { IExecutionContext } from './IExecutionContext';
 
-export interface ISource<T extends ITask, THttpResponse = unknown> {
-  supports(task: T): boolean;
+export interface ISource<TTask extends ICollectProductPhotosTask = ICollectProductPhotosTask> {
+  supports(task: TTask): boolean;
 
-  execute(
-    targetUrl: string,
-    page: Page,
-    options?: {},
-    debugMeta?: Record<string, string>,
-  ): Promise<IWorkerResult>;
-
-  executeHttpRequest<T = unknown>(
-    request: APIRequestContext,
-    options: {
-      url: string;
-      params?: Record<string, string>;
-      headers?: Record<string, string>;
-    },
-    debugMeta?: Record<string, string>,
-  ): Promise<IHttpResult<T>>;
-
-  workerHttpRequest(
-    request: APIRequestContext,
-    headers: Record<string, string>,
-    targetUrl: string,
-    limiter: RateLimiter,
-    sku: string,
-    debugMeta?: Record<string, string>,
-    loggerScope?: ILogger,
-  ): Promise<IHttpResult<THttpResponse>>;
-
-  worker(
-    targetUrl: string,
-    page: Page | undefined,
-    limiter: RateLimiter,
-    getNext?: (() => IProduct | undefined) | IProduct,
-    loggerScope?: ILogger,
-    sku?: string,
-    debugMeta?: Record<string, string>,
-  ): Promise<IWorkerResult[]>;
+  execute(ctx: IExecutionContext<TTask>): Promise<IWorkerResult>;
 }

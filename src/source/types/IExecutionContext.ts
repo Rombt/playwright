@@ -1,5 +1,6 @@
 import { Page } from 'playwright';
 import { ITask } from '../../data/entities/ITask';
+import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IProduct } from '../../data/entities/IProduct';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 
@@ -7,7 +8,9 @@ import { IActions } from './IActions';
 import { IStrategyDebugEntry } from './IStrategyDebugEntry';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 
-export interface IExecutionContext<TTask extends ITask = ITask> {
+export interface IExecutionContext<
+  TTask extends ICollectProductPhotosTask = ICollectProductPhotosTask,
+> {
   // core
   page: Page;
   logger: IScopedLogger;

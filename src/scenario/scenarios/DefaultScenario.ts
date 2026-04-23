@@ -2,7 +2,7 @@ import { BrowserContext, Page } from 'playwright-core';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { IScenario } from '../IScenario';
-import { ISource } from '../../source/types/ISource';
+import { ISource } from '../../source/types/ISourceOld';
 import { IStorage } from '../../storage/IStorage';
 import { IBrowser } from '../../browser/IBrowser';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
@@ -31,6 +31,16 @@ import { HtmlProcessorFactory, Site } from '../../processing/HTMLProcessor';
 import { IProductRaw } from '../../processing/HTMLProcessor';
 import { UnprocessedCollector } from '../../data/collectors/UnprocessedCollector';
 import { BRAND_ALIASES } from '../../data/entities/brand_aliases';
+
+/* new imports */
+
+import {
+  ISourceDependencies,
+  FlowRunner,
+  DefaultStrategyResolver,
+  ActionsFactory,
+  ISourceDefinition,
+} from '../../source';
 
 // todo один универсальный тип ProcessResult
 type TaskResult =
@@ -402,6 +412,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             },
           });
 
+          //!!!!!!!!!!!!!!!!! 1111
           const result = await this.withRetry(
             () =>
               source.worker(
@@ -1000,8 +1011,44 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     throw error;
   }
 
+  /* deprecated */
+  // async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
+  //   const sources: ISource<ICollectProductPhotosTask>[] = [];
+
+  //   const walk = async (dir: string) => {
+  //     const files = await fs.readdir(dir, { withFileTypes: true });
+
+  //     for (const file of files) {
+  //       const fullPath = path.resolve(dir, file.name);
+
+  //       if (file.isDirectory()) {
+  //         await walk(fullPath);
+  //         continue;
+  //       }
+
+  //       if (!file.name.endsWith('.js')) continue;
+
+  //       const sourceModule = require(fullPath);
+  //       const SourceClass = sourceModule.default ?? sourceModule;
+
+  //       sources.push(new SourceClass());
+  //     }
+  //   };
+
+  //   await walk(this.sourcesFolder);
+
+  //   return sources;
+  // }
+
   async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
     const sources: ISource<ICollectProductPhotosTask>[] = [];
+
+    const deps: ISourceDependencies = {
+      flowRunner: new FlowRunner(),
+      resolver: new DefaultStrategyResolver(),
+      actionsFactory: new ActionsFactory(),
+      logger: this.logger,
+    };
 
     const walk = async (dir: string) => {
       const files = await fs.readdir(dir, { withFileTypes: true });
@@ -1017,9 +1064,11 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         if (!file.name.endsWith('.js')) continue;
 
         const sourceModule = require(fullPath);
-        const SourceClass = sourceModule.default ?? sourceModule;
+        const definition: ISourceDefinition = sourceModule.default ?? sourceModule;
 
-        sources.push(new SourceClass());
+        console.log('definition = ', definition);
+
+        sources.push(definition.create(deps));
       }
     };
 
