@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class OpenSearchPage {
     name = 'OpenSearchPage';
     async run(ctx) {
-        const { page, actions } = ctx;
+        const { page } = ctx;
         const product = ctx.input.product;
         if (!product) {
             throw new Error('Product is undefined');
@@ -18,13 +18,14 @@ class OpenSearchPage {
             await page.goto(url, { waitUntil: 'domcontentloaded' });
             const linkSelector = '#block-personal-content a.product-teaser__image--wrapper';
             const emptySelector = '.view-empty > p';
-            await Promise.race([
-                actions.waitForSelector(linkSelector),
-                actions.waitForSelector(emptySelector),
-            ]);
-            if (await actions.exists(emptySelector)) {
-                throw new Error(`Goods not found on the page. ${sku}`);
-            }
+            //todo убрать actions
+            // await Promise.race([
+            //   actions.waitForSelector(linkSelector),
+            //   actions.waitForSelector(emptySelector),
+            // ]);
+            // if (await actions.exists(emptySelector)) {
+            //   throw new Error(`Goods not found on the page. ${sku}`);
+            // }
             const relativeHref = await actions.getAttribute(linkSelector, 'href');
             if (!relativeHref) {
                 throw new Error('Product link not found');

@@ -1,4 +1,3 @@
-import { IActionsFactory } from '../../types/IActionsFactory';
 import { IExecutionContext } from '../../types/IExecutionContext';
 import { IStep } from '../../types/IStep';
 import { IDataImag, IDataImagItem } from '../../../data/entities/IDataImag';
@@ -8,7 +7,7 @@ export default class OpenSearchPage implements IStep {
   public readonly name = 'OpenSearchPage';
 
   async run(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<void> {
-    const { page, actions } = ctx;
+    const { page } = ctx;
 
     const product = ctx.input.product;
     if (!product) {
@@ -34,14 +33,15 @@ export default class OpenSearchPage implements IStep {
       const linkSelector = '#block-personal-content a.product-teaser__image--wrapper';
       const emptySelector = '.view-empty > p';
 
-      await Promise.race([
-        actions.waitForSelector(linkSelector),
-        actions.waitForSelector(emptySelector),
-      ]);
+      //todo убрать actions
+      // await Promise.race([
+      //   actions.waitForSelector(linkSelector),
+      //   actions.waitForSelector(emptySelector),
+      // ]);
 
-      if (await actions.exists(emptySelector)) {
-        throw new Error(`Goods not found on the page. ${sku}`);
-      }
+      // if (await actions.exists(emptySelector)) {
+      //   throw new Error(`Goods not found on the page. ${sku}`);
+      // }
 
       const relativeHref = await actions.getAttribute(linkSelector, 'href');
       if (!relativeHref) {

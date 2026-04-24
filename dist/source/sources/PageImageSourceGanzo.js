@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     create(deps) {
-        // return new PageImageSourceGanzo(deps.flowRunner, deps.actionsFactory, deps.logger);
+        // return new PageImageSourceGanzo(deps.flowRunner deps.logger);
         return new PageImageSourceGanzo(deps.flowRunner);
     },
 };
@@ -15,7 +15,6 @@ class PageImageSourceGanzo {
         return task.metadata.target_website === 'https://ganzo.ua/search?search={{sku_prod}}';
     }
     async execute(ctx) {
-        // const startStep = new GanzoFlowStep(this.actionsFactory);
         // const startStep = ctx.stepFactory.create('GanzoFlowStep');
         const startStep = ctx.stepFactory.create('OpenSearchPage');
         await this.flowRunner.run(startStep, ctx);

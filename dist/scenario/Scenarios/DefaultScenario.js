@@ -297,7 +297,6 @@ class DefaultScenario {
                 let page;
                 try {
                     page = await pool.acquire();
-                    const actions = new source_1.ActionsFactory().create(page);
                     const stepsLoader = new StepRegistryLoader_1.StepRegistryLoader(this.config.stepsFolder);
                     await stepsLoader.load();
                     const stepFactory = new StepFactory_1.StepFactory(stepsLoader);
@@ -324,7 +323,6 @@ class DefaultScenario {
                                 product,
                             },
                             state: {},
-                            actions,
                             stepFactory,
                             errors: [],
                             debug: {
@@ -799,7 +797,6 @@ class DefaultScenario {
         const deps = {
             flowRunner: new source_1.FlowRunner(),
             resolver: new source_1.DefaultStrategyResolver(),
-            actionsFactory: new source_1.ActionsFactory(),
             logger: this.logger,
         };
         const walk = async (dir) => {

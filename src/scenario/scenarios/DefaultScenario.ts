@@ -42,7 +42,6 @@ import {
   ISourceDependencies,
   FlowRunner,
   DefaultStrategyResolver,
-  ActionsFactory,
   ISourceDefinition,
 } from '../../source';
 
@@ -405,8 +404,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         try {
           page = await pool.acquire();
 
-          const actions = new ActionsFactory().create(page!);
-
           const stepsLoader = new StepRegistryLoader(this.config.stepsFolder);
           await stepsLoader.load();
           const stepFactory = new StepFactory(stepsLoader);
@@ -436,7 +433,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                   product,
                 },
                 state: {},
-                actions,
                 stepFactory,
                 errors: [],
                 debug: {
@@ -1067,7 +1063,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     const deps: ISourceDependencies = {
       flowRunner: new FlowRunner(),
       resolver: new DefaultStrategyResolver(),
-      actionsFactory: new ActionsFactory(),
       logger: this.logger,
     };
 
