@@ -32,6 +32,9 @@ import { IProductRaw } from '../../processing/HTMLProcessor';
 import { UnprocessedCollector } from '../../data/collectors/UnprocessedCollector';
 import { BRAND_ALIASES } from '../../data/entities/brand_aliases';
 
+import { StepRegistryLoader } from '../../source/registry/StepRegistryLoader';
+import { StepFactory } from '../../source/steps/StepFactory';
+
 /* new imports */
 
 import {
@@ -402,6 +405,12 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
         try {
           page = await pool.acquire();
 
+          const actions = new ActionsFactory().create(page!);
+
+          const stepsLoader = new StepRegistryLoader(this.config.stepsFolder);
+          await stepsLoader.load();
+          const stepFactory = new StepFactory(stepsLoader);
+
           loggerScope?.debug('Beginning processing of product', {
             component: 'DefaultScenario',
             method: 'process()',
@@ -409,16 +418,14 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
             data: {
               product: product,
               targetWebsite: task.metadata.target_website,
-
+              stepsLoader: stepsLoader,
+              stepFactory: stepFactory,
               limiter: this.limiter,
             },
           });
 
-          //!!!!!!!!!!!!!!!!! 1111
           const result = await this.withRetry(
             async () => {
-              const actions = new ActionsFactory().create(page!);
-
               const ctx: IExecutionContext<ICollectProductPhotosTask> = {
                 page: page!,
                 logger: loggerScope as IScopedLogger,
@@ -430,6 +437,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                 },
                 state: {},
                 actions,
+                stepFactory,
                 errors: [],
                 debug: {
                   strategies: [],
@@ -666,146 +674,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
       targetDir: '',
     });
   }
-
-  //!!!!!!!!!!!  22222
-  // processProduct = async (
-  //   task: ICollectProductPhotosTask,
-  //   loggerScope?: ILogger,
-  // ): Promise<TaskResult> => {
-  //   if (!task.metadata.target_website) {
-  //     loggerScope?.error('Task metadata does not contain target_website!!', {
-  //       component: 'DefaultScenario',
-  //       method: 'process()',
-  //       action: 'if (!task.metadata.target_website)',
-  //       data: {
-  //         product,
-  //         targetWebsite: task.metadata.target_website,
-  //       },
-  //     });
-
-  //     throw new Error('Error!! Task metadata does not contain target_website!!');
-  //   }
-
-  //   let page: Page | undefined;
-
-  //   try {
-  //     page = await pool.acquire();
-
-  //     loggerScope?.debug('Beginning processing of product', {
-  //       component: 'DefaultScenario',
-  //       method: 'process()',
-  //       data: {
-  //         product,
-  //         targetWebsite: task.metadata.target_website,
-  //       },
-  //     });
-
-  //     const result = await this.withRetry(
-  //       async () => {
-  //         // 🔹 создаём actions (Scenario responsibility)
-  //         const actions = new ActionsFactory().create(page!);
-
-  //         // 🔹 создаём ExecutionContext (НОВЫЙ на каждый retry)
-  //         const ctx: IExecutionContext<ICollectProductPhotosTask> = {
-  //           page: page!,
-  //           logger: loggerScope as IScopedLogger,
-  //           task,
-
-  //           input: {
-  //             url: task.metadata.target_website!,
-  //             sku: product.sku,
-  //             product,
-  //           },
-
-  //           state: {},
-
-  //           actions,
-
-  //           errors: [],
-
-  //           debug: {
-  //             strategies: [],
-  //           },
-
-  //           control: {},
-  //         };
-
-  //         // 🔹 вызов новой модели Source
-  //         return await source.execute(ctx);
-  //       },
-  //       {
-  //         maxRetries: this.maxRetries,
-  //         isRetryable,
-  //       },
-  //       this.limiter,
-  //       loggerScope,
-  //     );
-
-  //     loggerScope?.debug('Product processing finished', {
-  //       component: 'DefaultScenario',
-  //       method: 'process()',
-  //       data: {
-  //         product,
-  //         result,
-  //       },
-  //     });
-
-  //     // 🔹 теперь result — ОДИН объект, не массив
-  //     const r = result;
-
-  //     if (r.data.images) {
-  //       for (const [sku, images] of Object.entries(r.data.images)) {
-  //         if (!allData[sku]) {
-  //           const arr = [] as unknown as IDataImagItem;
-  //           arr.idProduct = images.idProduct;
-  //           allData[sku] = arr;
-  //         }
-
-  //         allData[sku].push(...images);
-  //       }
-  //     }
-
-  //     if (r.data.html) {
-  //       const brandKey = this.resolveBrandName(task.brand_name);
-
-  //       const processor = new HtmlProcessorFactory().create(brandKey.toLowerCase());
-
-  //       const rawContent = processor.process(r.data.html);
-
-  //       if (!Array.isArray(rawContent)) {
-  //         allProductRaw.push({
-  //           sku: product.sku,
-  //           id: product.id_product,
-  //           content: rawContent,
-  //         });
-  //       }
-  //     }
-
-  //     return { status: 'success' };
-  //   } catch (err) {
-  //     const error = err as IWorkerError;
-
-  //     const errorStatus: TaskResult = isRetryable(error)
-  //       ? { status: 'retry', product, error }
-  //       : { status: 'fatal', product, error };
-
-  //     loggerScope?.error('Error during source execution with retry mechanism.', {
-  //       component: 'DefaultScenario',
-  //       method: 'process()',
-  //       data: {
-  //         product,
-  //         status: errorStatus.status,
-  //         errorMessage: error instanceof Error ? error.message : String(error),
-  //       },
-  //     });
-
-  //     return errorStatus;
-  //   } finally {
-  //     if (page) {
-  //       pool.release(page);
-  //     }
-  //   }
-  // };
 
   private resolveBrandName(input: string): string {
     const normalizedInput = input.trim().toLowerCase();
@@ -1101,7 +969,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     return allErrors;
   }
 
-  //!!!!!!!!!! 33333
   private async withRetry<T>(
     action: () => Promise<T>,
     options: {
@@ -1219,8 +1086,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
         const sourceModule = require(fullPath);
         const definition: ISourceDefinition = sourceModule.default ?? sourceModule;
-
-        console.log('definition = ', definition);
 
         sources.push(definition.create(deps));
       }

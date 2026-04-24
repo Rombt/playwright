@@ -1,25 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const GanzoFlowStep_1 = require("../steps/GanzoFlowStep");
 exports.default = {
     create(deps) {
-        return new PageImageSourceGanzo(deps.flowRunner, deps.actionsFactory, deps.logger);
+        // return new PageImageSourceGanzo(deps.flowRunner, deps.actionsFactory, deps.logger);
+        return new PageImageSourceGanzo(deps.flowRunner);
     },
 };
 class PageImageSourceGanzo {
     flowRunner;
-    actionsFactory;
-    logger;
-    constructor(flowRunner, actionsFactory, logger) {
+    constructor(flowRunner) {
         this.flowRunner = flowRunner;
-        this.actionsFactory = actionsFactory;
-        this.logger = logger;
     }
     supports(task) {
         return task.metadata.target_website === 'https://ganzo.ua/search?search={{sku_prod}}';
     }
     async execute(ctx) {
-        const startStep = new GanzoFlowStep_1.GanzoFlowStep(this.actionsFactory);
+        // const startStep = new GanzoFlowStep(this.actionsFactory);
+        // const startStep = ctx.stepFactory.create('GanzoFlowStep');
+        const startStep = ctx.stepFactory.create('OpenSearchPage');
         await this.flowRunner.run(startStep, ctx);
         const product = ctx.input.product;
         const sku = product.sku;

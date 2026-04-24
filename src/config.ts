@@ -26,6 +26,9 @@ export const config = {
 
     //                     source\sources\PageImageSourceGanzo.ts
     sourcesFolder: './dist/source/sources',
+    //                      source\steps\OpenSearchPage
+    // stepsFolder: './dist/source/steps/OpenSearchPage',
+    stepsFolder: './dist/source/steps',
     // scenario: 'rozetka',   // для отсутствующих sources
     convertToJpg: true,
     // taskPath: 'src/data/tasks/skechers/skechers.json',

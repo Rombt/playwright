@@ -5,6 +5,7 @@ import { IProduct } from '../../data/entities/IProduct';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 
 import { IActions } from './IActions';
+import { IStepFactory } from './IStepFactory';
 import { IStrategyDebugEntry } from './IStrategyDebugEntry';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 
@@ -34,6 +35,7 @@ export interface IExecutionContext<TTask extends ITask = ITask> {
 
   // infra
   actions: IActions;
+  stepFactory: IStepFactory;
 
   // errors (вместо diagnostics)
   errors: IWorkerError[];

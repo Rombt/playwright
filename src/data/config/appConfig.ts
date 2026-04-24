@@ -87,6 +87,10 @@ export class AppConfig {
     return this.processData(appConfig).data.sourcesFolder;
   }
 
+  public get stepsFolder(): string {
+    return this.processData(appConfig).data.stepsFolder;
+  }
+
   public get taskPath(): string {
     return this.processData(appConfig).data.taskPath;
   }
@@ -156,8 +160,9 @@ export class AppConfig {
 
     return {
       data: {
-        resultsFolder: this.resolvePath(dataConfig.resultsFolder),
-        sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
+        resultsFolder: this.resolvePath(dataConfig.resultsFolder ?? 'results'),
+        sourcesFolder: this.resolvePath(dataConfig.sourcesFolder ?? 'source/sources'),
+        stepsFolder: this.resolvePath(dataConfig.stepsFolder ?? 'source/steps'),
         convertToJpg: dataConfig.convertToJpg ?? false,
         brands: resolveBrands(dataConfig.brands),
         taskPath: this.resolvePath(dataConfig.taskPath),

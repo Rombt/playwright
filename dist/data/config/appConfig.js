@@ -63,6 +63,9 @@ class AppConfig {
     get sourcesFolder() {
         return this.processData(config_1.config).data.sourcesFolder;
     }
+    get stepsFolder() {
+        return this.processData(config_1.config).data.stepsFolder;
+    }
     get taskPath() {
         return this.processData(config_1.config).data.taskPath;
     }
@@ -115,8 +118,9 @@ class AppConfig {
             : [];
         return {
             data: {
-                resultsFolder: this.resolvePath(dataConfig.resultsFolder),
-                sourcesFolder: this.resolvePath(dataConfig.sourcesFolder),
+                resultsFolder: this.resolvePath(dataConfig.resultsFolder ?? 'results'),
+                sourcesFolder: this.resolvePath(dataConfig.sourcesFolder ?? 'source/sources'),
+                stepsFolder: this.resolvePath(dataConfig.stepsFolder ?? 'source/steps'),
                 convertToJpg: dataConfig.convertToJpg ?? false,
                 brands: resolveBrands(dataConfig.brands),
                 taskPath: this.resolvePath(dataConfig.taskPath),

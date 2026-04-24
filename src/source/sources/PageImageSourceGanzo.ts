@@ -7,27 +7,30 @@ import { ILogger } from '../../data/logger/types/ILogger';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IExecutionContext } from '../types/IExecutionContext';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
-import { GanzoFlowStep } from '../steps/GanzoFlowStep';
+
+import { GanzoFlowStep } from '../steps/GanzoFlowStep_first_draft';
 
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
-    return new PageImageSourceGanzo(deps.flowRunner, deps.actionsFactory, deps.logger);
+    // return new PageImageSourceGanzo(deps.flowRunner, deps.actionsFactory, deps.logger);
+    return new PageImageSourceGanzo(deps.flowRunner);
   },
 };
 
 class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
   constructor(
-    private flowRunner: IFlowRunner,
-    private actionsFactory: IActionsFactory,
-    private logger: ILogger,
-  ) {}
+    private flowRunner: IFlowRunner, // private actionsFactory: IActionsFactory,
+  ) // private logger: ILogger,
+  {}
 
   supports(task: ICollectProductPhotosTask): boolean {
     return task.metadata.target_website === 'https://ganzo.ua/search?search={{sku_prod}}';
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
-    const startStep = new GanzoFlowStep(this.actionsFactory);
+    // const startStep = new GanzoFlowStep(this.actionsFactory);
+    // const startStep = ctx.stepFactory.create('GanzoFlowStep');
+    const startStep = ctx.stepFactory.create('OpenSearchPage');
 
     await this.flowRunner.run(startStep, ctx);
 

@@ -34,6 +34,7 @@ export interface RetryConfig {
 export interface DataConfig {
   resultsFolder: string;
   sourcesFolder: string;
+  stepsFolder: string;
   convertToJpg: boolean;
   taskPath: string;
   brands: string[];
