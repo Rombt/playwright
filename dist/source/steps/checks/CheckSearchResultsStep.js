@@ -8,7 +8,6 @@ class CheckSearchResultsStep {
             throw new Error('SKU is required');
         }
         const sku = params.sku;
-        // 👉 ВСЁ ЧТО ПРО СЕЛЕКТОРЫ — В stepParams
         const stepConfig = ctx.stepParams?.get(CheckSearchResultsStep);
         if (!stepConfig?.linkSelector) {
             throw new Error('linkSelector is not configured in stepParams');

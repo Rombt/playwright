@@ -60,11 +60,17 @@ export class FlowRunner implements IFlowRunner {
       } catch (error) {
         ctx.logger.error('Step failed', {
           step: current.step.name,
-          error,
+          error: {
+            message: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined,
+          },
         });
 
         ctx.errors.push({
-          error,
+          error: {
+            message: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined,
+          },
           product: ctx.input.product,
           targetUrl: ctx.state.productUrl,
         });

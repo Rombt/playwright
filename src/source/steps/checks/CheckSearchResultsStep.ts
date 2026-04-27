@@ -24,7 +24,6 @@ export default class CheckSearchResultsStep implements IStep<CheckSearchResultsP
 
     const sku = params.sku;
 
-    // 👉 ВСЁ ЧТО ПРО СЕЛЕКТОРЫ — В stepParams
     const stepConfig = ctx.stepParams?.get(CheckSearchResultsStep) as {
       linkSelector: string;
       emptySelector?: string;
