@@ -7,6 +7,8 @@ import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IExecutionContext } from '../types/IExecutionContext';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 
+import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
+
 import { GanzoFlowStep } from '../steps/GanzoFlowStep_first_draft';
 
 export default {
@@ -18,7 +20,7 @@ export default {
 
 class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
   constructor(
-    private flowRunner: IFlowRunner, // // private logger: ILogger,
+    private flowRunner: IFlowRunner, // private logger: ILogger,
   ) {}
 
   supports(task: ICollectProductPhotosTask): boolean {
@@ -26,8 +28,22 @@ class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
+    ctx.stepParams = new Map([
+      [
+        CheckSearchResultsStep,
+        {
+          linkSelector:
+            '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
+          emptySelector: '.view-empty > p',
+        },
+      ],
+      // [ExtractImagesStep, { format: 'webp' }],
+      // [SaveStep, { compress: true }],
+      // ['*', { retry: 2 }], // глобальный fallback
+    ]);
+
     // const startStep = ctx.stepFactory.create('GanzoFlowStep');
-    const startStep = ctx.stepFactory.create('OpenSearchPage');
+    const startStep = ctx.stepFactory.create('OpenSearchPageStep');
 
     await this.flowRunner.run(startStep, ctx);
 

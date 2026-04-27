@@ -7,6 +7,7 @@ import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
 import { IStepFactory } from './IStepFactory';
 import { IStrategyDebugEntry } from './IStrategyDebugEntry';
 import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
+import { IStepConstructor, StepParamsMap } from './IStepConstructor';
 
 export interface IExecutionContext<TTask extends ITask = ITask> {
   // core
@@ -34,6 +35,7 @@ export interface IExecutionContext<TTask extends ITask = ITask> {
 
   // infra
   stepFactory: IStepFactory;
+  stepParams?: StepParamsMap; //todo не уверен что это должно быть в контексте выполнения
 
   // errors (вместо diagnostics)
   errors: IWorkerError[];

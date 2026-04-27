@@ -318,7 +318,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     this.sources = await this.loadSources();
   }
 
-  /* deprecated */
   async process(task: ICollectProductPhotosTask, loggerScope?: ILogger): Promise<void> {
     const allErrors: IWorkerError[] = [];
 
@@ -441,6 +440,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                 control: {},
               };
 
+              //!!!!!!!!  11111111111
               return await source.execute(ctx);
             },
             {
@@ -1060,8 +1060,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
   async loadSources(): Promise<ISource<ICollectProductPhotosTask>[]> {
     const sources: ISource<ICollectProductPhotosTask>[] = [];
 
+    //!! 222222
     const deps: ISourceDependencies = {
-      flowRunner: new FlowRunner(),
+      flowRunner: new FlowRunner(this.config),
       resolver: new DefaultStrategyResolver(),
       logger: this.logger,
     };

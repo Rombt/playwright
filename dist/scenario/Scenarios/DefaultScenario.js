@@ -225,7 +225,6 @@ class DefaultScenario {
     async prepare() {
         this.sources = await this.loadSources();
     }
-    /* deprecated */
     async process(task, loggerScope) {
         const allErrors = [];
         const source = this.sources.find((s) => s.supports(task));
@@ -330,6 +329,7 @@ class DefaultScenario {
                             },
                             control: {},
                         };
+                        //!!!!!!!!  11111111111
                         return await source.execute(ctx);
                     }, {
                         maxRetries: this.maxRetries,
@@ -794,8 +794,9 @@ class DefaultScenario {
     // }
     async loadSources() {
         const sources = [];
+        //!! 222222
         const deps = {
-            flowRunner: new source_1.FlowRunner(),
+            flowRunner: new source_1.FlowRunner(this.config),
             resolver: new source_1.DefaultStrategyResolver(),
             logger: this.logger,
         };

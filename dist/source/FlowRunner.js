@@ -2,25 +2,53 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FlowRunner = void 0;
 class FlowRunner {
+    config;
+    constructor(config) {
+        this.config = config;
+    }
+    resolveParams(step, ctx, runtimeParams) {
+        const map = ctx.stepParams;
+        if (!map)
+            return runtimeParams;
+        const stepCtor = step.constructor;
+        // приоритет:
+        // 1. runtime params (из next)
+        // 2. конкретный шаг
+        // 3. глобальные (*)
+        if (runtimeParams !== undefined)
+            return runtimeParams;
+        if (map.has(stepCtor)) {
+            return map.get(stepCtor);
+        }
+        if (map.has('*')) {
+            return map.get('*');
+        }
+        return undefined;
+    }
     async run(startStep, ctx) {
-        let current = startStep;
+        let current = {
+            step: startStep,
+            params: undefined,
+        };
         while (current) {
             if (ctx.control.stop) {
                 ctx.logger.warn('Flow stopped manually', {
-                    step: current.name,
+                    step: current.step.name,
                 });
                 break;
             }
+            const resolvedParams = this.resolveParams(current.step, ctx, current.params);
             ctx.logger.debug('Step start', {
-                step: current.name,
+                step: current.step.name,
                 stage: 'start',
+                params: resolvedParams,
             });
             try {
-                await current.run(ctx);
+                await current.step.run(ctx, this.config, resolvedParams);
             }
             catch (error) {
                 ctx.logger.error('Step failed', {
-                    step: current.name,
+                    step: current.step.name,
                     error,
                 });
                 ctx.errors.push({
@@ -28,17 +56,17 @@ class FlowRunner {
                     product: ctx.input.product,
                     targetUrl: ctx.state.productUrl,
                 });
-                // решение: продолжаем flow
             }
             ctx.logger.debug('Step finish', {
-                step: current.name,
+                step: current.step.name,
                 stage: 'finish',
             });
-            current = current.next(ctx);
-            if (ctx.control.skipNext) {
+            let next = current.step.next(ctx, this.config);
+            if (ctx.control.skipNext && next) {
                 ctx.control.skipNext = false;
-                current = current?.next(ctx) ?? null;
+                next = next.step.next(ctx, this.config);
             }
+            current = next;
         }
         ctx.logger.debug('Flow finished', {
             stage: 'done',
