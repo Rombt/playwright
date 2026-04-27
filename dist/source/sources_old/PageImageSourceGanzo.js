@@ -73,6 +73,7 @@ class PageImageSourceGanzo {
             if ((await empty.count()) > 0) {
                 throw new Error(`Goods not found on the page. ${sku}`);
             }
+            //***---------------------------------------------------------------------
             const relativeHref = await link.getAttribute('href');
             if (!relativeHref)
                 throw new Error('Product link not found');

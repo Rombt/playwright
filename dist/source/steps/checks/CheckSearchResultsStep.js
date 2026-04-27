@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class CheckSearchResultsStep {
+const BaseStep_1 = require("../../BaseStep");
+const helpers_1 = require("../../../common/helpers");
+class CheckSearchResultsStep extends BaseStep_1.BaseStep {
     name = 'CheckSearchResultsStep';
-    async run(ctx, config, params) {
+    async execute(ctx, config, params) {
         const { page } = ctx;
         if (!params?.sku) {
             throw new Error('SKU is required');
@@ -26,12 +28,13 @@ class CheckSearchResultsStep {
         if ((await empty.count()) > 0) {
             throw new Error(`Goods not found on the page. ${sku}`);
         }
+        ctx.state.urlProductPage = (0, helpers_1.getAbsoluteHref)(ctx.page, link);
     }
     next(ctx) {
         if (ctx.control.stop)
             return null;
         return {
-            step: ctx.stepFactory.create('FindProductLinkStep'),
+            step: ctx.stepFactory.create('OpenProductPageStep'),
             params: {
                 sku: ctx.input.product?.sku,
             },

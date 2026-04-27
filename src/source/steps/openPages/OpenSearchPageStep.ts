@@ -1,5 +1,5 @@
 import { IExecutionContext } from '../../types/IExecutionContext';
-import { IStep } from '../../types/IStep';
+import { BaseStep } from '../../BaseStep';
 import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { normalizeSku } from '../../../common/helpers';
 import { IProduct } from '../../../data/entities/IProduct';
@@ -11,10 +11,10 @@ type OpenSearchPageParams = {
   waitUntil?: 'domcontentloaded' | 'load' | 'networkidle';
 };
 
-export default class OpenSearchPageStep implements IStep<OpenSearchPageParams> {
+export default class OpenSearchPageStep extends BaseStep {
   public readonly name = 'OpenSearchPageStep';
 
-  async run(
+  protected async execute(
     ctx: IExecutionContext<ICollectProductPhotosTask>,
     config: AppConfig,
     params?: OpenSearchPageParams,
@@ -35,19 +35,9 @@ export default class OpenSearchPageStep implements IStep<OpenSearchPageParams> {
 
     const waitUntil = params?.waitUntil ?? 'domcontentloaded';
 
-    try {
-      await ctx.page.goto(url, { waitUntil });
+    await ctx.page.goto(url, { waitUntil });
 
-      ctx.state.productUrl = url;
-    } catch (error) {
-      ctx.errors.push({
-        error,
-        product,
-        targetUrl: url,
-      });
-
-      ctx.control.stop = true;
-    }
+    // ctx.state.productUrl = url;
   }
 
   next(ctx: IExecutionContext): IStepResult | null {
@@ -55,9 +45,9 @@ export default class OpenSearchPageStep implements IStep<OpenSearchPageParams> {
 
     return {
       step: ctx.stepFactory.create('CheckSearchResultsStep'),
-      params: {
-        sku: ctx.input.product?.sku, // runtime-only
-      },
+      // params: {
+      //   sku: ctx.input.product?.sku,
+      // },
     };
   }
 }

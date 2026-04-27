@@ -20,8 +20,7 @@ class PageImageSourceGanzo {
             [
                 CheckSearchResultsStep_1.default,
                 {
-                    // linkSelector:
-                    //   '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
+                    linkSelector: '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
                     emptySelector: '.view-empty > p',
                 },
             ],

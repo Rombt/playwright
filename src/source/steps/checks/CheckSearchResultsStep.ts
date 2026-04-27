@@ -1,17 +1,18 @@
 import { IExecutionContext } from '../../types/IExecutionContext';
-import { IStep } from '../../types/IStep';
+import { BaseStep } from '../../BaseStep';
 import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
+import { getAbsoluteHref } from '../../../common/helpers';
 
 type CheckSearchResultsParams = {
   sku: string;
 };
 
-export default class CheckSearchResultsStep implements IStep<CheckSearchResultsParams> {
+export default class CheckSearchResultsStep extends BaseStep {
   public readonly name = 'CheckSearchResultsStep';
 
-  async run(
+  protected async execute(
     ctx: IExecutionContext<ICollectProductPhotosTask>,
     config: AppConfig,
     params?: CheckSearchResultsParams,
@@ -34,7 +35,6 @@ export default class CheckSearchResultsStep implements IStep<CheckSearchResultsP
     }
 
     const link = page.locator(stepConfig.linkSelector).first();
-
     const empty = page.locator(stepConfig.emptySelector ?? '.view-empty');
 
     try {
@@ -49,13 +49,15 @@ export default class CheckSearchResultsStep implements IStep<CheckSearchResultsP
     if ((await empty.count()) > 0) {
       throw new Error(`Goods not found on the page. ${sku}`);
     }
+
+    ctx.state.urlProductPage = getAbsoluteHref(ctx.page, link);
   }
 
   next(ctx: IExecutionContext): IStepResult | null {
     if (ctx.control.stop) return null;
 
     return {
-      step: ctx.stepFactory.create('FindProductLinkStep'),
+      step: ctx.stepFactory.create('OpenProductPageStep'),
       params: {
         sku: ctx.input.product?.sku,
       },

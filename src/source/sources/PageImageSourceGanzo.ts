@@ -9,8 +9,6 @@ import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
 
-import { GanzoFlowStep } from '../steps/GanzoFlowStep_first_draft';
-
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
     // return new PageImageSourceGanzo(deps.flowRunner deps.logger);
@@ -32,8 +30,8 @@ class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
       [
         CheckSearchResultsStep,
         {
-          // linkSelector:
-          //   '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
+          linkSelector:
+            '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
           emptySelector: '.view-empty > p',
         },
       ],

@@ -121,6 +121,8 @@ export default class PageImageSourceGanzo implements ISource<ICollectProductPhot
         throw new Error(`Goods not found on the page. ${sku}`);
       }
 
+      //***---------------------------------------------------------------------
+
       const relativeHref = await link.getAttribute('href');
       if (!relativeHref) throw new Error('Product link not found');
       const absoluteHref = new URL(relativeHref, page.url()).toString();
