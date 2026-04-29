@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-09_13-10",
+  "task": [
+    {
+      "brand_id": "15",
+      "brand_name": "Nike",
+      "metadata": {
+        "target_website": "https://www.nike.com/fi/w?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54136",
+          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
+          "sku": "HV0959-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        }
+      ]
+    }
+  ]
+}
