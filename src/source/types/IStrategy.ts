@@ -1,11 +1,11 @@
 import { IExecutionContext } from './IExecutionContext';
 
-export interface IStrategy<TResult = unknown> {
+export interface IStrategy<TParams = unknown, TResult = unknown> {
   name: string;
 
   canHandle(ctx: IExecutionContext): Promise<boolean>;
 
   score(ctx: IExecutionContext): Promise<number>;
 
-  execute(ctx: IExecutionContext): Promise<TResult>;
+  execute(ctx: IExecutionContext, params: TParams): Promise<TResult>;
 }

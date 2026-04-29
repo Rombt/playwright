@@ -30,6 +30,8 @@ export interface IExecutionContext<TTask extends ITask = ITask> {
     description?: string;
     html?: string;
 
+    strategy?: Record<string, unknown>;
+
     [key: string]: unknown;
   };
 
