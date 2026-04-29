@@ -8,6 +8,10 @@ import { IExecutionContext } from '../types/IExecutionContext';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
+import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
+import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
+import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
+import { IExtractHtmlOptions } from '../../common/helpers';
 
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
@@ -35,15 +39,41 @@ class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
           emptySelector: '.view-empty > p',
         },
       ],
-      // [ExtractImagesStep, { format: 'webp' }],
-      // [SaveStep, { compress: true }],
+      [
+        CheckPageSkuStep,
+        { pageSkuSelector: 'div.product-full__code div.field-product-vendor-code__item' },
+      ],
+      [
+        SearchGalleryStep,
+        {
+          gallerySelector:
+            '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
+        },
+      ],
+      [
+        CollectDescriptionStep,
+        {
+          containers: ['div.field-product-desc__item.field__item'],
+          removeSelectors: ['h2', 'div.video'],
+          expand: false,
+          separator: '\n',
+        } satisfies IExtractHtmlOptions,
+      ],
       // ['*', { retry: 2 }], // глобальный fallback
-    ]);
+    ] as Array<[any, any]>);
 
-    // const startStep = ctx.stepFactory.create('GanzoFlowStep');
     const startStep = ctx.stepFactory.create('OpenSearchPageStep');
 
     await this.flowRunner.run(startStep, ctx);
+
+    ctx.logger?.debug('Processing of the PageImageSourceGanzo is finished', {
+      component: 'PageImageSourceGanzo',
+      method: 'execute()',
+      action: 'await this.flowRunner.run(startStep, ctx)',
+      data: {
+        ctx: ctx,
+      },
+    });
 
     const product = ctx.input.product!;
     const sku = product.sku;

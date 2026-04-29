@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-10_09-16",
+  "task": {
+    "248": {
+      "brand_id": "248",
+      "brand_name": "Ganzo",
+      "metadata": {
+        "target_website": "https://ganzo.ua/search?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54367",
+          "name_product": "Мультитул G302-H Ganzo (a)",
+          "sku": "G302-H",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

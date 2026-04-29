@@ -34,7 +34,7 @@ export const config = {
     // taskPath: 'src/data/tasks/skechers/skechers.json',
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
-    taskPath: 'src/data/tasks/ganzo/ganzo_test.json',
+    taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

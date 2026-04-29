@@ -29,15 +29,15 @@ import { IExtractHtmlOptions } from './types/IExtractHtmlOptions';
  * Получение чистого HTML-контента из сложных UI-страниц (с табами, аккордеонами,
  * галереями и динамическими блоками) для последующего парсинга или анализа.
  */
-export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): Promise<string> {
-  const { containers, removeSelectors = [], separator = '\n', expand = false } = options;
+export async function extractRawHtml(page: Page, options: any): Promise<string> {
+  const { containers, removeSelectors = [], separator = '\n' } = options;
 
-  const locators: Locator[] = containers.map((c) => (typeof c === 'string' ? page.locator(c) : c));
+  const locators: Locator[] = containers.map((c: any) =>
+    typeof c === 'string' ? page.locator(c) : c,
+  );
 
-  // soft expand — только если явно включено
-  if (expand) {
-    await softExpand(page);
-  }
+  // мягкое раскрытие (НЕ критичное)
+  await softExpand(page);
 
   const results: string[] = [];
   const seen = new Set<string>();
@@ -46,7 +46,7 @@ export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): 
     const elements = await locator.all();
 
     for (const el of elements) {
-      const data = await el.evaluate((root: HTMLElement, removeSelectors: string[]) => {
+      const data = await el.evaluate((root, removeSelectors) => {
         const clone = root.cloneNode(true) as HTMLElement;
 
         const remove = [
@@ -63,9 +63,18 @@ export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): 
           ...removeSelectors,
         ];
 
+        // удалить мусор
         for (const sel of remove) {
           clone.querySelectorAll(sel).forEach((n) => n.remove());
         }
+
+        // нормализация текста (главный фикс)
+        // const text = clone.innerText
+        //   .replace(/\s+\n/g, '\n')
+        //   .replace(/\n\s+/g, '\n')
+        //   .replace(/[ \t]+/g, ' ')
+        //   .trim();
+        // return text;
 
         return clone.innerHTML.trim();
       }, removeSelectors);
@@ -82,32 +91,26 @@ export async function extractRawHtml(page: Page, options: IExtractHtmlOptions): 
 
 async function softExpand(page: Page) {
   // details
-  await page.evaluate(() => {
-    document.querySelectorAll('details').forEach((el) => {
-      (el as HTMLDetailsElement).open = true;
-    });
+  await page.locator('details').evaluateAll((els) => {
+    els.forEach((el: any) => (el.open = true));
   });
 
   // aria-expanded
   const exp = page.locator('[aria-expanded="false"]');
-  const expCount = await exp.count();
-
-  for (let i = 0; i < expCount; i++) {
+  for (let i = 0; i < (await exp.count()); i++) {
     try {
-      await exp.nth(i).click({ timeout: 300 });
+      await exp.nth(i).click({ timeout: 400 });
     } catch {}
   }
 
-  // tabs (осторожно)
+  // tabs (очень осторожно)
   const tabs = page.locator('[role="tab"]');
-  const tabCount = await tabs.count();
-
-  for (let i = 0; i < tabCount; i++) {
+  for (let i = 0; i < (await tabs.count()); i++) {
     try {
-      await tabs.nth(i).click({ timeout: 300 });
-      await page.waitForTimeout(50);
+      await tabs.nth(i).click({ timeout: 400 });
+      await page.waitForTimeout(80);
     } catch {}
   }
 
-  await page.waitForTimeout(200);
+  await page.waitForTimeout(300);
 }

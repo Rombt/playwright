@@ -73,13 +73,12 @@ class PageImageSourceGanzo {
             if ((await empty.count()) > 0) {
                 throw new Error(`Goods not found on the page. ${sku}`);
             }
-            //***---------------------------------------------------------------------
             const relativeHref = await link.getAttribute('href');
             if (!relativeHref)
                 throw new Error('Product link not found');
             const absoluteHref = new URL(relativeHref, page.url()).toString();
             await page.goto(absoluteHref, { waitUntil: 'domcontentloaded' });
-            const page_sku = page.locator('div.product-full__code div.field-product-vendor-code__item', {
+            const page_sku = page.locator('', {
                 hasText: `${sku}`,
             });
             await page_sku
@@ -112,11 +111,13 @@ class PageImageSourceGanzo {
                 await htmlCont
                     .first()
                     .waitFor({ state: 'attached', timeout: this.config.asyncRetry.maxDelay });
+                //*** START ---------------------------------------------------------------------
                 // удаляю видео ролики
                 html = await htmlCont.evaluate((el) => {
                     el.querySelectorAll('div').forEach((div) => div.remove());
                     return el.innerHTML;
                 });
+                //*** END ---------------------------------------------------------------------
             }
             catch (error) {
                 this.logger?.debug(`Description is absent`, {

@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const BaseStep_1 = require("../../BaseStep");
+const helpers_1 = require("../../../common/helpers");
+// type CollectDescriptionStepParams = {
+//   sku: string;
+// };
+class CollectDescriptionStep extends BaseStep_1.BaseStep {
+    name = 'CollectDescriptionStep';
+    async execute(ctx, config) {
+        const { page } = ctx;
+        let html = '';
+        //!! Для сбора описаний на разных сайтах использовать СТРАТЕГИИ а не делать новые шаги аналогично этому
+        const stepConfig = ctx.stepParams?.get(CollectDescriptionStep);
+        try {
+            ctx.state.html = await (0, helpers_1.extractRawHtml)(page, stepConfig);
+        }
+        catch (error) {
+            throw new Error(`Description is absent for ${ctx.input.url}`);
+        }
+        ctx.control.stop = true;
+    }
+    next(ctx) {
+        if (ctx.control.stop)
+            return null;
+        return {
+            step: ctx.stepFactory.create(''), //!!!!
+            params: {
+                sku: ctx.input.product?.sku,
+            },
+        };
+    }
+}
+exports.default = CollectDescriptionStep;

@@ -1,4 +1,3 @@
-// import { Page, Locator } from 'playwright-core';
 import { IExecutionContext } from '../../types/IExecutionContext';
 import { BaseStep } from '../../BaseStep';
 import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
@@ -32,7 +31,7 @@ export default class OpenProductPageStep extends BaseStep {
     if (ctx.control.stop) return null;
 
     return {
-      step: ctx.stepFactory.create(''),
+      step: ctx.stepFactory.create('CheckPageSkuStep'),
       params: {
         sku: ctx.input.product?.sku,
       },

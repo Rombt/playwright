@@ -30,12 +30,10 @@ exports.extractRawHtml = extractRawHtml;
  * галереями и динамическими блоками) для последующего парсинга или анализа.
  */
 async function extractRawHtml(page, options) {
-    const { containers, removeSelectors = [], separator = '\n', expand = false } = options;
-    const locators = containers.map((c) => (typeof c === 'string' ? page.locator(c) : c));
-    // soft expand — только если явно включено
-    if (expand) {
-        await softExpand(page);
-    }
+    const { containers, removeSelectors = [], separator = '\n' } = options;
+    const locators = containers.map((c) => typeof c === 'string' ? page.locator(c) : c);
+    // мягкое раскрытие (НЕ критичное)
+    await softExpand(page);
     const results = [];
     const seen = new Set();
     for (const locator of locators) {
@@ -56,9 +54,17 @@ async function extractRawHtml(page, options) {
                     '[class*="icon"]',
                     ...removeSelectors,
                 ];
+                // удалить мусор
                 for (const sel of remove) {
                     clone.querySelectorAll(sel).forEach((n) => n.remove());
                 }
+                // нормализация текста (главный фикс)
+                // const text = clone.innerText
+                //   .replace(/\s+\n/g, '\n')
+                //   .replace(/\n\s+/g, '\n')
+                //   .replace(/[ \t]+/g, ' ')
+                //   .trim();
+                // return text;
                 return clone.innerHTML.trim();
             }, removeSelectors);
             if (data && !seen.has(data)) {
@@ -71,29 +77,25 @@ async function extractRawHtml(page, options) {
 }
 async function softExpand(page) {
     // details
-    await page.evaluate(() => {
-        document.querySelectorAll('details').forEach((el) => {
-            el.open = true;
-        });
+    await page.locator('details').evaluateAll((els) => {
+        els.forEach((el) => (el.open = true));
     });
     // aria-expanded
     const exp = page.locator('[aria-expanded="false"]');
-    const expCount = await exp.count();
-    for (let i = 0; i < expCount; i++) {
+    for (let i = 0; i < (await exp.count()); i++) {
         try {
-            await exp.nth(i).click({ timeout: 300 });
+            await exp.nth(i).click({ timeout: 400 });
         }
         catch { }
     }
-    // tabs (осторожно)
+    // tabs (очень осторожно)
     const tabs = page.locator('[role="tab"]');
-    const tabCount = await tabs.count();
-    for (let i = 0; i < tabCount; i++) {
+    for (let i = 0; i < (await tabs.count()); i++) {
         try {
-            await tabs.nth(i).click({ timeout: 300 });
-            await page.waitForTimeout(50);
+            await tabs.nth(i).click({ timeout: 400 });
+            await page.waitForTimeout(80);
         }
         catch { }
     }
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(300);
 }

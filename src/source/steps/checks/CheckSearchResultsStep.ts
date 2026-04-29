@@ -50,7 +50,16 @@ export default class CheckSearchResultsStep extends BaseStep {
       throw new Error(`Goods not found on the page. ${sku}`);
     }
 
-    ctx.state.urlProductPage = getAbsoluteHref(ctx.page, link);
+    ctx.state.urlProductPage = await getAbsoluteHref(ctx.page, link);
+
+    ctx.logger?.debug('URL product page is received', {
+      component: 'CheckSearchResultsStep',
+      method: 'execute()',
+      action: 'getAbsoluteHref(ctx.page, link)',
+      data: {
+        urlProductPage: ctx.state.urlProductPage,
+      },
+    });
   }
 
   next(ctx: IExecutionContext): IStepResult | null {

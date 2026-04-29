@@ -17,7 +17,7 @@ class OpenProductPageStep extends BaseStep_1.BaseStep {
         if (ctx.control.stop)
             return null;
         return {
-            step: ctx.stepFactory.create(''),
+            step: ctx.stepFactory.create('CheckPageSkuStep'),
             params: {
                 sku: ctx.input.product?.sku,
             },
