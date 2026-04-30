@@ -60,8 +60,6 @@ class StrategyResolver {
         return selected;
     }
     get(name) {
-        console.log('this.registry = '); //!!--!!
-        console.dir(this.registry, { depth: null, colors: true }); //!!--!!
         const strategy = this.registry.get(name);
         if (!strategy) {
             throw new Error(`Strategy not found: "${name}"`);

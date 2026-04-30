@@ -783,6 +783,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
 
         let _buf = buffer;
         let _ext = ext;
+        const normalizedSku = normalizeSku(item.sku);
 
         if (this.config.convertToJpg) {
           const imageProcessor: ImageProcessor = new ImageProcessor(this.storage);
@@ -790,7 +791,9 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           _ext = '.jpg';
         }
 
-        const fileName = `${item.idProduct}_${item.sku.replaceAll('/', '-')}_${item.index}${_ext}`;
+        const fileName = `${item.idProduct}_${normalizedSku.replaceAll('/', '-')}_${
+          item.index
+        }${_ext}`;
         await this.storage.save({
           filename: fileName,
           buffer: _buf,

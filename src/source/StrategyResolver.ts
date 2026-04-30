@@ -80,9 +80,6 @@ export class StrategyResolver implements IStrategyResolver {
   }
 
   get<TParams, TResult>(name: string): IStrategy<TParams, TResult> {
-    console.log('this.registry = '); //!!--!!
-    console.dir(this.registry, { depth: null, colors: true }); //!!--!!
-
     const strategy = this.registry.get(name);
 
     if (!strategy) {

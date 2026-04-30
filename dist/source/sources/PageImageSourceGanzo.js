@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const CheckSearchResultsStep_1 = require("../steps/checks/CheckSearchResultsStep");
 const CheckPageSkuStep_1 = require("../steps/checks/CheckPageSkuStep");
 const SearchGalleryStep_1 = require("../steps/searchElements/SearchGalleryStep");
+const CollectImgStep_1 = require("../steps/collectElements/CollectImgStep");
 const CollectDescriptionStep_1 = require("../steps/collectElements/CollectDescriptionStep");
 exports.default = {
     create(deps) {
@@ -38,6 +39,11 @@ class PageImageSourceGanzo {
                     gallerySelector: '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
                 },
             ],
+            CollectImgStep_1.default,
+            {
+                strategy: 'DefaultCollectImagesStrategy',
+                stopProcessing: true,
+            },
             [
                 CollectDescriptionStep_1.default,
                 {

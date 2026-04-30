@@ -10,7 +10,9 @@ import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
 import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
+import CollectImgStep from '../steps/collectElements/CollectImgStep';
 import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
+
 import { IExtractHtmlOptions } from '../../common/helpers';
 
 export default {
@@ -51,6 +53,12 @@ class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
             '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
         },
       ],
+      CollectImgStep,
+      {
+        strategy: 'DefaultCollectImagesStrategy',
+        stopProcessing: true,
+      },
+
       [
         CollectDescriptionStep,
         {

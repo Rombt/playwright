@@ -6,8 +6,13 @@ import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { getAbsoluteHref } from '../../../common/helpers';
 
-type CollectImgParams = {
+type CollectImagesResult = {
+  absoluteImageUrls: string[];
+};
+
+type CollectImgStepConfig = {
   stopProcessing: boolean;
+  strategy: string;
 };
 
 export default class CollectImgStep extends BaseStep {
@@ -20,36 +25,19 @@ export default class CollectImgStep extends BaseStep {
   ): Promise<void> {
     const { page } = ctx;
 
-    const stepConfig = ctx.stepParams?.get(CollectImgStep) as unknown as CollectImgParams;
+    const stepConfig = ctx.stepParams?.get(CollectImgStep) as unknown as CollectImgStepConfig;
 
-    // todo
-    // const strategy = ctx.strategyResolver.get<CheckSearchResultsParams, SearchResult>(
-    //   stepConfig.strategy,
-    // );
+    const strategy = ctx.strategyResolver.get<CollectImgStepConfig, CollectImagesResult>(
+      stepConfig.strategy,
+    );
 
-    const gallery = ctx.state.locatorGallery as Locator;
+    const result = await strategy.execute(ctx, stepConfig);
 
-    const imageUrls = await gallery
-      .locator('img')
-      .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src')).filter(Boolean));
-
-    const absoluteImageUrls = imageUrls.map((src) => new URL(src!, page.url()).toString());
-
-    if (absoluteImageUrls.length === 0) throw new Error('No valid image URLs found');
-
-    ctx.logger?.debug('URL of images are received', {
-      component: 'CollectImgStep',
-      method: 'execute()',
-      action: '',
-      data: {
-        absoluteImageUrls: absoluteImageUrls,
-      },
-    });
-
-    if (!ctx.state.images) {
+    if (ctx.state.images === undefined) {
       ctx.state.images = [];
     }
-    ctx.state.images?.push(...absoluteImageUrls);
+
+    ctx.state.images?.push(...result.absoluteImageUrls);
 
     // если источник не содержит описания товаров
     if (stepConfig.stopProcessing === true) {

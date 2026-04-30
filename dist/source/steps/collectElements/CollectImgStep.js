@@ -6,29 +6,12 @@ class CollectImgStep extends BaseStep_1.BaseStep {
     async execute(ctx, config) {
         const { page } = ctx;
         const stepConfig = ctx.stepParams?.get(CollectImgStep);
-        // todo
-        // const strategy = ctx.strategyResolver.get<CheckSearchResultsParams, SearchResult>(
-        //   stepConfig.strategy,
-        // );
-        const gallery = ctx.state.locatorGallery;
-        const imageUrls = await gallery
-            .locator('img')
-            .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src')).filter(Boolean));
-        const absoluteImageUrls = imageUrls.map((src) => new URL(src, page.url()).toString());
-        if (absoluteImageUrls.length === 0)
-            throw new Error('No valid image URLs found');
-        ctx.logger?.debug('URL of images are received', {
-            component: 'CollectImgStep',
-            method: 'execute()',
-            action: '',
-            data: {
-                absoluteImageUrls: absoluteImageUrls,
-            },
-        });
-        if (!ctx.state.images) {
+        const strategy = ctx.strategyResolver.get(stepConfig.strategy);
+        const result = await strategy.execute(ctx, stepConfig);
+        if (ctx.state.images === undefined) {
             ctx.state.images = [];
         }
-        ctx.state.images?.push(...absoluteImageUrls);
+        ctx.state.images?.push(...result.absoluteImageUrls);
         // если источник не содержит описания товаров
         if (stepConfig.stopProcessing === true) {
             ctx.control.stop = true;

@@ -50,6 +50,7 @@ class PageImageSourceNike implements ISource<ICollectProductPhotosTask> {
       [
         CollectImgStep,
         {
+          strategy: 'NikeCollectImagesStrategy',
           stopProcessing: true,
         },
       ],

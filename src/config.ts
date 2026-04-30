@@ -22,7 +22,7 @@ export const config = {
   data: {
     // resultsFolder: 'results/skechers',
     // resultsFolder: 'results/salomon/salomon_test',
-    resultsFolder: 'results/nike/nike_test',
+    resultsFolder: 'results/nike/nike_prod_1',
 
     //                     source\sources\PageImageSourceGanzo.ts
     sourcesFolder: './dist/source/sources',
@@ -34,12 +34,13 @@ export const config = {
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
-    taskPath: 'src/data/tasks/nike/nike_tests_short.json',
+    // taskPath: 'src/data/tasks/nike/nike_test.json',
+    taskPath: 'src/data/tasks/nike/nike_prod.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',
     mode: 'fake',
-    downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
+    // downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
   },
   //
   logger: {

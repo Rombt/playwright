@@ -582,12 +582,13 @@ class DefaultScenario {
                 });
                 let _buf = buffer;
                 let _ext = ext;
+                const normalizedSku = (0, helpers_1.normalizeSku)(item.sku);
                 if (this.config.convertToJpg) {
                     const imageProcessor = new SharpImageProcessor_1.SharpImageProcessor(this.storage);
                     _buf = await imageProcessor.convertBufferToJpg(buffer);
                     _ext = '.jpg';
                 }
-                const fileName = `${item.idProduct}_${item.sku.replaceAll('/', '-')}_${item.index}${_ext}`;
+                const fileName = `${item.idProduct}_${normalizedSku.replaceAll('/', '-')}_${item.index}${_ext}`;
                 await this.storage.save({
                     filename: fileName,
                     buffer: _buf,
