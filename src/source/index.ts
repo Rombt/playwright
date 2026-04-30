@@ -1,8 +1,23 @@
 ﻿export * from './BaseStep';
 export * from './BaseStrategy';
-export * from './StrategyResolver';
 export * from './FlowRunner';
+export * from './StrategyResolver';
 export * from './StrategyStep';
+export * from './registry/StepRegistryLoader';
+export * from './registry/StrategyRegistryLoader';
+export * from './sources/PageImageSourceGanzo';
+export * from './sources/PageImageSourceNike';
+export * from './steps/StepFactory';
+export * from './steps/checks/CheckPageSkuStep';
+export * from './steps/checks/CheckSearchResultsStep';
+export * from './steps/collectElements/CollectDescriptionStep';
+export * from './steps/collectElements/CollectImgStep';
+export * from './steps/openPages/OpenProductPageStep';
+export * from './steps/openPages/OpenSearchPageStep';
+export * from './steps/searchElements/SearchGalleryStep';
+export * from './strategies/searchElements/DefaultSearchResultsStrategy';
+export * from './strategies/searchElements/SimilarProductsSearchStrategy';
+export * from './types/ICheckSearchResults';
 export * from './types/IErrorHandler';
 export * from './types/IExecutionContext';
 export * from './types/IFlow';
@@ -15,10 +30,10 @@ export * from './types/ISource';
 export * from './types/ISourceDefinition';
 export * from './types/ISourceDependencies';
 export * from './types/IStep';
+export * from './types/IStepConstructor';
+export * from './types/IStepFactory';
+export * from './types/IStepResult';
 export * from './types/IStrategy';
 export * from './types/IStrategyDebugEntry';
 export * from './types/IStrategyResolver';
 export * from './types/IStrategyStep';
-
-/* ===  deprecated  === */
-// export * from './types/ISourceOld';

@@ -5,13 +5,12 @@ import { ILogger } from '../../data/logger/types/ILogger';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 
+import { IExecutionContext, ISourceDependencies } from '../../source';
+
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
 import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
-import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
-import { IExtractHtmlOptions } from '../../common/helpers';
-
-import { IExecutionContext, ISourceDependencies } from '../../source';
+import CollectImgStep from '../steps/collectElements/CollectImgStep';
 
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
@@ -33,28 +32,26 @@ class PageImageSourceNike implements ISource<ICollectProductPhotosTask> {
         {
           strategy: 'SimilarProductsSearchStrategy',
           linkSelector: '#skip-to-products > div > div > figure > a.product-card__img-link-overlay',
-          emptySelector: '.view-empty > p',
         },
       ],
       [
         CheckPageSkuStep,
-        { pageSkuSelector: 'div.product-full__code div.field-product-vendor-code__item' },
+        {
+          pageSkuSelector:
+            '#product-description-container > ul > li[data-testid="product-description-style-color"]',
+        },
       ],
       [
         SearchGalleryStep,
         {
-          gallerySelector:
-            '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
+          gallerySelector: 'div[data-testid="ImageCarousel"]',
         },
       ],
       [
-        CollectDescriptionStep,
+        CollectImgStep,
         {
-          containers: ['div.field-product-desc__item.field__item'],
-          removeSelectors: ['h2', 'div.video'],
-          expand: false,
-          separator: '\n',
-        } satisfies IExtractHtmlOptions,
+          stopProcessing: true,
+        },
       ],
       // ['*', { retry: 2 }], // глобальный fallback
     ] as Array<[any, any]>);

@@ -1,18 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseStep_1 = require("../../BaseStep");
-// type CollectImgStepParams = {
-//   sku: string;
-// };
 class CollectImgStep extends BaseStep_1.BaseStep {
     name = 'CollectImgStep';
     async execute(ctx, config) {
         const { page } = ctx;
-        //!! Для сбора изображений на разных сайтах использовать СТРАТЕГИИ а не делать новые шаги аналогично этому
-        // const stepConfig = ctx.stepParams?.get(CollectImgStep) as {
-        //   gallerySelector: string;
-        // };
-        // const gallerySelector = stepConfig?.gallerySelector;
+        const stepConfig = ctx.stepParams?.get(CollectImgStep);
+        // todo
+        // const strategy = ctx.strategyResolver.get<CheckSearchResultsParams, SearchResult>(
+        //   stepConfig.strategy,
+        // );
         const gallery = ctx.state.locatorGallery;
         const imageUrls = await gallery
             .locator('img')
@@ -32,12 +29,16 @@ class CollectImgStep extends BaseStep_1.BaseStep {
             ctx.state.images = [];
         }
         ctx.state.images?.push(...absoluteImageUrls);
+        // если источник не содержит описания товаров
+        if (stepConfig.stopProcessing === true) {
+            ctx.control.stop = true;
+        }
     }
     next(ctx) {
         if (ctx.control.stop)
             return null;
         return {
-            step: ctx.stepFactory.create('CollectDescriptionStep'), //!!!!
+            step: ctx.stepFactory.create(''),
             params: {
                 sku: ctx.input.product?.sku,
             },

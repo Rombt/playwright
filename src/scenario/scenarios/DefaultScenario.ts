@@ -20,7 +20,7 @@ import { IImageItem } from '../../data/entities/IImageItem';
 import { IImageError } from '../../data/entities/IErrors/IImageError';
 import { AppConfig } from '../../data/config/appConfig';
 
-import { normalizeAllData, isRetryable, waitBeforeRetry } from '../../common/helpers';
+import { normalizeAllData, isRetryable, waitBeforeRetry, normalizeSku } from '../../common/helpers';
 
 import { Logger } from '../../data/logger/Logger';
 import { IScopedLogger } from '../../data/logger/types/IScopedLogger';
@@ -412,6 +412,8 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           const strategyRegistry = await strategyLoader.load();
           const strategyResolver = new StrategyResolver(strategyRegistry);
 
+          const normalizedSku = normalizeSku(product.sku);
+
           loggerScope?.debug('Beginning processing of product', {
             component: 'DefaultScenario',
             method: 'process()',
@@ -434,6 +436,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                 input: {
                   url: task.metadata.target_website!,
                   sku: product.sku,
+                  normalizedSku: normalizedSku,
                   product,
                 },
                 state: {},

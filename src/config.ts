@@ -33,13 +33,13 @@ export const config = {
     // taskPath: 'src/data/tasks/skechers/skechers.json',
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
-    taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
-    // taskPath: 'src/data/tasks/nike/nike_tests_short.json',
+    // taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
+    taskPath: 'src/data/tasks/nike/nike_tests_short.json',
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',
     mode: 'fake',
-    // downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
+    downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
   },
   //
   logger: {

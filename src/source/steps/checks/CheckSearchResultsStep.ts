@@ -5,16 +5,7 @@ import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { IStrategy } from '../../types/IStrategy';
 import { IStrategyResolver } from '../../types/IStrategyResolver';
-
-type CheckSearchResultsParams = {
-  strategy: string;
-  linkSelector: string;
-  emptySelector?: string;
-};
-
-type SearchResult = {
-  productUrl: string;
-};
+import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
 
 export default class CheckSearchResultsStep extends BaseStep {
   public readonly name = 'CheckSearchResultsStep';

@@ -19,8 +19,6 @@ export default class SearchGalleryStep extends BaseStep {
   ): Promise<void> {
     const { page } = ctx;
 
-    //!! Для поиска галерей на разных сайтах использовать СТРАТЕГИИ а не делать новые шаги аналогично этому
-
     const stepConfig = ctx.stepParams?.get(SearchGalleryStep) as {
       gallerySelector: string;
     };

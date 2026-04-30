@@ -21,8 +21,6 @@ export default class CollectDescriptionStep extends BaseStep {
     const { page } = ctx;
     let html: string = '';
 
-    //!! Для сбора описаний на разных сайтах использовать СТРАТЕГИИ а не делать новые шаги аналогично этому
-
     const stepConfig = ctx.stepParams?.get(CollectDescriptionStep) as IExtractHtmlOptions;
 
     try {

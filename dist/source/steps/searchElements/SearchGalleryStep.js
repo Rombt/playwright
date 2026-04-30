@@ -8,7 +8,6 @@ class SearchGalleryStep extends BaseStep_1.BaseStep {
     name = 'SearchGalleryStep';
     async execute(ctx, config) {
         const { page } = ctx;
-        //!! Для поиска галерей на разных сайтах использовать СТРАТЕГИИ а не делать новые шаги аналогично этому
         const stepConfig = ctx.stepParams?.get(SearchGalleryStep);
         const gallerySelector = stepConfig?.gallerySelector;
         const gallery = page.locator(gallerySelector);

@@ -15,15 +15,15 @@ export default class CheckPageSkuStep extends BaseStep {
   protected async execute(
     ctx: IExecutionContext<ICollectProductPhotosTask>,
     config: AppConfig,
-    params?: CheckPageSkuParams,
+    // params?: CheckPageSkuParams,
   ): Promise<void> {
-    const { page } = ctx;
-
-    if (!params?.sku) {
-      throw new Error('SKU is required on the CheckPageSkuStep');
+    if (!ctx.input.sku || !ctx.input.normalizedSku) {
+      throw new Error('SKU or normalizedSku are not defined in context');
     }
 
-    const sku = params.sku;
+    const { page } = ctx;
+
+    const sku = ctx.input.sku;
 
     const stepConfig = ctx.stepParams?.get(CheckPageSkuStep) as {
       pageSkuSelector: string;
@@ -43,14 +43,18 @@ export default class CheckPageSkuStep extends BaseStep {
       },
     });
 
-    const page_sku = page.locator(pageSkuSelector, {
-      hasText: `${sku}`,
-    });
+    try {
+      const page_sku = page.locator(pageSkuSelector, {
+        hasText: `${ctx.input.normalizedSku}`,
+      });
 
-    await page_sku.first().waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
-
-    if ((await page_sku.count()) === 0) {
-      throw new Error(`The page is not match sku  ${sku}`);
+      await page_sku.first().waitFor({
+        state: 'attached',
+        timeout: config.asyncRetry.maxDelay,
+      });
+    } catch {
+      ctx.control.stop = true;
+      throw new Error(`The page is not match sku ${sku}`);
     }
   }
 

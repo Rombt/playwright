@@ -6,9 +6,9 @@ import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { getAbsoluteHref } from '../../../common/helpers';
 
-// type CollectImgStepParams = {
-//   sku: string;
-// };
+type CollectImgParams = {
+  stopProcessing: boolean;
+};
 
 export default class CollectImgStep extends BaseStep {
   public readonly name = 'CollectImgStep';
@@ -20,12 +20,13 @@ export default class CollectImgStep extends BaseStep {
   ): Promise<void> {
     const { page } = ctx;
 
-    //!! Для сбора изображений на разных сайтах использовать СТРАТЕГИИ а не делать новые шаги аналогично этому
+    const stepConfig = ctx.stepParams?.get(CollectImgStep) as unknown as CollectImgParams;
 
-    // const stepConfig = ctx.stepParams?.get(CollectImgStep) as {
-    //   gallerySelector: string;
-    // };
-    // const gallerySelector = stepConfig?.gallerySelector;
+    // todo
+    // const strategy = ctx.strategyResolver.get<CheckSearchResultsParams, SearchResult>(
+    //   stepConfig.strategy,
+    // );
+
     const gallery = ctx.state.locatorGallery as Locator;
 
     const imageUrls = await gallery
@@ -49,13 +50,18 @@ export default class CollectImgStep extends BaseStep {
       ctx.state.images = [];
     }
     ctx.state.images?.push(...absoluteImageUrls);
+
+    // если источник не содержит описания товаров
+    if (stepConfig.stopProcessing === true) {
+      ctx.control.stop = true;
+    }
   }
 
   next(ctx: IExecutionContext): IStepResult | null {
     if (ctx.control.stop) return null;
 
     return {
-      step: ctx.stepFactory.create('CollectDescriptionStep'), //!!!!
+      step: ctx.stepFactory.create(''),
       params: {
         sku: ctx.input.product?.sku,
       },

@@ -2,21 +2,7 @@ import { IStrategy } from '../../types/IStrategy';
 import { IExecutionContext } from '../../types/IExecutionContext';
 import { AppConfig } from '../../../data/config/appConfig';
 import { getAbsoluteHref } from '../../../common/helpers';
-
-type CheckSearchResultsParams = {
-  strategy: string;
-  linkSelector: string;
-  emptySelector?: string;
-};
-
-type SearchResult = {
-  productUrl: string;
-};
-
-type StrategyConfig = {
-  linkSelector: string;
-  emptySelector?: string;
-};
+import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
 
 export default class DefaultSearchResultsStrategy
   implements IStrategy<CheckSearchResultsParams, SearchResult>

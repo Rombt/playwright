@@ -21,6 +21,8 @@ export interface IExecutionContext<TTask extends ITask = ITask> {
   input: {
     url?: string;
     sku?: string;
+    normalizedSku?: string;
+
     product?: IProduct;
   };
 

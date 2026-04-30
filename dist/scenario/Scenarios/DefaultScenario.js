@@ -303,6 +303,7 @@ class DefaultScenario {
                     const strategyLoader = new StrategyRegistryLoader_1.StrategyRegistryLoader(this.config.strategiesFolder);
                     const strategyRegistry = await strategyLoader.load();
                     const strategyResolver = new source_1.StrategyResolver(strategyRegistry);
+                    const normalizedSku = (0, helpers_1.normalizeSku)(product.sku);
                     loggerScope?.debug('Beginning processing of product', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -323,6 +324,7 @@ class DefaultScenario {
                             input: {
                                 url: task.metadata.target_website,
                                 sku: product.sku,
+                                normalizedSku: normalizedSku,
                                 product,
                             },
                             state: {},

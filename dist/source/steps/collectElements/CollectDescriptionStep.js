@@ -10,7 +10,6 @@ class CollectDescriptionStep extends BaseStep_1.BaseStep {
     async execute(ctx, config) {
         const { page } = ctx;
         let html = '';
-        //!! Для сбора описаний на разных сайтах использовать СТРАТЕГИИ а не делать новые шаги аналогично этому
         const stepConfig = ctx.stepParams?.get(CollectDescriptionStep);
         try {
             ctx.state.html = await (0, helpers_1.extractRawHtml)(page, stepConfig);
