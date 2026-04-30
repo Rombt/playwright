@@ -1,10 +1,8 @@
-import { ISourceDependencies } from '../types/ISourceDependencies';
 import { ISource } from '../types/ISource';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IFlowRunner } from '../types/IFlowRunner';
 import { ILogger } from '../../data/logger/types/ILogger';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
-import { IExecutionContext } from '../types/IExecutionContext';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
@@ -13,17 +11,16 @@ import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
 import { IExtractHtmlOptions } from '../../common/helpers';
 
+import { IExecutionContext, ISourceDependencies } from '../../source';
+
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
-    // return new PageImageSourceNike(deps.flowRunner deps.logger);
-    return new PageImageSourceNike(deps.flowRunner);
+    return new PageImageSourceNike(deps.flowRunner, deps.logger);
   },
 };
 
 class PageImageSourceNike implements ISource<ICollectProductPhotosTask> {
-  constructor(
-    private flowRunner: IFlowRunner, // private logger: ILogger,
-  ) {}
+  constructor(private flowRunner: IFlowRunner, private logger: ILogger) {}
 
   supports(task: ICollectProductPhotosTask): boolean {
     return task.metadata.target_website === 'https://www.nike.com/fi/w?q={{sku_prod}}';
@@ -34,6 +31,7 @@ class PageImageSourceNike implements ISource<ICollectProductPhotosTask> {
       [
         CheckSearchResultsStep,
         {
+          strategy: 'SimilarProductsSearchStrategy',
           linkSelector: '#skip-to-products > div > div > figure > a.product-card__img-link-overlay',
           emptySelector: '.view-empty > p',
         },

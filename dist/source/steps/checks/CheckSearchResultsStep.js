@@ -1,40 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseStep_1 = require("../../BaseStep");
-const helpers_1 = require("../../../common/helpers");
 class CheckSearchResultsStep extends BaseStep_1.BaseStep {
     name = 'CheckSearchResultsStep';
+    constructor() {
+        super();
+    }
     async execute(ctx, config, params) {
-        const { page } = ctx;
-        if (!params?.sku) {
-            throw new Error('SKU is required');
-        }
-        const sku = params.sku;
         const stepConfig = ctx.stepParams?.get(CheckSearchResultsStep);
-        if (!stepConfig?.linkSelector) {
-            throw new Error('linkSelector is not configured in stepParams');
-        }
-        const link = page.locator(stepConfig.linkSelector).first();
-        const empty = page.locator(stepConfig.emptySelector ?? '.view-empty');
-        try {
-            await Promise.race([
-                link.waitFor({ state: 'visible', timeout: config.asyncRetry.maxDelay }),
-                empty.waitFor({ state: 'visible', timeout: config.asyncRetry.maxDelay }),
-            ]);
-        }
-        catch {
-            throw new Error(`Search result not resolved. ${sku}`);
-        }
-        if ((await empty.count()) > 0) {
-            throw new Error(`Goods not found on the page. ${sku}`);
-        }
-        ctx.state.urlProductPage = await (0, helpers_1.getAbsoluteHref)(ctx.page, link);
+        const strategy = ctx.strategyResolver.get(stepConfig.strategy);
+        const result = await strategy.execute(ctx, stepConfig);
+        ctx.state.urlProductPage = result.productUrl;
         ctx.logger?.debug('URL product page is received', {
             component: 'CheckSearchResultsStep',
             method: 'execute()',
-            action: 'getAbsoluteHref(ctx.page, link)',
+            action: 'strategy.execute',
             data: {
-                urlProductPage: ctx.state.urlProductPage,
+                strategy: strategy.name,
+                _strategy: strategy,
+                result: result,
             },
         });
     }

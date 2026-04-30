@@ -2,9 +2,10 @@ import { IExecutionContext } from './IExecutionContext';
 import { IStrategy } from './IStrategy';
 
 export interface IStrategyResolver {
-  resolve<T>(
+  resolve<TParams, TResult>(
     ctx: IExecutionContext,
-    strategies: IStrategy<T>[],
     stepName: string,
-  ): Promise<IStrategy<T>>;
+  ): Promise<IStrategy<TParams, TResult>>;
+
+  get<TParams, TResult>(name: string): IStrategy<TParams, TResult>;
 }

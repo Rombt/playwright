@@ -7,5 +7,5 @@ export interface IStrategy<TParams = unknown, TResult = unknown> {
 
   score(ctx: IExecutionContext): Promise<number>;
 
-  execute(ctx: IExecutionContext, params: TParams): Promise<TResult>;
+  execute(ctx: IExecutionContext, params?: TParams): Promise<TResult>;
 }

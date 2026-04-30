@@ -1,8 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DefaultStrategyResolver = void 0;
-class DefaultStrategyResolver {
-    async resolve(ctx, strategies, stepName) {
+exports.StrategyResolver = void 0;
+class StrategyResolver {
+    registry;
+    constructor(registry) {
+        this.registry = registry;
+    }
+    async resolve(ctx, stepName) {
+        const strategies = Array.from(this.registry.values());
         const candidates = [];
         for (const strategy of strategies) {
             try {
@@ -41,7 +46,6 @@ class DefaultStrategyResolver {
         }
         candidates.sort((a, b) => b.score - a.score);
         const selected = candidates[0].strategy;
-        // помечаем выбранную
         const debugEntries = ctx.debug.strategies.filter((s) => s.step === stepName);
         for (const entry of debugEntries) {
             if (entry.strategy === selected.name) {
@@ -55,5 +59,14 @@ class DefaultStrategyResolver {
         });
         return selected;
     }
+    get(name) {
+        console.log('this.registry = '); //!!--!!
+        console.dir(this.registry, { depth: null, colors: true }); //!!--!!
+        const strategy = this.registry.get(name);
+        if (!strategy) {
+            throw new Error(`Strategy not found: "${name}"`);
+        }
+        return strategy;
+    }
 }
-exports.DefaultStrategyResolver = DefaultStrategyResolver;
+exports.StrategyResolver = StrategyResolver;

@@ -16,7 +16,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./BaseStep"), exports);
 __exportStar(require("./BaseStrategy"), exports);
-__exportStar(require("./DefaultStrategyResolver"), exports);
+__exportStar(require("./StrategyResolver"), exports);
 __exportStar(require("./FlowRunner"), exports);
 __exportStar(require("./StrategyStep"), exports);
 __exportStar(require("./types/IErrorHandler"), exports);

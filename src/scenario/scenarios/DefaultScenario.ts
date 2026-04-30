@@ -34,6 +34,7 @@ import { BRAND_ALIASES } from '../../data/entities/brand_aliases';
 
 import { StepRegistryLoader } from '../../source/registry/StepRegistryLoader';
 import { StepFactory } from '../../source/steps/StepFactory';
+import { StrategyRegistryLoader } from '../../source/registry/StrategyRegistryLoader';
 
 /* new imports */
 
@@ -41,7 +42,7 @@ import {
   IExecutionContext,
   ISourceDependencies,
   FlowRunner,
-  DefaultStrategyResolver,
+  StrategyResolver,
   ISourceDefinition,
 } from '../../source';
 
@@ -407,6 +408,10 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           await stepsLoader.load();
           const stepFactory = new StepFactory(stepsLoader);
 
+          const strategyLoader = new StrategyRegistryLoader(this.config.strategiesFolder);
+          const strategyRegistry = await strategyLoader.load();
+          const strategyResolver = new StrategyResolver(strategyRegistry);
+
           loggerScope?.debug('Beginning processing of product', {
             component: 'DefaultScenario',
             method: 'process()',
@@ -415,7 +420,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
               product: product,
               targetWebsite: task.metadata.target_website,
               stepsLoader: stepsLoader,
-              stepFactory: stepFactory,
+              strategyResolver: strategyResolver,
               limiter: this.limiter,
             },
           });
@@ -433,6 +438,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                 },
                 state: {},
                 stepFactory,
+                strategyResolver,
                 errors: [],
                 debug: {
                   strategies: [],
@@ -1063,7 +1069,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
     //!! 222222
     const deps: ISourceDependencies = {
       flowRunner: new FlowRunner(this.config),
-      resolver: new DefaultStrategyResolver(),
       logger: this.logger,
     };
 

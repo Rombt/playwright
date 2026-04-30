@@ -1,6 +1,6 @@
 ﻿export * from './BaseStep';
 export * from './BaseStrategy';
-export * from './DefaultStrategyResolver';
+export * from './StrategyResolver';
 export * from './FlowRunner';
 export * from './StrategyStep';
 export * from './types/IErrorHandler';

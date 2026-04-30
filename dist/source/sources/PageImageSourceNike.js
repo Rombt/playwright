@@ -6,25 +6,26 @@ const SearchGalleryStep_1 = require("../steps/searchElements/SearchGalleryStep")
 const CollectDescriptionStep_1 = require("../steps/collectElements/CollectDescriptionStep");
 exports.default = {
     create(deps) {
-        // return new PageImageSourceGanzo(deps.flowRunner deps.logger);
-        return new PageImageSourceGanzo(deps.flowRunner);
+        return new PageImageSourceNike(deps.flowRunner, deps.logger);
     },
 };
-class PageImageSourceGanzo {
+class PageImageSourceNike {
     flowRunner;
-    constructor(flowRunner) {
+    logger;
+    constructor(flowRunner, logger) {
         this.flowRunner = flowRunner;
+        this.logger = logger;
     }
     supports(task) {
-        return task.metadata.target_website === 'https://ganzo.ua/search?search={{sku_prod}}';
+        return task.metadata.target_website === 'https://www.nike.com/fi/w?q={{sku_prod}}';
     }
     async execute(ctx) {
         ctx.stepParams = new Map([
             [
                 CheckSearchResultsStep_1.default,
                 {
-                    strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
+                    strategy: 'SimilarProductsSearchStrategy',
+                    linkSelector: '#skip-to-products > div > div > figure > a.product-card__img-link-overlay',
                     emptySelector: '.view-empty > p',
                 },
             ],
@@ -51,8 +52,8 @@ class PageImageSourceGanzo {
         ]);
         const startStep = ctx.stepFactory.create('OpenSearchPageStep');
         await this.flowRunner.run(startStep, ctx);
-        ctx.logger?.debug('Processing of the PageImageSourceGanzo is finished', {
-            component: 'PageImageSourceGanzo',
+        ctx.logger?.debug('Processing of the PageImageSourceNike is finished', {
+            component: 'PageImageSourceNike',
             method: 'execute()',
             action: 'await this.flowRunner.run(startStep, ctx)',
             data: {

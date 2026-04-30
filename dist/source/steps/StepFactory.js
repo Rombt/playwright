@@ -6,12 +6,12 @@ class StepFactory {
     constructor(registry) {
         this.registry = registry;
     }
-    create(name, ctx) {
+    create(name) {
         if (!this.registry.has(name)) {
             throw new Error(`Step not registered: ${name}`);
         }
         const StepClass = this.registry.get(name);
-        return new StepClass(ctx);
+        return new StepClass();
     }
     has(name) {
         return this.registry.has(name);

@@ -14,6 +14,7 @@ const UnprocessedCollector_1 = require("../../data/collectors/UnprocessedCollect
 const brand_aliases_1 = require("../../data/entities/brand_aliases");
 const StepRegistryLoader_1 = require("../../source/registry/StepRegistryLoader");
 const StepFactory_1 = require("../../source/steps/StepFactory");
+const StrategyRegistryLoader_1 = require("../../source/registry/StrategyRegistryLoader");
 /* new imports */
 const source_1 = require("../../source");
 class DefaultScenario {
@@ -299,6 +300,9 @@ class DefaultScenario {
                     const stepsLoader = new StepRegistryLoader_1.StepRegistryLoader(this.config.stepsFolder);
                     await stepsLoader.load();
                     const stepFactory = new StepFactory_1.StepFactory(stepsLoader);
+                    const strategyLoader = new StrategyRegistryLoader_1.StrategyRegistryLoader(this.config.strategiesFolder);
+                    const strategyRegistry = await strategyLoader.load();
+                    const strategyResolver = new source_1.StrategyResolver(strategyRegistry);
                     loggerScope?.debug('Beginning processing of product', {
                         component: 'DefaultScenario',
                         method: 'process()',
@@ -307,7 +311,7 @@ class DefaultScenario {
                             product: product,
                             targetWebsite: task.metadata.target_website,
                             stepsLoader: stepsLoader,
-                            stepFactory: stepFactory,
+                            strategyResolver: strategyResolver,
                             limiter: this.limiter,
                         },
                     });
@@ -323,6 +327,7 @@ class DefaultScenario {
                             },
                             state: {},
                             stepFactory,
+                            strategyResolver,
                             errors: [],
                             debug: {
                                 strategies: [],
@@ -797,7 +802,6 @@ class DefaultScenario {
         //!! 222222
         const deps = {
             flowRunner: new source_1.FlowRunner(this.config),
-            resolver: new source_1.DefaultStrategyResolver(),
             logger: this.logger,
         };
         const walk = async (dir) => {

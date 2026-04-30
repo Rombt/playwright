@@ -35,6 +35,7 @@ export interface DataConfig {
   resultsFolder: string;
   sourcesFolder: string;
   stepsFolder: string;
+  strategiesFolder: string;
   convertToJpg: boolean;
   taskPath: string;
   brands: string[];

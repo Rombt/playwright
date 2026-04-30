@@ -27,15 +27,15 @@ exports.config = {
         resultsFolder: 'results/nike/nike_test',
         //                     source\sources\PageImageSourceGanzo.ts
         sourcesFolder: './dist/source/sources',
-        //                      source\steps\OpenSearchPage
-        // stepsFolder: './dist/source/steps/OpenSearchPage',
         stepsFolder: './dist/source/steps',
+        strategiesFolder: './dist/source/strategies',
         // scenario: 'rozetka',   // для отсутствующих sources
         convertToJpg: true,
         // taskPath: 'src/data/tasks/skechers/skechers.json',
         // taskPath: 'src/data/tasks/svastone/svastone_test.json',
         // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
-        taskPath: 'src/data/tasks/nike/nike_tests_short.json',
+        taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
+        // taskPath: 'src/data/tasks/nike/nike_tests_short.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

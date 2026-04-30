@@ -8,11 +8,11 @@ class StrategyStep extends BaseStep_1.BaseStep {
         super();
         this.resolver = resolver;
     }
-    async execute(ctx) {
-        const strategy = await this.resolver.resolve(ctx, this.strategies, this.name);
+    async execute(ctx, config, params) {
+        const strategy = await this.resolver.resolve(ctx, this.name);
         try {
-            const result = await strategy.execute(ctx);
-            await this.afterExecute(ctx, result, strategy);
+            const result = await strategy.execute(ctx, params);
+            await this.afterExecute(ctx, result, strategy, params);
         }
         catch (error) {
             ctx.logger.error('Strategy execution failed', {

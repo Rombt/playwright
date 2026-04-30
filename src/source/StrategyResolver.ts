@@ -2,14 +2,17 @@ import { IExecutionContext } from './types/IExecutionContext';
 import { IStrategyResolver } from './types/IStrategyResolver';
 import { IStrategy } from './types/IStrategy';
 
-export class DefaultStrategyResolver implements IStrategyResolver {
-  async resolve<T>(
+export class StrategyResolver implements IStrategyResolver {
+  constructor(private registry: Map<string, IStrategy<any, any>>) {}
+
+  async resolve<TParams, TResult>(
     ctx: IExecutionContext,
-    strategies: IStrategy<T>[],
     stepName: string,
-  ): Promise<IStrategy<T>> {
+  ): Promise<IStrategy<TParams, TResult>> {
+    const strategies = Array.from(this.registry.values()) as IStrategy<TParams, TResult>[];
+
     const candidates: Array<{
-      strategy: IStrategy<T>;
+      strategy: IStrategy<TParams, TResult>;
       score: number;
     }> = [];
 
@@ -59,7 +62,6 @@ export class DefaultStrategyResolver implements IStrategyResolver {
 
     const selected = candidates[0].strategy;
 
-    // помечаем выбранную
     const debugEntries = ctx.debug.strategies.filter((s) => s.step === stepName);
 
     for (const entry of debugEntries) {
@@ -75,5 +77,18 @@ export class DefaultStrategyResolver implements IStrategyResolver {
     });
 
     return selected;
+  }
+
+  get<TParams, TResult>(name: string): IStrategy<TParams, TResult> {
+    console.log('this.registry = '); //!!--!!
+    console.dir(this.registry, { depth: null, colors: true }); //!!--!!
+
+    const strategy = this.registry.get(name);
+
+    if (!strategy) {
+      throw new Error(`Strategy not found: "${name}"`);
+    }
+
+    return strategy as IStrategy<TParams, TResult>;
   }
 }

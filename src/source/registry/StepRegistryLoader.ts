@@ -9,18 +9,12 @@ export class StepRegistryLoader {
   async load(): Promise<Map<string, any>> {
     const files = this.getAllFiles(this.stepsPath);
 
-    console.log('files = ', files); //!!--!!
-
     for (const file of files) {
       if (!file.endsWith('.ts') && !file.endsWith('.js')) continue;
 
       const module = await import(file);
 
-      console.dir(module, { depth: null, colors: true }); //!!--!!
-
       const StepClass = module.default;
-      console.log('StepClass = '); //!!--!!
-      console.dir(StepClass, { depth: null, colors: true }); //!!--!!
 
       if (!StepClass) continue;
 
@@ -67,7 +61,7 @@ export class StepRegistryLoader {
       const fullPath = path.join(dir, entry.name);
 
       if (entry.isDirectory()) {
-        files.push(...this.getAllFiles(fullPath)); // 🔁 рекурсия
+        files.push(...this.getAllFiles(fullPath));
       } else {
         files.push(fullPath);
       }

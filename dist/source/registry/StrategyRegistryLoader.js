@@ -1,45 +1,41 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StepRegistryLoader = void 0;
+exports.StrategyRegistryLoader = void 0;
 const fs = require("fs");
 const path = require("path");
-class StepRegistryLoader {
-    stepsPath;
+class StrategyRegistryLoader {
+    strategiesFolder;
     registry = new Map();
-    constructor(stepsPath) {
-        this.stepsPath = stepsPath;
+    constructor(strategiesFolder) {
+        this.strategiesFolder = strategiesFolder;
     }
     async load() {
-        const files = this.getAllFiles(this.stepsPath);
+        const files = this.getAllFiles(this.strategiesFolder);
         for (const file of files) {
             if (!file.endsWith('.ts') && !file.endsWith('.js'))
                 continue;
             const module = await Promise.resolve(`${file}`).then(s => require(s));
-            const StepClass = module.default;
-            if (!StepClass)
+            const StrategyClass = module.default;
+            if (!StrategyClass)
                 continue;
-            const instance = new StepClass();
+            const instance = new StrategyClass();
             if (!instance.name) {
-                throw new Error(`Step missing name: ${file}`);
+                throw new Error(`Strategy missing name: ${file}`);
             }
-            this.registry.set(instance.name, StepClass);
+            if (this.registry.has(instance.name)) {
+                throw new Error(`Duplicate strategy name: ${instance.name}`);
+            }
+            this.registry.set(instance.name, instance);
         }
         return this.registry;
     }
     get(name) {
-        const StepClass = this.registry.get(name);
-        if (!StepClass) {
-            throw new Error(`Step not found: ${name}`);
-        }
-        return StepClass;
+        return this.registry.get(name);
     }
     getAll() {
         return this.registry;
     }
     has(name) {
-        if (!name || typeof name !== 'string') {
-            return false;
-        }
         return this.registry.has(name);
     }
     getAllFiles(dir) {
@@ -57,4 +53,4 @@ class StepRegistryLoader {
         return files;
     }
 }
-exports.StepRegistryLoader = StepRegistryLoader;
+exports.StrategyRegistryLoader = StrategyRegistryLoader;
