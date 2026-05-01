@@ -1,5 +1,6 @@
 $source = "F:\testing\playwright\dist"
-$dest   = "F:\testing\playwright_prod"
+# $dest   = "F:\testing\playwright_prod"
+$dest = "F:\testing\playwright_prod_v-2"
 
 # 👉 ДОПОЛНИТЕЛЬНЫЕ ПУТИ (редактируешь здесь)
 $extraPaths = @(
@@ -49,7 +50,8 @@ foreach ($path in $extraPaths) {
         # 👉 это папка
         Write-Host "Copying folder: $name"
         robocopy $path $target /E /R:2 /W:2
-    } else {
+    }
+    else {
         # 👉 это файл
         Write-Host "Copying file: $name"
         Copy-Item $path $target -Force
@@ -61,7 +63,8 @@ if ($LASTEXITCODE -le 3) {
     Write-Host "=============================="
     Write-Host "       DEPLOY SUCCESS"
     Write-Host "==============================" -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "=============================="
     Write-Host "       DEPLOY FAILED"
     Write-Host "==============================" -ForegroundColor Red
