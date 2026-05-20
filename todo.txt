@@ -45,49 +45,7 @@
 
 
 
+Обнаруженные проблемы:
+    для торговой марки PUMA собирается только первые две фотки для каждого товара
 
 
-Очерёдность обработки брендов:
-    $brands = Array
-        (
-            [0] => Puma             + +
-            [1] => M-TAC            + +
-            [2] => Columbia         + +
-            [3] => New Balance      + +
-            [4] => Outventure       -
-            [5] => Adidas           + +
-            [6] => Fila             -
-            [7] => 4F               -
-            [8] => KAPPA            -
-            [9] => Jack Wolfskin    -
-            [11] => Merrell         -
-            [12] => Nike            + +
-            [13] => Under Armour    -
-            [14] => FLY
-            [15] => Glissade        -
-            [16] => Hi-Tec          -
-            [17] => Saucony         + +
-            [18] => Skechers        -
-            [19] => Joma            + +
-        )
-
-Потенциальные источники:
-    https://sportcity.ua/
-    https://modivo.ua/
-    https://md-fashion.ua/
-    https://sportano.ua/
-    https://megasport.ua/
-    https://intertop.ua/
-
-const productsPageLinks = {
-  '1865231': [
-    'https://rozetka.com.ua/ua/columbia_0990037254005_0192660465388/p388246605/'
-  ],
-  '2079181': [ 'https://rozetka.com.ua/ua/columbia-195981582994/p446003411/' ],
-  '2103761': [ 'https://rozetka.com.ua/ua/columbia-195981625394/p446018603/' ]
-};
-
-
-
-///!!!!!!!!!!!!!!!!!!!!!!!
-55395, 54861, 54857, 53381, 53377, 53376, 51109
