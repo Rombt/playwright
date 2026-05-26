@@ -9,12 +9,39 @@
       },
       "products": [
         {
-          "id_product": "55285",
-          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
-          "sku": "1382727-520*SS26",
+          "id_product": "55654",
+          "name_product": "Кепка 1376700-338*SS26 UA",
+          "sku": "1376700-338*SS26",
           "attributes": {
-            "color": "фіол.",
-            "size": "L"
+            "color": "зел.",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "55654",
+          "name_product": "Кепка 1376700-338*SS26 UA",
+          "sku": "1376700-338*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "M/L"
+          }
+        },
+        {
+          "id_product": "55654",
+          "name_product": "Кепка 1376700-338*SS26 UA",
+          "sku": "1376700-338*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "55654",
+          "name_product": "Кепка 1376700-338*SS26 UA",
+          "sku": "1376700-338*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "XL/2XL"
           }
         }
       ]

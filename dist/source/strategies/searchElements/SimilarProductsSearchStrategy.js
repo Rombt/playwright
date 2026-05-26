@@ -27,6 +27,7 @@ class SimilarProductsSearchStrategy {
         const { page } = ctx;
         let productUrl = '';
         const currentUrl = page.url();
+        //todo архитектурная ошибка!
         if (currentUrl.includes('nike.com')) {
             const links = page.locator(params.linkSelector);
             await links.first().waitFor();

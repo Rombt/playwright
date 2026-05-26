@@ -37,6 +37,7 @@ export default class SimilarProductsSearchStrategy
 
     const currentUrl = page.url();
 
+    //todo архитектурная ошибка!
     if (currentUrl.includes('nike.com')) {
       const links = page.locator(params.linkSelector);
 

@@ -23,7 +23,7 @@ class DefaultSearchResultsStrategy {
             await Promise.race([
                 link.waitFor({
                     state: 'visible',
-                    timeout: 30000, //todo позже можно вернуть config
+                    timeout: 30000, //todo брать из конфига config
                 }),
                 empty.waitFor({
                     state: 'visible',

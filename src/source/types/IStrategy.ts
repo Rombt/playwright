@@ -1,4 +1,5 @@
 import { IExecutionContext } from './IExecutionContext';
+import { IActionResult } from '../types/IActionResult';
 
 export interface IStrategy<TParams = unknown, TResult = unknown> {
   name: string;
@@ -9,3 +10,6 @@ export interface IStrategy<TParams = unknown, TResult = unknown> {
 
   execute(ctx: IExecutionContext, params?: TParams): Promise<TResult>;
 }
+
+export interface IActionStrategy<TParams = void, TResult = IActionResult>
+  extends IStrategy<TParams, TResult> {}
