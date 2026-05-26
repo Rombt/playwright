@@ -9,7 +9,7 @@ import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 
 import OpenSearchPageStep from '../steps/openPages/OpenSearchPageStep';
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
-import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
+import CheckPageSkuBySrcStep from '../steps/checks/CheckPageSkuBySrcStep';
 import OpenProductPageStep from '../steps/openPages/OpenProductPageStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectImgStep from '../steps/collectElements/CollectImgStep';
@@ -49,8 +49,8 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
       throw new Error('Invalid SKU');
     }
 
-    const [left] = sku.split('*');
-    const [key, value] = left.split('-');
+    const [left_part_sku] = sku.split('*');
+    const [key, value] = left_part_sku.split('-');
 
     ctx.stepParams = new Map([
       [
@@ -76,16 +76,23 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
         },
       ],
       [
-        OpenProductPageStep, // переход на страницу варианта
+        OpenProductPageStep,
         {
           strategy: 'GetUrlVariantPageStrategy',
+          // для перехода на страницу варианта
           key: `dwvar_${key}_color`,
           value: value,
+          nextStep: 'CheckPageSkuBySrcStep',
         },
       ],
+      // div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img
       [
-        CheckPageSkuStep,
-        { pageSkuSelector: 'div.product-full__code div.field-product-vendor-code__item' },
+        CheckPageSkuBySrcStep,
+        {
+          // pageSkuSelector: 'div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img',
+          pageSkuSelector: 'div.swiper-wrapper img',
+          token: left_part_sku,
+        },
       ],
       [
         SearchGalleryStep,

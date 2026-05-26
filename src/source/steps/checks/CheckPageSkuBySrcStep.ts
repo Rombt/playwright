@@ -5,17 +5,24 @@ import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { getAbsoluteHref } from '../../../common/helpers';
 
-type CheckPageSkuParams = {
-  sku: string;
-};
+// type CheckPageSkuBySrcParams = {
+//   sku: string;
+// };
 
-export default class CheckPageSkuStep extends BaseStep {
-  public readonly name = 'CheckPageSkuStep';
+export default class CheckPageSkuBySrcStep extends BaseStep {
+  public readonly name = 'CheckPageSkuBySrcStep';
 
+  /**
+   *
+   * @param ctx
+   * @param config
+   *
+   * для валидации полученной страницы продукта используется src картинки слайдера продукта
+   */
   protected async execute(
     ctx: IExecutionContext<ICollectProductPhotosTask>,
     config: AppConfig,
-    // params?: CheckPageSkuParams,
+    // params?: CheckPageSkuBySrcParams,
   ): Promise<void> {
     if (!ctx.input.sku || !ctx.input.normalizedSku) {
       throw new Error('SKU or normalizedSku are not defined in context');
@@ -25,37 +32,48 @@ export default class CheckPageSkuStep extends BaseStep {
 
     const sku = ctx.input.sku;
 
-    const stepConfig = ctx.stepParams?.get(CheckPageSkuStep) as {
+    const stepConfig = ctx.stepParams?.get(CheckPageSkuBySrcStep) as {
       pageSkuSelector: string;
+      token: string;
     };
+
     const pageSkuSelector = stepConfig?.pageSkuSelector;
+    const token = stepConfig?.token;
 
     if (!pageSkuSelector) {
       throw new Error('pageSkuSelector is not configured in stepParams');
     }
 
-    ctx.logger?.debug('Pag sku selector  is received', {
+    ctx.logger?.debug('Page sku selector  is received', {
       component: 'CheckPageSkuStep',
       method: 'execute()',
       action: 'ctx.stepParams?.get(CheckPageSkuStep)',
       data: {
         pageSkuSelector: pageSkuSelector,
+        token: token,
       },
     });
 
+    let count = 0;
     try {
-      const page_sku = page.locator(pageSkuSelector, {
-        hasText: `${ctx.input.normalizedSku}`,
-      });
+      const page_sku = page.locator(`${pageSkuSelector}[src*="${token}"]`);
+      count = await page_sku.count();
 
-      await page_sku.first().waitFor({
-        state: 'attached',
-        timeout: config.asyncRetry.maxDelay,
-      });
-    } catch {
+    } catch (error) {
       ctx.control.stop = true;
+
+      ctx.logger.error(`Error by match sku ${sku}`, {
+        step: this.name,
+        count: count,
+        error,
+      });
+    }
+
+    if (count===0) {
       throw new Error(`The page is not match sku ${sku}`);
     }
+
+    
   }
 
   next(ctx: IExecutionContext): IStepResult | null {

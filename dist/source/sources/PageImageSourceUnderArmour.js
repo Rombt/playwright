@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const OpenSearchPageStep_1 = require("../steps/openPages/OpenSearchPageStep");
 const CheckSearchResultsStep_1 = require("../steps/checks/CheckSearchResultsStep");
-const CheckPageSkuStep_1 = require("../steps/checks/CheckPageSkuStep");
+const CheckPageSkuBySrcStep_1 = require("../steps/checks/CheckPageSkuBySrcStep");
 const OpenProductPageStep_1 = require("../steps/openPages/OpenProductPageStep");
 const SearchGalleryStep_1 = require("../steps/searchElements/SearchGalleryStep");
 const CollectImgStep_1 = require("../steps/collectElements/CollectImgStep");
@@ -31,8 +31,8 @@ class PageImageSourceUnderArmour {
         if (typeof sku !== 'string') {
             throw new Error('Invalid SKU');
         }
-        const [left] = sku.split('*');
-        const [key, value] = left.split('-');
+        const [left_part_sku] = sku.split('*');
+        const [key, value] = left_part_sku.split('-');
         ctx.stepParams = new Map([
             [
                 OpenSearchPageStep_1.default,
@@ -57,16 +57,23 @@ class PageImageSourceUnderArmour {
                 },
             ],
             [
-                OpenProductPageStep_1.default, // переход на страницу варианта
+                OpenProductPageStep_1.default,
                 {
                     strategy: 'GetUrlVariantPageStrategy',
+                    // для перехода на страницу варианта
                     key: `dwvar_${key}_color`,
                     value: value,
+                    nextStep: 'CheckPageSkuBySrcStep',
                 },
             ],
+            // div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img
             [
-                CheckPageSkuStep_1.default,
-                { pageSkuSelector: 'div.product-full__code div.field-product-vendor-code__item' },
+                CheckPageSkuBySrcStep_1.default,
+                {
+                    // pageSkuSelector: 'div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img',
+                    pageSkuSelector: 'div.swiper-wrapper img',
+                    token: left_part_sku,
+                },
             ],
             [
                 SearchGalleryStep_1.default,

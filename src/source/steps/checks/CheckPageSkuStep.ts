@@ -34,7 +34,7 @@ export default class CheckPageSkuStep extends BaseStep {
       throw new Error('pageSkuSelector is not configured in stepParams');
     }
 
-    ctx.logger?.debug('Pag sku selector  is received', {
+    ctx.logger?.debug('Page sku selector  is received', {
       component: 'CheckPageSkuStep',
       method: 'execute()',
       action: 'ctx.stepParams?.get(CheckPageSkuStep)',
