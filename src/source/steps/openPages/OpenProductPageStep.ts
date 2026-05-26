@@ -1,4 +1,4 @@
-import { Page } from 'playwright-core';
+// import { Page } from 'playwright-core';
 import { IExecutionContext } from '../../types/IExecutionContext';
 import { BaseStep } from '../../BaseStep';
 import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
@@ -6,13 +6,7 @@ import { getAbsoluteHref } from '../../../common/helpers';
 import { IProduct } from '../../../data/entities/IProduct';
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
-import { IOpenVariantPageParam } from '../../types/IOpenVariantPageParam';
-
-type OpenProductPageParams = {
-  strategy: string;
-  key: string;
-  value: string;
-};
+import { IOpenProductPageParams } from '../../types/IOpenProductPageParams';
 
 export default class OpenProductPageStep extends BaseStep {
   public readonly name = 'OpenProductPageStep';
@@ -20,22 +14,24 @@ export default class OpenProductPageStep extends BaseStep {
   protected async execute(
     ctx: IExecutionContext<ICollectProductPhotosTask>,
     config: AppConfig,
-    params?: OpenProductPageParams,
+    params?: IOpenProductPageParams,
   ): Promise<void> {
-    const urlProductPage = ctx.state.urlProductPage as string;
+    let urlProductPage = ctx.state.urlProductPage as string;
 
     if (!urlProductPage) {
       throw new Error('productUrl is not found in state');
     }
 
-    let page: Page = ctx.page;
+    const stepConfig = ctx.stepParams?.get(
+      OpenProductPageStep,
+    ) as unknown as IOpenProductPageParams;
+    const strategy = ctx.strategyResolver.get<IOpenProductPageParams, string>(stepConfig.strategy);
 
-    const stepConfig = ctx.stepParams?.get(OpenProductPageStep) as unknown as OpenProductPageParams;
-
-    const strategy = ctx.strategyResolver.get<IOpenVariantPageParam, Page>(stepConfig.strategy);
-
-    if (strategy) {
-      page = await strategy.execute(ctx, { urlVariantPage: urlProductPage });
+    /** для разных брендов могут понадобится разные стратегии, так для некоторых брендов может
+     * понадобится перестраивать urlProductPage под конкретный вариант, например Under Armour
+    */
+    if (stepConfig.strategy === 'GetUrlVariantPageStrategy') {
+      urlProductPage = await strategy.execute(ctx, stepConfig);
     }
 
     await ctx.page.goto(urlProductPage, { waitUntil: 'domcontentloaded' });

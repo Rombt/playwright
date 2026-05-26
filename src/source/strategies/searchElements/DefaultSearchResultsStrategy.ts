@@ -30,20 +30,32 @@ export default class DefaultSearchResultsStrategy
     const link = page.locator(params.linkSelector).first();
     const empty = page.locator(params.emptySelector ?? '.view-empty');
 
+    // try {
+    //   await Promise.race([
+    //     link.waitFor({
+    //       state: 'visible',
+    //       timeout: 30000, //todo брать из конфига config
+    //     }),
+    //     empty.waitFor({
+    //       state: 'visible',
+    //       timeout: 30000,
+    //     }),
+    //   ]);
+    // } catch {
+    //   throw new Error(`Search result not resolved. ${ctx.input.sku}`);
+    // }
+
     try {
-      await Promise.race([
-        link.waitFor({
-          state: 'visible',
-          timeout: 30000, //todo брать из конфига config
-        }),
-        empty.waitFor({
-          state: 'visible',
-          timeout: 30000,
-        }),
+      const result = await Promise.any([
+        link.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'link'),
+        empty.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'empty'),
       ]);
     } catch {
       throw new Error(`Search result not resolved. ${ctx.input.sku}`);
     }
+
+
+
 
     if ((await empty.count()) > 0) {
       throw new Error(`Goods not found on the page. ${ctx.input.sku}`);

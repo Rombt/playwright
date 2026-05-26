@@ -20,7 +20,7 @@ export const config = {
   },
 
   data: {
-    resultsFolder: 'results/Under Armour',
+    resultsFolder: 'results/under_armour/under_armour_test',
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod_1',
 

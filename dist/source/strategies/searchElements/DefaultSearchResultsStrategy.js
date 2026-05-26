@@ -19,16 +19,24 @@ class DefaultSearchResultsStrategy {
         }
         const link = page.locator(params.linkSelector).first();
         const empty = page.locator(params.emptySelector ?? '.view-empty');
+        // try {
+        //   await Promise.race([
+        //     link.waitFor({
+        //       state: 'visible',
+        //       timeout: 30000, //todo брать из конфига config
+        //     }),
+        //     empty.waitFor({
+        //       state: 'visible',
+        //       timeout: 30000,
+        //     }),
+        //   ]);
+        // } catch {
+        //   throw new Error(`Search result not resolved. ${ctx.input.sku}`);
+        // }
         try {
-            await Promise.race([
-                link.waitFor({
-                    state: 'visible',
-                    timeout: 30000, //todo брать из конфига config
-                }),
-                empty.waitFor({
-                    state: 'visible',
-                    timeout: 30000,
-                }),
+            const result = await Promise.any([
+                link.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'link'),
+                empty.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'empty'),
             ]);
         }
         catch {

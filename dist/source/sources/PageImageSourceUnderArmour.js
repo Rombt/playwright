@@ -45,21 +45,21 @@ class PageImageSourceUnderArmour {
                 PreparationSearchPageStep_1.default,
                 {
                     selector: 'button.uawc-close-button',
-                    strategy: 'SimpleClick',
+                    strategy: 'SimpleClickStrategy',
                 },
             ],
             [
                 CheckSearchResultsStep_1.default,
                 {
                     strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: '#product-1376700-002-S/M-FPP > a',
+                    linkSelector: '[data-testid="product-tile-container"]>a',
                     emptySelector: '[data-testid="empty-search-result"]',
                 },
             ],
             [
                 OpenProductPageStep_1.default, // переход на страницу варианта
                 {
-                    strategy: 'OpenPageVariant',
+                    strategy: 'GetUrlVariantPageStrategy',
                     key: `dwvar_${key}_color`,
                     value: value,
                 },

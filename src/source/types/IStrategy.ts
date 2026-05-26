@@ -11,5 +11,22 @@ export interface IStrategy<TParams = unknown, TResult = unknown> {
   execute(ctx: IExecutionContext, params?: TParams): Promise<TResult>;
 }
 
+/**
+ * 
+ * используется для:
+ *   click
+ *   scroll
+ *   wait
+ *   form actions
+ * 
+ */
 export interface IActionStrategy<TParams = void, TResult = IActionResult>
   extends IStrategy<TParams, TResult> {}
+
+/**
+ * 
+ * использовать для разнообразных преобразований донных url для страницы вариантов например
+ * 
+ */
+export interface ITransformStrategy<TParams = unknown, TResult = unknown>
+  extends IStrategy<TParams, TResult> {}  

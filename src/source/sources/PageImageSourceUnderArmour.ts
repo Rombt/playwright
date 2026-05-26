@@ -10,7 +10,7 @@ import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 import OpenSearchPageStep from '../steps/openPages/OpenSearchPageStep';
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
 import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
-import OpenProductPageStep from "../steps/openPages/OpenProductPageStep";
+import OpenProductPageStep from '../steps/openPages/OpenProductPageStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectImgStep from '../steps/collectElements/CollectImgStep';
 import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
@@ -37,14 +37,12 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
-    
-
     const product = ctx.input.product;
 
     if (!product) {
       throw new Error('Product is missing');
     }
-    
+
     const sku = ctx.input.product?.sku;
 
     if (typeof sku !== 'string') {
@@ -53,8 +51,7 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
 
     const [left] = sku.split('*');
     const [key, value] = left.split('-');
-    
-    
+
     ctx.stepParams = new Map([
       [
         OpenSearchPageStep,
@@ -67,21 +64,21 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
         PreparationSearchPageStep,
         {
           selector: 'button.uawc-close-button',
-          strategy: 'SimpleClick',
+          strategy: 'SimpleClickStrategy',
         },
       ],
       [
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: '#product-1376700-002-S/M-FPP > a',
+          linkSelector: '[data-testid="product-tile-container"]>a',
           emptySelector: '[data-testid="empty-search-result"]',
         },
       ],
       [
         OpenProductPageStep, // переход на страницу варианта
         {
-          strategy: 'OpenPageVariant',
+          strategy: 'GetUrlVariantPageStrategy',
           key: `dwvar_${key}_color`,
           value: value,
         },
