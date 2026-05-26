@@ -66,11 +66,9 @@ class PageImageSourceUnderArmour {
                     nextStep: 'CheckPageSkuBySrcStep',
                 },
             ],
-            // div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img
             [
                 CheckPageSkuBySrcStep_1.default,
                 {
-                    // pageSkuSelector: 'div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img',
                     pageSkuSelector: 'div.swiper-wrapper img',
                     token: left_part_sku,
                 },
@@ -78,14 +76,16 @@ class PageImageSourceUnderArmour {
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
+                    gallerySelector: 'div.swiper-wrapper',
                 },
             ],
-            CollectImgStep_1.default,
-            {
-                strategy: 'DefaultCollectImagesStrategy',
-                stopProcessing: true,
-            },
+            [
+                CollectImgStep_1.default,
+                {
+                    strategy: 'DefaultCollectImagesStrategy',
+                    stopProcessing: true,
+                }
+            ],
             [
                 CollectDescriptionStep_1.default,
                 {

@@ -85,11 +85,9 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
           nextStep: 'CheckPageSkuBySrcStep',
         },
       ],
-      // div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img
       [
         CheckPageSkuBySrcStep,
         {
-          // pageSkuSelector: 'div.swiper-wrapper > div.swiper-slide.swiper-slide-active > div > img',
           pageSkuSelector: 'div.swiper-wrapper img',
           token: left_part_sku,
         },
@@ -98,15 +96,16 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
         SearchGalleryStep,
         {
           gallerySelector:
-            '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
+            'div.swiper-wrapper',
         },
       ],
-      CollectImgStep,
-      {
-        strategy: 'DefaultCollectImagesStrategy',
-        stopProcessing: true,
-      },
-
+      [
+        CollectImgStep,
+        {
+          strategy: 'DefaultCollectImagesStrategy',
+          stopProcessing: true,
+        }
+      ],
       [
         CollectDescriptionStep,
         {

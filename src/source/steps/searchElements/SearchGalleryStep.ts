@@ -38,6 +38,15 @@ export default class SearchGalleryStep extends BaseStep {
     const firstImg = gallery.locator('img').first();
     await firstImg.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
 
+    ctx.logger?.debug('The gallery is found', {
+      component: 'SearchGalleryStep',
+      data: {
+        ctx:ctx,
+        galleryCount: count,
+        gallery: gallery,
+      },
+    });
+
     ctx.state.locatorGallery = gallery;
   }
 

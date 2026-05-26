@@ -22,7 +22,8 @@ exports.config = {
         },
     },
     data: {
-        resultsFolder: 'results/under_armour/under_armour_test',
+        // resultsFolder: 'results/under_armour/under_armour_test',
+        resultsFolder: 'results/under_armour/under_armour_prod',
         // resultsFolder: 'results/salomon/salomon_test',
         // resultsFolder: 'results/nike/nike_prod_1',
         //                     source\sources\PageImageSourceGanzo.ts
@@ -37,7 +38,8 @@ exports.config = {
         // taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
         // taskPath: 'src/data/tasks/nike/nike_test.json',
         // src\data\tasks\under_armour\under_armour_test_short.json
-        taskPath: 'src/data/tasks/under_armour/under_armour_test_short.json',
+        // taskPath: 'src/data/tasks/under_armour/under_armour_test_short.json',
+        taskPath: 'src/data/tasks/under_armour/under_armour_prod.json',
     },
     browser: {
         fingerprintFile: './fingerprint.config.json',

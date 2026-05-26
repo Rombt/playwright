@@ -22,6 +22,14 @@ class SearchGalleryStep extends BaseStep_1.BaseStep {
             throw new Error('No images found on page');
         const firstImg = gallery.locator('img').first();
         await firstImg.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
+        ctx.logger?.debug('The gallery is found', {
+            component: 'SearchGalleryStep',
+            data: {
+                ctx: ctx,
+                galleryCount: count,
+                gallery: gallery,
+            },
+        });
         ctx.state.locatorGallery = gallery;
     }
     next(ctx) {
