@@ -34,7 +34,6 @@
     puma,
     adidas,
     new balance,
-    under armour,
     joma,
     salomon,
     svastone
