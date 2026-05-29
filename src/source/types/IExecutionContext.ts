@@ -1,4 +1,5 @@
 import { Page } from 'playwright';
+import { AppConfig } from '../../data/config/appConfig';
 import { ITask } from '../../data/entities/ITask';
 import { ICollectProductPhotosTask } from '../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { IProduct } from '../../data/entities/IProduct';
@@ -10,8 +11,10 @@ import { IWorkerError } from '../../data/entities/IErrors/IWorkerError';
 import { IStepConstructor, StepParamsMap } from './IStepConstructor';
 import { IStrategyResolver } from '../types/IStrategyResolver';
 
+
 export interface IExecutionContext<TTask extends ITask = ITask> {
   // core
+  appConfig: AppConfig;
   page: Page;
   logger: IScopedLogger;
 

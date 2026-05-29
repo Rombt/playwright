@@ -430,6 +430,7 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
           const result = await this.withRetry(
             async () => {
               const ctx: IExecutionContext<ICollectProductPhotosTask> = {
+                appConfig: this.config,
                 page: page!,
                 logger: loggerScope as IScopedLogger,
                 task,

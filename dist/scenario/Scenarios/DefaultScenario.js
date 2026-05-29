@@ -318,6 +318,7 @@ class DefaultScenario {
                     });
                     const result = await this.withRetry(async () => {
                         const ctx = {
+                            appConfig: this.config,
                             page: page,
                             logger: loggerScope,
                             task,
