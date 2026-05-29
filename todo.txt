@@ -31,7 +31,6 @@
     Злий борсук,
     columbia,
     jack wolfskin,
-    puma,
     adidas,
     new balance,
     joma,
@@ -39,6 +38,7 @@
     svastone
 
 Бренды готовые к обработке в v-2:    
+    Puma,
     Under Armour,
     Nike,
     Ganzo
