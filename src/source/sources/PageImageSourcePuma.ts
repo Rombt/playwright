@@ -42,7 +42,7 @@ class PageImageSourcePuma implements ISource<ICollectProductPhotosTask> {
       [CollectImgStep,
         {
           strategy: 'SlickSliderCollectImagesStrategy',
-          stopProcessing: true,
+          stopProcessing: false,
         }
       ],
       [CollectDescriptionStep,

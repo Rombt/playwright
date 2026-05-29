@@ -34,6 +34,7 @@ export const config = {
     // taskPath: 'src/data/tasks/under_armour/under_armour_test_short.json',
     // src\data\tasks\under_armour\under_armour_test_short.json
     taskPath: 'src/data/tasks/puma/puma_test.json',
+    // taskPath: 'src/data/tasks/puma/puma_test_short.json',
 
     sourcesFolder: './dist/source/sources',
     stepsFolder: './dist/source/steps',
@@ -44,7 +45,7 @@ export const config = {
   browser: {
     fingerprintFile: './fingerprint.config.json',
     mode: 'fake',
-    // downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
+    downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
   },
   //
   logger: {

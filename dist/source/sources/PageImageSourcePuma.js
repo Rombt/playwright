@@ -28,7 +28,7 @@ class PageImageSourcePuma {
             [CollectImgStep_1.default,
                 {
                     strategy: 'SlickSliderCollectImagesStrategy',
-                    stopProcessing: true,
+                    stopProcessing: false,
                 }
             ],
             [CollectDescriptionStep_1.default,

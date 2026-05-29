@@ -47,7 +47,7 @@ export default class CollectImgStep extends BaseStep {
     if (ctx.control.stop) return null;
 
     return {
-      step: ctx.stepFactory.create(''),
+      step: ctx.stepFactory.create('CollectDescriptionStep'),
       params: {
         sku: ctx.input.product?.sku,
       },
