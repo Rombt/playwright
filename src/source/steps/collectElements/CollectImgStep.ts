@@ -27,11 +27,9 @@ export default class CollectImgStep extends BaseStep {
 
     const stepConfig = ctx.stepParams?.get(CollectImgStep) as unknown as CollectImgStepConfig;
 
-    const strategy = ctx.strategyResolver.get<CollectImgStepConfig, CollectImagesResult>(
-      stepConfig.strategy,
-    );
+    const strategy = ctx.strategyResolver.get<CollectImgStepConfig, CollectImagesResult>( stepConfig.strategy );
 
-    const result = await strategy.execute(ctx, stepConfig);
+    const result = await strategy.execute(ctx);
 
     if (ctx.state.images === undefined) {
       ctx.state.images = [];

@@ -22,12 +22,8 @@ export default class CheckPageSkuStep extends BaseStep {
     }
 
     const { page } = ctx;
-
     const sku = ctx.input.sku;
-
-    const stepConfig = ctx.stepParams?.get(CheckPageSkuStep) as {
-      pageSkuSelector: string;
-    };
+    const stepConfig = ctx.stepParams?.get(CheckPageSkuStep) as { pageSkuSelector: string };
     const pageSkuSelector = stepConfig?.pageSkuSelector;
 
     if (!pageSkuSelector) {

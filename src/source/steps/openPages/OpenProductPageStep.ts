@@ -23,16 +23,21 @@ export default class OpenProductPageStep extends BaseStep {
       throw new Error('productUrl is not found in state');
     }
 
-    this.stepConfig = ctx.stepParams?.get(
-      OpenProductPageStep,
-    ) as unknown as IOpenProductPageParams;
-    const strategy = ctx.strategyResolver.get<IOpenProductPageParams, string>(this.stepConfig.strategy);
+    this.stepConfig = ctx.stepParams?.get(OpenProductPageStep) as unknown as IOpenProductPageParams;
 
-    /** для разных брендов могут понадобится разные стратегии, так для некоторых брендов может
-     * понадобится перестраивать urlProductPage под конкретный вариант, например Under Armour
-     */
-    if (this.stepConfig.strategy === 'GetUrlVariantPageStrategy') {
-      urlProductPage = await strategy.execute(ctx, this.stepConfig);
+
+    if (this.stepConfig?.strategy) {
+      const strategy = ctx.strategyResolver.get<IOpenProductPageParams, string>(this.stepConfig.strategy);
+
+      /**
+       * для разных брендов могут понадобится разные стратегии,
+       * так для некоторых брендов может понадобится перестраивать urlProductPage
+       * под конкретный вариант, например Under Armour
+       */
+      if (this.stepConfig.strategy === 'GetUrlVariantPageStrategy' && strategy) {
+        urlProductPage = await strategy.execute(ctx, this.stepConfig);
+      }
+
     }
 
     await ctx.page.goto(urlProductPage, { waitUntil: 'domcontentloaded' });
@@ -41,7 +46,7 @@ export default class OpenProductPageStep extends BaseStep {
   next(ctx: IExecutionContext): IStepResult | null {
     if (ctx.control.stop) return null;
 
-    const nextStep = this.stepConfig.nextStep || 'CheckPageSkuStep';
+    const nextStep = this.stepConfig?.nextStep || 'CheckPageSkuStep';
 
     return {
       step: ctx.stepFactory.create(nextStep),

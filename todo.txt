@@ -53,3 +53,8 @@
     для торговой марки PUMA собирается только первые две фотки для каждого товара
 
 
+
+
+
+
+#html-body > div.modals-wrapper > aside.modal-popup.global-popup-aside._show > div.modal-inner-wrap > header > button

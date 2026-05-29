@@ -9,30 +9,669 @@
       },
       "products": [
         {
-          "id_product": "44667",
-          "name_product": "Труси 93832501*SS24 PUMA (ч)",
-          "sku": "93832501*SS24",
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
           "attributes": {
             "color": "чорний",
             "size": "L"
           }
         },
         {
-          "id_product": "44678",
-          "name_product": "Шкарпетки 93838106*SS24 PUMA",
-          "sku": "93838106*SS24",
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
           "attributes": {
-            "color": "фіолет",
-            "size": "35/38"
+            "color": "чорний",
+            "size": "M"
           }
         },
         {
-          "id_product": "44679",
-          "name_product": "Шкарпетки 93839501*SS24 PUMA",
-          "sku": "93839501*SS24",
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
           "attributes": {
             "color": "чорний",
-            "size": "39/42"
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "176"
           }
         }
       ]

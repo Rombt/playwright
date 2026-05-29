@@ -7,7 +7,7 @@ class CollectImgStep extends BaseStep_1.BaseStep {
         const { page } = ctx;
         const stepConfig = ctx.stepParams?.get(CollectImgStep);
         const strategy = ctx.strategyResolver.get(stepConfig.strategy);
-        const result = await strategy.execute(ctx, stepConfig);
+        const result = await strategy.execute(ctx);
         if (ctx.state.images === undefined) {
             ctx.state.images = [];
         }

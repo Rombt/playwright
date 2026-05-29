@@ -11,7 +11,7 @@ export const config = {
       maxTask: 4,
     },
     pages: {
-      maxPage: 10, // for all brands
+      maxPage: 5, // for all brands
       // maxPage: 1, // for salomon
       maxPageDownloadImg: 5, // если не задавать то будет равным maxPage если и maxPage не задано то 10
       maxWaiters: 1500,
@@ -20,25 +20,26 @@ export const config = {
   },
 
   data: {
+    resultsFolder: 'results/puma/puma_test',
     // resultsFolder: 'results/under_armour/under_armour_test',
-    resultsFolder: 'results/under_armour/under_armour_prod',
+    // resultsFolder: 'results/under_armour/under_armour_prod',
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod_1',
 
-    //                     source\sources\PageImageSourceGanzo.ts
-    sourcesFolder: './dist/source/sources',
-    stepsFolder: './dist/source/steps',
-    strategiesFolder: './dist/source/strategies',
-    // scenario: 'rozetka',   // для отсутствующих sources
-    convertToJpg: true,
     // taskPath: 'src/data/tasks/skechers/skechers.json',
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
     // taskPath: 'src/data/tasks/nike/nike_test.json',
-    // src\data\tasks\under_armour\under_armour_test_short.json
     // taskPath: 'src/data/tasks/under_armour/under_armour_test_short.json',
-    taskPath: 'src/data/tasks/under_armour/under_armour_prod.json',
+    // src\data\tasks\under_armour\under_armour_test_short.json
+    taskPath: 'src/data/tasks/puma/puma_test.json',
+
+    sourcesFolder: './dist/source/sources',
+    stepsFolder: './dist/source/steps',
+    strategiesFolder: './dist/source/strategies',
+    // scenario: 'rozetka',   // для отсутствующих sources
+    convertToJpg: true,
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',
