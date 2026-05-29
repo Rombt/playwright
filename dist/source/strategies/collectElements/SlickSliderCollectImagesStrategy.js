@@ -1,0 +1,73 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class SlickSliderCollectImagesStrategy {
+    name = 'SlickSliderCollectImagesStrategy';
+    // сейчас не использую может в будущих версиях
+    async canHandle(ctx) {
+        // базовая стратегия — всегда может работать
+        return true;
+    }
+    // сейчас не использую может в будущих версиях
+    async score() {
+        return 10;
+    }
+    async execute(ctx) {
+        const { page } = ctx;
+        //!! ctx.state.locatorGallery должен содержать селектор именно родителя всей галереи!!
+        const gallery = ctx.state.locatorGallery;
+        await gallery.locator('.slick-track').waitFor({
+            state: 'visible',
+            timeout: ctx.appConfig.asyncRetry.maxDelay,
+        });
+        await gallery.evaluate((node) => {
+            const hasSlick = node.querySelector('.slick-track');
+            if (!hasSlick) {
+                throw new Error('Slick slider is not initialized');
+            }
+        });
+        // Иногда slick лениво подставляет src
+        await page.waitForTimeout(300);
+        const imageUrls = await gallery.evaluate((root) => {
+            const imgs = Array.from(root.querySelectorAll('img'));
+            const urls = imgs
+                .map((img) => {
+                return (img.getAttribute('src') ||
+                    img.getAttribute('data-src') ||
+                    img.getAttribute('data-lazy') ||
+                    img.getAttribute('data-original'));
+            })
+                .filter((src) => {
+                if (!src)
+                    return false;
+                const value = src.trim();
+                if (!value)
+                    return false;
+                // мусор
+                if (value.startsWith('data:image'))
+                    return false;
+                if (value.startsWith('blob:'))
+                    return false;
+                return true;
+            });
+            // dedupe
+            return [...new Set(urls)];
+        });
+        const absoluteImageUrls = imageUrls.map((src) => new URL(src, page.url()).toString());
+        if (absoluteImageUrls.length === 0) {
+            throw new Error('No valid image URLs found');
+        }
+        ctx.logger?.debug('URL of images are received', {
+            component: 'CollectImgStep',
+            method: 'execute()',
+            action: '',
+            data: {
+                absoluteImageUrls,
+            },
+        });
+        ctx.state.images ??= [];
+        return {
+            absoluteImageUrls,
+        };
+    }
+}
+exports.default = SlickSliderCollectImagesStrategy;
