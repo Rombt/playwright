@@ -9,525 +9,228 @@
       },
       "products": [
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55657",
+          "name_product": "Кросівки 150572*SS26 SCS (ж)",
+          "sku": "150572*SS26",
           "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "36"
           }
         },
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55657",
+          "name_product": "Кросівки 150572*SS26 SCS (ж)",
+          "sku": "150572*SS26",
           "attributes": {
-            "color": "чорн.",
-            "size": "36"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "36.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "36.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "37"
           }
         },
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55657",
+          "name_product": "Кросівки 150572*SS26 SCS (ж)",
+          "sku": "150572*SS26",
           "attributes": {
-            "color": "чорн.",
-            "size": "37"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "37.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "37.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "38"
           }
         },
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55657",
+          "name_product": "Кросівки 150572*SS26 SCS (ж)",
+          "sku": "150572*SS26",
           "attributes": {
-            "color": "чорн.",
+            "color": "чорний",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55657",
+          "name_product": "Кросівки 150572*SS26 SCS (ж)",
+          "sku": "150572*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55657",
+          "name_product": "Кросівки 150572*SS26 SCS (ж)",
+          "sku": "150572*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55658",
+          "name_product": "Кросівки 217020 *SS26 SCS (ч)",
+          "sku": "217020 *SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55658",
+          "name_product": "Кросівки 217020 *SS26 SCS (ч)",
+          "sku": "217020 *SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55658",
+          "name_product": "Кросівки 217020 *SS26 SCS (ч)",
+          "sku": "217020 *SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "55658",
+          "name_product": "Кросівки 217020 *SS26 SCS (ч)",
+          "sku": "217020 *SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "43.5"
+          }
+        },
+        {
+          "id_product": "55658",
+          "name_product": "Кросівки 217020 *SS26 SCS (ч)",
+          "sku": "217020 *SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "55658",
+          "name_product": "Кросівки 217020 *SS26 SCS (ч)",
+          "sku": "217020 *SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "55658",
+          "name_product": "Кросівки 217020 *SS26 SCS (ч)",
+          "sku": "217020 *SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "білий",
             "size": "38"
           }
         },
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
           "attributes": {
-            "color": "біл",
-            "size": "38.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "38.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "біл",
+            "color": "білий",
             "size": "39"
           }
         },
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
           "attributes": {
-            "color": "чорн.",
+            "color": "білий",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
+          "attributes": {
+            "color": "чорний",
             "size": "39"
           }
         },
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
           "attributes": {
-            "color": "біл",
-            "size": "39.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "39.5"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "40"
           }
         },
         {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
+          "id_product": "55908",
+          "name_product": "Сандалі 163651*SS26 SCS (ж)",
+          "sku": "163651*SS26 ",
           "attributes": {
-            "color": "чорн.",
-            "size": "40"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "41"
-          }
-        },
-        {
-          "id_product": "55342",
-          "name_product": "Кросівки 149036*SS26 SCS (ж)",
-          "sku": "149036*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "55343",
-          "name_product": "Кросівки 183199*SS26 SCS (ч)",
-          "sku": "183199*SS26 SCS",
-          "attributes": {
-            "color": "ол.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "55343",
-          "name_product": "Кросівки 183199*SS26 SCS (ч)",
-          "sku": "183199*SS26 SCS",
-          "attributes": {
-            "color": "ол.",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "55343",
-          "name_product": "Кросівки 183199*SS26 SCS (ч)",
-          "sku": "183199*SS26 SCS",
-          "attributes": {
-            "color": "ол.",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "55343",
-          "name_product": "Кросівки 183199*SS26 SCS (ч)",
-          "sku": "183199*SS26 SCS",
-          "attributes": {
-            "color": "ол.",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "55343",
-          "name_product": "Кросівки 183199*SS26 SCS (ч)",
-          "sku": "183199*SS26 SCS",
-          "attributes": {
-            "color": "ол.",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "55343",
-          "name_product": "Кросівки 183199*SS26 SCS (ч)",
-          "sku": "183199*SS26 SCS",
-          "attributes": {
-            "color": "ол.",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "55344",
-          "name_product": "Кросівки 220861*SS26 SCS (ч)",
-          "sku": "220861*SS26 SCS",
-          "attributes": {
-            "color": "сір.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "55344",
-          "name_product": "Кросівки 220861*SS26 SCS (ч)",
-          "sku": "220861*SS26 SCS",
-          "attributes": {
-            "color": "сір.",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "55344",
-          "name_product": "Кросівки 220861*SS26 SCS (ч)",
-          "sku": "220861*SS26 SCS",
-          "attributes": {
-            "color": "сір.",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "55344",
-          "name_product": "Кросівки 220861*SS26 SCS (ч)",
-          "sku": "220861*SS26 SCS",
-          "attributes": {
-            "color": "сір.",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "55344",
-          "name_product": "Кросівки 220861*SS26 SCS (ч)",
-          "sku": "220861*SS26 SCS",
-          "attributes": {
-            "color": "сір.",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "55344",
-          "name_product": "Кросівки 220861*SS26 SCS (ч)",
-          "sku": "220861*SS26 SCS",
-          "attributes": {
-            "color": "сір.",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "55345",
-          "name_product": "Кросівки 303552*SS26 SCS (д.п)",
-          "sku": "303552*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "27,5"
-          }
-        },
-        {
-          "id_product": "55345",
-          "name_product": "Кросівки 303552*SS26 SCS (д.п)",
-          "sku": "303552*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "28.5"
-          }
-        },
-        {
-          "id_product": "55345",
-          "name_product": "Кросівки 303552*SS26 SCS (д.п)",
-          "sku": "303552*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "30"
-          }
-        },
-        {
-          "id_product": "55345",
-          "name_product": "Кросівки 303552*SS26 SCS (д.п)",
-          "sku": "303552*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "32"
-          }
-        },
-        {
-          "id_product": "55345",
-          "name_product": "Кросівки 303552*SS26 SCS (д.п)",
-          "sku": "303552*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "33.5"
-          }
-        },
-        {
-          "id_product": "55345",
-          "name_product": "Кросівки 303552*SS26 SCS (д.п)",
-          "sku": "303552*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "35"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "27,5"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "28.5"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "30"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "31"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "32"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "33"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "33.5"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "34"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "35"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "36"
-          }
-        },
-        {
-          "id_product": "55346",
-          "name_product": "Кросівки 404800*SS26 SCS (х.п)",
-          "sku": "404800*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "37"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "30"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "31"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "32"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "33"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "33.5"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "34"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "35"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "36"
-          }
-        },
-        {
-          "id_product": "55347",
-          "name_product": "Кросівки 404801*SS26 SCS (х.п)",
-          "sku": "404801*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "37"
           }
         }
       ]
