@@ -31,7 +31,7 @@
     Злий борсук,
     columbia,
     jack wolfskin,
-    adidas,
+    adidas,     перестал работать?
     new balance,
     joma,
     salomon,
@@ -42,6 +42,24 @@
     Under Armour,
     Nike,
     Ganzo
+
+Бренды которые нужно обработать
+
+    EVERLAST    https://intersport.ua/ru/catalog?search=evm296d30
+    CROCS
+    4F - 2700 од.
+    адідас - 3000 од.
+    армані - 150 од.
+    CMP - 150 ОД.
+    Viking (термо білизна) -   300 од.
+    GAP (взуття) - 200 од.
+    LEVIS (взуття підліток) - 60 од. 
+    Капа (взуття) - 250 од.
+    Лікупер (взуття) - 80 од.
+
+
+
+
 
 
 Бренды которые нужно обрабатывать только через Розетку:
