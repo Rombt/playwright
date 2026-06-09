@@ -20,20 +20,20 @@ export const config = {
   },
 
   data: {
-    resultsFolder: 'results/puma/puma_test',
+    // resultsFolder: 'results/puma/puma_test',
     // resultsFolder: 'results/under_armour/under_armour_test',
     // resultsFolder: 'results/under_armour/under_armour_prod',
     // resultsFolder: 'results/salomon/salomon_test',
-    // resultsFolder: 'results/nike/nike_prod_1',
+    resultsFolder: 'results/nike/nike_prod',
 
     // taskPath: 'src/data/tasks/skechers/skechers.json',
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
-    // taskPath: 'src/data/tasks/nike/nike_test.json',
+    taskPath: 'src/data/tasks/nike/nike_prod.json',
     // taskPath: 'src/data/tasks/under_armour/under_armour_test_short.json',
     // src\data\tasks\under_armour\under_armour_test_short.json
-    taskPath: 'src/data/tasks/puma/puma_test.json',
+    // taskPath: 'src/data/tasks/puma/puma_test.json',
     // taskPath: 'src/data/tasks/puma/puma_test_short.json',
 
     sourcesFolder: './dist/source/sources',

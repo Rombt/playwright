@@ -34,16 +34,15 @@ export default class OpenSearchPageStep extends BaseStep {
     if (!baseUrl) {
       throw new Error('target_website is not defined');
     }
-    
+
     // для некоторых брендов может понадобится более радикальная очистка sku например Under Armour
     let sku = '';
-    if (this.stepConfig.clearSku === 'full') {
+    if (this.stepConfig?.clearSku === 'full') {
       sku = fullClearSku(product.sku);
     } else {
       sku = normalizeSku(product.sku);
     }
-    
-    
+
     const url = baseUrl.replace('{{sku_prod}}', sku);
     const waitUntil = params?.waitUntil ?? 'domcontentloaded';
 
@@ -55,7 +54,7 @@ export default class OpenSearchPageStep extends BaseStep {
   next(ctx: IExecutionContext): IStepResult | null {
     if (ctx.control.stop) return null;
 
-    const nextStep = this.stepConfig.nextStep || 'CheckSearchResultsStep';
+    const nextStep = this.stepConfig?.nextStep || 'CheckSearchResultsStep';
 
     return {
       step: ctx.stepFactory.create(nextStep),

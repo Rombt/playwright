@@ -9,308 +9,506 @@
       },
       "products": [
         {
-          "id_product": "53898",
-          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
-          "sku": "FZ7626-667*AW26",
+          "id_product": "55920",
+          "name_product": "Рюкзак DD0559-010*SS26 NIKE",
+          "sku": "DD0559-010*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55921",
+          "name_product": "Рюкзак DD0559-014*SS26 NIKE",
+          "sku": "DD0559-014*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55955",
+          "name_product": "Бейсболка FB5368-011*SS26 NIKE",
+          "sku": "FB5368-011*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55956",
+          "name_product": "Кепка FB5372-009*SS26 NIKE",
+          "sku": "FB5372-009*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
           "attributes": {
             "color": "св.рож",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "53898",
-          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
-          "sku": "FZ7626-667*AW26",
-          "attributes": {
-            "color": "св.рож",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "53898",
-          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
-          "sku": "FZ7626-667*AW26",
-          "attributes": {
-            "color": "св.рож",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "53898",
-          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
-          "sku": "FZ7626-667*AW26",
-          "attributes": {
-            "color": "св.рож",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54125",
-          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
-          "sku": "HF6603-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "2XL"
-          }
-        },
-        {
-          "id_product": "54125",
-          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
-          "sku": "HF6603-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54125",
-          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
-          "sku": "HF6603-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54125",
-          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
-          "sku": "HF6603-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54125",
-          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
-          "sku": "HF6603-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "39"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "40"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "40.5"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "55469",
-          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
-          "sku": "CU4152-101*SS26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "55470",
-          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
-          "sku": "DR7852-001*SS26",
-          "attributes": {
-            "color": "срібний",
-            "size": "36"
-          }
-        },
-        {
-          "id_product": "55470",
-          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
-          "sku": "DR7852-001*SS26",
-          "attributes": {
-            "color": "срібний",
-            "size": "36.5"
-          }
-        },
-        {
-          "id_product": "55470",
-          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
-          "sku": "DR7852-001*SS26",
-          "attributes": {
-            "color": "срібний",
             "size": "37.5"
           }
         },
         {
-          "id_product": "55470",
-          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
-          "sku": "DR7852-001*SS26",
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
           "attributes": {
-            "color": "срібний",
+            "color": "св.рож",
             "size": "38"
           }
         },
         {
-          "id_product": "55470",
-          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
-          "sku": "DR7852-001*SS26",
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
           "attributes": {
-            "color": "срібний",
+            "color": "св.рож",
             "size": "38.5"
           }
         },
         {
-          "id_product": "55470",
-          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
-          "sku": "DR7852-001*SS26",
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
           "attributes": {
-            "color": "срібний",
+            "color": "св.рож",
             "size": "39"
           }
         },
         {
-          "id_product": "55470",
-          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
-          "sku": "DR7852-001*SS26",
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
           "attributes": {
-            "color": "срібний",
+            "color": "св.рож",
             "size": "40"
           }
         },
         {
-          "id_product": "55471",
-          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
-          "sku": "DX7906-100*SS26",
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
           "attributes": {
-            "color": "біл",
+            "color": "св.рож",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
+          "attributes": {
+            "color": "св.рож",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55957",
+          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
+          "sku": "DD9294-600*SS26",
+          "attributes": {
+            "color": "св.рож",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "36.5"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "55958",
+          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
+          "sku": "FB2208-604*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "44.5"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "45.5"
+          }
+        },
+        {
+          "id_product": "55959",
+          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
+          "sku": "FD6033-001*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "55960",
+          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
+          "sku": "II6294-100*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "55960",
+          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
+          "sku": "II6294-100*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "55960",
+          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
+          "sku": "II6294-100*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "55960",
+          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
+          "sku": "II6294-100*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55960",
+          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
+          "sku": "II6294-100*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "55960",
+          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
+          "sku": "II6294-100*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55960",
+          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
+          "sku": "II6294-100*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55961",
+          "name_product": "Рюкзак DD0562-010*SS26 NIKE",
+          "sku": "DD0562-010*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55962",
+          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
+          "sku": "IB4127-010*SS26 ",
+          "attributes": {
+            "color": "чорний",
             "size": "L"
           }
         },
         {
-          "id_product": "55471",
-          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
-          "sku": "DX7906-100*SS26",
+          "id_product": "55962",
+          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
+          "sku": "IB4127-010*SS26 ",
           "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "M"
           }
         },
         {
-          "id_product": "55471",
-          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
-          "sku": "DX7906-100*SS26",
+          "id_product": "55962",
+          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
+          "sku": "IB4127-010*SS26 ",
           "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "S"
           }
         },
         {
-          "id_product": "55471",
-          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
-          "sku": "DX7906-100*SS26",
+          "id_product": "55962",
+          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
+          "sku": "IB4127-010*SS26 ",
           "attributes": {
-            "color": "біл",
+            "color": "чорний",
             "size": "XL"
           }
         },
         {
-          "id_product": "55471",
-          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
-          "sku": "DX7906-100*SS26",
+          "id_product": "55962",
+          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
+          "sku": "IB4127-010*SS26 ",
           "attributes": {
-            "color": "біл",
-            "size": "XS"
+            "color": "чорний",
+            "size": "XXL"
           }
         },
         {
-          "id_product": "55474",
-          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
-          "sku": "FN3859-051*SS26",
+          "id_product": "55963",
+          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
+          "sku": "DX5075-010*SS26",
           "attributes": {
-            "color": "св.сiр",
+            "color": "чорний",
             "size": "L"
           }
         },
         {
-          "id_product": "55474",
-          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
-          "sku": "FN3859-051*SS26",
+          "id_product": "55963",
+          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
+          "sku": "DX5075-010*SS26",
           "attributes": {
-            "color": "св.сiр",
+            "color": "чорний",
             "size": "M"
           }
         },
         {
-          "id_product": "55474",
-          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
-          "sku": "FN3859-051*SS26",
+          "id_product": "55963",
+          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
+          "sku": "DX5075-010*SS26",
           "attributes": {
-            "color": "св.сiр",
+            "color": "чорний",
             "size": "S"
           }
         },
         {
-          "id_product": "55474",
-          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
-          "sku": "FN3859-051*SS26",
+          "id_product": "55963",
+          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
+          "sku": "DX5075-010*SS26",
           "attributes": {
-            "color": "св.сiр",
+            "color": "чорний",
             "size": "XL"
           }
         },
         {
-          "id_product": "55474",
-          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
-          "sku": "FN3859-051*SS26",
+          "id_product": "55964",
+          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
+          "sku": "DX5075-100*SS26",
           "attributes": {
-            "color": "св.сiр",
+            "color": "білий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55964",
+          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
+          "sku": "DX5075-100*SS26",
+          "attributes": {
+            "color": "білий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55964",
+          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
+          "sku": "DX5075-100*SS26",
+          "attributes": {
+            "color": "білий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55964",
+          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
+          "sku": "DX5075-100*SS26",
+          "attributes": {
+            "color": "білий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55965",
+          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
+          "sku": "IB4129-010*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55965",
+          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
+          "sku": "IB4129-010*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55965",
+          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
+          "sku": "IB4129-010*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55965",
+          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
+          "sku": "IB4129-010*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55965",
+          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
+          "sku": "IB4129-010*SS26",
+          "attributes": {
+            "color": "чорний",
             "size": "XXL"
           }
         }

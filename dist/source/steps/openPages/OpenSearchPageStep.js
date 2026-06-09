@@ -17,7 +17,7 @@ class OpenSearchPageStep extends BaseStep_1.BaseStep {
         }
         // для некоторых брендов может понадобится более радикальная очистка sku например Under Armour
         let sku = '';
-        if (this.stepConfig.clearSku === 'full') {
+        if (this.stepConfig?.clearSku === 'full') {
             sku = (0, helpers_1.fullClearSku)(product.sku);
         }
         else {
@@ -31,7 +31,7 @@ class OpenSearchPageStep extends BaseStep_1.BaseStep {
     next(ctx) {
         if (ctx.control.stop)
             return null;
-        const nextStep = this.stepConfig.nextStep || 'CheckSearchResultsStep';
+        const nextStep = this.stepConfig?.nextStep || 'CheckSearchResultsStep';
         return {
             step: ctx.stepFactory.create(nextStep),
         };
