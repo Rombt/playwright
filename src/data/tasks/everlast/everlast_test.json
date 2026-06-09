@@ -1,0 +1,113 @@
+{
+  "generated_at": "2026-06-09_15-40",
+  "task": {
+    "314": {
+      "brand_id": "314",
+      "brand_name": "EVERLAST",
+      "metadata": {
+        "target_website": null
+      },
+      "products": [
+        {
+          "id_product": "55771",
+          "name_product": "Бейсболка унісекс Everlast 34A52043",
+          "sku": "34A52043*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55774",
+          "name_product": "Сумка EVERLAST  30A900Y27",
+          "sku": "30A900Y27*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55775",
+          "name_product": "Сумка EVERLAST  EVB802N27",
+          "sku": "EVB802N27*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55783",
+          "name_product": "Шорти унісекс EVERLAST EVM296D30",
+          "sku": "EVM296D30*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        }
+      ]
+    }
+  }
+}

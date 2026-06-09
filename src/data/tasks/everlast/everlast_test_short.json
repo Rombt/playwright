@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-10_09-16",
+  "task": {
+    "314": {
+      "brand_id": "314",
+      "brand_name": "EVERLAST",
+      "metadata": {
+        "target_website": null
+      },
+      "products": [
+        {
+          "id_product": "55771",
+          "name_product": "Бейсболка унісекс Everlast 34A52043",
+          "sku": "34A52043*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}
