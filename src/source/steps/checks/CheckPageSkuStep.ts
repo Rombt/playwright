@@ -35,6 +35,7 @@ export default class CheckPageSkuStep extends BaseStep {
       method: 'execute()',
       action: 'ctx.stepParams?.get(CheckPageSkuStep)',
       data: {
+        ctx:ctx,
         pageSkuSelector: pageSkuSelector,
       },
     });
@@ -50,7 +51,7 @@ export default class CheckPageSkuStep extends BaseStep {
       });
     } catch {
       ctx.control.stop = true;
-      throw new Error(`The page is not match sku ${sku}`);
+      throw new Error(`The page is not match sku ${ctx.input.normalizedSku}`);
     }
   }
 

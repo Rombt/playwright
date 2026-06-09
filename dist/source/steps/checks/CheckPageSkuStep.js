@@ -19,6 +19,7 @@ class CheckPageSkuStep extends BaseStep_1.BaseStep {
             method: 'execute()',
             action: 'ctx.stepParams?.get(CheckPageSkuStep)',
             data: {
+                ctx: ctx,
                 pageSkuSelector: pageSkuSelector,
             },
         });
@@ -33,7 +34,7 @@ class CheckPageSkuStep extends BaseStep_1.BaseStep {
         }
         catch {
             ctx.control.stop = true;
-            throw new Error(`The page is not match sku ${sku}`);
+            throw new Error(`The page is not match sku ${ctx.input.normalizedSku}`);
         }
     }
     next(ctx) {
