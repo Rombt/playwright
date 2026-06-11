@@ -26,12 +26,10 @@
     camotec,
     kiborg,
     bezet,
-    ganzo,
     BRS,
     Злий борсук,
     columbia,
     jack wolfskin,
-    adidas,     перестал работать?
     new balance,
     joma,
     salomon,
@@ -41,20 +39,29 @@
     Puma,
     Under Armour,
     Nike,
-    Ganzo
+    Ganzo,
+    Adidas
 
 Бренды которые нужно обработать
-
-    Adidas - 3000 од.
-    4F - 2700 од.
-    Viking (термо білизна) -   300 од.
-    Капа (взуття) - 250 од.
-    GAP (взуття) - 200 од.
-    армані - 150 од.
-    CMP - 150 ОД.
-    LEVIS (взуття підліток) - 60 од. 
-    Лікупер (взуття) - 80 од.
-
+    Алексей
+        ++ Puma - 3000 од. 
+        ++ Adidas - 3000 од.
+        -- 4F - 2700 од.
+        +- New balance - 2000 од.
+        ++ Nike - 800 од.
+        ++ Under Armour  - 800 од.
+        +- Joma - 400 од.
+        Viking -   300 од.
+        +- Salomon - 200 од.
+        Капа (взуття) - 250 од.
+        GAP (взуття) - 200 од.
+        +- Jack Wolfskin  - 160 од.
+        армані - 150 од.
+        CMP - 150 ОД.
+        LEVIS (взуття підліток) - 60 од. 
+        Лікупер (взуття) - 80 од.
+    Валерий
+        
 
 
 
