@@ -17,18 +17,18 @@ import { IExtractHtmlOptions } from '../../common/helpers';
 
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
-    // return new PageImageSourceGanzo(deps.flowRunner deps.logger);
-    return new PageImageSourceGanzo(deps.flowRunner);
+    // return new PageImageSourceCamotec(deps.flowRunner deps.logger);
+    return new PageImageSourceCamotec(deps.flowRunner);
   },
 };
 
-class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
+class PageImageSourceCamotec implements ISource<ICollectProductPhotosTask> {
   constructor(
     private flowRunner: IFlowRunner, // private logger: ILogger,
   ) {}
 
   supports(task: ICollectProductPhotosTask): boolean {
-    return task.metadata.target_website === 'https://ganzo.ua/search?search={{sku_prod}}';
+    return task.metadata.target_website === 'https://camotec.ua/search/?searchString={{sku_prod}}';
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
@@ -37,35 +37,30 @@ class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector:
-            '#block-personal-content > div > div > div > div > div > div > div > div.product-teaser__top > div > div.product-teaser__image--wrapper > a',
-          emptySelector: '.view-empty > p',
+          linkSelector: '#slick-slide00 > div > a',
+          emptySelector: 'div > p.emptyList',
         },
       ],
-      [
-        CheckPageSkuStep,
-        { pageSkuSelector: 'div.product-full__code div.field-product-vendor-code__item' },
-      ],
+      [CheckPageSkuStep, { pageSkuSelector: '#vendorCode' }],
       [
         SearchGalleryStep,
         {
-          gallerySelector:
-            '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
+          gallerySelector: '#productImageBlock',
         },
       ],
       [
         CollectImgStep,
         {
-          strategy: 'DefaultCollectImagesStrategy',
-          stopProcessing: true,
+          strategy: 'SlickSliderCollectImagesStrategy',
+          stopProcessing: false,
         },
       ],
 
       [
         CollectDescriptionStep,
         {
-          containers: ['div.field-product-desc__item.field__item'],
-          removeSelectors: ['h2', 'div.video'],
+          containers: ['div.offerDescriptionText'],
+          removeSelectors: [],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,
@@ -77,8 +72,8 @@ class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
 
     await this.flowRunner.run(startStep, ctx);
 
-    ctx.logger?.debug('Processing of the PageImageSourceGanzo is finished', {
-      component: 'PageImageSourceGanzo',
+    ctx.logger?.debug('Processing of the PageImageSourceCamotec is finished', {
+      component: 'PageImageSourceCamotec',
       method: 'execute()',
       action: 'await this.flowRunner.run(startStep, ctx)',
       data: {

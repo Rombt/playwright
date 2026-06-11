@@ -20,7 +20,8 @@ export const config = {
   },
 
   data: {
-    resultsFolder: 'results/adidas/adidas_test',
+    resultsFolder: 'results/camotec/camotec_test',
+    // resultsFolder: 'results/adidas/adidas_test',
     // resultsFolder: 'results/everlast/everlast_test',
     // resultsFolder: 'results/puma/puma_test',
     // resultsFolder: 'results/under_armour/under_armour_test',
@@ -28,7 +29,7 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/adidas/adidas_test.json',
+    taskPath: 'src/data/tasks/camotec/camotec_test_short.json',
     // taskPath: 'src/data/tasks/everlast/everlast_test.json',
     // taskPath: 'src/data/tasks/skechers/skechers.json',
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
