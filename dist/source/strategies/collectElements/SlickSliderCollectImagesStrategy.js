@@ -88,10 +88,12 @@ class SlickSliderCollectImagesStrategy {
             const urls = imgs
                 .map((img) => {
                 const candidates = [
-                    img.getAttribute('src'),
-                    img.getAttribute('data-lazy'),
                     img.getAttribute('data-src'),
+                    img.getAttribute('data-lazy'),
                     img.getAttribute('data-original'),
+                    img.getAttribute('data-zoom-image'),
+                    img.getAttribute('data-large-image'),
+                    img.getAttribute('src'),
                 ];
                 return candidates.find((value) => {
                     if (!value) {

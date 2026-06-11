@@ -45,7 +45,7 @@ class PageImageSourceCamotec implements ISource<ICollectProductPhotosTask> {
       [
         SearchGalleryStep,
         {
-          gallerySelector: '#productImageBlock',
+          gallerySelector: '#productImageBlock .mainImageBlock',
         },
       ],
       [
@@ -59,7 +59,7 @@ class PageImageSourceCamotec implements ISource<ICollectProductPhotosTask> {
       [
         CollectDescriptionStep,
         {
-          containers: ['div.offerDescriptionText'],
+          containers: ['#offerDescriptionText'],
           removeSelectors: [],
           expand: false,
           separator: '\n',

@@ -9,8 +9,7 @@ type CollectImagesResult = {
   absoluteImageUrls: string[];
 };
 
-type CollectImagesParams = {
-};
+type CollectImagesParams = {};
 
 export default class SlickSliderCollectImagesStrategy
   implements IStrategy<CollectImagesParams, CollectImagesResult>
@@ -113,6 +112,7 @@ export default class SlickSliderCollectImagesStrategy
       timeout: ctx.appConfig.asyncRetry.maxDelay,
     });
 
+
     await gallery.evaluate((node) => {
       const hasSlick = node.querySelector('.slick-track');
 
@@ -130,10 +130,12 @@ export default class SlickSliderCollectImagesStrategy
       const urls = imgs
         .map((img) => {
           const candidates = [
-            img.getAttribute('src'),
-            img.getAttribute('data-lazy'),
             img.getAttribute('data-src'),
+            img.getAttribute('data-lazy'),
             img.getAttribute('data-original'),
+            img.getAttribute('data-zoom-image'),
+            img.getAttribute('data-large-image'),
+            img.getAttribute('src'),
           ];
 
           return candidates.find((value) => {

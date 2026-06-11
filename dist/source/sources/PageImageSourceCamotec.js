@@ -33,7 +33,7 @@ class PageImageSourceCamotec {
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: '#productImageBlock',
+                    gallerySelector: '#productImageBlock .mainImageBlock',
                 },
             ],
             [
@@ -46,7 +46,7 @@ class PageImageSourceCamotec {
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['div.offerDescriptionText'],
+                    containers: ['#offerDescriptionText'],
                     removeSelectors: [],
                     expand: false,
                     separator: '\n',
