@@ -23,7 +23,6 @@
 
 Бренды готовые к обработке в v-1:
     m-tac,
-    camotec,
     kiborg,
     bezet,
     BRS,
@@ -40,7 +39,8 @@
     Under Armour,
     Nike,
     Ganzo,
-    Adidas
+    Adidas,
+    Camotec,
 
 Бренды которые нужно обработать
     Алексей
