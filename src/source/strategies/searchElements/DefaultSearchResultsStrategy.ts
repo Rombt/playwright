@@ -28,27 +28,21 @@ export default class DefaultSearchResultsStrategy
     }
 
     const link = page.locator(params.linkSelector).first();
-    const empty = page.locator(params.emptySelector ?? '.view-empty');
-
-    // try {
-    //   await Promise.race([
-    //     link.waitFor({
-    //       state: 'visible',
-    //       timeout: 30000, //todo брать из конфига config
-    //     }),
-    //     empty.waitFor({
-    //       state: 'visible',
-    //       timeout: 30000,
-    //     }),
-    //   ]);
-    // } catch {
-    //   throw new Error(`Search result not resolved. ${ctx.input.sku}`);
-    // }
+    // const empty = page.locator(params.emptySelector ?? '.view-empty');
+    const empty = params.emptySelectorText
+      ? page
+          .locator(params.emptySelector ?? '.view-empty')
+          .filter({ hasText: params.emptySelectorText })
+      : page.locator(params.emptySelector ?? '.view-empty');
 
     try {
       const result = await Promise.any([
-        link.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'link'),
-        empty.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'empty'),
+        link
+          .waitFor({ state: 'visible', timeout: ctx.appConfig.asyncRetry.maxDelay })
+          .then(() => 'link'),
+        empty
+          .waitFor({ state: 'visible', timeout: ctx.appConfig.asyncRetry.maxDelay })
+          .then(() => 'empty'),
       ]);
     } catch {
       throw new Error(`Search result not resolved. ${ctx.input.sku}`);
