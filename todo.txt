@@ -3,23 +3,9 @@
 запуск приложения
     node dist/index.js
 
-Инструменты оценки stealth-показателей веб драйвера (Playwright, Puppeteer, Selenium)
-    https://bot.sannysoft.com/
-        Сайт представляет собой чеклист тестов, которые имитируют проверки реальных антибот-систем (Cloudflare, Akamai, DataDome).
-        «золотой стандарт» для отладки фингерпринтов
 
-для повышения защищённости от спам систем
-Использование Playwright Stealth:
-    Плагин stealth через playwright-extra. Он автоматически подменяет параметры navigator.languages, webgl_vendor и скрывает свойство navigator.webdriver.
-        const { chromium } = require('playwright-extra');
-        const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-        chromium.use(StealthPlugin());
 
-при конвертации картинок в другой формат обеспечить их неизменность сейчас они обрезаются
-
-!! Добавить возможность определить что на странице поиска товар не найден что бы избежать повторных загрузок этой страницы 
-РЕФАКТОРИНГ
-    убрать зоопарк sources переписав весь механизм по принципу processors
+   !!! переписать SlickSliderCollectImagesStrategy.ts для любого слайдера  !!!
 
 Бренды готовые к обработке в v-1:
     kiborg,
@@ -65,10 +51,6 @@
 
 
 
-
-
-
-
 Бренды которые нужно обрабатывать только через Розетку:
     Skechers
 
@@ -81,5 +63,14 @@
 
 
 
+Инструменты оценки stealth-показателей веб драйвера (Playwright, Puppeteer, Selenium)
+    https://bot.sannysoft.com/
+        Сайт представляет собой чеклист тестов, которые имитируют проверки реальных антибот-систем (Cloudflare, Akamai, DataDome).
+        «золотой стандарт» для отладки фингерпринтов
 
-#html-body > div.modals-wrapper > aside.modal-popup.global-popup-aside._show > div.modal-inner-wrap > header > button
+для повышения защищённости от спам систем
+Использование Playwright Stealth:
+    Плагин stealth через playwright-extra. Он автоматически подменяет параметры navigator.languages, webgl_vendor и скрывает свойство navigator.webdriver.
+        const { chromium } = require('playwright-extra');
+        const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+        chromium.use(StealthPlugin());
