@@ -107,7 +107,7 @@ export default class SlickSliderCollectImagesStrategy
     // !! ctx.state.locatorGallery должен содержать селектор именно родителя всей галереи !!
     const gallery = ctx.state.locatorGallery as Locator;
 
-    await gallery.locator('.slick-track').waitFor({
+    await gallery.locator('.slick-track').first().waitFor({
       state: 'visible',
       timeout: ctx.appConfig.asyncRetry.maxDelay,
     });
