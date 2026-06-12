@@ -22,7 +22,7 @@ exports.config = {
         },
     },
     data: {
-        resultsFolder: 'results/m-tac/militarist_test',
+        resultsFolder: 'results/m-tac/militarist_test_1',
         // resultsFolder: 'results/camotec/camotec_test',
         // resultsFolder: 'results/adidas/adidas_test',
         // resultsFolder: 'results/everlast/everlast_test',
@@ -31,7 +31,8 @@ exports.config = {
         // resultsFolder: 'results/under_armour/under_armour_prod',
         // resultsFolder: 'results/salomon/salomon_test',
         // resultsFolder: 'results/nike/nike_prod',
-        taskPath: 'src/data/tasks/m-tac/militarist_test.json',
+        // taskPath: 'src/data/tasks/m-tac/militarist_test.json',
+        taskPath: 'src/data/tasks/camotec/camotec_test.json',
         // taskPath: 'src/data/tasks/everlast/everlast_test.json',
         // taskPath: 'src/data/tasks/skechers/skechers.json',
         // taskPath: 'src/data/tasks/svastone/svastone_test.json',

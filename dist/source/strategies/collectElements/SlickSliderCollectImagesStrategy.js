@@ -87,12 +87,14 @@ class SlickSliderCollectImagesStrategy {
             const imgs = Array.from(root.querySelectorAll('img'));
             const urls = imgs
                 .map((img) => {
+                const parentLink = img.closest('a');
                 const candidates = [
-                    img.getAttribute('data-src'),
+                    parentLink?.getAttribute('href'),
+                    img.getAttribute('data-large-image'),
+                    img.getAttribute('data-zoom-image'),
                     img.getAttribute('data-lazy'),
                     img.getAttribute('data-original'),
-                    img.getAttribute('data-zoom-image'),
-                    img.getAttribute('data-large-image'),
+                    img.getAttribute('data-src'),
                     img.getAttribute('src'),
                 ];
                 return candidates.find((value) => {
