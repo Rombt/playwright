@@ -23,10 +23,9 @@ class MTacProcessor extends BaseHtmlProcessor_1.BaseHtmlProcessor {
                 el.attribs = {};
             }
         });
-        const cleanHtmlTable = dom.html(table);
         return {
             descriptionHtml: cleanHtmlDescription,
-            attributesHtml: cleanHtmlTable,
+            attributesHtml: '',
         };
     }
 }

@@ -41,7 +41,7 @@ export default class SearchGalleryStep extends BaseStep {
     ctx.logger?.debug('The gallery is found', {
       component: 'SearchGalleryStep',
       data: {
-        ctx:ctx,
+        ctx: ctx,
         galleryCount: count,
         gallery: gallery,
       },

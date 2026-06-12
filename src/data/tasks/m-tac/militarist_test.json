@@ -189,24 +189,6 @@
           }
         }
       ]
-    },
-    "0": {
-      "brand_id": "0",
-      "brand_name": null,
-      "metadata": {
-        "target_website": null
-      },
-      "products": [
-        {
-          "id_product": "54516",
-          "name_product": "Баліст. пакет 2кл в напашник 10515001 M-TAC",
-          "sku": "10515001\t\t",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        }
-      ]
     }
   }
 }

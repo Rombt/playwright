@@ -27,11 +27,10 @@ export class MilitaristProcessor extends BaseHtmlProcessor {
           el.attribs = {};
         }
       });
-    const cleanHtmlTable = dom.html(table);
 
     return {
       descriptionHtml: cleanHtmlDescription,
-      attributesHtml: cleanHtmlTable,
+      attributesHtml: '',
     };
   }
 
