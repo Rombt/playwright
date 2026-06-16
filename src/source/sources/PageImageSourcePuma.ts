@@ -36,16 +36,17 @@ class PageImageSourcePuma implements ISource<ICollectProductPhotosTask> {
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
     ctx.stepParams = new Map([
       [CheckPageSkuStep, { pageSkuSelector: 'div.size-cont > div.product-article' }],
-      [SearchGalleryStep,
-        { gallerySelector: '#productGallery', },
-      ],
-      [CollectImgStep,
+      [SearchGalleryStep, { gallerySelector: '#productGallery' }],
+      [
+        CollectImgStep,
         {
-          strategy: 'SlickSliderCollectImagesStrategy',
+          // strategy: 'SlickSliderCollectImagesStrategy',
+          strategy: 'DefaultCollectImagesStrategy',
           stopProcessing: false,
-        }
+        },
       ],
-      [CollectDescriptionStep,
+      [
+        CollectDescriptionStep,
         {
           containers: ['[data-pdp-description-container]'],
           removeSelectors: ['[data-accordion-header]'],

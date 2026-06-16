@@ -41,6 +41,7 @@ class PageImageSourceEverlast {
             CollectImgStep_1.default,
             {
                 strategy: 'DefaultCollectImagesStrategy',
+                // strategy: 'SlickSliderCollectImagesStrategy',
                 stopProcessing: true,
             },
             [

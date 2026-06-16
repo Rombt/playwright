@@ -11,7 +11,6 @@ type CollectImagesResult = {
 
 type CollectImagesParams = {};
 
-// todo подобрать название по лучше!!
 export default class DefaultCollectImagesStrategy
   implements IStrategy<CollectImagesParams, CollectImagesResult>
 {
@@ -28,34 +27,62 @@ export default class DefaultCollectImagesStrategy
     return 10;
   }
 
-  async execute(
-    ctx: IExecutionContext,
-    // params: CheckSearchResultsParams,
-  ): Promise<CollectImagesResult> {
+  async execute(ctx: IExecutionContext): Promise<CollectImagesResult> {
     const { page } = ctx;
 
     const gallery = ctx.state.locatorGallery as Locator;
 
-    const imageUrls = await gallery
-      .locator('img')
-      .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('src')).filter(Boolean));
+    // Иногда слайдер лениво подставляет src
+    await page.waitForTimeout(ctx.appConfig.asyncRetry.maxDelay);
 
-    const absoluteImageUrls = imageUrls.map((src) => new URL(src!, page.url()).toString());
+    const imageUrls = await gallery.evaluate((root) => {
+      const imgs = Array.from(root.querySelectorAll('img'));
 
-    if (absoluteImageUrls.length === 0) throw new Error('No valid image URLs found');
+      const urls = imgs
+        .map((img) => {
+          const parentLink = img.closest('a');
+
+          const candidates = [
+            parentLink?.getAttribute('href'),
+            img.getAttribute('data-large-image'),
+            img.getAttribute('data-zoom-image'),
+            img.getAttribute('data-lazy'),
+            img.getAttribute('data-original'),
+            img.getAttribute('data-src'),
+            img.getAttribute('src'),
+          ];
+
+          return candidates.find((value) => {
+            if (!value) {
+              return false;
+            }
+
+            const src = value.trim();
+
+            return src !== '' && !src.startsWith('data:image') && !src.startsWith('blob:');
+          });
+        })
+        .filter((src): src is string => Boolean(src));
+
+      return [...new Set(urls)];
+    });
+
+    const absoluteImageUrls = imageUrls.map((src) => new URL(src, page.url()).toString());
+
+    if (absoluteImageUrls.length === 0) {
+      throw new Error('No valid image URLs found');
+    }
 
     ctx.logger?.debug('URL of images are received', {
       component: 'CollectImgStep',
       method: 'execute()',
       action: '',
       data: {
-        absoluteImageUrls: absoluteImageUrls,
+        absoluteImageUrls,
       },
     });
 
-    if (!ctx.state.images) {
-      ctx.state.images = [];
-    }
+    ctx.state.images ??= [];
 
     return {
       absoluteImageUrls,

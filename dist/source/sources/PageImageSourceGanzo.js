@@ -42,6 +42,7 @@ class PageImageSourceGanzo {
             [
                 CollectImgStep_1.default,
                 {
+                    // strategy: 'SlickSliderCollectImagesStrategy',
                     strategy: 'DefaultCollectImagesStrategy',
                     stopProcessing: true,
                 },

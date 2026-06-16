@@ -43,7 +43,9 @@ class PageImageSourceAdidas {
             [
                 CollectImgStep_1.default,
                 {
-                    strategy: 'SlickSliderCollectImagesStrategy',
+                    // strategy: 'SlickSliderCollectImagesStrategy',
+                    // todo протестить, не всегда собирает
+                    strategy: 'DefaultImagesStrategy',
                     stopProcessing: false,
                 },
             ],

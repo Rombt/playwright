@@ -55,7 +55,9 @@ class PageImageSourceAdidas implements ISource<ICollectProductPhotosTask> {
       [
         CollectImgStep,
         {
-          strategy: 'SlickSliderCollectImagesStrategy',
+          // strategy: 'SlickSliderCollectImagesStrategy',
+          // todo протестить, не всегда собирает
+          strategy: 'DefaultImagesStrategy',
           stopProcessing: false,
         },
       ],

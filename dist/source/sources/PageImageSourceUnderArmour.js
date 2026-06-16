@@ -82,9 +82,10 @@ class PageImageSourceUnderArmour {
             [
                 CollectImgStep_1.default,
                 {
+                    // strategy: 'SlickSliderCollectImagesStrategy',
                     strategy: 'DefaultCollectImagesStrategy',
                     stopProcessing: true,
-                }
+                },
             ],
             [
                 CollectDescriptionStep_1.default,

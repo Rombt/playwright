@@ -39,7 +39,8 @@ class PageImageSourceCamotec {
             [
                 CollectImgStep_1.default,
                 {
-                    strategy: 'SlickSliderCollectImagesStrategy',
+                    // strategy: 'SlickSliderCollectImagesStrategy',
+                    strategy: 'DefaultCollectImagesStrategy',
                     stopProcessing: false,
                 },
             ],

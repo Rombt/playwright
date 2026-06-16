@@ -22,16 +22,17 @@ class PageImageSourcePuma {
     async execute(ctx) {
         ctx.stepParams = new Map([
             [CheckPageSkuStep_1.default, { pageSkuSelector: 'div.size-cont > div.product-article' }],
-            [SearchGalleryStep_1.default,
-                { gallerySelector: '#productGallery', },
-            ],
-            [CollectImgStep_1.default,
+            [SearchGalleryStep_1.default, { gallerySelector: '#productGallery' }],
+            [
+                CollectImgStep_1.default,
                 {
-                    strategy: 'SlickSliderCollectImagesStrategy',
+                    // strategy: 'SlickSliderCollectImagesStrategy',
+                    strategy: 'DefaultCollectImagesStrategy',
                     stopProcessing: false,
-                }
+                },
             ],
-            [CollectDescriptionStep_1.default,
+            [
+                CollectDescriptionStep_1.default,
                 {
                     containers: ['[data-pdp-description-container]'],
                     removeSelectors: ['[data-accordion-header]'],

@@ -51,7 +51,8 @@ class PageImageSourceCamotec implements ISource<ICollectProductPhotosTask> {
       [
         CollectImgStep,
         {
-          strategy: 'SlickSliderCollectImagesStrategy',
+          // strategy: 'SlickSliderCollectImagesStrategy',
+          strategy: 'DefaultCollectImagesStrategy',
           stopProcessing: false,
         },
       ],

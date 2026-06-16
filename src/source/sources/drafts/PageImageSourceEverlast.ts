@@ -54,6 +54,7 @@ class PageImageSourceEverlast implements ISource<ICollectProductPhotosTask> {
       CollectImgStep,
       {
         strategy: 'DefaultCollectImagesStrategy',
+        // strategy: 'SlickSliderCollectImagesStrategy',
         stopProcessing: true,
       },
 

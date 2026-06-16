@@ -95,16 +95,16 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
       [
         SearchGalleryStep,
         {
-          gallerySelector:
-            'div.swiper-wrapper',
+          gallerySelector: 'div.swiper-wrapper',
         },
       ],
       [
         CollectImgStep,
         {
+          // strategy: 'SlickSliderCollectImagesStrategy',
           strategy: 'DefaultCollectImagesStrategy',
           stopProcessing: true,
-        }
+        },
       ],
       [
         CollectDescriptionStep,
