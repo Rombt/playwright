@@ -5,4 +5,6 @@ export type IExtractHtmlOptions = {
   removeSelectors?: string[];
   expand?: boolean;
   separator?: string; // разделитель между блоками
+  tabSelector?: string;
+  tabBodySelector?: string;
 };

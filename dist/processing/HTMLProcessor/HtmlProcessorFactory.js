@@ -15,6 +15,7 @@ const NewBalanceProcessor_1 = require("./processors/NewBalanceProcessor");
 const JomaProcessor_1 = require("./processors/JomaProcessor");
 const SalomonProcessor_1 = require("./processors/SalomonProcessor");
 const SvastoneProcessor_1 = require("./processors/SvastoneProcessor");
+const FenixProcessor_1 = require("./processors/FenixProcessor");
 class HtmlProcessorFactory {
     processors = {
         // 'm-tac': MTacProcessor,  //todo придумать как обрабатывать один бренд разными процессами
@@ -32,6 +33,7 @@ class HtmlProcessorFactory {
         joma: JomaProcessor_1.JomaProcessor,
         salomon: SalomonProcessor_1.SalomonProcessor,
         svastone: SvastoneProcessor_1.SvastoneProcessor,
+        fenix: FenixProcessor_1.FenixProcessor,
     };
     create(brand) {
         const ProcessorClass = this.processors[brand.toLowerCase()];

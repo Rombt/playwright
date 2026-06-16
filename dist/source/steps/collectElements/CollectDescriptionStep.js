@@ -11,6 +11,17 @@ class CollectDescriptionStep extends BaseStep_1.BaseStep {
         const { page } = ctx;
         let html = '';
         const stepConfig = ctx.stepParams?.get(CollectDescriptionStep);
+        if (stepConfig.tabSelector && stepConfig.tabBodySelector) {
+            // если селектор не найден весь сценарий не должен упасть
+            try {
+                await page.locator(stepConfig.tabSelector).click();
+                await page.locator(stepConfig.tabBodySelector).waitFor({
+                    state: 'visible',
+                    timeout: config.asyncRetry.maxDelay,
+                });
+            }
+            catch { }
+        }
         try {
             ctx.state.html = await (0, helpers_1.extractRawHtml)(page, stepConfig);
         }

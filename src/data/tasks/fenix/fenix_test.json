@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-06-16_15-21",
+  "task": {
+    "249": {
+      "brand_id": "249",
+      "brand_name": "Fenix",
+      "metadata": {
+        "target_website": "https://fenix.ua/ua/search/?query={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55483",
+          "name_product": "Ручка з ліхт-м T6-Black Fenix (а)",
+          "sku": "T6-Black",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55484",
+          "name_product": "Ручка з ліхт-м T6-Blue Fenix (а)",
+          "sku": "T6-Blue",
+          "attributes": {
+            "color": "син",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

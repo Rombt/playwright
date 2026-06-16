@@ -23,6 +23,17 @@ export default class CollectDescriptionStep extends BaseStep {
 
     const stepConfig = ctx.stepParams?.get(CollectDescriptionStep) as IExtractHtmlOptions;
 
+    if (stepConfig.tabSelector && stepConfig.tabBodySelector) {
+      // если селектор не найден весь сценарий не должен упасть
+      try {
+        await page.locator(stepConfig.tabSelector).click();
+        await page.locator(stepConfig.tabBodySelector).waitFor({
+          state: 'visible',
+          timeout: config.asyncRetry.maxDelay,
+        });
+      } catch {}
+    }
+
     try {
       ctx.state.html = await extractRawHtml(page, stepConfig);
     } catch (error) {

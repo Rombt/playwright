@@ -17,6 +17,7 @@ import { NewBalanceProcessor } from './processors/NewBalanceProcessor';
 import { JomaProcessor } from './processors/JomaProcessor';
 import { SalomonProcessor } from './processors/SalomonProcessor';
 import { SvastoneProcessor } from './processors/SvastoneProcessor';
+import { FenixProcessor } from './processors/FenixProcessor';
 
 export class HtmlProcessorFactory implements IHtmlProcessorFactory {
   private processors: Record<string, new () => IBaseHtmlProcessor> = {
@@ -35,6 +36,7 @@ export class HtmlProcessorFactory implements IHtmlProcessorFactory {
     joma: JomaProcessor,
     salomon: SalomonProcessor,
     svastone: SvastoneProcessor,
+    fenix: FenixProcessor,
   };
 
   public create(brand: string): IBaseHtmlProcessor {
