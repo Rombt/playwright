@@ -1,276 +1,6 @@
 {
-  "generated_at": "2026-02-03_10-52",
+  "generated_at": "2026-06-06_14-23",
   "task": {
-    "9": {
-      "brand_id": "9",
-      "brand_name": "Columbia",
-      "metadata": {
-        "target_website": "https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch"
-      },
-      "products": [
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "беж/чорн",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "беж/чорн",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "беж/чорн",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "беж/чорн",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "беж/чорн",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54208",
-          "name_product": "Куртка лижна чоловіча Columbia Last Tracks™ II Jacket  2087411",
-          "sku": "2087411*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "37"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "37.5"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "38"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "38.5"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "39"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "39.5"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "40"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "40.5"
-          }
-        },
-        {
-          "id_product": "54213",
-          "name_product": "Напівчеревики жіночі Columbia FIRECAMP™ FLEECE III  1865231",
-          "sku": "1865231*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "54217",
-          "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
-          "sku": "2079181*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "37"
-          }
-        },
-        {
-          "id_product": "54217",
-          "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
-          "sku": "2079181*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "37.5"
-          }
-        },
-        {
-          "id_product": "54217",
-          "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
-          "sku": "2079181*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "38"
-          }
-        },
-        {
-          "id_product": "54217",
-          "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
-          "sku": "2079181*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "38.5"
-          }
-        },
-        {
-          "id_product": "54217",
-          "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
-          "sku": "2079181*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "39"
-          }
-        },
-        {
-          "id_product": "54217",
-          "name_product": "Чоботи утеплені жіночі Columbia Minx™ Shorty IV 2079181",
-          "sku": "2079181*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "39.5"
-          }
-        },
-        {
-          "id_product": "54223",
-          "name_product": "Чоловічі черевики Columbia Konos™ TRS OutDry™ Mid  2103761",
-          "sku": "2103761*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "54223",
-          "name_product": "Чоловічі черевики Columbia Konos™ TRS OutDry™ Mid  2103761",
-          "sku": "2103761*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "43.5"
-          }
-        },
-        {
-          "id_product": "54223",
-          "name_product": "Чоловічі черевики Columbia Konos™ TRS OutDry™ Mid  2103761",
-          "sku": "2103761*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "54223",
-          "name_product": "Чоловічі черевики Columbia Konos™ TRS OutDry™ Mid  2103761",
-          "sku": "2103761*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "44.5"
-          }
-        }
-      ]
-    },
     "45": {
       "brand_id": "45",
       "brand_name": "Puma",
@@ -279,192 +9,1623 @@
       },
       "products": [
         {
-          "id_product": "54478",
-          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
-          "sku": "63152907*SS26",
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
           "attributes": {
-            "color": "т.сiр/чорн",
+            "color": "графіт",
             "size": "L"
           }
         },
         {
-          "id_product": "54478",
-          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
-          "sku": "63152907*SS26",
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
           "attributes": {
-            "color": "т.сiр/чорн",
+            "color": "графіт",
             "size": "M"
           }
         },
         {
-          "id_product": "54478",
-          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
-          "sku": "63152907*SS26",
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
           "attributes": {
-            "color": "т.сiр/чорн",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54478",
-          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
-          "sku": "63152907*SS26",
-          "attributes": {
-            "color": "т.сiр/чорн",
+            "color": "графіт",
             "size": "XL"
           }
         },
         {
-          "id_product": "54478",
-          "name_product": "Джемпер 63152907*SS26 PUMA (ч)",
-          "sku": "63152907*SS26",
+          "id_product": "55538",
+          "name_product": "Футболка 52590769*SS26 PUMA (ч)",
+          "sku": "52590769*SS26",
           "attributes": {
-            "color": "т.сiр/чорн",
+            "color": "графіт",
             "size": "XXL"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55828",
+          "name_product": "Брюки 69169601*SS26 PUMA (ч)",
+          "sku": "69169601*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55829",
+          "name_product": "Брюки 69169603*SS26 PUMA (ч)",
+          "sku": "69169603*SS26 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55830",
+          "name_product": "Брюки 69182101*SS26 PUMA (ж)",
+          "sku": "69182101*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55831",
+          "name_product": "Брюки 69384401*SS26 PUMA (ж)",
+          "sku": "69384401*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "55832",
+          "name_product": "Кросівки 31079810*SS26 PUMA (ж)",
+          "sku": "31079810*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55833",
+          "name_product": "Футболка 68253201*SS26 PUMA (ч)",
+          "sku": "68253201*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55834",
+          "name_product": "Футболка 68253338*SS26 PUMA (ч)",
+          "sku": "68253338*SS26",
+          "attributes": {
+            "color": "жовт.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55835",
+          "name_product": "Футболка 68497140*SS26 PUMA (ж)",
+          "sku": "68497140*SS26",
+          "attributes": {
+            "color": "зел.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55836",
+          "name_product": "Футболка 69169301*SS26 PUMA (ч)",
+          "sku": "69169301*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55837",
+          "name_product": "Футболка 69169302*SS26 PUMA (ч)",
+          "sku": "69169302*SS26 ",
+          "attributes": {
+            "color": "білий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55838",
+          "name_product": "Футболка 69169303*SS26 PUMA (ч)",
+          "sku": "69169303*SS26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55839",
+          "name_product": "Футболка 69187601*SS26 PUMA (ж)",
+          "sku": "69187601*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "55840",
+          "name_product": "Худі 68489787*SS26 PUMA (підл)",
+          "sku": "68489787*SS26 ",
+          "attributes": {
+            "color": "молоч.",
+            "size": "176"
+          }
+        }
+      ]
+    },
+    "21": {
+      "brand_id": "21",
+      "brand_name": "Under Armour",
+      "metadata": {
+        "target_website": "https://www.underarmour.com/en-us/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55285",
+          "name_product": "Брюки 1382727-520*SS26 UA (ж)",
+          "sku": "1382727-520*SS26",
+          "attributes": {
+            "color": "фіол.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55286",
+          "name_product": "Кепка 1376700-100*SS26 UA",
+          "sku": "1376700-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "55287",
+          "name_product": "Костюм 1357139-001*SS26 UA (ч)",
+          "sku": "1357139-001*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55289",
+          "name_product": "Кросівки 3027007-100*SS26 UA (ж)",
+          "sku": "3027007-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "55291",
+          "name_product": "Кросівки 6006717-011*SS26 UA (ч)",
+          "sku": "6006717-011*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "41"
+          }
+        }
+      ]
+    },
+    "15": {
+      "brand_id": "15",
+      "brand_name": "Nike",
+      "metadata": {
+        "target_website": "https://www.nike.com/fi/w?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53898",
+          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
+          "sku": "FZ7626-667*AW26",
+          "attributes": {
+            "color": "св.рож",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53898",
+          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
+          "sku": "FZ7626-667*AW26",
+          "attributes": {
+            "color": "св.рож",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53898",
+          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
+          "sku": "FZ7626-667*AW26",
+          "attributes": {
+            "color": "св.рож",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53898",
+          "name_product": "Брюки FZ7626-667*AW26 NIKE (ж)",
+          "sku": "FZ7626-667*AW26",
+          "attributes": {
+            "color": "св.рож",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53907",
+          "name_product": "Худі HF6839-063*AW26 NIKE (ж)",
+          "sku": "HF6839-063*AW26",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53907",
+          "name_product": "Худі HF6839-063*AW26 NIKE (ж)",
+          "sku": "HF6839-063*AW26",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "53907",
+          "name_product": "Худі HF6839-063*AW26 NIKE (ж)",
+          "sku": "HF6839-063*AW26",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "53907",
+          "name_product": "Худі HF6839-063*AW26 NIKE (ж)",
+          "sku": "HF6839-063*AW26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "53907",
+          "name_product": "Худі HF6839-063*AW26 NIKE (ж)",
+          "sku": "HF6839-063*AW26",
+          "attributes": {
+            "color": "сірий",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "53909",
+          "name_product": "Шапка HF0186-010*AW26 NIKE (у/с)",
+          "sku": "HF0186-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54125",
+          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
+          "sku": "HF6603-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "54125",
+          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
+          "sku": "HF6603-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54125",
+          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
+          "sku": "HF6603-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54125",
+          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
+          "sku": "HF6603-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54125",
+          "name_product": "Куртка HF6603-010*AW26 NIKE (ч)",
+          "sku": "HF6603-010*AW26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55467",
+          "name_product": "Брюки HV6779-010*SS26 NIKE (ж)",
+          "sku": "HV6779-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55467",
+          "name_product": "Брюки HV6779-010*SS26 NIKE (ж)",
+          "sku": "HV6779-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55467",
+          "name_product": "Брюки HV6779-010*SS26 NIKE (ж)",
+          "sku": "HV6779-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55467",
+          "name_product": "Брюки HV6779-010*SS26 NIKE (ж)",
+          "sku": "HV6779-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55467",
+          "name_product": "Брюки HV6779-010*SS26 NIKE (ж)",
+          "sku": "HV6779-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55468",
+          "name_product": "Джемпер HV6747-010*SS26 NIKE (ж)",
+          "sku": "HV6747-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55468",
+          "name_product": "Джемпер HV6747-010*SS26 NIKE (ж)",
+          "sku": "HV6747-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55468",
+          "name_product": "Джемпер HV6747-010*SS26 NIKE (ж)",
+          "sku": "HV6747-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55468",
+          "name_product": "Джемпер HV6747-010*SS26 NIKE (ж)",
+          "sku": "HV6747-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55468",
+          "name_product": "Джемпер HV6747-010*SS26 NIKE (ж)",
+          "sku": "HV6747-010*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
           "attributes": {
             "color": "чорн/бiл",
             "size": "41"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
           "attributes": {
             "color": "чорн/бiл",
             "size": "42"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
           "attributes": {
             "color": "чорн/бiл",
             "size": "42.5"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
           "attributes": {
             "color": "чорн/бiл",
             "size": "43"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55469",
+          "name_product": "Кросівки CU4152-101*SS26 NIKE (ч)",
+          "sku": "CU4152-101*SS26",
           "attributes": {
             "color": "чорн/бiл",
             "size": "44"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55470",
+          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
+          "sku": "DR7852-001*SS26",
           "attributes": {
-            "color": "чорн/бiл",
-            "size": "44.5"
+            "color": "срібний",
+            "size": "36"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55470",
+          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
+          "sku": "DR7852-001*SS26",
           "attributes": {
-            "color": "чорн/бiл",
-            "size": "45"
+            "color": "срібний",
+            "size": "36.5"
           }
         },
         {
-          "id_product": "54481",
-          "name_product": "Кросівки 37947809*SS26 PUMA (ч)",
-          "sku": "37947809*SS26",
+          "id_product": "55470",
+          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
+          "sku": "DR7852-001*SS26",
           "attributes": {
-            "color": "чорн/бiл",
-            "size": "46"
+            "color": "срібний",
+            "size": "37.5"
           }
         },
         {
-          "id_product": "54482",
-          "name_product": "Пляшка 05351801*SS26 PUMA",
-          "sku": "05351801*SS26",
+          "id_product": "55470",
+          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
+          "sku": "DR7852-001*SS26",
           "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
+            "color": "срібний",
+            "size": "38"
           }
         },
         {
-          "id_product": "54483",
-          "name_product": "Пляшка 05351837*SS26 PUMA",
-          "sku": "05351837*SS26",
+          "id_product": "55470",
+          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
+          "sku": "DR7852-001*SS26",
           "attributes": {
-            "color": "блак.",
-            "size": "O/S"
+            "color": "срібний",
+            "size": "38.5"
           }
         },
         {
-          "id_product": "54484",
-          "name_product": "Рукавиці 04146501*SS26 PUMA",
-          "sku": "04146501*SS26",
+          "id_product": "55470",
+          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
+          "sku": "DR7852-001*SS26",
           "attributes": {
-            "color": "чорн.",
+            "color": "срібний",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "55470",
+          "name_product": "Кросівки DR7852-001*SS26 NIKE (ж)",
+          "sku": "DR7852-001*SS26",
+          "attributes": {
+            "color": "срібний",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "55471",
+          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
+          "sku": "DX7906-100*SS26",
+          "attributes": {
+            "color": "біл",
             "size": "L"
           }
         },
         {
-          "id_product": "54484",
-          "name_product": "Рукавиці 04146501*SS26 PUMA",
-          "sku": "04146501*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54354",
-          "name_product": "Футболка 69291202111*SS26 PUMA (ч)",
-          "sku": "69291202111*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54354",
-          "name_product": "Футболка 69291202111*SS26 PUMA (ч)",
-          "sku": "69291202111*SS26",
+          "id_product": "55471",
+          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
+          "sku": "DX7906-100*SS26",
           "attributes": {
             "color": "біл",
             "size": "M"
           }
         },
         {
-          "id_product": "54354",
-          "name_product": "Футболка 69291202111*SS26 PUMA (ч)",
-          "sku": "69291202111*SS26",
+          "id_product": "55471",
+          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
+          "sku": "DX7906-100*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55471",
+          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
+          "sku": "DX7906-100*SS26",
           "attributes": {
             "color": "біл",
             "size": "XL"
           }
         },
         {
-          "id_product": "54354",
-          "name_product": "Футболка 69291202111*SS26 PUMA (ч)",
-          "sku": "69291202111*SS26",
+          "id_product": "55471",
+          "name_product": "Футболка DX7906-100*SS26 NIKE (ж)",
+          "sku": "DX7906-100*SS26",
           "attributes": {
             "color": "біл",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55472",
+          "name_product": "Футболка IH1121-236*SS26 NIKE (ч)",
+          "sku": "IH1121-236*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55472",
+          "name_product": "Футболка IH1121-236*SS26 NIKE (ч)",
+          "sku": "IH1121-236*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55472",
+          "name_product": "Футболка IH1121-236*SS26 NIKE (ч)",
+          "sku": "IH1121-236*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55472",
+          "name_product": "Футболка IH1121-236*SS26 NIKE (ч)",
+          "sku": "IH1121-236*SS26",
+          "attributes": {
+            "color": "беж.",
             "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55473",
+          "name_product": "Футболка IH7601-503*SS26 NIKE (ж)",
+          "sku": "IH7601-503*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55473",
+          "name_product": "Футболка IH7601-503*SS26 NIKE (ж)",
+          "sku": "IH7601-503*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55473",
+          "name_product": "Футболка IH7601-503*SS26 NIKE (ж)",
+          "sku": "IH7601-503*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55473",
+          "name_product": "Футболка IH7601-503*SS26 NIKE (ж)",
+          "sku": "IH7601-503*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55473",
+          "name_product": "Футболка IH7601-503*SS26 NIKE (ж)",
+          "sku": "IH7601-503*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55474",
+          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
+          "sku": "FN3859-051*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55474",
+          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
+          "sku": "FN3859-051*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55474",
+          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
+          "sku": "FN3859-051*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55474",
+          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
+          "sku": "FN3859-051*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55474",
+          "name_product": "Худі FN3859-051*SS26 NIKE (ч)",
+          "sku": "FN3859-051*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "XXL"
+          }
+        }
+      ]
+    },
+    "248": {
+      "brand_id": "248",
+      "brand_name": "Ganzo",
+      "metadata": {
+        "target_website": "https://ganzo.ua/search?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54367",
+          "name_product": "Мультитул G302-H Ganzo (a)",
+          "sku": "G302-H",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54368",
+          "name_product": "Ніж G806-BK з ножнами Ganzo (a)",
+          "sku": "G806-BK",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54369",
+          "name_product": "Ніж G806-GB з ножнами Ganzo (a)",
+          "sku": "G806-GB",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54370",
+          "name_product": "Ніж G806-OR з ножнами Ganzo (a)",
+          "sku": "G806-OR",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54372",
+          "name_product": "Ніж G807-DY з ножнами Ganzo (a)",
+          "sku": "G807DY",
+          "attributes": {
+            "color": "беж.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54373",
+          "name_product": "Ніж G807-GY з ножнами Ganzo (a)",
+          "sku": "G807GY",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54564",
+          "name_product": "Ніж G8012V2-OR Ganzo (а)",
+          "sku": "G8012V2-OR",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        }
+      ]
+    },
+    "43": {
+      "brand_id": "43",
+      "brand_name": "Adidas",
+      "metadata": {
+        "target_website": "https://www.adidas.ua/search?s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55225",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Trefoil Fleece IY8520",
+          "sku": "IY8520*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55226",
+          "name_product": "Шорти жіночі ADIDAS Z.N.E. JE7845",
+          "sku": "JE7845*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55227",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1113",
+          "sku": "JF1113*SS26 ",
+          "attributes": {
+            "color": "хакі",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55228",
+          "name_product": "Шорти чоловічі ADIDAS Essentials Small Logo Chelsea JF1117",
+          "sku": "JF1117*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55229",
+          "name_product": "Шорти жіночі ADIDAS W ALL SZN SL SH JV9876",
+          "sku": "JV9876*SS26",
+          "attributes": {
+            "color": "молоч.",
+            "size": "XS"
+          }
+        }
+      ]
+    },
+    "221": {
+      "brand_id": "221",
+      "brand_name": "camotec",
+      "metadata": {
+        "target_website": "https://camotec.ua/search/?searchString={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "53273",
+          "name_product": "Брюки Lizard 2.0 DW 9331 Camotec",
+          "sku": "9331_1111",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53274",
+          "name_product": "Брюки Lizard 2.0 DW 9339 Camotec",
+          "sku": "9339_1111",
+          "attributes": {
+            "color": "олив",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53275",
+          "name_product": "Брюки SoftShell Vent 3.0 9295 Camotec",
+          "sku": "9295_1111",
+          "attributes": {
+            "color": "мульт",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "53276",
+          "name_product": "Брюки Stalker Vent 3.0 SoftShell 9144 Camotec",
+          "sku": "9144",
+          "attributes": {
+            "color": "олив",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "53356",
+          "name_product": "Сорочка \"Буревій\" 9306 Camotec",
+          "sku": "9306",
+          "attributes": {
+            "color": "пісочн/біл",
+            "size": "L"
           }
         }
       ]
@@ -654,1221 +1815,6 @@
           "attributes": {
             "color": "чорн.",
             "size": "XL"
-          }
-        }
-      ]
-    },
-    "16": {
-      "brand_id": "16",
-      "brand_name": "New Balance",
-      "metadata": {
-        "target_website": "https://newbalance.ua/store?page=1&s={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "54309",
-          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
-          "sku": "MS41520AG*SS26",
-          "attributes": {
-            "color": "сірий",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54309",
-          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
-          "sku": "MS41520AG*SS26",
-          "attributes": {
-            "color": "сірий",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54309",
-          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
-          "sku": "MS41520AG*SS26",
-          "attributes": {
-            "color": "сірий",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54309",
-          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
-          "sku": "MS41520AG*SS26",
-          "attributes": {
-            "color": "сірий",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54309",
-          "name_product": "Шорти чоловічі New Balance  Sport Essentials French Terry 7'' MS41520AG",
-          "sku": "MS41520AG*SS26",
-          "attributes": {
-            "color": "сірий",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54436",
-          "name_product": "Кросівки ML574EVE*SS26 NB (ч)",
-          "sku": "ML574EVE*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "54436",
-          "name_product": "Кросівки ML574EVE*SS26 NB (ч)",
-          "sku": "ML574EVE*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "41.5"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "45.5"
-          }
-        },
-        {
-          "id_product": "54437",
-          "name_product": "Кросівки U5749X3*SS26 NB (ч)",
-          "sku": "U5749X3*SS26",
-          "attributes": {
-            "color": "сір/блак",
-            "size": "46.5"
-          }
-        },
-        {
-          "id_product": "54443",
-          "name_product": "Сумка LAB51531BK*SS26 NB",
-          "sku": "LAB51531BK*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "54444",
-          "name_product": "Футболка WT41502ABP*SS26 NB (ж)",
-          "sku": "WT41502ABP*SS26 ",
-          "attributes": {
-            "color": "кор.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54444",
-          "name_product": "Футболка WT41502ABP*SS26 NB (ж)",
-          "sku": "WT41502ABP*SS26 ",
-          "attributes": {
-            "color": "кор.",
-            "size": "XL"
-          }
-        }
-      ]
-    },
-    "15": {
-      "brand_id": "15",
-      "brand_name": "Nike",
-      "metadata": {
-        "target_website": "https://www.nike.com/fi/w?q={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53906",
-          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
-          "sku": "FN3868-010*AW26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "3XL"
-          }
-        },
-        {
-          "id_product": "53906",
-          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
-          "sku": "FN3868-010*AW26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "53906",
-          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
-          "sku": "FN3868-010*AW26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "53906",
-          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
-          "sku": "FN3868-010*AW26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "53906",
-          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
-          "sku": "FN3868-010*AW26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "53906",
-          "name_product": "Худі FN3868-010*AW26 NIKE (ч)",
-          "sku": "FN3868-010*AW26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "2XL"
-          }
-        },
-        {
-          "id_product": "54136",
-          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
-          "sku": "HV0959-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "2XL"
-          }
-        },
-        {
-          "id_product": "54136",
-          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
-          "sku": "HV0959-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54136",
-          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
-          "sku": "HV0959-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54136",
-          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
-          "sku": "HV0959-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54136",
-          "name_product": "Брюки HV0959-010*AW26 NIKE (ч)",
-          "sku": "HV0959-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "45.5"
-          }
-        },
-        {
-          "id_product": "54140",
-          "name_product": "Кросівки FN4322-005*AW26 NIKE (ч)",
-          "sku": "FN4322-005*AW26",
-          "attributes": {
-            "color": "чорн/сір",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "45.5"
-          }
-        },
-        {
-          "id_product": "54141",
-          "name_product": "Кросівки HF0263-001*AW26 NIKE (ч)",
-          "sku": "HF0263-001*AW26",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "54142",
-          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
-          "sku": "HV3698-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54142",
-          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
-          "sku": "HV3698-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54142",
-          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
-          "sku": "HV3698-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54142",
-          "name_product": "Фліс HV3698-010*AW26 NIKE (ж)",
-          "sku": "HV3698-010*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        }
-      ]
-    },
-    "53": {
-      "brand_id": "53",
-      "brand_name": "Saucony",
-      "metadata": {
-        "target_website": "https://saucony.kiev.ua/index.php?route=product/search&search={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "40"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "40.5"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "46316",
-          "name_product": "Кросівки чоловічі Saucony JAZZ ORIGINAL S2044-449",
-          "sku": "S2044-449*SS24",
-          "attributes": {
-            "color": "чорн/біл",
-            "size": "46.5"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "52595",
-          "name_product": "Кросівки чоловічі Saucony INTEGRITY METRO LE WIDE 21052-206",
-          "sku": "21052-206*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "52596",
-          "name_product": "Кросівки чоловічі Saucony 70665-56",
-          "sku": "70665-56*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "52964",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL 2044-725",
-          "sku": "2044-725*AW26",
-          "attributes": {
-            "color": "хакі",
-            "size": "46"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "42.5"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "43"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "44"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "44.5"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "45"
-          }
-        },
-        {
-          "id_product": "52965",
-          "name_product": "Кросівки Saucony JAZZ ORIGINAL  2044-727",
-          "sku": "2044-727*AW26",
-          "attributes": {
-            "color": "т.сір./чорн",
-            "size": "46"
-          }
-        }
-      ]
-    },
-    "25": {
-      "brand_id": "25",
-      "brand_name": "Joma",
-      "metadata": {
-        "target_website": "https://joma.ua/search/?q={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53740",
-          "name_product": "Футболка Joma FLAG II 101465.102",
-          "sku": "101465.102-AW26",
-          "attributes": {
-            "color": "чорн/бiл",
-            "size": "2XS"
-          }
-        },
-        {
-          "id_product": "54521",
-          "name_product": "Гетри 400054.060*SS26 JOMA",
-          "sku": "400054.060*SS26",
-          "attributes": {
-            "color": "лимон.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54521",
-          "name_product": "Гетри 400054.060*SS26 JOMA",
-          "sku": "400054.060*SS26",
-          "attributes": {
-            "color": "лимон.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54521",
-          "name_product": "Гетри 400054.060*SS26 JOMA",
-          "sku": "400054.060*SS26",
-          "attributes": {
-            "color": "лимон.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54535",
-          "name_product": "Шкарпетки 400027.P01*SS26 JOMA",
-          "sku": "400027.P01*SS26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "39/42"
-          }
-        },
-        {
-          "id_product": "54535",
-          "name_product": "Шкарпетки 400027.P01*SS26 JOMA",
-          "sku": "400027.P01*SS26 ",
-          "attributes": {
-            "color": "чорн.",
-            "size": "43/46"
-          }
-        },
-        {
-          "id_product": "54537",
-          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
-          "sku": "400032.P01*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "35/38"
-          }
-        },
-        {
-          "id_product": "54537",
-          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
-          "sku": "400032.P01*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "39/42"
-          }
-        },
-        {
-          "id_product": "54537",
-          "name_product": "Шкарпетки 400032.P01*SS26 JOMA",
-          "sku": "400032.P01*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "43/46"
-          }
-        },
-        {
-          "id_product": "54543",
-          "name_product": "Щитки 401488.269*SS26 JOMA",
-          "sku": "401488.269*SS26",
-          "attributes": {
-            "color": "сір.",
-            "size": "M"
-          }
-        }
-      ]
-    },
-    "43": {
-      "brand_id": "43",
-      "brand_name": "Adidas",
-      "metadata": {
-        "target_website": "https://www.adidas.ua/search?s={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "54431",
-          "name_product": "Футболка ADIDAS жіноча Future Icons 3-Stripes JE0237",
-          "sku": "JE0237*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54431",
-          "name_product": "Футболка ADIDAS жіноча Future Icons 3-Stripes JE0237",
-          "sku": "JE0237*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54431",
-          "name_product": "Футболка ADIDAS жіноча Future Icons 3-Stripes JE0237",
-          "sku": "JE0237*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54431",
-          "name_product": "Футболка ADIDAS жіноча Future Icons 3-Stripes JE0237",
-          "sku": "JE0237*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XS"
-          }
-        },
-        {
-          "id_product": "54432",
-          "name_product": "Футболка ADIDAS  жіноча Future Icons 3-Stripes JE0238",
-          "sku": "JE0238*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54432",
-          "name_product": "Футболка ADIDAS  жіноча Future Icons 3-Stripes JE0238",
-          "sku": "JE0238*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54432",
-          "name_product": "Футболка ADIDAS  жіноча Future Icons 3-Stripes JE0238",
-          "sku": "JE0238*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54432",
-          "name_product": "Футболка ADIDAS  жіноча Future Icons 3-Stripes JE0238",
-          "sku": "JE0238*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54432",
-          "name_product": "Футболка ADIDAS  жіноча Future Icons 3-Stripes JE0238",
-          "sku": "JE0238*SS26",
-          "attributes": {
-            "color": "біл",
-            "size": "XS"
-          }
-        },
-        {
-          "id_product": "54433",
-          "name_product": "Футболка чоловіча ADIDAS  TERREX MOUNTAIN  KB9601",
-          "sku": "KB9601*SS26 ",
-          "attributes": {
-            "color": "молоч.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54433",
-          "name_product": "Футболка чоловіча ADIDAS  TERREX MOUNTAIN  KB9601",
-          "sku": "KB9601*SS26 ",
-          "attributes": {
-            "color": "молоч.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54433",
-          "name_product": "Футболка чоловіча ADIDAS  TERREX MOUNTAIN  KB9601",
-          "sku": "KB9601*SS26 ",
-          "attributes": {
-            "color": "молоч.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54433",
-          "name_product": "Футболка чоловіча ADIDAS  TERREX MOUNTAIN  KB9601",
-          "sku": "KB9601*SS26 ",
-          "attributes": {
-            "color": "молоч.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54433",
-          "name_product": "Футболка чоловіча ADIDAS  TERREX MOUNTAIN  KB9601",
-          "sku": "KB9601*SS26 ",
-          "attributes": {
-            "color": "молоч.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54435",
-          "name_product": "Шорти чоловічі ADIDAS  2в1 adi365 Running Essentials KA4331",
-          "sku": "KA4331*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54435",
-          "name_product": "Шорти чоловічі ADIDAS  2в1 adi365 Running Essentials KA4331",
-          "sku": "KA4331*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54435",
-          "name_product": "Шорти чоловічі ADIDAS  2в1 adi365 Running Essentials KA4331",
-          "sku": "KA4331*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54435",
-          "name_product": "Шорти чоловічі ADIDAS  2в1 adi365 Running Essentials KA4331",
-          "sku": "KA4331*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54435",
-          "name_product": "Шорти чоловічі ADIDAS  2в1 adi365 Running Essentials KA4331",
-          "sku": "KA4331*SS26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54493",
-          "name_product": "Балетки ADIDAS  Samba OG JR1402",
-          "sku": "JR1402*SS26 ",
-          "attributes": {
-            "color": "білий",
-            "size": "36"
-          }
-        },
-        {
-          "id_product": "54493",
-          "name_product": "Балетки ADIDAS  Samba OG JR1402",
-          "sku": "JR1402*SS26 ",
-          "attributes": {
-            "color": "білий",
-            "size": "37 1/3"
-          }
-        },
-        {
-          "id_product": "54493",
-          "name_product": "Балетки ADIDAS  Samba OG JR1402",
-          "sku": "JR1402*SS26 ",
-          "attributes": {
-            "color": "білий",
-            "size": "38 2/3"
-          }
-        },
-        {
-          "id_product": "54493",
-          "name_product": "Балетки ADIDAS  Samba OG JR1402",
-          "sku": "JR1402*SS26 ",
-          "attributes": {
-            "color": "білий",
-            "size": "38"
-          }
-        },
-        {
-          "id_product": "54493",
-          "name_product": "Балетки ADIDAS  Samba OG JR1402",
-          "sku": "JR1402*SS26 ",
-          "attributes": {
-            "color": "білий",
-            "size": "39 1/3"
-          }
-        },
-        {
-          "id_product": "54493",
-          "name_product": "Балетки ADIDAS  Samba OG JR1402",
-          "sku": "JR1402*SS26 ",
-          "attributes": {
-            "color": "білий",
-            "size": "40 2/3"
-          }
-        },
-        {
-          "id_product": "54493",
-          "name_product": "Балетки ADIDAS  Samba OG JR1402",
-          "sku": "JR1402*SS26 ",
-          "attributes": {
-            "color": "білий",
-            "size": "40"
           }
         }
       ]
