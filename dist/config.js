@@ -23,7 +23,7 @@ exports.config = {
     },
     data: {
         // resultsFolder: 'results/all_brands_test',
-        resultsFolder: 'results/new_balance/new_balance_test',
+        resultsFolder: 'results/joma/joma_test',
         // resultsFolder: 'results/fenix/fenix_test',
         // resultsFolder: 'results/m-tac/militarist_test_1',
         // resultsFolder: 'results/camotec/camotec_test',
@@ -34,7 +34,7 @@ exports.config = {
         // resultsFolder: 'results/under_armour/under_armour_prod',
         // resultsFolder: 'results/salomon/salomon_test',
         // resultsFolder: 'results/nike/nike_prod',
-        taskPath: 'src/data/tasks/new_balance/new_balance_tests.json',
+        taskPath: 'src/data/tasks/joma/joma_test_short.json',
         // taskPath: 'src/data/tasks/m-tac/militarist_test.json',
         // taskPath: 'src/data/tasks/camotec/camotec_test.json',
         // taskPath: 'src/data/tasks/everlast/everlast_test.json',

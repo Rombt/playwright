@@ -37,7 +37,7 @@ export default class DefaultSearchResultsStrategy
     try {
       const result = await Promise.any([
         link
-          // для new_balance нужен именно attached
+          // на некоторых сайтах ссылка не видна(!)
           .waitFor({ state: 'attached', timeout: ctx.appConfig.asyncRetry.maxDelay })
           .then(() => 'link'),
         empty

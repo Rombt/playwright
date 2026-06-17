@@ -14,8 +14,6 @@
     Злий борсук,
     columbia,
     jack wolfskin,
-    new balance,
-    joma,
     salomon,
     svastone
 
@@ -28,6 +26,8 @@
     Camotec,
     m-tac,
     fenix,
+    new balance,
+    joma,
 
 Бренды которые нужно обработать
     Алексей
@@ -37,7 +37,7 @@
         ++ New Balance - 2000 од.
         ++ Nike - 800 од.
         ++ Under Armour  - 800 од.
-        +- Joma - 400 од.
+        ++ Joma - 400 од.
         Viking -   300 од.
         +- Salomon - 200 од.
         Капа (взуття) - 250 од.
