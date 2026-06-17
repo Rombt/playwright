@@ -56,7 +56,7 @@ exports.config = {
     browser: {
         fingerprintFile: './fingerprint.config.json',
         mode: 'fake',
-        // downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
+        downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
     },
     //
     logger: {

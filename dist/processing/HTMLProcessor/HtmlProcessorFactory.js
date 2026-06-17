@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HtmlProcessorFactory = void 0;
+const DefaultProcessor_1 = require("./processors/DefaultProcessor");
 const MilitaristProcessor_1 = require("./processors/MilitaristProcessor");
 const GanzoProcessor_1 = require("./processors/GanzoProcessor");
 const CamotecProcessor_1 = require("./processors/CamotecProcessor");
@@ -13,9 +14,6 @@ const AvecsProcessor_1 = require("./processors/AvecsProcessor");
 const AdidasProcessor_1 = require("./processors/AdidasProcessor");
 const NewBalanceProcessor_1 = require("./processors/NewBalanceProcessor");
 const JomaProcessor_1 = require("./processors/JomaProcessor");
-const SalomonProcessor_1 = require("./processors/SalomonProcessor");
-const SvastoneProcessor_1 = require("./processors/SvastoneProcessor");
-const FenixProcessor_1 = require("./processors/FenixProcessor");
 class HtmlProcessorFactory {
     processors = {
         // 'm-tac': MTacProcessor,  //todo придумать как обрабатывать один бренд разными процессами
@@ -31,12 +29,14 @@ class HtmlProcessorFactory {
         adidas: AdidasProcessor_1.AdidasProcessor,
         'new balance': NewBalanceProcessor_1.NewBalanceProcessor,
         joma: JomaProcessor_1.JomaProcessor,
-        salomon: SalomonProcessor_1.SalomonProcessor,
-        svastone: SvastoneProcessor_1.SvastoneProcessor,
-        fenix: FenixProcessor_1.FenixProcessor,
+        // тестирую DefaultProcessor.ts
+        // salomon: SalomonProcessor,
+        // svastone: SvastoneProcessor,
+        // fenix: FenixProcessor,
     };
     create(brand) {
-        const ProcessorClass = this.processors[brand.toLowerCase()];
+        // const ProcessorClass = this.processors[brand.toLowerCase()];
+        const ProcessorClass = this.processors[brand.toLowerCase()] ?? DefaultProcessor_1.DefaultProcessor;
         if (!ProcessorClass) {
             throw new Error(`Unsupported brand: ${brand}`);
         }

@@ -2,6 +2,7 @@ import { IHtmlProcessorFactory } from './types/IHtmlProcessorFactory';
 import { IBaseHtmlProcessor } from './types/IBaseHtmlProcessor';
 import { Site } from './types/Site';
 
+import { DefaultProcessor } from './processors/DefaultProcessor';
 import { MTacProcessor } from './processors/MTacProcessor';
 import { MilitaristProcessor } from './processors/MilitaristProcessor';
 import { GanzoProcessor } from './processors/GanzoProcessor';
@@ -34,13 +35,16 @@ export class HtmlProcessorFactory implements IHtmlProcessorFactory {
     adidas: AdidasProcessor,
     'new balance': NewBalanceProcessor,
     joma: JomaProcessor,
-    salomon: SalomonProcessor,
-    svastone: SvastoneProcessor,
-    fenix: FenixProcessor,
+
+    // тестирую DefaultProcessor.ts
+    // salomon: SalomonProcessor,
+    // svastone: SvastoneProcessor,
+    // fenix: FenixProcessor,
   };
 
   public create(brand: string): IBaseHtmlProcessor {
-    const ProcessorClass = this.processors[brand.toLowerCase()];
+    // const ProcessorClass = this.processors[brand.toLowerCase()];
+    const ProcessorClass = this.processors[brand.toLowerCase()] ?? DefaultProcessor;
 
     if (!ProcessorClass) {
       throw new Error(`Unsupported brand: ${brand}`);
