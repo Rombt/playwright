@@ -34,7 +34,7 @@
         ++ Puma - 3000 од. 
         ++ Adidas - 3000 од.
         -- 4F - 2700 од.
-        +- New balance - 2000 од.
+        ++ New Balance - 2000 од.
         ++ Nike - 800 од.
         ++ Under Armour  - 800 од.
         +- Joma - 400 од.
@@ -45,8 +45,8 @@
         +- Jack Wolfskin  - 160 од.
         армані - 150 од.
         CMP - 150 ОД.
-        LEVIS (взуття підліток) - 60 од. 
         Лікупер (взуття) - 80 од.
+        LEVIS (взуття підліток) - 60 од. 
     Валерий
        !! https://fenix.ua/ua/search/?query=SW05R-UVL
         

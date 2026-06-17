@@ -21,7 +21,8 @@ export const config = {
 
   data: {
     // resultsFolder: 'results/all_brands_test',
-    resultsFolder: 'results/fenix/fenix_test',
+    resultsFolder: 'results/new_balance/new_balance_test',
+    // resultsFolder: 'results/fenix/fenix_test',
     // resultsFolder: 'results/m-tac/militarist_test_1',
     // resultsFolder: 'results/camotec/camotec_test',
     // resultsFolder: 'results/adidas/adidas_test',
@@ -32,7 +33,7 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/fenix/fenix_test.json',
+    taskPath: 'src/data/tasks/new_balance/new_balance_tests.json',
     // taskPath: 'src/data/tasks/m-tac/militarist_test.json',
     // taskPath: 'src/data/tasks/camotec/camotec_test.json',
     // taskPath: 'src/data/tasks/everlast/everlast_test.json',
@@ -56,7 +57,7 @@ export const config = {
   browser: {
     fingerprintFile: './fingerprint.config.json',
     mode: 'fake',
-    downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
+    // downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
   },
   //
   logger: {

@@ -28,7 +28,6 @@ export default class DefaultSearchResultsStrategy
     }
 
     const link = page.locator(params.linkSelector).first();
-    // const empty = page.locator(params.emptySelector ?? '.view-empty');
     const empty = params.emptySelectorText
       ? page
           .locator(params.emptySelector ?? '.view-empty')
@@ -38,18 +37,27 @@ export default class DefaultSearchResultsStrategy
     try {
       const result = await Promise.any([
         link
-          .waitFor({ state: 'visible', timeout: ctx.appConfig.asyncRetry.maxDelay })
+          // для new_balance нужен именно attached
+          .waitFor({ state: 'attached', timeout: ctx.appConfig.asyncRetry.maxDelay })
           .then(() => 'link'),
         empty
           .waitFor({ state: 'visible', timeout: ctx.appConfig.asyncRetry.maxDelay })
           .then(() => 'empty'),
       ]);
-    } catch {
+    } catch (e) {
+      // if (e instanceof AggregateError) {
+      //   ctx.logger?.debug('************************', {
+      //     component: '',
+      //     method: '',
+      //     action: '',
+      //     data: {
+      //       e: e.errors,
+      //     },
+      //   });
+      // }
+
       throw new Error(`Search result not resolved. ${ctx.input.sku}`);
     }
-
-
-
 
     if ((await empty.count()) > 0) {
       throw new Error(`Goods not found on the page. ${ctx.input.sku}`);
