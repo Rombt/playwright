@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-06-19_16-03",
+  "task": {
+    "318": {
+      "brand_id": "318",
+      "brand_name": "SRM",
+      "metadata": {
+        "target_website": "https://srmknives.com.ua/search?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "56087",
+          "name_product": "Ніж скл-й SRM Retriever 9203-AK (a)",
+          "sku": "9203-AK",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56089",
+          "name_product": "Ніж складаний SRM Dome 106M-GK (a)",
+          "sku": "106M-GK",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56091",
+          "name_product": "Ніж складаний SRM Medal 255L-GP2 (a)",
+          "sku": "255L-GP2",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56092",
+          "name_product": "Ніж складний SRM Air 105M-GJ (а)",
+          "sku": "105M-GJ",
+          "attributes": {
+            "color": "помар.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

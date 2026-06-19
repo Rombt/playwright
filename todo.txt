@@ -28,6 +28,7 @@
     new balance,
     joma,
     jack wolfskin,
+    srm,
 
 Бренды которые нужно обработать
     Алексей
@@ -48,7 +49,8 @@
         -- Лікупер (взуття) - 80 од.
         -- LEVIS (взуття підліток) - 60 од. 
     Валерий
-       !! https://fenix.ua/ua/search/?query=SW05R-UVL
+       ++ https://fenix.ua/ua/search/?query=SW05R-UVL
+       ++ https://srmknives.com.ua/search?search=9203-AK
         
 
 
