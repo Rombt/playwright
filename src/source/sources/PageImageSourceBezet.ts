@@ -17,17 +17,17 @@ import { IExtractHtmlOptions } from '../../common/helpers';
 
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
-    return new PageImageSourceKiborg(deps.flowRunner);
+    return new PageImageSourceBezet(deps.flowRunner);
   },
 };
 
-class PageImageSourceKiborg implements ISource<ICollectProductPhotosTask> {
+class PageImageSourceBezet implements ISource<ICollectProductPhotosTask> {
   constructor(
     private flowRunner: IFlowRunner, // private logger: ILogger,
   ) {}
 
   supports(task: ICollectProductPhotosTask): boolean {
-    return task.metadata.target_website === 'https://kiborg.com.ua/ru/asearch/?search={{sku_prod}}';
+    return task.metadata.target_website === 'https://www.bezet.com.ua/search?s={{sku_prod}}';
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
@@ -36,14 +36,21 @@ class PageImageSourceKiborg implements ISource<ICollectProductPhotosTask> {
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: ' div.sc-module-img.position-relative > a',
-          emptySelector: 'h1',
-          emptySelectorText: 'Не знайдено жодного товару',
+          linkSelector: ' div.product > div.image > a',
+          emptySelector:
+            'body > div.container-fluid.maincatalog.search-results > div:nth-child(2) > div > p > b',
+          emptySelectorText: 'За цим запитом нічого не знайдено',
         },
       ],
       //
-      [CheckPageSkuStep, { pageSkuSelector: 'div.sc-product-info-item' }],
-      [SearchGalleryStep, { gallerySelector: 'div.sc-product-images-main' }],
+      [
+        CheckPageSkuStep,
+        { pageSkuSelector: '#single-product > div.row.gallery > div.col-5 > span' },
+      ],
+      [
+        SearchGalleryStep,
+        { gallerySelector: '#single-product > div.row.gallery > div.col-7 > div' },
+      ],
       [
         CollectImgStep,
         {
@@ -55,8 +62,8 @@ class PageImageSourceKiborg implements ISource<ICollectProductPhotosTask> {
       [
         CollectDescriptionStep,
         {
-          containers: ['.sc-product-content-description'],
-          removeSelectors: ['div.sc-product-content-title', 'p.sc-product-tags'],
+          containers: ['#desc'],
+          removeSelectors: ['h2'],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,
@@ -68,8 +75,8 @@ class PageImageSourceKiborg implements ISource<ICollectProductPhotosTask> {
 
     await this.flowRunner.run(startStep, ctx);
 
-    ctx.logger?.debug('Processing of the PageImageSourceKiborg is finished', {
-      component: 'PageImageSourceKiborg',
+    ctx.logger?.debug('Processing of the PageImageSourceBezet is finished', {
+      component: 'PageImageSourceBezet',
       method: 'execute()',
       action: 'await this.flowRunner.run(startStep, ctx)',
       data: {

@@ -8,7 +8,6 @@
    На англоязычных источниках тоже собирать описания, менеджеры будут его переводить в ручную
 
 Бренды готовые к обработке в v-1:
-    bezet,
     BRS,
     Злий борсук,
     columbia,
@@ -19,16 +18,17 @@
     Puma,
     Under Armour,
     Nike,
-    Ganzo,
     Adidas,
     Camotec,
-    m-tac,
-    fenix,
     new balance,
     joma,
     jack wolfskin,
+    m-tac,
+    ganzo,
+    fenix,
     srm,
     kiborg,
+    bezet,
 
 Бренды которые нужно обработать
     Алексей

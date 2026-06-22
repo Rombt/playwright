@@ -8,7 +8,6 @@ import { MilitaristProcessor } from './processors/MilitaristProcessor';
 import { GanzoProcessor } from './processors/GanzoProcessor';
 import { CamotecProcessor } from './processors/CamotecProcessor';
 import { KiborgProcessor } from './processors/KiborgProcessor';
-import { BezetProcessor } from './processors/BezetProcessor';
 import { ColumbiaProcessor } from './processors/ColumbiaProcessor';
 import { BRSProcessor } from './processors/BRSProcessor';
 import { PumaProcessor } from './processors/PumaProcessor';
@@ -18,7 +17,6 @@ import { NewBalanceProcessor } from './processors/NewBalanceProcessor';
 import { JomaProcessor } from './processors/JomaProcessor';
 import { SalomonProcessor } from './processors/SalomonProcessor';
 import { SvastoneProcessor } from './processors/SvastoneProcessor';
-import { FenixProcessor } from './processors/FenixProcessor';
 
 export class HtmlProcessorFactory implements IHtmlProcessorFactory {
   private processors: Record<string, new () => IBaseHtmlProcessor> = {
@@ -27,7 +25,6 @@ export class HtmlProcessorFactory implements IHtmlProcessorFactory {
     ganzo: GanzoProcessor,
     camotec: CamotecProcessor,
     kiborg: KiborgProcessor,
-    bezet: BezetProcessor,
     columbia: ColumbiaProcessor,
     brs: BRSProcessor,
     puma: PumaProcessor,

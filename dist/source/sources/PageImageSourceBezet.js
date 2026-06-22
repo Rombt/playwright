@@ -7,16 +7,16 @@ const CollectImgStep_1 = require("../steps/collectElements/CollectImgStep");
 const CollectDescriptionStep_1 = require("../steps/collectElements/CollectDescriptionStep");
 exports.default = {
     create(deps) {
-        return new PageImageSourceKiborg(deps.flowRunner);
+        return new PageImageSourceBezet(deps.flowRunner);
     },
 };
-class PageImageSourceKiborg {
+class PageImageSourceBezet {
     flowRunner;
     constructor(flowRunner) {
         this.flowRunner = flowRunner;
     }
     supports(task) {
-        return task.metadata.target_website === 'https://kiborg.com.ua/ru/asearch/?search={{sku_prod}}';
+        return task.metadata.target_website === 'https://www.bezet.com.ua/search?s={{sku_prod}}';
     }
     async execute(ctx) {
         ctx.stepParams = new Map([
@@ -24,14 +24,20 @@ class PageImageSourceKiborg {
                 CheckSearchResultsStep_1.default,
                 {
                     strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: ' div.sc-module-img.position-relative > a',
-                    emptySelector: 'h1',
-                    emptySelectorText: 'Не знайдено жодного товару',
+                    linkSelector: ' div.product > div.image > a',
+                    emptySelector: 'body > div.container-fluid.maincatalog.search-results > div:nth-child(2) > div > p > b',
+                    emptySelectorText: 'За цим запитом нічого не знайдено',
                 },
             ],
             //
-            [CheckPageSkuStep_1.default, { pageSkuSelector: 'div.sc-product-info-item' }],
-            [SearchGalleryStep_1.default, { gallerySelector: 'div.sc-product-images-main' }],
+            [
+                CheckPageSkuStep_1.default,
+                { pageSkuSelector: '#single-product > div.row.gallery > div.col-5 > span' },
+            ],
+            [
+                SearchGalleryStep_1.default,
+                { gallerySelector: '#single-product > div.row.gallery > div.col-7 > div' },
+            ],
             [
                 CollectImgStep_1.default,
                 {
@@ -42,8 +48,8 @@ class PageImageSourceKiborg {
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['.sc-product-content-description'],
-                    removeSelectors: ['div.sc-product-content-title', 'p.sc-product-tags'],
+                    containers: ['#desc'],
+                    removeSelectors: ['h2'],
                     expand: false,
                     separator: '\n',
                 },
@@ -52,8 +58,8 @@ class PageImageSourceKiborg {
         ]);
         const startStep = ctx.stepFactory.create('OpenSearchPageStep');
         await this.flowRunner.run(startStep, ctx);
-        ctx.logger?.debug('Processing of the PageImageSourceKiborg is finished', {
-            component: 'PageImageSourceKiborg',
+        ctx.logger?.debug('Processing of the PageImageSourceBezet is finished', {
+            component: 'PageImageSourceBezet',
             method: 'execute()',
             action: 'await this.flowRunner.run(startStep, ctx)',
             data: {
