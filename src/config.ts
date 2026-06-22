@@ -21,7 +21,8 @@ export const config = {
 
   data: {
     // resultsFolder: 'results/all_brands_test',
-    resultsFolder: 'results/srm/srm_test',
+    resultsFolder: 'results/kiborg/kiborg_test',
+    // resultsFolder: 'results/srm/srm_test',
     // resultsFolder: 'results/jack_wolfskin/jack_wolfskin_test',
     // resultsFolder: 'results/joma/joma_test',
     // resultsFolder: 'results/fenix/fenix_test',
@@ -35,7 +36,8 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/srm/srm_test.json',
+    taskPath: 'src/data/tasks/kiborg/kiborg_test.json',
+    // taskPath: 'src/data/tasks/srm/srm_test.json',
     // taskPath: 'src/data/tasks/joma/joma_test_short.json',
     // taskPath: 'src/data/tasks/m-tac/militarist_test.json',
     // taskPath: 'src/data/tasks/camotec/camotec_test.json',
