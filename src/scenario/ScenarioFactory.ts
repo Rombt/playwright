@@ -2,7 +2,7 @@ import { PlaywrightBrowser } from '../browser/playwright/PlaywrightBrowser';
 import { FileStorage } from '../storage/fs/FileStorage';
 
 import { DefaultScenario } from './scenarios/DefaultScenario';
-import { RozetkaScenario } from './scenarios/RozetkaScenario';
+// import { RozetkaScenario } from './scenarios/RozetkaScenario';
 
 type ScenarioConstructor = new (
   browser: PlaywrightBrowser,
@@ -13,7 +13,7 @@ type ScenarioConstructor = new (
 export class ScenarioFactory {
   private static registry: Record<string, ScenarioConstructor> = {
     default: DefaultScenario,
-    rozetka: RozetkaScenario,
+    // rozetka: RozetkaScenario,
   };
 
   static create(name: string, browser: PlaywrightBrowser, storage: FileStorage, mode: string) {
