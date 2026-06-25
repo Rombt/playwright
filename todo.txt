@@ -29,6 +29,10 @@
     bezet,
     BRS,
     Злий борсук,
+    Brand Element,
+
+Черновики
+    columbia, - анти боты на сайте
 
 Бренды которые нужно обработать
     Алексей
@@ -51,6 +55,7 @@
     Валерий
        ++ https://fenix.ua/ua/search/?query=SW05R-UVL
        ++ https://srmknives.com.ua/search?search=9203-AK
+       -- https://belement.net/search?order=product.position.desc&s=S-249
         
 
 

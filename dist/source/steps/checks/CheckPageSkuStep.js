@@ -21,18 +21,18 @@ class CheckPageSkuStep extends BaseStep_1.BaseStep {
             data: {
                 ctx: ctx,
                 pageSkuSelector: pageSkuSelector,
+                ctxInputNormalizedSku: ctx.input.normalizedSku,
             },
         });
         try {
-            const page_sku = page.locator(pageSkuSelector, {
-                hasText: `${ctx.input.normalizedSku}`,
-            });
-            await page_sku.first().waitFor({
-                state: 'attached',
-                timeout: config.asyncRetry.maxDelay,
-            });
+            const pageSku = page.locator(pageSkuSelector);
+            await pageSku.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
+            const text = await pageSku.textContent();
+            if (!text?.includes(ctx.input.normalizedSku)) {
+                throw new Error(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
+            }
         }
-        catch {
+        catch (e) {
             ctx.control.stop = true;
             throw new Error(`The page is not match sku ${ctx.input.normalizedSku}`);
         }

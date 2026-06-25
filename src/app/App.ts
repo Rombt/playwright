@@ -2,7 +2,7 @@ import { PlaywrightBrowser } from '../browser/playwright/PlaywrightBrowser';
 import { FileStorage } from '../storage/fs/FileStorage';
 import { ITask } from '../data/entities/ITask';
 import { DefaultScenario } from '../scenario/scenarios/DefaultScenario';
-import { RozetkaScenario } from '../scenario/scenarios/RozetkaScenario';
+// import { RozetkaScenario } from '../scenario/scenarios/RozetkaScenario';
 
 import { LaunchOptions, BrowserContextOptions } from 'playwright';
 import { accessSync, readFileSync, constants } from 'node:fs';
@@ -134,8 +134,9 @@ export class App<BrowserOptions> {
         },
       });
 
-      const rozetkaScenario = new RozetkaScenario(browser, storage, this.mode);
-      await rozetkaScenario.run();
+      // todo RozetkaScenario не адаптирована для второй версии приложения
+      // const rozetkaScenario = new RozetkaScenario(browser, storage, this.mode);
+      // await rozetkaScenario.run();
     }
   }
 

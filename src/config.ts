@@ -20,8 +20,9 @@ export const config = {
   },
 
   data: {
+    resultsFolder: 'results/belement/belement_test',
     // resultsFolder: 'results/all_brands_test',
-    resultsFolder: 'results/columbia/columbia_test',
+    // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_test',
     // resultsFolder: 'results/bezet/bezet_test',
     // resultsFolder: 'results/kiborg/kiborg_test',
@@ -39,7 +40,8 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/columbia/columbia_test.json',
+    taskPath: 'src/data/tasks/belement/belement_test.json',
+    // taskPath: 'src/data/tasks/columbia/columbia_test.json',
     // taskPath: 'src/data/tasks/brs/brs_test.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test.json',
     // taskPath: 'src/data/tasks/kiborg/kiborg_test.json',

@@ -1,0 +1,104 @@
+{
+  "generated_at": "2026-06-16_15-21",
+  "task": {
+    "319": {
+      "brand_id": "319",
+      "brand_name": "Вelement",
+      "metadata": {
+        "target_website": "https://belement.net/search?s={{sku_prod}}&kategorii=pvh-shevroni"
+      },
+      "products": [
+        {
+          "id_product": "56097",
+          "name_product": "Шеврон Leopard 2 BE-853",
+          "sku": "BE-853",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56098",
+          "name_product": "Шеврон Leopard 2 Вогонь BE-851",
+          "sku": "BE-851",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56099",
+          "name_product": "Шеврон MAXXPRO 2.0 BE-854",
+          "sku": "BE-854",
+          "attributes": {
+            "color": "ол.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56100",
+          "name_product": "Шеврон MAXXPRO BE-855",
+          "sku": "BE-855",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56101",
+          "name_product": "Шеврон MAXXPRO Малюнок BE-857",
+          "sku": "BE-857",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56102",
+          "name_product": "Шеврон БМП BE-858",
+          "sku": "BE-858",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56103",
+          "name_product": "Шеврон Бойова техніка BE-856",
+          "sku": "BE-856",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56104",
+          "name_product": "Шеврон Жta Констаха BE-907",
+          "sku": "BE-907",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56105",
+          "name_product": "Шеврон Козак 2 BE-852",
+          "sku": "BE-852",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56106",
+          "name_product": "Шеврон Миколаїв BE-287-1",
+          "sku": "BE-287-1",
+          "attributes": {
+            "color": "кольор.",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

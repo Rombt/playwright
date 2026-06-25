@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const PlaywrightBrowser_1 = require("../browser/playwright/PlaywrightBrowser");
 const FileStorage_1 = require("../storage/fs/FileStorage");
-const RozetkaScenario_1 = require("../scenario/scenarios/RozetkaScenario");
 const node_fs_1 = require("node:fs");
 const appConfig_1 = require("../data/config/appConfig");
 const UnprocessedCollector_1 = require("../data/collectors/UnprocessedCollector");
@@ -114,8 +113,9 @@ class App {
                     storage: storage,
                 },
             });
-            const rozetkaScenario = new RozetkaScenario_1.RozetkaScenario(browser, storage, this.mode);
-            await rozetkaScenario.run();
+            // todo RozetkaScenario не адаптирована для второй версии приложения
+            // const rozetkaScenario = new RozetkaScenario(browser, storage, this.mode);
+            // await rozetkaScenario.run();
         }
     }
     async getBrowserOptions() { }

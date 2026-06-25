@@ -7,47 +7,41 @@ const CollectImgStep_1 = require("../steps/collectElements/CollectImgStep");
 const CollectDescriptionStep_1 = require("../steps/collectElements/CollectDescriptionStep");
 exports.default = {
     create(deps) {
-        return new PageImageSourceEverlast(deps.flowRunner);
+        return new PageImageSourceВelement(deps.flowRunner);
     },
 };
-class PageImageSourceEverlast {
+class PageImageSourceВelement {
     flowRunner;
     constructor(flowRunner) {
         this.flowRunner = flowRunner;
     }
     supports(task) {
-        return task.metadata.target_website === 'https://intersport.ua/ru/catalog?search={{sku_prod}}';
+        return (task.metadata.target_website ===
+            'https://belement.net/search?s={{sku_prod}}&kategorii=pvh-shevroni');
     }
     async execute(ctx) {
         ctx.stepParams = new Map([
             [
                 CheckSearchResultsStep_1.default,
                 {
-                    strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: 'Product_top__7abSb > a',
-                    emptySelector: '',
+                    strategy: 'FuzzyProductNameSearchResultsStrategy',
+                    linkSelector: 'article > div.product_desc > a',
                 },
             ],
+            [CheckPageSkuStep_1.default, { pageSkuSelector: '#product-details > div.product-reference > span' }],
+            [SearchGalleryStep_1.default, { gallerySelector: 'section#content' }],
             [
-                CheckPageSkuStep_1.default,
-                { pageSkuSelector: 'div.product-full__code div.field-product-vendor-code__item' },
-            ],
-            [
-                SearchGalleryStep_1.default,
+                CollectImgStep_1.default,
                 {
-                    gallerySelector: '#block-personal-content > div > div > div > div.product-full__top > div.product-full__top--left.product-full__top-item > div.product-full__gallery.swiper-arrow-style-2.swiper-arrow-style-min > div > div.product-gl__images',
+                    strategy: 'DefaultCollectImagesStrategy',
+                    stopProcessing: false,
                 },
             ],
-            CollectImgStep_1.default,
-            {
-                strategy: 'DefaultCollectImagesStrategy',
-                stopProcessing: true,
-            },
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['div.field-product-desc__item.field__item'],
-                    removeSelectors: ['h2', 'div.video'],
+                    containers: ['#description', '#overview'],
+                    removeSelectors: [],
                     expand: false,
                     separator: '\n',
                 },
@@ -56,8 +50,8 @@ class PageImageSourceEverlast {
         ]);
         const startStep = ctx.stepFactory.create('OpenSearchPageStep');
         await this.flowRunner.run(startStep, ctx);
-        ctx.logger?.debug('Processing of the PageImageSourceEverlast is finished', {
-            component: 'PageImageSourceEverlast',
+        ctx.logger?.debug('Processing of the PageImageSourceВelement is finished', {
+            component: 'PageImageSourceВelement',
             method: 'execute()',
             action: 'await this.flowRunner.run(startStep, ctx)',
             data: {
