@@ -25,14 +25,17 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'off',
+    // Блокируем Service Workers глобально
+    serviceWorkers: 'block',
   },
+
 
   projects: [
     {
-      name: 'columbia',
-      testDir: 'tests/columbia',
-      use: { baseURL: 'https://www.columbia.com/' },
-       outputDir: 'test-results/columbia',
+      // name: 'columbia',
+      // testDir: 'tests/columbia',
+      // use: { baseURL: 'https://www.columbia.com/' },
+      //  outputDir: 'test-results/columbia',
     },
     // {
     //   name: 'site_2',
