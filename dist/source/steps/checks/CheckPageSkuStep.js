@@ -24,10 +24,10 @@ class CheckPageSkuStep extends BaseStep_1.BaseStep {
                 ctxInputNormalizedSku: ctx.input.normalizedSku,
             },
         });
+        const pageSku = page.locator(pageSkuSelector);
+        await pageSku.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
+        const text = await pageSku.textContent();
         try {
-            const pageSku = page.locator(pageSkuSelector);
-            await pageSku.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
-            const text = await pageSku.textContent();
             if (!text?.includes(ctx.input.normalizedSku)) {
                 throw new Error(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
             }
