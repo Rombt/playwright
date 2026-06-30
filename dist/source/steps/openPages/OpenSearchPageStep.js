@@ -25,6 +25,50 @@ class OpenSearchPageStep extends BaseStep_1.BaseStep {
         }
         const url = baseUrl.replace('{{sku_prod}}', sku);
         const waitUntil = params?.waitUntil ?? 'domcontentloaded';
+        // await ctx.page.route('**/*', (route) => {
+        //   const url = route.request().url();
+        //   if (url.includes('doubleclick.net') || url.includes('googlesyndication.com')) {
+        //     return route.abort();
+        //   }
+        //   return route.continue();
+        // });
+        await ctx.page.addStyleTag({
+            content: `
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0s !important;
+          transition-duration: 0s !important;
+        }
+      `,
+        });
+        await ctx.page.route('**/*', async (route) => {
+            const type = route.request().resourceType();
+            if (type === 'image' ||
+                type === 'font' ||
+                type === 'media' ||
+                route.request().resourceType() === 'websocket') {
+                await route.abort();
+                return;
+            }
+            await route.continue();
+        });
+        await ctx.page.route('**/*', async (route) => {
+            const url = route.request().url();
+            if (url.includes('google-analytics') ||
+                url.includes('googletagmanager') ||
+                url.includes('facebook.net') ||
+                url.includes('fbevents') ||
+                url.includes('doubleclick.net') ||
+                url.includes('googlesyndication.com') ||
+                url.includes('googleadservices.com') ||
+                url.includes('hotjar') ||
+                url.includes('clarity')) {
+                await route.abort();
+                return;
+            }
+            await route.continue();
+        });
         await ctx.page.goto(url, { waitUntil });
         // ctx.state.productUrl = url;
     }
