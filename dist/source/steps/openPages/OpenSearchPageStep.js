@@ -25,13 +25,7 @@ class OpenSearchPageStep extends BaseStep_1.BaseStep {
         }
         const url = baseUrl.replace('{{sku_prod}}', sku);
         const waitUntil = params?.waitUntil ?? 'domcontentloaded';
-        // await ctx.page.route('**/*', (route) => {
-        //   const url = route.request().url();
-        //   if (url.includes('doubleclick.net') || url.includes('googlesyndication.com')) {
-        //     return route.abort();
-        //   }
-        //   return route.continue();
-        // });
+        // для облегчения загрузки страницы отключаю всё не нужное
         await ctx.page.addStyleTag({
             content: `
         *,

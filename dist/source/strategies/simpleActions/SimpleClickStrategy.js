@@ -14,6 +14,9 @@ class SimpleClickStrategy {
     }
     async execute(ctx, params) {
         try {
+            if (!params.selector) {
+                throw new Error('SimpleClickStrategy. Selector is not defined in params');
+            }
             const el = ctx.page.locator(params.selector);
             await el.waitFor({ state: 'visible' });
             await el.click();
