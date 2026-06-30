@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseStep_1 = require("../../BaseStep");
+const helpers_1 = require("../../../common/helpers");
 class OpenProductPageStep extends BaseStep_1.BaseStep {
     name = 'OpenProductPageStep';
     stepConfig;
@@ -21,6 +22,8 @@ class OpenProductPageStep extends BaseStep_1.BaseStep {
                 urlProductPage = await strategy.execute(ctx, this.stepConfig);
             }
         }
+        // для облегчения загрузки страницы отключаю всё не нужное
+        await (0, helpers_1.optimizePageResources)(ctx);
         await ctx.page.goto(urlProductPage, { waitUntil: 'domcontentloaded' });
     }
     next(ctx) {

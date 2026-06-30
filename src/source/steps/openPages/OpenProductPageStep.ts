@@ -7,6 +7,7 @@ import { IProduct } from '../../../data/entities/IProduct';
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { IOpenProductPageParams } from '../../types/IOpenProductPageParams';
+import { optimizePageResources } from '../../../common/helpers';
 
 export default class OpenProductPageStep extends BaseStep {
   public readonly name = 'OpenProductPageStep';
@@ -25,9 +26,10 @@ export default class OpenProductPageStep extends BaseStep {
 
     this.stepConfig = ctx.stepParams?.get(OpenProductPageStep) as unknown as IOpenProductPageParams;
 
-
     if (this.stepConfig?.strategy) {
-      const strategy = ctx.strategyResolver.get<IOpenProductPageParams, string>(this.stepConfig.strategy);
+      const strategy = ctx.strategyResolver.get<IOpenProductPageParams, string>(
+        this.stepConfig.strategy,
+      );
 
       /**
        * для разных брендов могут понадобится разные стратегии,
@@ -37,8 +39,10 @@ export default class OpenProductPageStep extends BaseStep {
       if (this.stepConfig.strategy === 'GetUrlVariantPageStrategy' && strategy) {
         urlProductPage = await strategy.execute(ctx, this.stepConfig);
       }
-
     }
+
+    // для облегчения загрузки страницы отключаю всё не нужное
+    await optimizePageResources(ctx);
 
     await ctx.page.goto(urlProductPage, { waitUntil: 'domcontentloaded' });
   }

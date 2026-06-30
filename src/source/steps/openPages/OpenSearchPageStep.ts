@@ -5,6 +5,7 @@ import { normalizeSku, fullClearSku } from '../../../common/helpers';
 import { IProduct } from '../../../data/entities/IProduct';
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
+import { optimizePageResources } from '../../../common/helpers';
 
 type OpenSearchPageParams = {
   product?: IProduct;
@@ -48,53 +49,7 @@ export default class OpenSearchPageStep extends BaseStep {
 
 
     // для облегчения загрузки страницы отключаю всё не нужное
-    await ctx.page.addStyleTag({
-      content: `
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0s !important;
-          transition-duration: 0s !important;
-        }
-      `,
-    });
-
-    await ctx.page.route('**/*', async (route) => {
-      const type = route.request().resourceType();
-
-      if (
-        type === 'image' ||
-        type === 'font' ||
-        type === 'media' ||
-        route.request().resourceType() === 'websocket'
-      ) {
-        await route.abort();
-        return;
-      }
-
-      await route.continue();
-    });
-
-    await ctx.page.route('**/*', async (route) => {
-      const url = route.request().url();
-
-      if (
-        url.includes('google-analytics') ||
-        url.includes('googletagmanager') ||
-        url.includes('facebook.net') ||
-        url.includes('fbevents') ||
-        url.includes('doubleclick.net') ||
-        url.includes('googlesyndication.com') ||
-        url.includes('googleadservices.com') ||
-        url.includes('hotjar') ||
-        url.includes('clarity')
-      ) {
-        await route.abort();
-        return;
-      }
-
-      await route.continue();
-    });
+    await optimizePageResources(ctx);
 
     await ctx.page.goto(url, { waitUntil });
 
