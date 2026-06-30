@@ -12,6 +12,8 @@ import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectImgStep from '../steps/collectElements/CollectImgStep';
 import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
+import PreparationSearchPageStep from '../steps/preparationPage/PreparationSearchPageStep';
+import OpenSearchPageStep from '../steps/openPages/OpenSearchPageStep';
 
 import { IExtractHtmlOptions } from '../../common/helpers';
 
@@ -33,12 +35,33 @@ class PageImageSourceEmporioArmani implements ISource<ICollectProductPhotosTask>
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
     ctx.stepParams = new Map([
       [
+        OpenSearchPageStep,
+        {
+          nextStep: 'PreparationSearchPageStep',
+        },
+      ],
+
+      [
+        PreparationSearchPageStep,
+        {
+          // #ab-header-container > div > div > div.cta-left.hidden.lg\:block > ul > li.list-none > button
+          // openInputSelector: 'button.button-search[aria-label="Search"]',
+          openInputSelector: '#ab-header-container ul [aria-label="Search"]',
+          inputSelector: 'input#search',
+          strategy: 'InsertValueIntoInputStrategy',
+          useWaitForSystemToCoolDown: true,
+          maxDelay: 10000,
+          timeoutMs: 90000,
+          scrollIntoViewIfNeeded: false,
+        },
+      ],
+      [
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: 'div.card-body > a.s-image-wrapper',
-          emptySelector: 'h1',
-          emptySelectorText: 'Не знайдено жодного товару',
+          linkSelector: `a[href*="${ctx.input.normalizedSku}"]`,
+          // emptySelector: 'h1',
+          // emptySelectorText: 'Не знайдено жодного товару',
         },
       ],
       [CheckPageSkuStep, { pageSkuSelector: 'div.s-product-sku > span.s-product-sku__sku' }],

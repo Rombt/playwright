@@ -20,7 +20,8 @@ export const config = {
   },
 
   data: {
-    resultsFolder: 'results/belement/belement_test',
+    resultsFolder: 'results/emporio_armani/emporio_armani_test',
+    // resultsFolder: 'results/belement/belement_test',
     // resultsFolder: 'results/all_brands_test',
     // resultsFolder: 'results/columbia/columbia_test',
     // resultsFolder: 'results/brs/brs_test',
@@ -30,7 +31,7 @@ export const config = {
     // resultsFolder: 'results/jack_wolfskin/jack_wolfskin_test',
     // resultsFolder: 'results/joma/joma_test',
     // resultsFolder: 'results/fenix/fenix_test',
-    // resultsFolder: 'results/m-tac/militarist_test_1',
+    // resultsFolder: 'results/m-tac/militarist_test',
     // resultsFolder: 'results/camotec/camotec_test',
     // resultsFolder: 'results/adidas/adidas_test',
     // resultsFolder: 'results/everlast/everlast_test',
@@ -40,7 +41,8 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/belement/belement_test.json',
+    taskPath: 'src/data/tasks/emporio_armani/emporio_armani_test.json',
+    // taskPath: 'src/data/tasks/belement/belement_test.json',
     // taskPath: 'src/data/tasks/columbia/columbia_test.json',
     // taskPath: 'src/data/tasks/brs/brs_test.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test.json',

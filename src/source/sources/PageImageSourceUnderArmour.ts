@@ -42,7 +42,7 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
     if (!product) {
       throw new Error('Product is missing');
     }
-
+    
     const sku = ctx.input.product?.sku;
 
     if (typeof sku !== 'string') {
