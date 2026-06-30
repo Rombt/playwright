@@ -7,4 +7,6 @@ export type IPreparationSearchPageParams = {
   useWaitForSystemToCoolDown?: boolean;
   timeoutMs?: number;
   maxDelay?: number;
+  minFreeMemMB?: number;
+  maxCpuLoad?: number;
 };

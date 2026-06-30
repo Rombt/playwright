@@ -33,8 +33,8 @@ class InsertValueIntoInputStrategy {
             await ctx.page.waitForLoadState('load');
             if (params.useWaitForSystemToCoolDown) {
                 await (0, helpers_1.waitForSystemToCoolDown)(ctx, {
-                    minFreeMemMB: 1000,
-                    maxCpuLoad: 0.5,
+                    minFreeMemMB: params.minFreeMemMB,
+                    maxCpuLoad: params.maxCpuLoad,
                     timeoutMs: params.timeoutMs,
                 });
             }

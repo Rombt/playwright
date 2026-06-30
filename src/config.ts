@@ -20,7 +20,7 @@ export const config = {
   },
 
   data: {
-    resultsFolder: 'results/emporio_armani/emporio_armani_test',
+    resultsFolder: 'results/emporio_armani/emporio_armani_prod',
     // resultsFolder: 'results/belement/belement_test',
     // resultsFolder: 'results/all_brands_test',
     // resultsFolder: 'results/columbia/columbia_test',

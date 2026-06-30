@@ -53,8 +53,8 @@ export default class InsertValueIntoInputStrategy
 
       if (params.useWaitForSystemToCoolDown) {
         await waitForSystemToCoolDown(ctx, {
-          minFreeMemMB: 1000,
-          maxCpuLoad: 0.5,
+          minFreeMemMB: params.minFreeMemMB,
+          maxCpuLoad: params.maxCpuLoad,
           timeoutMs: params.timeoutMs,
         });
       }

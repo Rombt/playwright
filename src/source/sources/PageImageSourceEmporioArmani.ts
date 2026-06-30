@@ -48,6 +48,8 @@ class PageImageSourceEmporioArmani implements ISource<ICollectProductPhotosTask>
           inputSelector: 'input#search',
           strategy: 'InsertValueIntoInputStrategy',
           useWaitForSystemToCoolDown: true,
+          minFreeMemMB: 800,
+          maxCpuLoad: 0.5,
           maxDelay: 10000,
           timeoutMs: 90000,
           scrollIntoViewIfNeeded: false,
