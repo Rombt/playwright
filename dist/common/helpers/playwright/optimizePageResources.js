@@ -61,7 +61,12 @@ async function optimizePageResources(ctx) {
             url.includes('googlesyndication.com') ||
             url.includes('googleadservices.com') ||
             url.includes('hotjar') ||
-            url.includes('clarity')) {
+            url.includes('clarity') ||
+            url.includes('consent') ||
+            url.includes('cookie') ||
+            url.includes('onetrust') ||
+            url.includes('quantcast') ||
+            url.includes('didomi')) {
             await route.abort();
             return;
         }

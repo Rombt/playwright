@@ -31,8 +31,6 @@ class PageImageSourceEmporioArmani {
             [
                 PreparationSearchPageStep_1.default,
                 {
-                    // #ab-header-container > div > div > div.cta-left.hidden.lg\:block > ul > li.list-none > button
-                    // openInputSelector: 'button.button-search[aria-label="Search"]',
                     openInputSelector: '#ab-header-container ul [aria-label="Search"]',
                     inputSelector: 'input#search',
                     strategy: 'InsertValueIntoInputStrategy',
@@ -51,8 +49,14 @@ class PageImageSourceEmporioArmani {
                     // emptySelectorText: 'Не знайдено жодного товару',
                 },
             ],
-            [CheckPageSkuStep_1.default, { pageSkuSelector: 'div.s-product-sku > span.s-product-sku__sku' }],
-            [SearchGalleryStep_1.default, { gallerySelector: 'div.s-photo-main' }],
+            [
+                CheckPageSkuStep_1.default,
+                {
+                    pageSkuSelector: '#headlessui-dialog-panel-v-0-0-1-0-10 > div.flex-1.overflow-y-auto.positive-padding > div > div:nth-child(4) > div',
+                },
+            ],
+            //
+            [SearchGalleryStep_1.default, { gallerySelector: 'div.gallery-slider' }],
             [
                 CollectImgStep_1.default,
                 {
@@ -63,13 +67,16 @@ class PageImageSourceEmporioArmani {
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['#product_description', '#overview'],
-                    removeSelectors: ['h2', 'div.video-container'],
+                    containers: [
+                        '#headlessui-dialog-panel-v-0-0-1-0-16 > div.flex-1.overflow-y-auto.positive-padding > div',
+                    ],
+                    removeSelectors: ['h3', 'button', 'xpath=//h3[contains(., "Product code")]/..'],
                     expand: false,
                     separator: '\n',
                     /* если для получения описания на странице нужно кликнуть по табу */
-                    tabSelector: '#product_description-tab',
-                    tabBodySelector: '#product_description',
+                    //
+                    tabSelector: '#pdp-main-block > div.grid-standard.bg-primitives-off-white.giorgioArmaniHeaderPaddingTop.lg:pb-lg.relative.lg:items-start > div.order-3.col-span-full.lg:col-start-10.lg:col-end-13.lg:flex.lg:h-full.lg:flex-col > div > div > div.py-md.flex.h-full.flex-col.justify-between.lg:gap-6.lg:py-0.xl:gap-16 > div > div.flex.flex-col > button:nth-child(1)',
+                    tabBodySelector: '#headlessui-dialog-panel-v-0-0-1-0-22',
                 },
             ],
             // ['*', { retry: 2 }], // глобальный fallback

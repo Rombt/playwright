@@ -44,8 +44,6 @@ class PageImageSourceEmporioArmani implements ISource<ICollectProductPhotosTask>
       [
         PreparationSearchPageStep,
         {
-          // #ab-header-container > div > div > div.cta-left.hidden.lg\:block > ul > li.list-none > button
-          // openInputSelector: 'button.button-search[aria-label="Search"]',
           openInputSelector: '#ab-header-container ul [aria-label="Search"]',
           inputSelector: 'input#search',
           strategy: 'InsertValueIntoInputStrategy',
@@ -64,8 +62,15 @@ class PageImageSourceEmporioArmani implements ISource<ICollectProductPhotosTask>
           // emptySelectorText: 'Не знайдено жодного товару',
         },
       ],
-      [CheckPageSkuStep, { pageSkuSelector: 'div.s-product-sku > span.s-product-sku__sku' }],
-      [SearchGalleryStep, { gallerySelector: 'div.s-photo-main' }],
+      [
+        CheckPageSkuStep,
+        {
+          pageSkuSelector:
+            '#headlessui-dialog-panel-v-0-0-1-0-10 > div.flex-1.overflow-y-auto.positive-padding > div > div:nth-child(4) > div',
+        },
+      ],
+      //
+      [SearchGalleryStep, { gallerySelector: 'div.gallery-slider' }],
       [
         CollectImgStep,
         {
@@ -77,13 +82,17 @@ class PageImageSourceEmporioArmani implements ISource<ICollectProductPhotosTask>
       [
         CollectDescriptionStep,
         {
-          containers: ['#product_description', '#overview'],
-          removeSelectors: ['h2', 'div.video-container'],
+          containers: [
+            '#headlessui-dialog-panel-v-0-0-1-0-16 > div.flex-1.overflow-y-auto.positive-padding > div',
+          ],
+          removeSelectors: ['h3', 'button', 'xpath=//h3[contains(., "Product code")]/..'],
           expand: false,
           separator: '\n',
           /* если для получения описания на странице нужно кликнуть по табу */
-          tabSelector: '#product_description-tab',
-          tabBodySelector: '#product_description',
+          //
+          tabSelector:
+            '#pdp-main-block > div.grid-standard.bg-primitives-off-white.giorgioArmaniHeaderPaddingTop.lg:pb-lg.relative.lg:items-start > div.order-3.col-span-full.lg:col-start-10.lg:col-end-13.lg:flex.lg:h-full.lg:flex-col > div > div > div.py-md.flex.h-full.flex-col.justify-between.lg:gap-6.lg:py-0.xl:gap-16 > div > div.flex.flex-col > button:nth-child(1)',
+          tabBodySelector: '#headlessui-dialog-panel-v-0-0-1-0-22',
         } satisfies IExtractHtmlOptions,
       ],
       // ['*', { retry: 2 }], // глобальный fallback
