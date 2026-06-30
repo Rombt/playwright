@@ -1,4 +1,10 @@
 export type IPreparationSearchPageParams = {
-  selector: string;
   strategy: string;
+  openInputSelector?: string;
+  inputSelector?: string;
+  selector?: string;
+  scrollIntoViewIfNeeded?: boolean;
+  useWaitForSystemToCoolDown?: boolean;
+  timeoutMs?: number;
+  maxDelay?: number;
 };

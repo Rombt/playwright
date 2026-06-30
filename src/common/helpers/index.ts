@@ -6,6 +6,7 @@ export * from './playwright/extractRawHtml';
 export * from './playwright/getAbsoluteHref';
 export * from './playwright/types/IExtractHtmlOptions';
 export * from './async/wait';
+export * from './async/waitForSystemToCoolDown';
 export * from './data/readProducts';
 export * from './data/writeProducts';
 export * from './data/getUnprocessedFilePath';

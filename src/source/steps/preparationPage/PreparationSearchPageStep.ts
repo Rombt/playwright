@@ -5,10 +5,7 @@ import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { IStrategy } from '../../types/IStrategy';
 import { IStrategyResolver } from '../../types/IStrategyResolver';
-import { IPreparationSearchPageParams } from "../../types/IPreparationSearchPageParams";
-
-
-
+import { IPreparationSearchPageParams } from '../../types/IPreparationSearchPageParams';
 
 export default class PreparationSearchPageStep extends BaseStep {
   public readonly name = 'PreparationSearchPageStep';
@@ -30,7 +27,6 @@ export default class PreparationSearchPageStep extends BaseStep {
 
     // todo пока не понятно что именно делать с результатами простого действия
     const result = await strategy.execute(ctx, stepConfig);
-
   }
 
   next(ctx: IExecutionContext): IStepResult | null {

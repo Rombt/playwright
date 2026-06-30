@@ -22,6 +22,7 @@ __exportStar(require("./playwright/extractRawHtml"), exports);
 __exportStar(require("./playwright/getAbsoluteHref"), exports);
 __exportStar(require("./playwright/types/IExtractHtmlOptions"), exports);
 __exportStar(require("./async/wait"), exports);
+__exportStar(require("./async/waitForSystemToCoolDown"), exports);
 __exportStar(require("./data/readProducts"), exports);
 __exportStar(require("./data/writeProducts"), exports);
 __exportStar(require("./data/getUnprocessedFilePath"), exports);
