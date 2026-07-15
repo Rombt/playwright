@@ -27,7 +27,6 @@
     srm,
     kiborg,
     bezet,
-    BRS,
     Злий борсук,
     Brand Element,
     Emporio Armani

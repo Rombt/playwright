@@ -47,7 +47,7 @@ export default class CheckPageSkuStep extends BaseStep {
     const text = await pageSku.textContent();
 
     try {
-      if (!text?.includes(ctx.input.normalizedSku)) {
+      if (!text?.toLowerCase().includes(ctx.input.normalizedSku.toLowerCase())) {
         throw new Error(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
       }
     } catch (e) {

@@ -1,64 +1,73 @@
 {
   "generated_at": "2026-02-09_14-00",
   "task": {
-    "306": {
-      "brand_id": "306",
-      "brand_name": "BRS",
+    "283": {
+      "brand_id": "283",
+      "brand_name": "Злий Борсук",
       "metadata": {
         "target_website": "https://borsuk.com.ua/katalog/search/?q={{sku_prod}}"
       },
       "products": [
         {
-          "id_product": "50999",
-          "name_product": "Баул, сумка-рюкзак АБ2.1 BRS",
-          "sku": "АБ2.1",
+          "id_product": "56343",
+          "name_product": "Фартух під бал пакет 10488008 BRONYX",
+          "sku": "10488008",
           "attributes": {
-            "color": "мультик.",
-            "size": "120л"
+            "color": "мульт.",
+            "size": "XL"
           }
         },
         {
-          "id_product": "51000",
-          "name_product": "Баул, сумка-рюкзак АБ2.2 BRS",
-          "sku": "АБ2.2",
+          "id_product": "56344",
+          "name_product": "Фартух під бал пакет 10491008 BRONYX",
+          "sku": "10491008",
           "attributes": {
-            "color": "піксель",
-            "size": "120л"
-          }
-        },
-        {
-          "id_product": "51001",
-          "name_product": "Баул, сумка-рюкзак АБ2.3 BRS",
-          "sku": "АБ2.3",
-          "attributes": {
-            "color": "олива",
-            "size": "120л"
-          }
-        },
-        {
-          "id_product": "51002",
-          "name_product": "Баул, сумка-рюкзак АБ2.5 BRS",
-          "sku": "АБ2.5",
-          "attributes": {
-            "color": "чорний",
-            "size": "120л"
-          }
-        },
-        {
-          "id_product": "51016",
-          "name_product": "Каремат 160х60 х1.5 см. (Oxford) КР3.1 BRS",
-          "sku": "КР3.1",
-          "attributes": {
-            "color": "мульт",
+            "color": "мульт.",
             "size": "O/S"
           }
         },
         {
-          "id_product": "51017",
-          "name_product": "Каремат 160х60 х1.5 см. (Oxford) КР3.2 BRS",
-          "sku": "КР3.2",
+          "id_product": "56358",
+          "name_product": "Карабін туристичний ID_2011 BRS",
+          "sku": "ID_2011",
           "attributes": {
-            "color": "пікс",
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56360",
+          "name_product": "М'який балі-ний пакет 1кМБП-200х135х165-1 BRS",
+          "sku": "МБП-200х135х165-1",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56361",
+          "name_product": "М'який балі-ний пакет 2к МБП-200х150-2 BRS",
+          "sku": "МБП-200х150-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56385",
+          "name_product": "Баул, сумка-рюкзак ID_1869 BRS",
+          "sku": "ID_1869",
+          "attributes": {
+            "color": "піксель",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56389",
+          "name_product": "Плитоноска STALKER ID_1888 BRS",
+          "sku": "ID_1888 ",
+          "attributes": {
+            "color": "чорн.",
             "size": "O/S"
           }
         }
