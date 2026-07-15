@@ -7,7 +7,7 @@ import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IExecutionContext } from '../types/IExecutionContext';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
 
-import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
+import OpenSearchPageStep from '../steps/openPages/OpenSearchPageStep';
 import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectImgStep from '../steps/collectElements/CollectImgStep';
@@ -33,17 +33,15 @@ class PageImageSourceAdidas implements ISource<ICollectProductPhotosTask> {
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
     ctx.stepParams = new Map([
       [
-        CheckSearchResultsStep,
+        OpenSearchPageStep,
         {
-          strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: 'div.product__image > a',
-          emptySelector: '.search-no-results__title',
+          nextStep: 'CheckPageSkuStep',
         },
       ],
       [
         CheckPageSkuStep,
         {
-          pageSkuSelector: 'h1',
+          pageSkuSelector: 'li.bullets__list--item:has-text("Номер моделі")',
         },
       ],
       [
@@ -57,7 +55,7 @@ class PageImageSourceAdidas implements ISource<ICollectProductPhotosTask> {
         {
           // strategy: 'SlickSliderCollectImagesStrategy',
           // todo протестить, не всегда собирает
-          strategy: 'DefaultImagesStrategy',
+          strategy: 'DefaultCollectImagesStrategy',
           stopProcessing: false,
         },
       ],

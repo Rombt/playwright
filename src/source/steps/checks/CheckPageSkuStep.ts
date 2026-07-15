@@ -43,16 +43,14 @@ export default class CheckPageSkuStep extends BaseStep {
 
     const pageSku = page.locator(pageSkuSelector);
     await pageSku.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
+    // await pageSku.scrollIntoViewIfNeeded();
     const text = await pageSku.textContent();
 
-
     try {
-
       if (!text?.includes(ctx.input.normalizedSku)) {
         throw new Error(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
       }
     } catch (e) {
-
       ctx.control.stop = true;
       throw new Error(`The page is not match sku ${ctx.input.normalizedSku}`);
     }

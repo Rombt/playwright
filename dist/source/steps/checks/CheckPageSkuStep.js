@@ -26,6 +26,7 @@ class CheckPageSkuStep extends BaseStep_1.BaseStep {
         });
         const pageSku = page.locator(pageSkuSelector);
         await pageSku.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
+        // await pageSku.scrollIntoViewIfNeeded();
         const text = await pageSku.textContent();
         try {
             if (!text?.includes(ctx.input.normalizedSku)) {

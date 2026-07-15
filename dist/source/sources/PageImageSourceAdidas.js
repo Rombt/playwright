@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const CheckSearchResultsStep_1 = require("../steps/checks/CheckSearchResultsStep");
+const OpenSearchPageStep_1 = require("../steps/openPages/OpenSearchPageStep");
 const CheckPageSkuStep_1 = require("../steps/checks/CheckPageSkuStep");
 const SearchGalleryStep_1 = require("../steps/searchElements/SearchGalleryStep");
 const CollectImgStep_1 = require("../steps/collectElements/CollectImgStep");
@@ -21,17 +21,15 @@ class PageImageSourceAdidas {
     async execute(ctx) {
         ctx.stepParams = new Map([
             [
-                CheckSearchResultsStep_1.default,
+                OpenSearchPageStep_1.default,
                 {
-                    strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: 'div.product__image > a',
-                    emptySelector: '.search-no-results__title',
+                    nextStep: 'CheckPageSkuStep',
                 },
             ],
             [
                 CheckPageSkuStep_1.default,
                 {
-                    pageSkuSelector: 'h1',
+                    pageSkuSelector: 'li.bullets__list--item:has-text("Номер моделі")',
                 },
             ],
             [
@@ -45,7 +43,7 @@ class PageImageSourceAdidas {
                 {
                     // strategy: 'SlickSliderCollectImagesStrategy',
                     // todo протестить, не всегда собирает
-                    strategy: 'DefaultImagesStrategy',
+                    strategy: 'DefaultCollectImagesStrategy',
                     stopProcessing: false,
                 },
             ],
