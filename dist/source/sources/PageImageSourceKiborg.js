@@ -1,10 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const CheckSearchResultsStep_1 = require("../steps/checks/CheckSearchResultsStep");
-const CheckPageSkuStep_1 = require("../steps/checks/CheckPageSkuStep");
-const SearchGalleryStep_1 = require("../steps/searchElements/SearchGalleryStep");
-const CollectImgStep_1 = require("../steps/collectElements/CollectImgStep");
-const CollectDescriptionStep_1 = require("../steps/collectElements/CollectDescriptionStep");
+const CheckSearchResultsStep_1 = __importDefault(require("../steps/checks/CheckSearchResultsStep"));
+const CheckPageSkuStep_1 = __importDefault(require("../steps/checks/CheckPageSkuStep"));
+const SearchGalleryStep_1 = __importDefault(require("../steps/searchElements/SearchGalleryStep"));
+const CollectImgStep_1 = __importDefault(require("../steps/collectElements/CollectImgStep"));
+const CollectDescriptionStep_1 = __importDefault(require("../steps/collectElements/CollectDescriptionStep"));
 exports.default = {
     create(deps) {
         return new PageImageSourceKiborg(deps.flowRunner);

@@ -1,10 +1,46 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaywrightBrowser = void 0;
-const path = require("path");
-const crypto = require("crypto");
-const fs = require("fs/promises");
-const image_size_1 = require("image-size");
+const path = __importStar(require("path"));
+const crypto = __importStar(require("crypto"));
+const fs = __importStar(require("fs/promises"));
+const image_size_1 = __importDefault(require("image-size"));
 const playwright_1 = require("playwright");
 const FingerprintPool_1 = require("../fingerprint/FingerprintPool");
 const appConfig_1 = require("../../data/config/appConfig");
@@ -473,19 +509,21 @@ class PlaywrightBrowser {
     }
     validateDownloadedFile(buffer, ext) {
         if (ext === '.jpg' || ext === '.png' || ext === '.webp' || ext === '.avif') {
-            this.assertImageSize(buffer, 400, 400);
+            this.assertImageSize(buffer);
         }
         if (buffer.length === 0) {
             throw new Error('Downloaded file is empty');
         }
     }
-    assertImageSize(buffer, minWidth = 400, minHeight = 400) {
+    assertImageSize(buffer) {
         const dimensions = (0, image_size_1.default)(buffer);
+        const minWidth = this.config.imageProcessing.minWidth;
+        const minHeight = this.config.imageProcessing.minHeight;
         if (!dimensions.width || !dimensions.height) {
             throw new Error('Unable to determine image dimensions');
         }
         if (dimensions.width < minWidth || dimensions.height < minHeight) {
-            throw new Error(`Image is too small (${dimensions.width}x${dimensions.height})`);
+            throw new Error(`Image is too small (${dimensions.width}x${dimensions.height}) minWidth=${minWidth}  minHeight=${minHeight}`);
         }
     }
     /**

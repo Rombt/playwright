@@ -32,22 +32,19 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppConfig = void 0;
 const path = __importStar(require("path"));
 const config_1 = require("../../config");
 const ConsoleTransport_1 = require("../logger/transport/ConsoleTransport");
 const FileTransport_1 = require("../logger/transport/FileTransport");
-const process_1 = __importDefault(require("process"));
 class AppConfig {
     static instance;
+    rawConfig;
     config;
     baseDir;
     constructor() {
-        this.baseDir = process_1.default.cwd();
+        this.baseDir = process.cwd();
         this.config = this.buildConfig();
     }
     //todo добавить путь к файлу конфига при инициализации и оставить import { config as appConfig } from '../../config'; по дефолту
@@ -65,11 +62,24 @@ class AppConfig {
     }
     /** Применение processors и нормализация */
     buildConfig() {
+        let result = {};
+        const processors = [
+            this.processData.bind(this),
+            this.processAsync.bind(this),
+            // сюда добавлять методы для обработки новых полей
+        ];
+        for (const processor of processors) {
+            const partial = processor(config_1.config);
+            result = this.merge(result, partial);
+        }
+        return result;
+    }
+    /** Простой merge для частичных результатов processors */
+    merge(target, source) {
         return {
-            ...this.processData(config_1.config),
-            ...this.processAsync(config_1.config),
-            ...this.processBrowser(config_1.config),
-            ...this.processLogger(config_1.config),
+            ...target,
+            ...source,
+            ...(source.data ? { data: { ...target.data, ...source.data } } : {}),
         };
     }
     // ========= геттеры =========================
@@ -78,58 +88,58 @@ class AppConfig {
         return this.config;
     }
     get scenario() {
-        return this.config.data.scenario ?? 'default';
+        return this.processData(config_1.config).data.scenario ?? 'default';
     }
     get resultsFolder() {
-        return this.config.data.resultsFolder;
+        return this.processData(config_1.config).data.resultsFolder;
     }
     get sourcesFolder() {
-        return this.config.data.sourcesFolder;
+        return this.processData(config_1.config).data.sourcesFolder;
     }
     get stepsFolder() {
-        return this.config.data.stepsFolder;
+        return this.processData(config_1.config).data.stepsFolder;
     }
     get strategiesFolder() {
-        return this.config.data.strategiesFolder;
+        return this.processData(config_1.config).data.strategiesFolder;
     }
     get taskPath() {
-        return this.config.data.taskPath;
+        return this.processData(config_1.config).data.taskPath;
     }
     get convertToJpg() {
-        return this.config.data.imageProcessing.convertToJpg;
+        return this.processData(config_1.config).data.imageProcessing.convertToJpg;
     }
     get imageProcessing() {
-        return this.config.data.imageProcessing;
+        return this.processData(config_1.config).data.imageProcessing;
     }
     get minImageWidth() {
-        return this.config.data.imageProcessing.minWidth;
+        return this.processData(config_1.config).data.imageProcessing.minWidth;
     }
     get minImageHeight() {
-        return this.config.data.imageProcessing.minHeight;
+        return this.processData(config_1.config).data.imageProcessing.minHeight;
     }
     get brands() {
-        return this.config.data.brands;
+        return this.processData(config_1.config).data.brands;
     }
     get asyncRetry() {
-        return this.config.async.retry;
+        return this.processAsync(config_1.config).async.retry;
     }
     get asyncTasks() {
-        return this.config.async.tasks;
+        return this.processAsync(config_1.config).async.tasks;
     }
     get asyncPages() {
-        return this.config.async.pages;
+        return this.processAsync(config_1.config).async.pages;
     }
     get fingerprintFile() {
-        return this.config.browser.fingerprintFile;
+        return this.processBrowser(config_1.config).browser.fingerprintFile;
     }
     get browserMode() {
-        return this.config.browser.mode;
+        return this.processBrowser(config_1.config).browser.mode;
     }
     get downloadImages() {
-        return this.config.browser.downloadImages;
+        return this.processBrowser(config_1.config).browser.downloadImages;
     }
     get loggerConfig() {
-        return this.config.logger;
+        return this.processLogger(config_1.config).logger;
     }
     get loggerTransports() {
         const transports = [];
@@ -145,7 +155,6 @@ class AppConfig {
     // ==========  методы для обработки полей  ===============
     processData(rawConfig) {
         const dataConfig = rawConfig?.data ?? {};
-        const imageProcessing = dataConfig.imageProcessing ?? {};
         const resolveBrands = (value) => Array.isArray(value)
             ? value
                 .filter((v) => typeof v === 'string')
@@ -162,9 +171,9 @@ class AppConfig {
                 taskPath: this.resolvePath(dataConfig.taskPath),
                 scenario: typeof dataConfig.scenario === 'string' ? dataConfig.scenario : 'default',
                 imageProcessing: {
-                    convertToJpg: imageProcessing.convertToJpg ?? false,
-                    minWidth: typeof imageProcessing.minWidth === 'number' ? imageProcessing.minWidth : 400,
-                    minHeight: typeof imageProcessing.minHeight === 'number' ? imageProcessing.minHeight : 400,
+                    convertToJpg: dataConfig.imageProcessing.convertToJpg ?? false,
+                    minWidth: typeof dataConfig.imageProcessing.minWidth === 'number' ? dataConfig.imageProcessing.minWidth : 400,
+                    minHeight: typeof dataConfig.imageProcessing.minHeight === 'number' ? dataConfig.imageProcessing.minHeight : 400,
                 },
             },
         };

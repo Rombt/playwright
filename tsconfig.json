@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    // "target": "ES2020",
     "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM"], // DOM нужен, если Playwright работает с браузерным контекстом в тестах
     "module": "commonjs",
     "rootDir": "src",
     "outDir": "dist",
     "strict": true,
-    "types": ["node"]
+    "types": ["node"],
+
+    /* Добавьте эти две строки ниже: */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
   "exclude": ["**/_*/**"]

@@ -16,10 +16,9 @@ import { ConsoleTransport } from '../logger/transport/ConsoleTransport';
 import { FileTransport } from '../logger/transport/FileTransport';
 import { IBrowserMode } from '../../browser/IBrowserMode';
 
-import process from 'process';
-
 export class AppConfig {
   private static instance: AppConfig;
+  private readonly rawConfig: any;
   private readonly config: IAppConfig;
   private readonly baseDir: string;
 
@@ -45,11 +44,28 @@ export class AppConfig {
 
   /** Применение processors и нормализация */
   private buildConfig(): IAppConfig {
+    let result: IAppConfig = {} as IAppConfig;
+
+    const processors = [
+      this.processData.bind(this),
+      this.processAsync.bind(this),
+      // сюда добавлять методы для обработки новых полей
+    ];
+
+    for (const processor of processors) {
+      const partial = processor(appConfig);
+      result = this.merge(result, partial);
+    }
+
+    return result;
+  }
+
+  /** Простой merge для частичных результатов processors */
+  private merge(target: IAppConfig, source: Partial<IAppConfig>): IAppConfig {
     return {
-      ...this.processData(appConfig),
-      ...this.processAsync(appConfig),
-      ...this.processBrowser(appConfig),
-      ...this.processLogger(appConfig),
+      ...target,
+      ...source,
+      ...(source.data ? { data: { ...target.data, ...source.data } } : {}),
     };
   }
 
@@ -61,74 +77,74 @@ export class AppConfig {
   }
 
   public get scenario(): string {
-    return this.config.data.scenario ?? 'default';
+    return this.processData(appConfig).data.scenario ?? 'default';
   }
 
   public get resultsFolder(): string {
-    return this.config.data.resultsFolder;
+    return this.processData(appConfig).data.resultsFolder;
   }
 
   public get sourcesFolder(): string {
-    return this.config.data.sourcesFolder;
+    return this.processData(appConfig).data.sourcesFolder;
   }
 
   public get stepsFolder(): string {
-    return this.config.data.stepsFolder;
+    return this.processData(appConfig).data.stepsFolder;
   }
 
   public get strategiesFolder(): string {
-    return this.config.data.strategiesFolder;
+    return this.processData(appConfig).data.strategiesFolder;
   }
 
   public get taskPath(): string {
-    return this.config.data.taskPath;
+    return this.processData(appConfig).data.taskPath;
   }
 
   public get convertToJpg(): boolean {
-    return this.config.data.imageProcessing.convertToJpg;
+    return this.processData(appConfig).data.imageProcessing.convertToJpg;
   }
 
   public get imageProcessing(): ImageProcessingConfig {
-    return this.config.data.imageProcessing;
+    return this.processData(appConfig).data.imageProcessing;
   }
 
   public get minImageWidth(): number {
-    return this.config.data.imageProcessing.minWidth;
+    return this.processData(appConfig).data.imageProcessing.minWidth;
   }
 
   public get minImageHeight(): number {
-    return this.config.data.imageProcessing.minHeight;
+    return this.processData(appConfig).data.imageProcessing.minHeight;
   }
 
   public get brands(): string[] {
-    return this.config.data.brands;
+    return this.processData(appConfig).data.brands;
   }
 
   public get asyncRetry(): RetryConfig {
-    return this.config.async.retry;
+    return this.processAsync(appConfig).async.retry;
   }
 
   public get asyncTasks(): AsyncConfig['tasks'] {
-    return this.config.async.tasks;
+    return this.processAsync(appConfig).async.tasks;
   }
 
   public get asyncPages(): AsyncConfig['pages'] {
-    return this.config.async.pages;
+    return this.processAsync(appConfig).async.pages;
   }
 
   public get fingerprintFile(): string | undefined {
-    return this.config.browser.fingerprintFile;
+    return this.processBrowser(appConfig).browser.fingerprintFile;
   }
 
   public get browserMode(): IBrowserMode {
-    return this.config.browser.mode;
+    return this.processBrowser(appConfig).browser.mode;
   }
   public get downloadImages(): boolean {
-    return this.config.browser.downloadImages;
+    return this.processBrowser(appConfig).browser.downloadImages;
   }
 
   public get loggerConfig(): LoggerConfig {
-    return this.config.logger;
+    return this.processLogger(appConfig).logger;
   }
 
   public get loggerTransports(): ILogTransport[] {
@@ -150,7 +166,6 @@ export class AppConfig {
 
   private processData(rawConfig: any): { data: DataConfig } {
     const dataConfig = rawConfig?.data ?? {};
-    const imageProcessing = dataConfig.imageProcessing ?? {};
 
     const resolveBrands = (value: unknown): string[] =>
       Array.isArray(value)
@@ -169,11 +184,12 @@ export class AppConfig {
         brands: resolveBrands(dataConfig.brands),
         taskPath: this.resolvePath(dataConfig.taskPath),
         scenario: typeof dataConfig.scenario === 'string' ? dataConfig.scenario : 'default',
+
         imageProcessing: {
-          convertToJpg: imageProcessing.convertToJpg ?? false,
-          minWidth: typeof imageProcessing.minWidth === 'number' ? imageProcessing.minWidth : 400,
+          convertToJpg: dataConfig.imageProcessing.convertToJpg ?? false,
+          minWidth: typeof dataConfig.imageProcessing.minWidth === 'number' ? dataConfig.imageProcessing.minWidth : 400,
           minHeight:
-            typeof imageProcessing.minHeight === 'number' ? imageProcessing.minHeight : 400,
+            typeof dataConfig.imageProcessing.minHeight === 'number' ? dataConfig.imageProcessing.minHeight : 400,
         },
       },
     };

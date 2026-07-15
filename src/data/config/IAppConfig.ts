@@ -2,10 +2,10 @@ import { LogLevel } from '../logger/types/LogLevel';
 import { IBrowserMode } from '../../browser/IBrowserMode';
 
 export interface IAppConfig {
-  async?: AsyncConfig;
-  data?: DataConfig;
-  browser?: BrowserConfig;
-  logger?: LoggerConfig;
+  async: AsyncConfig;
+  data: DataConfig;
+  browser: BrowserConfig;
+  logger: LoggerConfig;
 }
 
 export interface AsyncConfig {
@@ -36,10 +36,10 @@ export interface DataConfig {
   sourcesFolder: string;
   stepsFolder: string;
   strategiesFolder: string;
-  convertToJpg: boolean;
   taskPath: string;
   brands: string[];
   scenario?: string;
+  imageProcessing: ImageProcessingConfig;
 }
 
 export interface BrowserConfig {
@@ -57,4 +57,11 @@ export interface LoggerConfig {
 export interface LoggerTransportConfig {
   type: string;
   options?: any;
+}
+
+export interface ImageProcessingConfig {
+  convertToJpg: boolean;
+  // картинки меньше указанных здесь размеров скачиваться не будут
+  minWidth: number;
+  minHeight: number;
 }

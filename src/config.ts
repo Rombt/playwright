@@ -33,7 +33,7 @@ export const config = {
     // resultsFolder: 'results/fenix/fenix_test',
     // resultsFolder: 'results/m-tac/militarist_test',
     // resultsFolder: 'results/camotec/camotec_test',
-    resultsFolder: 'results/adidas/adidas_test',
+    resultsFolder: 'results/adidas/adidas_test_0',
     // resultsFolder: 'results/everlast/everlast_test',
     // resultsFolder: 'results/puma/puma_test',
     // resultsFolder: 'results/under_armour/under_armour_test',
@@ -69,7 +69,9 @@ export const config = {
     stepsFolder: './dist/source/steps',
     strategiesFolder: './dist/source/strategies',
     // scenario: 'rozetka',   // для отсутствующих sources
-    convertToJpg: true,
+    imageProcessing: {
+      convertToJpg: true,
+    },
   },
   browser: {
     fingerprintFile: './fingerprint.config.json',

@@ -553,7 +553,7 @@ export class PlaywrightBrowser
 
   private validateDownloadedFile(buffer: Buffer, ext: string): void {
     if (ext === '.jpg' || ext === '.png' || ext === '.webp' || ext === '.avif') {
-      this.assertImageSize(buffer, 400, 400);
+      this.assertImageSize(buffer);
     }
 
     if (buffer.length === 0) {
@@ -561,15 +561,20 @@ export class PlaywrightBrowser
     }
   }
 
-  private assertImageSize(buffer: Buffer, minWidth = 400, minHeight = 400): void {
+  private assertImageSize(buffer: Buffer): void {
+    
     const dimensions = sizeOf(buffer);
+    const minWidth = this.config.imageProcessing.minWidth;
+    const minHeight = this.config.imageProcessing.minHeight;
 
     if (!dimensions.width || !dimensions.height) {
       throw new Error('Unable to determine image dimensions');
     }
 
     if (dimensions.width < minWidth || dimensions.height < minHeight) {
-      throw new Error(`Image is too small (${dimensions.width}x${dimensions.height})`);
+      throw new Error(
+        `Image is too small (${dimensions.width}x${dimensions.height}) minWidth=${minWidth}  minHeight=${minHeight}`,
+      );
     }
   }
 
