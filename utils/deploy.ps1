@@ -1,5 +1,5 @@
 $source = "F:\testing\playwright\dist"
-# $dest   = "F:\testing\playwright_prod"
+# $dest = "F:\testing\playwright_prod"
 $dest = "F:\testing\playwright_prod_v-2"
 
 # 👉 ДОПОЛНИТЕЛЬНЫЕ ПУТИ (редактируешь здесь)
@@ -33,6 +33,8 @@ robocopy $source $dest /MIR /R:2 /W:2 `
     /XD "tasks" "results" "node_modules" `
     /XF "config.js" "package.json"
 
+$robocopyExitCode = $LASTEXITCODE
+
 # --- 2. Копирование дополнительных путей ---
 Write-Host "Copying EXTRA paths..."
 
@@ -47,19 +49,49 @@ foreach ($path in $extraPaths) {
     $target = Join-Path $dest $name
 
     if (Test-Path $path -PathType Container) {
-        # 👉 это папка
         Write-Host "Copying folder: $name"
         robocopy $path $target /E /R:2 /W:2
     }
     else {
-        # 👉 это файл
         Write-Host "Copying file: $name"
         Copy-Item $path $target -Force
     }
 }
 
+# --- 3. Синхронизация package.json ---
+Write-Host "Syncing package.json dependencies..."
+
+$devPackage = "F:\testing\playwright\package.json"
+$prodPackage = Join-Path $dest "package.json"
+
+if ((Test-Path $devPackage) -and (Test-Path $prodPackage)) {
+
+    $dev = Get-Content $devPackage -Raw | ConvertFrom-Json
+    $prod = Get-Content $prodPackage -Raw | ConvertFrom-Json
+
+    # Обновляем только зависимости
+    $prod.dependencies = $dev.dependencies
+    $prod.devDependencies = $dev.devDependencies
+
+    # Если используются
+    if ($dev.PSObject.Properties.Name -contains "optionalDependencies") {
+        $prod.optionalDependencies = $dev.optionalDependencies
+    }
+
+    if ($dev.PSObject.Properties.Name -contains "peerDependencies") {
+        $prod.peerDependencies = $dev.peerDependencies
+    }
+
+    $prod | ConvertTo-Json -Depth 100 | Set-Content $prodPackage -Encoding UTF8
+
+    Write-Host "package.json synchronized." -ForegroundColor Green
+}
+else {
+    Write-Host "package.json not found. Skipping." -ForegroundColor Yellow
+}
+
 # Проверка результата
-if ($LASTEXITCODE -le 3) {
+if ($robocopyExitCode -le 3) {
     Write-Host "=============================="
     Write-Host "       DEPLOY SUCCESS"
     Write-Host "==============================" -ForegroundColor Green
