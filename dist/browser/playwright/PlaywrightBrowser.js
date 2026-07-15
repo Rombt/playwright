@@ -4,6 +4,7 @@ exports.PlaywrightBrowser = void 0;
 const path = require("path");
 const crypto = require("crypto");
 const fs = require("fs/promises");
+const image_size_1 = require("image-size");
 const playwright_1 = require("playwright");
 const FingerprintPool_1 = require("../fingerprint/FingerprintPool");
 const appConfig_1 = require("../../data/config/appConfig");
@@ -265,6 +266,7 @@ class PlaywrightBrowser {
                     ext = '.avif';
                 else if (contentType.includes('application/pdf'))
                     ext = '.pdf';
+                this.validateDownloadedFile(buffer, ext);
                 loggerScope?.debug(`Response body read successfully for URL`, {
                     component: 'PlaywrightBrowser',
                     method: 'download(...)',
@@ -360,6 +362,7 @@ class PlaywrightBrowser {
                 ext = '.pdf';
             else
                 ext = '';
+            this.validateDownloadedFile(buffer, ext);
             loggerScope?.debug(`Static resource downloaded successfully`, {
                 component: 'PlaywrightBrowser',
                 method: 'downloadStaticResource()',
@@ -389,65 +392,6 @@ class PlaywrightBrowser {
         }
         return { buffer, ext };
     }
-    // async downloadWithFallback(
-    //   url: string,
-    //   page: Page,
-    //   context: BrowserContext,
-    //   loggerScope?: ILogger,
-    // ): Promise<{ buffer: Buffer; ext: string }> {
-    //   const scope = {
-    //     component: 'PlaywrightBrowser',
-    //     method: 'downloadWithFallback()',
-    //     url,
-    //   };
-    //   loggerScope?.debug(`Starting download (browser-first strategy)`, {
-    //     ...scope,
-    //   });
-    //   // --- PRIMARY: browser (page) ---
-    //   try {
-    //     const result = await this.download(page, url, loggerScope);
-    //     loggerScope?.debug(`Primary (browser) download succeeded`, {
-    //       ...scope,
-    //     });
-    //     return result;
-    //   } catch (err) {
-    //     const { error } = this.normalizeError(err);
-    //     loggerScope?.warn(`Primary (browser) download failed`, {
-    //       ...scope,
-    //       errorName: error.name,
-    //       errorMessage: error.message,
-    //     });
-    //     // решаем — делать fallback или нет
-    //     if (!this.shouldFallback(error)) {
-    //       loggerScope?.warn(`Error is not eligible for fallback`, {
-    //         ...scope,
-    //       });
-    //       throw error;
-    //     }
-    //     loggerScope?.warn(`Switching to fallback (static download)`, {
-    //       ...scope,
-    //     });
-    //     // --- FALLBACK: static ---
-    //     try {
-    //       const result = await this.downloadStaticResource(url, context, loggerScope);
-    //       loggerScope?.debug(`Fallback (static) download succeeded`, {
-    //         ...scope,
-    //       });
-    //       return result;
-    //     } catch (fallbackErr) {
-    //       const { error: fallbackError } = this.normalizeError(fallbackErr);
-    //       loggerScope?.error(`Fallback (static) download failed`, {
-    //         ...scope,
-    //         errorName: fallbackError.name,
-    //         errorMessage: fallbackError.message,
-    //       });
-    //       // не теряем цепочку ошибок
-    //       throw Object.assign(new Error(`Download failed for ${url}`), {
-    //         originalError: fallbackError,
-    //       });
-    //     }
-    //   }
-    // }
     async downloadWithFallback(url, page, context, loggerScope, options) {
         const scope = {
             component: 'PlaywrightBrowser',
@@ -526,6 +470,23 @@ class PlaywrightBrowser {
             // --- generic playwright errors ---
             message.includes('protocol error') ||
             message.includes('session closed'));
+    }
+    validateDownloadedFile(buffer, ext) {
+        if (ext === '.jpg' || ext === '.png' || ext === '.webp' || ext === '.avif') {
+            this.assertImageSize(buffer, 400, 400);
+        }
+        if (buffer.length === 0) {
+            throw new Error('Downloaded file is empty');
+        }
+    }
+    assertImageSize(buffer, minWidth = 400, minHeight = 400) {
+        const dimensions = (0, image_size_1.default)(buffer);
+        if (!dimensions.width || !dimensions.height) {
+            throw new Error('Unable to determine image dimensions');
+        }
+        if (dimensions.width < minWidth || dimensions.height < minHeight) {
+            throw new Error(`Image is too small (${dimensions.width}x${dimensions.height})`);
+        }
     }
     /**
      * Проверяет, является ли ошибка таймаутом
