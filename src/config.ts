@@ -20,11 +20,11 @@ export const config = {
   },
 
   data: {
+    resultsFolder: 'results/alpine_crown/alpine_crown_test',
     // resultsFolder: 'results/emporio_armani/emporio_armani_prod',
     // resultsFolder: 'results/belement/belement_test',
     // resultsFolder: 'results/all_brands_test',
     // resultsFolder: 'results/columbia/columbia_test',
-    resultsFolder: 'results/brs/brs_test',
     // resultsFolder: 'results/bezet/bezet_test',
     // resultsFolder: 'results/kiborg/kiborg_test',
     // resultsFolder: 'results/srm/srm_test',
@@ -46,7 +46,7 @@ export const config = {
     // taskPath: 'src/data/tasks/emporio_armani/emporio_armani_test.json',
     // taskPath: 'src/data/tasks/belement/belement_test.json',
     // taskPath: 'src/data/tasks/columbia/columbia_test.json',
-    taskPath: 'src/data/tasks/brs/brs_test.json',
+    taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
     // taskPath: 'src/data/tasks/bezet/bezet_test.json',
     // taskPath: 'src/data/tasks/kiborg/kiborg_test.json',
     // taskPath: 'src/data/tasks/srm/srm_test.json',

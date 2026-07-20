@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-07-20_17-11",
+  "task": {
+    "24": {
+      "brand_id": "24",
+      "brand_name": "AlpineCrown",
+      "metadata": {
+        "target_website": "https://militaryhub.net.ua/ru/katalog/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "56401",
+          "name_product": "Рюкзак 240610-001 AlCr",
+          "sku": "240610-001",
+          "attributes": {
+            "color": "т.зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56401",
+          "name_product": "Рюкзак 240610-001 AlCr",
+          "sku": "240610-001",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "56402",
+          "name_product": "Рюкзак 240610-021 AlCr",
+          "sku": "240610-021",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56403",
+          "name_product": "Рюкзак 240611-001 AlCr",
+          "sku": "240611-001",
+          "attributes": {
+            "color": "кам-ж",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56404",
+          "name_product": "Рюкзак 240611-021 AlCr",
+          "sku": "240611-021",
+          "attributes": {
+            "color": "т.зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56404",
+          "name_product": "Рюкзак 240611-021 AlCr",
+          "sku": "240611-021",
+          "attributes": {
+            "color": "",
+            "size": ""
+          }
+        },
+        {
+          "id_product": "56405",
+          "name_product": "Рюкзак 250851-021 AlCr",
+          "sku": "250851-021",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}
