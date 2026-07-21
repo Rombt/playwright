@@ -28,13 +28,19 @@ class PageImageSourceAlpineCrown {
                 CheckSearchResultsStep_1.default,
                 {
                     strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: 'div.product-teaser__image--wrapper > a',
-                    emptySelector: 'div.view-empty',
-                    emptySelectorText: 'нічого не знайдено',
+                    linkSelector: 'div.catalogCard-view > a',
+                    emptySelector: 'div[data-catalog-view-block="products"] > p',
+                    emptySelectorText: 'Нет товаров',
                 },
             ],
-            [CheckPageSkuStep_1.default, { pageSkuSelector: 'div.field-product-vendor-code__item.field__item' }],
-            [SearchGalleryStep_1.default, { gallerySelector: '[data-once="product-full-slider"]' }],
+            //
+            [CheckPageSkuStep_1.default, { pageSkuSelector: 'div.product-header div.product-header__code' }],
+            [
+                SearchGalleryStep_1.default,
+                {
+                    gallerySelector: '[data-view-block="gallery"] > div.product__section div.gallery__photos',
+                },
+            ],
             [
                 CollectImgStep_1.default,
                 {
@@ -45,8 +51,8 @@ class PageImageSourceAlpineCrown {
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['div.field-product-desc__item.field__item'],
-                    removeSelectors: ['h2'],
+                    containers: ['div[itemprop="description"] > div.text'],
+                    removeSelectors: [],
                     expand: false,
                     separator: '\n',
                 },

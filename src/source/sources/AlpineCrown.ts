@@ -39,13 +39,19 @@ class PageImageSourceAlpineCrown implements ISource<ICollectProductPhotosTask> {
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: 'div.product-teaser__image--wrapper > a',
-          emptySelector: 'div.view-empty',
-          emptySelectorText: 'нічого не знайдено',
+          linkSelector: 'div.catalogCard-view > a',
+          emptySelector: 'div[data-catalog-view-block="products"] > p',
+          emptySelectorText: 'Нет товаров',
         },
       ],
-      [CheckPageSkuStep, { pageSkuSelector: 'div.field-product-vendor-code__item.field__item' }],
-      [SearchGalleryStep, { gallerySelector: '[data-once="product-full-slider"]' }],
+      //
+      [CheckPageSkuStep, { pageSkuSelector: 'div.product-header div.product-header__code' }],
+      [
+        SearchGalleryStep,
+        {
+          gallerySelector: '[data-view-block="gallery"] > div.product__section div.gallery__photos',
+        },
+      ],
       [
         CollectImgStep,
         {
@@ -57,8 +63,8 @@ class PageImageSourceAlpineCrown implements ISource<ICollectProductPhotosTask> {
       [
         CollectDescriptionStep,
         {
-          containers: ['div.field-product-desc__item.field__item'],
-          removeSelectors: ['h2'],
+          containers: ['div[itemprop="description"] > div.text'],
+          removeSelectors: [],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,
