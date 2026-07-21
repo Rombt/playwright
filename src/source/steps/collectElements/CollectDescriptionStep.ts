@@ -24,20 +24,27 @@ export default class CollectDescriptionStep extends BaseStep {
     const stepConfig = ctx.stepParams?.get(CollectDescriptionStep) as IExtractHtmlOptions;
 
     if (stepConfig.tabSelector && stepConfig.tabBodySelector) {
-      // если селектор не найден весь сценарий не должен упасть
-      try {
-        await page.locator(stepConfig.tabSelector).click();
-        await page.locator(stepConfig.tabBodySelector).waitFor({
-          state: 'visible',
-          timeout: config.asyncRetry.maxDelay,
-        });
-      } catch {}
+      await page.locator(stepConfig.tabSelector).click();
+      await page.locator(stepConfig.tabBodySelector).waitFor({
+        state: 'visible',
+        timeout: config.asyncRetry.maxDelay,
+      });
     }
 
     try {
       ctx.state.html = await extractRawHtml(page, stepConfig);
     } catch (error) {
-      throw new Error(`Description is absent for ${ctx.input.url}`);
+      ctx.logger?.debug('extractRawHtml failed', {
+        component: 'ExtractHtmlStep',
+        method: 'execute',
+        action: 'extractRawHtml',
+        data: {
+          error: error instanceof Error ? error.message : error,
+          stack: error instanceof Error ? error.stack : undefined,
+        },
+      });
+
+      throw new Error(`Description is absent for ${ctx.input.sku}`);
     }
 
     ctx.control.stop = true;
