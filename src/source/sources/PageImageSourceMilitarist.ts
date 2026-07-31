@@ -61,7 +61,7 @@ class PageImageSourceMilitarist implements ISource<ICollectProductPhotosTask> {
         CollectDescriptionStep,
         {
           containers: ['#short_desc_block'],
-          removeSelectors: ['h2'],
+          removeSelectors: ['h2', 'a'],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,
