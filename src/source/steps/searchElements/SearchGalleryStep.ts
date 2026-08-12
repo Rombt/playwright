@@ -24,7 +24,7 @@ export default class SearchGalleryStep extends BaseStep {
     };
     const gallerySelector = stepConfig?.gallerySelector;
 
-    const gallery = page.locator(gallerySelector);
+    const gallery = page.locator(gallerySelector).first();
 
     try {
       await gallery.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
@@ -32,8 +32,9 @@ export default class SearchGalleryStep extends BaseStep {
       throw new Error('No gallery found on page');
     }
 
+    //todo не уверен что эта проверка нужна
     const count = await gallery.count();
-    if (count === 0) throw new Error('No images found on page');
+    if (count === 0) throw new Error('No gallery found on page 222');
 
     const firstImg = gallery.locator('img').first();
     await firstImg.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });

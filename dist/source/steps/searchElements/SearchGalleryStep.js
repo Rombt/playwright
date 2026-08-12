@@ -10,16 +10,17 @@ class SearchGalleryStep extends BaseStep_1.BaseStep {
         const { page } = ctx;
         const stepConfig = ctx.stepParams?.get(SearchGalleryStep);
         const gallerySelector = stepConfig?.gallerySelector;
-        const gallery = page.locator(gallerySelector);
+        const gallery = page.locator(gallerySelector).first();
         try {
             await gallery.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
         }
         catch (error) {
             throw new Error('No gallery found on page');
         }
+        //todo не уверен что эта проверка нужна
         const count = await gallery.count();
         if (count === 0)
-            throw new Error('No images found on page');
+            throw new Error('No gallery found on page 222');
         const firstImg = gallery.locator('img').first();
         await firstImg.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
         ctx.logger?.debug('The gallery is found', {
