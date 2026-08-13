@@ -20,7 +20,7 @@ export const config = {
   },
 
   data: {
-    resultsFolder: 'results/avecs/avecs_prod_13.08.26',
+    // resultsFolder: 'results/avecs/avecs_prod_13.08.26',
     // resultsFolder: 'results/kappa/kappa_test',
     // resultsFolder: 'results/alpine_crown/alpine_crown_test',
     // resultsFolder: 'results/emporio_armani/emporio_armani_prod',
@@ -35,7 +35,7 @@ export const config = {
     // resultsFolder: 'results/fenix/fenix_test',
     // resultsFolder: 'results/m-tac/militarist_12.08.26',
     // resultsFolder: 'results/camotec/camotec_test',
-    // resultsFolder: 'results/adidas/adidas_prod_13.08.26',
+    resultsFolder: 'results/adidas/adidas_prod_13.08.26',
     // resultsFolder: 'results/everlast/everlast_test',
     // resultsFolder: 'results/puma/puma_test',
     // resultsFolder: 'results/under_armour/under_armour_test',
@@ -43,8 +43,8 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/avecs/avecs_prod.json',
-    // taskPath: 'src/data/tasks/adidas/adidas_prod.json',
+    // taskPath: 'src/data/tasks/avecs/avecs_prod.json',
+    taskPath: 'src/data/tasks/adidas/adidas_prod.json',
     // taskPath: 'src/data/tasks/adidas/adidas_test_short.json',
     // taskPath: 'src/data/tasks/emporio_armani/emporio_armani_test.json',
     // taskPath: 'src/data/tasks/belement/belement_test.json',
