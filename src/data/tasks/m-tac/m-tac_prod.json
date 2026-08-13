@@ -1,0 +1,167 @@
+{
+  "generated_at": "2026-02-05_13-18",
+  "task": {
+    "214": {
+      "brand_id": "214",
+      "brand_name": "M-TAC",
+      "metadata": {
+        "target_website": "https://militarist.ua/ua/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "56298",
+          "name_product": "Паракорд M-TAC 475 PC47515-C",
+          "sku": "MTC-PC47515-C",
+          "attributes": {
+            "color": "кой/зел",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "56300",
+          "name_product": "Паракорд M-TAC 550 mil-spec MSPC15-W",
+          "sku": "MTC-MSPC15-W",
+          "attributes": {
+            "color": "вудленд",
+            "size": "15м"
+          }
+        },
+        {
+          "id_product": "56577",
+          "name_product": "Поло Elite Coolmax 80010215 M-TAC",
+          "sku": "80010215",
+          "attributes": {
+            "color": "т.син",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56577",
+          "name_product": "Поло Elite Coolmax 80010215 M-TAC",
+          "sku": "80010215",
+          "attributes": {
+            "color": "т.син",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56577",
+          "name_product": "Поло Elite Coolmax 80010215 M-TAC",
+          "sku": "80010215",
+          "attributes": {
+            "color": "т.син",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56577",
+          "name_product": "Поло Elite Coolmax 80010215 M-TAC",
+          "sku": "80010215",
+          "attributes": {
+            "color": "т.син",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56577",
+          "name_product": "Поло Elite Coolmax 80010215 M-TAC",
+          "sku": "80010215",
+          "attributes": {
+            "color": "т.син",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56578",
+          "name_product": "Футболка Kill Zone Cotton 80209002 M-TAC",
+          "sku": "80209002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56578",
+          "name_product": "Футболка Kill Zone Cotton 80209002 M-TAC",
+          "sku": "80209002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56578",
+          "name_product": "Футболка Kill Zone Cotton 80209002 M-TAC",
+          "sku": "80209002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56578",
+          "name_product": "Футболка Kill Zone Cotton 80209002 M-TAC",
+          "sku": "80209002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56578",
+          "name_product": "Футболка Kill Zone Cotton 80209002 M-TAC",
+          "sku": "80209002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56579",
+          "name_product": "Футболка Summer Comfort 80181002 M-TAC",
+          "sku": "80181002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56579",
+          "name_product": "Футболка Summer Comfort 80181002 M-TAC",
+          "sku": "80181002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56579",
+          "name_product": "Футболка Summer Comfort 80181002 M-TAC",
+          "sku": "80181002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56579",
+          "name_product": "Футболка Summer Comfort 80181002 M-TAC",
+          "sku": "80181002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56579",
+          "name_product": "Футболка Summer Comfort 80181002 M-TAC",
+          "sku": "80181002",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}

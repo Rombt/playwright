@@ -9,327 +9,138 @@
       },
       "products": [
         {
-          "id_product": "37157",
-          "name_product": "Бейсболка Columbia CM9484*SS14",
-          "sku": "9484",
+          "id_product": "56611",
+          "name_product": "Кофта фл Helikon 13117 BEZET",
+          "sku": "13117",
           "attributes": {
             "color": "чорн.",
-            "size": "XXL"
+            "size": "2XL"
           }
         },
         {
-          "id_product": "37157",
-          "name_product": "Бейсболка Columbia CM9484*SS14",
-          "sku": "9484",
-          "attributes": {
-            "color": "т.серый",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "37157",
-          "name_product": "Бейсболка Columbia CM9484*SS14",
-          "sku": "9484",
-          "attributes": {
-            "color": "голубой",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "37332",
-          "name_product": "Брюки Columbia WM8068CLB",
-          "sku": "8068",
-          "attributes": {
-            "color": "син",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "37332",
-          "name_product": "Брюки Columbia WM8068CLB",
-          "sku": "8068",
-          "attributes": {
-            "color": "чёрный",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "37332",
-          "name_product": "Брюки Columbia WM8068CLB",
-          "sku": "8068",
-          "attributes": {
-            "color": "чёрный",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "37332",
-          "name_product": "Брюки Columbia WM8068CLB",
-          "sku": "8068",
-          "attributes": {
-            "color": "чёрный",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "37332",
-          "name_product": "Брюки Columbia WM8068CLB",
-          "sku": "8068",
-          "attributes": {
-            "color": "чёрный",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "37332",
-          "name_product": "Брюки Columbia WM8068CLB",
-          "sku": "8068",
-          "attributes": {
-            "color": "чёрный",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "37948",
-          "name_product": "Сумка Columbia UU9900CLB",
-          "sku": "9900",
-          "attributes": {
-            "color": "мульт",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "37948",
-          "name_product": "Сумка Columbia UU9900CLB",
-          "sku": "9900",
-          "attributes": {
-            "color": "чёрный",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53451",
-          "name_product": "Брюки теплі Titan 10875 BEZET",
-          "sku": "10875",
+          "id_product": "56611",
+          "name_product": "Кофта фл Helikon 13117 BEZET",
+          "sku": "13117",
           "attributes": {
             "color": "чорн.",
             "size": "L"
           }
         },
         {
-          "id_product": "53451",
-          "name_product": "Брюки теплі Titan 10875 BEZET",
-          "sku": "10875",
+          "id_product": "56611",
+          "name_product": "Кофта фл Helikon 13117 BEZET",
+          "sku": "13117",
           "attributes": {
             "color": "чорн.",
             "size": "M"
           }
         },
         {
-          "id_product": "53451",
-          "name_product": "Брюки теплі Titan 10875 BEZET",
-          "sku": "10875",
+          "id_product": "56611",
+          "name_product": "Кофта фл Helikon 13117 BEZET",
+          "sku": "13117",
           "attributes": {
             "color": "чорн.",
             "size": "S"
           }
         },
         {
-          "id_product": "53451",
-          "name_product": "Брюки теплі Titan 10875 BEZET",
-          "sku": "10875",
+          "id_product": "56611",
+          "name_product": "Кофта фл Helikon 13117 BEZET",
+          "sku": "13117",
           "attributes": {
             "color": "чорн.",
             "size": "XL"
           }
         },
         {
-          "id_product": "53451",
-          "name_product": "Брюки теплі Titan 10875 BEZET",
-          "sku": "10875",
+          "id_product": "56612",
+          "name_product": "Кофта фл Helikon 13124 BEZET",
+          "sku": "13124",
           "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
+            "color": "сірий",
+            "size": "2XL"
           }
         },
         {
-          "id_product": "53454",
-          "name_product": "Кофта Active 12035 BEZET",
-          "sku": "12035",
+          "id_product": "56612",
+          "name_product": "Кофта фл Helikon 13124 BEZET",
+          "sku": "13124",
           "attributes": {
-            "color": "чорн.",
+            "color": "сірий",
             "size": "L"
           }
         },
         {
-          "id_product": "53454",
-          "name_product": "Кофта Active 12035 BEZET",
-          "sku": "12035",
+          "id_product": "56612",
+          "name_product": "Кофта фл Helikon 13124 BEZET",
+          "sku": "13124",
           "attributes": {
-            "color": "чорн.",
+            "color": "сірий",
             "size": "M"
           }
         },
         {
-          "id_product": "53454",
-          "name_product": "Кофта Active 12035 BEZET",
-          "sku": "12035",
+          "id_product": "56612",
+          "name_product": "Кофта фл Helikon 13124 BEZET",
+          "sku": "13124",
           "attributes": {
-            "color": "чорн.",
+            "color": "сірий",
             "size": "S"
           }
         },
         {
-          "id_product": "53454",
-          "name_product": "Кофта Active 12035 BEZET",
-          "sku": "12035",
+          "id_product": "56612",
+          "name_product": "Кофта фл Helikon 13124 BEZET",
+          "sku": "13124",
           "attributes": {
-            "color": "чорн.",
+            "color": "сірий",
             "size": "XL"
           }
         },
         {
-          "id_product": "53454",
-          "name_product": "Кофта Active 12035 BEZET",
-          "sku": "12035",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54017",
-          "name_product": "Кофта Active 12043 BEZET",
-          "sku": "12043",
+          "id_product": "56613",
+          "name_product": "Кофта фл Helikon 13131 BEZET",
+          "sku": "13131",
           "attributes": {
             "color": "хакі",
-            "size": "L"
+            "size": "2XL"
           }
         },
         {
-          "id_product": "54017",
-          "name_product": "Кофта Active 12043 BEZET",
-          "sku": "12043",
-          "attributes": {
-            "color": "хакі",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54017",
-          "name_product": "Кофта Active 12043 BEZET",
-          "sku": "12043",
-          "attributes": {
-            "color": "хакі",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54017",
-          "name_product": "Кофта Active 12043 BEZET",
-          "sku": "12043",
-          "attributes": {
-            "color": "хакі",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54017",
-          "name_product": "Кофта Active 12043 BEZET",
-          "sku": "12043",
-          "attributes": {
-            "color": "хакі",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54020",
-          "name_product": "Кофта Motion 12354 BEZET",
-          "sku": "12354",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54020",
-          "name_product": "Кофта Motion 12354 BEZET",
-          "sku": "12354",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54020",
-          "name_product": "Кофта Motion 12354 BEZET",
-          "sku": "12354",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54020",
-          "name_product": "Кофта Motion 12354 BEZET",
-          "sku": "12354",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "54020",
-          "name_product": "Кофта Motion 12354 BEZET",
-          "sku": "12354",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "54021",
-          "name_product": "Кофта Motion 12362 BEZET",
-          "sku": "12362",
+          "id_product": "56613",
+          "name_product": "Кофта фл Helikon 13131 BEZET",
+          "sku": "13131",
           "attributes": {
             "color": "хакі",
             "size": "L"
           }
         },
         {
-          "id_product": "54021",
-          "name_product": "Кофта Motion 12362 BEZET",
-          "sku": "12362",
+          "id_product": "56613",
+          "name_product": "Кофта фл Helikon 13131 BEZET",
+          "sku": "13131",
           "attributes": {
             "color": "хакі",
             "size": "M"
           }
         },
         {
-          "id_product": "54021",
-          "name_product": "Кофта Motion 12362 BEZET",
-          "sku": "12362",
+          "id_product": "56613",
+          "name_product": "Кофта фл Helikon 13131 BEZET",
+          "sku": "13131",
           "attributes": {
             "color": "хакі",
             "size": "S"
           }
         },
         {
-          "id_product": "54021",
-          "name_product": "Кофта Motion 12362 BEZET",
-          "sku": "12362",
+          "id_product": "56613",
+          "name_product": "Кофта фл Helikon 13131 BEZET",
+          "sku": "13131",
           "attributes": {
             "color": "хакі",
             "size": "XL"
-          }
-        },
-        {
-          "id_product": "54021",
-          "name_product": "Кофта Motion 12362 BEZET",
-          "sku": "12362",
-          "attributes": {
-            "color": "хакі",
-            "size": "XXL"
           }
         }
       ]
