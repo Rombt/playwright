@@ -1,0 +1,257 @@
+{
+  "generated_at": "2026-04-02_12-56",
+  "task": {
+    "19": {
+      "brand_id": "19",
+      "brand_name": "KAPPA",
+      "metadata": {
+        "target_website": "https://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "56570",
+          "name_product": "Кеди 95K0542005*AW27 KAPPA (ж)",
+          "sku": "95K0542005*AW27 ",
+          "attributes": {
+            "color": "білий",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "56570",
+          "name_product": "Кеди 95K0542005*AW27 KAPPA (ж)",
+          "sku": "95K0542005*AW27 ",
+          "attributes": {
+            "color": "білий",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "56570",
+          "name_product": "Кеди 95K0542005*AW27 KAPPA (ж)",
+          "sku": "95K0542005*AW27 ",
+          "attributes": {
+            "color": "білий",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "56570",
+          "name_product": "Кеди 95K0542005*AW27 KAPPA (ж)",
+          "sku": "95K0542005*AW27 ",
+          "attributes": {
+            "color": "білий",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "56570",
+          "name_product": "Кеди 95K0542005*AW27 KAPPA (ж)",
+          "sku": "95K0542005*AW27 ",
+          "attributes": {
+            "color": "білий",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56570",
+          "name_product": "Кеди 95K0542005*AW27 KAPPA (ж)",
+          "sku": "95K0542005*AW27 ",
+          "attributes": {
+            "color": "білий",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "27"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "28"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "29"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "30"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "31"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "32"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "33"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "56571",
+          "name_product": "Кросівки 26K0073005*AW27 KAPPA (дит)",
+          "sku": "26K0073005*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "35"
+          }
+        },
+        {
+          "id_product": "56572",
+          "name_product": "Кросівки 36K0022001*AW27 KAPPA (ж)",
+          "sku": "36K0022001*AW27",
+          "attributes": {
+            "color": "зол/беж",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "56572",
+          "name_product": "Кросівки 36K0022001*AW27 KAPPA (ж)",
+          "sku": "36K0022001*AW27",
+          "attributes": {
+            "color": "зол/беж",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "56572",
+          "name_product": "Кросівки 36K0022001*AW27 KAPPA (ж)",
+          "sku": "36K0022001*AW27",
+          "attributes": {
+            "color": "зол/беж",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "56572",
+          "name_product": "Кросівки 36K0022001*AW27 KAPPA (ж)",
+          "sku": "36K0022001*AW27",
+          "attributes": {
+            "color": "зол/беж",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "56572",
+          "name_product": "Кросівки 36K0022001*AW27 KAPPA (ж)",
+          "sku": "36K0022001*AW27",
+          "attributes": {
+            "color": "зол/беж",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56572",
+          "name_product": "Кросівки 36K0022001*AW27 KAPPA (ж)",
+          "sku": "36K0022001*AW27",
+          "attributes": {
+            "color": "зол/беж",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "56573",
+          "name_product": "Кросівки 36K0071001*AW27 KAPPA (ч)",
+          "sku": "36K0071001*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56573",
+          "name_product": "Кросівки 36K0071001*AW27 KAPPA (ч)",
+          "sku": "36K0071001*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "56573",
+          "name_product": "Кросівки 36K0071001*AW27 KAPPA (ч)",
+          "sku": "36K0071001*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56573",
+          "name_product": "Кросівки 36K0071001*AW27 KAPPA (ч)",
+          "sku": "36K0071001*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "56573",
+          "name_product": "Кросівки 36K0071001*AW27 KAPPA (ч)",
+          "sku": "36K0071001*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56573",
+          "name_product": "Кросівки 36K0071001*AW27 KAPPA (ч)",
+          "sku": "36K0071001*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "45"
+          }
+        }
+      ]
+    }
+  }
+}

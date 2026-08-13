@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-04-08_10-11",
+  "task": {
+    "194": {
+      "brand_id": "194",
+      "brand_name": "Avecs",
+      "metadata": {
+        "target_website": "https://avecs.com/en/search-ru?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "56615",
+          "name_product": "Вітрівка 50567/1 AW27 Avecs (ч)",
+          "sku": "50492/1-AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56615",
+          "name_product": "Вітрівка 50567/1 AW27 Avecs (ч)",
+          "sku": "50492/1-AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "56615",
+          "name_product": "Вітрівка 50567/1 AW27 Avecs (ч)",
+          "sku": "50492/1-AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56615",
+          "name_product": "Вітрівка 50567/1 AW27 Avecs (ч)",
+          "sku": "50492/1-AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56615",
+          "name_product": "Вітрівка 50567/1 AW27 Avecs (ч)",
+          "sku": "50492/1-AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56616",
+          "name_product": "Вітрівка 50567/27 AW27 Avecs (ч)",
+          "sku": "50567/27 AW27",
+          "attributes": {
+            "color": "т.зел.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56616",
+          "name_product": "Вітрівка 50567/27 AW27 Avecs (ч)",
+          "sku": "50567/27 AW27",
+          "attributes": {
+            "color": "т.зел.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "56616",
+          "name_product": "Вітрівка 50567/27 AW27 Avecs (ч)",
+          "sku": "50567/27 AW27",
+          "attributes": {
+            "color": "т.зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56616",
+          "name_product": "Вітрівка 50567/27 AW27 Avecs (ч)",
+          "sku": "50567/27 AW27",
+          "attributes": {
+            "color": "т.зел.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56616",
+          "name_product": "Вітрівка 50567/27 AW27 Avecs (ч)",
+          "sku": "50567/27 AW27",
+          "attributes": {
+            "color": "т.зел.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56617",
+          "name_product": "Вітрівка 50690/1 AW27 Avecs (ч)",
+          "sku": "50690/1 AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56617",
+          "name_product": "Вітрівка 50690/1 AW27 Avecs (ч)",
+          "sku": "50690/1 AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "56617",
+          "name_product": "Вітрівка 50690/1 AW27 Avecs (ч)",
+          "sku": "50690/1 AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56617",
+          "name_product": "Вітрівка 50690/1 AW27 Avecs (ч)",
+          "sku": "50690/1 AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56617",
+          "name_product": "Вітрівка 50690/1 AW27 Avecs (ч)",
+          "sku": "50690/1 AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}
