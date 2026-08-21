@@ -1,704 +1,1559 @@
 {
   "generated_at": "2026-04-06_14-03",
   "task": {
-    "9": {
-      "brand_id": "9",
-      "brand_name": "Columbia",
-      "metadata": {
-        "target_website": "https://www.columbia.com/search?q={{sku_prod}}&searchMethod=manualSearch"
-      },
-      "products": [
-        {
-          "id_product": "54657",
-          "name_product": "Шкарпетки NCHCS3P*AW27 CLB",
-          "sku": "NCHCS3P*AW27",
-          "attributes": {
-            "color": "кольор.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54657",
-          "name_product": "Шкарпетки NCHCS3P*AW27 CLB",
-          "sku": "NCHCS3P*AW27",
-          "attributes": {
-            "color": "кольор.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54657",
-          "name_product": "Шкарпетки NCHCS3P*AW27 CLB",
-          "sku": "NCHCS3P*AW27",
-          "attributes": {
-            "color": "кольор.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54658",
-          "name_product": "Шкарпетки RCL104W*AW27 CLB",
-          "sku": "RCL104W*AW27 ",
-          "attributes": {
-            "color": "кольор.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54658",
-          "name_product": "Шкарпетки RCL104W*AW27 CLB",
-          "sku": "RCL104W*AW27 ",
-          "attributes": {
-            "color": "кольор.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "54663",
-          "name_product": "Шкарпетки RCS6985*AW27 CLB",
-          "sku": "RCS6985*AW27",
-          "attributes": {
-            "color": "сірий",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "54663",
-          "name_product": "Шкарпетки RCS6985*AW27 CLB",
-          "sku": "RCS6985*AW27",
-          "attributes": {
-            "color": "сірий",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54663",
-          "name_product": "Шкарпетки RCS6985*AW27 CLB",
-          "sku": "RCS6985*AW27",
-          "attributes": {
-            "color": "сірий",
-            "size": "S"
-          }
-        }
-      ]
-    },
-    "13": {
-      "brand_id": "13",
-      "brand_name": "Jack Wolfskin",
-      "metadata": {
-        "target_website": "https://www.jack-wolfskin.com/search/?q={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53840",
-          "name_product": "Пуховик A65097*AW26 JW (ж)",
-          "sku": "A65097*AW26",
-          "attributes": {
-            "color": "сір.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "53840",
-          "name_product": "Пуховик A65097*AW26 JW (ж)",
-          "sku": "A65097*AW26",
-          "attributes": {
-            "color": "чорний",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "53840",
-          "name_product": "Пуховик A65097*AW26 JW (ж)",
-          "sku": "A65097*AW26",
-          "attributes": {
-            "color": "сір.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "53840",
-          "name_product": "Пуховик A65097*AW26 JW (ж)",
-          "sku": "A65097*AW26",
-          "attributes": {
-            "color": "чорний",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "53840",
-          "name_product": "Пуховик A65097*AW26 JW (ж)",
-          "sku": "A65097*AW26",
-          "attributes": {
-            "color": "сір.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "53840",
-          "name_product": "Пуховик A65097*AW26 JW (ж)",
-          "sku": "A65097*AW26",
-          "attributes": {
-            "color": "чорний",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "53840",
-          "name_product": "Пуховик A65097*AW26 JW (ж)",
-          "sku": "A65097*AW26",
-          "attributes": {
-            "color": "сір.",
-            "size": "XS"
-          }
-        }
-      ]
-    },
-    "16": {
-      "brand_id": "16",
-      "brand_name": "New Balance",
-      "metadata": {
-        "target_website": "https://newbalance.ua/store?page=1&s={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53443",
-          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
-          "sku": "MJ53504GT*AW26",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "53443",
-          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
-          "sku": "MJ53504GT*AW26",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "53443",
-          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
-          "sku": "MJ53504GT*AW26",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "53443",
-          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
-          "sku": "MJ53504GT*AW26",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "53443",
-          "name_product": "Фліска MJ53504GT*AW26 NB (ч)",
-          "sku": "MJ53504GT*AW26",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "XXL"
-          }
-        }
-      ]
-    },
     "43": {
       "brand_id": "43",
       "brand_name": "Adidas",
-      "metadata": {
-        "target_website": "https://www.adidas.ua/search?s={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "55141",
-          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
-          "sku": "KB9419*SS26 ",
-          "attributes": {
-            "color": "рож.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "55141",
-          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
-          "sku": "KB9419*SS26 ",
-          "attributes": {
-            "color": "рож.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "55141",
-          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
-          "sku": "KB9419*SS26 ",
-          "attributes": {
-            "color": "рож.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "55141",
-          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
-          "sku": "KB9419*SS26 ",
-          "attributes": {
-            "color": "рож.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55141",
-          "name_product": "Футболка KB9419*SS26 ADIDAS (ж)",
-          "sku": "KB9419*SS26 ",
-          "attributes": {
-            "color": "рож.",
-            "size": "XS"
-          }
-        }
-      ]
-    },
-    "45": {
-      "brand_id": "45",
-      "brand_name": "Puma",
-      "metadata": {
-        "target_website": "https://ua.puma.com/uk/catalogsearch/result/?q={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53062",
-          "name_product": "Труси 93832005*AW26 PUMA (ч)",
-          "sku": "93832005*AW26",
-          "attributes": {
-            "color": "сір/чорн",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "53411",
-          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
-          "sku": "70575003*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "53411",
-          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
-          "sku": "70575003*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "53411",
-          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
-          "sku": "70575003*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "53411",
-          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
-          "sku": "70575003*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "53411",
-          "name_product": "Лонгслів 70575003*AW26 PUMA (ч)",
-          "sku": "70575003*AW26",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        }
-      ]
-    },
-    "214": {
-      "brand_id": "214",
-      "brand_name": "M-TAC",
-      "metadata": {
-        "target_website": "https://militarist.ua/ua/search/?q={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53293",
-          "name_product": "Кружка зі складн. ручкою CL1C-M83 M-TAC",
-          "sku": "CL1C-M83",
-          "attributes": {
-            "color": "нерж.",
-            "size": "450ml"
-          }
-        },
-        {
-          "id_product": "53332",
-          "name_product": "Паракорд 550 type III PC15-OF M-TAC",
-          "sku": "MTC-PC15-OF",
-          "attributes": {
-            "color": "сір/зел",
-            "size": "15м"
-          }
-        },
-        {
-          "id_product": "53333",
-          "name_product": "Паракорд SC-3DS15--OD Shock-Cord 3mm M-TAC",
-          "sku": "MTC-SC-3DS15--OD",
-          "attributes": {
-            "color": "зелен.",
-            "size": "15м"
-          }
-        },
-        {
-          "id_product": "53932",
-          "name_product": "Карабін GCLI-00002-PK пластик. M-TAC",
-          "sku": "GCLI-00002-PK",
-          "attributes": {
-            "color": "рож.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53932",
-          "name_product": "Карабін GCLI-00002-PK пластик. M-TAC",
-          "sku": "",
-          "attributes": {
-            "color": "",
-            "size": ""
-          }
-        }
-      ]
-    },
-    "221": {
-      "brand_id": "221",
-      "brand_name": "camotec",
-      "metadata": {
-        "target_website": "https://camotec.ua/search/?searchString={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53972",
-          "name_product": "Погон НПУ Капітан 9242 Camotec",
-          "sku": "9242",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53973",
-          "name_product": "Погон НПУ Капрал 9236 Camotec",
-          "sku": "9236",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53974",
-          "name_product": "Погон НПУ Лейтенант 9240 Camotec",
-          "sku": "9240",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53975",
-          "name_product": "Погон НПУ Майор 9243 Camotec",
-          "sku": "9243",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53977",
-          "name_product": "Погон НПУ Підполковник 9245 Camotec",
-          "sku": "9245",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53978",
-          "name_product": "Погон НПУ Рядовий 9253 Camotec",
-          "sku": "9253",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53979",
-          "name_product": "Погон НПУ Сержант 9237 Camotec",
-          "sku": "9237",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "53981",
-          "name_product": "Погон НПУ Ст Сержант 9238 Camotec",
-          "sku": "9238",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "54363",
-          "name_product": "Каремат-сидушка 8205 KBG",
-          "sku": "8205",
-          "attributes": {
-            "color": "мульт",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "54364",
-          "name_product": "Каремат-сидушка 8405 KBG",
-          "sku": "8405",
-          "attributes": {
-            "color": "мульт",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55275",
-          "name_product": "TG/CTC Кріпл Molle з кар-м 8744 Camotec",
-          "sku": "8744",
-          "attributes": {
-            "color": "мульт",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55276",
-          "name_product": "Брюки Guard DW LT 9653 Camotec",
-          "sku": "9653",
-          "attributes": {
-            "color": "олива",
-            "size": "2XL"
-          }
-        },
-        {
-          "id_product": "55276",
-          "name_product": "Брюки Guard DW LT 9653 Camotec",
-          "sku": "9653",
-          "attributes": {
-            "color": "олива",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "55276",
-          "name_product": "Брюки Guard DW LT 9653 Camotec",
-          "sku": "9653",
-          "attributes": {
-            "color": "олива",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "55276",
-          "name_product": "Брюки Guard DW LT 9653 Camotec",
-          "sku": "9653",
-          "attributes": {
-            "color": "олива",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "55276",
-          "name_product": "Брюки Guard DW LT 9653 Camotec",
-          "sku": "9653",
-          "attributes": {
-            "color": "олива",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55277",
-          "name_product": "Патч Герб України (4.5*8) 9098 Camotec",
-          "sku": "9098",
-          "attributes": {
-            "color": "мульт",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55278",
-          "name_product": "Патч Конюшина 9121 Camotec",
-          "sku": "9121",
-          "attributes": {
-            "color": "зел.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55279",
-          "name_product": "Патч/Лип UKRAINE (2.5*9) 8643 Camotec",
-          "sku": "8643",
-          "attributes": {
-            "color": "мульт",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55280",
-          "name_product": "Патч/Липучка охорона 0753 Camotec",
-          "sku": "0753",
-          "attributes": {
-            "color": "чорн.",
-            "size": "31*10"
-          }
-        },
-        {
-          "id_product": "55281",
-          "name_product": "Прапор/Лип Укр з Тр-м 9280 Camotec",
-          "sku": "9280",
-          "attributes": {
-            "color": "олива",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55281",
-          "name_product": "Прапор/Лип Укр з Тр-м 9280 Camotec",
-          "sku": "9280",
-          "attributes": {
-            "color": "",
-            "size": ""
-          }
-        },
-        {
-          "id_product": "55282",
-          "name_product": "Футболка Chiton Patrol 7175 Camotec",
-          "sku": "7175",
-          "attributes": {
-            "color": "олива",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "55282",
-          "name_product": "Футболка Chiton Patrol 7175 Camotec",
-          "sku": "7175",
-          "attributes": {
-            "color": "олива",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "55282",
-          "name_product": "Футболка Chiton Patrol 7175 Camotec",
-          "sku": "7175",
-          "attributes": {
-            "color": "олива",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "55282",
-          "name_product": "Футболка Chiton Patrol 7175 Camotec",
-          "sku": "7175",
-          "attributes": {
-            "color": "олива",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55283",
-          "name_product": "Шарф-труба Basic CP Grid 2.0 8982 Camotec",
-          "sku": "8982",
-          "attributes": {
-            "color": "мульт",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55284",
-          "name_product": "Шарф-труба Eco Cotton 0812 Camotec",
-          "sku": "0812",
-          "attributes": {
-            "color": "олива",
-            "size": "O/S"
-          }
-        }
-      ]
-    },
-    "248": {
-      "brand_id": "248",
-      "brand_name": "Ganzo",
-      "metadata": {
-        "target_website": "https://ganzo.ua/search?search={{sku_prod}}"
-      },
-      "products": [
-        {
-          "id_product": "53303",
-          "name_product": "Мультитул NE20099 Ganzo (a)",
-          "sku": "NE20099\t",
-          "attributes": {
-            "color": "син",
-            "size": "O/S"
-          }
-        }
-      ]
-    },
-    "283": {
-      "brand_id": "283",
-      "brand_name": "Злий Борсук",
       "metadata": {
         "target_website": null
       },
       "products": [
         {
-          "id_product": "54776",
-          "name_product": "Бал. пакет МБП-200х135х165-2 клас BRS",
-          "sku": "МБП-200х135х165-2",
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
           "attributes": {
-            "color": "чорн.",
+            "color": "сірий",
+            "size": "36 2/3"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "37 1/3"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "38 2/3"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "39 1/3"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "40 2/3"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56326",
+          "name_product": "Кросівки JH6958*AW27 ADIDAS (ж)",
+          "sku": "JH6958*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "41 1/3"
+          }
+        },
+        {
+          "id_product": "56327",
+          "name_product": "Футболка JX3090*SS26 ADIDAS (ч)",
+          "sku": "JX3090*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56327",
+          "name_product": "Футболка JX3090*SS26 ADIDAS (ч)",
+          "sku": "JX3090*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56327",
+          "name_product": "Футболка JX3090*SS26 ADIDAS (ч)",
+          "sku": "JX3090*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56327",
+          "name_product": "Футболка JX3090*SS26 ADIDAS (ч)",
+          "sku": "JX3090*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56328",
+          "name_product": "Футболка JY3650*SS26 ADIDAS (ч)",
+          "sku": "JY3650*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56328",
+          "name_product": "Футболка JY3650*SS26 ADIDAS (ч)",
+          "sku": "JY3650*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56328",
+          "name_product": "Футболка JY3650*SS26 ADIDAS (ч)",
+          "sku": "JY3650*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56328",
+          "name_product": "Футболка JY3650*SS26 ADIDAS (ч)",
+          "sku": "JY3650*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56328",
+          "name_product": "Футболка JY3650*SS26 ADIDAS (ч)",
+          "sku": "JY3650*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56331",
+          "name_product": "Футболка KC4275*SS26 ADIDAS (ч)",
+          "sku": "KC4275*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56331",
+          "name_product": "Футболка KC4275*SS26 ADIDAS (ч)",
+          "sku": "KC4275*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56331",
+          "name_product": "Футболка KC4275*SS26 ADIDAS (ч)",
+          "sku": "KC4275*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56331",
+          "name_product": "Футболка KC4275*SS26 ADIDAS (ч)",
+          "sku": "KC4275*SS26",
+          "attributes": {
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56332",
+          "name_product": "Футболка KC7097*SS26 ADIDAS (ч)",
+          "sku": "KC7097*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56332",
+          "name_product": "Футболка KC7097*SS26 ADIDAS (ч)",
+          "sku": "KC7097*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56332",
+          "name_product": "Футболка KC7097*SS26 ADIDAS (ч)",
+          "sku": "KC7097*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56332",
+          "name_product": "Футболка KC7097*SS26 ADIDAS (ч)",
+          "sku": "KC7097*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56332",
+          "name_product": "Футболка KC7097*SS26 ADIDAS (ч)",
+          "sku": "KC7097*SS26 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56333",
+          "name_product": "Футболка KD5453*AW27 ADIDAS (ч)",
+          "sku": "KD5453*AW27",
+          "attributes": {
+            "color": "білий",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56333",
+          "name_product": "Футболка KD5453*AW27 ADIDAS (ч)",
+          "sku": "KD5453*AW27",
+          "attributes": {
+            "color": "білий",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "56333",
+          "name_product": "Футболка KD5453*AW27 ADIDAS (ч)",
+          "sku": "KD5453*AW27",
+          "attributes": {
+            "color": "білий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56333",
+          "name_product": "Футболка KD5453*AW27 ADIDAS (ч)",
+          "sku": "KD5453*AW27",
+          "attributes": {
+            "color": "білий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56333",
+          "name_product": "Футболка KD5453*AW27 ADIDAS (ч)",
+          "sku": "KD5453*AW27",
+          "attributes": {
+            "color": "білий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56333",
+          "name_product": "Футболка KD5453*AW27 ADIDAS (ч)",
+          "sku": "KD5453*AW27",
+          "attributes": {
+            "color": "білий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56335",
+          "name_product": "Футболка KT2766*AW27 ADIDAS (ж)",
+          "sku": "KT2766*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56335",
+          "name_product": "Футболка KT2766*AW27 ADIDAS (ж)",
+          "sku": "KT2766*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56335",
+          "name_product": "Футболка KT2766*AW27 ADIDAS (ж)",
+          "sku": "KT2766*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56335",
+          "name_product": "Футболка KT2766*AW27 ADIDAS (ж)",
+          "sku": "KT2766*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56335",
+          "name_product": "Футболка KT2766*AW27 ADIDAS (ж)",
+          "sku": "KT2766*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56446",
+          "name_product": "Брюки JM5541*AW27 ADIDAS (ч)",
+          "sku": "JM5541*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56446",
+          "name_product": "Брюки JM5541*AW27 ADIDAS (ч)",
+          "sku": "JM5541*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "56446",
+          "name_product": "Брюки JM5541*AW27 ADIDAS (ч)",
+          "sku": "JM5541*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56446",
+          "name_product": "Брюки JM5541*AW27 ADIDAS (ч)",
+          "sku": "JM5541*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56446",
+          "name_product": "Брюки JM5541*AW27 ADIDAS (ч)",
+          "sku": "JM5541*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56446",
+          "name_product": "Брюки JM5541*AW27 ADIDAS (ч)",
+          "sku": "JM5541*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56453",
+          "name_product": "Футболка KG1341*AW27 ADIDAS (ч)",
+          "sku": "KG1341*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56453",
+          "name_product": "Футболка KG1341*AW27 ADIDAS (ч)",
+          "sku": "KG1341*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56453",
+          "name_product": "Футболка KG1341*AW27 ADIDAS (ч)",
+          "sku": "KG1341*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56453",
+          "name_product": "Футболка KG1341*AW27 ADIDAS (ч)",
+          "sku": "KG1341*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56453",
+          "name_product": "Футболка KG1341*AW27 ADIDAS (ч)",
+          "sku": "KG1341*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56454",
+          "name_product": "Шорти KG0471*AW27 ADIDAS (ч)",
+          "sku": "KG0471*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56454",
+          "name_product": "Шорти KG0471*AW27 ADIDAS (ч)",
+          "sku": "KG0471*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56454",
+          "name_product": "Шорти KG0471*AW27 ADIDAS (ч)",
+          "sku": "KG0471*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56454",
+          "name_product": "Шорти KG0471*AW27 ADIDAS (ч)",
+          "sku": "KG0471*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56454",
+          "name_product": "Шорти KG0471*AW27 ADIDAS (ч)",
+          "sku": "KG0471*AW27",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56522",
+          "name_product": "Брюки JD1857*AW27 ADIDAS (ч)",
+          "sku": "JD1857*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56522",
+          "name_product": "Брюки JD1857*AW27 ADIDAS (ч)",
+          "sku": "JD1857*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56522",
+          "name_product": "Брюки JD1857*AW27 ADIDAS (ч)",
+          "sku": "JD1857*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56522",
+          "name_product": "Брюки JD1857*AW27 ADIDAS (ч)",
+          "sku": "JD1857*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56526",
+          "name_product": "Вітрівка IW0418*AW27 ADIDAS (ч)",
+          "sku": "IW0418*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56526",
+          "name_product": "Вітрівка IW0418*AW27 ADIDAS (ч)",
+          "sku": "IW0418*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56526",
+          "name_product": "Вітрівка IW0418*AW27 ADIDAS (ч)",
+          "sku": "IW0418*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56526",
+          "name_product": "Вітрівка IW0418*AW27 ADIDAS (ч)",
+          "sku": "IW0418*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56527",
+          "name_product": "Вітрівка JZ9101*AW27 ADIDAS (ч)",
+          "sku": "JZ9101*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56527",
+          "name_product": "Вітрівка JZ9101*AW27 ADIDAS (ч)",
+          "sku": "JZ9101*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56527",
+          "name_product": "Вітрівка JZ9101*AW27 ADIDAS (ч)",
+          "sku": "JZ9101*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56527",
+          "name_product": "Вітрівка JZ9101*AW27 ADIDAS (ч)",
+          "sku": "JZ9101*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56528",
+          "name_product": "Джемпер HZ3743*AW27 ADIDAS (ж)",
+          "sku": "HZ3743*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56528",
+          "name_product": "Джемпер HZ3743*AW27 ADIDAS (ж)",
+          "sku": "HZ3743*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56528",
+          "name_product": "Джемпер HZ3743*AW27 ADIDAS (ж)",
+          "sku": "HZ3743*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56528",
+          "name_product": "Джемпер HZ3743*AW27 ADIDAS (ж)",
+          "sku": "HZ3743*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "36 2/3"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "37 1/3"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "38 2/3"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "39 1/3"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "40 2/3"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56532",
+          "name_product": "Кеди KH9452*AW27 ADIDAS (ж)",
+          "sku": "KH9452*AW27 ",
+          "attributes": {
+            "color": "біл/зел",
+            "size": "41 1/3"
+          }
+        },
+        {
+          "id_product": "56533",
+          "name_product": "Костюм JC5375*AW27 ADIDAS (ч)",
+          "sku": "JC5375*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56533",
+          "name_product": "Костюм JC5375*AW27 ADIDAS (ч)",
+          "sku": "JC5375*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56533",
+          "name_product": "Костюм JC5375*AW27 ADIDAS (ч)",
+          "sku": "JC5375*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56533",
+          "name_product": "Костюм JC5375*AW27 ADIDAS (ч)",
+          "sku": "JC5375*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56533",
+          "name_product": "Костюм JC5375*AW27 ADIDAS (ч)",
+          "sku": "JC5375*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56534",
+          "name_product": "Кросівки JQ5361*AW27 ADIDAS (ч)",
+          "sku": "JQ5361*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "42 2/3"
+          }
+        },
+        {
+          "id_product": "56534",
+          "name_product": "Кросівки JQ5361*AW27 ADIDAS (ч)",
+          "sku": "JQ5361*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "56534",
+          "name_product": "Кросівки JQ5361*AW27 ADIDAS (ч)",
+          "sku": "JQ5361*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "56534",
+          "name_product": "Кросівки JQ5361*AW27 ADIDAS (ч)",
+          "sku": "JQ5361*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56534",
+          "name_product": "Кросівки JQ5361*AW27 ADIDAS (ч)",
+          "sku": "JQ5361*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "56534",
+          "name_product": "Кросівки JQ5361*AW27 ADIDAS (ч)",
+          "sku": "JQ5361*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "40 2/3"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "41 1/3"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "42 2/3"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "46 2/3"
+          }
+        },
+        {
+          "id_product": "56535",
+          "name_product": "Кросівки JQ9953*AW27 ADIDAS (ч)",
+          "sku": "JQ9953*AW27 ",
+          "attributes": {
+            "color": "св.кор/чорн",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "36 2/3"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "37 1/3"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "38 2/3"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "39 1/3"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "40 2/3"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56536",
+          "name_product": "Кросівки KJ1918*AW27 ADIDAS (ж)",
+          "sku": "KJ1918*AW27",
+          "attributes": {
+            "color": "біл/сір",
+            "size": "41 1/3"
+          }
+        },
+        {
+          "id_product": "56537",
+          "name_product": "Куртка JZ6668*AW27 ADIDAS (ч)",
+          "sku": "JZ6668*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56537",
+          "name_product": "Куртка JZ6668*AW27 ADIDAS (ч)",
+          "sku": "JZ6668*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56537",
+          "name_product": "Куртка JZ6668*AW27 ADIDAS (ч)",
+          "sku": "JZ6668*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56537",
+          "name_product": "Куртка JZ6668*AW27 ADIDAS (ч)",
+          "sku": "JZ6668*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56537",
+          "name_product": "Куртка JZ6668*AW27 ADIDAS (ч)",
+          "sku": "JZ6668*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56538",
+          "name_product": "Лонгслів JJ1515*AW27 ADIDAS (ч)",
+          "sku": "JJ1515*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56538",
+          "name_product": "Лонгслів JJ1515*AW27 ADIDAS (ч)",
+          "sku": "JJ1515*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56538",
+          "name_product": "Лонгслів JJ1515*AW27 ADIDAS (ч)",
+          "sku": "JJ1515*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56538",
+          "name_product": "Лонгслів JJ1515*AW27 ADIDAS (ч)",
+          "sku": "JJ1515*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56538",
+          "name_product": "Лонгслів JJ1515*AW27 ADIDAS (ч)",
+          "sku": "JJ1515*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56539",
+          "name_product": "Світшот JF3542*AW27 ADIDAS (ч)",
+          "sku": "JF3542*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56539",
+          "name_product": "Світшот JF3542*AW27 ADIDAS (ч)",
+          "sku": "JF3542*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56539",
+          "name_product": "Світшот JF3542*AW27 ADIDAS (ч)",
+          "sku": "JF3542*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56539",
+          "name_product": "Світшот JF3542*AW27 ADIDAS (ч)",
+          "sku": "JF3542*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56540",
+          "name_product": "Топ JN6896*AW27 ADIDAS (ж)",
+          "sku": "JN6896*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56540",
+          "name_product": "Топ JN6896*AW27 ADIDAS (ж)",
+          "sku": "JN6896*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56540",
+          "name_product": "Топ JN6896*AW27 ADIDAS (ж)",
+          "sku": "JN6896*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56540",
+          "name_product": "Топ JN6896*AW27 ADIDAS (ж)",
+          "sku": "JN6896*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56540",
+          "name_product": "Топ JN6896*AW27 ADIDAS (ж)",
+          "sku": "JN6896*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56541",
+          "name_product": "Футболка JJ1518*AW27 ADIDAS (ч)",
+          "sku": "JJ1518*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56541",
+          "name_product": "Футболка JJ1518*AW27 ADIDAS (ч)",
+          "sku": "JJ1518*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56541",
+          "name_product": "Футболка JJ1518*AW27 ADIDAS (ч)",
+          "sku": "JJ1518*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56541",
+          "name_product": "Футболка JJ1518*AW27 ADIDAS (ч)",
+          "sku": "JJ1518*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56541",
+          "name_product": "Футболка JJ1518*AW27 ADIDAS (ч)",
+          "sku": "JJ1518*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56542",
+          "name_product": "Футболка KE9932*AW27 ADIDAS (ч)",
+          "sku": "KE9932*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56542",
+          "name_product": "Футболка KE9932*AW27 ADIDAS (ч)",
+          "sku": "KE9932*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56542",
+          "name_product": "Футболка KE9932*AW27 ADIDAS (ч)",
+          "sku": "KE9932*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56542",
+          "name_product": "Футболка KE9932*AW27 ADIDAS (ч)",
+          "sku": "KE9932*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56542",
+          "name_product": "Футболка KE9932*AW27 ADIDAS (ч)",
+          "sku": "KE9932*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56543",
+          "name_product": "Худі JD1864*AW27 ADIDAS (ч)",
+          "sku": "JD1864*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56543",
+          "name_product": "Худі JD1864*AW27 ADIDAS (ч)",
+          "sku": "JD1864*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56543",
+          "name_product": "Худі JD1864*AW27 ADIDAS (ч)",
+          "sku": "JD1864*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56543",
+          "name_product": "Худі JD1864*AW27 ADIDAS (ч)",
+          "sku": "JD1864*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56543",
+          "name_product": "Худі JD1864*AW27 ADIDAS (ч)",
+          "sku": "JD1864*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "41 1/3"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "42 2/3"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "46 2/3"
+          }
+        },
+        {
+          "id_product": "56544",
+          "name_product": "Черевики IF4977*AW27 ADIDAS (ч)",
+          "sku": "IF4977*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "56545",
+          "name_product": "Черевики JQ7903*AW27 ADIDAS (ж)",
+          "sku": "JQ7903*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "36 2/3"
+          }
+        },
+        {
+          "id_product": "56545",
+          "name_product": "Черевики JQ7903*AW27 ADIDAS (ж)",
+          "sku": "JQ7903*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "56545",
+          "name_product": "Черевики JQ7903*AW27 ADIDAS (ж)",
+          "sku": "JQ7903*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "37 1/3"
+          }
+        },
+        {
+          "id_product": "56545",
+          "name_product": "Черевики JQ7903*AW27 ADIDAS (ж)",
+          "sku": "JQ7903*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "38 2/3"
+          }
+        },
+        {
+          "id_product": "56545",
+          "name_product": "Черевики JQ7903*AW27 ADIDAS (ж)",
+          "sku": "JQ7903*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "56545",
+          "name_product": "Черевики JQ7903*AW27 ADIDAS (ж)",
+          "sku": "JQ7903*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "39 1/3"
+          }
+        },
+        {
+          "id_product": "56545",
+          "name_product": "Черевики JQ7903*AW27 ADIDAS (ж)",
+          "sku": "JQ7903*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56546",
+          "name_product": "Черевики JR0170*AW27 ADIDAS (ч)",
+          "sku": "JR0170*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "41 1/3"
+          }
+        },
+        {
+          "id_product": "56546",
+          "name_product": "Черевики JR0170*AW27 ADIDAS (ч)",
+          "sku": "JR0170*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "42 2/3"
+          }
+        },
+        {
+          "id_product": "56546",
+          "name_product": "Черевики JR0170*AW27 ADIDAS (ч)",
+          "sku": "JR0170*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56546",
+          "name_product": "Черевики JR0170*AW27 ADIDAS (ч)",
+          "sku": "JR0170*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "56546",
+          "name_product": "Черевики JR0170*AW27 ADIDAS (ч)",
+          "sku": "JR0170*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "56546",
+          "name_product": "Черевики JR0170*AW27 ADIDAS (ч)",
+          "sku": "JR0170*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56546",
+          "name_product": "Черевики JR0170*AW27 ADIDAS (ч)",
+          "sku": "JR0170*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "56547",
+          "name_product": "Шапочка д/п KB9510*AW27 ADIDAS",
+          "sku": "KB9510*AW27 ",
+          "attributes": {
+            "color": "чорний",
             "size": "O/S"
           }
         },
         {
-          "id_product": "54777",
-          "name_product": "Бал. пакет МБП-230х170-2 клас BRS",
-          "sku": "МБП-230х170-2",
+          "id_product": "56548",
+          "name_product": "Шапочка д/п KH3997*AW27 ADIDAS",
+          "sku": "KH3997*AW27",
           "attributes": {
-            "color": "чорн.",
+            "color": "рож.",
             "size": "O/S"
           }
         },
         {
-          "id_product": "54779",
-          "name_product": "Джгут-турнікет CAT ID_1898 BRS",
-          "sku": "ID_1898",
+          "id_product": "56575",
+          "name_product": "Брюки IW0415*AW27 ADIDAS (ч)",
+          "sku": "IW0415*AW27",
           "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
+            "color": "чорний",
+            "size": "L"
           }
         },
         {
-          "id_product": "54793",
-          "name_product": "Підс-к під гр-ту NATO ПГН1.1-0068 BRS",
-          "sku": "ПГН1.1-0068",
+          "id_product": "56575",
+          "name_product": "Брюки IW0415*AW27 ADIDAS (ч)",
+          "sku": "IW0415*AW27",
           "attributes": {
-            "color": "мульт",
-            "size": "O/S"
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56575",
+          "name_product": "Брюки IW0415*AW27 ADIDAS (ч)",
+          "sku": "IW0415*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56575",
+          "name_product": "Брюки IW0415*AW27 ADIDAS (ч)",
+          "sku": "IW0415*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
           }
         }
       ]

@@ -312,6 +312,14 @@ class RozetkaScenario {
                         });
                         throw new Error(`One of the results from source.workerHttpRequest() is invalid  ${autocomplete}`);
                     }
+                    loggerScope?.debug('****************', {
+                        component: 'RozetkaScenario',
+                        method: 'process',
+                        action: 'for (const g of autocomplete.body?.data.content.records.goods ?? [])',
+                        data: {
+                            autocomplete: autocomplete,
+                        },
+                    });
                     for (const g of autocomplete.body?.data.content.records.goods ?? []) {
                         if (!this.isAutocompleteGood(g)) {
                             loggerScope?.debug('Missing or invalid goods in the workerHttpRequest results', {
