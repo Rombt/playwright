@@ -5,7 +5,7 @@
       "brand_id": "221",
       "brand_name": "camotec",
       "metadata": {
-        "target_website": "https://camotec.ua/search/?searchString={{sku_prod}}"
+        "target_website": "https://camotec.ua/search?q={{sku_prod}}"
       },
       "products": [
         {

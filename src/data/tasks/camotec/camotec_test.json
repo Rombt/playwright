@@ -5,52 +5,232 @@
       "brand_id": "221",
       "brand_name": "camotec",
       "metadata": {
-        "target_website": "https://camotec.ua/search/?searchString={{sku_prod}}"
+        "target_website": "https://camotec.ua/search?q={{sku_prod}}"
       },
       "products": [
         {
-          "id_product": "53273",
-          "name_product": "Брюки Lizard 2.0 DW 9331 Camotec",
-          "sku": "9331_1111",
+          "id_product": "56680",
+          "name_product": "Сорочка \"Вектор\" 9777 Camotec",
+          "sku": "9777",
+          "attributes": {
+            "color": "ол/біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56680",
+          "name_product": "Сорочка \"Вектор\" 9777 Camotec",
+          "sku": "9777",
+          "attributes": {
+            "color": "ол/біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56680",
+          "name_product": "Сорочка \"Вектор\" 9777 Camotec",
+          "sku": "9777",
+          "attributes": {
+            "color": "ол/біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56681",
+          "name_product": "Термобілизна ThermoGrid 8547 Camotec",
+          "sku": "8547",
+          "attributes": {
+            "color": "графіт",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56681",
+          "name_product": "Термобілизна ThermoGrid 8547 Camotec",
+          "sku": "8547",
+          "attributes": {
+            "color": "графіт",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56681",
+          "name_product": "Термобілизна ThermoGrid 8547 Camotec",
+          "sku": "8547",
+          "attributes": {
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56681",
+          "name_product": "Термобілизна ThermoGrid 8547 Camotec",
+          "sku": "8547",
+          "attributes": {
+            "color": "графіт",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56682",
+          "name_product": "Футболка Modal Ukrainian Army10107 Camotec",
+          "sku": "10107",
+          "attributes": {
+            "color": "хакі",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56682",
+          "name_product": "Футболка Modal Ukrainian Army10107 Camotec",
+          "sku": "10107",
+          "attributes": {
+            "color": "хакі",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56682",
+          "name_product": "Футболка Modal Ukrainian Army10107 Camotec",
+          "sku": "10107",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56682",
+          "name_product": "Футболка Modal Ukrainian Army10107 Camotec",
+          "sku": "10107",
+          "attributes": {
+            "color": "хакі",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56682",
+          "name_product": "Футболка Modal Ukrainian Army10107 Camotec",
+          "sku": "10107",
+          "attributes": {
+            "color": "хакі",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56685",
+          "name_product": "Кокарда/липучка 9291 Поліція Camotec",
+          "sku": "9291",
           "attributes": {
             "color": "чорн.",
-            "size": "L"
+            "size": "5см"
           }
         },
         {
-          "id_product": "53274",
-          "name_product": "Брюки Lizard 2.0 DW 9339 Camotec",
-          "sku": "9339_1111",
-          "attributes": {
-            "color": "олив",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "53275",
-          "name_product": "Брюки SoftShell Vent 3.0 9295 Camotec",
-          "sku": "9295_1111",
+          "id_product": "56686",
+          "name_product": "Патч Memento Mori 9616 Camotec",
+          "sku": "9616",
           "attributes": {
             "color": "мульт",
-            "size": "XXL"
+            "size": "O/S"
           }
         },
         {
-          "id_product": "53276",
-          "name_product": "Брюки Stalker Vent 3.0 SoftShell 9144 Camotec",
-          "sku": "9144",
+          "id_product": "56687",
+          "name_product": "Патч Punisher 9567 Camotec",
+          "sku": "9567",
           "attributes": {
-            "color": "олив",
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56688",
+          "name_product": "Патч Герб \"Воля\" 9622 Camotec",
+          "sku": "9622",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56689",
+          "name_product": "Патч Герб \"Воля\" 9624 Camotec",
+          "sku": "9624",
+          "attributes": {
+            "color": "мульт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56690",
+          "name_product": "Патч Герб України (4.5*8) 9096 Camotec",
+          "sku": "9096",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56691",
+          "name_product": "Патч Герб України (4х5,5 см) 7774 Camotec",
+          "sku": "7774",
+          "attributes": {
+            "color": "чорн/черв",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56692",
+          "name_product": "Патч Очі Венома (2.5*8) 8855 Camotec",
+          "sku": "8855",
+          "attributes": {
+            "color": "чорн/люм",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56693",
+          "name_product": "Прапор/Лип Укр з Тр-м 6556 Camotec",
+          "sku": "6556",
+          "attributes": {
+            "color": "олива",
             "size": "L"
           }
         },
         {
-          "id_product": "53356",
-          "name_product": "Сорочка \"Буревій\" 9306 Camotec",
-          "sku": "9306",
+          "id_product": "56694",
+          "name_product": "Прапор/Липучка 9279 Camotec",
+          "sku": "9279",
           "attributes": {
-            "color": "пісочн/біл",
-            "size": "L"
+            "color": "пікс",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56695",
+          "name_product": "Сумка COB Sling 7130 Camotec",
+          "sku": "7130",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56696",
+          "name_product": "Шеврон прапор України 5859 Camotec",
+          "sku": "5859",
+          "attributes": {
+            "color": "син/жовт",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56697",
+          "name_product": "Шеврон Смерть з небес 7784 Camotec",
+          "sku": "7784",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
           }
         }
       ]

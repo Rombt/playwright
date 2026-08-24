@@ -20,7 +20,7 @@ class PageImageSourceCamotec {
         this.flowRunner = flowRunner;
     }
     supports(task) {
-        return task.metadata.target_website === 'https://camotec.ua/search/?searchString={{sku_prod}}';
+        return task.metadata.target_website === 'https://camotec.ua/search?q={{sku_prod}}';
     }
     async execute(ctx) {
         ctx.stepParams = new Map([
@@ -28,15 +28,15 @@ class PageImageSourceCamotec {
                 CheckSearchResultsStep_1.default,
                 {
                     strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: '#slick-slide00 > div > a',
+                    linkSelector: 'div[ref="cardGallery"] > a[ref="cardGalleryLink"]',
                     emptySelector: 'div > p.emptyList',
                 },
             ],
-            [CheckPageSkuStep_1.default, { pageSkuSelector: '#vendorCode' }],
+            [CheckPageSkuStep_1.default, { pageSkuSelector: 'div[ref="skuContainer"] > span[ref="sku"]' }],
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: '#productImageBlock .mainImageBlock',
+                    gallerySelector: 'ul[data-testid="media-gallery-grid"]',
                 },
             ],
             [
@@ -50,8 +50,8 @@ class PageImageSourceCamotec {
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['#offerDescriptionText'],
-                    removeSelectors: [],
+                    containers: ['[id*="product_description"]'],
+                    removeSelectors: ['button'],
                     expand: false,
                     separator: '\n',
                 },

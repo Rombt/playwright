@@ -28,7 +28,7 @@ class PageImageSourceCamotec implements ISource<ICollectProductPhotosTask> {
   ) {}
 
   supports(task: ICollectProductPhotosTask): boolean {
-    return task.metadata.target_website === 'https://camotec.ua/search/?searchString={{sku_prod}}';
+    return task.metadata.target_website === 'https://camotec.ua/search?q={{sku_prod}}';
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
@@ -37,15 +37,15 @@ class PageImageSourceCamotec implements ISource<ICollectProductPhotosTask> {
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: '#slick-slide00 > div > a',
+          linkSelector: 'div[ref="cardGallery"] > a[ref="cardGalleryLink"]',
           emptySelector: 'div > p.emptyList',
         },
       ],
-      [CheckPageSkuStep, { pageSkuSelector: '#vendorCode' }],
+      [CheckPageSkuStep, { pageSkuSelector: 'div[ref="skuContainer"] > span[ref="sku"]' }],
       [
         SearchGalleryStep,
         {
-          gallerySelector: '#productImageBlock .mainImageBlock',
+          gallerySelector: 'ul[data-testid="media-gallery-grid"]',
         },
       ],
       [
@@ -60,8 +60,8 @@ class PageImageSourceCamotec implements ISource<ICollectProductPhotosTask> {
       [
         CollectDescriptionStep,
         {
-          containers: ['#offerDescriptionText'],
-          removeSelectors: [],
+          containers: ['[id*="product_description"]'],
+          removeSelectors: ['button'],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,
