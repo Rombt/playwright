@@ -19,11 +19,11 @@ exports.config = {
             maxPageDownloadImg: 5, // если не задавать то будет равным maxPage если и maxPage не задано то 10
             maxWaiters: 1500,
             // pageLoadWait: 10000,
-            pageLoadWait: 100000, //  для особо тяжёлых картинок типа как здесь https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}
+            pageLoadWait: 120000, // так много потому что у некоторых сайтов очень тяжёлые картинки например как здесь https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}
         },
     },
     data: {
-        resultsFolder: 'results/4f/4f_3_test',
+        resultsFolder: 'results/4f/4f_3_test_1',
         // resultsFolder: 'results/avecs/avecs_prod_13.08.26',
         // resultsFolder: 'results/kappa/kappa_test',
         // resultsFolder: 'results/alpine_crown/alpine_crown_test',

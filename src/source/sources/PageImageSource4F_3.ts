@@ -59,7 +59,7 @@ class PageImageSource4F_3 implements ISource<ICollectProductPhotosTask> {
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: 'div.search_list__products a.search_top__icon',
+          linkSelector: `div.search_list__products a.search_top__icon[href*="${ctx.input.product.sku}" i]`,
           emptySelector: '#content h3.noproduct__label',
           emptySelectorText: 'Szukany produkt nie został znaleziony',
         },
