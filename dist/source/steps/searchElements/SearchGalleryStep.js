@@ -15,12 +15,12 @@ class SearchGalleryStep extends BaseStep_1.BaseStep {
             await gallery.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
         }
         catch (error) {
-            throw new Error('No gallery found on page');
+            throw new Error('No gallery found on page for sku ' + ctx.input.product.sku);
         }
         //todo не уверен что эта проверка нужна
         const count = await gallery.count();
         if (count === 0)
-            throw new Error('No gallery found on page 222');
+            throw new Error('No gallery found on page 222 for sku ' + ctx.input.product.sku);
         const firstImg = gallery.locator('img').first();
         await firstImg.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
         ctx.logger?.debug('The gallery is found', {

@@ -18,10 +18,12 @@ exports.config = {
             // maxPage: 1, // for salomon
             maxPageDownloadImg: 5, // если не задавать то будет равным maxPage если и maxPage не задано то 10
             maxWaiters: 1500,
-            pageLoadWait: 10000,
+            // pageLoadWait: 10000,
+            pageLoadWait: 100000, //  для особо тяжёлых картинок типа как здесь https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}
         },
     },
     data: {
+        resultsFolder: 'results/4f/4f_3_test',
         // resultsFolder: 'results/avecs/avecs_prod_13.08.26',
         // resultsFolder: 'results/kappa/kappa_test',
         // resultsFolder: 'results/alpine_crown/alpine_crown_test',
@@ -36,7 +38,6 @@ exports.config = {
         // resultsFolder: 'results/joma/joma_test',
         // resultsFolder: 'results/fenix/fenix_test',
         // resultsFolder: 'results/m-tac/militarist_12.08.26',
-        resultsFolder: 'results/camotec/camotec_test',
         // resultsFolder: 'results/adidas/adidas_prod_13.08.26',
         // resultsFolder: 'results/everlast/everlast_test',
         // resultsFolder: 'results/puma/puma_test',
@@ -44,6 +45,8 @@ exports.config = {
         // resultsFolder: 'results/under_armour/under_armour_prod_10.08.26_1',
         // resultsFolder: 'results/salomon/salomon_test',
         // resultsFolder: 'results/nike/nike_prod',
+        taskPath: 'src/data/tasks/4f/4f_3_test.json',
+        // taskPath: 'src/data/tasks/4f/4f_1_test.json',
         // taskPath: 'src/data/tasks/avecs/avecs_prod.json',
         // taskPath: 'src/data/tasks/adidas/adidas_prod.json',
         // taskPath: 'src/data/tasks/adidas/adidas_test_short.json',
@@ -56,7 +59,7 @@ exports.config = {
         // taskPath: 'src/data/tasks/srm/srm_test.json',
         // taskPath: 'src/data/tasks/joma/joma_test.json',
         // taskPath: 'src/data/tasks/m-tac/m-tac_prod.json',
-        taskPath: 'src/data/tasks/camotec/camotec_test.json',
+        // taskPath: 'src/data/tasks/camotec/camotec_test.json',
         // taskPath: 'src/data/tasks/everlast/everlast_test.json',
         // taskPath: 'src/data/tasks/skechers/skechers.json',
         // taskPath: 'src/data/tasks/svastone/svastone_test.json',

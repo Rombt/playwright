@@ -7,6 +7,7 @@
     "outDir": "dist",
     "strict": true,
     "types": ["node"],
+    "resolveJsonModule": true,
 
     /* Добавьте эти две строки ниже: */
     "esModuleInterop": true,

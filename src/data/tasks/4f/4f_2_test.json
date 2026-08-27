@@ -1,0 +1,2876 @@
+{
+  "generated_at": "2026-08-27_12-15",
+  "task": {
+    "35": {
+      "brand_id": "35",
+      "brand_name": "4F",
+      "metadata": {
+        "target_website": "https://fanaticsport.ua/ua/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "54956",
+          "name_product": "Джемпер WSF2520*SS26 4F (під)",
+          "sku": "WSF2520*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "54956",
+          "name_product": "Джемпер WSF2520*SS26 4F (під)",
+          "sku": "WSF2520*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "54956",
+          "name_product": "Джемпер WSF2520*SS26 4F (під)",
+          "sku": "WSF2520*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "54956",
+          "name_product": "Джемпер WSF2520*SS26 4F (під)",
+          "sku": "WSF2520*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "54956",
+          "name_product": "Джемпер WSF2520*SS26 4F (під)",
+          "sku": "WSF2520*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "54956",
+          "name_product": "Джемпер WSF2520*SS26 4F (під)",
+          "sku": "WSF2520*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "54956",
+          "name_product": "Джемпер WSF2520*SS26 4F (під)",
+          "sku": "WSF2520*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "54957",
+          "name_product": "Джемпер WSF2534*SS26 4F (ж)",
+          "sku": "WSF2534*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54957",
+          "name_product": "Джемпер WSF2534*SS26 4F (ж)",
+          "sku": "WSF2534*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54957",
+          "name_product": "Джемпер WSF2534*SS26 4F (ж)",
+          "sku": "WSF2534*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54957",
+          "name_product": "Джемпер WSF2534*SS26 4F (ж)",
+          "sku": "WSF2534*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54957",
+          "name_product": "Джемпер WSF2534*SS26 4F (ж)",
+          "sku": "WSF2534*SS26",
+          "attributes": {
+            "color": "св.сiр",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "54958",
+          "name_product": "Джемпер WSM2523*SS26 4F (під)",
+          "sku": "WSM2523*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "54959",
+          "name_product": "Легінси TIGF296*SS26 4F (ж)",
+          "sku": "TIGF296*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54959",
+          "name_product": "Легінси TIGF296*SS26 4F (ж)",
+          "sku": "TIGF296*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54959",
+          "name_product": "Легінси TIGF296*SS26 4F (ж)",
+          "sku": "TIGF296*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54959",
+          "name_product": "Легінси TIGF296*SS26 4F (ж)",
+          "sku": "TIGF296*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54960",
+          "name_product": "Лонгслів LONM611*SS26 4F (ч)",
+          "sku": "LONM611*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "54960",
+          "name_product": "Лонгслів LONM611*SS26 4F (ч)",
+          "sku": "LONM611*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54960",
+          "name_product": "Лонгслів LONM611*SS26 4F (ч)",
+          "sku": "LONM611*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54960",
+          "name_product": "Лонгслів LONM611*SS26 4F (ч)",
+          "sku": "LONM611*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54960",
+          "name_product": "Лонгслів LONM611*SS26 4F (ч)",
+          "sku": "LONM611*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54960",
+          "name_product": "Лонгслів LONM611*SS26 4F (ч)",
+          "sku": "LONM611*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54962",
+          "name_product": "Сумка POUU123*SS26 4F",
+          "sku": "POUU123*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "54964",
+          "name_product": "Труси BXSM080*SS26 4F",
+          "sku": "BXSM080*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54964",
+          "name_product": "Труси BXSM080*SS26 4F",
+          "sku": "BXSM080*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54964",
+          "name_product": "Труси BXSM080*SS26 4F",
+          "sku": "BXSM080*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54964",
+          "name_product": "Труси BXSM080*SS26 4F",
+          "sku": "BXSM080*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54967",
+          "name_product": "Футболка SHF3003*SS26 4F (під)",
+          "sku": "SHF3003*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "54967",
+          "name_product": "Футболка SHF3003*SS26 4F (під)",
+          "sku": "SHF3003*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "54967",
+          "name_product": "Футболка SHF3003*SS26 4F (під)",
+          "sku": "SHF3003*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "54967",
+          "name_product": "Футболка SHF3003*SS26 4F (під)",
+          "sku": "SHF3003*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "54967",
+          "name_product": "Футболка SHF3003*SS26 4F (під)",
+          "sku": "SHF3003*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "54967",
+          "name_product": "Футболка SHF3003*SS26 4F (під)",
+          "sku": "SHF3003*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "54967",
+          "name_product": "Футболка SHF3003*SS26 4F (під)",
+          "sku": "SHF3003*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54968",
+          "name_product": "Футболка SHF3306*SS26 4F (ж)",
+          "sku": "SHF3306*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "блак.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "блак.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "блак.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "блак.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54969",
+          "name_product": "Футболка SHF3308*SS26 4F (ж)",
+          "sku": "SHF3308*SS26",
+          "attributes": {
+            "color": "блак.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54970",
+          "name_product": "Футболка SHF3309*SS26 4F (ж)",
+          "sku": "SHF3309*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54970",
+          "name_product": "Футболка SHF3309*SS26 4F (ж)",
+          "sku": "SHF3309*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54970",
+          "name_product": "Футболка SHF3309*SS26 4F (ж)",
+          "sku": "SHF3309*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54970",
+          "name_product": "Футболка SHF3309*SS26 4F (ж)",
+          "sku": "SHF3309*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54970",
+          "name_product": "Футболка SHF3309*SS26 4F (ж)",
+          "sku": "SHF3309*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54978",
+          "name_product": "Футболка SHM3341*SS26 4F (ч)",
+          "sku": "SHM3341*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "сір.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54979",
+          "name_product": "Футболка SHM3342*SS26 4F (ч)",
+          "sku": "SHM3342*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54980",
+          "name_product": "Футболка SLEF244*SS26 4F (ж)",
+          "sku": "SLEF244*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54980",
+          "name_product": "Футболка SLEF244*SS26 4F (ж)",
+          "sku": "SLEF244*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54980",
+          "name_product": "Футболка SLEF244*SS26 4F (ж)",
+          "sku": "SLEF244*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54980",
+          "name_product": "Футболка SLEF244*SS26 4F (ж)",
+          "sku": "SLEF244*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54980",
+          "name_product": "Футболка SLEF244*SS26 4F (ж)",
+          "sku": "SLEF244*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "біл",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54981",
+          "name_product": "Футболка SLEF299*SS26 4F (ж)",
+          "sku": "SLEF299*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "54982",
+          "name_product": "Футболка SLEM306*SS26 4F (ч)",
+          "sku": "SLEM306*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "54982",
+          "name_product": "Футболка SLEM306*SS26 4F (ч)",
+          "sku": "SLEM306*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54982",
+          "name_product": "Футболка SLEM306*SS26 4F (ч)",
+          "sku": "SLEM306*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54982",
+          "name_product": "Футболка SLEM306*SS26 4F (ч)",
+          "sku": "SLEM306*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54982",
+          "name_product": "Футболка SLEM306*SS26 4F (ч)",
+          "sku": "SLEM306*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54982",
+          "name_product": "Футболка SLEM306*SS26 4F (ч)",
+          "sku": "SLEM306*SS26",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "54987",
+          "name_product": "Шорти STIF028*SS26 4F (під)",
+          "sku": "STIF028*SS26",
+          "attributes": {
+            "color": "св.фіол",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "54987",
+          "name_product": "Шорти STIF028*SS26 4F (під)",
+          "sku": "STIF028*SS26",
+          "attributes": {
+            "color": "св.фіол",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "54987",
+          "name_product": "Шорти STIF028*SS26 4F (під)",
+          "sku": "STIF028*SS26",
+          "attributes": {
+            "color": "св.фіол",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "54987",
+          "name_product": "Шорти STIF028*SS26 4F (під)",
+          "sku": "STIF028*SS26",
+          "attributes": {
+            "color": "св.фіол",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "54987",
+          "name_product": "Шорти STIF028*SS26 4F (під)",
+          "sku": "STIF028*SS26",
+          "attributes": {
+            "color": "св.фіол",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "54987",
+          "name_product": "Шорти STIF028*SS26 4F (під)",
+          "sku": "STIF028*SS26",
+          "attributes": {
+            "color": "св.фіол",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "54987",
+          "name_product": "Шорти STIF028*SS26 4F (під)",
+          "sku": "STIF028*SS26",
+          "attributes": {
+            "color": "св.фіол",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "54988",
+          "name_product": "Шорти STIF031*SS26 4F (ж)",
+          "sku": "STIF031*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "54988",
+          "name_product": "Шорти STIF031*SS26 4F (ж)",
+          "sku": "STIF031*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "54988",
+          "name_product": "Шорти STIF031*SS26 4F (ж)",
+          "sku": "STIF031*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "54988",
+          "name_product": "Шорти STIF031*SS26 4F (ж)",
+          "sku": "STIF031*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "54988",
+          "name_product": "Шорти STIF031*SS26 4F (ж)",
+          "sku": "STIF031*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55095",
+          "name_product": "Брюки спортивні з модалом жіночі 4F  ROF1421",
+          "sku": "ROF1421*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55095",
+          "name_product": "Брюки спортивні з модалом жіночі 4F  ROF1421",
+          "sku": "ROF1421*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55095",
+          "name_product": "Брюки спортивні з модалом жіночі 4F  ROF1421",
+          "sku": "ROF1421*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55095",
+          "name_product": "Брюки спортивні з модалом жіночі 4F  ROF1421",
+          "sku": "ROF1421*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55095",
+          "name_product": "Брюки спортивні з модалом жіночі 4F  ROF1421",
+          "sku": "ROF1421*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55095",
+          "name_product": "Брюки спортивні з модалом жіночі 4F  ROF1421",
+          "sku": "ROF1421*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55098",
+          "name_product": "Брюки ROM1385*SS26 4F (ч)",
+          "sku": "ROM1385*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55098",
+          "name_product": "Брюки ROM1385*SS26 4F (ч)",
+          "sku": "ROM1385*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55098",
+          "name_product": "Брюки ROM1385*SS26 4F (ч)",
+          "sku": "ROM1385*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55098",
+          "name_product": "Брюки ROM1385*SS26 4F (ч)",
+          "sku": "ROM1385*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55098",
+          "name_product": "Брюки ROM1385*SS26 4F (ч)",
+          "sku": "ROM1385*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55100",
+          "name_product": "Брюки ROM1674*SS26 4F (ч)",
+          "sku": "ROM1674*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55100",
+          "name_product": "Брюки ROM1674*SS26 4F (ч)",
+          "sku": "ROM1674*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55100",
+          "name_product": "Брюки ROM1674*SS26 4F (ч)",
+          "sku": "ROM1674*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55100",
+          "name_product": "Брюки ROM1674*SS26 4F (ч)",
+          "sku": "ROM1674*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55101",
+          "name_product": "Джемпер WSF2205*SS26 4F (ж)",
+          "sku": "WSF2205*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55101",
+          "name_product": "Джемпер WSF2205*SS26 4F (ж)",
+          "sku": "WSF2205*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55101",
+          "name_product": "Джемпер WSF2205*SS26 4F (ж)",
+          "sku": "WSF2205*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55101",
+          "name_product": "Джемпер WSF2205*SS26 4F (ж)",
+          "sku": "WSF2205*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55101",
+          "name_product": "Джемпер WSF2205*SS26 4F (ж)",
+          "sku": "WSF2205*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55103",
+          "name_product": "Джемпер WSM2551*SS26 4F (ч)",
+          "sku": "WSM2551*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "55103",
+          "name_product": "Джемпер WSM2551*SS26 4F (ч)",
+          "sku": "WSM2551*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55103",
+          "name_product": "Джемпер WSM2551*SS26 4F (ч)",
+          "sku": "WSM2551*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55103",
+          "name_product": "Джемпер WSM2551*SS26 4F (ч)",
+          "sku": "WSM2551*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55103",
+          "name_product": "Джемпер WSM2551*SS26 4F (ч)",
+          "sku": "WSM2551*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55103",
+          "name_product": "Джемпер WSM2551*SS26 4F (ч)",
+          "sku": "WSM2551*SS26",
+          "attributes": {
+            "color": "хакі",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55106",
+          "name_product": "Футболка PTSM609*SS26 4F (ч)",
+          "sku": "PTSM609*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55106",
+          "name_product": "Футболка PTSM609*SS26 4F (ч)",
+          "sku": "PTSM609*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55106",
+          "name_product": "Футболка PTSM609*SS26 4F (ч)",
+          "sku": "PTSM609*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55106",
+          "name_product": "Футболка PTSM609*SS26 4F (ч)",
+          "sku": "PTSM609*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55106",
+          "name_product": "Футболка PTSM609*SS26 4F (ч)",
+          "sku": "PTSM609*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "бордо",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "бордо",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "бордо",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "бордо",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55107",
+          "name_product": "Футболка SHF2772*SS26 4F (ж)",
+          "sku": "SHF2772*SS26",
+          "attributes": {
+            "color": "бордо",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55123",
+          "name_product": "Шорти SHOF721*SS26 4F (ж)",
+          "sku": "SHOF721*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55123",
+          "name_product": "Шорти SHOF721*SS26 4F (ж)",
+          "sku": "SHOF721*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55123",
+          "name_product": "Шорти SHOF721*SS26 4F (ж)",
+          "sku": "SHOF721*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55123",
+          "name_product": "Шорти SHOF721*SS26 4F (ж)",
+          "sku": "SHOF721*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55123",
+          "name_product": "Шорти SHOF721*SS26 4F (ж)",
+          "sku": "SHOF721*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55124",
+          "name_product": "Шорти  спортивні чоловічі 4F   SHOM744",
+          "sku": "SHOM744*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55124",
+          "name_product": "Шорти  спортивні чоловічі 4F   SHOM744",
+          "sku": "SHOM744*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55124",
+          "name_product": "Шорти  спортивні чоловічі 4F   SHOM744",
+          "sku": "SHOM744*SS26",
+          "attributes": {
+            "color": "т. зел",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "синій",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "синій",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "синій",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "синій",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "синій",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55195",
+          "name_product": "Брюки TRM1047*SS26 4F (ч)",
+          "sku": "TRM1047*SS26 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55196",
+          "name_product": "Брюки TRM1057*SS26 4F (ч)",
+          "sku": "TRM1057*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55196",
+          "name_product": "Брюки TRM1057*SS26 4F (ч)",
+          "sku": "TRM1057*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55196",
+          "name_product": "Брюки TRM1057*SS26 4F (ч)",
+          "sku": "TRM1057*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55196",
+          "name_product": "Брюки TRM1057*SS26 4F (ч)",
+          "sku": "TRM1057*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55196",
+          "name_product": "Брюки TRM1057*SS26 4F (ч)",
+          "sku": "TRM1057*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55197",
+          "name_product": "Брюки TRM1190*SS26 4F (ч)",
+          "sku": "TRM1190*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55198",
+          "name_product": "Джемпер FSWM632*SS26 4F (ч)",
+          "sku": "FSWM632*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55198",
+          "name_product": "Джемпер FSWM632*SS26 4F (ч)",
+          "sku": "FSWM632*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55198",
+          "name_product": "Джемпер FSWM632*SS26 4F (ч)",
+          "sku": "FSWM632*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55198",
+          "name_product": "Джемпер FSWM632*SS26 4F (ч)",
+          "sku": "FSWM632*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55198",
+          "name_product": "Джемпер FSWM632*SS26 4F (ч)",
+          "sku": "FSWM632*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55199",
+          "name_product": "Джемпер FSWM690*SS26 4F (під)",
+          "sku": "FSWM690*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "134/140"
+          }
+        },
+        {
+          "id_product": "55199",
+          "name_product": "Джемпер FSWM690*SS26 4F (під)",
+          "sku": "FSWM690*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "146/152"
+          }
+        },
+        {
+          "id_product": "55199",
+          "name_product": "Джемпер FSWM690*SS26 4F (під)",
+          "sku": "FSWM690*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "146/152"
+          }
+        },
+        {
+          "id_product": "55199",
+          "name_product": "Джемпер FSWM690*SS26 4F (під)",
+          "sku": "FSWM690*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "158/164"
+          }
+        },
+        {
+          "id_product": "55199",
+          "name_product": "Джемпер FSWM690*SS26 4F (під)",
+          "sku": "FSWM690*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "158/164"
+          }
+        },
+        {
+          "id_product": "55202",
+          "name_product": "Майка SLEM248*SS26 4F (ч)",
+          "sku": "SLEM248*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55208",
+          "name_product": "Сумка WAIU161*SS26 4F",
+          "sku": "WAIU161*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55209",
+          "name_product": "Футболка SHF2742*SS26 4F (ж)",
+          "sku": "SHF2742*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "кор.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "кор.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "кор.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "кор.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "кор.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55210",
+          "name_product": "Футболка SHF2743*SS26 4F (ж)",
+          "sku": "SHF2743*SS26",
+          "attributes": {
+            "color": "рож.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55212",
+          "name_product": "Футболка SHM2667*SS26 4F (ч)",
+          "sku": "SHM2667*SS26",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55213",
+          "name_product": "Футболка SHM3033*SS26 4F (ч)",
+          "sku": "SHM3033*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "55213",
+          "name_product": "Футболка SHM3033*SS26 4F (ч)",
+          "sku": "SHM3033*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55213",
+          "name_product": "Футболка SHM3033*SS26 4F (ч)",
+          "sku": "SHM3033*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55213",
+          "name_product": "Футболка SHM3033*SS26 4F (ч)",
+          "sku": "SHM3033*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "55213",
+          "name_product": "Футболка SHM3033*SS26 4F (ч)",
+          "sku": "SHM3033*SS26",
+          "attributes": {
+            "color": "крем",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "55214",
+          "name_product": "Шорти BDSM110*SS26 4F (під)",
+          "sku": "BDSM110*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "122/128"
+          }
+        },
+        {
+          "id_product": "55214",
+          "name_product": "Шорти BDSM110*SS26 4F (під)",
+          "sku": "BDSM110*SS26",
+          "attributes": {
+            "color": "бір.",
+            "size": "134/140"
+          }
+        },
+        {
+          "id_product": "55214",
+          "name_product": "Шорти BDSM110*SS26 4F (під)",
+          "sku": "BDSM110*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "134/140"
+          }
+        },
+        {
+          "id_product": "55214",
+          "name_product": "Шорти BDSM110*SS26 4F (під)",
+          "sku": "BDSM110*SS26",
+          "attributes": {
+            "color": "бір.",
+            "size": "146/152"
+          }
+        },
+        {
+          "id_product": "55214",
+          "name_product": "Шорти BDSM110*SS26 4F (під)",
+          "sku": "BDSM110*SS26",
+          "attributes": {
+            "color": "син",
+            "size": "146/152"
+          }
+        },
+        {
+          "id_product": "55214",
+          "name_product": "Шорти BDSM110*SS26 4F (під)",
+          "sku": "BDSM110*SS26",
+          "attributes": {
+            "color": "бір.",
+            "size": "158/164"
+          }
+        },
+        {
+          "id_product": "55214",
+          "name_product": "Шорти BDSM110*SS26 4F (під)",
+          "sku": "BDSM110*SS26",
+          "attributes": {
+            "color": "чорн.",
+            "size": "146/152"
+          }
+        },
+        {
+          "id_product": "55215",
+          "name_product": "Шорти FSHM1277*SS26 4F (ч)",
+          "sku": "FSHM1277*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "55215",
+          "name_product": "Шорти FSHM1277*SS26 4F (ч)",
+          "sku": "FSHM1277*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "55215",
+          "name_product": "Шорти FSHM1277*SS26 4F (ч)",
+          "sku": "FSHM1277*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "55215",
+          "name_product": "Шорти FSHM1277*SS26 4F (ч)",
+          "sku": "FSHM1277*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "55215",
+          "name_product": "Шорти FSHM1277*SS26 4F (ч)",
+          "sku": "FSHM1277*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "55215",
+          "name_product": "Шорти FSHM1277*SS26 4F (ч)",
+          "sku": "FSHM1277*SS26",
+          "attributes": {
+            "color": "антрацит",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "св.сiр.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "св.сiр.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "св.сiр.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "св.сiр.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "св.сiр.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56756",
+          "name_product": "Брюки TROF1755*AW27 4F (ж)",
+          "sku": "TROF1755*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56757",
+          "name_product": "Брюки TROM1799*AW27 4F (ч)",
+          "sku": "TROM1799*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56757",
+          "name_product": "Брюки TROM1799*AW27 4F (ч)",
+          "sku": "TROM1799*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56757",
+          "name_product": "Брюки TROM1799*AW27 4F (ч)",
+          "sku": "TROM1799*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56757",
+          "name_product": "Брюки TROM1799*AW27 4F (ч)",
+          "sku": "TROM1799*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56757",
+          "name_product": "Брюки TROM1799*AW27 4F (ч)",
+          "sku": "TROM1799*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56758",
+          "name_product": "Брюки TROM1809*AW27 4F (ч)",
+          "sku": "TROM1809*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56758",
+          "name_product": "Брюки TROM1809*AW27 4F (ч)",
+          "sku": "TROM1809*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "56758",
+          "name_product": "Брюки TROM1809*AW27 4F (ч)",
+          "sku": "TROM1809*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56758",
+          "name_product": "Брюки TROM1809*AW27 4F (ч)",
+          "sku": "TROM1809*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56758",
+          "name_product": "Брюки TROM1809*AW27 4F (ч)",
+          "sku": "TROM1809*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56758",
+          "name_product": "Брюки TROM1809*AW27 4F (ч)",
+          "sku": "TROM1809*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56759",
+          "name_product": "Брюки TROM1860*AW27 4F (ч)",
+          "sku": "TROM1860*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56759",
+          "name_product": "Брюки TROM1860*AW27 4F (ч)",
+          "sku": "TROM1860*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56759",
+          "name_product": "Брюки TROM1860*AW27 4F (ч)",
+          "sku": "TROM1860*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56759",
+          "name_product": "Брюки TROM1860*AW27 4F (ч)",
+          "sku": "TROM1860*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56759",
+          "name_product": "Брюки TROM1860*AW27 4F (ч)",
+          "sku": "TROM1860*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56760",
+          "name_product": "Джемпер SWSF2535*AW27 4F (ж)",
+          "sku": "SWSF2535*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56761",
+          "name_product": "Джемпер SWSM2547*AW27 4F (ч)",
+          "sku": "SWSM2547*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56761",
+          "name_product": "Джемпер SWSM2547*AW27 4F (ч)",
+          "sku": "SWSM2547*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56761",
+          "name_product": "Джемпер SWSM2547*AW27 4F (ч)",
+          "sku": "SWSM2547*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56761",
+          "name_product": "Джемпер SWSM2547*AW27 4F (ч)",
+          "sku": "SWSM2547*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56761",
+          "name_product": "Джемпер SWSM2547*AW27 4F (ч)",
+          "sku": "SWSM2547*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "рож.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56762",
+          "name_product": "Куртка DJAF0927*AW27 4F (ж)",
+          "sku": "DJAF0927*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "56763",
+          "name_product": "Рюкзак ABACU627*AW27 4F",
+          "sku": "ABACU627*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56764",
+          "name_product": "Труси UBXSM080*AW27 4F",
+          "sku": "UBXSM080*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56764",
+          "name_product": "Труси UBXSM080*AW27 4F",
+          "sku": "UBXSM080*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56764",
+          "name_product": "Труси UBXSM080*AW27 4F",
+          "sku": "UBXSM080*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56764",
+          "name_product": "Труси UBXSM080*AW27 4F",
+          "sku": "UBXSM080*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56764",
+          "name_product": "Труси UBXSM080*AW27 4F",
+          "sku": "UBXSM080*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56765",
+          "name_product": "Худі SWSM2548*AW27 4F (ч)",
+          "sku": "SWSM2548*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56765",
+          "name_product": "Худі SWSM2548*AW27 4F (ч)",
+          "sku": "SWSM2548*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56765",
+          "name_product": "Худі SWSM2548*AW27 4F (ч)",
+          "sku": "SWSM2548*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56765",
+          "name_product": "Худі SWSM2548*AW27 4F (ч)",
+          "sku": "SWSM2548*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56765",
+          "name_product": "Худі SWSM2548*AW27 4F (ч)",
+          "sku": "SWSM2548*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56766",
+          "name_product": "Шкарпетки USOCF753*AW27 4F",
+          "sku": "USOCF753*AW27",
+          "attributes": {
+            "color": "кольор.",
+            "size": "35-38"
+          }
+        },
+        {
+          "id_product": "56766",
+          "name_product": "Шкарпетки USOCF753*AW27 4F",
+          "sku": "USOCF753*AW27",
+          "attributes": {
+            "color": "кольор.",
+            "size": "39-42"
+          }
+        },
+        {
+          "id_product": "56767",
+          "name_product": "Шкарпетки USOCM756*AW27 4F",
+          "sku": "USOCM756*AW27",
+          "attributes": {
+            "color": "кольор.",
+            "size": "39-42"
+          }
+        },
+        {
+          "id_product": "56767",
+          "name_product": "Шкарпетки USOCM756*AW27 4F",
+          "sku": "USOCM756*AW27",
+          "attributes": {
+            "color": "кольор.",
+            "size": "43-46"
+          }
+        }
+      ]
+    }
+  }
+}
