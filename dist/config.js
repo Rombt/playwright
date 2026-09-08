@@ -23,7 +23,7 @@ exports.config = {
         },
     },
     data: {
-        resultsFolder: 'results/4f/4f_3_test_1',
+        resultsFolder: 'results/avecs/avecs_test_1',
         // resultsFolder: 'results/avecs/avecs_prod_13.08.26',
         // resultsFolder: 'results/kappa/kappa_test',
         // resultsFolder: 'results/alpine_crown/alpine_crown_test',
@@ -45,7 +45,7 @@ exports.config = {
         // resultsFolder: 'results/under_armour/under_armour_prod_10.08.26_1',
         // resultsFolder: 'results/salomon/salomon_test',
         // resultsFolder: 'results/nike/nike_prod',
-        taskPath: 'src/data/tasks/4f/4f_3_test.json',
+        taskPath: 'src/data/tasks/avecs/avecs_test.json',
         // taskPath: 'src/data/tasks/4f/4f_1_test.json',
         // taskPath: 'src/data/tasks/avecs/avecs_prod.json',
         // taskPath: 'src/data/tasks/adidas/adidas_prod.json',
