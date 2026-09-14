@@ -8,50 +8,48 @@ const CheckPageSkuStep_1 = __importDefault(require("../steps/checks/CheckPageSku
 const SearchGalleryStep_1 = __importDefault(require("../steps/searchElements/SearchGalleryStep"));
 const CollectImgStep_1 = __importDefault(require("../steps/collectElements/CollectImgStep"));
 const CollectDescriptionStep_1 = __importDefault(require("../steps/collectElements/CollectDescriptionStep"));
-const _4F_long_sku_json_1 = __importDefault(require("../../data/4F_long_sku.json"));
 const helpers_1 = require("../../common/helpers");
 exports.default = {
     create(deps) {
-        // return new PageImageSource4F(deps.flowRunner deps.logger);
-        return new PageImageSource4F(deps.flowRunner);
+        // return new PageImageSourceLasting_1(deps.flowRunner deps.logger);
+        return new PageImageSourceLasting_1(deps.flowRunner);
     },
 };
-class PageImageSource4F {
+class PageImageSourceLasting_1 {
     flowRunner;
     constructor(flowRunner) {
         this.flowRunner = flowRunner;
     }
     supports(task) {
-        return task.metadata.target_website === 'https://md-fashion.ua/ru/store?s={{sku_prod}}';
+        return (task.metadata.target_website ===
+            'https://shop.lasting.eu/en/index.php?fc=module&module=leoproductsearch&controller=productsearch&search_query={{sku_prod}}');
     }
     async execute(ctx) {
-        // т.к. товары ТМ 4F ищутся только по полным squ то нужно получить их все доступные
-        // выбрать из них тот частью которого является текущий, короткий, sku и
-        // в дальнейшем использовать только длинный
-        const arr_longSku = [...new Set(_4F_long_sku_json_1.default)];
-        if (!ctx.input.product) {
-            throw new Error('!ctx.input.product');
+        if (!ctx.input.sku) {
+            throw new Error('SKU is required');
         }
-        const shortSku = (0, helpers_1.normalizeSku)(ctx.input.product.sku);
-        const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
-        if (!foundLongSku) {
-            throw new Error('Long sku is not found');
-        }
-        ctx.input.product.sku = foundLongSku;
+        const clearSku = (0, helpers_1.normalizeSku)(ctx.input.sku);
         ctx.stepParams = new Map([
+            // [
+            //   OpenSearchPageStep,
+            //   {
+            //     strategy: 'WaitForElementOpenSearchPageStrategy',
+            //     waitForSelector: `div.multi-cell div.multi-item div.multi-content a > span:has-text("${clearSku}")`,
+            //   },
+            // ],
             [
                 CheckSearchResultsStep_1.default,
                 {
                     strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: 'div.product-list a.products-item__link',
-                    emptySelector: 'div.no-result > h2.no-result__title',
+                    linkSelector: `div.thumbnail-container > div.product-image > a.product-thumbnail`,
+                    emptySelector: 'h1:has-text("0 results have been found")',
                 },
             ],
-            [CheckPageSkuStep_1.default, { pageSkuSelector: 'h1 > span' }],
+            [CheckPageSkuStep_1.default, { pageSkuSelector: `div.product-reference:has-text(${clearSku}` }],
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: 'div.product_images',
+                    gallerySelector: '#content div.images-container',
                 },
             ],
             [
@@ -59,14 +57,14 @@ class PageImageSource4F {
                 {
                     // strategy: 'SlickSliderCollectImagesStrategy',
                     strategy: 'DefaultCollectImagesStrategy',
-                    stopProcessing: false,
+                    stopProcessing: true,
                 },
             ],
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['div.product_description'],
-                    removeSelectors: ['div.specs_section_head', 'div.product-article'],
+                    containers: [''],
+                    removeSelectors: [],
                     expand: false,
                     separator: '\n',
                 },
@@ -75,8 +73,8 @@ class PageImageSource4F {
         ]);
         const startStep = ctx.stepFactory.create('OpenSearchPageStep');
         await this.flowRunner.run(startStep, ctx);
-        ctx.logger?.debug('Processing of the PageImageSource4F is finished', {
-            component: 'PageImageSource4F',
+        ctx.logger?.debug('Processing of the PageImageSourceLasting_1 is finished', {
+            component: 'PageImageSourceLasting_1',
             method: 'execute()',
             action: 'await this.flowRunner.run(startStep, ctx)',
             data: {

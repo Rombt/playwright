@@ -1,68 +1,50 @@
 import { IExecutionContext } from '../../types/IExecutionContext';
 import { BaseStep } from '../../BaseStep';
 import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
-import { normalizeSku, fullClearSku } from '../../../common/helpers';
-import { IProduct } from '../../../data/entities/IProduct';
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
-import { optimizePageResources } from '../../../common/helpers';
-
-type OpenSearchPageParams = {
-  product?: IProduct;
-  waitUntil?: 'domcontentloaded' | 'load' | 'networkidle';
-  nextStep?: string;
-  clearSku?: 'full';
-};
+import { IOpenSearchPageParams } from '../../types/IOpenSearchPageParams';
 
 export default class OpenSearchPageStep extends BaseStep {
   public readonly name = 'OpenSearchPageStep';
-  private stepConfig!: OpenSearchPageParams;
 
   protected async execute(
     ctx: IExecutionContext<ICollectProductPhotosTask>,
     config: AppConfig,
-    params?: OpenSearchPageParams,
+    params?: IOpenSearchPageParams,
   ): Promise<void> {
-    const product = params?.product ?? ctx.input.product;
+    const stepConfig =
+      (ctx.stepParams?.get(OpenSearchPageStep) as unknown as IOpenSearchPageParams) ?? params;
 
-    this.stepConfig = ctx.stepParams?.get(OpenSearchPageStep) as unknown as OpenSearchPageParams;
-
-    if (!product) {
-      throw new Error('Product is undefined');
-    }
-
-    const baseUrl = ctx.task.metadata.target_website;
-    if (!baseUrl) {
-      throw new Error('target_website is not defined');
-    }
-
-    // для некоторых брендов может понадобится более радикальная очистка sku например Under Armour
-    let sku = '';
-    if (this.stepConfig?.clearSku === 'full') {
-      sku = fullClearSku(product.sku);
-    } else {
-      sku = normalizeSku(product.sku);
-    }
-
-    const url = baseUrl.replace('{{sku_prod}}', sku);
-    const waitUntil = params?.waitUntil ?? 'domcontentloaded';
+    console.log('stepConfig:', stepConfig);
+    
+    const strategyName = stepConfig?.strategy || 'DefaultOpenSearchPageStrategy';
 
 
-    // для облегчения загрузки страницы отключаю всё не нужное
-    await optimizePageResources(ctx);
+    const strategy = ctx.strategyResolver.get<IOpenSearchPageParams, void>(strategyName);
 
-    await ctx.page.goto(url, { waitUntil });
+    await strategy.execute(ctx, stepConfig);
 
-    // ctx.state.productUrl = url;
+    ctx.logger?.debug('Search page opened', {
+      component: 'OpenSearchPageStep',
+      method: 'execute()',
+      action: 'strategy.execute',
+      data: {
+        strategy: strategy.name,
+      },
+    });
   }
 
   next(ctx: IExecutionContext): IStepResult | null {
     if (ctx.control.stop) return null;
 
-    const nextStep = this.stepConfig?.nextStep || 'CheckSearchResultsStep';
+    const stepConfig = ctx.stepParams?.get(OpenSearchPageStep) as unknown as IOpenSearchPageParams;
 
     return {
-      step: ctx.stepFactory.create(nextStep),
+      step: ctx.stepFactory.create(stepConfig?.nextStep || 'CheckSearchResultsStep'),
+      params: {
+        sku: ctx.input.product?.sku,
+      },
     };
   }
 }

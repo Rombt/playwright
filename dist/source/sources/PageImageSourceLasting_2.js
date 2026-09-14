@@ -11,48 +11,45 @@ const CollectDescriptionStep_1 = __importDefault(require("../steps/collectElemen
 const helpers_1 = require("../../common/helpers");
 exports.default = {
     create(deps) {
-        // return new PageImageSource4F(deps.flowRunner deps.logger);
-        return new PageImageSource4F_3(deps.flowRunner);
+        // return new PageImageSourceLasting_2(deps.flowRunner deps.logger);
+        return new PageImageSourceLasting_2(deps.flowRunner);
     },
 };
-class PageImageSource4F_3 {
+class PageImageSourceLasting_2 {
     flowRunner;
     constructor(flowRunner) {
         this.flowRunner = flowRunner;
     }
     supports(task) {
         return (task.metadata.target_website ===
-            'https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}');
+            'https://shop.lasting.eu/en/index.php?fc=module&module=leoproductsearch&controller=productsearch&search_query={{sku_prod}}');
     }
     async execute(ctx) {
-        // т.к. товары ТМ 4F ищутся только по полным squ то нужно получить их все доступные
-        // выбрать из них тот частью которого является текущий, короткий, sku и
-        // в дальнейшем использовать только длинный
-        // const arr_longSku = [...new Set(longSku4F)];
-        if (!ctx.input.product) {
-            throw new Error('!ctx.input.product');
+        if (!ctx.input.sku) {
+            throw new Error('SKU is required');
         }
-        // const shortSku = normalizeSku(ctx.input.product.sku);
-        // const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
-        // if (!foundLongSku) {
-        //   throw new Error('Long sku is not found');
-        // }
-        // ctx.input.product.sku = foundLongSku;
+        const clearSku = (0, helpers_1.normalizeSku)(ctx.input.sku);
         ctx.stepParams = new Map([
+            // [
+            //   OpenSearchPageStep,
+            //   {
+            //     strategy: 'WaitForElementOpenSearchPageStrategy',
+            //     waitForSelector: `div.multi-cell div.multi-item div.multi-content a > span:has-text("${clearSku}")`,
+            //   },
+            // ],
             [
                 CheckSearchResultsStep_1.default,
                 {
                     strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: `div.search_list__products a.search_top__icon[href*="${(0, helpers_1.normalizeSku)(ctx.input.product.sku)}" i]`,
-                    emptySelector: '#content h3.noproduct__label',
-                    emptySelectorText: 'Szukany produkt nie został znaleziony',
+                    linkSelector: `a:has-text("${clearSku}")`,
+                    emptySelector: '.multi-noResults:has-text("Нічого не знайдено")',
                 },
             ],
-            [CheckPageSkuStep_1.default, { pageSkuSelector: 'h1.product_name__name' }],
+            [CheckPageSkuStep_1.default, { pageSkuSelector: `h1:has-text(${clearSku}` }],
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: '#photos_slider',
+                    gallerySelector: 'div.product__section--gallery > section.gallery',
                 },
             ],
             [
@@ -66,8 +63,8 @@ class PageImageSource4F_3 {
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['#description'],
-                    removeSelectors: [''],
+                    containers: ['div.product-description'],
+                    removeSelectors: [],
                     expand: false,
                     separator: '\n',
                 },
@@ -76,8 +73,8 @@ class PageImageSource4F_3 {
         ]);
         const startStep = ctx.stepFactory.create('OpenSearchPageStep');
         await this.flowRunner.run(startStep, ctx);
-        ctx.logger?.debug('Processing of the PageImageSource4F_3 is finished', {
-            component: 'PageImageSource4F_3',
+        ctx.logger?.debug('Processing of the PageImageSourceLasting_2 is finished', {
+            component: 'PageImageSourceLasting_2',
             method: 'execute()',
             action: 'await this.flowRunner.run(startStep, ctx)',
             data: {

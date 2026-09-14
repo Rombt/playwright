@@ -12,18 +12,18 @@ import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectImgStep from '../steps/collectElements/CollectImgStep';
 import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
-import longSku4F from '../../data/4F_long_sku.json';
+import OpenSearchPageStep from '../steps/openPages/OpenSearchPageStep';
 
-import { IExtractHtmlOptions, normalizeSku, fullClearSku } from '../../common/helpers';
+import { IExtractHtmlOptions, normalizeSku } from '../../common/helpers';
 
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
-    // return new PageImageSource4F(deps.flowRunner deps.logger);
-    return new PageImageSource4F_3(deps.flowRunner);
+    // return new PageImageSourceLasting_1(deps.flowRunner deps.logger);
+    return new PageImageSourceLasting_1(deps.flowRunner);
   },
 };
 
-class PageImageSource4F_3 implements ISource<ICollectProductPhotosTask> {
+class PageImageSourceLasting_1 implements ISource<ICollectProductPhotosTask> {
   constructor(
     private flowRunner: IFlowRunner, // private logger: ILogger,
   ) {}
@@ -31,44 +31,38 @@ class PageImageSource4F_3 implements ISource<ICollectProductPhotosTask> {
   supports(task: ICollectProductPhotosTask): boolean {
     return (
       task.metadata.target_website ===
-      'https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}'
+      'https://shop.lasting.eu/en/index.php?fc=module&module=leoproductsearch&controller=productsearch&search_query={{sku_prod}}'
     );
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
-    // т.к. товары ТМ 4F ищутся только по полным squ то нужно получить их все доступные
-    // выбрать из них тот частью которого является текущий, короткий, sku и
-    // в дальнейшем использовать только длинный
-    // const arr_longSku = [...new Set(longSku4F)];
-
-    if (!ctx.input.product) {
-      throw new Error('!ctx.input.product');
+    if (!ctx.input.sku) {
+      throw new Error('SKU is required');
     }
 
-    // const shortSku = normalizeSku(ctx.input.product.sku);
-    // const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
-
-    // if (!foundLongSku) {
-    //   throw new Error('Long sku is not found');
-    // }
-
-    // ctx.input.product.sku = foundLongSku;
+    const clearSku = normalizeSku(ctx.input.sku);
 
     ctx.stepParams = new Map([
+      // [
+      //   OpenSearchPageStep,
+      //   {
+      //     strategy: 'WaitForElementOpenSearchPageStrategy',
+      //     waitForSelector: `div.multi-cell div.multi-item div.multi-content a > span:has-text("${clearSku}")`,
+      //   },
+      // ],
       [
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: `div.search_list__products a.search_top__icon[href*="${normalizeSku(ctx.input.product.sku)}" i]`,
-          emptySelector: '#content h3.noproduct__label',
-          emptySelectorText: 'Szukany produkt nie został znaleziony',
+          linkSelector: `div.thumbnail-container > div.product-image > a.product-thumbnail`,
+          emptySelector: 'h1:has-text("0 results have been found")',
         },
       ],
-      [CheckPageSkuStep, { pageSkuSelector: 'h1.product_name__name' }],
+      [CheckPageSkuStep, { pageSkuSelector: `div.product-reference:has-text(${clearSku}` }],
       [
         SearchGalleryStep,
         {
-          gallerySelector: '#photos_slider',
+          gallerySelector: '#content div.images-container',
         },
       ],
       [
@@ -83,8 +77,8 @@ class PageImageSource4F_3 implements ISource<ICollectProductPhotosTask> {
       [
         CollectDescriptionStep,
         {
-          containers: ['#description'],
-          removeSelectors: [''],
+          containers: [''],
+          removeSelectors: [],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,
@@ -96,8 +90,8 @@ class PageImageSource4F_3 implements ISource<ICollectProductPhotosTask> {
 
     await this.flowRunner.run(startStep, ctx);
 
-    ctx.logger?.debug('Processing of the PageImageSource4F_3 is finished', {
-      component: 'PageImageSource4F_3',
+    ctx.logger?.debug('Processing of the PageImageSourceLasting_1 is finished', {
+      component: 'PageImageSourceLasting_1',
       method: 'execute()',
       action: 'await this.flowRunner.run(startStep, ctx)',
       data: {

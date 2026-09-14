@@ -1,0 +1,509 @@
+{
+  "generated_at": "2026-08-27_12-15",
+  "task": {
+    "35": {
+      "brand_id": "35",
+      "brand_name": "4F",
+      "metadata": {
+        "target_website": "https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "56766",
+          "name_product": "Шкарпетки USOCF753*AW27 4F",
+          "sku": "USOCF753*AW27",
+          "attributes": {
+            "color": "кольор.",
+            "size": "35-38"
+          }
+        },
+        {
+          "id_product": "56766",
+          "name_product": "Шкарпетки USOCF753*AW27 4F",
+          "sku": "USOCF753*AW27",
+          "attributes": {
+            "color": "кольор.",
+            "size": "39-42"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "56991",
+          "name_product": "Куртка DJAM0915*AW27 4F (підл)",
+          "sku": "DJAM0915*AW27",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "56992",
+          "name_product": "Куртка DJAM0916*AW27 4F (підл)",
+          "sku": "DJAM0916*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "хакі",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56993",
+          "name_product": "Куртка DJAM0938*AW27 4F (ч)",
+          "sku": "DJAM0938*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56994",
+          "name_product": "Рюкзак ABACU654*AW27 4F",
+          "sku": "ABACU654*AW27 ",
+          "attributes": {
+            "color": "синій",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56995",
+          "name_product": "Сумка APOUU128*AW27 4F",
+          "sku": "APOUU128*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56996",
+          "name_product": "Сумка APOUU141*AW27 4F",
+          "sku": "APOUU141*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "56997",
+          "name_product": "Фліс TFLEF472*AW27 4F (підл)",
+          "sku": "TFLEF472*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "56997",
+          "name_product": "Фліс TFLEF472*AW27 4F (підл)",
+          "sku": "TFLEF472*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "56997",
+          "name_product": "Фліс TFLEF472*AW27 4F (підл)",
+          "sku": "TFLEF472*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "56997",
+          "name_product": "Фліс TFLEF472*AW27 4F (підл)",
+          "sku": "TFLEF472*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "56997",
+          "name_product": "Фліс TFLEF472*AW27 4F (підл)",
+          "sku": "TFLEF472*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "56997",
+          "name_product": "Фліс TFLEF472*AW27 4F (підл)",
+          "sku": "TFLEF472*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "160"
+          }
+        },
+        {
+          "id_product": "56997",
+          "name_product": "Фліс TFLEF472*AW27 4F (підл)",
+          "sku": "TFLEF472*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "56998",
+          "name_product": "Фліс TFLEM481*AW27 4F (ч)",
+          "sku": "TFLEM481*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56998",
+          "name_product": "Фліс TFLEM481*AW27 4F (ч)",
+          "sku": "TFLEM481*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "56998",
+          "name_product": "Фліс TFLEM481*AW27 4F (ч)",
+          "sku": "TFLEM481*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56998",
+          "name_product": "Фліс TFLEM481*AW27 4F (ч)",
+          "sku": "TFLEM481*AW27",
+          "attributes": {
+            "color": "беж.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "158"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "160"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "синій",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "56999",
+          "name_product": "Фліс TFLEM493*AW27 4F (підл)",
+          "sku": "TFLEM493*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "57000",
+          "name_product": "Шапка CAPU0846*AW27 4F",
+          "sku": "CAPU0846*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57001",
+          "name_product": "Шапка CAPU0854*AW27 4F",
+          "sku": "CAPU0854*AW27",
+          "attributes": {
+            "color": "рож.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57002",
+          "name_product": "Шапка CAPU0855*AW27 4F",
+          "sku": "CAPU0855*AW27",
+          "attributes": {
+            "color": "білий",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57003",
+          "name_product": "Шапка CAPU0857*AW27 4F",
+          "sku": "CAPU0857*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57004",
+          "name_product": "Шапка CAPU0867*AW27 4F",
+          "sku": "CAPU0867*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

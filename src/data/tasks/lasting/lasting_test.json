@@ -1,0 +1,410 @@
+{
+  "generated_at": "2026-09-08_16-54",
+  "task": {
+    "240": {
+      "brand_id": "240",
+      "brand_name": "Lasting",
+      "metadata": {
+        "target_website": "https://shambala.com.ua/lasting/#/search/{{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "56924",
+          "name_product": "Термофутболка APOL*AW27 LTG",
+          "sku": "APOL*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL/3XL"
+          }
+        },
+        {
+          "id_product": "56924",
+          "name_product": "Термофутболка APOL*AW27 LTG",
+          "sku": "APOL*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "56924",
+          "name_product": "Термофутболка APOL*AW27 LTG",
+          "sku": "APOL*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "56925",
+          "name_product": "Термофутболка ATALA*AW27 LTG",
+          "sku": "ATALA*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL/3XL"
+          }
+        },
+        {
+          "id_product": "56925",
+          "name_product": "Термофутболка ATALA*AW27 LTG",
+          "sku": "ATALA*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "56925",
+          "name_product": "Термофутболка ATALA*AW27 LTG",
+          "sku": "ATALA*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "56925",
+          "name_product": "Термофутболка ATALA*AW27 LTG",
+          "sku": "ATALA*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXS/XS"
+          }
+        },
+        {
+          "id_product": "56926",
+          "name_product": "Термошкарпетки FWO*AW27 LTG",
+          "sku": "FWO*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56926",
+          "name_product": "Термошкарпетки FWO*AW27 LTG",
+          "sku": "FWO*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56927",
+          "name_product": "Термошкарпетки OLI*AW27 LTG",
+          "sku": "OLI*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56927",
+          "name_product": "Термошкарпетки OLI*AW27 LTG",
+          "sku": "OLI*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56928",
+          "name_product": "Термошкарпетки TKA*AW27 LTG",
+          "sku": "TKA*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56928",
+          "name_product": "Термошкарпетки TKA*AW27 LTG",
+          "sku": "TKA*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56928",
+          "name_product": "Термошкарпетки TKA*AW27 LTG",
+          "sku": "TKA*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56929",
+          "name_product": "Термошкарпетки WHI*AW27 LTG",
+          "sku": "WHI*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56929",
+          "name_product": "Термошкарпетки WHI*AW27 LTG",
+          "sku": "WHI*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56929",
+          "name_product": "Термошкарпетки WHI*AW27 LTG",
+          "sku": "WHI*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56930",
+          "name_product": "Термошкарпетки WLS*AW27 LTG",
+          "sku": "WLS*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56930",
+          "name_product": "Термошкарпетки WLS*AW27 LTG",
+          "sku": "WLS*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56930",
+          "name_product": "Термошкарпетки WLS*AW27 LTG",
+          "sku": "WLS*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56931",
+          "name_product": "Термоштани ATEO*AW27 LTG",
+          "sku": "ATEO*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL/3XL"
+          }
+        },
+        {
+          "id_product": "56931",
+          "name_product": "Термоштани ATEO*AW27 LTG",
+          "sku": "ATEO*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "56931",
+          "name_product": "Термоштани ATEO*AW27 LTG",
+          "sku": "ATEO*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "56932",
+          "name_product": "Термоштани AURA*AW27 LTG",
+          "sku": "AURA*AW27",
+          "attributes": {
+            "color": "",
+            "size": "2XL/3XL"
+          }
+        },
+        {
+          "id_product": "56932",
+          "name_product": "Термоштани AURA*AW27 LTG",
+          "sku": "AURA*AW27",
+          "attributes": {
+            "color": "",
+            "size": "L/XL"
+          }
+        },
+        {
+          "id_product": "56932",
+          "name_product": "Термоштани AURA*AW27 LTG",
+          "sku": "AURA*AW27",
+          "attributes": {
+            "color": "",
+            "size": "S/M"
+          }
+        },
+        {
+          "id_product": "56932",
+          "name_product": "Термоштани AURA*AW27 LTG",
+          "sku": "AURA*AW27",
+          "attributes": {
+            "color": "",
+            "size": "XXS/XS"
+          }
+        },
+        {
+          "id_product": "56952",
+          "name_product": "Термошкарпетки HTV*AW27 LTG",
+          "sku": "HTV*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56952",
+          "name_product": "Термошкарпетки HTV*AW27 LTG",
+          "sku": "HTV*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56952",
+          "name_product": "Термошкарпетки HTV*AW27 LTG",
+          "sku": "HTV*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56953",
+          "name_product": "Термошкарпетки KNT*AW27 LTG",
+          "sku": "KNT*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56953",
+          "name_product": "Термошкарпетки KNT*AW27 LTG",
+          "sku": "KNT*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56954",
+          "name_product": "Термошкарпетки SKG*AW27 LTG",
+          "sku": "SKG*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56954",
+          "name_product": "Термошкарпетки SKG*AW27 LTG",
+          "sku": "SKG*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56954",
+          "name_product": "Термошкарпетки SKG*AW27 LTG",
+          "sku": "SKG*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56955",
+          "name_product": "Термошкарпетки TKH*AW27 LTG",
+          "sku": "TKH*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56955",
+          "name_product": "Термошкарпетки TKH*AW27 LTG",
+          "sku": "TKH*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56955",
+          "name_product": "Термошкарпетки TKH*AW27 LTG",
+          "sku": "TKH*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56956",
+          "name_product": "Термошкарпетки TKN*AW27 LTG",
+          "sku": "TKN*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56956",
+          "name_product": "Термошкарпетки TKN*AW27 LTG",
+          "sku": "TKN*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "56956",
+          "name_product": "Термошкарпетки TKN*AW27 LTG",
+          "sku": "TKN*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56956",
+          "name_product": "Термошкарпетки TKN*AW27 LTG",
+          "sku": "TKN*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "56956",
+          "name_product": "Термошкарпетки TKN*AW27 LTG",
+          "sku": "TKN*AW27",
+          "attributes": {
+            "color": "зел.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "56956",
+          "name_product": "Термошкарпетки TKN*AW27 LTG",
+          "sku": "TKN*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}

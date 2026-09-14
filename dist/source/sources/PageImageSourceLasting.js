@@ -8,52 +8,48 @@ const CheckPageSkuStep_1 = __importDefault(require("../steps/checks/CheckPageSku
 const SearchGalleryStep_1 = __importDefault(require("../steps/searchElements/SearchGalleryStep"));
 const CollectImgStep_1 = __importDefault(require("../steps/collectElements/CollectImgStep"));
 const CollectDescriptionStep_1 = __importDefault(require("../steps/collectElements/CollectDescriptionStep"));
-const _4F_long_sku_json_1 = __importDefault(require("../../data/4F_long_sku.json"));
+const OpenSearchPageStep_1 = __importDefault(require("../steps/openPages/OpenSearchPageStep"));
 const helpers_1 = require("../../common/helpers");
 exports.default = {
     create(deps) {
-        // return new PageImageSource4F(deps.flowRunner deps.logger);
-        return new PageImageSource4F_2(deps.flowRunner);
+        // return new PageImageSourceLasting(deps.flowRunner deps.logger);
+        return new PageImageSourceLasting(deps.flowRunner);
     },
 };
-class PageImageSource4F_2 {
+class PageImageSourceLasting {
     flowRunner;
     constructor(flowRunner) {
         this.flowRunner = flowRunner;
     }
     supports(task) {
-        return (task.metadata.target_website ===
-            'https://fanaticsport.ua/ua/catalogsearch/result/?q={{sku_prod}}');
+        return task.metadata.target_website === 'https://shambala.com.ua/lasting/#/search/{{sku_prod}}';
     }
     async execute(ctx) {
-        // т.к. товары ТМ 4F ищутся только по полным squ то нужно получить их все доступные
-        // выбрать из них тот частью которого является текущий, короткий, sku и
-        // в дальнейшем использовать только длинный
-        const arr_longSku = [...new Set(_4F_long_sku_json_1.default)];
-        if (!ctx.input.product) {
-            throw new Error('!ctx.input.product');
+        if (!ctx.input.sku) {
+            throw new Error('SKU is required');
         }
-        const shortSku = (0, helpers_1.normalizeSku)(ctx.input.product.sku);
-        const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
-        if (!foundLongSku) {
-            throw new Error('Long sku is not found');
-        }
-        ctx.input.product.sku = foundLongSku;
+        const clearSku = (0, helpers_1.normalizeSku)(ctx.input.sku);
         ctx.stepParams = new Map([
+            [
+                OpenSearchPageStep_1.default,
+                {
+                    strategy: 'WaitForElementOpenSearchPageStrategy',
+                    waitForSelector: `div.multi-cell div.multi-item div.multi-content a > span:has-text("${clearSku}")`,
+                },
+            ],
             [
                 CheckSearchResultsStep_1.default,
                 {
                     strategy: 'DefaultSearchResultsStrategy',
-                    linkSelector: 'div.images-container a.product-item-photo',
-                    emptySelector: 'div.message.notice div',
-                    emptySelectorText: ' На Ваш запит нічого не знайдено. ',
+                    linkSelector: `a:has-text("${clearSku}")`,
+                    emptySelector: '.multi-noResults:has-text("Нічого не знайдено")',
                 },
             ],
-            [CheckPageSkuStep_1.default, { pageSkuSelector: 'div.product.attribute.sku > div[itemprop="sku"]' }],
+            [CheckPageSkuStep_1.default, { pageSkuSelector: `h1:has-text(${clearSku}` }],
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: 'div.[data-gallery-role="gallery"]',
+                    gallerySelector: 'div.product__section--gallery > section.gallery',
                 },
             ],
             [
@@ -61,14 +57,14 @@ class PageImageSource4F_2 {
                 {
                     // strategy: 'SlickSliderCollectImagesStrategy',
                     strategy: 'DefaultCollectImagesStrategy',
-                    stopProcessing: false,
+                    stopProcessing: true,
                 },
             ],
             [
                 CollectDescriptionStep_1.default,
                 {
-                    containers: ['#description'],
-                    removeSelectors: [''],
+                    containers: ['div.product-description'],
+                    removeSelectors: [],
                     expand: false,
                     separator: '\n',
                 },
@@ -77,8 +73,8 @@ class PageImageSource4F_2 {
         ]);
         const startStep = ctx.stepFactory.create('OpenSearchPageStep');
         await this.flowRunner.run(startStep, ctx);
-        ctx.logger?.debug('Processing of the PageImageSource4F_2 is finished', {
-            component: 'PageImageSource4F_2',
+        ctx.logger?.debug('Processing of the PageImageSourceLasting is finished', {
+            component: 'PageImageSourceLasting',
             method: 'execute()',
             action: 'await this.flowRunner.run(startStep, ctx)',
             data: {
