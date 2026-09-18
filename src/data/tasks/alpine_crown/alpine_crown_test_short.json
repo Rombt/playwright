@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-07-20_17-11",
+  "task": {
+    "24": {
+      "brand_id": "24",
+      "brand_name": "Alpine crown",
+      "metadata": {
+        "target_website": "https://alpine-crown.com/?s={{sku_prod}}&post_type=product"
+      },
+      "products": [
+        {
+          "id_product": "57042",
+          "name_product": "Шолом FAST Twaron Kevlar 250110-010",
+          "sku": "250110-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        }
+      ]
+    }
+  }
+}

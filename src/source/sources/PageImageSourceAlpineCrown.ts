@@ -6,7 +6,7 @@ import { ILogger } from '../../data/logger/types/ILogger';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IExecutionContext } from '../types/IExecutionContext';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
-
+import OpenSearchPageStep from '../steps/openPages/OpenSearchPageStep';
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
 import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
@@ -28,28 +28,35 @@ class PageImageSourceAlpineCrown implements ISource<ICollectProductPhotosTask> {
 
   supports(task: ICollectProductPhotosTask): boolean {
     return (
-      task.metadata.target_website ===
-      'https://militaryhub.net.ua/ru/katalog/search/?q={{sku_prod}}'
+      task.metadata.target_website === 'https://alpine-crown.com/?s={{sku_prod}}&post_type=product'
     );
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
     ctx.stepParams = new Map([
+      // [
+      //   OpenSearchPageStep,
+      //   {
+      //     nextStep: 'CheckPageSkuStep',
+      //   },
+      // ],
+
       [
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: 'div.catalogCard-view > a',
-          emptySelector: 'div[data-catalog-view-block="products"] > p',
-          emptySelectorText: 'Нет товаров',
+          // linkSelector: 'ul.products > li.type-product > a',
+          // linkSelector: `ul.products a:has(img[src*="${ctx.input.sku}"])`,
+          linkSelector: `a:has(> div:first-child img[src*="${ctx.input.sku}"])`,
+          emptySelector: 'div.woocommerce-no-products-found > .woocommerce-info',
+          emptySelectorText: 'Товарів, відповідних вашому запиту, не знайдено',
         },
       ],
-      //
-      [CheckPageSkuStep, { pageSkuSelector: 'div.product-header div.product-header__code' }],
+      [CheckPageSkuStep, { pageSkuSelector: 'div.variation-sku > span' }],
       [
         SearchGalleryStep,
         {
-          gallerySelector: '[data-view-block="gallery"] > div.product__section div.gallery__photos',
+          gallerySelector: 'div.product-gallery-main-shell > div.swiper-wrapper',
         },
       ],
       [
@@ -63,8 +70,11 @@ class PageImageSourceAlpineCrown implements ISource<ICollectProductPhotosTask> {
       [
         CollectDescriptionStep,
         {
-          containers: ['div[itemprop="description"] > div.text'],
-          removeSelectors: [],
+          containers: [
+            'h3:has-text("Technical specifications") >> ..',
+            'h3:has-text("Технічні характеристики") >> ..',
+          ],
+          removeSelectors: ['h2'],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,

@@ -23,7 +23,7 @@ export const config = {
   data: {
     // resultsFolder: 'results/4f/14.09.26',
     // resultsFolder: 'results/all_brands_test',
-    resultsFolder: 'results/lasting/lasting_test_1',
+    resultsFolder: 'results/alpine_crown/18.09.26',
     // resultsFolder: 'results/avecs/avecs_test_1',
     // resultsFolder: 'results/avecs/avecs_prod_13.08.26',
     // resultsFolder: 'results/kappa/kappa_test',
@@ -46,7 +46,9 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/lasting/lasting_test_1.json',
+    taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
+    // taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test_short.json',
+    // taskPath: 'src/data/tasks/lasting/lasting_test_1.json',
     // taskPath: 'src/data/tasks/lasting/lasting_test.json',
     // taskPath: 'src/data/tasks/avecs/avecs_test.json',
     // taskPath: 'src/data/tasks/4f/4f_3.json',
@@ -56,7 +58,6 @@ export const config = {
     // taskPath: 'src/data/tasks/emporio_armani/emporio_armani_test.json',
     // taskPath: 'src/data/tasks/belement/belement_test.json',
     // taskPath: 'src/data/tasks/columbia/columbia_test.json',
-    // taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
     // taskPath: 'src/data/tasks/kappa/kappa_prod.json',
     // taskPath: 'src/data/tasks/kiborg/kiborg_test.json',
     // taskPath: 'src/data/tasks/srm/srm_test.json',

@@ -3,72 +3,351 @@
   "task": {
     "24": {
       "brand_id": "24",
-      "brand_name": "AlpineCrown",
+      "brand_name": "Alpine crown",
       "metadata": {
-        "target_website": "https://militaryhub.net.ua/ru/katalog/search/?q={{sku_prod}}"
+        "target_website": "https://alpine-crown.com/?s={{sku_prod}}&post_type=product"
       },
       "products": [
         {
-          "id_product": "56401",
-          "name_product": "Рюкзак 240610-001 AlCr",
-          "sku": "240610-001",
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
           "attributes": {
-            "color": "т.зел.",
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "56423",
+          "name_product": "Кросівки Falcon 260055-010 AlCr",
+          "sku": "260055-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "47"
+          }
+        },
+        {
+          "id_product": "57009",
+          "name_product": "Пояс тактичний 240670-008",
+          "sku": "240670-008",
+          "attributes": {
+            "color": "хакі",
             "size": "O/S"
           }
         },
         {
-          "id_product": "56401",
-          "name_product": "Рюкзак 240610-001 AlCr",
-          "sku": "240610-001",
+          "id_product": "57020",
+          "name_product": "Кофта 250504-007 AlCr",
+          "sku": "250504-007",
           "attributes": {
-            "color": "",
-            "size": ""
+            "color": "зел.",
+            "size": "2XL"
           }
         },
         {
-          "id_product": "56402",
-          "name_product": "Рюкзак 240610-021 AlCr",
-          "sku": "240610-021",
+          "id_product": "57020",
+          "name_product": "Кофта 250504-007 AlCr",
+          "sku": "250504-007",
+          "attributes": {
+            "color": "зел.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57020",
+          "name_product": "Кофта 250504-007 AlCr",
+          "sku": "250504-007",
+          "attributes": {
+            "color": "зел.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57020",
+          "name_product": "Кофта 250504-007 AlCr",
+          "sku": "250504-007",
+          "attributes": {
+            "color": "зел.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57020",
+          "name_product": "Кофта 250504-007 AlCr",
+          "sku": "250504-007",
+          "attributes": {
+            "color": "зел.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57020",
+          "name_product": "Кофта 250504-007 AlCr",
+          "sku": "250504-007",
+          "attributes": {
+            "color": "зел.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57022",
+          "name_product": "Кофта флісова 250501-010 AlCr",
+          "sku": "250501-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57022",
+          "name_product": "Кофта флісова 250501-010 AlCr",
+          "sku": "250501-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57022",
+          "name_product": "Кофта флісова 250501-010 AlCr",
+          "sku": "250501-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57022",
+          "name_product": "Кофта флісова 250501-010 AlCr",
+          "sku": "250501-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57022",
+          "name_product": "Кофта флісова 250501-010 AlCr",
+          "sku": "250501-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57022",
+          "name_product": "Кофта флісова 250501-010 AlCr",
+          "sku": "250501-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57023",
+          "name_product": "Кофта флісова 250501-021 AlCr",
+          "sku": "250501-021",
+          "attributes": {
+            "color": "койот",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57023",
+          "name_product": "Кофта флісова 250501-021 AlCr",
+          "sku": "250501-021",
+          "attributes": {
+            "color": "койот",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57023",
+          "name_product": "Кофта флісова 250501-021 AlCr",
+          "sku": "250501-021",
+          "attributes": {
+            "color": "койот",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57023",
+          "name_product": "Кофта флісова 250501-021 AlCr",
+          "sku": "250501-021",
+          "attributes": {
+            "color": "койот",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57023",
+          "name_product": "Кофта флісова 250501-021 AlCr",
+          "sku": "250501-021",
+          "attributes": {
+            "color": "койот",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57023",
+          "name_product": "Кофта флісова 250501-021 AlCr",
+          "sku": "250501-021",
+          "attributes": {
+            "color": "койот",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57025",
+          "name_product": "Кофта флісова 250502-021 AlCr",
+          "sku": "250502-021",
+          "attributes": {
+            "color": "койот",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57025",
+          "name_product": "Кофта флісова 250502-021 AlCr",
+          "sku": "250502-021",
+          "attributes": {
+            "color": "койот",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57025",
+          "name_product": "Кофта флісова 250502-021 AlCr",
+          "sku": "250502-021",
+          "attributes": {
+            "color": "койот",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57025",
+          "name_product": "Кофта флісова 250502-021 AlCr",
+          "sku": "250502-021",
+          "attributes": {
+            "color": "койот",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57025",
+          "name_product": "Кофта флісова 250502-021 AlCr",
+          "sku": "250502-021",
+          "attributes": {
+            "color": "койот",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57025",
+          "name_product": "Кофта флісова 250502-021 AlCr",
+          "sku": "250502-021",
+          "attributes": {
+            "color": "койот",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57034",
+          "name_product": "Шапка F-4T Fl Win 250301-010 AlCr",
+          "sku": "250301-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57035",
+          "name_product": "Шапка F-4T Fl Win 250301-021 AlCr",
+          "sku": "250301-021",
           "attributes": {
             "color": "кой",
             "size": "O/S"
           }
         },
         {
-          "id_product": "56403",
-          "name_product": "Рюкзак 240611-001 AlCr",
-          "sku": "240611-001",
+          "id_product": "57037",
+          "name_product": "Шапка W8X Grid Fl 250300-010 AlCr",
+          "sku": "250300-010",
           "attributes": {
-            "color": "кам-ж",
+            "color": "чорн.",
             "size": "O/S"
           }
         },
         {
-          "id_product": "56404",
-          "name_product": "Рюкзак 240611-021 AlCr",
-          "sku": "240611-021",
-          "attributes": {
-            "color": "т.зел.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "56404",
-          "name_product": "Рюкзак 240611-021 AlCr",
-          "sku": "240611-021",
-          "attributes": {
-            "color": "",
-            "size": ""
-          }
-        },
-        {
-          "id_product": "56405",
-          "name_product": "Рюкзак 250851-021 AlCr",
-          "sku": "250851-021",
+          "id_product": "57038",
+          "name_product": "Шапка W8X Grid Fl 250300-021 AlCr",
+          "sku": "250300-021",
           "attributes": {
             "color": "кой",
             "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57042",
+          "name_product": "Шолом FAST Twaron Kevlar 250110-010",
+          "sku": "250110-010",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
           }
         }
       ]
