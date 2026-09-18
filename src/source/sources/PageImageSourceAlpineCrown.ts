@@ -34,19 +34,11 @@ class PageImageSourceAlpineCrown implements ISource<ICollectProductPhotosTask> {
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
     ctx.stepParams = new Map([
-      // [
-      //   OpenSearchPageStep,
-      //   {
-      //     nextStep: 'CheckPageSkuStep',
-      //   },
-      // ],
 
       [
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          // linkSelector: 'ul.products > li.type-product > a',
-          // linkSelector: `ul.products a:has(img[src*="${ctx.input.sku}"])`,
           linkSelector: `a:has(> div:first-child img[src*="${ctx.input.sku}"])`,
           emptySelector: 'div.woocommerce-no-products-found > .woocommerce-info',
           emptySelectorText: 'Товарів, відповідних вашому запиту, не знайдено',
