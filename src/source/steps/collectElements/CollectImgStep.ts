@@ -27,6 +27,11 @@ export default class CollectImgStep extends BaseStep {
 
     const stepConfig = ctx.stepParams?.get(CollectImgStep) as unknown as CollectImgStepConfig;
 
+    // !! в самом начале на случай ошибок в стратегиях
+    if (stepConfig.stopProcessing === true) {
+      ctx.control.stop = true;
+    }
+
     const strategy = ctx.strategyResolver.get<CollectImgStepConfig, CollectImagesResult>( stepConfig.strategy );
 
     const result = await strategy.execute(ctx);
@@ -37,10 +42,10 @@ export default class CollectImgStep extends BaseStep {
 
     ctx.state.images?.push(...result.absoluteImageUrls);
 
-    // если источник не содержит описания товаров
-    if (stepConfig.stopProcessing === true) {
-      ctx.control.stop = true;
-    }
+
+
+
+
   }
 
   next(ctx: IExecutionContext): IStepResult | null {
