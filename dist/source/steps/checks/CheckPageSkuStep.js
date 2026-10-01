@@ -1,18 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseStep_1 = require("../../BaseStep");
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 class CheckPageSkuStep extends BaseStep_1.BaseStep {
     name = 'CheckPageSkuStep';
     async execute(ctx, config) {
         if (!ctx.input.sku || !ctx.input.normalizedSku) {
-            throw new Error('SKU or normalizedSku are not defined in context');
+            throw new FatalError_1.FatalError('SKU or normalizedSku are not defined in context');
         }
         const { page } = ctx;
         const sku = ctx.input.sku;
         const stepConfig = ctx.stepParams?.get(CheckPageSkuStep);
         const pageSkuSelector = stepConfig?.pageSkuSelector;
         if (!pageSkuSelector) {
-            throw new Error('pageSkuSelector is not configured in stepParams');
+            throw new FatalError_1.FatalError('pageSkuSelector is not configured in stepParams');
         }
         ctx.logger?.debug('Page sku selector  is received', {
             component: 'CheckPageSkuStep',
@@ -30,12 +31,12 @@ class CheckPageSkuStep extends BaseStep_1.BaseStep {
         const text = await pageSku.textContent();
         try {
             if (!text?.toLowerCase().includes(ctx.input.normalizedSku.toLowerCase())) {
-                throw new Error(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
+                throw new FatalError_1.FatalError(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
             }
         }
         catch (e) {
             ctx.control.stop = true;
-            throw new Error(`The page is not match sku ${ctx.input.normalizedSku}`);
+            throw new FatalError_1.FatalError(`The page is not match sku ${ctx.input.normalizedSku}`);
         }
     }
     next(ctx) {

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("../../../common/helpers");
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 /**
  * todo
  *  Некоторые сайты на странице результатов поиска вместо надписи типа "товар не найден" выводят похожие продукты
@@ -22,7 +23,7 @@ class SimilarProductsSearchStrategy {
     }
     async execute(ctx, params) {
         if (!ctx.input.sku || !ctx.input.normalizedSku) {
-            throw new Error('SKU or normalizedSku are not defined in context');
+            throw new FatalError_1.FatalError('SKU or normalizedSku are not defined in context');
         }
         const { page } = ctx;
         let productUrl = '';
@@ -33,7 +34,7 @@ class SimilarProductsSearchStrategy {
             await links.first().waitFor();
             const count = await links.count();
             if (count === 0) {
-                throw new Error(`Links to the products do not found on the page. ${ctx.input.sku}`);
+                throw new FatalError_1.FatalError(`Links to the products do not found on the page. ${ctx.input.sku}`);
             }
             for (let i = 0; i < count; i++) {
                 const link = links.nth(i);
@@ -45,7 +46,7 @@ class SimilarProductsSearchStrategy {
             }
         }
         if (productUrl === '') {
-            throw new Error(`No links contain sku: ${ctx.input.sku}`);
+            throw new FatalError_1.FatalError(`No links contain sku: ${ctx.input.sku}`);
         }
         return {
             productUrl: productUrl,

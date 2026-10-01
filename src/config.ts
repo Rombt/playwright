@@ -23,7 +23,7 @@ export const config = {
   data: {
     // resultsFolder: 'results/4f/14.09.26',
     // resultsFolder: 'results/all_brands_test',
-    resultsFolder: 'results/alpine_crown/18.09.26',
+    // resultsFolder: 'results/alpine_crown/18.09.26',
     // resultsFolder: 'results/avecs/avecs_test_1',
     // resultsFolder: 'results/avecs/avecs_prod_13.08.26',
     // resultsFolder: 'results/kappa/kappa_test',
@@ -40,13 +40,13 @@ export const config = {
     // resultsFolder: 'results/m-tac/militarist_12.08.26',
     // resultsFolder: 'results/adidas/adidas_prod_13.08.26',
     // resultsFolder: 'results/everlast/everlast_test',
-    // resultsFolder: 'results/puma/puma_test',
+    resultsFolder: 'results/puma/puma_01.10.26_1',
     // resultsFolder: 'results/under_armour/under_armour_test',
     // resultsFolder: 'results/under_armour/under_armour_prod_10.08.26_1',
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_prod',
 
-    taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
+    // taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
     // taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test_short.json',
     // taskPath: 'src/data/tasks/lasting/lasting_test_1.json',
     // taskPath: 'src/data/tasks/lasting/lasting_test.json',
@@ -72,7 +72,7 @@ export const config = {
     // taskPath: 'src/data/tasks/nike/nike_prod.json',
     // taskPath: 'src/data/tasks/under_armour/under_armour_prod.json',
     // src\data\tasks\under_armour\under_armour_test_short.json
-    // taskPath: 'src/data/tasks/puma/puma_test.json',
+    taskPath: 'src/data/tasks/puma/puma_prod.json',
     // taskPath: 'src/data/tasks/puma/puma_test_short.json',
     // taskPath: 'src/data/tasks/all_brands_for_test.json',
 

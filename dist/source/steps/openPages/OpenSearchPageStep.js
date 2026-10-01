@@ -5,7 +5,6 @@ class OpenSearchPageStep extends BaseStep_1.BaseStep {
     name = 'OpenSearchPageStep';
     async execute(ctx, config, params) {
         const stepConfig = ctx.stepParams?.get(OpenSearchPageStep) ?? params;
-        console.log('stepConfig:', stepConfig);
         const strategyName = stepConfig?.strategy || 'DefaultOpenSearchPageStrategy';
         const strategy = ctx.strategyResolver.get(strategyName);
         await strategy.execute(ctx, stepConfig);
@@ -14,7 +13,7 @@ class OpenSearchPageStep extends BaseStep_1.BaseStep {
             method: 'execute()',
             action: 'strategy.execute',
             data: {
-                strategy: strategy.name,
+                strategy: strategyName,
             },
         });
     }

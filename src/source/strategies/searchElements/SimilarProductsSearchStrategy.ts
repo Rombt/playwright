@@ -2,6 +2,7 @@ import { IStrategy } from '../../types/IStrategy';
 import { IExecutionContext } from '../../types/IExecutionContext';
 import { getAbsoluteHref } from '../../../common/helpers';
 import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 /**
  * todo
@@ -29,7 +30,7 @@ export default class SimilarProductsSearchStrategy
 
   async execute(ctx: IExecutionContext, params: CheckSearchResultsParams): Promise<SearchResult> {
     if (!ctx.input.sku || !ctx.input.normalizedSku) {
-      throw new Error('SKU or normalizedSku are not defined in context');
+      throw new FatalError('SKU or normalizedSku are not defined in context');
     }
 
     const { page } = ctx;
@@ -46,7 +47,7 @@ export default class SimilarProductsSearchStrategy
       const count = await links.count();
 
       if (count === 0) {
-        throw new Error(`Links to the products do not found on the page. ${ctx.input.sku}`);
+        throw new FatalError(`Links to the products do not found on the page. ${ctx.input.sku}`);
       }
 
       for (let i = 0; i < count; i++) {
@@ -61,7 +62,7 @@ export default class SimilarProductsSearchStrategy
     }
 
     if (productUrl === '') {
-      throw new Error(`No links contain sku: ${ctx.input.sku}`);
+      throw new FatalError(`No links contain sku: ${ctx.input.sku}`);
     }
     return {
       productUrl: productUrl,

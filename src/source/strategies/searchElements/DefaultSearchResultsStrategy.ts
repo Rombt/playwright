@@ -3,10 +3,12 @@ import { IExecutionContext } from '../../types/IExecutionContext';
 import { AppConfig } from '../../../data/config/appConfig';
 import { getAbsoluteHref } from '../../../common/helpers';
 import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
-export default class DefaultSearchResultsStrategy
-  implements IStrategy<CheckSearchResultsParams, SearchResult>
-{
+export default class DefaultSearchResultsStrategy implements IStrategy<
+  CheckSearchResultsParams,
+  SearchResult
+> {
   name = 'DefaultSearchResultsStrategy';
 
   // сейчас не использую может в будущих версиях
@@ -24,7 +26,7 @@ export default class DefaultSearchResultsStrategy
     const { page } = ctx;
 
     if (!params?.linkSelector) {
-      throw new Error('linkSelector is not configured');
+      throw new FatalError('linkSelector is not configured');
     }
 
     const link = page.locator(params.linkSelector).first();
@@ -45,22 +47,22 @@ export default class DefaultSearchResultsStrategy
           .then(() => 'empty'),
       ]);
     } catch (e) {
-      // if (e instanceof AggregateError) {
-      //   ctx.logger?.debug('************************', {
-      //     component: '',
-      //     method: '',
-      //     action: '',
-      //     data: {
-      //       e: e.errors,
-      //     },
-      //   });
-      // }
+      if (e instanceof AggregateError) {
+        // ctx.logger?.debug('************************', {
+        //   component: '',
+        //   method: '',
+        //   action: '',
+        //   data: {
+        //     e: e.errors,
+        //   },
+        // });
+      }
 
-      throw new Error(`Search result not resolved. ${ctx.input.sku}`);
+      throw new FatalError(`Search result not resolved. ${ctx.input.sku}`);
     }
 
     if ((await empty.count()) > 0) {
-      throw new Error(`Goods not found on the page. ${ctx.input.sku}`);
+      throw new FatalError(`Goods not found on the page. ${ctx.input.sku}`);
     }
 
     return {

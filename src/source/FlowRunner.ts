@@ -3,6 +3,7 @@ import { IExecutionContext } from './types/IExecutionContext';
 import { IStep } from './types/IStep';
 import { IStepResult } from './types/IStepResult';
 import { AppConfig } from '../data/config/appConfig';
+import { FatalError } from '../data/entities/Errors/FatalError';
 
 import { IStepConstructor, StepParamsMap } from './types/IStepConstructor';
 
@@ -58,14 +59,6 @@ export class FlowRunner implements IFlowRunner {
       try {
         await current.step.run(ctx, this.config, resolvedParams);
       } catch (error) {
-        ctx.logger.error('Step failed', {
-          step: current.step.name,
-          error: {
-            message: error instanceof Error ? error.message : String(error),
-            stack: error instanceof Error ? error.stack : undefined,
-          },
-        });
-
         ctx.errors.push({
           error: {
             message: error instanceof Error ? error.message : String(error),
@@ -74,6 +67,26 @@ export class FlowRunner implements IFlowRunner {
           product: ctx.input.product,
           targetUrl: ctx.state.productUrl,
         });
+
+        if (error instanceof FatalError) {
+          ctx.logger.error('Step failed with fatal error', {
+            step: current.step.name,
+            error: {
+              message: error instanceof Error ? error.message : String(error),
+              stack: error instanceof Error ? error.stack : undefined,
+            },
+          });
+
+          throw error;
+        } else {
+          ctx.logger.error('Step failed', {
+            step: current.step.name,
+            error: {
+              message: error instanceof Error ? error.message : String(error),
+              stack: error instanceof Error ? error.stack : undefined,
+            },
+          });
+        }
       }
 
       ctx.logger.debug('Step finish', {
@@ -81,7 +94,7 @@ export class FlowRunner implements IFlowRunner {
         stage: 'finish',
       });
 
-      let next = current.step.next(ctx, this.config);
+      let next: IStepResult | null = current.step.next(ctx, this.config);
 
       if (ctx.control.skipNext && next) {
         ctx.control.skipNext = false;

@@ -3,6 +3,7 @@ import { IExecutionContext } from '../../types/IExecutionContext';
 import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/CollectProductPhotos/ICollectProductPhotosTask';
 import { fullClearSku, normalizeSku, optimizePageResources } from '../../../common/helpers';
 import { IOpenSearchPageParams } from '../../types/IOpenSearchPageParams';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 export default class DefaultOpenSearchPageStrategy implements IStrategy<
   IOpenSearchPageParams,
@@ -25,13 +26,13 @@ export default class DefaultOpenSearchPageStrategy implements IStrategy<
     const product = ctx.input.product;
 
     if (!product) {
-      throw new Error('Product is undefined');
+      throw new FatalError('Product is undefined');
     }
 
     const baseUrl = ctx.input.url;
 
     if (!baseUrl) {
-      throw new Error('target_website is not defined');
+      throw new FatalError('target_website is not defined');
     }
 
     const sku = params?.clearSku === 'full' ? fullClearSku(product.sku) : normalizeSku(product.sku);

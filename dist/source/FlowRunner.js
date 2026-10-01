@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FlowRunner = void 0;
+const FatalError_1 = require("../data/entities/Errors/FatalError");
 class FlowRunner {
     config;
     constructor(config) {
@@ -47,13 +48,6 @@ class FlowRunner {
                 await current.step.run(ctx, this.config, resolvedParams);
             }
             catch (error) {
-                ctx.logger.error('Step failed', {
-                    step: current.step.name,
-                    error: {
-                        message: error instanceof Error ? error.message : String(error),
-                        stack: error instanceof Error ? error.stack : undefined,
-                    },
-                });
                 ctx.errors.push({
                     error: {
                         message: error instanceof Error ? error.message : String(error),
@@ -62,6 +56,25 @@ class FlowRunner {
                     product: ctx.input.product,
                     targetUrl: ctx.state.productUrl,
                 });
+                if (error instanceof FatalError_1.FatalError) {
+                    ctx.logger.error('Step failed with fatal error', {
+                        step: current.step.name,
+                        error: {
+                            message: error instanceof Error ? error.message : String(error),
+                            stack: error instanceof Error ? error.stack : undefined,
+                        },
+                    });
+                    throw error;
+                }
+                else {
+                    ctx.logger.error('Step failed', {
+                        step: current.step.name,
+                        error: {
+                            message: error instanceof Error ? error.message : String(error),
+                            stack: error instanceof Error ? error.stack : undefined,
+                        },
+                    });
+                }
             }
             ctx.logger.debug('Step finish', {
                 step: current.step.name,

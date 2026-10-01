@@ -4,6 +4,7 @@ import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/Collect
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { getAbsoluteHref } from '../../../common/helpers';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 type CheckPageSkuParams = {
   sku: string;
@@ -18,7 +19,7 @@ export default class CheckPageSkuStep extends BaseStep {
     // params?: CheckPageSkuParams,
   ): Promise<void> {
     if (!ctx.input.sku || !ctx.input.normalizedSku) {
-      throw new Error('SKU or normalizedSku are not defined in context');
+      throw new FatalError('SKU or normalizedSku are not defined in context');
     }
 
     const { page } = ctx;
@@ -27,7 +28,7 @@ export default class CheckPageSkuStep extends BaseStep {
     const pageSkuSelector = stepConfig?.pageSkuSelector;
 
     if (!pageSkuSelector) {
-      throw new Error('pageSkuSelector is not configured in stepParams');
+      throw new FatalError('pageSkuSelector is not configured in stepParams');
     }
 
     ctx.logger?.debug('Page sku selector  is received', {
@@ -48,11 +49,11 @@ export default class CheckPageSkuStep extends BaseStep {
 
     try {
       if (!text?.toLowerCase().includes(ctx.input.normalizedSku.toLowerCase())) {
-        throw new Error(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
+        throw new FatalError(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
       }
     } catch (e) {
       ctx.control.stop = true;
-      throw new Error(`The page is not match sku ${ctx.input.normalizedSku}`);
+      throw new FatalError(`The page is not match sku ${ctx.input.normalizedSku}`);
     }
   }
 

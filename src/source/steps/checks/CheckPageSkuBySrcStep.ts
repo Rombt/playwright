@@ -4,10 +4,7 @@ import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/Collect
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { getAbsoluteHref } from '../../../common/helpers';
-
-// type CheckPageSkuBySrcParams = {
-//   sku: string;
-// };
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 export default class CheckPageSkuBySrcStep extends BaseStep {
   public readonly name = 'CheckPageSkuBySrcStep';
@@ -25,7 +22,7 @@ export default class CheckPageSkuBySrcStep extends BaseStep {
     // params?: CheckPageSkuBySrcParams,
   ): Promise<void> {
     if (!ctx.input.sku || !ctx.input.normalizedSku) {
-      throw new Error('SKU or normalizedSku are not defined in context');
+      throw new FatalError('SKU or normalizedSku are not defined in context');
     }
 
     const { page } = ctx;
@@ -41,7 +38,7 @@ export default class CheckPageSkuBySrcStep extends BaseStep {
     const token = stepConfig?.token;
 
     if (!pageSkuSelector) {
-      throw new Error('pageSkuSelector is not configured in stepParams');
+      throw new FatalError('pageSkuSelector is not configured in stepParams');
     }
 
     ctx.logger?.debug('Page sku selector  is received', {
@@ -58,7 +55,6 @@ export default class CheckPageSkuBySrcStep extends BaseStep {
     try {
       const page_sku = page.locator(`${pageSkuSelector}[src*="${token}"]`);
       count = await page_sku.count();
-
     } catch (error) {
       ctx.control.stop = true;
 
@@ -69,11 +65,9 @@ export default class CheckPageSkuBySrcStep extends BaseStep {
       });
     }
 
-    if (count===0) {
-      throw new Error(`The page is not match sku ${sku}`);
+    if (count === 0) {
+      throw new FatalError(`The page is not match sku ${sku}`);
     }
-
-    
   }
 
   next(ctx: IExecutionContext): IStepResult | null {

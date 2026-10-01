@@ -4,6 +4,7 @@ import { ICollectProductPhotosTask } from '../../../data/entities/ITasks/Collect
 import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { getAbsoluteHref } from '../../../common/helpers';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 // type SearchGalleryParams = {
 //   sku: string;
@@ -29,12 +30,12 @@ export default class SearchGalleryStep extends BaseStep {
     try {
       await gallery.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
     } catch (error) {
-      throw new Error('No gallery found on page for sku ' + ctx.input.product!.sku);
+      throw new FatalError('No gallery found on page for sku ' + ctx.input.product!.sku);
     }
 
     //todo не уверен что эта проверка нужна
     const count = await gallery.count();
-    if (count === 0) throw new Error('No gallery found on page 222 for sku ' + ctx.input.product!.sku);
+    if (count === 0) throw new FatalError('No gallery found on page 222 for sku ' + ctx.input.product!.sku);
 
     const firstImg = gallery.locator('img').first();
     await firstImg.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });

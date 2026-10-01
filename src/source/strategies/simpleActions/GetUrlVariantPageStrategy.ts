@@ -6,6 +6,7 @@ import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearch
 import { IPreparationSearchPageParams } from '../../types/IPreparationSearchPageParams';
 import { IActionResult } from '../../types/IActionResult';
 import { IOpenProductPageParams } from '../../types/IOpenProductPageParams';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 export default class GetUrlVariantPageStrategy implements ITransformStrategy<IOpenProductPageParams, string> {
   name = 'GetUrlVariantPageStrategy';
@@ -25,11 +26,11 @@ export default class GetUrlVariantPageStrategy implements ITransformStrategy<IOp
   async execute(ctx: IExecutionContext, stepConfig: IOpenProductPageParams): Promise<string> {
     const originalUrl = ctx.state.urlProductPage;
     if (typeof originalUrl !== 'string') {
-      throw new Error('urlProductPage is not a string');
+      throw new FatalError('urlProductPage is not a string');
     }
 
     if (!stepConfig.key || stepConfig.value === undefined) {
-      throw new Error('Invalid URL params stepConfig');
+      throw new FatalError('Invalid URL params stepConfig');
     }
 
     let url: URL;
@@ -37,7 +38,7 @@ export default class GetUrlVariantPageStrategy implements ITransformStrategy<IOp
     try {
       url = new URL(originalUrl);
     } catch {
-      throw new Error(`Invalid URL: ${originalUrl}`);
+      throw new FatalError(`Invalid URL: ${originalUrl}`);
     }
 
     url.searchParams.set(stepConfig.key, stepConfig.value);

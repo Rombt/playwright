@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("../../../common/helpers");
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 class DefaultSearchResultsStrategy {
     name = 'DefaultSearchResultsStrategy';
     // сейчас не использую может в будущих версиях
@@ -15,7 +16,7 @@ class DefaultSearchResultsStrategy {
     async execute(ctx, params) {
         const { page } = ctx;
         if (!params?.linkSelector) {
-            throw new Error('linkSelector is not configured');
+            throw new FatalError_1.FatalError('linkSelector is not configured');
         }
         const link = page.locator(params.linkSelector).first();
         const empty = params.emptySelectorText
@@ -35,20 +36,20 @@ class DefaultSearchResultsStrategy {
             ]);
         }
         catch (e) {
-            // if (e instanceof AggregateError) {
-            //   ctx.logger?.debug('************************', {
-            //     component: '',
-            //     method: '',
-            //     action: '',
-            //     data: {
-            //       e: e.errors,
-            //     },
-            //   });
-            // }
-            throw new Error(`Search result not resolved. ${ctx.input.sku}`);
+            if (e instanceof AggregateError) {
+                // ctx.logger?.debug('************************', {
+                //   component: '',
+                //   method: '',
+                //   action: '',
+                //   data: {
+                //     e: e.errors,
+                //   },
+                // });
+            }
+            throw new FatalError_1.FatalError(`Search result not resolved. ${ctx.input.sku}`);
         }
         if ((await empty.count()) > 0) {
-            throw new Error(`Goods not found on the page. ${ctx.input.sku}`);
+            throw new FatalError_1.FatalError(`Goods not found on the page. ${ctx.input.sku}`);
         }
         return {
             productUrl: await (0, helpers_1.getAbsoluteHref)(ctx.page, link),

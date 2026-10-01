@@ -2,13 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseStep_1 = require("../../BaseStep");
 const helpers_1 = require("../../../common/helpers");
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 class OpenProductPageStep extends BaseStep_1.BaseStep {
     name = 'OpenProductPageStep';
     stepConfig;
     async execute(ctx, config, params) {
         let urlProductPage = ctx.state.urlProductPage;
         if (!urlProductPage) {
-            throw new Error('productUrl is not found in state');
+            throw new FatalError_1.FatalError('productUrl is not found in state');
         }
         this.stepConfig = ctx.stepParams?.get(OpenProductPageStep);
         if (this.stepConfig?.strategy) {

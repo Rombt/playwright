@@ -8,6 +8,7 @@ import { AppConfig } from '../../../data/config/appConfig';
 import { IStepResult } from '../../types/IStepResult';
 import { IOpenProductPageParams } from '../../types/IOpenProductPageParams';
 import { optimizePageResources } from '../../../common/helpers';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 export default class OpenProductPageStep extends BaseStep {
   public readonly name = 'OpenProductPageStep';
@@ -21,7 +22,7 @@ export default class OpenProductPageStep extends BaseStep {
     let urlProductPage = ctx.state.urlProductPage as string;
 
     if (!urlProductPage) {
-      throw new Error('productUrl is not found in state');
+      throw new FatalError('productUrl is not found in state');
     }
 
     this.stepConfig = ctx.stepParams?.get(OpenProductPageStep) as unknown as IOpenProductPageParams;

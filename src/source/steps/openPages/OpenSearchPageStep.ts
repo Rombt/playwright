@@ -15,8 +15,6 @@ export default class OpenSearchPageStep extends BaseStep {
   ): Promise<void> {
     const stepConfig =
       (ctx.stepParams?.get(OpenSearchPageStep) as unknown as IOpenSearchPageParams) ?? params;
-
-    console.log('stepConfig:', stepConfig);
     
     const strategyName = stepConfig?.strategy || 'DefaultOpenSearchPageStrategy';
 
@@ -30,7 +28,7 @@ export default class OpenSearchPageStep extends BaseStep {
       method: 'execute()',
       action: 'strategy.execute',
       data: {
-        strategy: strategy.name,
+        strategy: strategyName,
       },
     });
   }

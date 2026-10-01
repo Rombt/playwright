@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("../../../common/helpers");
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 class DefaultOpenSearchPageStrategy {
     name = 'DefaultOpenSearchPageStrategy';
     async canHandle(ctx) {
@@ -12,11 +13,11 @@ class DefaultOpenSearchPageStrategy {
     async execute(ctx, params) {
         const product = ctx.input.product;
         if (!product) {
-            throw new Error('Product is undefined');
+            throw new FatalError_1.FatalError('Product is undefined');
         }
         const baseUrl = ctx.input.url;
         if (!baseUrl) {
-            throw new Error('target_website is not defined');
+            throw new FatalError_1.FatalError('target_website is not defined');
         }
         const sku = params?.clearSku === 'full' ? (0, helpers_1.fullClearSku)(product.sku) : (0, helpers_1.normalizeSku)(product.sku);
         const url = baseUrl.replace('{{sku_prod}}', sku);

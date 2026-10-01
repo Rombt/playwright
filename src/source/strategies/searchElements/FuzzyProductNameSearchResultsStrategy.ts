@@ -4,6 +4,7 @@ import { AppConfig } from '../../../data/config/appConfig';
 import { getAbsoluteHref } from '../../../common/helpers';
 import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
 import { fuzzyMatchStrings } from '../../../common/helpers';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 export default class FuzzyProductNameSearchResultsStrategy
   implements IStrategy<CheckSearchResultsParams, SearchResult>
@@ -25,14 +26,14 @@ export default class FuzzyProductNameSearchResultsStrategy
     const { page } = ctx;
 
     if (!ctx.input.product?.name_product) {
-      throw new Error(`Product name is missing for SKU: ${ctx.input.sku ?? 'unknown'}`);
+      throw new FatalError(`Product name is missing for SKU: ${ctx.input.sku ?? 'unknown'}`);
     }
     
     const cleanProdName = ctx.input.product?.name_product?.replace(ctx.input.sku ?? '', '').trim();
     const link = page.locator(params.linkSelector).first();
 
     if ((await link.count()) == 0) {
-      throw new Error(`The link selector not found on the page. ${ctx.input.sku}`);
+      throw new FatalError(`The link selector not found on the page. ${ctx.input.sku}`);
     }
 
     const linkText = await link.innerText();

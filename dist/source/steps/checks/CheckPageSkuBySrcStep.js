@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseStep_1 = require("../../BaseStep");
-// type CheckPageSkuBySrcParams = {
-//   sku: string;
-// };
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 class CheckPageSkuBySrcStep extends BaseStep_1.BaseStep {
     name = 'CheckPageSkuBySrcStep';
     /**
@@ -15,7 +13,7 @@ class CheckPageSkuBySrcStep extends BaseStep_1.BaseStep {
      */
     async execute(ctx, config) {
         if (!ctx.input.sku || !ctx.input.normalizedSku) {
-            throw new Error('SKU or normalizedSku are not defined in context');
+            throw new FatalError_1.FatalError('SKU or normalizedSku are not defined in context');
         }
         const { page } = ctx;
         const sku = ctx.input.sku;
@@ -23,7 +21,7 @@ class CheckPageSkuBySrcStep extends BaseStep_1.BaseStep {
         const pageSkuSelector = stepConfig?.pageSkuSelector;
         const token = stepConfig?.token;
         if (!pageSkuSelector) {
-            throw new Error('pageSkuSelector is not configured in stepParams');
+            throw new FatalError_1.FatalError('pageSkuSelector is not configured in stepParams');
         }
         ctx.logger?.debug('Page sku selector  is received', {
             component: 'CheckPageSkuStep',
@@ -48,7 +46,7 @@ class CheckPageSkuBySrcStep extends BaseStep_1.BaseStep {
             });
         }
         if (count === 0) {
-            throw new Error(`The page is not match sku ${sku}`);
+            throw new FatalError_1.FatalError(`The page is not match sku ${sku}`);
         }
     }
     next(ctx) {

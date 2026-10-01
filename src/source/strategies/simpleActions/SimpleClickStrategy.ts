@@ -4,6 +4,7 @@ import { getAbsoluteHref } from '../../../common/helpers';
 import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
 import { IPreparationSearchPageParams } from '../../types/IPreparationSearchPageParams';
 import { IActionResult } from '../../types/IActionResult';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 export default class SimpleClickStrategy implements IActionStrategy<IPreparationSearchPageParams> {
   name = 'SimpleClickStrategy';
@@ -26,7 +27,7 @@ export default class SimpleClickStrategy implements IActionStrategy<IPreparation
   ): Promise<IActionResult> {
     try {
       if (!params.selector) {
-        throw new Error('SimpleClickStrategy. Selector is not defined in params');
+        throw new FatalError('SimpleClickStrategy. Selector is not defined in params');
       }
 
       const el = ctx.page.locator(params.selector);

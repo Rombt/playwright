@@ -4,6 +4,7 @@ import { getAbsoluteHref, waitForSystemToCoolDown } from '../../../common/helper
 import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
 import { IPreparationSearchPageParams } from '../../types/IPreparationSearchPageParams';
 import { IActionResult } from '../../types/IActionResult';
+import { FatalError } from '../../../data/entities/Errors/FatalError';
 
 export default class InsertValueIntoInputStrategy
   implements IActionStrategy<IPreparationSearchPageParams>
@@ -27,11 +28,11 @@ export default class InsertValueIntoInputStrategy
     params: IPreparationSearchPageParams,
   ): Promise<IActionResult> {
     if (!params.openInputSelector || !params.inputSelector) {
-      throw new Error('Input selectors are not defined in params');
+      throw new FatalError('Input selectors are not defined in params');
     }
 
     if (!ctx.input.normalizedSku) {
-      throw new Error(
+      throw new FatalError(
         'InsertValueIntoInputStrategy. SKU or normalizedSku are not defined in context',
       );
     }

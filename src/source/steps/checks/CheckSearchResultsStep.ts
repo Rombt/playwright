@@ -7,6 +7,7 @@ import { IStrategy } from '../../types/IStrategy';
 import { IStrategyResolver } from '../../types/IStrategyResolver';
 import { CheckSearchResultsParams, SearchResult } from '../../types/ICheckSearchResults';
 
+
 export default class CheckSearchResultsStep extends BaseStep {
   public readonly name = 'CheckSearchResultsStep';
 

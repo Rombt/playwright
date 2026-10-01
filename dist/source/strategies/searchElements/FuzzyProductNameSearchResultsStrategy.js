@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("../../../common/helpers");
 const helpers_2 = require("../../../common/helpers");
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 class FuzzyProductNameSearchResultsStrategy {
     name = 'FuzzyProductNameSearchResultsStrategy';
     // сейчас не использую может в будущих версиях
@@ -16,12 +17,12 @@ class FuzzyProductNameSearchResultsStrategy {
     async execute(ctx, params) {
         const { page } = ctx;
         if (!ctx.input.product?.name_product) {
-            throw new Error(`Product name is missing for SKU: ${ctx.input.sku ?? 'unknown'}`);
+            throw new FatalError_1.FatalError(`Product name is missing for SKU: ${ctx.input.sku ?? 'unknown'}`);
         }
         const cleanProdName = ctx.input.product?.name_product?.replace(ctx.input.sku ?? '', '').trim();
         const link = page.locator(params.linkSelector).first();
         if ((await link.count()) == 0) {
-            throw new Error(`The link selector not found on the page. ${ctx.input.sku}`);
+            throw new FatalError_1.FatalError(`The link selector not found on the page. ${ctx.input.sku}`);
         }
         const linkText = await link.innerText();
         const productMatch = (0, helpers_2.fuzzyMatchStrings)({

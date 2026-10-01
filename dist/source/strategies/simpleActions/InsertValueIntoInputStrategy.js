@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("../../../common/helpers");
+const FatalError_1 = require("../../../data/entities/Errors/FatalError");
 class InsertValueIntoInputStrategy {
     name = 'InsertValueIntoInputStrategy';
     // сейчас не использую может в будущих версиях
@@ -15,10 +16,10 @@ class InsertValueIntoInputStrategy {
     }
     async execute(ctx, params) {
         if (!params.openInputSelector || !params.inputSelector) {
-            throw new Error('Input selectors are not defined in params');
+            throw new FatalError_1.FatalError('Input selectors are not defined in params');
         }
         if (!ctx.input.normalizedSku) {
-            throw new Error('InsertValueIntoInputStrategy. SKU or normalizedSku are not defined in context');
+            throw new FatalError_1.FatalError('InsertValueIntoInputStrategy. SKU or normalizedSku are not defined in context');
         }
         const openInputEl = ctx.page.locator(params.openInputSelector);
         const input = ctx.page.locator(params.inputSelector);
