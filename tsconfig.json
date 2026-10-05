@@ -14,5 +14,9 @@
     "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
-  "exclude": ["**/_*/**"]
+  "exclude": [
+    "**/_*/**", 
+    "src/source/sources/_drafts/**/*",
+    "src/source/sources_old/**/*"
+  ]
 }

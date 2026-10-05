@@ -27,6 +27,7 @@ __exportStar(require("./async/waitForSystemToCoolDown"), exports);
 __exportStar(require("./data/readProducts"), exports);
 __exportStar(require("./data/writeProducts"), exports);
 __exportStar(require("./data/getUnprocessedFilePath"), exports);
+__exportStar(require("./data/read4fFulSku"), exports);
 __exportStar(require("./data/extractBrandFromFileName"), exports);
 __exportStar(require("./data/sanitizeDom"), exports);
 __exportStar(require("./data/removeAllAttributes"), exports);

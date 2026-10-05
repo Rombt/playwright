@@ -12,7 +12,7 @@ import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
 import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectImgStep from '../steps/collectElements/CollectImgStep';
 import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
-import longSku4F from '../../data/4F_long_sku.json';
+// import longSku4F from '../../data/4F_long_sku.json';
 
 import { IExtractHtmlOptions, normalizeSku, fullClearSku } from '../../common/helpers';
 
@@ -36,20 +36,20 @@ class PageImageSource4F_1 implements ISource<ICollectProductPhotosTask> {
     // т.к. товары ТМ 4F ищутся только по полным squ то нужно получить их все доступные
     // выбрать из них тот частью которого является текущий, короткий, sku и
     // в дальнейшем использовать только длинный
-    const arr_longSku = [...new Set(longSku4F)];
+    // const arr_longSku = [...new Set(longSku4F)];
 
     if (!ctx.input.product) {
       throw new Error('!ctx.input.product');
     }
 
-    const shortSku = normalizeSku(ctx.input.product.sku);
-    const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
+    // const shortSku = normalizeSku(ctx.input.product.sku);
+    // const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
 
-    if (!foundLongSku) {
-      throw new Error('Long sku is not found');
-    }
+    // if (!foundLongSku) {
+    //   throw new Error('Long sku is not found');
+    // }
 
-    ctx.input.product.sku = foundLongSku;
+    // ctx.input.product.sku = foundLongSku;
 
     ctx.stepParams = new Map([
       [

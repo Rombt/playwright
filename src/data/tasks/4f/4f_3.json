@@ -502,6 +502,1113 @@
             "color": "чорний",
             "size": "O/S"
           }
+        },
+        {
+          "id_product": "57075",
+          "name_product": "Шапка 2640002*AW27 PUMA",
+          "sku": "2640002*AW27",
+          "attributes": {
+            "color": "св.рож",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57081",
+          "name_product": "Рюкзак 09071602 *AW27 PUMA *",
+          "sku": "09071602*AW27",
+          "attributes": {
+            "color": "черв",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57082",
+          "name_product": "Сумка 09033301*AW27 PUMA *",
+          "sku": "09033301*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57083",
+          "name_product": "Сумка 09091901*AW27 PUMA *",
+          "sku": "09091901*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57084",
+          "name_product": "Шапка 2640404*AW27 PUMA*",
+          "sku": "2640404*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57084",
+          "name_product": "Шапка 2640404*AW27 PUMA*",
+          "sku": "2641001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57084",
+          "name_product": "Шапка 2640404*AW27 PUMA*",
+          "sku": "2641001*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57085",
+          "name_product": "Шапка 2641402*AW27 PUMA*",
+          "sku": "2641402*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57095",
+          "name_product": "Брюки 68178969*AW27 PUMA (підл)*",
+          "sku": "68178969*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "57095",
+          "name_product": "Брюки 68178969*AW27 PUMA (підл)*",
+          "sku": "68178969*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "57095",
+          "name_product": "Брюки 68178969*AW27 PUMA (підл)*",
+          "sku": "68178969*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "57095",
+          "name_product": "Брюки 68178969*AW27 PUMA (підл)*",
+          "sku": "68178969*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "176"
+          }
+        },
+        {
+          "id_product": "57098",
+          "name_product": "Кросівки 31050001*AW27 PUMA (ч)*",
+          "sku": "31050001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "57098",
+          "name_product": "Кросівки 31050001*AW27 PUMA (ч)*",
+          "sku": "31050001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "57098",
+          "name_product": "Кросівки 31050001*AW27 PUMA (ч)*",
+          "sku": "31050001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "57098",
+          "name_product": "Кросівки 31050001*AW27 PUMA (ч)*",
+          "sku": "31050001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "57098",
+          "name_product": "Кросівки 31050001*AW27 PUMA (ч)*",
+          "sku": "31050001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "57098",
+          "name_product": "Кросівки 31050001*AW27 PUMA (ч)*",
+          "sku": "31050001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "47"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "42.5"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "44,5"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "57099",
+          "name_product": "Кросівки 40026701*AW27 PUMA (ч)*",
+          "sku": "40026701*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "47"
+          }
+        },
+        {
+          "id_product": "57100",
+          "name_product": "Куртка 53194401*AW27 PUMA (дит)*",
+          "sku": "53194401*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "57100",
+          "name_product": "Куртка 53194401*AW27 PUMA (дит)*",
+          "sku": "53194401*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "57100",
+          "name_product": "Куртка 53194401*AW27 PUMA (дит)*",
+          "sku": "53194401*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "57100",
+          "name_product": "Куртка 53194401*AW27 PUMA (дит)*",
+          "sku": "53194401*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "57100",
+          "name_product": "Куртка 53194401*AW27 PUMA (дит)*",
+          "sku": "53194401*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "176"
+          }
+        },
+        {
+          "id_product": "57102",
+          "name_product": "Рюкзак 09116403 *AW27 PUMA *",
+          "sku": "09116403*AW27",
+          "attributes": {
+            "color": "чорн/зол",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57103",
+          "name_product": "Світшот 68178769*AW27 PUMA (підл)*",
+          "sku": "68178769*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "57103",
+          "name_product": "Світшот 68178769*AW27 PUMA (підл)*",
+          "sku": "68178769*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "57103",
+          "name_product": "Світшот 68178769*AW27 PUMA (підл)*",
+          "sku": "68178769*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "57103",
+          "name_product": "Світшот 68178769*AW27 PUMA (підл)*",
+          "sku": "68178769*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "57103",
+          "name_product": "Світшот 68178769*AW27 PUMA (підл)*",
+          "sku": "68178769*AW27",
+          "attributes": {
+            "color": "т.сiр.",
+            "size": "176"
+          }
+        },
+        {
+          "id_product": "57104",
+          "name_product": "Сумка 09144201*AW27 PUMA *",
+          "sku": "09144201*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57105",
+          "name_product": "Сумка 09144301*AW27 PUMA *",
+          "sku": "09144301*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57106",
+          "name_product": "Сумка 09220101*AW27 PUMA *",
+          "sku": "09220101*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57107",
+          "name_product": "Футболка 68254201*AW27 PUMA (ч)*",
+          "sku": "68254201*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57107",
+          "name_product": "Футболка 68254201*AW27 PUMA (ч)*",
+          "sku": "68254201*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57107",
+          "name_product": "Футболка 68254201*AW27 PUMA (ч)*",
+          "sku": "68254201*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57107",
+          "name_product": "Футболка 68254201*AW27 PUMA (ч)*",
+          "sku": "68254201*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57107",
+          "name_product": "Футболка 68254201*AW27 PUMA (ч)*",
+          "sku": "68254201*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57116",
+          "name_product": "Черевики 39383101*AW27 PUMA (підл)*",
+          "sku": "39383101*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "57116",
+          "name_product": "Черевики 39383101*AW27 PUMA (підл)*",
+          "sku": "39383101*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "57116",
+          "name_product": "Черевики 39383101*AW27 PUMA (підл)*",
+          "sku": "39383101*AW27",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "57116",
+          "name_product": "Черевики 39383101*AW27 PUMA (підл)*",
+          "sku": "39383101*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "57116",
+          "name_product": "Черевики 39383101*AW27 PUMA (підл)*",
+          "sku": "39383101*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "57116",
+          "name_product": "Черевики 39383101*AW27 PUMA (підл)*",
+          "sku": "39383101*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "57118",
+          "name_product": "Черевики 39745903*AW27 PUMA (ж)*",
+          "sku": "39745903*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "57118",
+          "name_product": "Черевики 39745903*AW27 PUMA (ж)*",
+          "sku": "39745903*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "57118",
+          "name_product": "Черевики 39745903*AW27 PUMA (ж)*",
+          "sku": "39745903*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "57118",
+          "name_product": "Черевики 39745903*AW27 PUMA (ж)*",
+          "sku": "39745903*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "57118",
+          "name_product": "Черевики 39745903*AW27 PUMA (ж)*",
+          "sku": "39745903*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "57118",
+          "name_product": "Черевики 39745903*AW27 PUMA (ж)*",
+          "sku": "39745903*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "57118",
+          "name_product": "Черевики 39745903*AW27 PUMA (ж)*",
+          "sku": "39745903*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "36"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "37"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "37.5"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "38.5"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "39"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "40.5"
+          }
+        },
+        {
+          "id_product": "57120",
+          "name_product": "Черевики 40358403*AW27 PUMA (ж)*",
+          "sku": "40358403*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "57225",
+          "name_product": "Брюки 586844*AW27 PUMA (ж)*",
+          "sku": "586844*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57225",
+          "name_product": "Брюки 586844*AW27 PUMA (ж)*",
+          "sku": "586844*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57225",
+          "name_product": "Брюки 586844*AW27 PUMA (ж)*",
+          "sku": "586844*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57225",
+          "name_product": "Брюки 586844*AW27 PUMA (ж)*",
+          "sku": "586844*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57225",
+          "name_product": "Брюки 586844*AW27 PUMA (ж)*",
+          "sku": "586844*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57226",
+          "name_product": "Брюки 627429*AW27 PUMA (ч)*",
+          "sku": "627429*AW27",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57226",
+          "name_product": "Брюки 627429*AW27 PUMA (ч)*",
+          "sku": "627429*AW27",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57226",
+          "name_product": "Брюки 627429*AW27 PUMA (ч)*",
+          "sku": "627429*AW27",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57226",
+          "name_product": "Брюки 627429*AW27 PUMA (ч)*",
+          "sku": "627429*AW27",
+          "attributes": {
+            "color": "чорн/біл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57227",
+          "name_product": "Брюки 679246*AW27 PUMA (під)*",
+          "sku": "679246*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "57227",
+          "name_product": "Брюки 679246*AW27 PUMA (під)*",
+          "sku": "679246*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "57227",
+          "name_product": "Брюки 679246*AW27 PUMA (під)*",
+          "sku": "679246*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "57227",
+          "name_product": "Брюки 679246*AW27 PUMA (під)*",
+          "sku": "679246*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "57227",
+          "name_product": "Брюки 679246*AW27 PUMA (під)*",
+          "sku": "679246*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "176"
+          }
+        },
+        {
+          "id_product": "57228",
+          "name_product": "Легінси 525797*AW27 PUMA (ж)*",
+          "sku": "525797*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57228",
+          "name_product": "Легінси 525797*AW27 PUMA (ж)*",
+          "sku": "525797*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57228",
+          "name_product": "Легінси 525797*AW27 PUMA (ж)*",
+          "sku": "525797*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57228",
+          "name_product": "Легінси 525797*AW27 PUMA (ж)*",
+          "sku": "525797*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57228",
+          "name_product": "Легінси 525797*AW27 PUMA (ж)*",
+          "sku": "525797*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57229",
+          "name_product": "Рюкзак 091697*AW27 PUMA *",
+          "sku": "091697*AW27 ",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57230",
+          "name_product": "Футболка 523276*AW27 PUMA (ж)*",
+          "sku": "523276*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57230",
+          "name_product": "Футболка 523276*AW27 PUMA (ж)*",
+          "sku": "523276*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57230",
+          "name_product": "Футболка 523276*AW27 PUMA (ж)*",
+          "sku": "523276*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57230",
+          "name_product": "Футболка 523276*AW27 PUMA (ж)*",
+          "sku": "523276*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57230",
+          "name_product": "Футболка 523276*AW27 PUMA (ж)*",
+          "sku": "523276*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57231",
+          "name_product": "Худі 586869*AW27 PUMA (ж)*",
+          "sku": "586869*AW27",
+          "attributes": {
+            "color": "черв",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57231",
+          "name_product": "Худі 586869*AW27 PUMA (ж)*",
+          "sku": "586869*AW27",
+          "attributes": {
+            "color": "черв",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57231",
+          "name_product": "Худі 586869*AW27 PUMA (ж)*",
+          "sku": "586869*AW27",
+          "attributes": {
+            "color": "черв",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57231",
+          "name_product": "Худі 586869*AW27 PUMA (ж)*",
+          "sku": "586869*AW27",
+          "attributes": {
+            "color": "черв",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57231",
+          "name_product": "Худі 586869*AW27 PUMA (ж)*",
+          "sku": "586869*AW27",
+          "attributes": {
+            "color": "черв",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57232",
+          "name_product": "Худі 627428*AW27 PUMA (ч)*",
+          "sku": "627428*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57232",
+          "name_product": "Худі 627428*AW27 PUMA (ч)*",
+          "sku": "627428*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57232",
+          "name_product": "Худі 627428*AW27 PUMA (ч)*",
+          "sku": "627428*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57232",
+          "name_product": "Худі 627428*AW27 PUMA (ч)*",
+          "sku": "627428*AW27",
+          "attributes": {
+            "color": "чорн/бiл",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57233",
+          "name_product": "Худі 676814*AW27 PUMA (ч)*",
+          "sku": "676814*AW27 ",
+          "attributes": {
+            "color": "помар.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57233",
+          "name_product": "Худі 676814*AW27 PUMA (ч)*",
+          "sku": "676814*AW27 ",
+          "attributes": {
+            "color": "помар.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57233",
+          "name_product": "Худі 676814*AW27 PUMA (ч)*",
+          "sku": "676814*AW27 ",
+          "attributes": {
+            "color": "помар.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57233",
+          "name_product": "Худі 676814*AW27 PUMA (ч)*",
+          "sku": "676814*AW27 ",
+          "attributes": {
+            "color": "помар.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57233",
+          "name_product": "Худі 676814*AW27 PUMA (ч)*",
+          "sku": "676814*AW27 ",
+          "attributes": {
+            "color": "помар.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57234",
+          "name_product": "Худі 679245*AW27 PUMA (під)*",
+          "sku": "679245*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "57234",
+          "name_product": "Худі 679245*AW27 PUMA (під)*",
+          "sku": "679245*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "134"
+          }
+        },
+        {
+          "id_product": "57234",
+          "name_product": "Худі 679245*AW27 PUMA (під)*",
+          "sku": "679245*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "57234",
+          "name_product": "Худі 679245*AW27 PUMA (під)*",
+          "sku": "679245*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "146"
+          }
+        },
+        {
+          "id_product": "57234",
+          "name_product": "Худі 679245*AW27 PUMA (під)*",
+          "sku": "679245*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "152"
+          }
+        },
+        {
+          "id_product": "57234",
+          "name_product": "Худі 679245*AW27 PUMA (під)*",
+          "sku": "679245*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "164"
+          }
+        },
+        {
+          "id_product": "57234",
+          "name_product": "Худі 679245*AW27 PUMA (під)*",
+          "sku": "679245*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "176"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "коричн",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "коричн",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "коричн",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "коричн",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57235",
+          "name_product": "Худі 681529*AW27 PUMA (ж)*",
+          "sku": "681529*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57236",
+          "name_product": "Шапка 025701*AW27 PUMA*",
+          "sku": "025701*AW27 ",
+          "attributes": {
+            "color": "св.сірий",
+            "size": "O/S"
+          }
         }
       ]
     }
