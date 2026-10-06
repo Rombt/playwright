@@ -47,7 +47,7 @@ class PageImageSourceGanzo {
                 {
                     // strategy: 'SlickSliderCollectImagesStrategy',
                     strategy: 'DefaultCollectImagesStrategy',
-                    stopProcessing: true,
+                    stopProcessing: false,
                 },
             ],
             [

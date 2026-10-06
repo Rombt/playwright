@@ -58,7 +58,7 @@ class PageImageSourceGanzo implements ISource<ICollectProductPhotosTask> {
         {
           // strategy: 'SlickSliderCollectImagesStrategy',
           strategy: 'DefaultCollectImagesStrategy',
-          stopProcessing: true,
+          stopProcessing: false,
         },
       ],
 
