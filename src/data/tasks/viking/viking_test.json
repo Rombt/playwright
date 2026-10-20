@@ -1,0 +1,257 @@
+{
+  "generated_at": "2026-10-20_09-11",
+  "task": {
+    "206": {
+      "brand_id": "0",
+      "brand_name": "Viking",
+      "metadata": {
+        "target_website": "https://viking-europe.com/catalogsearch/result/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "57303",
+          "name_product": "Термо 500151977*AW27VKG (ж)",
+          "sku": "500151977*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57303",
+          "name_product": "Термо 500151977*AW27VKG (ж)",
+          "sku": "500151977*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57303",
+          "name_product": "Термо 500151977*AW27VKG (ж)",
+          "sku": "500151977*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57303",
+          "name_product": "Термо 500151977*AW27VKG (ж)",
+          "sku": "500151977*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57304",
+          "name_product": "Термо 500216590*AW27VKG (під)",
+          "sku": "500216590*AW27",
+          "attributes": {
+            "color": "син",
+            "size": "128"
+          }
+        },
+        {
+          "id_product": "57304",
+          "name_product": "Термо 500216590*AW27VKG (під)",
+          "sku": "500216590*AW27",
+          "attributes": {
+            "color": "син",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "57305",
+          "name_product": "Термо 500273361*AW27VKG (ч)",
+          "sku": "500273361*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57305",
+          "name_product": "Термо 500273361*AW27VKG (ч)",
+          "sku": "500273361*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57305",
+          "name_product": "Термо 500273361*AW27VKG (ч)",
+          "sku": "500273361*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57305",
+          "name_product": "Термо 500273361*AW27VKG (ч)",
+          "sku": "500273361*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57305",
+          "name_product": "Термо 500273361*AW27VKG (ч)",
+          "sku": "500273361*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57305",
+          "name_product": "Термо 500273361*AW27VKG (ч)",
+          "sku": "500273361*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57306",
+          "name_product": "Термо 500273907*AW27VKG (ч)",
+          "sku": "500273907*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57306",
+          "name_product": "Термо 500273907*AW27VKG (ч)",
+          "sku": "500273907*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57306",
+          "name_product": "Термо 500273907*AW27VKG (ч)",
+          "sku": "500273907*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57306",
+          "name_product": "Термо 500273907*AW27VKG (ч)",
+          "sku": "500273907*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57306",
+          "name_product": "Термо 500273907*AW27VKG (ч)",
+          "sku": "500273907*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57307",
+          "name_product": "Термо 500273908*AW27VKG (ч)",
+          "sku": "500273908*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57307",
+          "name_product": "Термо 500273908*AW27VKG (ч)",
+          "sku": "500273908*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57307",
+          "name_product": "Термо 500273908*AW27VKG (ч)",
+          "sku": "500273908*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57307",
+          "name_product": "Термо 500273908*AW27VKG (ч)",
+          "sku": "500273908*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57307",
+          "name_product": "Термо 500273908*AW27VKG (ч)",
+          "sku": "500273908*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57308",
+          "name_product": "Термо 500276048*AW27VKG (ж)",
+          "sku": "500276048*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57308",
+          "name_product": "Термо 500276048*AW27VKG (ж)",
+          "sku": "500276048*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57308",
+          "name_product": "Термо 500276048*AW27VKG (ж)",
+          "sku": "500276048*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57308",
+          "name_product": "Термо 500276048*AW27VKG (ж)",
+          "sku": "500276048*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57308",
+          "name_product": "Термо 500276048*AW27VKG (ж)",
+          "sku": "500276048*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        }
+      ]
+    }
+  }
+}

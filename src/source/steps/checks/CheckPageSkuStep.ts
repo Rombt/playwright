@@ -23,9 +23,13 @@ export default class CheckPageSkuStep extends BaseStep {
     }
 
     const { page } = ctx;
-    const sku = ctx.input.sku;
-    const stepConfig = ctx.stepParams?.get(CheckPageSkuStep) as { pageSkuSelector: string };
+    const stepConfig = ctx.stepParams?.get(CheckPageSkuStep) as {
+      pageSkuSelector: string;
+      formattedSku: string;
+    };
+
     const pageSkuSelector = stepConfig?.pageSkuSelector;
+    const formattedSku = stepConfig?.formattedSku;
 
     if (!pageSkuSelector) {
       throw new FatalError('pageSkuSelector is not configured in stepParams');
@@ -39,6 +43,7 @@ export default class CheckPageSkuStep extends BaseStep {
         ctx: ctx,
         pageSkuSelector: pageSkuSelector,
         ctxInputNormalizedSku: ctx.input.normalizedSku,
+        formattedSku: formattedSku,
       },
     });
 
@@ -46,14 +51,22 @@ export default class CheckPageSkuStep extends BaseStep {
     await pageSku.waitFor({ state: 'attached', timeout: config.asyncRetry.maxDelay });
     // await pageSku.scrollIntoViewIfNeeded();
     const text = await pageSku.textContent();
+    let sku = '';
+
+    // если sku на странице представлено в оригинальном виде. Как здесь на пример https://viking-europe.com/bielizna-damska-viking-etna-2-0-lady-pants-bamboo-czarno-fioletowa-500-27-6048-0948/
+    if (formattedSku) {
+      sku = formattedSku;
+    } else {
+      sku = ctx.input.normalizedSku;
+    }
 
     try {
-      if (!text?.toLowerCase().includes(ctx.input.normalizedSku.toLowerCase())) {
-        throw new FatalError(`SKU mismatch. Expected: ${ctx.input.normalizedSku}, found: ${text}`);
+      if (!text?.toLowerCase().includes(sku.toLowerCase())) {
+        throw new FatalError(`SKU mismatch. Expected: ${sku}, found: ${text}`);
       }
     } catch (e) {
       ctx.control.stop = true;
-      throw new FatalError(`The page is not match sku ${ctx.input.normalizedSku}`);
+      throw new FatalError(`The page is not match sku ${sku}`);
     }
   }
 

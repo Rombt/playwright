@@ -18,6 +18,7 @@ class DefaultSearchResultsStrategy {
         if (!params?.linkSelector) {
             throw new FatalError_1.FatalError('linkSelector is not configured');
         }
+        // const count = await page.locator(params.linkSelector).count();
         const link = page.locator(params.linkSelector).first();
         const empty = params.emptySelectorText
             ? page
@@ -36,16 +37,18 @@ class DefaultSearchResultsStrategy {
             ]);
         }
         catch (e) {
-            if (e instanceof AggregateError) {
-                // ctx.logger?.debug('************************', {
-                //   component: '',
-                //   method: '',
-                //   action: '',
-                //   data: {
-                //     e: e.errors,
-                //   },
-                // });
-            }
+            // if (e instanceof AggregateError) {
+            //   ctx.logger?.debug('************************', {
+            //     component: '',
+            //     method: '',
+            //     action: '',
+            //     data: {
+            //       e: e.errors,
+            //       paramsLinkSelector:params.linkSelector,
+            //       // count: count,
+            //     },
+            //   });
+            // }
             throw new FatalError_1.FatalError(`Search result not resolved. ${ctx.input.sku}`);
         }
         if ((await empty.count()) > 0) {
