@@ -32,7 +32,9 @@
     Emporio Armani,
     Alpine Crown,
     4f,
-    avecs
+    avecs,
+    Lasting,
+    Kappa
 
 Черновики
     columbia, - анти боты на сайте
@@ -62,6 +64,8 @@
        ++ https://srmknives.com.ua/search?search=9203-AK
        -- https://belement.net/search?order=product.position.desc&s=S-249
         
+RAGNAROK
+    https://tactical-belt.store/katalog/search/filter/brand=98/?q=MAGNI-B
 
 
 Нет источников для фото:

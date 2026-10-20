@@ -46,6 +46,7 @@ class PageImageSourceNike {
             [
                 CollectImgStep_1.default,
                 {
+                    // strategy: 'DefaultCollectImagesStrategy',
                     strategy: 'NikeCollectImagesStrategy',
                     stopProcessing: true,
                 },

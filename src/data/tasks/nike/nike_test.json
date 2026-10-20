@@ -1,0 +1,284 @@
+{
+  "generated_at": "2026-04-30_16-46",
+  "task": {
+    "15": {
+      "brand_id": "15",
+      "brand_name": "Nike",
+      "metadata": {
+        "target_website": "https://www.nike.com/fi/w?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "57086",
+          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
+          "sku": "FB7497-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57086",
+          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
+          "sku": "FB7497-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57086",
+          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
+          "sku": "FB7497-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57086",
+          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
+          "sku": "FB7497-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57086",
+          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
+          "sku": "FB7497-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57087",
+          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
+          "sku": "FN3787-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57087",
+          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
+          "sku": "FN3787-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57087",
+          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
+          "sku": "FN3787-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57087",
+          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
+          "sku": "FN3787-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57087",
+          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
+          "sku": "FN3787-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57088",
+          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
+          "sku": "HV6779-063*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57088",
+          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
+          "sku": "HV6779-063*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57088",
+          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
+          "sku": "HV6779-063*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57088",
+          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
+          "sku": "HV6779-063*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57088",
+          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
+          "sku": "HV6779-063*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57089",
+          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
+          "sku": "HV5769-010*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57089",
+          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
+          "sku": "HV5769-010*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57089",
+          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
+          "sku": "HV5769-010*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57089",
+          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
+          "sku": "HV5769-010*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57089",
+          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
+          "sku": "HV5769-010*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57090",
+          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
+          "sku": "FN3861-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57090",
+          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
+          "sku": "FN3861-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57090",
+          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
+          "sku": "FN3861-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57090",
+          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
+          "sku": "FN3861-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57090",
+          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
+          "sku": "FN3861-063*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57091",
+          "name_product": "Джемпер жіночий NIKE  HV6747-063",
+          "sku": "HV6747-063*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57091",
+          "name_product": "Джемпер жіночий NIKE  HV6747-063",
+          "sku": "HV6747-063*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57091",
+          "name_product": "Джемпер жіночий NIKE  HV6747-063",
+          "sku": "HV6747-063*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57091",
+          "name_product": "Джемпер жіночий NIKE  HV6747-063",
+          "sku": "HV6747-063*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57091",
+          "name_product": "Джемпер жіночий NIKE  HV6747-063",
+          "sku": "HV6747-063*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "XS"
+          }
+        }
+      ]
+    }
+  }
+}

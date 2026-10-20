@@ -19,7 +19,10 @@ export default {
 };
 
 class PageImageSourceNike implements ISource<ICollectProductPhotosTask> {
-  constructor(private flowRunner: IFlowRunner, private logger: ILogger) {}
+  constructor(
+    private flowRunner: IFlowRunner,
+    private logger: ILogger,
+  ) {}
 
   supports(task: ICollectProductPhotosTask): boolean {
     return task.metadata.target_website === 'https://www.nike.com/fi/w?q={{sku_prod}}';
@@ -50,6 +53,7 @@ class PageImageSourceNike implements ISource<ICollectProductPhotosTask> {
       [
         CollectImgStep,
         {
+          // strategy: 'DefaultCollectImagesStrategy',
           strategy: 'NikeCollectImagesStrategy',
           stopProcessing: true,
         },
