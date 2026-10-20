@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-10-20_09-11",
+  "task": {
+    "281": {
+      "brand_id": "281",
+      "brand_name": "Ragnarok",
+      "metadata": {
+        "target_website": "https://tactical-belt.store/ru/katalog/search/?q={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "57297",
+          "name_product": "Ремінь збр на плитон MAGNI-B 1т RG",
+          "sku": "MAGNI-B",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57298",
+          "name_product": "Ремінь збр на плитон MAGNI-CB 1т RG",
+          "sku": "MAGNI-CB",
+          "attributes": {
+            "color": "кой",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57299",
+          "name_product": "Ремінь збр на плитон MAGNI-O 1т RG",
+          "sku": "MAGNI-O",
+          "attributes": {
+            "color": "олива",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57300",
+          "name_product": "Ремінь збр на плитон MAGNI-RG 1т RG",
+          "sku": "MAGNI-RG",
+          "attributes": {
+            "color": "зел.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57301",
+          "name_product": "Тактичний пояс FENRIR-B RG",
+          "sku": "FENRIR-B",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57301",
+          "name_product": "Тактичний пояс FENRIR-B RG",
+          "sku": "FENRIR-B",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57301",
+          "name_product": "Тактичний пояс FENRIR-B RG",
+          "sku": "FENRIR-B",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        }
+      ]
+    }
+  }
+}

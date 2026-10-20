@@ -23,7 +23,7 @@ exports.config = {
         },
     },
     data: {
-        resultsFolder: 'results/viking/viking_test',
+        resultsFolder: 'results/ragnarok/ragnarok_test',
         // resultsFolder: 'results/4f/05.10.26',
         // resultsFolder: 'results/all_brands_test',
         // resultsFolder: 'results/alpine_crown/18.09.26',
@@ -48,7 +48,7 @@ exports.config = {
         // resultsFolder: 'results/under_armour/under_armour_prod_10.08.26_1',
         // resultsFolder: 'results/salomon/salomon_test',
         // resultsFolder: 'results/nike/nike_test',
-        taskPath: 'src/data/tasks/viking/viking_test.json',
+        taskPath: 'src/data/tasks/ragnarok/ragnarok_test.json',
         //  taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
         // taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test_short.json',
         // taskPath: 'src/data/tasks/lasting/lasting_test_1.json',
@@ -89,7 +89,7 @@ exports.config = {
     browser: {
         fingerprintFile: './fingerprint.config.json',
         mode: 'fake',
-        // downloadImages: false, // если false картинки не будут скачиваться нужно для отладки текстовых процессоров по дефолту true
+        // downloadImages: false, // если false картинки не будут скачиваться. Нужно для отладки текстовых процессоров по дефолту true
     },
     //
     logger: {

@@ -450,7 +450,6 @@ export class DefaultScenario<Browser, Context extends BrowserContext>
                 control: {},
               };
 
-              //!!!!!!!!  11111111111
               return await source.execute(ctx);
             },
             {
