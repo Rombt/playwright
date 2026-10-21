@@ -34,7 +34,9 @@
     4f,
     avecs,
     Lasting,
-    Kappa
+    Kappa,
+    Ragnarok,
+    Viking
 
 Черновики
     columbia, - анти боты на сайте
