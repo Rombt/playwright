@@ -72,14 +72,14 @@ class PageImageSourceUnderArmour {
             [
                 CheckPageSkuBySrcStep_1.default,
                 {
-                    pageSkuSelector: 'div.swiper-wrapper img',
+                    pageSkuSelector: 'section[class*="HorizontalImageSlider-module-scss-module"] img',
                     token: left_part_sku,
                 },
             ],
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: 'div.swiper-wrapper',
+                    gallerySelector: 'section[class*="HorizontalImageSlider-module-scss-module"]',
                 },
             ],
             [

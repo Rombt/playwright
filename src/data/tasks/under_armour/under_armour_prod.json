@@ -9,200 +9,452 @@
       },
       "products": [
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "56678",
+          "name_product": "Шкарпетки 6015139-008*AW27 UA",
+          "sku": "6015139-008*AW27",
           "attributes": {
-            "color": "",
-            "size": ""
+            "color": "чорн.",
+            "size": "L"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "56678",
+          "name_product": "Шкарпетки 6015139-008*AW27 UA",
+          "sku": "6015139-008*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "41"
+            "color": "чорн.",
+            "size": "M"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "56678",
+          "name_product": "Шкарпетки 6015139-008*AW27 UA",
+          "sku": "6015139-008*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "42"
+            "color": "чорн.",
+            "size": "XL"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "56679",
+          "name_product": "Шкарпетки 6015139-011*AW27 UA",
+          "sku": "6015139-011*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "42.5"
+            "color": "сір.",
+            "size": "L"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "56679",
+          "name_product": "Шкарпетки 6015139-011*AW27 UA",
+          "sku": "6015139-011*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "43"
+            "color": "сір.",
+            "size": "M"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "56679",
+          "name_product": "Шкарпетки 6015139-011*AW27 UA",
+          "sku": "6015139-011*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "44"
+            "color": "сір.",
+            "size": "XL"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "57045",
+          "name_product": "Куртка 6006353-001*AW27 UA (жін)",
+          "sku": "6006353-001*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "44.5"
+            "color": "чорн.",
+            "size": "L"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "57045",
+          "name_product": "Куртка 6006353-001*AW27 UA (жін)",
+          "sku": "6006353-001*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "45"
+            "color": "чорн.",
+            "size": "M"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "57045",
+          "name_product": "Куртка 6006353-001*AW27 UA (жін)",
+          "sku": "6006353-001*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "45.5"
+            "color": "чорн.",
+            "size": "S"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "57045",
+          "name_product": "Куртка 6006353-001*AW27 UA (жін)",
+          "sku": "6006353-001*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "46"
+            "color": "чорн.",
+            "size": "XL"
           }
         },
         {
-          "id_product": "56593",
-          "name_product": "Кросівки 6006719-001*AW27 UA (ч)",
-          "sku": "6006719-001*AW27",
+          "id_product": "57045",
+          "name_product": "Куртка 6006353-001*AW27 UA (жін)",
+          "sku": "6006353-001*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "47"
+            "color": "чорн.",
+            "size": "XXL"
           }
         },
         {
-          "id_product": "56594",
-          "name_product": "Легінси 1366075-001*AW27 UA (ж)",
-          "sku": "1366075-001*AW27 ",
+          "id_product": "57046",
+          "name_product": "Куртка 6006363-001*AW27 UA (жін)",
+          "sku": "6006363-001*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "2XL"
-          }
-        },
-        {
-          "id_product": "56594",
-          "name_product": "Легінси 1366075-001*AW27 UA (ж)",
-          "sku": "1366075-001*AW27 ",
-          "attributes": {
-            "color": "чорний",
+            "color": "чорн.",
             "size": "3XL"
           }
         },
         {
-          "id_product": "56594",
-          "name_product": "Легінси 1366075-001*AW27 UA (ж)",
-          "sku": "1366075-001*AW27 ",
+          "id_product": "57046",
+          "name_product": "Куртка 6006363-001*AW27 UA (жін)",
+          "sku": "6006363-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57046",
+          "name_product": "Куртка 6006363-001*AW27 UA (жін)",
+          "sku": "6006363-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57046",
+          "name_product": "Куртка 6006363-001*AW27 UA (жін)",
+          "sku": "6006363-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57046",
+          "name_product": "Куртка 6006363-001*AW27 UA (жін)",
+          "sku": "6006363-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57046",
+          "name_product": "Куртка 6006363-001*AW27 UA (жін)",
+          "sku": "6006363-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57046",
+          "name_product": "Куртка 6006363-001*AW27 UA (жін)",
+          "sku": "6006363-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57309",
+          "name_product": "Брюки 6013457-008*AW27 UA (ч)",
+          "sku": "6013457-008*AW27",
           "attributes": {
             "color": "чорний",
             "size": "L"
           }
         },
         {
-          "id_product": "56594",
-          "name_product": "Легінси 1366075-001*AW27 UA (ж)",
-          "sku": "1366075-001*AW27 ",
+          "id_product": "57309",
+          "name_product": "Брюки 6013457-008*AW27 UA (ч)",
+          "sku": "6013457-008*AW27",
           "attributes": {
             "color": "чорний",
             "size": "M"
           }
         },
         {
-          "id_product": "56594",
-          "name_product": "Легінси 1366075-001*AW27 UA (ж)",
-          "sku": "1366075-001*AW27 ",
+          "id_product": "57309",
+          "name_product": "Брюки 6013457-008*AW27 UA (ч)",
+          "sku": "6013457-008*AW27",
           "attributes": {
             "color": "чорний",
             "size": "S"
           }
         },
         {
-          "id_product": "56594",
-          "name_product": "Легінси 1366075-001*AW27 UA (ж)",
-          "sku": "1366075-001*AW27 ",
+          "id_product": "57309",
+          "name_product": "Брюки 6013457-008*AW27 UA (ч)",
+          "sku": "6013457-008*AW27",
           "attributes": {
             "color": "чорний",
             "size": "XL"
           }
         },
         {
-          "id_product": "56597",
-          "name_product": "Сумка 1369222-001*AW27 UA",
-          "sku": "369222-001*AW27",
+          "id_product": "57309",
+          "name_product": "Брюки 6013457-008*AW27 UA (ч)",
+          "sku": "6013457-008*AW27",
           "attributes": {
             "color": "чорний",
-            "size": "O/S"
+            "size": "XXL"
           }
         },
         {
-          "id_product": "56598",
-          "name_product": "Труси 1383882-001*AW27 UA (ч)",
-          "sku": "1383882-001*AW27",
+          "id_product": "57310",
+          "name_product": "Брюки 6017021-008*AW27 UA (ч)",
+          "sku": "6017021-008*AW27",
           "attributes": {
             "color": "чорний",
             "size": "L"
           }
         },
         {
-          "id_product": "56598",
-          "name_product": "Труси 1383882-001*AW27 UA (ч)",
-          "sku": "1383882-001*AW27",
+          "id_product": "57310",
+          "name_product": "Брюки 6017021-008*AW27 UA (ч)",
+          "sku": "6017021-008*AW27",
           "attributes": {
             "color": "чорний",
             "size": "M"
           }
         },
         {
-          "id_product": "56598",
-          "name_product": "Труси 1383882-001*AW27 UA (ч)",
-          "sku": "1383882-001*AW27",
+          "id_product": "57310",
+          "name_product": "Брюки 6017021-008*AW27 UA (ч)",
+          "sku": "6017021-008*AW27",
           "attributes": {
             "color": "чорний",
             "size": "S"
           }
         },
         {
-          "id_product": "56598",
-          "name_product": "Труси 1383882-001*AW27 UA (ч)",
-          "sku": "1383882-001*AW27",
+          "id_product": "57310",
+          "name_product": "Брюки 6017021-008*AW27 UA (ч)",
+          "sku": "6017021-008*AW27",
           "attributes": {
             "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57310",
+          "name_product": "Брюки 6017021-008*AW27 UA (ч)",
+          "sku": "6017021-008*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57311",
+          "name_product": "Джемпер 6013459-008*AW27 UA (ч)",
+          "sku": "6013459-008*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57311",
+          "name_product": "Джемпер 6013459-008*AW27 UA (ч)",
+          "sku": "6013459-008*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57311",
+          "name_product": "Джемпер 6013459-008*AW27 UA (ч)",
+          "sku": "6013459-008*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57311",
+          "name_product": "Джемпер 6013459-008*AW27 UA (ч)",
+          "sku": "6013459-008*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57311",
+          "name_product": "Джемпер 6013459-008*AW27 UA (ч)",
+          "sku": "6013459-008*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57311",
+          "name_product": "Джемпер 6013459-008*AW27 UA (ч)",
+          "sku": "6013459-008*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57312",
+          "name_product": "Рукавиці 1369826-001*AW27 UA",
+          "sku": "1369826-001*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57312",
+          "name_product": "Рукавиці 1369826-001*AW27 UA",
+          "sku": "1369826-001*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57312",
+          "name_product": "Рукавиці 1369826-001*AW27 UA",
+          "sku": "1369826-001*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57312",
+          "name_product": "Рукавиці 1369826-001*AW27 UA",
+          "sku": "1369826-001*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57312",
+          "name_product": "Рукавиці 1369826-001*AW27 UA",
+          "sku": "1369826-001*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57313",
+          "name_product": "Сумка 1388920-001*AW27 UA",
+          "sku": "1388920-001*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57314",
+          "name_product": "Футболка 6009875-025*AW27 UA (ч)",
+          "sku": "6009875-025*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57314",
+          "name_product": "Футболка 6009875-025*AW27 UA (ч)",
+          "sku": "6009875-025*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57314",
+          "name_product": "Футболка 6009875-025*AW27 UA (ч)",
+          "sku": "6009875-025*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57314",
+          "name_product": "Футболка 6009875-025*AW27 UA (ч)",
+          "sku": "6009875-025*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57314",
+          "name_product": "Футболка 6009875-025*AW27 UA (ч)",
+          "sku": "6009875-025*AW27",
+          "attributes": {
+            "color": "сірий",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57315",
+          "name_product": "Худі 6017022-011*AW27 UA (ч)",
+          "sku": "6017022-011*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57315",
+          "name_product": "Худі 6017022-011*AW27 UA (ч)",
+          "sku": "6017022-011*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57315",
+          "name_product": "Худі 6017022-011*AW27 UA (ч)",
+          "sku": "6017022-011*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57315",
+          "name_product": "Худі 6017022-011*AW27 UA (ч)",
+          "sku": "6017022-011*AW27 ",
+          "attributes": {
+            "color": "сірий",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57315",
+          "name_product": "Худі 6017022-011*AW27 UA (ч)",
+          "sku": "6017022-011*AW27 ",
+          "attributes": {
+            "color": "сірий",
             "size": "XXL"
           }
         }

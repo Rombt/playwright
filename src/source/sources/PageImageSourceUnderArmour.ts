@@ -88,14 +88,14 @@ class PageImageSourceUnderArmour implements ISource<ICollectProductPhotosTask> {
       [
         CheckPageSkuBySrcStep,
         {
-          pageSkuSelector: 'div.swiper-wrapper img',
+          pageSkuSelector: 'section[class*="HorizontalImageSlider-module-scss-module"] img',
           token: left_part_sku,
         },
       ],
       [
         SearchGalleryStep,
         {
-          gallerySelector: 'div.swiper-wrapper',
+          gallerySelector: 'section[class*="HorizontalImageSlider-module-scss-module"]',
         },
       ],
       [
