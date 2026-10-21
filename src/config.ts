@@ -22,7 +22,7 @@ export const config = {
 
   data: {
     // resultsFolder: 'results/ragnarok/ragnarok_test',
-    // resultsFolder: 'results/4f/05.10.26',
+    resultsFolder: 'results/4f/21.10.26',
     // resultsFolder: 'results/all_brands_test',
     // resultsFolder: 'results/alpine_crown/18.09.26',
     // resultsFolder: 'results/avecs/avecs_test_1',
@@ -43,7 +43,7 @@ export const config = {
     // resultsFolder: 'results/everlast/everlast_test',
     // resultsFolder: 'results/puma/puma_01.10.26_1',
     // resultsFolder: 'results/under_armour/under_armour_test',
-    resultsFolder: 'results/under_armour/under_armour_prod_21.10.26',
+    // resultsFolder: 'results/under_armour/under_armour_prod_21.10.26',
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_test',
 
@@ -53,7 +53,7 @@ export const config = {
     // taskPath: 'src/data/tasks/lasting/lasting_test_1.json',
     // taskPath: 'src/data/tasks/lasting/lasting_test.json',
     // taskPath: 'src/data/tasks/avecs/avecs_test.json',
-    // taskPath: 'src/data/tasks/4f/4f_3.json',
+    taskPath: 'src/data/tasks/4f/4f_3.json',
     // taskPath: 'src/data/tasks/avecs/avecs_prod.json',
     // taskPath: 'src/data/tasks/adidas/adidas_prod.json',
     // taskPath: 'src/data/tasks/adidas/adidas_test_short.json',
@@ -72,7 +72,7 @@ export const config = {
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
     // taskPath: 'src/data/tasks/nike/nike_test.json',
-    taskPath: 'src/data/tasks/under_armour/under_armour_prod.json',
+    // taskPath: 'src/data/tasks/under_armour/under_armour_prod.json',
     // src\data\tasks\under_armour\under_armour_test_short.json
     // taskPath: 'src/data/tasks/puma/puma_prod.json',
     // taskPath: 'src/data/tasks/puma/puma_test_short.json',
