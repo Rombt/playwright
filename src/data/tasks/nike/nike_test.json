@@ -9,272 +9,542 @@
       },
       "products": [
         {
-          "id_product": "57086",
-          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
-          "sku": "FB7497-010*AW27",
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
           "attributes": {
-            "color": "чорн.",
+            "color": "графіт",
             "size": "2XL"
           }
         },
         {
-          "id_product": "57086",
-          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
-          "sku": "FB7497-010*AW27",
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
+          "attributes": {
+            "color": "графіт",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
+          "attributes": {
+            "color": "графіт",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
+          "attributes": {
+            "color": "графіт",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
+          "attributes": {
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57392",
+          "name_product": "Брюки IQ6116-010*AW27 NIKE (під)",
+          "sku": "IQ6116-010*AW27",
           "attributes": {
             "color": "чорн.",
             "size": "L"
           }
         },
         {
-          "id_product": "57086",
-          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
-          "sku": "FB7497-010*AW27",
+          "id_product": "57392",
+          "name_product": "Брюки IQ6116-010*AW27 NIKE (під)",
+          "sku": "IQ6116-010*AW27",
           "attributes": {
             "color": "чорн.",
             "size": "M"
           }
         },
         {
-          "id_product": "57086",
-          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
-          "sku": "FB7497-010*AW27",
+          "id_product": "57392",
+          "name_product": "Брюки IQ6116-010*AW27 NIKE (під)",
+          "sku": "IQ6116-010*AW27",
           "attributes": {
             "color": "чорн.",
             "size": "S"
           }
         },
         {
-          "id_product": "57086",
-          "name_product": "Брюки FB7497-010*AW27 NIKE (ч)",
-          "sku": "FB7497-010*AW27",
+          "id_product": "57392",
+          "name_product": "Брюки IQ6116-010*AW27 NIKE (під)",
+          "sku": "IQ6116-010*AW27",
           "attributes": {
             "color": "чорн.",
             "size": "XL"
           }
         },
         {
-          "id_product": "57087",
-          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
-          "sku": "FN3787-063*AW27",
+          "id_product": "57392",
+          "name_product": "Брюки IQ6116-010*AW27 NIKE (під)",
+          "sku": "IQ6116-010*AW27",
           "attributes": {
-            "color": "сір.",
-            "size": "2XL"
-          }
-        },
-        {
-          "id_product": "57087",
-          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
-          "sku": "FN3787-063*AW27",
-          "attributes": {
-            "color": "сір.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57087",
-          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
-          "sku": "FN3787-063*AW27",
-          "attributes": {
-            "color": "сір.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57087",
-          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
-          "sku": "FN3787-063*AW27",
-          "attributes": {
-            "color": "сір.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57087",
-          "name_product": "Брюки чоловічі Nike Sportswear Club Joggers   FN3787-063",
-          "sku": "FN3787-063*AW27",
-          "attributes": {
-            "color": "сір.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57088",
-          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
-          "sku": "HV6779-063*AW27",
-          "attributes": {
-            "color": "сірий",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57088",
-          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
-          "sku": "HV6779-063*AW27",
-          "attributes": {
-            "color": "сірий",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57088",
-          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
-          "sku": "HV6779-063*AW27",
-          "attributes": {
-            "color": "сірий",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57088",
-          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
-          "sku": "HV6779-063*AW27",
-          "attributes": {
-            "color": "сірий",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57088",
-          "name_product": "Брюки жіночі Nike Sportswear Tech Fleece Grey  HV6779-063",
-          "sku": "HV6779-063*AW27",
-          "attributes": {
-            "color": "сірий",
+            "color": "чорн.",
             "size": "XS"
           }
         },
         {
-          "id_product": "57089",
-          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
-          "sku": "HV5769-010*AW27",
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
           "attributes": {
-            "color": "чорний",
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
             "size": "L"
           }
         },
         {
-          "id_product": "57089",
-          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
-          "sku": "HV5769-010*AW27",
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
           "attributes": {
-            "color": "чорний",
+            "color": "чорн.",
             "size": "M"
           }
         },
         {
-          "id_product": "57089",
-          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
-          "sku": "HV5769-010*AW27",
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
           "attributes": {
-            "color": "чорний",
+            "color": "чорн.",
             "size": "S"
           }
         },
         {
-          "id_product": "57089",
-          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
-          "sku": "HV5769-010*AW27",
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
           "attributes": {
-            "color": "чорний",
+            "color": "чорн.",
             "size": "XL"
           }
         },
         {
-          "id_product": "57089",
-          "name_product": "Вітрівка жіноча Nike Tempo Repel Black  HV5769-010",
-          "sku": "HV5769-010*AW27",
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
           "attributes": {
-            "color": "чорний",
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57394",
+          "name_product": "Вітрівка HV5769-010*AW27 NIKE (ч)",
+          "sku": "HV5769-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57396",
+          "name_product": "Джемпер IM4935-010*AW27 NIKE (під)",
+          "sku": "IM4935-010*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57396",
+          "name_product": "Джемпер IM4935-010*AW27 NIKE (під)",
+          "sku": "IM4935-010*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57396",
+          "name_product": "Джемпер IM4935-010*AW27 NIKE (під)",
+          "sku": "IM4935-010*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57396",
+          "name_product": "Джемпер IM4935-010*AW27 NIKE (під)",
+          "sku": "IM4935-010*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57396",
+          "name_product": "Джемпер IM4935-010*AW27 NIKE (під)",
+          "sku": "IM4935-010*AW27 ",
+          "attributes": {
+            "color": "чорн.",
             "size": "XS"
           }
         },
         {
-          "id_product": "57090",
-          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
-          "sku": "FN3861-063*AW27",
+          "id_product": "57397",
+          "name_product": "Лосіни HV8170-010*AW27 NIKE (ж)",
+          "sku": "HV8170-010*AW27",
           "attributes": {
-            "color": "сір.",
-            "size": "2XL"
-          }
-        },
-        {
-          "id_product": "57090",
-          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
-          "sku": "FN3861-063*AW27",
-          "attributes": {
-            "color": "сір.",
+            "color": "чорн.",
             "size": "L"
           }
         },
         {
-          "id_product": "57090",
-          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
-          "sku": "FN3861-063*AW27",
+          "id_product": "57397",
+          "name_product": "Лосіни HV8170-010*AW27 NIKE (ж)",
+          "sku": "HV8170-010*AW27",
           "attributes": {
-            "color": "сір.",
+            "color": "чорн.",
             "size": "M"
           }
         },
         {
-          "id_product": "57090",
-          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
-          "sku": "FN3861-063*AW27",
+          "id_product": "57397",
+          "name_product": "Лосіни HV8170-010*AW27 NIKE (ж)",
+          "sku": "HV8170-010*AW27",
           "attributes": {
-            "color": "сір.",
+            "color": "чорн.",
             "size": "S"
           }
         },
         {
-          "id_product": "57090",
-          "name_product": "Джемпер чоловічий NIKE  Club Full Zip Hoodie  FN3861-063",
-          "sku": "FN3861-063*AW27",
+          "id_product": "57397",
+          "name_product": "Лосіни HV8170-010*AW27 NIKE (ж)",
+          "sku": "HV8170-010*AW27",
           "attributes": {
-            "color": "сір.",
+            "color": "чорн.",
             "size": "XL"
           }
         },
         {
-          "id_product": "57091",
-          "name_product": "Джемпер жіночий NIKE  HV6747-063",
-          "sku": "HV6747-063*AW27 ",
+          "id_product": "57397",
+          "name_product": "Лосіни HV8170-010*AW27 NIKE (ж)",
+          "sku": "HV8170-010*AW27",
           "attributes": {
-            "color": "сірий",
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57398",
+          "name_product": "Рюкзак DD0559-010*AW27 NIKE",
+          "sku": "DD0559-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57399",
+          "name_product": "Рюкзак IB4343-072*AW27 NIKE",
+          "sku": "IB4343-072*AW27",
+          "attributes": {
+            "color": "молоч.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57400",
+          "name_product": "Сумка DB0456-010*AW27 NIKE",
+          "sku": "DB0456-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57401",
+          "name_product": "Сумка HQ4370-013*AW27 NIKE",
+          "sku": "HQ4370-013*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57402",
+          "name_product": "Сумка IB2528-010*AW27 NIKE",
+          "sku": "IB2528-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57403",
+          "name_product": "Футболка FN2798-101*AW27 NIKE (ж)",
+          "sku": "FN2798-101*AW27",
+          "attributes": {
+            "color": "біл",
             "size": "L"
           }
         },
         {
-          "id_product": "57091",
-          "name_product": "Джемпер жіночий NIKE  HV6747-063",
-          "sku": "HV6747-063*AW27 ",
+          "id_product": "57403",
+          "name_product": "Футболка FN2798-101*AW27 NIKE (ж)",
+          "sku": "FN2798-101*AW27",
           "attributes": {
-            "color": "сірий",
+            "color": "біл",
             "size": "M"
           }
         },
         {
-          "id_product": "57091",
-          "name_product": "Джемпер жіночий NIKE  HV6747-063",
-          "sku": "HV6747-063*AW27 ",
+          "id_product": "57403",
+          "name_product": "Футболка FN2798-101*AW27 NIKE (ж)",
+          "sku": "FN2798-101*AW27",
           "attributes": {
-            "color": "сірий",
+            "color": "біл",
             "size": "S"
           }
         },
         {
-          "id_product": "57091",
-          "name_product": "Джемпер жіночий NIKE  HV6747-063",
-          "sku": "HV6747-063*AW27 ",
+          "id_product": "57403",
+          "name_product": "Футболка FN2798-101*AW27 NIKE (ж)",
+          "sku": "FN2798-101*AW27",
           "attributes": {
-            "color": "сірий",
+            "color": "біл",
             "size": "XL"
           }
         },
         {
-          "id_product": "57091",
-          "name_product": "Джемпер жіночий NIKE  HV6747-063",
-          "sku": "HV6747-063*AW27 ",
+          "id_product": "57403",
+          "name_product": "Футболка FN2798-101*AW27 NIKE (ж)",
+          "sku": "FN2798-101*AW27",
           "attributes": {
-            "color": "сірий",
+            "color": "біл",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57404",
+          "name_product": "Футболка HV2852-010*AW27 NIKE (ж)",
+          "sku": "HV2852-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57404",
+          "name_product": "Футболка HV2852-010*AW27 NIKE (ж)",
+          "sku": "HV2852-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57404",
+          "name_product": "Футболка HV2852-010*AW27 NIKE (ж)",
+          "sku": "HV2852-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57404",
+          "name_product": "Футболка HV2852-010*AW27 NIKE (ж)",
+          "sku": "HV2852-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57404",
+          "name_product": "Футболка HV2852-010*AW27 NIKE (ж)",
+          "sku": "HV2852-010*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "30"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "31"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "31.5"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "32"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "33"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "33.5"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "34"
+          }
+        },
+        {
+          "id_product": "57405",
+          "name_product": "Черевики CD7783-001*AW27 NIKE (під)",
+          "sku": "CD7783-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "35"
+          }
+        },
+        {
+          "id_product": "57406",
+          "name_product": "Шорти HJ5376-010 *AW27 NIKE (ж)",
+          "sku": "HJ5376-010 *AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57406",
+          "name_product": "Шорти HJ5376-010 *AW27 NIKE (ж)",
+          "sku": "HJ5376-010 *AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57406",
+          "name_product": "Шорти HJ5376-010 *AW27 NIKE (ж)",
+          "sku": "HJ5376-010 *AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57406",
+          "name_product": "Шорти HJ5376-010 *AW27 NIKE (ж)",
+          "sku": "HJ5376-010 *AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57406",
+          "name_product": "Шорти HJ5376-010 *AW27 NIKE (ж)",
+          "sku": "HJ5376-010 *AW27",
+          "attributes": {
+            "color": "чорн.",
             "size": "XS"
           }
         }

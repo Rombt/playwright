@@ -16,13 +16,13 @@ export const config = {
       maxPageDownloadImg: 3, // если не задавать то будет равным maxPage если и maxPage не задано то 10
       maxWaiters: 1500,
       // pageLoadWait: 10000,
-      pageLoadWait: 120000, // так много потому что у некоторых сайтов очень тяжёлые картинки например как здесь https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}
+      pageLoadWait: 240000, // так много потому что у некоторых сайтов очень тяжёлые картинки например как здесь https://sportowestyleb2b.pl/pl/search.html?text={{sku_prod}}
     },
   },
 
   data: {
     // resultsFolder: 'results/ragnarok/ragnarok_test',
-    resultsFolder: 'results/4f/21.10.26',
+    // resultsFolder: 'results/4f/21.10.26',
     // resultsFolder: 'results/all_brands_test',
     // resultsFolder: 'results/alpine_crown/18.09.26',
     // resultsFolder: 'results/avecs/avecs_test_1',
@@ -45,7 +45,7 @@ export const config = {
     // resultsFolder: 'results/under_armour/under_armour_test',
     // resultsFolder: 'results/under_armour/under_armour_prod_21.10.26',
     // resultsFolder: 'results/salomon/salomon_test',
-    // resultsFolder: 'results/nike/nike_test',
+    resultsFolder: 'results/nike/nike_test',
 
     // taskPath: 'src/data/tasks/ragnarok/ragnarok_test.json',
     //  taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
@@ -53,7 +53,7 @@ export const config = {
     // taskPath: 'src/data/tasks/lasting/lasting_test_1.json',
     // taskPath: 'src/data/tasks/lasting/lasting_test.json',
     // taskPath: 'src/data/tasks/avecs/avecs_test.json',
-    taskPath: 'src/data/tasks/4f/4f_3.json',
+    // taskPath: 'src/data/tasks/4f/4f_3.json',
     // taskPath: 'src/data/tasks/avecs/avecs_prod.json',
     // taskPath: 'src/data/tasks/adidas/adidas_prod.json',
     // taskPath: 'src/data/tasks/adidas/adidas_test_short.json',
@@ -71,7 +71,7 @@ export const config = {
     // taskPath: 'src/data/tasks/svastone/svastone_test.json',
     // taskPath: 'src/data/tasks/salomon/salomon_test_short.json',
     // taskPath: 'src/data/tasks/ganzo/ganzo_test_short.json',
-    // taskPath: 'src/data/tasks/nike/nike_test.json',
+    taskPath: 'src/data/tasks/nike/nike_test.json',
     // taskPath: 'src/data/tasks/under_armour/under_armour_prod.json',
     // src\data\tasks\under_armour\under_armour_test_short.json
     // taskPath: 'src/data/tasks/puma/puma_prod.json',
