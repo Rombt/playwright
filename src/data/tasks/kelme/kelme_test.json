@@ -1,0 +1,176 @@
+{
+  "generated_at": "2026-30-10_12-56",
+  "task": {
+    "62": {
+      "brand_id": "62",
+      "brand_name": "Kelme",
+      "metadata": {
+        "target_website": "https://kelme.ua/?s={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "57451",
+          "name_product": "Куртка 7361MF3027.9000*AW27 K",
+          "sku": "7361MF3027.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "120"
+          }
+        },
+        {
+          "id_product": "57451",
+          "name_product": "Куртка 7361MF3027.9000*AW27 K",
+          "sku": "7361MF3027.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "130"
+          }
+        },
+        {
+          "id_product": "57451",
+          "name_product": "Куртка 7361MF3027.9000*AW27 K",
+          "sku": "7361MF3027.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "140"
+          }
+        },
+        {
+          "id_product": "57451",
+          "name_product": "Куртка 7361MF3027.9000*AW27 K",
+          "sku": "7361MF3027.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "160"
+          }
+        },
+        {
+          "id_product": "57452",
+          "name_product": "Куртка 8261MF1013.9000*AW27 K",
+          "sku": "8261MF1013.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57452",
+          "name_product": "Куртка 8261MF1013.9000*AW27 K",
+          "sku": "8261MF1013.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57452",
+          "name_product": "Куртка 8261MF1013.9000*AW27 K",
+          "sku": "8261MF1013.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57452",
+          "name_product": "Куртка 8261MF1013.9000*AW27 K",
+          "sku": "8261MF1013.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57452",
+          "name_product": "Куртка 8261MF1013.9000*AW27 K",
+          "sku": "8261MF1013.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57453",
+          "name_product": "Куртка 8461MF1030.9000*AW27 K",
+          "sku": "8461MF1030.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "2XL"
+          }
+        },
+        {
+          "id_product": "57453",
+          "name_product": "Куртка 8461MF1030.9000*AW27 K",
+          "sku": "8461MF1030.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57453",
+          "name_product": "Куртка 8461MF1030.9000*AW27 K",
+          "sku": "8461MF1030.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57453",
+          "name_product": "Куртка 8461MF1030.9000*AW27 K",
+          "sku": "8461MF1030.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57453",
+          "name_product": "Куртка 8461MF1030.9000*AW27 K",
+          "sku": "8461MF1030.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57457",
+          "name_product": "Рукавиці 8161ST5002.9015*AW27 K",
+          "sku": "8161ST5002.9015*AW27",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57474",
+          "name_product": "Шапка 8201MZ5012.9000*AW27 K",
+          "sku": "8201MZ5012.9000*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57475",
+          "name_product": "Шапка 8201MZ5012.9200*AW27 K",
+          "sku": "8201MZ5012.9200*AW27",
+          "attributes": {
+            "color": "сір.",
+            "size": "O/S"
+          }
+        },
+        {
+          "id_product": "57476",
+          "name_product": "Шапка 8201MZ5012.9401*AW27 K",
+          "sku": "8201MZ5012.9401*AW27",
+          "attributes": {
+            "color": "т.син",
+            "size": "O/S"
+          }
+        }
+      ]
+    }
+  }
+}

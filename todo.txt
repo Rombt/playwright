@@ -36,7 +36,8 @@
     Lasting,
     Kappa,
     Ragnarok,
-    Viking
+    Viking,
+    kelme
 
 Черновики
     columbia, - анти боты на сайте
