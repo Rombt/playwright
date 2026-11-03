@@ -6,6 +6,7 @@ import { ILogger } from '../../data/logger/types/ILogger';
 import { IWorkerResult } from '../../data/entities/IResults/IWorkerResult';
 import { IExecutionContext } from '../types/IExecutionContext';
 import { IDataImag, IDataImagItem } from '../../data/entities/IDataImag';
+import { existsSync, readFileSync } from 'node:fs';
 
 import CheckSearchResultsStep from '../steps/checks/CheckSearchResultsStep';
 import CheckPageSkuStep from '../steps/checks/CheckPageSkuStep';
@@ -13,7 +14,7 @@ import SearchGalleryStep from '../steps/searchElements/SearchGalleryStep';
 import CollectImgStep from '../steps/collectElements/CollectImgStep';
 import CollectDescriptionStep from '../steps/collectElements/CollectDescriptionStep';
 
-import { IExtractHtmlOptions } from '../../common/helpers';
+import { IExtractHtmlOptions, normalizeSku, fullClearSku } from '../../common/helpers';
 
 export default {
   create(deps: ISourceDependencies): ISource<ICollectProductPhotosTask> {
@@ -31,31 +32,78 @@ class PageImageSourceJackWolfskin implements ISource<ICollectProductPhotosTask> 
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
+    if (!ctx.input.product) {
+      throw new Error('!ctx.input.product');
+    }
+
+    // т.к. товары ТМ JackWolfskin ищутся только по полным squ то нужно получить их все доступные
+    // выбрать из них тот частью которого является текущий, короткий, sku и
+    // в дальнейшем использовать только длинный
+    const filePath = 'src/data/sku/jackWolfskin/jackWolfskin_full_sku.json';
+
+    let arr_longSku: string[] = [];
+
+    if (existsSync(filePath)) {
+      const data: string[] = JSON.parse(readFileSync(filePath, 'utf-8'));
+
+      arr_longSku = [...new Set(data)];
+    }
+
+    const shortSku = normalizeSku(ctx.input.product.sku);
+    const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
+
+    if (!foundLongSku) {
+      throw new Error('Long sku is not found');
+    }
+
+    ctx.input.product.sku = foundLongSku;
+
+    // ctx.logger?.debug('************************', {
+    //   component: '',
+    //   method: '',
+    //   action: '',
+    //   data: {
+    //     ctxInputProductSku: ctx.input.product.sku,
+    //   },
+    // });
+
     ctx.stepParams = new Map([
       [
         CheckSearchResultsStep,
         {
           strategy: 'DefaultSearchResultsStrategy',
-          linkSelector: 'div.jwsdw-pop-image-wrapper.jws-positionRelative > a',
+          linkSelector: `#voyado-search > div > div.v-grid > div.v-product-card > div.v-image-wrapper > a[href*="${normalizeSku(ctx.input.product.sku)}" i]`,
           emptySelector: 'h1',
           emptySelectorText: 'We’ve got sidetracked somehow',
         },
       ],
-      [CheckPageSkuStep, { pageSkuSelector: '[data-product-id]' }],
-      [SearchGalleryStep, { gallerySelector: '[aria-label="Product image gallery"]' }],
+      [
+        CheckPageSkuStep,
+        {
+          pageSkuSelector:
+            '#ProductInformation-template--27214413037892__main > div > div.group-block-content.layout-panel-flex.layout-panel-flex--column.custom- > div.product-description > details > div > product-article-ref-component > p > span:nth-child(2)',
+        },
+      ],
+      [
+        SearchGalleryStep,
+        {
+          gallerySelector:
+            '#shopify-section-template--27214413037892__main > div.product-information.section.section--page-width.spacing-style.color-scheme-1.relative > div > div.product-information__media > media-gallery > ul',
+        },
+      ],
       [
         CollectImgStep,
         {
           strategy: 'DefaultCollectImagesStrategy',
-          stopProcessing: false,
+          stopProcessing: true,
         },
       ],
 
       [
         CollectDescriptionStep,
         {
-          containers: ['ul.jws-accordionWrapper'],
-          removeSelectors: ['h2', 'label', 'svg', 'input', 'button', 'img'],
+          containers: [''],
+          removeSelectors: [],
           expand: false,
           separator: '\n',
         } satisfies IExtractHtmlOptions,
