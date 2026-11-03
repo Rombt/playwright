@@ -21,7 +21,7 @@ export const config = {
   },
 
   data: {
-    resultsFolder: 'results/kelme/kelme_test',
+    // resultsFolder: 'results/kelme/kelme_test',
     // resultsFolder: 'results/ragnarok/ragnarok_test',
     // resultsFolder: 'results/4f/21.10.26',
     // resultsFolder: 'results/all_brands_test',
@@ -36,7 +36,7 @@ export const config = {
     // resultsFolder: 'results/bezet/bezet_12.08.26',
     // resultsFolder: 'results/kiborg/kiborg_test',
     // resultsFolder: 'results/srm/srm_test',
-    // resultsFolder: 'results/jack_wolfskin/jack_wolfskin_test',
+    resultsFolder: 'results/jack_wolfskin/jack_wolfskin_prod',
     // resultsFolder: 'results/joma/joma_test',
     // resultsFolder: 'results/fenix/fenix_test',
     // resultsFolder: 'results/m-tac/militarist_12.08.26',
@@ -48,7 +48,8 @@ export const config = {
     // resultsFolder: 'results/salomon/salomon_test',
     // resultsFolder: 'results/nike/nike_test',
 
-    taskPath: 'src/data/tasks/kelme/kelme_test.json',
+    taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_prod.json',
+    // taskPath: 'src/data/tasks/kelme/kelme_test.json',
     // taskPath: 'src/data/tasks/ragnarok/ragnarok_test.json',
     //  taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test.json',
     // taskPath: 'src/data/tasks/alpine_crown/alpine_crown_test_short.json',

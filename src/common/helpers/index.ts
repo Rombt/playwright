@@ -12,6 +12,7 @@ export * from './data/readProducts';
 export * from './data/writeProducts';
 export * from './data/getUnprocessedFilePath';
 export * from './data/read4fFulSku';
+export * from './data/readJackWolfskinFulSku';
 export * from './data/extractBrandFromFileName';
 export * from './data/sanitizeDom';
 export * from './data/removeAllAttributes';
