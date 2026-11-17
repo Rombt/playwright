@@ -40,14 +40,14 @@ class PageImageSourceNike {
             [
                 SearchGalleryStep_1.default,
                 {
-                    gallerySelector: 'div[data-testid="ImageCarousel"]',
+                    gallerySelector: '#__next > main > div.css-d67f25 > div > div.grid-item.css-14dv2as.nds-grid-item > div.product-imagery.css-l5xyiw',
                 },
             ],
             [
                 CollectImgStep_1.default,
                 {
-                    // strategy: 'DefaultCollectImagesStrategy',
-                    strategy: 'NikeCollectImagesStrategy',
+                    strategy: 'DefaultCollectImagesStrategy',
+                    // strategy: 'NikeCollectImagesStrategy',
                     stopProcessing: true,
                 },
             ],

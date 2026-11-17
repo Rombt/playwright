@@ -9,507 +9,471 @@
       },
       "products": [
         {
-          "id_product": "55920",
-          "name_product": "Рюкзак DD0559-010*SS26 NIKE",
-          "sku": "DD0559-010*SS26",
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "O/S"
+            "color": "графіт",
+            "size": "2XL"
           }
         },
         {
-          "id_product": "55921",
-          "name_product": "Рюкзак DD0559-014*SS26 NIKE",
-          "sku": "DD0559-014*SS26",
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
           "attributes": {
-            "color": "молоч.",
-            "size": "O/S"
+            "color": "графіт",
+            "size": "L"
           }
         },
         {
-          "id_product": "55955",
-          "name_product": "Бейсболка FB5368-011*SS26 NIKE",
-          "sku": "FB5368-011*SS26",
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
           "attributes": {
-            "color": "чорний",
-            "size": "O/S"
+            "color": "графіт",
+            "size": "M"
           }
         },
         {
-          "id_product": "55956",
-          "name_product": "Кепка FB5372-009*SS26 NIKE",
-          "sku": "FB5372-009*SS26",
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
           "attributes": {
-            "color": "сірий",
-            "size": "O/S"
+            "color": "графіт",
+            "size": "S"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57391",
+          "name_product": "Брюки IF2989-084*AW27 NIKE (ч)",
+          "sku": "IF2989-084*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
+            "size": "3XL"
+          }
+        },
+        {
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57393",
+          "name_product": "Вітрівка HJ2012-010*AW27 NIKE (ч)",
+          "sku": "HJ2012-010*AW27 NIKE",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57395",
+          "name_product": "Джемпер IF2985-084*AW27 NIKE (ч)",
+          "sku": "IF2985-084*AW27 ",
+          "attributes": {
+            "color": "графіт",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57540",
+          "name_product": "Брюки IQ3885-001*AW27 NIKE (ж)",
+          "sku": "IQ3885-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57540",
+          "name_product": "Брюки IQ3885-001*AW27 NIKE (ж)",
+          "sku": "IQ3885-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57540",
+          "name_product": "Брюки IQ3885-001*AW27 NIKE (ж)",
+          "sku": "IQ3885-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57540",
+          "name_product": "Брюки IQ3885-001*AW27 NIKE (ж)",
+          "sku": "IQ3885-001*AW27",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57541",
+          "name_product": "Джемпер IQ3875-001*AW27 NIKE (ж)",
+          "sku": "IQ3875-001*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57541",
+          "name_product": "Джемпер IQ3875-001*AW27 NIKE (ж)",
+          "sku": "IQ3875-001*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57541",
+          "name_product": "Джемпер IQ3875-001*AW27 NIKE (ж)",
+          "sku": "IQ3875-001*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57541",
+          "name_product": "Джемпер IQ3875-001*AW27 NIKE (ж)",
+          "sku": "IQ3875-001*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57541",
+          "name_product": "Джемпер IQ3875-001*AW27 NIKE (ж)",
+          "sku": "IQ3875-001*AW27 ",
+          "attributes": {
+            "color": "чорн.",
+            "size": "XS"
+          }
+        },
+        {
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
+          "attributes": {
+            "color": "беж.",
             "size": "37.5"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "беж.",
             "size": "38"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "беж.",
             "size": "38.5"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "беж.",
             "size": "39"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "беж.",
             "size": "40"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "беж.",
             "size": "40.5"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "беж.",
             "size": "41"
           }
         },
         {
-          "id_product": "55957",
-          "name_product": "Кросівки DD9294-600*SS26 NIKE (ж)",
-          "sku": "DD9294-600*SS26",
+          "id_product": "57542",
+          "name_product": "Кросівки HQ7901-012*AW27 NIKE (ж)",
+          "sku": "HQ7901-012*AW27",
           "attributes": {
-            "color": "св.рож",
+            "color": "беж.",
             "size": "42"
           }
         },
         {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
+          "id_product": "57553",
+          "name_product": "Гетри FQ8253-010*AW27 NIKE (у/с)",
+          "sku": "FQ8253-010*AW26 ",
           "attributes": {
-            "color": "рож.",
-            "size": "36"
+            "color": "чорний",
+            "size": "L"
           }
         },
         {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
+          "id_product": "57553",
+          "name_product": "Гетри FQ8253-010*AW27 NIKE (у/с)",
+          "sku": "FQ8253-010*AW26 ",
           "attributes": {
-            "color": "рож.",
-            "size": "36.5"
+            "color": "чорний",
+            "size": "M"
           }
         },
         {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
+          "id_product": "57553",
+          "name_product": "Гетри FQ8253-010*AW27 NIKE (у/с)",
+          "sku": "FQ8253-010*AW26 ",
           "attributes": {
-            "color": "рож.",
-            "size": "37.5"
+            "color": "чорний",
+            "size": "S"
           }
         },
         {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
+          "id_product": "57553",
+          "name_product": "Гетри FQ8253-010*AW27 NIKE (у/с)",
+          "sku": "FQ8253-010*AW26 ",
           "attributes": {
-            "color": "рож.",
-            "size": "38"
+            "color": "чорний",
+            "size": "XL"
           }
         },
         {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
-          "attributes": {
-            "color": "рож.",
-            "size": "38.5"
-          }
-        },
-        {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
-          "attributes": {
-            "color": "рож.",
-            "size": "39"
-          }
-        },
-        {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
-          "attributes": {
-            "color": "рож.",
-            "size": "40"
-          }
-        },
-        {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
-          "attributes": {
-            "color": "рож.",
-            "size": "40.5"
-          }
-        },
-        {
-          "id_product": "55958",
-          "name_product": "Кросівки FB2208-604*SS26 NIKE (ж)",
-          "sku": "FB2208-604*SS26",
-          "attributes": {
-            "color": "рож.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "41"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "42"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "42.5"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "43"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "44"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "44.5"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "45"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "45.5"
           }
         },
         {
-          "id_product": "55959",
-          "name_product": "Кросівки FD6033-001*SS26 NIKE (ч)",
-          "sku": "FD6033-001*SS26 ",
+          "id_product": "57555",
+          "name_product": "Кросівки CK9951-001*AW27 NIKE (ч)",
+          "sku": "CK9951-001*AW27 ",
           "attributes": {
             "color": "чорний",
             "size": "46"
           }
         },
         {
-          "id_product": "55960",
-          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
-          "sku": "II6294-100*SS26",
+          "id_product": "57559",
+          "name_product": "Куртка IB2975-451*AW27 NIKE (ч)",
+          "sku": "IB2975-451*AW27",
           "attributes": {
-            "color": "беж.",
-            "size": "37.5"
+            "color": "синій",
+            "size": "2XL"
           }
         },
         {
-          "id_product": "55960",
-          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
-          "sku": "II6294-100*SS26",
+          "id_product": "57559",
+          "name_product": "Куртка IB2975-451*AW27 NIKE (ч)",
+          "sku": "IB2975-451*AW27",
           "attributes": {
-            "color": "беж.",
-            "size": "38"
-          }
-        },
-        {
-          "id_product": "55960",
-          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
-          "sku": "II6294-100*SS26",
-          "attributes": {
-            "color": "беж.",
-            "size": "38.5"
-          }
-        },
-        {
-          "id_product": "55960",
-          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
-          "sku": "II6294-100*SS26",
-          "attributes": {
-            "color": "беж.",
-            "size": "39"
-          }
-        },
-        {
-          "id_product": "55960",
-          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
-          "sku": "II6294-100*SS26",
-          "attributes": {
-            "color": "беж.",
-            "size": "40.5"
-          }
-        },
-        {
-          "id_product": "55960",
-          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
-          "sku": "II6294-100*SS26",
-          "attributes": {
-            "color": "беж.",
-            "size": "41"
-          }
-        },
-        {
-          "id_product": "55960",
-          "name_product": "Кросівки II6294-100*SS26 NIKE (ж)",
-          "sku": "II6294-100*SS26",
-          "attributes": {
-            "color": "беж.",
-            "size": "42"
-          }
-        },
-        {
-          "id_product": "55961",
-          "name_product": "Рюкзак DD0562-010*SS26 NIKE",
-          "sku": "DD0562-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "55962",
-          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
-          "sku": "IB4127-010*SS26 ",
-          "attributes": {
-            "color": "чорний",
+            "color": "синій",
             "size": "L"
           }
         },
         {
-          "id_product": "55962",
-          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
-          "sku": "IB4127-010*SS26 ",
+          "id_product": "57559",
+          "name_product": "Куртка IB2975-451*AW27 NIKE (ч)",
+          "sku": "IB2975-451*AW27",
           "attributes": {
-            "color": "чорний",
+            "color": "синій",
             "size": "M"
           }
         },
         {
-          "id_product": "55962",
-          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
-          "sku": "IB4127-010*SS26 ",
+          "id_product": "57559",
+          "name_product": "Куртка IB2975-451*AW27 NIKE (ч)",
+          "sku": "IB2975-451*AW27",
           "attributes": {
-            "color": "чорний",
+            "color": "синій",
             "size": "S"
           }
         },
         {
-          "id_product": "55962",
-          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
-          "sku": "IB4127-010*SS26 ",
+          "id_product": "57559",
+          "name_product": "Куртка IB2975-451*AW27 NIKE (ч)",
+          "sku": "IB2975-451*AW27",
           "attributes": {
-            "color": "чорний",
+            "color": "синій",
             "size": "XL"
           }
         },
         {
-          "id_product": "55962",
-          "name_product": "Футболка IB4127-010*SS26 NIKE (ч)",
-          "sku": "IB4127-010*SS26 ",
+          "id_product": "57560",
+          "name_product": "Мяч HV6341-100*AW27 NIKE",
+          "sku": "HV6341-100*AW27 ",
           "attributes": {
-            "color": "чорний",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "55963",
-          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
-          "sku": "DX5075-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "55963",
-          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
-          "sku": "DX5075-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "55963",
-          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
-          "sku": "DX5075-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "55963",
-          "name_product": "Шкарпетки DX5075-010*SS26 NIKE",
-          "sku": "DX5075-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55964",
-          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
-          "sku": "DX5075-100*SS26",
-          "attributes": {
-            "color": "білий",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "55964",
-          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
-          "sku": "DX5075-100*SS26",
-          "attributes": {
-            "color": "білий",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "55964",
-          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
-          "sku": "DX5075-100*SS26",
-          "attributes": {
-            "color": "білий",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "55964",
-          "name_product": "Шкарпетки DX5075-100*SS26 NIKE",
-          "sku": "DX5075-100*SS26",
-          "attributes": {
-            "color": "білий",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55965",
-          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
-          "sku": "IB4129-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "55965",
-          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
-          "sku": "IB4129-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "55965",
-          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
-          "sku": "IB4129-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "55965",
-          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
-          "sku": "IB4129-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "55965",
-          "name_product": "Шорти IB4129-010*SS26 NIKE (ч)",
-          "sku": "IB4129-010*SS26",
-          "attributes": {
-            "color": "чорний",
-            "size": "XXL"
+            "color": "біл/чорн",
+            "size": "5"
           }
         }
       ]
