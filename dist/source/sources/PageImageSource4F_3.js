@@ -39,11 +39,11 @@ class PageImageSource4F_3 {
             arr_longSku = [...new Set(data)];
         }
         const shortSku = (0, helpers_1.normalizeSku)(ctx.input.product.sku);
-        const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
-        if (!foundLongSku) {
-            throw new Error('Long sku is not found');
+        const longSku = shortSku.length < 8 ? arr_longSku.find((sku) => sku.includes(shortSku)) : shortSku;
+        if (!longSku) {
+            throw new Error(`Long SKU not found for short SKU: ${shortSku}`);
         }
-        ctx.input.product.sku = foundLongSku;
+        ctx.input.product.sku = longSku;
         ctx.stepParams = new Map([
             [
                 CheckSearchResultsStep_1.default,

@@ -36,32 +36,33 @@ class PageImageSource4F_3 implements ISource<ICollectProductPhotosTask> {
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
-   if (!ctx.input.product) {
-        throw new Error('!ctx.input.product');
-      }
-  
-  
-      // т.к. товары ТМ 4F ищутся только по полным squ то нужно получить их все доступные
-      // выбрать из них тот частью которого является текущий, короткий, sku и
-      // в дальнейшем использовать только длинный
-      const filePath = 'src/data/sku/4f/4F_full_sku.json';
-  
-      let arr_longSku: string[] = [];
-  
-      if (existsSync(filePath)) {
-        const data: string[] = JSON.parse(readFileSync(filePath, 'utf-8'));
-  
-        arr_longSku = [...new Set(data)];
-      }
-  
-      const shortSku = normalizeSku(ctx.input.product.sku);
-      const foundLongSku = arr_longSku.find((sku) => sku.includes(shortSku));
-  
-      if (!foundLongSku) {
-        throw new Error('Long sku is not found');
-      }
-  
-      ctx.input.product.sku = foundLongSku;
+    if (!ctx.input.product) {
+      throw new Error('!ctx.input.product');
+    }
+
+    // т.к. товары ТМ 4F ищутся только по полным squ то нужно получить их все доступные
+    // выбрать из них тот частью которого является текущий, короткий, sku и
+    // в дальнейшем использовать только длинный
+    const filePath = 'src/data/sku/4f/4F_full_sku.json';
+
+    let arr_longSku: string[] = [];
+
+    if (existsSync(filePath)) {
+      const data: string[] = JSON.parse(readFileSync(filePath, 'utf-8'));
+
+      arr_longSku = [...new Set(data)];
+    }
+
+    const shortSku = normalizeSku(ctx.input.product.sku);
+
+    const longSku =
+      shortSku.length < 8 ? arr_longSku.find((sku) => sku.includes(shortSku)) : shortSku;
+
+    if (!longSku) {
+      throw new Error(`Long SKU not found for short SKU: ${shortSku}`);
+    }
+
+    ctx.input.product.sku = longSku;
 
     ctx.stepParams = new Map([
       [

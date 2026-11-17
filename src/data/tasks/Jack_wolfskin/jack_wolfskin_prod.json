@@ -9,345 +9,165 @@
       },
       "products": [
         {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
+          "id_product": "57578",
+          "name_product": "Брюки A66216*AW27 JW (ч)",
+          "sku": "A66216*AW27 JW ",
           "attributes": {
-            "color": "чорн.",
-            "size": "36"
+            "color": "чорний",
+            "size": "L"
           }
         },
         {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
+          "id_product": "57578",
+          "name_product": "Брюки A66216*AW27 JW (ч)",
+          "sku": "A66216*AW27 JW ",
           "attributes": {
-            "color": "чорн.",
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57578",
+          "name_product": "Брюки A66216*AW27 JW (ч)",
+          "sku": "A66216*AW27 JW ",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57578",
+          "name_product": "Брюки A66216*AW27 JW (ч)",
+          "sku": "A66216*AW27 JW ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57578",
+          "name_product": "Брюки A66216*AW27 JW (ч)",
+          "sku": "A66216*AW27 JW ",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57579",
+          "name_product": "Фліска A66701*AW27 JW (ч)",
+          "sku": "A66701*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57579",
+          "name_product": "Фліска A66701*AW27 JW (ч)",
+          "sku": "A66701*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57579",
+          "name_product": "Фліска A66701*AW27 JW (ч)",
+          "sku": "A66701*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57579",
+          "name_product": "Фліска A66701*AW27 JW (ч)",
+          "sku": "A66701*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57579",
+          "name_product": "Фліска A66701*AW27 JW (ч)",
+          "sku": "A66701*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "XXL"
+          }
+        },
+        {
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
+          "attributes": {
+            "color": "т.сірий",
             "size": "37"
           }
         },
         {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
           "attributes": {
-            "color": "чорн.",
+            "color": "т.сірий",
             "size": "37.5"
           }
         },
         {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
           "attributes": {
-            "color": "чорн.",
-            "size": "38"
-          }
-        },
-        {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
-          "attributes": {
-            "color": "чорн.",
+            "color": "т.сірий",
             "size": "39"
           }
         },
         {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
           "attributes": {
-            "color": "чорн.",
+            "color": "т.сірий",
+            "size": "38"
+          }
+        },
+        {
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
+          "attributes": {
+            "color": "т.сірий",
             "size": "39.5"
           }
         },
         {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
           "attributes": {
-            "color": "чорн.",
-            "size": "40"
-          }
-        },
-        {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
-          "attributes": {
-            "color": "чорн.",
+            "color": "т.сірий",
             "size": "40.5"
           }
         },
         {
-          "id_product": "57447",
-          "name_product": "Напівчеревики 4050821*AW27 JW (ж)",
-          "sku": "4050821*AW27 JW",
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
           "attributes": {
-            "color": "чорн.",
+            "color": "т.сірий",
+            "size": "40"
+          }
+        },
+        {
+          "id_product": "57580",
+          "name_product": "Черевики 4053581*AW27 JW (ж)",
+          "sku": "4053581*AW27 JW",
+          "attributes": {
+            "color": "т.сірий",
             "size": "41"
-          }
-        },
-        {
-          "id_product": "57481",
-          "name_product": "Куртка A61831*AW27 JW (ч)",
-          "sku": "A61831*AW27 JW",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57481",
-          "name_product": "Куртка A61831*AW27 JW (ч)",
-          "sku": "A61831*AW27 JW",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57481",
-          "name_product": "Куртка A61831*AW27 JW (ч)",
-          "sku": "A61831*AW27 JW",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57481",
-          "name_product": "Куртка A61831*AW27 JW (ч)",
-          "sku": "A61831*AW27 JW",
-          "attributes": {
-            "color": "т.сiр.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57482",
-          "name_product": "Куртка A66299*AW27 JW (ч)",
-          "sku": "A66299*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57482",
-          "name_product": "Куртка A66299*AW27 JW (ч)",
-          "sku": "A66299*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57482",
-          "name_product": "Куртка A66299*AW27 JW (ч)",
-          "sku": "A66299*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57482",
-          "name_product": "Куртка A66299*AW27 JW (ч)",
-          "sku": "A66299*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57483",
-          "name_product": "Сумка A65979*AW27 JW",
-          "sku": "A65979*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "57484",
-          "name_product": "Сумка A66075*AW27 JW",
-          "sku": "A66075*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "57485",
-          "name_product": "Сумка A66076*AW27 JW",
-          "sku": "A66076*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
-          }
-        },
-        {
-          "id_product": "57486",
-          "name_product": "Фліска A65793*AW27 JW (ч)",
-          "sku": "A65793*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57486",
-          "name_product": "Фліска A65793*AW27 JW (ч)",
-          "sku": "A65793*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57486",
-          "name_product": "Фліска A65793*AW27 JW (ч)",
-          "sku": "A65793*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57486",
-          "name_product": "Фліска A65793*AW27 JW (ч)",
-          "sku": "A65793*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57487",
-          "name_product": "Фліска A65798*AW27 JW (ч)",
-          "sku": "A65798*AW27",
-          "attributes": {
-            "color": "син",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57487",
-          "name_product": "Фліска A65798*AW27 JW (ч)",
-          "sku": "A65798*AW27",
-          "attributes": {
-            "color": "син",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57487",
-          "name_product": "Фліска A65798*AW27 JW (ч)",
-          "sku": "A65798*AW27",
-          "attributes": {
-            "color": "син",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57487",
-          "name_product": "Фліска A65798*AW27 JW (ч)",
-          "sku": "A65798*AW27",
-          "attributes": {
-            "color": "син",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57488",
-          "name_product": "Футболка A65757*AW27 JW (ж)",
-          "sku": "A65757*AW27",
-          "attributes": {
-            "color": "т.син",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57488",
-          "name_product": "Футболка A65757*AW27 JW (ж)",
-          "sku": "A65757*AW27",
-          "attributes": {
-            "color": "т.син",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57488",
-          "name_product": "Футболка A65757*AW27 JW (ж)",
-          "sku": "A65757*AW27",
-          "attributes": {
-            "color": "т.син",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57488",
-          "name_product": "Футболка A65757*AW27 JW (ж)",
-          "sku": "A65757*AW27",
-          "attributes": {
-            "color": "т.син",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57488",
-          "name_product": "Футболка A65757*AW27 JW (ж)",
-          "sku": "A65757*AW27",
-          "attributes": {
-            "color": "т.син",
-            "size": "XS"
-          }
-        },
-        {
-          "id_product": "57489",
-          "name_product": "Футболка A65917*AW27 JW (ч)",
-          "sku": "A65917*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57489",
-          "name_product": "Футболка A65917*AW27 JW (ч)",
-          "sku": "A65917*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57489",
-          "name_product": "Футболка A65917*AW27 JW (ч)",
-          "sku": "A65917*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57489",
-          "name_product": "Футболка A65917*AW27 JW (ч)",
-          "sku": "A65917*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57489",
-          "name_product": "Футболка A65917*AW27 JW (ч)",
-          "sku": "A65917*AW27",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
           }
         }
       ]

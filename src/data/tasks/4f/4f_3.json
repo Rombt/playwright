@@ -54,696 +54,336 @@
           }
         },
         {
-          "id_product": "57362",
-          "name_product": "Брюки TROF1658*AW27 4F (ж)",
-          "sku": "4FWMM00TTROF1658",
+          "id_product": "57515",
+          "name_product": "Брюки TROM1840*AW27 4F (під)",
+          "sku": "4FJWMM00TTROM1840",
           "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57362",
-          "name_product": "Брюки TROF1658*AW27 4F (ж)",
-          "sku": "4FWMM00TTROF1658",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57362",
-          "name_product": "Брюки TROF1658*AW27 4F (ж)",
-          "sku": "4FWMM00TTROF1658",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57362",
-          "name_product": "Брюки TROF1658*AW27 4F (ж)",
-          "sku": "4FWMM00TTROF1658",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XS"
-          }
-        },
-        {
-          "id_product": "57363",
-          "name_product": "Брюки TROM1674*AW27 4F (ч)",
-          "sku": "4FWMM00TTROM1674",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57363",
-          "name_product": "Брюки TROM1674*AW27 4F (ч)",
-          "sku": "4FWMM00TTROM1674",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57363",
-          "name_product": "Брюки TROM1674*AW27 4F (ч)",
-          "sku": "4FWMM00TTROM1674",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57363",
-          "name_product": "Брюки TROM1674*AW27 4F (ч)",
-          "sku": "4FWMM00TTROM1674",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57363",
-          "name_product": "Брюки TROM1674*AW27 4F (ч)",
-          "sku": "4FWMM00TTROM1674",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "св.сiр",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "св.сiр",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "св.сiр",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "св.сiр",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "св.сiр",
-            "size": "XS"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XS"
-          }
-        },
-        {
-          "id_product": "57364",
-          "name_product": "Джемпер SWSF2536*AW27 4F (ж)",
-          "sku": "4FWMM00TSWSF2536",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57365",
-          "name_product": "Джемпер SWSM2549*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2549",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57365",
-          "name_product": "Джемпер SWSM2549*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2549",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57365",
-          "name_product": "Джемпер SWSM2549*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2549",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57365",
-          "name_product": "Джемпер SWSM2549*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2549",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57365",
-          "name_product": "Джемпер SWSM2549*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2549",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57366",
-          "name_product": "Джемпер SWSM2550*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2550",
-          "attributes": {
-            "color": "чорн.",
-            "size": "3XL"
-          }
-        },
-        {
-          "id_product": "57366",
-          "name_product": "Джемпер SWSM2550*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2550",
-          "attributes": {
-            "color": "чорн.",
-            "size": "4XL"
-          }
-        },
-        {
-          "id_product": "57366",
-          "name_product": "Джемпер SWSM2550*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2550",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57366",
-          "name_product": "Джемпер SWSM2550*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2550",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57366",
-          "name_product": "Джемпер SWSM2550*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2550",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57366",
-          "name_product": "Джемпер SWSM2550*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2550",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57366",
-          "name_product": "Джемпер SWSM2550*AW27 4F (ч)",
-          "sku": "4FWMM00TSWSM2550",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57367",
-          "name_product": "Жилет TVJAM376*AW27 4F (ч)",
-          "sku": "4FWAW26TVJAM376",
-          "attributes": {
-            "color": "чорн.",
-            "size": "3XL"
-          }
-        },
-        {
-          "id_product": "57367",
-          "name_product": "Жилет TVJAM376*AW27 4F (ч)",
-          "sku": "4FWAW26TVJAM376",
-          "attributes": {
-            "color": "чорн.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57367",
-          "name_product": "Жилет TVJAM376*AW27 4F (ч)",
-          "sku": "4FWAW26TVJAM376",
-          "attributes": {
-            "color": "чорн.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57367",
-          "name_product": "Жилет TVJAM376*AW27 4F (ч)",
-          "sku": "4FWAW26TVJAM376",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57367",
-          "name_product": "Жилет TVJAM376*AW27 4F (ч)",
-          "sku": "4FWAW26TVJAM376",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57367",
-          "name_product": "Жилет TVJAM376*AW27 4F (ч)",
-          "sku": "4FWAW26TVJAM376",
-          "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
-          }
-        },
-        {
-          "id_product": "57368",
-          "name_product": "Куртка DJAM0913*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0913",
-          "attributes": {
-            "color": "чорн.",
-            "size": "134"
-          }
-        },
-        {
-          "id_product": "57368",
-          "name_product": "Куртка DJAM0913*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0913",
-          "attributes": {
-            "color": "чорн.",
-            "size": "140"
-          }
-        },
-        {
-          "id_product": "57368",
-          "name_product": "Куртка DJAM0913*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0913",
-          "attributes": {
-            "color": "чорн.",
-            "size": "146"
-          }
-        },
-        {
-          "id_product": "57368",
-          "name_product": "Куртка DJAM0913*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0913",
-          "attributes": {
-            "color": "чорн.",
-            "size": "152"
-          }
-        },
-        {
-          "id_product": "57368",
-          "name_product": "Куртка DJAM0913*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0913",
-          "attributes": {
-            "color": "чорн.",
-            "size": "158"
-          }
-        },
-        {
-          "id_product": "57368",
-          "name_product": "Куртка DJAM0913*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0913",
-          "attributes": {
-            "color": "чорн.",
-            "size": "164"
-          }
-        },
-        {
-          "id_product": "57369",
-          "name_product": "Куртка DJAM0914*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0914",
-          "attributes": {
-            "color": "т.сiр.",
+            "color": "синій",
             "size": "128"
           }
         },
         {
-          "id_product": "57369",
-          "name_product": "Куртка DJAM0914*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0914",
+          "id_product": "57515",
+          "name_product": "Брюки TROM1840*AW27 4F (під)",
+          "sku": "4FJWMM00TTROM1840",
           "attributes": {
-            "color": "т.сiр.",
+            "color": "синій",
             "size": "134"
           }
         },
         {
-          "id_product": "57369",
-          "name_product": "Куртка DJAM0914*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0914",
+          "id_product": "57515",
+          "name_product": "Брюки TROM1840*AW27 4F (під)",
+          "sku": "4FJWMM00TTROM1840",
           "attributes": {
-            "color": "т.сiр.",
+            "color": "синій",
             "size": "140"
           }
         },
         {
-          "id_product": "57369",
-          "name_product": "Куртка DJAM0914*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0914",
+          "id_product": "57515",
+          "name_product": "Брюки TROM1840*AW27 4F (під)",
+          "sku": "4FJWMM00TTROM1840",
           "attributes": {
-            "color": "т.сiр.",
+            "color": "синій",
             "size": "146"
           }
         },
         {
-          "id_product": "57369",
-          "name_product": "Куртка DJAM0914*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0914",
+          "id_product": "57515",
+          "name_product": "Брюки TROM1840*AW27 4F (під)",
+          "sku": "4FJWMM00TTROM1840",
           "attributes": {
-            "color": "т.сiр.",
+            "color": "синій",
             "size": "152"
           }
         },
         {
-          "id_product": "57369",
-          "name_product": "Куртка DJAM0914*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0914",
+          "id_product": "57515",
+          "name_product": "Брюки TROM1840*AW27 4F (під)",
+          "sku": "4FJWMM00TTROM1840",
           "attributes": {
-            "color": "т.сiр.",
+            "color": "синій",
             "size": "158"
           }
         },
         {
-          "id_product": "57369",
-          "name_product": "Куртка DJAM0914*AW27 4F (підл)",
-          "sku": "4FJWAW26TDJAM0914",
+          "id_product": "57515",
+          "name_product": "Брюки TROM1840*AW27 4F (під)",
+          "sku": "4FJWMM00TTROM1840",
           "attributes": {
-            "color": "т.сiр.",
+            "color": "синій",
             "size": "164"
           }
         },
         {
-          "id_product": "57370",
-          "name_product": "Рюкзак ABACM687*AW27 4F",
-          "sku": "4FWAW26ABACM687",
+          "id_product": "57516",
+          "name_product": "Худі SWSF2694 *AW27 4F (під)",
+          "sku": "4FJWAW26TSWSF2694",
           "attributes": {
-            "color": "син",
-            "size": "O/S"
+            "color": "рож.",
+            "size": "128"
           }
         },
         {
-          "id_product": "57370",
-          "name_product": "Рюкзак ABACM687*AW27 4F",
-          "sku": "4FWAW26ABACM687",
+          "id_product": "57516",
+          "name_product": "Худі SWSF2694 *AW27 4F (під)",
+          "sku": "4FJWAW26TSWSF2694",
           "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
+            "color": "рож.",
+            "size": "134"
           }
         },
         {
-          "id_product": "57371",
-          "name_product": "Футболка FTSM2220*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2220",
+          "id_product": "57516",
+          "name_product": "Худі SWSF2694 *AW27 4F (під)",
+          "sku": "4FJWAW26TSWSF2694",
           "attributes": {
-            "color": "чорн.",
-            "size": "L"
+            "color": "рож.",
+            "size": "140"
           }
         },
         {
-          "id_product": "57371",
-          "name_product": "Футболка FTSM2220*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2220",
+          "id_product": "57516",
+          "name_product": "Худі SWSF2694 *AW27 4F (під)",
+          "sku": "4FJWAW26TSWSF2694",
           "attributes": {
-            "color": "чорн.",
-            "size": "M"
+            "color": "рож.",
+            "size": "146"
           }
         },
         {
-          "id_product": "57371",
-          "name_product": "Футболка FTSM2220*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2220",
+          "id_product": "57516",
+          "name_product": "Худі SWSF2694 *AW27 4F (під)",
+          "sku": "4FJWAW26TSWSF2694",
           "attributes": {
-            "color": "чорн.",
-            "size": "S"
+            "color": "рож.",
+            "size": "152"
           }
         },
         {
-          "id_product": "57371",
-          "name_product": "Футболка FTSM2220*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2220",
+          "id_product": "57516",
+          "name_product": "Худі SWSF2694 *AW27 4F (під)",
+          "sku": "4FJWAW26TSWSF2694",
           "attributes": {
-            "color": "чорн.",
-            "size": "XL"
+            "color": "рож.",
+            "size": "158"
           }
         },
         {
-          "id_product": "57371",
-          "name_product": "Футболка FTSM2220*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2220",
+          "id_product": "57516",
+          "name_product": "Худі SWSF2694 *AW27 4F (під)",
+          "sku": "4FJWAW26TSWSF2694",
           "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
+            "color": "рож.",
+            "size": "164"
           }
         },
         {
-          "id_product": "57372",
-          "name_product": "Футболка FTSM2355*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2355",
+          "id_product": "57517",
+          "name_product": "Худі SWSM2761*AW27 4F (під)",
+          "sku": "4FJWMM00TSWSM2761",
           "attributes": {
-            "color": "чорн.",
-            "size": "3XL"
+            "color": "синій",
+            "size": "128"
           }
         },
         {
-          "id_product": "57372",
-          "name_product": "Футболка FTSM2355*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2355",
+          "id_product": "57517",
+          "name_product": "Худі SWSM2761*AW27 4F (під)",
+          "sku": "4FJWMM00TSWSM2761",
           "attributes": {
-            "color": "чорн.",
-            "size": "L"
+            "color": "синій",
+            "size": "134"
           }
         },
         {
-          "id_product": "57372",
-          "name_product": "Футболка FTSM2355*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2355",
+          "id_product": "57517",
+          "name_product": "Худі SWSM2761*AW27 4F (під)",
+          "sku": "4FJWMM00TSWSM2761",
           "attributes": {
-            "color": "чорн.",
-            "size": "M"
+            "color": "синій",
+            "size": "140"
           }
         },
         {
-          "id_product": "57372",
-          "name_product": "Футболка FTSM2355*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2355",
+          "id_product": "57517",
+          "name_product": "Худі SWSM2761*AW27 4F (під)",
+          "sku": "4FJWMM00TSWSM2761",
           "attributes": {
-            "color": "чорн.",
-            "size": "S"
+            "color": "синій",
+            "size": "146"
           }
         },
         {
-          "id_product": "57372",
-          "name_product": "Футболка FTSM2355*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2355",
+          "id_product": "57517",
+          "name_product": "Худі SWSM2761*AW27 4F (під)",
+          "sku": "4FJWMM00TSWSM2761",
           "attributes": {
-            "color": "чорн.",
-            "size": "XL"
+            "color": "синій",
+            "size": "152"
           }
         },
         {
-          "id_product": "57372",
-          "name_product": "Футболка FTSM2355*AW27 4F (ч)",
-          "sku": "4FWAW26TFTSM2355",
+          "id_product": "57517",
+          "name_product": "Худі SWSM2761*AW27 4F (під)",
+          "sku": "4FJWMM00TSWSM2761",
           "attributes": {
-            "color": "чорн.",
-            "size": "XXL"
+            "color": "синій",
+            "size": "158"
           }
         },
         {
-          "id_product": "57373",
-          "name_product": "Шапка CAPU0856*AW27 4F",
-          "sku": "4FWAW26ACAPU0856",
+          "id_product": "57517",
+          "name_product": "Худі SWSM2761*AW27 4F (під)",
+          "sku": "4FJWMM00TSWSM2761",
           "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
+            "color": "синій",
+            "size": "164"
           }
         },
         {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
-          "attributes": {
-            "color": "т. зел",
-            "size": "3XL"
-          }
-        },
-        {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
-          "attributes": {
-            "color": "чорн.",
-            "size": "3XL"
-          }
-        },
-        {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
-          "attributes": {
-            "color": "т.зел.",
-            "size": "L"
-          }
-        },
-        {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
+          "id_product": "57573",
+          "name_product": "Куртка DJAF0895*AW27 4F (ж)",
+          "sku": "4FWAW26TDJAF0895",
           "attributes": {
             "color": "чорн.",
             "size": "L"
           }
         },
         {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
-          "attributes": {
-            "color": "т.зел.",
-            "size": "M"
-          }
-        },
-        {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
+          "id_product": "57573",
+          "name_product": "Куртка DJAF0895*AW27 4F (ж)",
+          "sku": "4FWAW26TDJAF0895",
           "attributes": {
             "color": "чорн.",
             "size": "M"
           }
         },
         {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
-          "attributes": {
-            "color": "т.зел.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
-          "attributes": {
-            "color": "чорн.",
-            "size": "S"
-          }
-        },
-        {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
-          "attributes": {
-            "color": "т.зел.",
-            "size": "XL"
-          }
-        },
-        {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
+          "id_product": "57573",
+          "name_product": "Куртка DJAF0895*AW27 4F (ж)",
+          "sku": "4FWAW26TDJAF0895",
           "attributes": {
             "color": "чорн.",
             "size": "XL"
           }
         },
         {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
+          "id_product": "57573",
+          "name_product": "Куртка DJAF0895*AW27 4F (ж)",
+          "sku": "4FWAW26TDJAF0895",
           "attributes": {
-            "color": "т.зел.",
-            "size": "XXL"
+            "color": "чорн.",
+            "size": "XS"
           }
         },
         {
-          "id_product": "57374",
-          "name_product": "Шорти FSHM1673*AW27 4F (ч)",
-          "sku": "4FWAW26TFSHM1673",
+          "id_product": "57574",
+          "name_product": "Куртка DJAM0945*AW27 4F (ч)",
+          "sku": "4FWAW26TDJAM0945",
           "attributes": {
             "color": "чорн.",
-            "size": "XXL"
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57575",
+          "name_product": "Куртка TJAM1202*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1202",
+          "attributes": {
+            "color": "синій",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57575",
+          "name_product": "Куртка TJAM1202*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1202",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57575",
+          "name_product": "Куртка TJAM1202*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1202",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57575",
+          "name_product": "Куртка TJAM1202*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1202",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57576",
+          "name_product": "Куртка TJAM1203*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1203",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57576",
+          "name_product": "Куртка TJAM1203*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1203",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57576",
+          "name_product": "Куртка TJAM1203*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1203",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "S"
+          }
+        },
+        {
+          "id_product": "57576",
+          "name_product": "Куртка TJAM1203*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1203",
+          "attributes": {
+            "color": "чорн/сір",
+            "size": "XL"
+          }
+        },
+        {
+          "id_product": "57577",
+          "name_product": "Куртка TJAM1204*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1204",
+          "attributes": {
+            "color": "чорний",
+            "size": "L"
+          }
+        },
+        {
+          "id_product": "57577",
+          "name_product": "Куртка TJAM1204*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1204",
+          "attributes": {
+            "color": "чорний",
+            "size": "M"
+          }
+        },
+        {
+          "id_product": "57577",
+          "name_product": "Куртка TJAM1204*AW27 4F (ч)",
+          "sku": "4FWAW26TTJAM1204",
+          "attributes": {
+            "color": "чорний",
+            "size": "XL"
           }
         }
       ]

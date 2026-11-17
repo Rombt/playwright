@@ -5,52 +5,322 @@
       "brand_id": "12",
       "brand_name": "Salomon",
       "metadata": {
-        "target_website": "https://www.sportovna.com.ua/search/?productsPerPage=24&limiter%5Bfulltext%5D={{sku_prod}}"
+        "target_website": "https://md-fashion.ua/store?s={{sku_prod}}"
       },
       "products": [
         {
-          "id_product": "55335",
-          "name_product": "Кросівки L47801500*SS26 SLM (ж)",
-          "sku": "L47801500*SS26",
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
           "attributes": {
-            "color": "чорн/бiл",
-            "size": "36 2/3"
+            "color": "кой",
+            "size": "42 2/3"
           }
         },
         {
-          "id_product": "55337",
-          "name_product": "Кросівки L47975300*SS26 SLM (ч)",
-          "sku": "L47975300*SS26",
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
           "attributes": {
-            "color": "сір/пом.",
+            "color": "кой",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
+          "attributes": {
+            "color": "кой",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
+          "attributes": {
+            "color": "кой",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
+          "attributes": {
+            "color": "кой",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
+          "attributes": {
+            "color": "кой",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
+          "attributes": {
+            "color": "кой",
+            "size": "46 2/3"
+          }
+        },
+        {
+          "id_product": "57441",
+          "name_product": "Черевики 409779 XA Forces MID GTX SLM",
+          "sku": "409779",
+          "attributes": {
+            "color": "кой",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "42 2/3"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "46 2/3"
+          }
+        },
+        {
+          "id_product": "57442",
+          "name_product": "Черевики 472209 XA Forces MID GTX SLM",
+          "sku": "472209",
+          "attributes": {
+            "color": "т.коричн.",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
+          "attributes": {
+            "color": "чорний",
             "size": "41 1/3"
           }
         },
         {
-          "id_product": "55339",
-          "name_product": "Кросівки L49221600*SS26 SLM (ч)",
-          "sku": "L49221600*SS26",
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
           "attributes": {
-            "color": "чорн/син",
-            "size": "41 1/3"
+            "color": "чорний",
+            "size": "42 2/3"
           }
         },
         {
-          "id_product": "55340",
-          "name_product": "Кросівки L49228300*SS26 SLM (ж)",
-          "sku": "L49228300*SS26",
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
           "attributes": {
-            "color": "рож/пом",
-            "size": "36 2/3"
+            "color": "чорний",
+            "size": "42"
           }
         },
         {
-          "id_product": "55341",
-          "name_product": "Сумка LC2183800*SS26 SLM",
-          "sku": "LC2183800*SS26",
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
           "attributes": {
-            "color": "чорн.",
-            "size": "O/S"
+            "color": "чорний",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "46 2/3"
+          }
+        },
+        {
+          "id_product": "57525",
+          "name_product": "Черевики L47809100*AW27 SLM (ч)",
+          "sku": "L47809100*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "42 2/3"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "43 1/3"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44 2/3"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "45 1/3"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "46 2/3"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "47 1/3"
+          }
+        },
+        {
+          "id_product": "57527",
+          "name_product": "Черевики L49138400*AW27 SLM (ч)",
+          "sku": "L49138400*AW27",
+          "attributes": {
+            "color": "чорний",
+            "size": "48"
           }
         }
       ]

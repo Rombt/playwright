@@ -29,7 +29,7 @@ class PageImageSource4F_1 implements ISource<ICollectProductPhotosTask> {
   ) {}
 
   supports(task: ICollectProductPhotosTask): boolean {
-    return task.metadata.target_website === 'https://md-fashion.ua/ru/store?s={{sku_prod}}';
+    return task.metadata.target_website === 'https://md-fashion.ua/store?s={{sku_prod}}';
   }
 
   async execute(ctx: IExecutionContext<ICollectProductPhotosTask>): Promise<IWorkerResult> {
