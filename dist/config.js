@@ -23,6 +23,7 @@ exports.config = {
         },
     },
     data: {
+        resultsFolder: 'results/humtto/humtto_test',
         // resultsFolder: 'results/ganzo/ganzo_prod',
         // resultsFolder: 'results/kelme/kelme_test',
         // resultsFolder: 'results/ragnarok/ragnarok_test',
@@ -49,7 +50,8 @@ exports.config = {
         // resultsFolder: 'results/under_armour/under_armour_test',
         // resultsFolder: 'results/under_armour/under_armour_prod_21.10.26',
         // resultsFolder: 'results/salomon/salomon_test',
-        resultsFolder: 'results/nike/nike_prod_2',
+        // resultsFolder: 'results/nike/nike_prod_2',
+        taskPath: 'src/data/tasks/humtto/humtto_test.json',
         // taskPath: 'src/data/tasks/jack_wolfskin/jack_wolfskin_prod.json',
         // taskPath: 'src/data/tasks/kelme/kelme_test.json',
         // taskPath: 'src/data/tasks/ragnarok/ragnarok_test.json',
@@ -76,7 +78,7 @@ exports.config = {
         // taskPath: 'src/data/tasks/svastone/svastone_test.json',
         // taskPath: 'src/data/tasks/salomon/salomon_test.json',
         // taskPath: 'src/data/tasks/ganzo/ganzo_prod.json',
-        taskPath: 'src/data/tasks/nike/nike_prod.json',
+        // taskPath: 'src/data/tasks/nike/nike_prod.json',
         // taskPath: 'src/data/tasks/under_armour/under_armour_prod.json',
         // src\data\tasks\under_armour\under_armour_test_short.json
         // taskPath: 'src/data/tasks/puma/puma_prod.json',

@@ -1,0 +1,284 @@
+{
+  "generated_at": "2026-04-06_16-22",
+  "task": {
+    "220": {
+      "brand_id": "220",
+      "brand_name": "HUMTTO",
+      "metadata": {
+        "target_website": "https://humtto.com.ua/search?search={{sku_prod}}"
+      },
+      "products": [
+        {
+          "id_product": "55841",
+          "name_product": "Кросівки 110343A-2 Humtto Explorer (а)",
+          "sku": "110343A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55841",
+          "name_product": "Кросівки 110343A-2 Humtto Explorer (а)",
+          "sku": "110343A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55841",
+          "name_product": "Кросівки 110343A-2 Humtto Explorer (а)",
+          "sku": "110343A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "55841",
+          "name_product": "Кросівки 110343A-2 Humtto Explorer (а)",
+          "sku": "110343A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "46"
+          }
+        },
+        {
+          "id_product": "55842",
+          "name_product": "Кросівки 350848A-2 Humtto Walker (а)",
+          "sku": "350848A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "55842",
+          "name_product": "Кросівки 350848A-2 Humtto Walker (а)",
+          "sku": "350848A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "55842",
+          "name_product": "Кросівки 350848A-2 Humtto Walker (а)",
+          "sku": "350848A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "55842",
+          "name_product": "Кросівки 350848A-2 Humtto Walker (а)",
+          "sku": "350848A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "55842",
+          "name_product": "Кросівки 350848A-2 Humtto Walker (а)",
+          "sku": "350848A-2",
+          "attributes": {
+            "color": "хакі",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "56275",
+          "name_product": "Кросівки 110629A-2 Humtto Hiker (а)",
+          "sku": "110629A-2",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56275",
+          "name_product": "Кросівки 110629A-2 Humtto Hiker (а)",
+          "sku": "110629A-2",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "56275",
+          "name_product": "Кросівки 110629A-2 Humtto Hiker (а)",
+          "sku": "110629A-2",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56275",
+          "name_product": "Кросівки 110629A-2 Humtto Hiker (а)",
+          "sku": "110629A-2",
+          "attributes": {
+            "color": "сір/чорн",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "56276",
+          "name_product": "Кросівки 360038A-3 Humtto Highland (а)",
+          "sku": "360038A-3",
+          "attributes": {
+            "color": "сір.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "56276",
+          "name_product": "Кросівки 360038A-3 Humtto Highland (а)",
+          "sku": "360038A-3",
+          "attributes": {
+            "color": "сір.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56276",
+          "name_product": "Кросівки 360038A-3 Humtto Highland (а)",
+          "sku": "360038A-3",
+          "attributes": {
+            "color": "сір.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "56276",
+          "name_product": "Кросівки 360038A-3 Humtto Highland (а)",
+          "sku": "360038A-3",
+          "attributes": {
+            "color": "сір.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56276",
+          "name_product": "Кросівки 360038A-3 Humtto Highland (а)",
+          "sku": "360038A-3",
+          "attributes": {
+            "color": "сір.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "56277",
+          "name_product": "Кросівки 360363A-2 Humtto Cityline (а)",
+          "sku": "360363A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "56277",
+          "name_product": "Кросівки 360363A-2 Humtto Cityline (а)",
+          "sku": "360363A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "56277",
+          "name_product": "Кросівки 360363A-2 Humtto Cityline (а)",
+          "sku": "360363A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "56277",
+          "name_product": "Кросівки 360363A-2 Humtto Cityline (а)",
+          "sku": "360363A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "56277",
+          "name_product": "Кросівки 360363A-2 Humtto Cityline (а)",
+          "sku": "360363A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "45"
+          }
+        },
+        {
+          "id_product": "57585",
+          "name_product": "Черевики 260125A-2 Humtto Fort (а)",
+          "sku": "260125A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "57585",
+          "name_product": "Черевики 260125A-2 Humtto Fort (а)",
+          "sku": "260125A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "57585",
+          "name_product": "Черевики 260125A-2 Humtto Fort (а)",
+          "sku": "260125A-2",
+          "attributes": {
+            "color": "чорн.",
+            "size": "44"
+          }
+        },
+        {
+          "id_product": "57586",
+          "name_product": "Черевики 540995C-2 Humtto Glacier (а)",
+          "sku": "540995C-2",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "41"
+          }
+        },
+        {
+          "id_product": "57586",
+          "name_product": "Черевики 540995C-2 Humtto Glacier (а)",
+          "sku": "540995C-2",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "42"
+          }
+        },
+        {
+          "id_product": "57586",
+          "name_product": "Черевики 540995C-2 Humtto Glacier (а)",
+          "sku": "540995C-2",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "43"
+          }
+        },
+        {
+          "id_product": "57586",
+          "name_product": "Черевики 540995C-2 Humtto Glacier (а)",
+          "sku": "540995C-2",
+          "attributes": {
+            "color": "т.сір.",
+            "size": "44"
+          }
+        }
+      ]
+    }
+  }
+}
